@@ -1,3321 +1,2380 @@
 1
-00:00:25,176 --> 00:00:26,316
->> ROGER PANTOS: Good
-morning, everyone.
+00:00:20,020 --> 00:00:21,555
+HTTP实时流媒体播放的扩展
 
 
 2
-00:00:27,416 --> 00:00:31,096
-Welcome to this year's
-Worldwide Developers Conference.
+00:00:25,425 --> 00:00:26,326
+大家早上好！
 
 
 3
-00:00:31,526 --> 00:00:33,846
-This is your first real session.
+00:00:27,427 --> 00:00:31,098
+欢迎参加今年的全球开发者大会
 
 
 4
-00:00:34,596 --> 00:00:35,826
-So, welcome.
+00:00:31,532 --> 00:00:33,901
+这是您参加的
+第一个真正的讲座环节
 
 
 5
-00:00:37,146 --> 00:00:39,106
-Today -- thank you.
+00:00:34,601 --> 00:00:35,836
+因此欢迎您！
 
 
 6
-00:00:39,766 --> 00:00:44,416
-Today we are going to be talking
-about a pretty exciting addition
+00:00:37,137 --> 00:00:39,106
+今天...
+谢谢你
 
 
 7
-00:00:44,666 --> 00:00:46,366
-to HTTP Live Streaming.
+00:00:39,773 --> 00:00:44,411
+今天我们将讨论
+HTTP实时流媒体播放的
 
 
 8
-00:00:47,666 --> 00:00:49,746
-You know, we are always looking
+00:00:44,678 --> 00:00:46,380
+一个非常激动人心的扩展
 
 
 9
-00:00:49,826 --> 00:00:53,536
-at whatever it is that's
-preventing you guys
+00:00:47,681 --> 00:00:53,453
+你知道我们一直在关注
+究竟是什么阻止了你们
 
 
 10
-00:00:53,536 --> 00:00:57,606
-from using HLS to deploy your
-content the way you want to,
+00:00:53,520 --> 00:00:57,591
+以自己喜欢的方式
+使用HLS来部署内容
 
 
 11
-00:00:58,296 --> 00:01:03,396
-and content protection, which
-is to say allowing your users
+00:00:58,292 --> 00:01:00,027
+而内容保护
 
 
 12
-00:01:03,396 --> 00:01:05,706
-to watch your content,
-listen to your content
+00:01:00,260 --> 00:01:05,699
+是指让您的用户观看或收听您的内容
 
 
 13
-00:01:06,416 --> 00:01:08,626
-without making unauthorized
-use of it,
+00:01:06,400 --> 00:01:08,635
+却不授权使用它
 
 
 14
-00:01:09,186 --> 00:01:12,616
-has always been a really
-difficult problem that a lot
+00:01:09,203 --> 00:01:14,308
+一直是一个真正有难度的问题
+你们中的很多人曾经不得不设法应对
 
 
 15
-00:01:12,616 --> 00:01:14,306
-of you have had to
-sort of contend with.
+00:01:15,075 --> 00:01:18,745
+而且随着比特率的升高
+以及分辨率的上升
 
 
 16
-00:01:15,076 --> 00:01:17,286
-And, as the bit rates
-get higher,
+00:01:18,912 --> 00:01:20,614
+那些需求将只会增大
 
 
 17
-00:01:17,286 --> 00:01:18,736
-and the resolutions get higher,
+00:01:21,481 --> 00:01:27,588
+那也是我为何
+终于能够高兴地宣布
 
 
 18
-00:01:18,906 --> 00:01:20,626
-those demands are only
-going to get louder.
+00:01:28,589 --> 00:01:30,390
+FairPlay流媒体的诞生
 
 
 19
-00:01:21,496 --> 00:01:25,736
-And that's why I am
-extremely pleased, finally,
+00:01:31,692 --> 00:01:32,626
+那么它是什么？
 
 
 20
-00:01:26,086 --> 00:01:30,376
-to be able to announce
-today FairPlay Streaming.
+00:01:34,394 --> 00:01:40,901
+首先
+它是我们最出色的内容保护技术
 
 
 21
-00:01:31,706 --> 00:01:33,266
-So what is it?
+00:01:41,101 --> 00:01:46,139
+它的封装方式允许您将其用于
+保护您的HLS内容
 
 
 22
-00:01:34,386 --> 00:01:40,166
-First and foremost, it is
-our best content protection
+00:01:47,140 --> 00:01:48,175
+现在 它已不是新事物了
 
 
 23
-00:01:40,166 --> 00:01:44,216
-technology, packaged in a
-way that allows you to use it
+00:01:48,809 --> 00:01:52,279
+我们在过去三年一直在
 
 
 24
-00:01:44,216 --> 00:01:46,136
-to protect your HLS content.
+00:01:52,880 --> 00:01:55,082
+与一些主要内容合作伙伴进行合作
 
 
 25
-00:01:47,146 --> 00:01:47,946
-Now, it is not new.
+00:01:55,849 --> 00:01:59,553
+帮助它们在app
+或Apple TV上部署FPS
 
 
 26
-00:01:48,816 --> 00:01:53,276
-We have been working for the
-past three years with some
+00:02:00,187 --> 00:02:05,158
+现在它已被用来保护大量的内容
 
 
 27
-00:01:53,276 --> 00:01:55,076
-of our major content partners
+00:02:05,425 --> 00:02:10,597
+包括一些世界上最热门的
+电影和电视节目
 
 
 28
-00:01:55,856 --> 00:01:57,846
-to help them deploy
-FairPlay Streaming
+00:02:15,836 --> 00:02:21,642
+现在您可以将它用于iOS
+及Apple TV和OS X上
 
 
 29
-00:01:57,846 --> 00:01:59,546
-in their apps and on Apple TV.
+00:02:22,910 --> 00:02:26,513
+当然
+在我们的移动设备上 电池寿命是王道
 
 
 30
-00:02:00,176 --> 00:02:04,486
-And at this point, it has
-been used to protect a lot
+00:02:27,080 --> 00:02:30,217
+所以当我们设计
+FairPlay流媒体的时候
 
 
 31
-00:02:04,486 --> 00:02:08,515
-of content, including some
-of the most popular movies
+00:02:31,185 --> 00:02:35,656
+我们所做的每个决定都是建立在
+为您实现良好的电池寿命的基础上的
 
 
 32
-00:02:08,515 --> 00:02:10,606
-and television shows
-in the world.
+00:02:35,756 --> 00:02:38,759
+我们选择的编解码器
+我们选择的加密技术
 
 
 33
-00:02:15,826 --> 00:02:21,406
-Now, you can use it on iOS,
-on Apple TV, and on OS X.
+00:02:39,092 --> 00:02:41,929
+我们的实施方式
+甚至我们利用的硬件
 
 
 34
-00:02:22,906 --> 00:02:26,516
-Of course, on our mobile
-devices, battery life is king.
+00:02:42,329 --> 00:02:45,632
+所以您会有极大的安全性
+也会有很好的电池寿命
 
 
 35
-00:02:27,086 --> 00:02:30,216
-And so, when we designed
-FairPlay Streaming,
+00:02:47,000 --> 00:02:52,806
+而且它也与AirPlay无缝集成
+因此它会伴随全面的保护
 
 
 36
-00:02:31,186 --> 00:02:34,026
-every choice we made
-was predicated
+00:02:54,141 --> 00:02:57,945
+不过您可能会说：
+“好吧 那听上去很不错
 
 
 37
-00:02:34,026 --> 00:02:35,506
-on giving you good battery life.
+00:02:58,412 --> 00:02:59,546
+但是我有很多内容
 
 
 38
-00:02:35,746 --> 00:02:38,756
-The codecs we chose,
-the encryption we chose,
+00:02:59,680 --> 00:03:04,251
+我的意思是Apple
+将如何让我为这个FPS付费？
 
 
 39
-00:02:39,096 --> 00:02:41,926
-how we implemented it, even the
-hardware we took advantage of.
+00:03:04,318 --> 00:03:07,454
+它将是按照影片收费？
+按每次播放还是统一价格？”
 
 
 40
-00:02:42,326 --> 00:02:43,716
-And, so, you get great security,
+00:03:08,722 --> 00:03:12,326
+我们反复尝试
+最后我们确定采用统一价格
 
 
 41
-00:02:43,716 --> 00:02:45,626
-but you also get
-great battery life.
+00:03:13,794 --> 00:03:14,628
+零
 
 
 42
-00:02:46,046 --> 00:02:50,176
-And it is also integrated
-with AirPlay, seamlessly.
+00:03:15,996 --> 00:03:19,800
+如果大家每年向我们
+支付99美元的开发者费用
 
 
 43
-00:02:50,866 --> 00:02:52,806
-And, so, with full protection.
+00:03:20,100 --> 00:03:24,838
+您将不必再向苹果公司支付一分钱
+就能尽情使用FPS
 
 
 44
-00:02:54,156 --> 00:02:57,946
-Now, you may be saying, okay,
-well, that sounds pretty good,
+00:03:26,240 --> 00:03:31,645
+那么现在 观众中间任何从事
+市场营销的朋友可能会说这样的话：
 
 
 45
-00:02:58,416 --> 00:02:59,556
-but I've got a lot of content.
+00:03:31,712 --> 00:03:33,146
+“哦 那听上去棒极了！”
 
 
 46
-00:02:59,686 --> 00:03:03,116
-I mean, is Apple -- how is
-Apple going to make me pay
+00:03:33,480 --> 00:03:36,483
+而坐你旁边的工程师可能会说：
+“不 不 真的吗？ 它是什么？”
 
 
 47
-00:03:03,116 --> 00:03:04,306
-for this FairPlay
-Streaming thing?
+00:03:36,850 --> 00:03:37,784
+好了 那么
 
 
 48
-00:03:04,306 --> 00:03:05,906
-Is going to be like
-a per movie charge,
+00:03:38,352 --> 00:03:41,121
+它实际上是非常简单的
 
 
 49
-00:03:05,906 --> 00:03:07,456
-per playback, as a flat rate?
+00:03:41,922 --> 00:03:46,326
+我们所做的就是着手解决了DRM系统
 
 
 50
-00:03:08,726 --> 00:03:10,176
-We went back and forth on that,
+00:03:46,393 --> 00:03:48,962
+最重要的组成部分 即密钥保护
 
 
 51
-00:03:10,416 --> 00:03:12,316
-and we eventually did
-settle on a flat rate.
+00:03:49,963 --> 00:03:55,335
+那么FPS在本质上及实际上是一个
+安全的密钥传送系统
 
 
 52
-00:03:13,806 --> 00:03:19,256
-Zero. If you guys are paying
-your 99-dollar a year developer
+00:03:55,669 --> 00:03:59,006
+它是一种将密钥
+从您在互联网上的服务器
 
 
 53
-00:03:19,256 --> 00:03:22,526
-fee to us, you will not need
-to pay Apple a penny more
+00:03:59,473 --> 00:04:01,775
+转移到设备上的方式
 
 
 54
-00:03:22,756 --> 00:03:24,836
-to use FairPlay Streaming
-as much as you want.
+00:04:02,543 --> 00:04:07,648
+让您在该设备上使用密钥
+同时不让攻击者获取它并解密您的内容
 
 
 55
-00:03:26,256 --> 00:03:30,996
-So, now, at this point,
-any marketing folks
+00:04:08,849 --> 00:04:12,920
+在设计方面 
+我们让它容易使用和采用
 
 
 56
-00:03:30,996 --> 00:03:33,146
-in the audience are like:
-Oh, that sounds awesome!
+00:04:13,487 --> 00:04:15,822
+我们认识到你们中的很多人
 
 
 57
-00:03:33,466 --> 00:03:35,576
-And the engineer sitting
-next to you is like: No,
+00:04:15,889 --> 00:04:20,360
+尤其是当您以流媒体提供
+高级内容或订阅内容时
 
 
 58
-00:03:35,576 --> 00:03:36,476
-no, really, what is it?
+00:04:20,427 --> 00:04:22,963
+您已经在与某种安全后端对话了
 
 
 59
-00:03:36,856 --> 00:03:41,136
-Okay. So, it is really
-very simple.
+00:04:23,664 --> 00:04:26,233
+因此我们设计了FPS
 
 
 60
-00:03:41,906 --> 00:03:46,476
-What we did is, we attacked the
-most essential building block
+00:04:26,300 --> 00:04:30,003
+让传送这部分工作成为不可知
+让您使用的协议成为隐蔽
 
 
 61
-00:03:46,476 --> 00:03:48,976
-of a DRM system, which
-is key protection.
+00:04:30,070 --> 00:04:34,842
+如果您拥有安全连接
+您可以极其容易地采用FPS
 
 
 62
-00:03:49,976 --> 00:03:52,196
-And so FairPlay Streaming
-is essentially
+00:04:35,342 --> 00:04:37,878
+如果没有 你也可以使用HTTPS
+它是一个很不错的选择
 
 
 63
-00:03:52,366 --> 00:03:55,346
-and really only a secure
-key delivery system.
+00:04:39,346 --> 00:04:42,683
+最后 过去很多朋友
+问我关于HDCP方面的事情
 
 
 64
-00:03:55,666 --> 00:03:59,006
-It's a way to transfer the keys
-from your server on the Internet
+00:04:43,250 --> 00:04:45,586
+FPS就是这个问题的答案
 
 
 65
-00:03:59,476 --> 00:04:03,896
-to the device, and use it on
-that device without allowing it
+00:04:46,987 --> 00:04:51,992
+如果您的设备连接了电视
+或其他外部输入
 
 
 66
-00:04:03,896 --> 00:04:07,636
-to be obtained by an attacker so
-they can decrypt your content.
+00:04:52,593 --> 00:04:54,094
+它一定是HDMI
 
 
 67
-00:04:08,826 --> 00:04:12,906
-We designed it to be easy to
-use and also easy to adopt.
+00:04:54,661 --> 00:04:56,763
+而HDCP一定是活跃的
 
 
 68
-00:04:13,476 --> 00:04:15,886
-We recognized that a
-lot of you, particularly
+00:04:57,164 --> 00:05:00,400
+否则任何FPS内容播放都会失败
 
 
 69
-00:04:15,886 --> 00:04:20,416
-if you are streaming premium
-content or subscription content,
+00:05:01,235 --> 00:05:02,135
+没有例外
 
 
 70
-00:04:20,416 --> 00:04:22,956
-you are already talking to
-some kind of secure back end.
+00:05:04,204 --> 00:05:07,207
+当我们设计它的时候
 
 
 71
-00:04:23,666 --> 00:04:26,306
-And so we designed
-FairPlay Streaming
+00:05:07,708 --> 00:05:13,013
+我们知道有很多商业规则或逻辑的区别
+而每个人都有自己的口味
 
 
 72
-00:04:26,306 --> 00:04:29,156
-so that the delivery
-part is agnostic,
+00:05:13,080 --> 00:05:15,382
+而我们不希望
+建立一个庞大而复杂的东西
 
 
 73
-00:04:29,156 --> 00:04:30,066
-the protocol you're using.
+00:05:15,749 --> 00:05:17,284
+并迫使你们进入我们的盒子
 
 
 74
-00:04:30,066 --> 00:04:31,796
-If you have got a
-secure connection,
+00:05:17,784 --> 00:05:21,255
+所以我们建立了
+这个密钥传送机制
 
 
 75
-00:04:32,166 --> 00:04:34,836
-you can adopt FairPlay
-Streaming extremely easily.
+00:05:21,722 --> 00:05:25,259
+我们并不是创建了一种
+权利表达语言评估工具
 
 
 76
-00:04:35,296 --> 00:04:36,766
-And if you don't, you
-can just use HTTPS.
+00:05:25,325 --> 00:05:28,695
+或者是一长串您需要遵守的策略
 
 
 77
-00:04:36,766 --> 00:04:37,856
-It's a great choice.
+00:05:29,363 --> 00:05:33,667
+而那意味着
+如果您的商业逻辑要求那些东西
 
 
 78
-00:04:39,346 --> 00:04:42,676
-Finally, a lot of folks have
-asked me about HDCP in the past.
+00:05:33,734 --> 00:05:35,936
+您是可以掌控的
+您依然是守门员
 
 
 79
-00:04:43,256 --> 00:04:45,596
-With FairPlay Streaming
-is the answer to this.
+00:05:36,470 --> 00:05:39,273
+因此 一旦您为媒体堆栈
+赋予了一个FPS密钥
 
 
 80
-00:04:46,996 --> 00:04:49,726
-If your device is
-connected to a television
+00:05:39,339 --> 00:05:40,774
+毫无问题
+我们将播放它
 
 
 81
-00:04:49,886 --> 00:04:54,746
-or another external
-input, it must be HDMI,
+00:05:40,841 --> 00:05:42,376
+我们将保护密钥
+我们将去播放它
 
 
 82
-00:04:54,746 --> 00:04:56,776
-and HDCP must be active
+00:05:43,076 --> 00:05:46,146
+如果您需要实施某种策略实施
 
 
 83
-00:04:57,176 --> 00:05:00,386
-or any FairPlay Streaming
-content playback will fail,
+00:05:46,246 --> 00:05:50,751
+或进行用户认证
+或对每个设备插槽进行管理
 
 
 84
-00:05:01,226 --> 00:05:02,006
-no exceptions.
+00:05:51,151 --> 00:05:53,987
+那么您就可以在FPS上那么做
 
 
 85
-00:05:04,216 --> 00:05:09,166
-Now, when we designed it,
-we knew that there's a lot
+00:05:54,421 --> 00:05:57,224
+而且它将是非常容易整合的
 
 
 86
-00:05:09,166 --> 00:05:11,706
-of difference, business
-rules and logic,
+00:05:58,458 --> 00:06:00,694
+那么现在让我们讨论一些具体步骤
 
 
 87
-00:05:11,706 --> 00:05:13,286
-and everybody has
-their own flavor.
+00:06:01,161 --> 00:06:03,096
+那就是FPS为您提供的基本功能
 
 
 88
-00:05:13,286 --> 00:05:15,396
-And so we didn't want to
-build a big, complicated thing
+00:06:03,430 --> 00:06:06,200
+让我们讨论一下
+您采用它需要采取的步骤
 
 
 89
-00:05:15,746 --> 00:05:17,286
-and force you into our box.
+00:06:07,467 --> 00:06:09,002
+主要有三步
 
 
 90
-00:05:17,776 --> 00:05:21,256
-So we built just the
-key delivery mechanism.
+00:06:09,603 --> 00:06:12,039
+第一步
+也极可能是最重要的一步是
 
 
 91
-00:05:21,706 --> 00:05:25,326
-We didn't build a big rights
-expression language evaluator
+00:06:12,372 --> 00:06:15,709
+由于FPS是一个在线密钥传送协议
 
 
 92
-00:05:25,326 --> 00:05:27,576
-or create a long
-list of policies
+00:06:16,343 --> 00:06:20,447
+您必须在线获取您的密钥
+而一旦播放停止密钥即消失
 
 
 93
-00:05:27,576 --> 00:05:28,696
-that you need to adhere to.
+00:06:21,248 --> 00:06:26,386
+您需要把我们所谓的“密钥安全模块”
+集成到您的密钥服务器中
 
 
 94
-00:05:29,366 --> 00:05:33,726
-And that means that if your
-business logic requires those
+00:06:27,421 --> 00:06:31,024
+因此那是最重大的一步
+稍后我们将详细讨论那个话题
 
 
 95
-00:05:33,726 --> 00:05:34,886
-things, you are in control.
+00:06:31,692 --> 00:06:35,462
+但是第二件事情是
+您需向您的应用添加一些代码
 
 
 96
-00:05:34,886 --> 00:05:35,946
-You are still the gate keeper.
+00:06:36,029 --> 00:06:39,166
+称为AV Asset Resource Loader Delegate
 
 
 97
-00:05:36,486 --> 00:05:39,346
-So, once you give the media
-stack a FairPlay Streaming key,
+00:06:39,766 --> 00:06:45,372
+那段代码负责将来自
+AV Foundation的密钥请求传送到后端
 
 
 98
-00:05:39,346 --> 00:05:39,876
-we will play it.
+00:06:45,706 --> 00:06:49,610
+然后将您后端发出的响应
+并返回给AV Foundation
 
 
 99
-00:05:39,876 --> 00:05:40,856
-No questions asked.
+00:06:50,310 --> 00:06:52,513
+最后您需要做的是准备您的内容
 
 
 100
-00:05:40,856 --> 00:05:42,386
-We will protect the key,
-we'll go and play it.
+00:06:52,579 --> 00:06:57,784
+而那意味着您需要
+使用AES示例加密法将其加密
 
 
 101
-00:05:43,086 --> 00:05:46,156
-And so, if you need to do
-some policy enforcement
+00:06:58,085 --> 00:07:03,290
+巧的是 这是我们三年前引入的
 
 
 102
-00:05:46,246 --> 00:05:50,746
-or user authentication or
-per device slot management,
+00:07:04,558 --> 00:07:10,864
+因此与最初HLS使用的传统
+整段代码加密不同的是
 
 
 103
-00:05:51,136 --> 00:05:53,986
-then you can do that on
-top of FairPlay Streaming.
+00:07:11,098 --> 00:07:14,168
+这种加密法仅加密
+每段示例代码中小的片段
 
 
 104
-00:05:54,436 --> 00:05:57,226
-And so again, it goes into
-being easy to integrate.
+00:07:14,434 --> 00:07:19,106
+这确保了我们能够
+在系统基本水平上进行解密工作
 
 
 105
-00:05:58,486 --> 00:06:00,696
-So now let's talk about
-some concrete steps.
+00:07:20,140 --> 00:07:22,476
+因此您需要选择一个内容密钥
 
 
 106
-00:06:00,696 --> 00:06:03,086
-That's kind of what
-FairPlay Streaming gives you.
+00:07:22,543 --> 00:07:24,111
+将其存放在您的后端数据库内
 
 
 107
-00:06:03,446 --> 00:06:06,216
-Let's talk about the steps that
-you need to do to adopt it.
+00:07:24,411 --> 00:07:25,479
+对您的内容进行加密
 
 
 108
-00:06:07,466 --> 00:06:09,006
-Basically there are three steps.
+00:07:25,746 --> 00:07:28,649
+然后将对那个密钥的引用加入播放列表
 
 
 109
-00:06:09,606 --> 00:06:12,626
-The first one and
-probably the largest one is
+00:07:28,882 --> 00:07:31,652
+以便当您的那小段代码
+接到对密钥的请求时
 
 
 110
-00:06:12,626 --> 00:06:15,706
-because FairPlay Streaming is
-an online key delivery protocol,
+00:07:31,718 --> 00:07:33,854
+能够知道向后端请求哪个密钥
 
 
 111
-00:06:16,346 --> 00:06:18,166
-you must be online
-to get your key,
+00:07:35,155 --> 00:07:40,928
+那么我接下来将要做的
+是进一步详述这三个步骤
 
 
 112
-00:06:18,166 --> 00:06:20,306
-and once the playback
-stops, the key goes poof.
+00:07:41,328 --> 00:07:45,465
+在那之前 我想介绍我的一位同事
 
 
 113
-00:06:21,236 --> 00:06:25,266
-You need to integrate what
-we call a key security module
+00:07:45,799 --> 00:07:47,434
+他是FairPlay团队成员之一
 
 
 114
-00:06:25,336 --> 00:06:26,376
-into your key server.
+00:07:47,734 --> 00:07:48,936
+詹保罗 法索里
 
 
 115
-00:06:27,416 --> 00:06:29,946
-And so that's the biggest
-step, and we'll go into a lot
+00:07:50,070 --> 00:07:50,904
+欢迎！
 
 
 116
-00:06:29,946 --> 00:06:31,026
-of detail about that
-in a second.
+00:07:56,143 --> 00:07:57,044
+谢谢你 罗哲斯！
 
 
 117
-00:06:31,686 --> 00:06:34,026
-But the second thing is, then
-you need to add a little bit
+00:07:58,145 --> 00:08:00,214
+大家早上好！
+我叫詹保罗 法索里
 
 
 118
-00:06:34,026 --> 00:06:35,466
-of code to your application,
+00:08:00,280 --> 00:08:02,783
+是Apple的FPS工程师
 
 
 119
-00:06:36,036 --> 00:06:39,106
-called an AV asset
-resource loader delegate.
+00:08:03,684 --> 00:08:06,753
+继罗哲斯所做的概述
+我想跟大家谈一下
 
 
 120
-00:06:39,766 --> 00:06:41,506
-And that code is going
-to be responsible
+00:08:06,820 --> 00:08:09,256
+设计一个FPS系统需要些什么
 
 
 121
-00:06:41,546 --> 00:06:44,116
-for relaying the key
-requests from AV foundation
+00:08:09,323 --> 00:08:10,791
+我想讲的第一件事
 
 
 122
-00:06:44,456 --> 00:06:47,436
-to your back end, and then
-returning the response
+00:08:11,291 --> 00:08:17,631
+是我们所谓的FairPlay流媒体
+证书的目的和重要性
 
 
 123
-00:06:47,436 --> 00:06:49,606
-from your back end
-back to AV foundation.
+00:08:18,365 --> 00:08:23,270
+接下来
+我将识别系统和数据流中的活动要素
 
 
 124
-00:06:50,306 --> 00:06:52,586
-Then finally what you need to
-do is, prepare your content.
+00:08:24,638 --> 00:08:27,975
+然后我将讨论苹果公司将在您
+构建的东西中会提供哪些东西
 
 
 125
-00:06:52,586 --> 00:06:54,026
-And that means you
-need to encrypt it,
+00:08:28,041 --> 00:08:31,144
+而在您将构建的东西中
+我们将先从服务器端讲起
 
 
 126
-00:06:54,026 --> 00:06:57,776
-using the AES Sample encryption.
+00:08:31,211 --> 00:08:36,683
+以及如何将Roger刚才所讲的
+密钥安全模块集成到您的密钥服务器中
 
 
 127
-00:06:58,086 --> 00:07:01,516
-This is the format
-that we introduced, oh,
+00:08:37,217 --> 00:08:39,586
+我们将讨论如何测试集成
 
 
 128
-00:07:01,676 --> 00:07:03,286
-three years ago, coincidentally.
+00:08:40,254 --> 00:08:45,492
+接下来我们将讨论客户端
+以及如何将FPS集成到您的应用中
 
 
 129
-00:07:03,786 --> 00:07:07,916
-And so, rather than the
-traditional bulk entire segment
+00:08:45,559 --> 00:08:52,232
+然后我们将讨论
+您将对内容制作工作流的更新
 
 
 130
-00:07:07,916 --> 00:07:10,806
-encryption that HLS
-is using originally,
+00:08:52,966 --> 00:08:57,337
+以便将内容加密 并确认
+您将对工作流的更改
 
 
 131
-00:07:11,086 --> 00:07:15,336
-this just encrypts small slices
-of each sample and it ensures
+00:08:59,239 --> 00:09:02,910
+那么当我们讨论FPS证书的时候
 
 
 132
-00:07:15,556 --> 00:07:17,346
-that we can drive the decryption
+00:09:03,010 --> 00:09:05,946
+我们有那些证书是为了
 
 
 133
-00:07:17,556 --> 00:07:19,116
-down to the lowest
-level of the system.
+00:09:06,013 --> 00:09:12,519
+能够将您的FPS部署
+和那里已经存在的部署区分开来
 
 
 134
-00:07:20,136 --> 00:07:23,096
-And so you need to pick a
-content key, store that away
+00:09:13,053 --> 00:09:16,290
+之所以需要它们是因为有了它们
 
 
 135
-00:07:23,096 --> 00:07:25,466
-in your back end database,
-encrypt your content,
+00:09:16,356 --> 00:09:20,494
+您的客户才可以在他们的设备上
+实际播放他们的内容
 
 
 136
-00:07:25,756 --> 00:07:29,356
-and then put a reference to that
-key into your playlist so that
+00:09:21,929 --> 00:09:27,968
+出于这些原因
+保护FPS证书资产资源就十分重要了
 
 
 137
-00:07:29,356 --> 00:07:31,726
-when you your little bit
-of code receives a request
+00:09:28,202 --> 00:09:30,204
+不管是当它们被部署在服务器上
 
 
 138
-00:07:31,726 --> 00:07:33,856
-for that key it knows which
-one to ask your back end for.
+00:09:30,270 --> 00:09:31,505
+还是在您的服务器上被使用
 
 
 139
-00:07:34,016 --> 00:07:37,756
-And so what I would like
-to do next is have us go
+00:09:32,306 --> 00:09:33,674
+要确保它们得到保护
 
 
 140
-00:07:37,756 --> 00:07:40,936
-into greater detail on
-all three of those steps.
+00:09:34,641 --> 00:09:40,380
+那么现在继续往下看图表
+左边我们已经有了服务器组件
 
 
 141
-00:07:41,316 --> 00:07:45,476
-And to do that, I would like to
-introduce a colleague of mine
+00:09:40,681 --> 00:09:42,216
+也就是您的密钥服务器
 
 
 142
-00:07:45,476 --> 00:07:48,526
-who works on the FairPlay
-team, Gianpaolo Fasoli.
+00:09:42,316 --> 00:09:46,119
+它内部已经集成了FPS密钥安全模块
 
 
 143
-00:07:48,586 --> 00:07:48,936
-Welcome.
+00:09:46,854 --> 00:09:51,458
+密钥数据库里面含有
+用来为您的流媒体加密内容密钥值
 
 
 144
-00:07:50,516 --> 00:07:55,686
-[Applause]
+00:09:51,725 --> 00:09:56,029
+而在右边我们有客户端活动要素
+即是您的应用
 
 
 145
-00:07:56,186 --> 00:07:56,856
->> GIANPAOLO FASOLI:
-Thank you, Roger.
+00:09:56,396 --> 00:09:59,600
+罗哲斯刚才讲的
+AVFoundation Delegate和AVFoundation
 
 
 146
-00:07:57,906 --> 00:07:58,836
-Good morning, everyone.
+00:09:59,666 --> 00:10:03,470
+已经为我们提供了部分操作系统
+即我们的iOS或Mac OS X
 
 
 147
-00:07:58,836 --> 00:08:00,276
-My name's Gianpaolo Fasoli,
+00:10:04,938 --> 00:10:09,176
+那么让我们讨论一下 当用户在您的
+应用中点击播放的时候会发生什么
 
 
 148
-00:08:00,276 --> 00:08:02,796
-and I am a FairPlay
-Streaming Engineer at Apple.
+00:10:09,243 --> 00:10:10,544
+第一件会发生的事情是
 
 
 149
-00:08:03,686 --> 00:08:06,826
-So, with Roger's overview in
-mind, I'd like to talk to you
+00:10:11,011 --> 00:10:13,514
+您的应用将调用AVFoundation
 
 
 150
-00:08:06,826 --> 00:08:09,326
-about what it takes to design
-a FairPlay Streaming system.
+00:10:13,580 --> 00:10:16,683
+并为其提供即将赋予
+加密内容的m3u8 URL
 
 
 151
-00:08:09,326 --> 00:08:13,536
-And the first thing I'm going
-to talk about is the purpose
+00:10:17,184 --> 00:10:21,288
+AVFoundation将从互联网
+抽取那个播放列表并对其进行解析
 
 
 152
-00:08:13,536 --> 00:08:15,346
-and the importance
-of what we refer
+00:10:21,655 --> 00:10:23,790
+当它注意到内容被加密的时候
 
 
 153
-00:08:15,346 --> 00:08:17,716
-to as the FairPlay
-Streaming credentials.
+00:10:23,857 --> 00:10:28,028
+它将回调您的Delegate
+告诉它需要一个密钥以便播放内容
 
 
 154
-00:08:17,716 --> 00:08:21,026
-Next up, I'm going to
-identify the actors
+00:10:29,196 --> 00:10:32,299
+Delegate将进行处理
+它将调入AVFoundation
 
 
 155
-00:08:21,026 --> 00:08:23,276
-in the system and
-the data flows.
+00:10:32,366 --> 00:10:37,070
+并请求后者创建
+所谓的服务器上下文播放
 
 
 156
-00:08:23,276 --> 00:08:26,546
-Then I'm going to talk
-about what Apple provides
+00:10:37,971 --> 00:10:40,841
+在FPS术语中
+我们将其简称为SPC
 
 
 157
-00:08:26,546 --> 00:08:28,246
-in the things that you are
-going to build and in the things
+00:10:40,908 --> 00:10:41,942
+而那是什么？
 
 
 158
-00:08:28,246 --> 00:08:30,266
-that you are going to build,
-we're going to start by talking
+00:10:42,209 --> 00:10:47,414
+它是一个Delegate的密钥请求
+它将用post方法提交给密钥服务器
 
 
 159
-00:08:30,266 --> 00:08:31,586
-about the server side and how
+00:10:48,248 --> 00:10:51,818
+以便完成其工作并传递内容密钥
 
 
 160
-00:08:31,586 --> 00:08:35,436
-to integrate the key security
-module that Roger was talking
+00:10:52,186 --> 00:10:53,921
+这里需要注意的重要一点是
 
 
 161
-00:08:35,436 --> 00:08:36,686
-about into your key server.
+00:10:54,321 --> 00:11:01,061
+SPC是在客户端上的
+FPS传递上下文中创建的
 
 
 162
-00:08:37,206 --> 00:08:39,596
-We're going to talk about
-how to test that integration.
+00:11:01,495 --> 00:11:03,964
+而那是一个特定会话上下文
 
 
 163
-00:08:39,596 --> 00:08:43,116
-We're going to move on to
-the client side and how
+00:11:05,098 --> 00:11:07,734
+只有那台设备能够创建它
 
 
 164
-00:08:43,116 --> 00:08:45,566
-to integrate FairPlay
-Streaming into your application,
+00:11:07,801 --> 00:11:11,905
+也只有那台设备能够为其处理
+来自于服务器的响应
 
 
 165
-00:08:45,566 --> 00:08:47,666
-and then we're also
-going to be talking
+00:11:11,972 --> 00:11:13,807
+它是和设备以及会话绑定的
 
 
 166
-00:08:47,666 --> 00:08:49,666
-about the updates you
-are going to be making
+00:11:14,675 --> 00:11:18,212
+因此当您的服务器准备利用KSM
 
 
 167
-00:08:49,666 --> 00:08:54,156
-to your content authoring
-workflow, in order to encrypt
+00:11:18,645 --> 00:11:24,351
+来破解SPC队列请求
+对其格式和加密方法进行验证
 
 
 168
-00:08:54,156 --> 00:08:56,106
-that content and
-verify the changes
+00:11:24,718 --> 00:11:27,888
+并在密钥服务器数据库中
+查找对应的内容密钥时
 
 
 169
-00:08:56,106 --> 00:08:57,336
-that you are making
-to your workflow.
+00:11:28,589 --> 00:11:34,828
+它将把那个内容密钥值
+打包为我们所称的内容密钥上下文
 
 
 170
-00:08:59,236 --> 00:09:02,916
-So when we talk about
-FairPlay Streaming credentials,
+00:11:35,162 --> 00:11:36,530
+或简称为CKC
 
 
 171
-00:09:03,006 --> 00:09:06,016
-the reason we have those is
+00:11:37,164 --> 00:11:40,634
+而您的app delegate
+将要执行的最后一步是
 
 
 172
-00:09:06,016 --> 00:09:09,226
-so that we can differentiate
-your FairPlay Streaming
+00:11:40,701 --> 00:11:43,504
+将那个CKC
+返回给AVFoundation
 
 
 173
-00:09:09,226 --> 00:09:12,516
-deployment from other FPS
-deployments out there.
+00:11:44,471 --> 00:11:48,942
+那么此刻设备已经有了
+它对内容的解密和播放所需要的一切
 
 
 174
-00:09:13,066 --> 00:09:16,236
-And the reason they are required
-is because you need them
+00:11:49,643 --> 00:11:53,947
+那么现在我们已经谈及了FP系统中的
+活动要素和数据流
 
 
 175
-00:09:16,236 --> 00:09:19,046
-so that your customers can
-actually play their content
+00:11:54,014 --> 00:11:55,816
+让我们谈一下Apple将供哪些东西
 
 
 176
-00:09:19,236 --> 00:09:20,496
-on the customer devices.
+00:11:56,984 --> 00:11:58,785
+当然我们提供AVFoundation
 
 
 177
-00:09:21,466 --> 00:09:24,196
-For those reasons,
-it is critical
+00:11:58,852 --> 00:12:03,023
+在iOS和Mac OS中
+AVFoundation的一部分是
 
 
 178
-00:09:24,196 --> 00:09:27,966
-that you protect those FairPlay
-Streaming credential assets
+00:12:03,090 --> 00:12:05,726
+您将用于执行delegate的API
 
 
 179
-00:09:28,196 --> 00:09:30,276
-at all times, when they are
-deployed in your server,
+00:12:06,527 --> 00:12:09,730
+我们提供的另一个工具是
+developer.apple.com上的
 
 
 180
-00:09:30,276 --> 00:09:31,516
-and when they're
-used in your server.
+00:12:09,863 --> 00:12:11,865
+FairPlay Streaming SDK
 
 
 181
-00:09:32,316 --> 00:09:33,686
-Make sure they are protected.
+00:12:11,932 --> 00:12:13,834
+那个SDK包含一些特定的内容
 
 
 182
-00:09:34,636 --> 00:09:39,216
-So now moving on to the diagram,
-we've got the server components
+00:12:13,901 --> 00:12:17,504
+首先它包含一个协议规范
 
 
 183
-00:09:39,216 --> 00:09:42,326
-on the left-hand side,
-namely your key server
+00:12:18,005 --> 00:12:22,709
+里面有关于SPC和CKC消息
+编写格式的全部详细信息
 
 
 184
-00:09:42,326 --> 00:09:45,806
-that has the FairPlay Streaming
-key security module integrated
+00:12:23,110 --> 00:12:29,783
+和您将使用哪些加密原函数
+来处理密钥请求 及生成密钥响应
 
 
 185
-00:09:45,806 --> 00:09:49,596
-in it; the key database that
-contains the content key values
+00:12:30,651 --> 00:12:36,757
+它包含一个在网络控制中心的
+对密钥安全模块服务器的引用实施
 
 
 186
-00:09:49,596 --> 00:09:51,456
-that were used to
-encrypt your streams.
+00:12:37,824 --> 00:12:43,664
+它包含一整套能够用于服务器部署的
+服务器测试矢量和验证工具
 
 
 187
-00:09:51,726 --> 00:09:54,746
-And then on the right-hand side
-we've got the client actors,
+00:12:44,398 --> 00:12:47,334
+它包含一些客户端示例内容
 
 
 188
-00:09:54,746 --> 00:09:56,026
-namely your application,
+00:12:48,902 --> 00:12:54,842
+而它包含的最后一点内容是
+一套客户端示例代码
 
 
 189
-00:09:56,406 --> 00:09:58,676
-the AVFoundation Delegate
-Roger was talking about,
+00:12:56,376 --> 00:13:01,982
+因此如罗哲斯指出的
+密钥服务器的首要职责是加密
 
 
 190
-00:09:58,946 --> 00:10:01,986
-and AVFoundation that's provided
-us part of the operating system
+00:13:02,149 --> 00:13:05,018
+以及对SPC密钥请求的验证
 
 
 191
-00:10:01,986 --> 00:10:04,376
-with our iOS or Mac OS X.
+00:13:05,619 --> 00:13:10,457
+然后它将根据资源识别符
+查找客户希望播放的内容
 
 
 192
-00:10:04,946 --> 00:10:06,196
-So lLet's talk about
-what happens
+00:13:10,824 --> 00:13:13,193
+然后它将生成CKC响应
 
 
 193
-00:10:06,196 --> 00:10:09,176
-when the user hits play
-in your application.
+00:13:13,260 --> 00:13:15,262
+它是您的密钥安全模块中
 
 
 194
-00:10:09,226 --> 00:10:10,556
-First thing that's
-going to happen is,
+00:13:15,329 --> 00:13:17,197
+将发生的第一个和第三个操作
 
 
 195
-00:10:10,996 --> 00:10:13,566
-your application is going
-to invoke AVFoundation
+00:13:18,165 --> 00:13:21,335
+您有两种执行该操作的方式
 
 
 196
-00:10:13,566 --> 00:10:16,686
-and provide it with the m3u8
-URL to the encrypted content.
+00:13:21,401 --> 00:13:23,837
+您可以使用FPS SDK中
+提供的协议规范
 
 
 197
-00:10:17,186 --> 00:10:20,256
-AVFoundation is going to pull
-that playlist from the Internet,
+00:13:23,904 --> 00:13:27,841
+从零开始执行这个逻辑系统
 
 
 198
-00:10:20,356 --> 00:10:22,586
-it's going to parse
-it, and when it notices
+00:13:28,542 --> 00:13:33,447
+或者您也可以直接采用C参考实施
 
 
 199
-00:10:22,586 --> 00:10:24,566
-that the content is encrypted,
-it is going to call back
+00:13:33,514 --> 00:13:36,950
+并通过您自己选择的语言
 
 
 200
-00:10:24,566 --> 00:10:26,166
-into your delegate, telling it
+00:13:37,017 --> 00:13:40,654
+或直接将其集成到现有密钥服务器中
+而对其进行定制化处理
 
 
 201
-00:10:26,166 --> 00:10:28,026
-that it needs a key
-to play the content.
+00:13:42,356 --> 00:13:45,726
+那么在执行完集成之后
+让我们谈一谈您将如何测试KSM
 
 
 202
-00:10:28,506 --> 00:10:31,166
-The delegate is going to
-handle that by calling
+00:13:46,894 --> 00:13:48,695
+我们建议您做的第一件事当然是
 
 
 203
-00:10:31,306 --> 00:10:34,846
-into AVFoundation and asking
-it to create what we refer
+00:13:48,762 --> 00:13:51,498
+使用我们提供
+作为SDK一部分的测试矢量
 
 
 204
-00:10:34,846 --> 00:10:37,086
-to as the Server
-Playback Context.
+00:13:51,965 --> 00:13:55,202
+来验证KSM将生成的响应的正确性
 
 
 205
-00:10:37,976 --> 00:10:40,866
-In FPS parlance we
-use SPC for short.
+00:13:55,269 --> 00:14:01,074
+而您执行此步骤的方式
+是使用我们提供的SPC测试矢量
 
 
 206
-00:10:40,916 --> 00:10:43,896
-And what that is,
-is a key request
+00:14:01,508 --> 00:14:04,144
+将它们提供给KSM执行
 
 
 207
-00:10:43,896 --> 00:10:47,406
-that your delegate then is
-going to post to your key server
+00:14:04,545 --> 00:14:08,048
+然后运行由KSM通过验证工具
+产生并输出的CKC
 
 
 208
-00:10:47,406 --> 00:10:50,666
-in order for the key
-server to do its job
+00:14:08,415 --> 00:14:14,488
+以确保它们不管从加密的角度
+或格式的角度都是正确的
 
 
 209
-00:10:50,666 --> 00:10:51,806
-and deliver the content key.
+00:14:15,522 --> 00:14:16,390
+需要注意的是
 
 
 210
-00:10:52,216 --> 00:10:56,296
-What is important to note here
-is that the SPC is created
+00:14:16,456 --> 00:14:20,694
+我们在SDK中提供的测试矢量
+是基于开发专用凭证的
 
 
 211
-00:10:56,296 --> 00:11:01,046
-in a FairPlay Streaming
-delivery context on the client.
+00:14:20,761 --> 00:14:24,264
+它们是专为您的开发工作而存在的
 
 
 212
-00:11:01,496 --> 00:11:05,676
-And that is a session-specific
-context that only
+00:14:24,331 --> 00:14:28,569
+它们不可被用于向活跃的客户设备
+部署解决方案
 
 
 213
-00:11:05,676 --> 00:11:07,806
-that device was able to create,
+00:14:28,635 --> 00:14:32,639
+为了向活跃的客户设备部署解决方案
+您将需要专用于生产目的的FPS凭证
 
 
 214
-00:11:07,806 --> 00:11:09,776
-for which that device
-will only be able
+00:14:33,373 --> 00:14:36,577
+那么既然我们已经谈了服务器端
+让我们谈谈客户端
 
 
 215
-00:11:09,776 --> 00:11:11,986
-to process the response
-from the server.
+00:14:36,643 --> 00:14:39,346
+将FPS集成到您的应用中
+需要些什么呢？
 
 
 216
-00:11:11,986 --> 00:11:13,806
-It is tied to the device
-and to that session.
+00:14:39,413 --> 00:14:40,347
+您应做的第一件事是
 
 
 217
-00:11:14,676 --> 00:11:18,926
-So then your server is going
-to make use of the KSM to crack
+00:14:40,414 --> 00:14:44,518
+用AVAsset注册一个
+AVasset Resource Loader delegate
 
 
 218
-00:11:19,006 --> 00:11:22,536
-that SPC queue request open,
-validate it from a format point
+00:14:44,685 --> 00:14:48,388
+而那个delegate的职责
+有三个方面
 
 
 219
-00:11:22,536 --> 00:11:24,346
-of view and from a
-cryptographic point of view,
+00:14:48,455 --> 00:14:50,991
+首先它要做的是生成SPC
 
 
 220
-00:11:24,716 --> 00:11:26,566
-and look up the corresponding
-content key
+00:14:51,291 --> 00:14:53,660
+这需要通过以下两步完成
 
 
 221
-00:11:26,566 --> 00:11:27,896
-in the key server database.
+00:14:53,727 --> 00:14:54,828
+首先您将为密钥请求处理
 
 
 222
-00:11:28,586 --> 00:11:30,906
-It's going to then wrap
-that content key value
+00:14:55,162 --> 00:14:56,330
+“should Wait For
+Loading
 
 
 223
-00:11:30,966 --> 00:11:34,836
-into what we refer to as
-a content key context,
+00:14:56,396 --> 00:14:59,032
+Of Requested
+Resource”命令
 
 
 224
-00:11:35,156 --> 00:11:38,666
-or CKC for short,
-and the last step
+00:14:59,099 --> 00:15:00,267
+然后您将做的第二步是调用
 
 
 225
-00:11:38,666 --> 00:11:40,486
-that your app delegate
-is going to perform,
+00:15:00,334 --> 00:15:02,836
+“VAsset Resource
+Loading Request
 
 
 226
-00:11:40,486 --> 00:11:43,516
-is provide that CKC
-back to AVFoundation.
+00:15:02,903 --> 00:15:04,972
+Streaming Content
+Key Request Data
 
 
 227
-00:11:44,456 --> 00:11:46,836
-So, at this point the device
-has everything it needs
+00:15:05,038 --> 00:15:06,240
+For App”
 
 
 228
-00:11:46,836 --> 00:11:48,936
-to decrypt and play the content.
+00:15:06,306 --> 00:15:07,875
+以便生成SPC
 
 
 229
-00:11:49,636 --> 00:11:52,906
-So now that we've covered
-the actors and the data flows
+00:15:08,842 --> 00:15:11,912
+一旦您获得了那个 SPC
+您将把它传送给您的密钥服务器
 
 
 230
-00:11:52,906 --> 00:11:54,186
-in a FairPlay Streaming system,
+00:15:12,379 --> 00:15:14,248
+而当您的密钥服务器做出响应时
 
 
 231
-00:11:54,186 --> 00:11:55,666
-let's talk about
-what Apple provides.
+00:15:14,314 --> 00:15:15,582
+您将把CKC响应提供给
 
 
 232
-00:11:56,586 --> 00:11:58,796
-We provide AVFoundation,
-of course.
+00:15:15,649 --> 00:15:17,551
+“AVAsset Resource
+Loading Request”
 
 
 233
-00:11:58,856 --> 00:12:03,076
-And part of AVFoundation in
-iOS and Mac OS is the API
+00:15:18,452 --> 00:15:21,588
+那么我们就完成了服务器端的执行
+也完成了客户端的执行
 
 
 234
-00:12:03,076 --> 00:12:05,736
-that you are going to be using
-to implement the delegate.
+00:15:21,655 --> 00:15:25,025
+让我们谈一谈工作流更新中内容制作
 
 
 235
-00:12:06,536 --> 00:12:09,546
-Another thing we provide is
-the FairPlay Streaming SDK
+00:15:25,692 --> 00:15:28,128
+为了将内容解密您将必须做些什么？
 
 
 236
-00:12:09,996 --> 00:12:11,426
-on developer.apple.com.
+00:15:28,195 --> 00:15:29,363
+您应做的第一件事是
 
 
 237
-00:12:11,936 --> 00:12:13,886
-And that SDK contains a
-certain number of things.
+00:15:29,429 --> 00:15:33,367
+去从developer.apple.com
+获取HLS加密规范 
 
 
 238
-00:12:13,886 --> 00:12:17,026
-First of all, it contains
-a protocol specification
+00:15:33,700 --> 00:15:35,636
+不管比特流是音频还是视频
 
 
 239
-00:12:17,196 --> 00:12:20,316
-that has all the
-details on how the SPC
+00:15:35,702 --> 00:15:39,706
+它将为您提供您需要了解的
+对比特流本身加密的所有细节
 
 
 240
-00:12:20,456 --> 00:12:22,726
-and the CKC messages
-are formatted,
+00:15:41,275 --> 00:15:45,612
+一旦您对比特流加密后
+您将必须更新m3u8播放列表
 
 
 241
-00:12:23,096 --> 00:12:25,076
-and which cryptographic
-primitives you are going to use
+00:15:45,679 --> 00:15:47,981
+首先您采用的是何种加密方式
 
 
 242
-00:12:25,076 --> 00:12:27,766
-to process the incoming
-key requests
+00:15:48,048 --> 00:15:50,484
+这是通过
+将m3u8列表中的Method标签
 
 
 243
-00:12:27,766 --> 00:12:29,796
-and also generate
-the key response.
+00:15:50,951 --> 00:15:53,420
+设为Sample-AES而实现的
 
 
 244
-00:12:30,656 --> 00:12:34,996
-It contains a key security
-module server reference
+00:15:54,655 --> 00:15:57,491
+您应向客户端发送的另一个信号是
 
 
 245
-00:12:34,996 --> 00:12:36,746
-implementation in NCC.
+00:15:57,558 --> 00:15:59,993
+您希望用FPS来传递密钥的事实
 
 
 246
-00:12:37,826 --> 00:12:41,046
-It contains a full suite
-of server test vectors
+00:16:00,060 --> 00:16:05,465
+实现的方式则是对m3u8播放列表中
+的另一个标签即密钥格式标签进行更新
 
 
 247
-00:12:41,046 --> 00:12:42,636
-and validation tools
-that you can use
+00:16:05,532 --> 00:16:07,835
+应把它设为
+com.apple.streamingkeydelivery
 
 
 248
-00:12:42,636 --> 00:12:43,676
-for your server development.
+00:16:10,270 --> 00:16:12,539
+事实上我们三年多前就开始部署了
 
 
 249
-00:12:44,406 --> 00:12:47,346
-It contains some
-client-side example content.
+00:16:12,606 --> 00:16:16,844
+这意味着目前在解码器方面
+有相当多的第三方支持
 
 
 250
-00:12:48,466 --> 00:12:55,486
-And the last bit it contains is
-a set of client example code.
+00:16:16,910 --> 00:16:22,349
+您可以选择搭配其中之一作为替代
+而不是您亲自更新工作流
 
 
 251
-00:12:56,366 --> 00:13:00,136
-So the responsibilities of your
-key server are going to be,
+00:16:23,417 --> 00:16:25,085
+一旦您更新了您的工作流
 
 
 252
-00:13:00,136 --> 00:13:02,836
-as Roger pointed out, first
-of all, the decryption
+00:16:25,319 --> 00:16:29,389
+这里是您如何检查
+加密工作流的正确性的方法
 
 
 253
-00:13:02,836 --> 00:13:05,036
-and the validation of
-the SPC key request.
+00:16:30,490 --> 00:16:33,894
+您大体上可以做两个比较
 
 
 254
-00:13:05,616 --> 00:13:07,966
-Then it is going to look
-up the content key based
+00:16:35,062 --> 00:16:36,563
+但它们都是以同样的方式开始的
 
 
 255
-00:13:07,966 --> 00:13:10,466
-on the asset identifier that
-the customer wants to play,
+00:16:36,630 --> 00:16:39,633
+开始时先从
+示例SDK选取一段明文内容
 
 
 256
-00:13:10,526 --> 00:13:13,336
-and then it is going to
-produce the CKC response.
+00:16:40,000 --> 00:16:43,971
+并使其运行通过您的新工作流
 
 
 257
-00:13:13,336 --> 00:13:15,326
-It's the first and third
-operation that are going
+00:16:44,771 --> 00:16:50,911
+然后将其与SDK中相同加密资源对比
 
 
 258
-00:13:15,326 --> 00:13:17,056
-to be taking place in your KSM.
+00:16:51,578 --> 00:16:57,351
+也可将其与在HLS媒体文件切割
+工具上通过的该资源加密版本进行比较
 
 
 259
-00:13:17,056 --> 00:13:21,386
-And the way you go about
-implementing that is two fold.
+00:16:57,651 --> 00:17:00,921
+之所以第二点比较有意思有吸引力
+是因为您也可以使用自己的内容
 
 
 260
-00:13:21,386 --> 00:13:23,896
-You can either decide
-to implement the logic
+00:17:00,988 --> 00:17:02,489
+而不是示例内容完成检查工作
 
 
 261
-00:13:23,896 --> 00:13:26,576
-from scratch using the protocol
-specification that's provided
+00:17:03,857 --> 00:17:05,425
+那么现在我们已经讨论了
 
 
 262
-00:13:26,576 --> 00:13:27,716
-in the FPS SDK.
+00:17:05,492 --> 00:17:09,630
+客户端开发和服务器端开发所需的工作
+以及对您的工作流的更新
 
 
 263
-00:13:28,546 --> 00:13:33,506
-Or you can just take the
-C reference implementation
+00:17:10,564 --> 00:17:12,566
+接下来我们讨论功能性本地回放
 
 
 264
-00:13:33,506 --> 00:13:37,006
-and customize it either by
-using your language of choice
+00:17:12,633 --> 00:17:15,636
+现在我想很大家谈谈
+AirPlay中对FPS的支持
 
 
 265
-00:13:37,006 --> 00:13:40,646
-or by integrating it directly
-into your existing key server.
+00:17:17,069 --> 00:17:23,443
+我们对FPS和AirPlay的支持
+是通过AirPlay视频路径实现的
 
 
 266
-00:13:41,226 --> 00:13:43,376
-So now that that's integrated,
+00:17:23,810 --> 00:17:29,816
+就是说当您从应用中的
+本地回放过渡到Apple TV时
 
 
 267
-00:13:43,376 --> 00:13:45,716
-let's talk about how you
-are going to test the KSM.
+00:17:30,384 --> 00:17:34,421
+实际上是Apple TV
+从互联网上读取内容 是吗？
 
 
 268
-00:13:46,906 --> 00:13:48,756
-Well, the first thing we
-recommend you do is obviously
+00:17:34,488 --> 00:17:36,757
+它不再是发送方的设备了
 
 
 269
-00:13:48,756 --> 00:13:51,266
-use the supplied test vectors
-that are part of the SDK
+00:17:37,925 --> 00:17:39,426
+这里的好消息是
 
 
 270
-00:13:51,976 --> 00:13:53,846
-to validate the correctness
-of the responses
+00:17:39,493 --> 00:17:43,430
+在您的应用中或服务器端
+都不需要写任何额外代码了
 
 
 271
-00:13:53,846 --> 00:13:55,256
-that your KSM is
-going to produce.
+00:17:43,564 --> 00:17:48,702
+KSM支持来自于Apple TV
 
 
 272
-00:13:55,256 --> 00:13:56,396
-And the way you go about doing
+00:17:49,069 --> 00:17:53,173
+或来自于iOS设备传入的密钥请求
 
 
 273
-00:13:56,396 --> 00:14:01,066
-that is using the
-supplied SPC test vectors,
+00:17:55,042 --> 00:17:58,612
+需要明确的是 
+SPC仍是Apple TV上生成的
 
 
 274
-00:14:01,386 --> 00:14:04,156
-feed them to your
-KSM implementation,
+00:17:59,146 --> 00:18:03,884
+而您的密钥服务器上生成的CKC响应
+也将在AppleTV上进行处理
 
 
 275
-00:14:04,546 --> 00:14:08,036
-and then run the output
-CKC that your KSM produced
+00:18:05,152 --> 00:18:10,657
+然而app仍然负责Apple TV
+和密钥服务器之间的消息
 
 
 276
-00:14:08,426 --> 00:14:11,246
-through the validation tool to
-make sure they are correct both
+00:18:10,724 --> 00:18:12,659
+因此必须有发送设备的参与
 
 
 277
-00:14:11,246 --> 00:14:13,006
-from a cryptographic
-point of view
+00:18:14,261 --> 00:18:17,364
+这给了我们与本地回放同水平的安全性
 
 
 278
-00:14:13,276 --> 00:14:14,566
-and from a format point of view.
+00:18:17,431 --> 00:18:21,502
+因为SPC和CKC消息
+都来自于并终止于
 
 
 279
-00:14:15,216 --> 00:14:17,686
-It is important to note that
-the test vectors we provide
+00:18:21,668 --> 00:18:23,904
+实际播放内容的那个设备
 
 
 280
-00:14:17,686 --> 00:14:20,836
-in the SDK are based on
-development credentials.
+00:18:24,004 --> 00:18:26,406
+在这种情况下是Apple TV
+也即AirPlay
 
 
 281
-00:14:20,836 --> 00:14:24,396
-And they are there exclusively
-for your development effort.
+00:18:27,975 --> 00:18:29,743
+需要注意的一点是
 
 
 282
-00:14:24,396 --> 00:14:26,856
-They cannot be used
-to deploy a solution
+00:18:29,810 --> 00:18:33,847
+实际上FPS内容将不会
+以AirPlay镜像模式执行
 
 
 283
-00:14:26,856 --> 00:14:28,636
-to live customer devices.
+00:18:34,281 --> 00:18:36,984
+那也适用于在您的本地设备上
 
 
 284
-00:14:28,636 --> 00:14:31,706
-To do that you're going to
-need production FairPlay
+00:18:37,317 --> 00:18:39,987
+播放的FPS内容所做的
+屏幕截图和音视频录制
 
 
 285
-00:14:31,706 --> 00:14:32,626
-Streaming credentials.
+00:18:41,355 --> 00:18:44,157
+在我们谈了关于如何
+在您的app上或AirPlay上
 
 
 286
-00:14:33,156 --> 00:14:35,096
-So now that we've talked
-about the server side,
+00:18:44,858 --> 00:18:47,661
+在本地消费内容之后
 
 
 287
-00:14:35,436 --> 00:14:36,646
-let's talk about
-the client side.
+00:18:48,128 --> 00:18:50,264
+我骄傲地宣布：
 
 
 288
-00:14:36,646 --> 00:14:38,406
-What does it take to
-integrate FairPlay Streaming
+00:18:50,330 --> 00:18:53,066
+今年我们将增加
+对El Capitan的FPS支持
 
 
 289
-00:14:38,406 --> 00:14:39,366
-into your application?
+00:18:54,668 --> 00:18:59,873
+这种大家支持
+且集成到网站的方式
 
 
 290
-00:14:39,366 --> 00:14:40,336
-Well, the first thing
-you're going to want
+00:19:00,240 --> 00:19:04,444
+是通过加密的媒体扩展
 
 
 291
-00:14:40,336 --> 00:14:43,996
-to do is register an AV asset
-resource loader delegate
+00:19:04,912 --> 00:19:07,080
+它们是HTML5的一部分
+是一个W3C规范
 
 
 292
-00:14:44,266 --> 00:14:46,316
-with AVAsset, and
-the responsibilities
+00:19:07,147 --> 00:19:08,715
+您可以从它们的网站下载它
 
 
 293
-00:14:46,316 --> 00:14:48,446
-of that delegate are three fold.
+00:19:09,383 --> 00:19:13,187
+您与EME集成的方式是
 
 
 294
-00:14:48,446 --> 00:14:50,496
-The first thing it's going to
-be doing is generating the SPC.
+00:19:13,253 --> 00:19:16,623
+将您的JavaScript格式
+密钥传递代码写到您的网站上
 
 
 295
-00:14:50,496 --> 00:14:53,646
-And you do that by
-implementing these two steps.
+00:19:17,124 --> 00:19:21,161
+我们在SDK中
+提供了一个这种实施的例子
 
 
 296
-00:14:53,646 --> 00:14:56,026
-You're first going to handle
-'should wait for loading
+00:19:21,261 --> 00:19:22,663
+它更多地是一个小片段
 
 
 297
-00:14:56,026 --> 00:14:58,456
-of requested resource'
-for the key requests.
+00:19:24,097 --> 00:19:30,437
+这里的好消息是
+不管是在KSM端或AirPlay端
 
 
 298
-00:14:59,086 --> 00:15:00,336
-And then second of
-all you're going
+00:19:30,504 --> 00:19:32,673
+都不需要任何新的代码
 
 
 299
-00:15:00,336 --> 00:15:03,686
-to call 'AVAsset resource
-loading request streaming
+00:19:33,106 --> 00:19:34,474
+它是开箱即用型的
 
 
 300
-00:15:03,686 --> 00:15:07,326
-content key request data
-for app' to produce the SPC.
+00:19:34,908 --> 00:19:38,145
+且写好了JavaScript代码后
+它将对一切都是完全支持的
 
 
 301
-00:15:07,326 --> 00:15:10,436
-Once you've got that SPC
-in hand, you're going
+00:19:38,212 --> 00:19:39,179
+现在让我们谈一下
 
 
 302
-00:15:10,436 --> 00:15:11,896
-to send it to your key server.
+00:19:39,246 --> 00:19:43,450
+您为了在网页上支持FPS
+而将要写的JavaScript代码
 
 
 303
-00:15:12,366 --> 00:15:14,326
-And when your key server
-responds, you're going
+00:19:43,650 --> 00:19:46,753
+您要做的第一件事是
+将m3u8 URL设为
 
 
 304
-00:15:14,326 --> 00:15:15,556
-to provide the CKC response
+00:19:47,054 --> 00:19:51,091
+HTML5视频标签的来源属性
 
 
 305
-00:15:15,556 --> 00:15:17,566
-to 'AVAsset resource
-loading request.'
+00:19:51,825 --> 00:19:53,427
+正像您为一个非加密内容所做的那样
 
 
 306
-00:15:18,456 --> 00:15:20,146
-So we've got the
-server side implemented;
+00:19:54,394 --> 00:20:00,634
+然后为WebKitNeedKey调用
+添加视频元素Event Listener
 
 
 307
-00:15:20,146 --> 00:15:21,476
-we've got the client
-side implemented.
+00:20:01,535 --> 00:20:02,402
+当被触发的时候
 
 
 308
-00:15:21,476 --> 00:15:23,836
-Let's talk about
-the workflow updates
+00:20:02,569 --> 00:20:07,641
+那个Event Listener
+将把EME内容加密模块设置到FPS
 
 
 309
-00:15:23,836 --> 00:15:25,016
-in your content authoring.
+00:20:08,509 --> 00:20:11,378
+它还将在video/MP4上
+创建一个keySession
 
 
 310
-00:15:25,676 --> 00:15:28,066
-What are you going to have
-to do to encrypt the content?
+00:20:11,445 --> 00:20:14,381
+以便在密钥系统
+和您的密钥服务器之间传递消息
 
 
 311
-00:15:28,066 --> 00:15:30,546
-Well, the first thing you should
-do is go pull the HLS Sample
+00:20:15,115 --> 00:20:16,717
+您将
+web kit key message
 
 
 312
-00:15:30,546 --> 00:15:33,376
-Encryption specifications
-from developer.apple.com,
+00:20:16,783 --> 00:20:19,286
+向那个keySession
+添加Event Handler
 
 
 313
-00:15:33,716 --> 00:15:36,536
-and that will provide you with
-all the details you need to know
+00:20:19,786 --> 00:20:25,058
+那个Event Handler负责
+把SPC密钥请求传送到您的服务器上
 
 
 314
-00:15:36,536 --> 00:15:39,716
-about encrypting the bit stream
-itself, whether audio or video.
+00:20:25,425 --> 00:20:30,030
+然后通过更新密钥会话
+处理CKC响应
 
 
 315
-00:15:39,716 --> 00:15:43,116
-Once you have got that bit
-stream encrypted you're going
+00:20:31,131 --> 00:20:34,701
+在数据流方面
+我们在左侧有非常类似的活动要素
 
 
 316
-00:15:43,116 --> 00:15:45,686
-to have to update the
-m3u8 playlist to signal,
+00:20:34,768 --> 00:20:36,703
+我们在右侧有同样的活动要素
 
 
 317
-00:15:45,686 --> 00:15:47,996
-first of all, what type of
-encryption mode you use.
+00:20:36,770 --> 00:20:41,241
+我们现在有Apple提供的
+Safari以及EME堆栈
 
 
 318
-00:15:48,056 --> 00:15:50,486
-And that, you do that by
-setting the method tag
+00:20:41,708 --> 00:20:43,377
+在Safari内我们有您的网站
 
 
 319
-00:15:50,966 --> 00:15:53,426
-in the m3u8 playlist
-to Sample-AES.
+00:20:43,911 --> 00:20:50,684
+及您将在网站上支持FPS内容播放和
+新写的JavaScript代码片段
 
 
 320
-00:15:54,636 --> 00:15:57,906
-Another signal you want to
-send to the client is the fact
+00:20:52,786 --> 00:20:56,123
+让我们讨论下当用户在Safari中
+点击Play会发生什么
 
 
 321
-00:15:57,906 --> 00:16:00,066
-that you want to use FairPlay
-Streaming for the key delivery.
+00:20:56,256 --> 00:20:59,493
+那么当用户点击play时
+将要发生的第一件事是
 
 
 322
-00:16:00,066 --> 00:16:02,786
-And the way you do that is
-an update to another tag
+00:20:59,927 --> 00:21:03,530
+m3u8将在操作系统中
+点击EME和AVFoundation
 
 
 323
-00:16:03,206 --> 00:16:05,456
-in the m3u8 playlist,
-that's the key format tag,
+00:21:03,597 --> 00:21:07,401
+而EME将会注意到内容已被加密
 
 
 324
-00:16:05,496 --> 00:16:07,726
-you want it to set it to
-com.apple.streamingkeydelivery.
+00:21:07,467 --> 00:21:12,706
+这将使它触发
+Web kit need key message
 
 
 325
-00:16:10,256 --> 00:16:12,956
-The fact that we've deployed it
-for over three years now means
+00:21:12,773 --> 00:21:14,374
+您的事件监听器将收到这条消息
 
 
 326
-00:16:12,956 --> 00:16:15,236
-that there's quite some
-third-party support
+00:21:16,410 --> 00:21:18,478
+然后您的事件监听器将创建密钥会话
 
 
 327
-00:16:15,236 --> 00:16:16,916
-in the encoders out
-there right now.
+00:21:18,545 --> 00:21:21,081
+并将等待Web kit key message
 
 
 328
-00:16:16,916 --> 00:16:19,966
-And you can choose to go with
-one of those as an alternative
+00:21:21,181 --> 00:21:23,183
+后者又将触发
+Event Handler
 
 
 329
-00:16:19,966 --> 00:16:22,356
-to making updates to
-the workflow yourself.
+00:21:23,817 --> 00:21:26,286
+而Event Handler
+将接收到SPC
 
 
 330
-00:16:23,426 --> 00:16:26,086
-Once you have got your workflow
-updated, here is how you go
+00:21:26,620 --> 00:21:30,123
+并将其传给您的密钥服务器
+密钥服务器将对其照常处理
 
 
 331
-00:16:26,086 --> 00:16:29,406
-about checking the correctness
-of that encryption workflow.
+00:21:30,190 --> 00:21:32,693
+包括提取内容密钥和创建内容密钥响应
 
 
 332
-00:16:30,496 --> 00:16:33,896
-You can do basically
-two comparisons.
+00:21:33,026 --> 00:21:36,396
+然后将那个CKC传回
+给JavaScript代码
 
 
 333
-00:16:34,076 --> 00:16:36,616
-But they both start
-in the same way.
+00:21:36,463 --> 00:21:39,900
+后者再将CKC
+向下传递返回给EME层以便播放
 
 
 334
-00:16:36,616 --> 00:16:39,636
-You start by taking a
-clear text piece of content
+00:21:42,202 --> 00:21:43,504
+正如罗哲斯刚才所说
 
 
 335
-00:16:40,006 --> 00:16:43,956
-from the sample SDK and run
-that through your new workflow.
+00:21:43,570 --> 00:21:48,442
+我们从最初部署该解决方案
+到现在已超过三年
 
 
 336
-00:16:43,956 --> 00:16:46,236
-And then you can
-compare it either
+00:21:48,909 --> 00:21:55,716
+这几年间我们学会了一些
+如何解决FPS集成问题的秘诀和窍门
 
 
 337
-00:16:46,236 --> 00:16:52,666
-to the same encrypted asset in
-the SDK, or you can compare it
+00:21:56,250 --> 00:21:58,886
+而您可能面对的典型问题
 
 
 338
-00:16:52,666 --> 00:16:55,576
-to an encrypted version
-of that asset that you run
+00:21:59,586 --> 00:22:03,657
+如果您的集成工作不幸出错的话
+是内容不播放
 
 
 339
-00:16:55,656 --> 00:16:57,346
-through the HLS media
-file segmenter.
+00:22:04,358 --> 00:22:08,095
+那么您要怎样对那种情况进行调试呢？
 
 
 340
-00:16:57,666 --> 00:16:59,466
-The reason why the second
-point is interesting is
+00:22:08,262 --> 00:22:11,231
+我们建议您做的一件事是...
 
 
 341
-00:16:59,466 --> 00:17:01,536
-because you can do it with
-your own content as well rather
+00:22:11,298 --> 00:22:14,935
+而且这仅限于调试目的
+我们不建议您在生产环境中这么做 
 
 
 342
-00:17:01,536 --> 00:17:02,486
-than the sample content.
+00:22:15,269 --> 00:22:19,206
+那就是将您在m3u8播放列表中的
+密钥格式设为identity
 
 
 343
-00:17:03,866 --> 00:17:05,496
-So now that we've talked
-about what it takes
+00:22:19,806 --> 00:22:22,442
+而不是
+com.apple.streamingkeydelivery
 
 
 344
-00:17:05,496 --> 00:17:08,185
-to develop the client
-side and the server side,
+00:22:22,509 --> 00:22:23,877
+这有什么作用呢？
 
 
 345
-00:17:08,185 --> 00:17:11,246
-and updates to your
-workflow, that leads us
+00:22:23,944 --> 00:22:26,713
+它将同样的内容传送到客户端
 
 
 346
-00:17:11,246 --> 00:17:12,626
-to functional local playback.
+00:22:27,214 --> 00:22:31,718
+但并不是用FPS将内容解密
+而是用明文AES密钥解密
 
 
 347
-00:17:12,626 --> 00:17:13,616
-I would like to now talk to you
+00:22:32,586 --> 00:22:35,956
+而我们最终会是两种情况之一
 
 
 348
-00:17:13,616 --> 00:17:15,646
-about FairPlay Streaming
-support in AirPlay.
+00:22:36,023 --> 00:22:37,457
+第一种是您的内容仍不播放
 
 
 349
-00:17:15,705 --> 00:17:19,296
-And the support we have
-for FairPlay Streaming
+00:22:37,758 --> 00:22:42,196
+这种情况下很有可能是内容制作问题
 
 
 350
-00:17:19,296 --> 00:17:23,445
-and AirPlay is through
-the AirPlay video path.
+00:22:42,529 --> 00:22:45,165
+而那些问题通常分为四类
 
 
 351
-00:17:23,806 --> 00:17:26,776
-And what that means is
-that when you transition
+00:22:45,566 --> 00:22:48,969
+或者是您的加密样本存在问题 
 
 
 352
-00:17:26,776 --> 00:17:29,806
-from local playback in your
-application to the Apple TV,
+00:22:49,036 --> 00:22:53,240
+如果是那种情况 
+我建议您参考HLS示例加密规范
 
 
 353
-00:17:29,806 --> 00:17:32,786
-it is actually the Apple
-TV that is pulling the bits
+00:22:53,540 --> 00:22:55,876
+它可能是PAT/PMT音频设置问题
 
 
 354
-00:17:32,786 --> 00:17:34,406
-from the Internet, right?
+00:22:56,410 --> 00:23:02,182
+那些是您需要对采用FPS编码
+和加密的音频流采取的步骤
 
 
 355
-00:17:34,496 --> 00:17:36,766
-It is not the sender
-device anymore.
+00:23:02,249 --> 00:23:04,718
+需要对一些元数据进行更新
 
 
 356
-00:17:37,916 --> 00:17:40,636
-And the good news here is that
-no new additional code needs
+00:23:05,786 --> 00:23:08,188
+可能是这样的情况
+您使用的编解码器不被支持
 
 
 357
-00:17:40,636 --> 00:17:42,456
-to be written either
-in your application
+00:23:08,388 --> 00:23:09,690
+而且如罗哲斯稍早提到的
 
 
 358
-00:17:42,456 --> 00:17:43,376
-or on the server side.
+00:23:09,756 --> 00:23:14,962
+目前我们在FPS中支持的是
+H.264 AAC 以及加密的AC3
 
 
 359
-00:17:43,376 --> 00:17:48,726
-The KSM supports processing
-increment key requests,
+00:23:15,729 --> 00:23:21,869
+最后 有可能您将在非HLS片段上
+重置您的内容密钥
 
 
 360
-00:17:49,176 --> 00:17:51,176
-both whether they are
-coming from an Apple TV
+00:23:22,302 --> 00:23:27,474
+那么我们建议您将密钥
+在最细粒度的HLS片段上重置
 
 
 361
-00:17:51,176 --> 00:17:53,186
-or from an iOS device.
+00:23:27,841 --> 00:23:32,379
+或者您也可以转换比特率时
+更改内容密钥值
 
 
 362
-00:17:53,826 --> 00:17:58,626
-To be clear, the SPC is still
-generated on the Apple TV
+00:23:33,914 --> 00:23:37,985
+如果在您将密钥格式标签
+更新为identity之后
 
 
 363
-00:17:59,146 --> 00:18:01,806
-and the CKC response that your
-key server is producing will
+00:23:38,051 --> 00:23:40,187
+您的内容已经可以播放
+但可能面临密钥传递问题
 
 
 364
-00:18:01,806 --> 00:18:03,886
-also be processed
-on the Apple TV.
+00:23:40,721 --> 00:23:45,292
+如果那样的话
+您要做的就是跟踪我们刚才所考查的
 
 
 365
-00:18:05,146 --> 00:18:07,076
-However, your app
-is still responsible
+00:23:45,893 --> 00:23:50,464
+图表中的数据流
+并确保SPC由客户端正确生成
 
 
 366
-00:18:07,076 --> 00:18:08,376
-for relaying the messages
+00:23:50,531 --> 00:23:55,235
+它被传送到服务器
+您的服务器能正确无误处理该密钥请求
 
 
 367
-00:18:08,376 --> 00:18:10,736
-between the Apple TV
-and the key server.
+00:23:55,502 --> 00:23:57,771
+您的服务器在数据库中查找正确的密钥
 
 
 368
-00:18:10,736 --> 00:18:12,676
-So the sending device
-has to be present.
+00:23:58,172 --> 00:24:02,142
+而且服务器能够将内容密钥
+封装为内容密钥响应
 
 
 369
-00:18:13,316 --> 00:18:17,396
-This gives us the same level
-of security as local playback
+00:24:02,209 --> 00:24:06,880
+而且客户端能够正确无误地
+处理那一响应
 
 
 370
-00:18:17,446 --> 00:18:21,516
-because the SPC and CKC
-messages both originate and end
+00:24:08,015 --> 00:24:12,152
+既然我们已经考查了
+在Apple生态系统内
 
 
 371
-00:18:21,676 --> 00:18:23,896
-on the device that is
-actually playing the content,
+00:24:12,219 --> 00:24:15,055
+消费FPS内容的各种方式
 
 
 372
-00:18:24,006 --> 00:18:26,226
-the Apple TV, in this
-case, in the AirPlay case.
+00:24:15,122 --> 00:24:17,524
+我想把舞台还给罗哲斯
+让他为这节讲座做一个总结
 
 
 373
-00:18:28,016 --> 00:18:30,136
-One important point
-to note is the fact
+00:24:17,624 --> 00:24:18,926
+非常感谢大家为此付出的时间
 
 
 374
-00:18:30,186 --> 00:18:32,626
-that FairPlay Streaming
-content will not be rendered
+00:24:25,966 --> 00:24:27,067
+非常感谢谢詹保罗 法索里
 
 
 375
-00:18:32,626 --> 00:18:33,856
-in AirPlay Mirroring mode.
+00:24:27,501 --> 00:24:29,236
+那么让我们在这里快速地总结一下
 
 
 376
-00:18:34,286 --> 00:18:36,996
-That also applies to
-screen shots and recordings
+00:24:30,137 --> 00:24:33,874
+面向HLS的FPS
 
 
 377
-00:18:37,316 --> 00:18:39,086
-for FairPlay Streaming
-content that's played
+00:24:34,107 --> 00:24:40,848
+为您提供业内颇具优势的
+HLS内容保护工具
 
 
 378
-00:18:39,086 --> 00:18:39,986
-on your local device.
+00:24:42,082 --> 00:24:48,355
+您在iOS上 Apple TV上
+以及在OS X上都能使用它
 
 
 379
-00:18:40,916 --> 00:18:43,026
-So now that we've
-spoken about how
+00:24:48,689 --> 00:24:53,627
+自从iOS 6就开始提供了
+因此已有相当程度的兼容性
 
 
 380
-00:18:43,026 --> 00:18:47,646
-to consume the content locally
-on your app or through AirPlay,
+00:24:54,061 --> 00:24:56,797
+在Apple TV上也是如此
 
 
 381
-00:18:48,136 --> 00:18:50,346
-I'm proud to announce this year
+00:24:57,231 --> 00:24:58,866
+OS X仍较新
 
 
 382
-00:18:50,346 --> 00:18:52,926
-that we are adding FairPlay
-Streaming support to El Capitan.
+00:24:58,932 --> 00:25:00,868
+您可以在之后的实验室活动中
+跟我们聊聊
 
 
 383
-00:18:54,656 --> 00:18:56,996
-And the way we go about,
-the way you would go
+00:25:00,934 --> 00:25:03,804
+我们将向您和盘托出
+您可以把它用在什么地方
 
 
 384
-00:18:56,996 --> 00:18:59,876
-about integrating this
-into your website is
+00:25:05,239 --> 00:25:07,341
+它已被深度集成到OS内部
 
 
 385
-00:19:00,236 --> 00:19:03,216
-through the encrypted media
-extensions that are part
+00:25:07,441 --> 00:25:10,677
+意味着它能够向下兼容到极低的版本
 
 
 386
-00:19:03,216 --> 00:19:07,136
-of HTML5, that's a
-W3C specification
+00:25:10,744 --> 00:25:12,246
+而且我们也尽可能确保其安全性
 
 
 387
-00:19:07,136 --> 00:19:08,726
-that you can download
-on their website.
+00:25:12,446 --> 00:25:14,882
+它的电源效率也达到了
+我们能够达到的极致
 
 
 388
-00:19:09,396 --> 00:19:13,246
-The way you go about
-integrating with EME is
+00:25:15,215 --> 00:25:18,085
+而且它有极佳的电池寿命
+以及高度的安全性
 
 
 389
-00:19:13,306 --> 00:19:15,786
-by writing your key
-delivery code in JavaScript
+00:25:19,052 --> 00:25:22,990
+而且它支持我们所有生态系统特性
 
 
 390
-00:19:15,916 --> 00:19:18,866
-on your website, and
-we provide an example
+00:25:23,357 --> 00:25:28,061
+比如AirPlay
+HDCP HTML5
 
 
 391
-00:19:18,866 --> 00:19:21,146
-of such an implementation
-in the SDK.
+00:25:28,128 --> 00:25:32,566
+而且随着不断推出新特性
+我们将持续改进它
 
 
 392
-00:19:21,146 --> 00:19:22,676
-It is more of a snippet.
+00:25:36,069 --> 00:25:37,204
+那么下一步是什么呢？
 
 
 393
-00:19:24,096 --> 00:19:29,006
-The good news here is
-that both on the KSM side
+00:25:38,338 --> 00:25:39,773
+第一站是在
 
 
 394
-00:19:29,126 --> 00:19:32,666
-and on the AirPlay side there
-is no new code that is needed.
+00:25:40,174 --> 00:25:43,977
+developer.apple.com
+上最新的FPS门户
 
 
 395
-00:19:32,666 --> 00:19:34,486
-It will work out of the box
+00:25:44,044 --> 00:25:48,415
+它现在就在运转中
+所以您可以去那里看看
 
 
 396
-00:19:34,906 --> 00:19:37,386
-and everything is fully
-supported once you have got your
+00:25:48,482 --> 00:25:53,921
+而且您还可以从门户下载SDK
+您可以查看概述文件
 
 
 397
-00:19:37,386 --> 00:19:38,196
-JavaScript written.
+00:25:53,987 --> 00:25:58,759
+它会让您对FPS的细节
+有一点更深入的见解
 
 
 398
-00:19:38,196 --> 00:19:39,986
-So now let's talk about the
-JavaScript you are going
+00:25:59,259 --> 00:26:04,631
+而且通过那个站点
+您也可以申请生产目的的开发者证书
 
 
 399
-00:19:39,986 --> 00:19:41,956
-to be writing to add support
+00:26:04,698 --> 00:26:08,769
+它们对实现iOS设备或Safari
 
 
 400
-00:19:41,956 --> 00:19:43,636
-for FairPlay Streaming
-in your Webpage.
+00:26:09,036 --> 00:26:12,539
+上的来回播放是必要的
 
 
 401
-00:19:43,636 --> 00:19:46,756
-The first thing you're going
-to do is set the m3u8 URL
+00:26:15,742 --> 00:26:22,149
+我应该提到的下一件事情
+在那个站点 在登录页上
 
 
 402
-00:19:47,066 --> 00:19:51,106
-as a source attribute of the
-HTML5 video tag as you would
+00:26:22,516 --> 00:26:27,788
+你们中间的某些人
+可能并没有一个现成的后端
 
 
 403
-00:19:51,816 --> 00:19:53,426
-for a non-encrypted
-piece of content.
+00:26:28,155 --> 00:26:34,261
+或者一想到将FPS集成到后端
+就被这个想法吓到了
 
 
 404
-00:19:54,406 --> 00:19:56,066
-Then you are going to
-add an event listener
+00:26:34,661 --> 00:26:38,565
+那么在那个登录页面上
+我们有一个小小的清单
 
 
 405
-00:19:56,066 --> 00:20:00,636
-for the Web kit need key
-call to the video element.
+00:26:38,866 --> 00:26:44,004
+列出了我们的集成合作伙伴
+像Irdeto 像Adobe
 
 
 406
-00:20:01,536 --> 00:20:03,926
-That event listener
-when triggered is going
+00:26:44,571 --> 00:26:49,109
+它们已经为希望使用FPS
 
 
 407
-00:20:03,926 --> 00:20:06,466
-to set the EME content
-decryption module
+00:26:49,176 --> 00:26:54,081
+保护HLS内容的朋友
+建立了一些支持
 
 
 408
-00:20:06,466 --> 00:20:07,636
-to FairPlay Streaming.
+00:26:55,282 --> 00:26:58,051
+我建议您也查看一下那些合作伙伴
 
 
 409
-00:20:07,636 --> 00:20:11,136
-It is also going to create
-a key session on video/MP4
+00:26:58,118 --> 00:27:02,789
+如果您觉得在FPS设置
+及如何使其为您工作方面
 
 
 410
-00:20:11,206 --> 00:20:13,466
-to relay the messages
-between the key system
+00:27:03,290 --> 00:27:04,124
+一点帮助的话
 
 
 411
-00:20:13,466 --> 00:20:14,526
-and your key server.
+00:27:04,525 --> 00:27:06,426
+我觉得这是很容易做的
 
 
 412
-00:20:15,126 --> 00:20:16,726
-And you're going to
-add an event handler
+00:27:06,493 --> 00:27:09,029
+但并不是每个人都是业内人士
 
 
 413
-00:20:16,726 --> 00:20:19,276
-for web kit key message
-to that key session.
+00:27:09,463 --> 00:27:11,265
+因此如果您需要的话
+我们会为您提供帮助
 
 
 414
-00:20:19,776 --> 00:20:22,236
-That event handler is going to
-be the one that's responsible
+00:27:12,099 --> 00:27:18,272
+此外
+如果您想让HLS和FPS开始工作
 
 
 415
-00:20:22,236 --> 00:20:25,056
-for sending the SPC key
-request to your key server
+00:27:18,605 --> 00:27:23,410
+但是感觉仍然存在问题
+或者您已经尝试过且遇到了一些问题
 
 
 416
-00:20:25,416 --> 00:20:28,476
-and then processing
-the CKC response
+00:27:23,777 --> 00:27:25,679
+如果您不是在WWDC上
 
 
 417
-00:20:28,796 --> 00:20:30,046
-by updating the key session.
+00:27:25,979 --> 00:27:29,950
+那么对您来说最佳的第一站
+就是我们的开发者论坛
 
 
 418
-00:20:31,126 --> 00:20:33,916
-In terms of the data flow,
-we've got very similar actors
+00:27:30,117 --> 00:27:33,453
+而且我们实际上
+已经建立了目前处于测试阶段
 
 
 419
-00:20:33,916 --> 00:20:34,776
-on the left-hand side.
+00:27:33,754 --> 00:27:37,824
+但是我们已建立了一个新的论坛
+它是专门面向FPS的
 
 
 420
-00:20:34,776 --> 00:20:36,766
-We have the same ones
-on the right-hand side.
+00:27:38,225 --> 00:27:41,228
+因此请查看一下这个论坛
 
 
 421
-00:20:36,766 --> 00:20:39,776
-We have got Safari now
-that Apple provides,
+00:27:41,361 --> 00:27:44,131
+如果您遇到了困难
+或者是有什么问题
 
 
 422
-00:20:39,776 --> 00:20:41,226
-along with the EME stack.
+00:27:44,398 --> 00:27:48,836
+很可能其他人也有
+同样的问题 同样的困难
 
 
 423
-00:20:41,706 --> 00:20:45,026
-Within Safari we have got
-your site, and the new piece
+00:27:49,102 --> 00:27:51,438
+而你可能通过查看论坛
+就能找到答案
 
 
 424
-00:20:45,026 --> 00:20:46,766
-of JavaScript code that
-you are going to be writing
+00:27:52,840 --> 00:27:54,374
+如果那样做失败的话
 
 
 425
-00:20:47,116 --> 00:20:50,076
-to support FairPlay
-Streaming content playback
+00:27:54,441 --> 00:27:57,411
+还有您的非常友好的社区
+以及开发者技术支持代表
 
 
 426
-00:20:50,076 --> 00:20:50,696
-in your website.
+00:27:57,477 --> 00:27:59,780
+将乐于为您提供帮助且收费低廉
 
 
 427
-00:20:51,326 --> 00:20:54,146
-Let's talk about what happens
+00:28:01,615 --> 00:28:02,616
+我想就是这样了
 
 
 428
-00:20:54,146 --> 00:20:56,116
-when the user hits
-play in Safari.
+00:28:03,884 --> 00:28:05,052
+再次感谢您的光临！
 
 
 429
-00:20:56,116 --> 00:20:57,416
-So, the user hits play.
-
-
-430
-00:20:57,416 --> 00:20:59,496
-The first thing that is going
-to happen is, obviously,
-
-
-431
-00:20:59,496 --> 00:21:03,376
-the m3u8 is going to hit
-the EME and AVFoundation
-
-
-432
-00:21:03,516 --> 00:21:06,006
-in the operating system,
-and EME is going to notice
-
-
-433
-00:21:06,046 --> 00:21:09,006
-that the content is encrypted,
-which is going to cause it
-
-
-434
-00:21:09,186 --> 00:21:12,786
-to trigger the Web
-kit need key message
-
-
-435
-00:21:12,786 --> 00:21:14,366
-that your event listener
-is going to receive.
-
-
-436
-00:21:16,396 --> 00:21:18,556
-Then your event listener is
-going to create the key session
-
-
-437
-00:21:18,556 --> 00:21:21,086
-and is going to wait for
-the Web kit key message,
-
-
-438
-00:21:21,186 --> 00:21:23,176
-which in turn is going
-to trigger the handler,
-
-
-439
-00:21:23,826 --> 00:21:26,666
-and that handler is
-going to receive the SPC,
-
-
-440
-00:21:26,726 --> 00:21:29,526
-send it over to your key server,
-which is going to process it
-
-
-441
-00:21:29,526 --> 00:21:31,076
-as usual, pull the content key
-
-
-442
-00:21:31,146 --> 00:21:34,746
-and then create the content key
-response, send that CKC back
-
-
-443
-00:21:34,816 --> 00:21:37,576
-to your JavaScript, which
-will provide it back
-
-
-444
-00:21:37,616 --> 00:21:39,906
-down to the EME layer
-for playback.
-
-
-445
-00:21:41,126 --> 00:21:45,746
-As Roger described, we've had
-this solution deployed now
-
-
-446
-00:21:45,746 --> 00:21:49,986
-for over three years, and over
-the years we've learned a few
-
-
-447
-00:21:49,986 --> 00:21:53,676
-tips and tricks on how to
-troubleshoot integrating issues
-
-
-448
-00:21:53,916 --> 00:21:55,726
-with FairPlay Streaming.
-
-
-449
-00:21:56,256 --> 00:21:58,876
-And the typical issue
-you may be facing,
-
-
-450
-00:21:59,596 --> 00:22:02,186
-if unfortunately something goes
-wrong with your integration,
-
-
-451
-00:22:02,466 --> 00:22:03,666
-is that content doesn't play.
-
-
-452
-00:22:04,366 --> 00:22:08,086
-So how do you go about
-debugging that situation?
-
-
-453
-00:22:08,276 --> 00:22:11,286
-Well, one thing we
-recommend you do is --
-
-
-454
-00:22:11,286 --> 00:22:13,486
-and this is for debug purposes
-only, we don't recommend
-
-
-455
-00:22:13,486 --> 00:22:14,946
-that you do this in a
-production environment, but --
-
-
-456
-00:22:15,366 --> 00:22:19,196
-set your key format tag in
-the m3u8 playlist to identity,
-
-
-457
-00:22:19,806 --> 00:22:22,126
-instead of
-com.apple.streamingkeydelivery.
-
-
-458
-00:22:22,506 --> 00:22:25,956
-What this does is, it allows
-the same content to get
-
-
-459
-00:22:25,956 --> 00:22:28,536
-to your client, but
-instead of decrypting it
-
-
-460
-00:22:28,536 --> 00:22:29,916
-with FairPlay Streaming,
-it decrypts it
-
-
-461
-00:22:29,916 --> 00:22:31,716
-with a clear text AES key.
-
-
-462
-00:22:32,596 --> 00:22:36,016
-And what we end up is either
-in one of two situations.
-
-
-463
-00:22:36,016 --> 00:22:37,446
-Your content is still
-not playing,
-
-
-464
-00:22:37,766 --> 00:22:41,686
-in which case this is probably
-facing a content authoring
-
-
-465
-00:22:41,686 --> 00:22:43,976
-issue, and those
-issues typically fall
-
-
-466
-00:22:43,976 --> 00:22:45,156
-into one of four buckets.
-
-
-467
-00:22:45,776 --> 00:22:49,226
-Either your sample of
-encryption has an issue and in
-
-
-468
-00:22:49,226 --> 00:22:50,206
-that case I'd refer you
-
-
-469
-00:22:50,206 --> 00:22:53,226
-to the HLS Sample
-encryption specification.
-
-
-470
-00:22:53,556 --> 00:22:56,126
-It could be an issue with
-your PAT/PMT audio set up.
-
-
-471
-00:22:56,406 --> 00:22:59,636
-Those are steps that you need
-to perform on audio streams
-
-
-472
-00:22:59,636 --> 00:23:01,216
-that are encoded,
-that are encrypted
-
-
-473
-00:23:01,216 --> 00:23:02,246
-with FairPlay Streaming.
-
-
-474
-00:23:02,246 --> 00:23:04,706
-There are a few metadata
-updates that need to happen.
-
-
-475
-00:23:05,776 --> 00:23:07,336
-It may be the case that
-you are not using one
-
-
-476
-00:23:07,336 --> 00:23:08,396
-of the supported codecs.
-
-
-477
-00:23:08,396 --> 00:23:10,676
-And as Roger mentioned earlier,
-what we support right now
-
-
-478
-00:23:10,676 --> 00:23:15,066
-in FairPlay Streaming is
-H.264, AAC, and encrypted AC3.
-
-
-479
-00:23:15,726 --> 00:23:18,406
-Last but not least, it may be
-you are rotating your content
-
-
-480
-00:23:18,466 --> 00:23:21,866
-key on something that
-isn't an HLS segment.
-
-
-481
-00:23:22,316 --> 00:23:26,106
-So we recommend that you rotate
-your keys either on HLS segments
-
-
-482
-00:23:26,186 --> 00:23:28,736
-at the most granular level
-or you can also decide
-
-
-483
-00:23:28,736 --> 00:23:32,386
-to change your content key
-value on a bit rate switch.
-
-
-484
-00:23:33,336 --> 00:23:37,096
-If your content is playing after
-you update the key format tag
-
-
-485
-00:23:37,166 --> 00:23:40,196
-to identity, you are probably
-facing a key delivery issue.
-
-
-486
-00:23:40,706 --> 00:23:43,696
-And in that case, what you
-want to do is you want to trace
-
-
-487
-00:23:43,796 --> 00:23:45,306
-through the data
-flow that we went
-
-
-488
-00:23:45,896 --> 00:23:48,366
-through in the earlier
-diagrams, and make sure
-
-
-489
-00:23:48,396 --> 00:23:50,546
-that the SPC is properly
-generated by the client,
-
-
-490
-00:23:50,546 --> 00:23:53,396
-that it's sent to your server,
-that your server can process
-
-
-491
-00:23:53,456 --> 00:23:55,236
-that key request
-without any failures,
-
-
-492
-00:23:55,416 --> 00:23:57,776
-that your server is looking up
-the right key in the database,
-
-
-493
-00:23:58,156 --> 00:24:02,206
-that your server is also capable
-of packaging the content key
-
-
-494
-00:24:02,206 --> 00:24:05,196
-into content key response,
-and that the client is able
-
-
-495
-00:24:05,196 --> 00:24:06,876
-to process that without
-any errors.
-
-
-496
-00:24:08,026 --> 00:24:11,706
-So, now that we went
-over all the various ways
-
-
-497
-00:24:11,936 --> 00:24:15,296
-of consuming FairPlay Streaming
-content in the Apple ecosystem,
-
-
-498
-00:24:15,296 --> 00:24:17,246
-I would like to hand it back to
-Roger to wrap the session up.
-
-
-499
-00:24:17,246 --> 00:24:17,976
-Thank you very much
-for your time.
-
-
-500
-00:24:18,516 --> 00:24:25,256
-[Applause]
-
-
-501
-00:24:25,756 --> 00:24:26,966
->> ROGER PANTOS:
-Thanks very much, GP.
-
-
-502
-00:24:27,486 --> 00:24:29,246
-So, let's do a quick recap here.
-
-
-503
-00:24:30,086 --> 00:24:34,936
-FairPlay Streaming for HTTP
-Live Streaming, it provides you
-
-
-504
-00:24:34,936 --> 00:24:38,956
-with industrial strength
-tools to protect your content
-
-
-505
-00:24:39,316 --> 00:24:40,826
-with HTTP live streaming.
-
-
-506
-00:24:40,826 --> 00:24:44,566
-You have got it available
-on iOS,
-
-
-507
-00:24:44,656 --> 00:24:49,156
-on Apple TV, and now on OS X.
-
-
-508
-00:24:49,156 --> 00:24:52,416
-iOS, it's available since iOS
-6, so there's a fair amount
-
-
-509
-00:24:52,416 --> 00:24:56,806
-of backward compatibility,
-and also on Apple TV.
-
-
-510
-00:24:57,236 --> 00:25:00,176
-OS X is a little bit newer, and
-so you can come down and talk
-
-
-511
-00:25:00,176 --> 00:25:02,796
-to us in the labs, and we
-will give you the entire scoop
-
-
-512
-00:25:02,796 --> 00:25:03,796
-on where you can use it.
-
-
-513
-00:25:03,946 --> 00:25:07,356
-It has been deeply
-integrated into the OS.
-
-
-514
-00:25:07,436 --> 00:25:10,676
-That means that it is down
-as low as we can get it,
-
-
-515
-00:25:10,756 --> 00:25:12,126
-as secure as we can make it.
-
-
-516
-00:25:12,436 --> 00:25:14,896
-It is as power efficient
-as we can do.
-
-
-517
-00:25:15,206 --> 00:25:16,866
-And so it gives you
-great battery life
-
-
-518
-00:25:16,866 --> 00:25:18,086
-as well as great security.
-
-
-519
-00:25:19,036 --> 00:25:22,996
-And it also supports all
-of our ecosystem features
-
-
-520
-00:25:23,346 --> 00:25:28,946
-such as AirPlay, such as HDCP,
-HTML5, and we will continue
-
-
-521
-00:25:28,946 --> 00:25:32,566
-to do so as we roll out
-new features going forward.
-
-
-522
-00:25:34,256 --> 00:25:38,346
-So, what's next?
-
-
-523
-00:25:38,346 --> 00:25:41,886
-First stop is our new
-FairPlay Streaming portal
-
-
-524
-00:25:42,116 --> 00:25:44,046
-on developer.apple.com.
-
-
-525
-00:25:44,086 --> 00:25:46,186
-It's live now, so you
-can go there, you know,
-
-
-526
-00:25:46,646 --> 00:25:48,466
-you can go there right now.
-
-
-527
-00:25:48,466 --> 00:25:51,476
-And you can, from there
-you can download the SDK.
-
-
-528
-00:25:51,476 --> 00:25:53,976
-You can look at the
-overview document
-
-
-529
-00:25:53,976 --> 00:25:57,196
-that gives you a little bit
-of a deeper insight into some
-
-
-530
-00:25:57,196 --> 00:25:58,756
-of the details of
-FairPlay Streaming.
-
-
-531
-00:25:59,246 --> 00:26:01,706
-And you can also,
-through that site,
-
-
-532
-00:26:01,706 --> 00:26:04,696
-apply for your production
-developer credentials
-
-
-533
-00:26:04,696 --> 00:26:08,786
-that are necessary for you to
-do your round trip playback
-
-
-534
-00:26:09,116 --> 00:26:12,536
-to an actual iOS
-device or Safari.
-
-
-535
-00:26:13,416 --> 00:26:18,846
-And the next thing, and I
-should also mention, actually,
-
-
-536
-00:26:18,846 --> 00:26:22,156
-that on that site, on
-that landing page there,
-
-
-537
-00:26:22,506 --> 00:26:27,776
-there may be some of you who
-don't have an existing back end
-
-
-538
-00:26:28,146 --> 00:26:31,246
-or are a little bit
-intimidated by the idea
-
-
-539
-00:26:31,246 --> 00:26:34,246
-of integrating FairPlay
-Streaming into that back end.
-
-
-540
-00:26:34,616 --> 00:26:38,566
-So on that landing page
-we have a little list
-
-
-541
-00:26:38,856 --> 00:26:42,846
-of integration partners we've
-worked with, folks like Irdeto,
-
-
-542
-00:26:42,846 --> 00:26:49,796
-folks like Adobe, who have
-set up some support for folks
-
-
-543
-00:26:49,796 --> 00:26:52,276
-who wish to use FairPlay
-Streaming
-
-
-544
-00:26:52,516 --> 00:26:54,096
-to protect their HLS content.
-
-
-545
-00:26:54,176 --> 00:26:57,026
-And so I would recommend
-checking
-
-
-546
-00:26:57,026 --> 00:26:58,116
-out those folks as well.
-
-
-547
-00:26:58,116 --> 00:26:59,936
-If you feel like you
-need a little bit
-
-
-548
-00:26:59,936 --> 00:27:01,736
-of help getting FairPlay
-Streaming up
-
-
-549
-00:27:01,736 --> 00:27:03,886
-and running for your content.
-
-
-550
-00:27:04,536 --> 00:27:06,486
-It is, it's, I think
-it's pretty easy to do,
-
-
-551
-00:27:06,486 --> 00:27:08,796
-but not everyone is
-in that business.
-
-
-552
-00:27:08,796 --> 00:27:10,886
-And so there's help for
-you there if you need it.
-
-
-553
-00:27:11,606 --> 00:27:18,276
-Also, if you would like to
-get HLS and FPS working,
-
-
-554
-00:27:18,616 --> 00:27:21,846
-and it feels a little bit
-like there're still questions
-
-
-555
-00:27:21,846 --> 00:27:23,426
-or you've tried it and
-you've got some problems,
-
-
-556
-00:27:23,776 --> 00:27:25,356
-if you are not at WWDC,
-
-
-557
-00:27:25,976 --> 00:27:29,946
-then your best first stop
-is our developer forums.
-
-
-558
-00:27:30,106 --> 00:27:32,236
-And we've actually
-set up, I believe it's
-
-
-559
-00:27:32,236 --> 00:27:34,486
-in the beta section
-right now, but we've set
-
-
-560
-00:27:34,486 --> 00:27:37,816
-up a new forum specifically
-for FairPlay Streaming.
-
-
-561
-00:27:38,226 --> 00:27:41,226
-And so check that out.
-
-
-562
-00:27:41,346 --> 00:27:43,146
-If you are running
-into a problem
-
-
-563
-00:27:43,146 --> 00:27:45,466
-or you have got a question,
-there's pretty good odds
-
-
-564
-00:27:45,526 --> 00:27:48,846
-that somebody else has had the
-same question, same problem,
-
-
-565
-00:27:49,106 --> 00:27:50,526
-and you might just be
-able to find the answer
-
-
-566
-00:27:50,526 --> 00:27:52,786
-by looking in the forums.
-
-
-567
-00:27:52,846 --> 00:27:54,536
-Failing that, there
-is, of course,
-
-
-568
-00:27:54,536 --> 00:27:56,476
-your friendly neighborhood
-developer tech support
-
-
-569
-00:27:56,786 --> 00:27:59,786
-representative who will be happy
-to assist you for a small fee.
-
-
-570
-00:28:00,436 --> 00:28:02,516
-I think that's it.
-
-
-571
-00:28:03,886 --> 00:28:05,046
-Thank you again for coming.
-
-
-572
-00:28:05,366 --> 00:28:06,806
-And have a great show!
-
-
-573
-00:28:07,508 --> 00:28:09,508
-[Applause]
+00:28:05,352 --> 00:28:06,820
+希望您在大会期间开心！
 

@@ -1,4402 +1,3853 @@
 1
-00:00:41,426 --> 00:00:42,856
->> ANIL KANDANGATH: Good
-afternoon and welcome.
+00:00:36,937 --> 00:00:39,473
+Core Motion中有什么新料
 
 
 2
-00:00:44,146 --> 00:00:47,096
-My name is Anil Kandangath
-and today I'm going to talk
+00:00:41,408 --> 00:00:43,143
+下午好 欢迎大家
 
 
 3
-00:00:47,096 --> 00:00:49,196
-about what is new
-in Core Motion.
+00:00:44,144 --> 00:00:47,447
+我的名字是阿尼尔·卡南加
+今天我要讲一讲
 
 
 4
-00:00:49,606 --> 00:00:51,316
-We have quite a few
-things to talk about.
+00:00:47,514 --> 00:00:49,183
+Core Motion中有什么新料
 
 
 5
-00:00:51,316 --> 00:00:53,996
-But today we will stick
-to a few key points.
+00:00:49,616 --> 00:00:51,552
+我们能讲的事情比较多
 
 
 6
-00:00:54,836 --> 00:00:59,776
-We will begin by talking
-about the Apple Watch.
+00:00:51,618 --> 00:00:53,987
+不过今天我们主要讲几个关键点
 
 
 7
-00:00:59,776 --> 00:01:02,656
-We have a new platform
-and we will talk about how
+00:00:56,056 --> 00:00:59,693
+我们会首先谈一谈
+Apple Watch
 
 
 8
-00:01:02,656 --> 00:01:04,926
-to bring your Core Motion
-apps to the Apple Watch.
+00:00:59,760 --> 00:01:02,596
+这是我们的一个新的平台
+我们会谈谈怎样把你的
 
 
 9
-00:01:06,006 --> 00:01:07,926
-We also have new updates
+00:01:02,663 --> 00:01:05,399
+Core Motion apps
+弄到Apple Watch上
 
 
 10
-00:01:07,986 --> 00:01:10,456
-to the pedometer
-including some new APIs.
+00:01:05,999 --> 00:01:07,935
+我们也对计步器做了一些
 
 
 11
-00:01:12,036 --> 00:01:14,286
-We will also talk
-about the altimeter
+00:01:08,001 --> 00:01:10,571
+新的变更
+其中包括一些新的APIs
 
 
 12
-00:01:14,396 --> 00:01:17,776
-which is a sensor we
-introduced in the iPhone 6.
+00:01:12,039 --> 00:01:17,711
+我们还会谈一谈高度表
+在Phone 6上引入的一个传感器
 
 
 13
-00:01:18,636 --> 00:01:22,036
-Gabrielle will then walk
-us through an application
+00:01:18,645 --> 00:01:21,982
+然后加布里埃尔就会通过一个
+以一个非常有趣的方式
 
 
 14
-00:01:22,036 --> 00:01:25,176
-that uses Core Motion in a
-really, really interesting way.
+00:01:22,049 --> 00:01:25,185
+使用了Core Motion的
+应用程序来给我们做一个演示
 
 
 15
-00:01:25,506 --> 00:01:26,946
-I've seen it and
-it's pretty awesome.
+00:01:25,519 --> 00:01:26,954
+我之前已经看过了 非常棒
 
 
 16
-00:01:27,826 --> 00:01:28,886
-So let's get started.
+00:01:27,821 --> 00:01:29,289
+让我们开始吧
 
 
 17
-00:01:29,656 --> 00:01:31,506
-Now this is not an
-introductory session
+00:01:29,656 --> 00:01:31,592
+这并不是一个介绍性的会议
 
 
 18
-00:01:32,016 --> 00:01:34,746
-but we will cover enough
-Core Motion concepts for you
+00:01:32,025 --> 00:01:35,295
+不过我们会涵盖非常多的
+Core Motion概念 
 
 
 19
-00:01:34,746 --> 00:01:36,756
-to be able to follow along even
+00:01:35,362 --> 00:01:36,363
+你也可以跟得上
 
 
 20
-00:01:36,756 --> 00:01:39,786
-if you are not intimately
-familiar with Motion itself.
+00:01:36,430 --> 00:01:39,800
+即使你不是十分熟悉Motion
 
 
 21
-00:01:40,156 --> 00:01:41,246
-But for those of you here
+00:01:40,167 --> 00:01:44,905
+不过对于那些来到会场的人来说
+我们在会议结束后会立即有一个实验室
 
 
 22
-00:01:41,246 --> 00:01:44,346
-at the conference we do have
-a lab immediately following
+00:01:45,239 --> 00:01:47,140
+请带着你的问题来实验室
 
 
 23
-00:01:44,346 --> 00:01:44,926
-the session.
+00:01:47,207 --> 00:01:48,976
+我们有工程师以及科学家在场
 
 
 24
-00:01:45,226 --> 00:01:47,216
-So please come by with
-all your questions.
+00:01:49,743 --> 00:01:52,045
+但是如果你没有问题 那就要恭喜你了
 
 
 25
-00:01:47,216 --> 00:01:49,026
-We have the engineers
-and scientists on hand.
+00:01:52,713 --> 00:01:54,781
+不过还是要请你过来
 
 
 26
-00:01:49,756 --> 00:01:52,106
-If you have no questions,
-congratulations.
+00:01:54,848 --> 00:02:00,053
+告诉我们在你的apps中是怎样使用
+Core Motion 乐意聆听
 
 
 27
-00:01:52,106 --> 00:01:52,556
-[Laughter.]
+00:02:00,487 --> 00:02:04,291
+在Apple developer
+上确实也有一些之前的会议
 
 
 28
-00:01:52,556 --> 00:01:54,846
->> ANIL KANDANGATH:
-Still come by
+00:02:04,358 --> 00:02:08,061
+在那些会议中深入探讨了动作感应、
 
 
 29
-00:01:54,846 --> 00:01:57,336
-and tell us how you are using
-Core Motion in your apps.
+00:02:08,127 --> 00:02:09,763
+动作活动性以及计步器
 
 
 30
-00:01:57,456 --> 00:02:00,106
-We would love to hear from you.
+00:02:09,830 --> 00:02:11,198
+所以请你去看看那些会议
 
 
 31
-00:02:00,476 --> 00:02:04,066
-We do have some great past
-sessions on Apple developer
+00:02:11,265 --> 00:02:12,799
+让我们开始吧
 
 
 32
-00:02:04,366 --> 00:02:08,116
-where we go into great
-detail about motion sensing
+00:02:13,700 --> 00:02:18,639
+一段时间以来
+动作感应已经在iOS上取得很大进展
 
 
 33
-00:02:08,116 --> 00:02:09,756
-and motion activity
-and the pedometer.
+00:02:18,705 --> 00:02:24,711
+先来看个有关它的工作原理的简短概述
 
 
 34
-00:02:09,846 --> 00:02:11,266
-So do check them out.
+00:02:24,778 --> 00:02:27,614
+这是一个传统的动作感应的结构
 
 
 35
-00:02:11,266 --> 00:02:12,816
-Let's get started.
+00:02:27,681 --> 00:02:30,684
+你把一些传感器连接到主处理器
 
 
 36
-00:02:13,696 --> 00:02:16,746
-Now, motion sensing
-has come a long way
+00:02:31,118 --> 00:02:32,619
+就可以很明显地看到它们的缺点
 
 
 37
-00:02:16,746 --> 00:02:18,356
-in iOS since the early days.
+00:02:32,686 --> 00:02:34,922
+无论你在什么时候想要访问传感器数据
 
 
 38
-00:02:18,696 --> 00:02:21,386
-We will begin with
-just a quick overview
+00:02:34,988 --> 00:02:37,291
+你都必须让主处理器处于活动状态
 
 
 39
-00:02:21,386 --> 00:02:24,346
-of how things work today.
+00:02:37,824 --> 00:02:39,893
+这会严重制约你可以编写的
 
 
 40
-00:02:24,766 --> 00:02:27,676
-This is a traditional
-motion sensing architecture.
+00:02:39,960 --> 00:02:42,029
+应用程序的种类
 
 
 41
-00:02:27,676 --> 00:02:30,676
-You take some sensors hook
-them up to the main processor
+00:02:42,763 --> 00:02:44,598
+所以我们认为 我们能够做得更好
 
 
 42
-00:02:31,106 --> 00:02:32,596
-and the drawback
-should be obvious.
+00:02:44,932 --> 00:02:49,436
+从iPhone 5S开始
+我们就引入了一颗协处理器
 
 
 43
-00:02:32,676 --> 00:02:34,996
-Any time you want to
-access sensor data,
+00:02:49,503 --> 00:02:51,605
+我们称之为M7
 
 
 44
-00:02:34,996 --> 00:02:38,196
-you do have to keep the
-main processor active.
+00:02:51,772 --> 00:02:54,641
+是一颗微型处理器 它唯一的工作就是
 
 
 45
-00:02:38,296 --> 00:02:39,976
-This severely limits the kinds
+00:02:54,842 --> 00:02:56,577
+对动作数据进行处理
 
 
 46
-00:02:39,976 --> 00:02:42,036
-of applications that
-you can write.
+00:02:56,643 --> 00:02:59,980
+这颗处理器可以全天候运行
 
 
 47
-00:02:42,766 --> 00:02:44,106
-So we thought we
-could do better.
+00:03:00,080 --> 00:03:02,382
+且只有在真正必须时才会唤醒主处理器
 
 
 48
-00:02:44,806 --> 00:02:49,186
-Starting with the iPhone 5S we
-introduced a motion coprocessor
+00:03:03,183 --> 00:03:06,286
+对于用户的电池寿命来说这是好事
 
 
 49
-00:02:49,506 --> 00:02:51,616
-that we called the M7.
+00:03:06,820 --> 00:03:10,724
+我们在iPhone 6上又引入了
+M8处理器以及一个新的
 
 
 50
-00:02:51,786 --> 00:02:55,096
-This is a tiny processor
-whose sole job is
+00:03:10,791 --> 00:03:13,727
+传感器即“高度表”
 
 
 51
-00:02:55,096 --> 00:02:56,086
-to process Motion data.
+00:03:13,794 --> 00:03:17,731
+现在在iOS上
+动作感应看起来就是这样的
 
 
 52
-00:02:56,086 --> 00:03:00,076
-It can chug along all
-day long and only turn
+00:03:18,732 --> 00:03:20,234
+那么它对你来说有什么用呢？
 
 
 53
-00:03:00,276 --> 00:03:02,376
-on the main processor
-when it really needs to.
+00:03:20,467 --> 00:03:22,269
+如果你让传感器
 
 
 54
-00:03:03,176 --> 00:03:06,166
-This is great for the
-battery life of the users.
+00:03:22,636 --> 00:03:28,108
+实时访问你获得的数据
+实时访问原始传感器数据
 
 
 55
-00:03:06,836 --> 00:03:10,506
-In iPhone 6 we introduced
-the M8 processor
+00:03:28,175 --> 00:03:31,512
+以及在传感器上构建的功能特性
 
 
 56
-00:03:10,786 --> 00:03:13,446
-and new sensor, the altimeter.
+00:03:31,812 --> 00:03:35,048
+如能够给你提供设备的高度的设备动作
 
 
 57
-00:03:13,806 --> 00:03:17,306
-This is what motion sensing
-looks like today on iOS.
+00:03:35,115 --> 00:03:37,784
+比如计步器再比如动作活动性
 
 
 58
-00:03:18,286 --> 00:03:19,816
-So what does it get you?
+00:03:38,051 --> 00:03:42,523
+若是在有高度计平台上 还可访问原始
 
 
 59
-00:03:20,416 --> 00:03:22,126
-Well, if you take the sensors
+00:03:42,589 --> 00:03:47,628
+压力、高度变化以及阶梯步级这些数据
 
 
 60
-00:03:22,636 --> 00:03:28,186
-and access data live you do get
-not just the raw sensor data
+00:03:48,795 --> 00:03:51,365
+这就是来自传感器的实时数据
 
 
 61
-00:03:28,186 --> 00:03:31,306
-but also features built
-on top of the sensors
+00:03:51,431 --> 00:03:53,600
+但是动作协处理器能让你做的
 
 
 62
-00:03:31,806 --> 00:03:35,116
-like device motion which gives
-you the altitude of the device
+00:03:53,667 --> 00:03:55,402
+远远不止这些 没错
 
 
 63
-00:03:35,116 --> 00:03:37,506
-or the pedometer
-or motion activity.
+00:03:55,469 --> 00:03:56,770
+远远不止这些
 
 
 64
-00:03:38,036 --> 00:03:41,746
-On platforms that have the
-altimeter you also get access
+00:03:56,837 --> 00:03:59,806
+你还可以每周七天、每天
+二十四小时访问动作活动性
 
 
 65
-00:03:41,776 --> 00:03:47,626
-to the raw pressure, altitude
-changes and flights of stairs.
+00:04:00,073 --> 00:04:02,309
+访问计步器 在有高度计的平台上
 
 
 66
-00:03:48,456 --> 00:03:51,006
-So that is live data
-from the sensors.
+00:04:02,376 --> 00:04:06,213
+你还可以每周七天、每天
+二十四小时访问阶梯步级
 
 
 67
-00:03:51,436 --> 00:03:53,656
-But the promise of the
-motion coprocessor is
+00:04:06,280 --> 00:04:11,318
+现在在iOS上 你能用动作感应
+做的事情就是这些
 
 
 68
-00:03:53,656 --> 00:03:55,046
-that you can do more
-than this, right.
+00:04:12,920 --> 00:04:16,523
+那么在Apple Watch上
+动作感应看起来是什么样呢？
 
 
 69
-00:03:55,456 --> 00:03:56,476
-Indeed, you can.
+00:04:17,057 --> 00:04:20,293
+Apple Watch上
+面同样也有一颗协处理器
 
 
 70
-00:03:56,836 --> 00:03:59,816
-You also get 24/7
-access to motion activity
+00:04:20,827 --> 00:04:22,062
+它上面还有一个加速计
 
 
 71
-00:04:00,086 --> 00:04:02,356
-and the pedometer
-and on platforms
+00:04:22,729 --> 00:04:27,634
+这就意味着你同样可以
+每周七天、每天二十四小时
 
 
 72
-00:04:02,386 --> 00:04:06,066
-that have the altimeter you
-also get flights of stairs 24/7.
+00:04:28,302 --> 00:04:31,238
+访问动作活动性以及计步器
+访问除了这两种数据之外
 
 
 73
-00:04:06,406 --> 00:04:12,726
-So this is what you can do with
-motion sensing on iOS today.
+00:04:31,305 --> 00:04:32,940
+你获得的实时传感器数据
 
 
 74
-00:04:12,926 --> 00:04:16,336
-So what does motion sensing
-look like on the Apple Watch?
+00:04:33,340 --> 00:04:35,776
+如果你在想 哎呀！
+这个看起来这么眼熟
 
 
 75
-00:04:17,065 --> 00:04:20,366
-Well, the Apple Watch
-also has a coprocessor
+00:04:36,043 --> 00:04:37,744
+那么Apple Watch上的动作
 
 
 76
-00:04:20,366 --> 00:04:22,055
-and it has an accelerometer
+00:04:37,811 --> 00:04:40,747
+你看起来也眼熟 你看的没错
 
 
 77
-00:04:22,746 --> 00:04:26,836
-which means you get the same
-24/7 access to motion activity
+00:04:41,448 --> 00:04:46,153
+iOS上的Core Motion 
+APIs在watchOS上也有了
 
 
 78
-00:04:26,836 --> 00:04:31,296
-and the pedometer and in terms
-of live data you get sensor data
+00:04:47,187 --> 00:04:51,191
+不仅是动作Core Motion 
+API iOS和watchOS部分
 
 
 79
-00:04:31,296 --> 00:04:32,926
-in addition to these two.
+00:04:51,258 --> 00:04:53,660
+Core Motion APIs
+都表现得一样
 
 
 80
-00:04:33,336 --> 00:04:35,826
-So if you are thinking gee,
-this all looks so familiar.
+00:04:53,727 --> 00:04:56,363
+我们就是在两个OSs上沿用了
 
 
 81
-00:04:35,826 --> 00:04:37,826
-Maybe Motion is very similar
+00:04:56,430 --> 00:04:58,065
+这个特性
 
 
 82
-00:04:37,826 --> 00:04:40,736
-on the Apple Watch too,
-you would be right.
+00:04:59,199 --> 00:05:02,703
+不过Watch基本上就是一个
+完全不同的平台了
 
 
 83
-00:04:41,456 --> 00:04:46,216
-Most Core Motion APIs on iOS
-are available on watchOS,
+00:05:03,270 --> 00:05:05,506
+因此当为Watch构建应用程序时
 
 
 84
-00:04:46,216 --> 00:04:51,226
-and not only that most Core
-Motion APIs behave the same
+00:05:05,572 --> 00:05:09,209
+我们需要知道
+一些事情从头到尾给你们讲讲
 
 
 85
-00:04:51,266 --> 00:04:53,196
-on iOS and watchOS.
+00:05:09,877 --> 00:05:11,945
+我们先来讲一下动作活动性
 
 
 86
-00:04:53,776 --> 00:04:56,446
-So this is a quick run down
-of the features we have
+00:05:12,446 --> 00:05:15,816
+动作活动性
+可以给我们提供上下文信息 
 
 
 87
-00:04:56,446 --> 00:04:57,456
-on both OSs.
+00:05:15,883 --> 00:05:17,417
+告诉我们用户正在做什么
 
 
 88
-00:04:59,206 --> 00:05:02,706
-But the Watch is fundamentally
-a different platform.
+00:05:17,484 --> 00:05:19,019
+可知用户是否正在走路 
 
 
 89
-00:05:03,266 --> 00:05:05,576
-So there are some
-things we need to know
+00:05:19,086 --> 00:05:21,255
+是否正在跑步 
+是否潜水 是否正在骑车等
 
 
 90
-00:05:05,576 --> 00:05:08,106
-as we build our applications
-for the Watch
+00:05:21,421 --> 00:05:25,259
+你能够获得的等级非常依赖于平台
 
 
 91
-00:05:08,426 --> 00:05:09,246
-and I'll go through them.
+00:05:25,325 --> 00:05:26,894
+非常依赖于它的使用方式
 
 
 92
-00:05:09,766 --> 00:05:11,886
-We'll start with
-motion activity.
+00:05:27,361 --> 00:05:31,632
+这里简单对你能够在watchOS上
+得到的状态进行一个总结
 
 
 93
-00:05:12,456 --> 00:05:15,516
-Motion activity is what gives
-us contextual information
+00:05:32,032 --> 00:05:33,667
+你可以注意到 你可以访问
 
 
 94
-00:05:15,896 --> 00:05:17,426
-about what the user is doing.
+00:05:33,734 --> 00:05:36,803
+走路、跑步、骑车以及静止状态
 
 
 95
-00:05:17,496 --> 00:05:19,076
-You can tell if they
-are walking, running,
+00:05:37,471 --> 00:05:40,507
+这就是Apple Watch
+上的动作活动性
 
 
 96
-00:05:19,076 --> 00:05:20,576
-driving, cycling, et cetera.
+00:05:42,376 --> 00:05:46,914
+开发者早就想要访问传感器本身
 
 
 97
-00:05:21,436 --> 00:05:24,826
-And the stage that you can
-obtain are very much dependent
+00:05:47,414 --> 00:05:49,950
+提供通过这个熟悉的
+CMAccelerometer
 
 
 98
-00:05:24,826 --> 00:05:26,616
-on the platform and
-how it is used.
+00:05:50,017 --> 00:05:52,753
+API来访问加速计
 
 
 99
-00:05:27,276 --> 00:05:30,746
-So this is a quick summary of
-the states that you can get
+00:05:53,887 --> 00:05:55,856
+那些东西都在加速计上
 
 
 100
-00:05:30,876 --> 00:05:33,726
-on watchOS and you'll notice
-that you can get access
+00:05:56,190 --> 00:05:58,458
+不过因为它是一个不同的平台
 
 
 101
-00:05:33,726 --> 00:05:36,806
-to walking, running, cycling,
-and stationary states.
+00:05:58,525 --> 00:06:00,627
+我们还是需要记住一些
 
 
 102
-00:05:37,486 --> 00:05:40,506
-And that's motion activity
-on the Apple Watch.
+00:06:00,694 --> 00:06:02,229
+应该考虑的事
 
 
 103
-00:05:42,376 --> 00:05:46,906
-Developers have wanted
-access to the sensors itself
+00:06:02,629 --> 00:06:06,166
+第一点你的app获得的处理时间
 
 
 104
-00:05:47,406 --> 00:05:49,686
-and we do provide access
-to the accelerometer
+00:06:06,233 --> 00:06:07,668
+可能是有限的
 
 
 105
-00:05:50,026 --> 00:05:52,606
-through the familiar
-CMAccelerometer API.
+00:06:08,268 --> 00:06:10,904
+Watch上并没有真正后台处理方式
 
 
 106
-00:05:52,606 --> 00:05:55,856
-And that should be all there
-is to the accelerometer
+00:06:10,971 --> 00:06:13,106
+因此当你的app显示在屏幕上时
 
 
 107
-00:05:56,206 --> 00:05:58,526
-but it is a different platform
+00:06:13,173 --> 00:06:14,741
+你的app就在高速运行了
 
 
 108
-00:05:58,526 --> 00:06:00,706
-and there are some
-considerations
+00:06:16,410 --> 00:06:19,313
+屏幕可能会因为多种原因关闭
 
 
 109
-00:06:00,706 --> 00:06:01,976
-that we have to keep in mind.
+00:06:19,379 --> 00:06:20,414
+屏幕可能会超时
 
 
 110
-00:06:02,636 --> 00:06:06,226
-The first is that you are
-app may get a limited amount
+00:06:21,014 --> 00:06:23,183
+不过Apple Watch
+的屏幕是设计成了
 
 
 111
-00:06:06,226 --> 00:06:08,476
-of processing time.
+00:06:23,250 --> 00:06:25,419
+只有当你在看它的时候屏幕才会开启
 
 
 112
-00:06:08,476 --> 00:06:10,926
-There are no real background
-processing modes in the Watch,
+00:06:25,485 --> 00:06:28,021
+因此如果你不想看屏幕了
 
 
 113
-00:06:10,976 --> 00:06:13,116
-so your app pretty much runs
+00:06:28,188 --> 00:06:30,757
+那么屏幕关闭、
+屏幕关闭后你的app得不到
 
 
 114
-00:06:13,166 --> 00:06:14,756
-when you are showing
-up on the screen.
+00:06:30,824 --> 00:06:34,127
+处理时间的可能性就非常大
 
 
 115
-00:06:15,816 --> 00:06:19,356
-And the screen may turn
-off for many reasons.
+00:06:34,294 --> 00:06:36,463
+考虑到这些情况
 
 
 116
-00:06:19,396 --> 00:06:20,276
-The screen may time out.
+00:06:36,530 --> 00:06:38,732
+我想要谈一些
 
 
 117
-00:06:21,006 --> 00:06:24,076
-But the Apple Watch screen is
-also designed to turn on only
+00:06:38,799 --> 00:06:40,133
+最佳实践
 
 
 118
-00:06:24,076 --> 00:06:25,156
-when you're looking at it.
+00:06:40,334 --> 00:06:45,472
+首先要把你的app设计成
+只有当app在屏幕上显示时
 
 
 119
-00:06:25,486 --> 00:06:27,676
-So if you want to turn
-the screen away from you,
+00:06:45,539 --> 00:06:46,807
+你的app才会期望数据
 
 
 120
-00:06:28,196 --> 00:06:30,576
-there is a good likelihood
-the screen may turn off
+00:06:47,074 --> 00:06:48,809
+我知道说起来容易做起来难
 
 
 121
-00:06:30,826 --> 00:06:33,596
-and your app may not get
-processing time after that.
+00:06:48,876 --> 00:06:50,377
+不过还是要记住这一点
 
 
 122
-00:06:34,306 --> 00:06:36,536
-So given all these
-considerations
+00:06:51,512 --> 00:06:55,549
+其次当你访问一个流的时候
+访问一个传感器数据流时
 
 
 123
-00:06:36,536 --> 00:06:38,786
-in mind there are a few
-best practices I would
+00:06:55,983 --> 00:07:00,053
+你需要确保当你的任务被挂起时
 
 
 124
-00:06:38,786 --> 00:06:39,766
-like to talk about.
+00:07:00,487 --> 00:07:04,024
+也可以以一种优雅的方式处理你的任务
 
 
 125
-00:06:40,336 --> 00:06:45,016
-The first is to design your
-app to only expect data
+00:07:04,091 --> 00:07:06,627
+幸运的是
+可以通过NSProcessInfo
 
 
 126
-00:06:45,536 --> 00:06:46,806
-when the app is on screen.
+00:07:06,693 --> 00:07:08,262
+来实现这一点
 
 
 127
-00:06:47,086 --> 00:06:48,866
-Now, I know this is
-easier said then done
-
-
-128
-00:06:48,866 --> 00:06:50,386
-but something to keep in mind.
-
-
-129
-00:06:51,096 --> 00:06:54,416
-The other is as you are
-accessing a streaming,
-
-
-130
-00:06:54,416 --> 00:06:56,956
-a stream of sensor
-data you have to ensure
-
-
-131
-00:06:56,956 --> 00:07:02,606
-that you can handle your
-task being suspended
-
-
-132
-00:07:02,606 --> 00:07:03,676
-in a graceful way.
-
-
-133
-00:07:04,106 --> 00:07:06,696
-And fortunately we do
-have a way to do this
-
-
-134
-00:07:06,696 --> 00:07:08,256
-through NSProcessInfo.
-
-
-135
-00:07:08,886 --> 00:07:11,446
-If you use this API
+00:07:08,762 --> 00:07:11,431
+如果你使用这个API
 performExpiring
 
 
+128
+00:07:11,532 --> 00:07:14,835
+ActivityWithReason
+你就可以在这个API中
+
+
+129
+00:07:14,902 --> 00:07:16,970
+把你的传感器数据当成一个块来处理
+
+
+130
+00:07:17,437 --> 00:07:20,674
+它就会通知你的块通知你你的任务
+
+
+131
+00:07:20,741 --> 00:07:23,477
+就要被挂起了
+这样你就可以采取适当行动
+
+
+132
+00:07:24,344 --> 00:07:28,182
+那是CMAccelerometer
+API
+
+
+133
+00:07:29,049 --> 00:07:32,052
+不过你们中有人想要的不仅仅是这些
+
+
+134
+00:07:32,119 --> 00:07:35,055
+事实上你想要长期访问
+
+
+135
+00:07:35,122 --> 00:07:36,990
+传感器数据
+
+
 136
-00:07:11,536 --> 00:07:14,916
-ActivityWithReason, you can
-perform your sensor data
+00:07:37,457 --> 00:07:39,092
+今天我很高兴地告诉大家
 
 
 137
-00:07:14,916 --> 00:07:16,786
-processing as a block
-in this API
+00:07:39,826 --> 00:07:41,695
+有史以来第一次 我们开始提供访问
 
 
 138
-00:07:16,786 --> 00:07:20,726
-and this will inform your
-block that your task is
+00:07:41,762 --> 00:07:45,999
+历史传感器数据 历史加速计数据
 
 
 139
-00:07:20,726 --> 00:07:23,356
-about to be suspended so
-you can do the right thing.
+00:07:47,100 --> 00:07:49,436
+那么你现在可以拿它做什么？
 
 
 140
-00:07:24,346 --> 00:07:27,686
-That is the CMAccelerometer API.
+00:07:49,770 --> 00:07:53,807
+它允许你访问很长一段时间内的数据
 
 
 141
-00:07:28,776 --> 00:07:31,746
-But some of you want more,
-a lot more than that.
+00:07:54,074 --> 00:07:55,242
+相当长一段时间
 
 
 142
-00:07:32,116 --> 00:07:35,116
-In fact you wanted to
-get access to sensor data
+00:07:55,976 --> 00:07:57,845
+你也可以访问这个数据
 
 
 143
-00:07:35,116 --> 00:07:37,006
-for a long period of time.
+00:07:58,045 --> 00:07:59,880
+即使你的app不是处于运行状态
 
 
 144
-00:07:37,446 --> 00:07:38,856
-So today I'm pleased to say
+00:08:01,348 --> 00:08:06,653
+这样的话 你就可以在这个长长的
 
 
 145
-00:07:38,856 --> 00:07:41,746
-that for the first time
-ever we are providing access
+00:08:06,720 --> 00:08:09,289
+传感器数据流上运行你自己的定制算法
 
 
 146
-00:07:41,746 --> 00:07:45,996
-to historical sensor data as
-the historical accelerometer.
+00:08:09,723 --> 00:08:11,124
+这很酷 我们也期待你们用它
 
 
 147
-00:07:47,086 --> 00:07:49,426
-Now what does this do for you?
+00:08:11,191 --> 00:08:12,593
+来开发出很酷的apps
 
 
 148
-00:07:49,756 --> 00:07:53,796
-It allows you to access
-data for long durations.
+00:08:13,093 --> 00:08:14,428
+那么你应该怎么用它呢？
 
 
 149
-00:07:54,086 --> 00:07:55,236
-For really long durations.
+00:08:14,795 --> 00:08:17,764
+我们有一个新的API叫做
+CMSensorRecorder
 
 
 150
-00:07:55,986 --> 00:07:58,426
-And you can access
-this data even
+00:08:18,332 --> 00:08:22,803
+这个API允许
+初始化历史传感器数据录制
 
 
 151
-00:07:58,426 --> 00:07:59,896
-when your app is not running.
+00:08:23,070 --> 00:08:29,109
+记住这点此API和其他的APIs
+一个很重要的不同之处
 
 
 152
-00:08:01,356 --> 00:08:06,706
-So this enables you to perform
-your own custom algorithms
+00:08:29,176 --> 00:08:31,845
+比如计步器以及动作活动性
 
 
 153
-00:08:06,706 --> 00:08:09,196
-on top of this long
-streams of sensor data.
+00:08:32,246 --> 00:08:35,015
+其他的APIs
+并不需要你初始化任何录制
 
 
 154
-00:08:09,726 --> 00:08:11,176
-This is really cool
-and we expect you
+00:08:35,749 --> 00:08:38,919
+对SensorRecorder说
+你确实需要对它进行初始化
 
 
 155
-00:08:11,176 --> 00:08:12,576
-to make really cool
-apps with this.
+00:08:39,419 --> 00:08:42,523
+数据录制的频率是五十赫兹
 
 
 156
-00:08:13,106 --> 00:08:14,236
-So how do you do this?
+00:08:42,823 --> 00:08:45,626
+你最多可以录制三天的数据
 
 
 157
-00:08:14,796 --> 00:08:17,766
-We have a new API called
-the CMSensorRecorder,
+00:08:46,994 --> 00:08:50,931
+这就是SensorRecorder
+的使用方式
 
 
 158
-00:08:18,336 --> 00:08:22,066
-and this enables you to
-initiate historical sensor
+00:08:51,565 --> 00:08:54,601
+提到执行 我们应该这样做
 
 
 159
-00:08:22,066 --> 00:08:22,846
-data recording.
-
-
-160
-00:08:23,076 --> 00:08:25,236
-Now keep in mind, this
-is a key difference
-
-
-161
-00:08:25,236 --> 00:08:27,056
-between this historical API
-
-
-162
-00:08:27,056 --> 00:08:30,906
-and the other historical APIs
-we have such as the pedometer
-
-
-163
-00:08:30,906 --> 00:08:33,316
-and motion activity where
-you do not really need
-
-
-164
-00:08:33,316 --> 00:08:35,046
-to initiate any recording.
-
-
-165
-00:08:35,626 --> 00:08:39,426
-But for the SensorRecorder
-you do need to initiate it,
-
-
-166
-00:08:39,426 --> 00:08:42,496
-and the data is recorded
-at 50 Hertz,
-
-
-167
-00:08:42,826 --> 00:08:45,506
-and you can query it
-for up to three days.
-
-
-168
-00:08:46,806 --> 00:08:50,946
-So that's how you use
-the SensorRecorder.
-
-
-169
-00:08:51,556 --> 00:08:54,386
-In terms of the implementation,
-here is how we do it.
-
-
-170
-00:08:54,736 --> 00:08:57,806
-The first thing you want to
-do is initiate recording data
-
-
-171
-00:08:57,806 --> 00:09:01,636
-and do it by saying
+00:08:54,735 --> 00:08:58,272
+你首先要通过初始化
 recordAccelerometerDataFor
 
 
+160
+00:08:58,338 --> 00:09:01,742
+录制数据 然后要提供一个
+
+
+161
+00:09:02,075 --> 00:09:03,510
+持续时间
+
+
+162
+00:09:04,211 --> 00:09:07,314
+一旦你完成这一步
+设备可能就会进入睡眠状态
+
+
+163
+00:09:07,681 --> 00:09:09,283
+你的app可能会被挂起
+
+
+164
+00:09:09,483 --> 00:09:10,651
+没关系
+
+
+165
+00:09:10,717 --> 00:09:14,388
+之后 用户可能会回来
+并且启动你的app
+
+
+166
+00:09:15,389 --> 00:09:18,792
+当用户启动你的app时
+你就可以决定是否查询传感器数据
+
+
+167
+00:09:19,826 --> 00:09:23,597
+通过查询
+accelerometerDataFrom
+
+
+168
+00:09:23,664 --> 00:09:25,799
+当然你还需要指定一个时间段
+
+
+169
+00:09:27,801 --> 00:09:30,137
+然后指定的时间段的加速计的数据
+
+
+170
+00:09:30,504 --> 00:09:32,739
+就会返回回来
+
+
+171
+00:09:32,806 --> 00:09:35,242
+很明显 这个时间段可以是
+
+
 172
-00:09:01,636 --> 00:09:03,276
-and provide a duration.
+00:09:35,742 --> 00:09:37,744
+你录制数据的时间的一个子集
 
 
 173
-00:09:04,206 --> 00:09:07,316
-Once you do this, the
-device may go to sleep.
+00:09:38,645 --> 00:09:42,249
+好的 数据会被作为一个
 
 
 174
-00:09:07,666 --> 00:09:09,356
-Your app may get suspended.
+00:09:42,316 --> 00:09:45,185
+CMAccelerometerData
+对象序列返回回来
 
 
 175
-00:09:09,356 --> 00:09:10,396
-It's all okay.
+00:09:46,987 --> 00:09:49,556
+回想一下 我们提到过的
 
 
 176
-00:09:10,716 --> 00:09:14,946
-Later the user may come
-and launch your app.
+00:09:49,623 --> 00:09:52,159
+关于优雅地处理任务挂起的内容
 
 
 177
-00:09:15,396 --> 00:09:17,796
-When they launch your app
-you may decide to query
+00:09:52,226 --> 00:09:54,294
+你在这里也会遇到同样的问题
 
 
 178
-00:09:17,796 --> 00:09:23,406
-for sensor data and you query it
-by saying accelerometerDataFrom
+00:09:54,828 --> 00:09:57,798
+因此 当你处理这个很大的
 
 
 179
-00:09:23,676 --> 00:09:25,796
-and provide a time range.
+00:09:57,865 --> 00:09:59,399
+历史数据流的时候
 
 
 180
-00:09:26,336 --> 00:09:30,176
-The accelerometer data
-will then be returned
+00:09:59,867 --> 00:10:03,403
+你就需要访问我们的老朋友
+NSProcessInfo
 
 
 181
-00:09:30,386 --> 00:09:32,076
-for the time ranges specified.
+00:10:04,271 --> 00:10:09,142
+当你的任务就要被挂起时它会通知给你
 
 
 182
-00:09:32,076 --> 00:09:35,066
-And it should be obvious that
-the time range can be a subset
+00:10:11,144 --> 00:10:12,946
+如果你看一下加速计数据对象
 
 
 183
-00:09:35,066 --> 00:09:39,026
-of the time that you have
-been recording data for.
+00:10:13,013 --> 00:10:16,683
+它里面不仅包括了你熟悉的加速度部分
 
 
 184
-00:09:39,496 --> 00:09:42,836
-Now, the data is
-returned as a sequence
+00:10:17,117 --> 00:10:20,988
+而且还包括了一个startDate
+你就可以把这个它当做一个定位器
 
 
 185
-00:09:42,836 --> 00:09:44,816
-of CMAccelerometerData objects.
+00:10:21,455 --> 00:10:24,525
+你可以从这个点
+开始确保下次你的app启动时
 
 
 186
-00:09:45,436 --> 00:09:48,616
-Cast your mind back
-to what we said
+00:10:25,225 --> 00:10:26,760
+向前进行查询
 
 
 187
-00:09:48,616 --> 00:09:51,856
-about handling task
-suspenses gracefully.
+00:10:27,528 --> 00:10:30,264
+这就是SensorRecorder
+的工作原理
 
 
 188
-00:09:51,856 --> 00:09:54,266
-You will encounter the
-same problem here, too.
+00:10:30,998 --> 00:10:34,701
+这个很棒 不过正如你看到的
+那里有一项需要考虑的事
 
 
 189
-00:09:54,826 --> 00:09:57,576
-So as you are processing
-this big stream
+00:10:35,169 --> 00:10:36,870
+不是 是两项功率与性能
 
 
 190
-00:09:57,876 --> 00:10:00,586
-of historical data you do have
+00:10:37,404 --> 00:10:39,873
+SensorRecorder
+是一个强大的API
 
 
 191
-00:10:00,586 --> 00:10:03,396
-to visit our old
-friend NSProcessInfo.
+00:10:39,940 --> 00:10:42,743
+但是能力越大 危险性也就越大
 
 
 192
-00:10:04,286 --> 00:10:08,076
-Now, this will inform
-you when your task is
+00:10:42,809 --> 00:10:46,980
+这里的危险性就在于
+你可能没有足够的时间
 
 
 193
-00:10:08,076 --> 00:10:09,186
-about to be suspended.
+00:10:47,047 --> 00:10:49,283
+来处理传感器数据的大量的字符串
 
 
 194
-00:10:09,656 --> 00:10:13,016
-So if you look at the
-accelerometer data object,
+00:10:49,850 --> 00:10:52,486
+因此我再介绍几个最佳做法
 
 
 195
-00:10:13,016 --> 00:10:16,156
-it contains not just the
-acceleration part you're
+00:10:53,020 --> 00:10:57,224
+首先是 仅仅录制 查询你的app
 
 
 196
-00:10:16,156 --> 00:10:18,246
-familiar with, but
-also a startDate.
+00:10:57,758 --> 00:11:00,928
+需要用到的最短持续时间内的数据
 
 
 197
-00:10:18,566 --> 00:10:21,046
-And you can use this
-startDate as an anchor
+00:11:00,994 --> 00:11:04,097
+如果app是一款锻炼身体
+你大概就不需要十二个小时的数据
 
 
 198
-00:10:21,446 --> 00:10:24,146
-to make sure the next time the
-app is launched you can query
+00:11:04,164 --> 00:11:06,934
+你大概需要几个小时的数据就够了
 
 
 199
-00:10:24,146 --> 00:10:26,366
-from this point onwards.
+00:11:07,000 --> 00:11:09,570
+你查询的数据量越少
 
 
 200
-00:10:26,366 --> 00:10:30,126
-So that, is how SensorRecorder
-works.
+00:11:09,636 --> 00:11:11,605
+你的app就越能容易地获取、处理
 
 
 201
-00:10:31,006 --> 00:10:34,566
-Now, this is great, but as you
-show there is one consideration.
+00:11:12,940 --> 00:11:15,976
+此外你也应该知道
+传感器数据传输率的要求
 
 
 202
-00:10:35,156 --> 00:10:36,866
-Well, two, power
-and performance.
+00:11:16,410 --> 00:11:18,579
+数据是以五十赫兹的频率提供给你的
 
 
 203
-00:10:37,416 --> 00:10:39,626
-Now, the SensorRecorder
-is a powerful API
+00:11:19,012 --> 00:11:21,882
+但是除非你想要从那些数据中
+抽取出特性、需要更高的
 
 
 204
-00:10:39,956 --> 00:10:42,806
-but with great power
-comes great danger.
+00:11:22,082 --> 00:11:25,919
+传感器数据传输率
+那么你最好丢弃一些数据
 
 
 205
-00:10:42,806 --> 00:10:47,056
-And the danger here is that
-you may not have enough time
+00:11:26,253 --> 00:11:28,222
+处理较少的数据
 
 
 206
-00:10:47,056 --> 00:10:49,176
-to process large
-strings of sensor data.
+00:11:28,288 --> 00:11:30,824
+只要采用几项最佳做法
+你应该就没问题了
 
 
 207
-00:10:49,856 --> 00:10:52,496
-So a few best practices again.
+00:11:32,659 --> 00:11:35,896
+Apple Watch上Core 
+Motion的情况就是这些
 
 
 208
-00:10:52,946 --> 00:10:56,706
-The first thing is to, and this
-may be obvious, is to record
+00:11:36,396 --> 00:11:39,600
+你已经看过了
+我们有很多看起来眼熟的APIs
 
 
 209
-00:10:56,706 --> 00:11:00,436
-and query only data for the
-minimum duration required
+00:11:39,900 --> 00:11:43,237
+我们也可以访问历史传感器数据
 
 
 210
-00:11:00,436 --> 00:11:00,876
-by your app.
+00:11:43,770 --> 00:11:45,105
+这个很棒 你们应该可以用它
 
 
 211
-00:11:00,996 --> 00:11:03,956
-So if you are a work out app
-you probably don't need 12 hours
+00:11:45,172 --> 00:11:46,940
+来开发出很酷的应用程序
 
 
 212
-00:11:03,956 --> 00:11:04,176
-of data.
+00:11:47,407 --> 00:11:49,476
+提到编写Watch应用程序
 
 
 213
-00:11:04,176 --> 00:11:06,996
-You can probably get by with
-a couple of hours of data.
+00:11:49,543 --> 00:11:51,612
+我们今天上午确实举办了一个会议
 
 
 214
-00:11:06,996 --> 00:11:09,876
-The less amount of
-data you query for,
+00:11:51,979 --> 00:11:53,313
+现在就可以看到会议视频了
 
 
 215
-00:11:09,876 --> 00:11:11,776
-the easier it will
-be for your app.
+00:11:55,182 --> 00:11:58,218
+会议剩余的时间里
+我想重点关注iOS 我先来讲讲
 
 
 216
-00:11:12,926 --> 00:11:15,966
-You should also know the
-sensor data rate requirements.
+00:11:58,285 --> 00:11:59,953
+计步器上有什么新情况
 
 
 217
-00:11:16,416 --> 00:11:18,576
-Now, the data is
-available at 50 Hertz,
+00:12:01,221 --> 00:12:04,191
+这就是你属性的计步器
 
 
 218
-00:11:18,996 --> 00:11:21,686
-but unless you are planning to
-extract features from that data
+00:12:04,424 --> 00:12:05,859
+步数、距离
 
 
 219
-00:11:21,686 --> 00:11:25,596
-that require a high sensor rate
-you are better off just dropping
+00:12:06,627 --> 00:12:07,594
+我们来快速回顾下
 
 
 220
-00:11:25,596 --> 00:11:27,866
-data and process less data.
+00:12:08,095 --> 00:12:10,063
+计步器的设计理念
 
 
 221
-00:11:28,466 --> 00:11:30,826
-So a few best practices
-and you should be good.
+00:12:10,130 --> 00:12:13,600
+是持续给你
+提供身体各个部位的行为表现
 
 
 222
-00:11:31,436 --> 00:11:35,766
-And that's the Core Motion
-update for Apple Watch.
+00:12:13,667 --> 00:12:16,170
+无论是放在你的手中
+还是放到你的口袋里
 
 
 223
-00:11:36,386 --> 00:11:39,646
-As you've seen we had a
-lot of the familiar APIs
+00:12:16,270 --> 00:12:18,672
+计步器的性能应该是一致的
 
 
 224
-00:11:39,646 --> 00:11:43,076
-and we also have access
-to historical sensor data.
+00:12:19,139 --> 00:12:22,509
+即使速度不同
+计步器的性能也应该是一致的
 
 
 225
-00:11:43,656 --> 00:11:45,186
-This should be really great,
-and you should be able
+00:12:23,443 --> 00:12:25,946
+计步器的一个很棒的特性是
 
 
 226
-00:11:45,186 --> 00:11:46,936
-to make really cool
-application with this.
+00:12:26,013 --> 00:12:27,915
+它会适应用户
 
 
 227
-00:11:47,066 --> 00:11:49,536
-In terms of writing
-Watch applications,
+00:12:28,182 --> 00:12:31,485
+因此使用计步器的用户人数越多
+那么通过自身的校正
 
 
 228
-00:11:49,536 --> 00:11:51,616
-we did have a session
-earlier this morning
+00:12:31,552 --> 00:12:33,654
+它就能更好地理解用户
 
 
 229
-00:11:51,976 --> 00:11:53,316
-that you can probably
-go watch now.
+00:12:35,155 --> 00:12:38,559
+在iOS 9上我们对计步器
+做了一个很大的改进
 
 
 230
-00:11:53,846 --> 00:11:58,276
-For the rest of the talk I'll
-focus on iOS and I'll begin
+00:12:38,625 --> 00:12:42,462
+让它尽可能地合并了GPS
 
 
 231
-00:11:58,276 --> 00:11:59,956
-with updates to the pedometer.
+00:12:43,730 --> 00:12:44,932
+我们为什么要这么做？
 
 
 232
-00:12:01,026 --> 00:12:04,206
-This is the pedometer that
-you are familiar with.
+00:12:45,465 --> 00:12:47,734
+原因在于你的app可能
 
 
 233
-00:12:04,476 --> 00:12:05,696
-Steps and distance.
+00:12:47,835 --> 00:12:50,070
+已经订阅了用户的位置
 
 
 234
-00:12:06,616 --> 00:12:08,176
-A quick recap.
+00:12:50,137 --> 00:12:52,506
+你可能想要在用户进行跑步的时候
 
 
 235
-00:12:08,286 --> 00:12:10,436
-The pedometer is designed
+00:12:52,573 --> 00:12:53,473
+绘制用户的运动轨迹
 
 
 236
-00:12:10,576 --> 00:12:12,086
-to give you consistent
-performance
+00:12:54,208 --> 00:12:56,877
+当你这么做的时候计步器检测到
 
 
 237
-00:12:12,086 --> 00:12:13,676
-across body location.
+00:12:56,944 --> 00:12:58,512
+GPS数据可以用了
 
 
 238
-00:12:13,676 --> 00:12:16,156
-So whether it's in your hand
-or if it's in your pocket,
+00:12:58,879 --> 00:13:00,981
+通过使用GPS数据
+就可以让轨迹绘制的更精确
 
 
 239
-00:12:16,276 --> 00:12:18,736
-the performance is
-supposed to be consistent,
+00:13:02,850 --> 00:13:05,285
+为什么这一点如此关键呢？
 
 
 240
-00:12:18,736 --> 00:12:22,346
-and it is also consistent
-for varying pace.
+00:13:05,586 --> 00:13:09,656
+看看这个 
+这是我的一位同事在旧金山跑的一次步
 
 
 241
-00:12:23,436 --> 00:12:25,996
-Now a great feature
-of this pedometer is
+00:13:09,990 --> 00:13:11,491
+旧金山是一座“城市峡谷”
 
 
 242
-00:12:25,996 --> 00:12:27,926
-that it adapts to the user.
+00:13:11,558 --> 00:13:15,295
+有很高的建筑物对任何GPS来说
 
 
 243
-00:12:28,186 --> 00:12:31,566
-So the more the user uses the
-pedometer, the better it gets
+00:13:15,362 --> 00:13:16,730
+环境都富有挑战性
 
 
 244
-00:12:31,566 --> 00:12:33,446
-by calibrating itself
-to the user.
+00:13:17,397 --> 00:13:18,932
+如果你看看这里的这一段
 
 
 245
-00:12:34,156 --> 00:12:38,556
-In iOS 9 we are making one big
-improvement to the pedometer
+00:13:19,600 --> 00:13:22,369
+GPS在这里看起来非常靠谱
 
 
 246
-00:12:38,626 --> 00:12:42,446
-which is it incorporates
-GPS when possible.
+00:13:22,603 --> 00:13:27,274
+如果你依赖于GPS
+我们就可以对距离进行很好的估测
 
 
 247
-00:12:43,726 --> 00:12:44,466
-Why do we do this?
+00:13:28,041 --> 00:13:28,909
+很好
 
 
 248
-00:12:45,466 --> 00:12:47,746
-Well, you may have an app
+00:13:29,843 --> 00:13:31,478
+但是如果你再看这里不同的段
 
 
 249
-00:12:47,846 --> 00:12:50,136
-that is already subscribing
-to location.
+00:13:31,545 --> 00:13:34,915
+你就会发现在用户的轨迹中用户在闲逛
 
 
 250
-00:12:50,136 --> 00:12:52,586
-Maybe you are trying to
-plot the user's track
+00:13:35,382 --> 00:13:38,118
+一路上有好几个酒吧 所以...
 
 
 251
-00:12:52,586 --> 00:12:53,476
-as they go on a run.
+00:13:38,185 --> 00:13:42,289
+但是这可能
+并不是这位用户真实的跑步轨迹
 
 
 252
-00:12:54,216 --> 00:12:56,946
-When you do that,
-the pedometer senses
+00:13:42,890 --> 00:13:44,324
+所以说
 
 
 253
-00:12:56,946 --> 00:12:58,506
-that GPS data is available
+00:13:44,725 --> 00:13:47,561
+计步器非常聪明 它知道在这里
 
 
 254
-00:12:58,866 --> 00:13:01,566
-and it gets more
-accurate by using it.
+00:13:47,995 --> 00:13:50,531
+它就不应该继续依赖GPS了
 
 
 255
-00:13:02,956 --> 00:13:05,286
-Well, why is this so critical?
+00:13:50,931 --> 00:13:53,400
+它应该继续借助于自身的基于步幅的
 
 
 256
-00:13:05,586 --> 00:13:08,176
-So take a look at this
-run that a colleague
+00:13:53,467 --> 00:13:54,468
+距离估计
 
 
 257
-00:13:08,176 --> 00:13:09,726
-of mine did in San Francisco.
+00:13:54,768 --> 00:13:59,173
+如果你使用了计步器
+那么你得到的最终结果
 
 
 258
-00:13:09,726 --> 00:13:11,566
-San Francisco is urban canyon.
+00:13:59,306 --> 00:14:02,910
+就非常一致
+这也就是为什么你应该使用
 
 
 259
-00:13:11,566 --> 00:13:15,356
-It has tall buildings and it
-can be a challenging environment
+00:14:03,911 --> 00:14:05,479
+计步器的步数和距离的原因
 
 
 260
-00:13:15,356 --> 00:13:16,256
-for any GPS.
+00:14:08,949 --> 00:14:13,420
+今年我们对计步器的API
+做了一个很大的改进
 
 
 261
-00:13:16,256 --> 00:13:18,946
-If you look at this
-segment here,
+00:14:14,321 --> 00:14:15,255
+在我们开始之前
 
 
 262
-00:13:19,476 --> 00:13:22,356
-GPS looks pretty solid here.
+00:14:15,322 --> 00:14:17,991
+我们先来回顾一个
+你们已经知道的特性 这是层数计数
 
 
 263
-00:13:23,126 --> 00:13:25,916
-If you were to rely on
-GPS we'd get really good
+00:14:18,559 --> 00:14:21,128
+层数计数有
+floorsAscended
 
 
 264
-00:13:26,046 --> 00:13:27,126
-distance estimates.
+00:14:21,195 --> 00:14:23,063
+还有floorsDescended
 
 
 265
-00:13:28,056 --> 00:13:28,506
-That's good.
+00:14:23,664 --> 00:14:25,599
+因为这是计步器的一部分
 
 
 266
-00:13:29,306 --> 00:13:31,546
-If you look at a
-different segment here,
+00:14:25,999 --> 00:14:28,335
+这就是一个徒步功能 你必须实际迈步
 
 
 267
-00:13:31,546 --> 00:13:33,066
-you can see that
-there's quite a bit
+00:14:28,402 --> 00:14:29,736
+才能把它用起来
 
 
 268
-00:13:33,066 --> 00:13:34,746
-of wander in the user's track.
+00:14:30,237 --> 00:14:33,674
+也就是说 你需要在这里
 
 
 269
-00:13:35,376 --> 00:13:38,186
-Now granted there are quite
-a few pubs along the way --
+00:14:33,907 --> 00:14:36,376
+赢取授予的层数
 
 
 270
-00:13:38,186 --> 00:13:41,976
-[Laughter.] but that is probably
-not really how this person
+00:14:37,744 --> 00:14:40,314
+让我们更深入地看看 
+它到底是如何工作的
 
 
 271
-00:13:42,906 --> 00:13:44,216
-really ran.
+00:14:41,481 --> 00:14:42,749
+它有几项要求
 
 
 272
-00:13:44,716 --> 00:13:47,386
-The pedometer is smart
-enough to understand
+00:14:43,383 --> 00:14:46,353
+首先是 最低提升速率要求
 
 
 273
-00:13:47,386 --> 00:13:50,316
-that this is a portion where
-it should not rely on the GPS,
+00:14:47,221 --> 00:14:49,590
+还有一个步数要求
 
 
 274
-00:13:50,316 --> 00:13:53,466
-and it resorts to
-its own stride-based
+00:14:50,090 --> 00:14:54,394
+它们对我们意味着
+假如说 如果你进行了一次远足
 
 
 275
-00:13:53,466 --> 00:13:54,456
-distance estimation.
+00:14:54,461 --> 00:14:55,562
+并且你走的很慢
 
 
 276
-00:13:54,776 --> 00:13:59,156
-The end result if you use the
-pedometer you get a consistent
+00:14:55,629 --> 00:14:58,465
+那么最终你积累的高度就会很多
 
 
 277
-00:13:59,296 --> 00:14:02,146
-performance and that's
-why you should use steps
+00:14:59,733 --> 00:15:03,537
+但是你很有可能达不到提升速率要求
 
 
 278
-00:14:02,146 --> 00:14:09,016
-and distance from the pedometer.
+00:15:03,604 --> 00:15:04,938
+我们就不会授予你层数
 
 
 279
-00:14:09,146 --> 00:14:13,136
-We have one big API improvement
-in the pedometer this year.
+00:15:05,873 --> 00:15:08,942
+但是如果你是在旧金山散步
+有一些非常陡峭的丘陵
 
 
 280
-00:14:13,216 --> 00:14:15,306
-That is -- well,
-before we go to that,
+00:15:09,009 --> 00:15:12,746
+那么你就有可能达到一些层数
 
 
 281
-00:14:15,306 --> 00:14:17,036
-let's talk about one
-you already know about
+00:15:14,147 --> 00:15:16,350
+因为步速要求 如果你使用了电梯
 
 
 282
-00:14:17,036 --> 00:14:17,986
-and that's floor counting.
+00:15:17,251 --> 00:15:20,354
+或者自动扶梯
 
 
 283
-00:14:18,546 --> 00:14:21,206
-So floor counting is available
+00:15:20,821 --> 00:15:22,689
+你就不大可能会被授予层数
 
 
 284
-00:14:21,206 --> 00:14:23,076
-as floorsAscended
-and floorsDescended.
+00:15:22,789 --> 00:15:25,626
+这就是iOS上层数计数的工作原理
 
 
 285
-00:14:23,876 --> 00:14:25,676
-Because this is part
-of the pedometer,
+00:15:28,095 --> 00:15:29,396
+现在轮到新的API了
 
 
 286
-00:14:25,676 --> 00:14:28,396
-there is a pedestrian aspect
-to it, which is that you have
+00:15:30,264 --> 00:15:32,299
+这是“步幅”
 
 
 287
-00:14:28,396 --> 00:14:29,396
-to actually take steps.
+00:15:33,133 --> 00:15:36,370
+长期以来
+开发者就要求我们提供“步幅”
 
 
 288
-00:14:30,166 --> 00:14:33,636
-What it means is that you
-really have to earn your floors
+00:15:36,803 --> 00:15:38,172
+我们很高兴现在能提供了
 
 
 289
-00:14:33,916 --> 00:14:36,376
-to be awarded floors here.
+00:15:39,039 --> 00:15:42,676
+当我们提起“步幅”
+我们指的是currentPace
 
 
 290
-00:14:37,266 --> 00:14:41,206
-Let's take a deeper look
-at how this actually works.
+00:15:43,210 --> 00:15:45,279
+这实际上是瞬时步幅
 
 
 291
-00:14:41,476 --> 00:14:42,596
-It has a few requirements.
+00:15:45,345 --> 00:15:48,148
+而不是在跑步一开始就估算出来的步幅
 
 
 292
-00:14:42,996 --> 00:14:46,366
-The first is that there is a
-minimum ascend rate requirement.
+00:15:48,882 --> 00:15:52,619
+“步幅”是以时间单位内
+通过的距离来表示的
 
 
 293
-00:14:47,226 --> 00:14:49,596
-There is also a steps
-requirement.
+00:15:53,387 --> 00:15:57,724
+如果你想问为什么这样表示
+而不是时间单位内的速度
 
 
 294
-00:14:50,076 --> 00:14:53,616
-What this all means for us
-is that if you were to say go
+00:15:57,824 --> 00:15:59,660
+你知道 因为对于跑步者来说
 
 
 295
-00:14:53,616 --> 00:14:55,616
-on a long hike and you walk slow
+00:16:00,194 --> 00:16:03,330
+步幅通常
+可以被类推为走完一个已知的距离
 
 
 296
-00:14:55,616 --> 00:14:58,466
-and eventually you accumulate
-quite a bit of altitude.
+00:16:03,397 --> 00:16:04,932
+需要的实际时间
 
 
 297
-00:14:58,746 --> 00:15:03,596
-The likelihood is that you won't
-hit the ascend rate requirements
+00:16:06,200 --> 00:16:08,435
+在网站上关注了
+Apple Watch的更新情况
 
 
 298
-00:15:03,596 --> 00:15:04,936
-and we won't award you floors.
+00:16:08,502 --> 00:16:11,038
+那么这个步幅
+你看起来就可能很眼熟
 
 
 299
-00:15:05,866 --> 00:15:08,016
-But if you are walking
-in San Francisco
+00:16:12,072 --> 00:16:13,807
+这就让我有点 妒忌了
 
 
 300
-00:15:08,016 --> 00:15:09,016
-where you have some really,
+00:16:17,211 --> 00:16:18,645
+计步器既有实时数据
 
 
 301
-00:15:09,016 --> 00:15:11,066
-really steep hills
-it is possible
+00:16:18,712 --> 00:16:21,648
+又有历史数据
+但是“步幅”是只有你在进行
 
 
 302
-00:15:11,066 --> 00:15:12,666
-that you will get a few floors.
+00:16:21,715 --> 00:16:23,283
+实时查询时才有的
 
 
 303
-00:15:14,156 --> 00:15:17,796
-Also because of the step
-rate requirements if you were
+00:16:23,951 --> 00:16:25,419
+别忘了这一点
 
 
 304
-00:15:17,796 --> 00:15:19,406
-to use the elevator
+00:16:25,886 --> 00:16:27,821
+我们为什么要提供“步幅”？
 
 
 305
-00:15:19,406 --> 00:15:22,686
-or the escalator you are not
-likely to be awarded floors.
+00:16:27,888 --> 00:16:31,425
+毕竟我们已经在计步器上
+提供了距离和一个时间概念
 
 
 306
-00:15:22,806 --> 00:15:25,536
-So that is how floor
-counting works in iOS.
+00:16:31,491 --> 00:16:35,596
+因此我们可以很容易地计算出步幅
 
 
 307
-00:15:25,856 --> 00:15:29,256
-Now it's time for the new API.
+00:16:36,363 --> 00:16:38,999
+这样得出的步幅健壮性更高
 
 
 308
-00:15:30,276 --> 00:15:32,176
-That is pace.
+00:16:39,800 --> 00:16:42,069
+假如说你想要有所区别
 
 
 309
-00:15:33,086 --> 00:15:33,876
-Pace is something
+00:16:42,135 --> 00:16:45,172
+想从那些距离组块中估算出步幅
 
 
 310
-00:15:33,876 --> 00:15:36,366
-that developers have
-long asked us to provide.
+00:16:45,806 --> 00:16:49,977
+也会向步幅中引入一个可接受的抖动量
 
 
 311
-00:15:36,366 --> 00:15:39,376
-We are happy to provide it now.
+00:16:50,777 --> 00:16:54,481
+计步器就可以对此进行处理 
 
 
 312
-00:15:39,376 --> 00:15:42,606
-When we talk about pace, we
-are referring to currentPace.
+00:16:54,548 --> 00:16:57,117
+确保步幅的估算是平滑的
 
 
 313
-00:15:43,226 --> 00:15:45,336
-So this is really the
-instantaneous pace
+00:16:59,453 --> 00:17:02,289
+此外你还可以通过回顾历史组块
 
 
 314
-00:15:45,336 --> 00:15:49,186
-and not the pace as estimated
-from the beginning of your run.
+00:17:02,356 --> 00:17:05,726
+然后算出步幅的平均数这一方法
 
 
 315
-00:15:49,226 --> 00:15:52,626
-And it is provided in units
-of time over distance.
+00:17:05,791 --> 00:17:07,560
+尝试获得平滑的步幅
 
 
 316
-00:15:53,276 --> 00:15:56,806
-If you are wondering why it is
-provided in this way and not
+00:17:07,627 --> 00:17:11,665
+不过你这样做的代价就是
+如果用户步幅发生了改变
 
 
 317
-00:15:56,806 --> 00:15:59,676
-as speed, you know, that pace
-is normally analogous to,
+00:17:11,732 --> 00:17:14,701
+你就无法很快做出响应
 
 
 318
-00:16:00,206 --> 00:16:03,396
-is because for runners,
-pace is the time taken
+00:17:15,169 --> 00:17:18,805
+通过CMPedometer得出步幅
+能够对变更很快做出响应
 
 
 319
-00:16:03,396 --> 00:16:04,916
-to cover a known distance.
+00:17:18,872 --> 00:17:20,574
+响应性也很高
 
 
 320
-00:16:06,206 --> 00:16:08,416
-If you have been following
-the Apple Watch updates
+00:17:21,508 --> 00:17:24,411
+因此平滑性和响应性就
+你应该通过CMPedometer
 
 
 321
-00:16:08,496 --> 00:16:11,646
-on the website, this pace
-might be familiar to you.
+00:17:25,012 --> 00:17:26,413
+使用步幅的理由所在
 
 
 322
-00:16:12,076 --> 00:16:15,206
-To me this is something
-that I'm envy just of.
+00:17:27,481 --> 00:17:28,849
+这是步幅
 
 
 323
-00:16:15,206 --> 00:16:15,946
-[Laughter.]
+00:17:28,916 --> 00:17:33,754
+步幅有个“近亲”叫做“步调”
 
 
 324
-00:16:15,946 --> 00:16:18,696
->> ANIL KANDANGATH: The
-pedometer has both a live
+00:17:34,488 --> 00:17:37,124
+我们现在在计步器上有了步调
 
 
 325
-00:16:18,696 --> 00:16:21,716
-and historical aspect to it,
-but pace is only available
+00:17:37,858 --> 00:17:39,426
+那么什么是“步调”？
 
 
 326
-00:16:21,716 --> 00:16:23,176
-when you do live queries.
+00:17:39,493 --> 00:17:43,130
+步调指的是你的步行速率
+或者换其他话来说
 
 
 327
-00:16:23,936 --> 00:16:25,036
-So just keep that in mind.
+00:17:43,197 --> 00:17:46,300
+就是你的脚接触地面的频率
 
 
 328
-00:16:25,876 --> 00:16:27,766
-Now why do we provide pace?
+00:17:46,800 --> 00:17:49,636
+对于跑步者来说步调非常重要
 
 
 329
-00:16:27,896 --> 00:16:31,506
-After all, we do provide
-distance and a notion of time
+00:17:49,736 --> 00:17:51,538
+现在你就能直接通过计步器
 
 
 330
-00:16:31,506 --> 00:16:34,706
-in the pedometer, and we
-could just easily compute pace
+00:17:51,605 --> 00:17:53,974
+在你的apps内提供步调了
 
 
 331
-00:16:34,706 --> 00:16:35,156
-from there.
+00:17:56,076 --> 00:17:56,944
+是的！
 
 
 332
-00:16:36,376 --> 00:16:38,726
-The answer in one
-word is robustness.
+00:17:57,010 --> 00:18:01,315
+我们对计步器做的变更就这些
 
 
 333
-00:16:39,796 --> 00:16:42,136
-If you were to say do some
-finer difference and try
+00:18:01,381 --> 00:18:05,586
+这里快速看看各个平台内的特性
 
 
 334
-00:16:42,136 --> 00:16:45,166
-to estimate pace just from
-those distance chunks,
+00:18:05,652 --> 00:18:08,422
+注意看
+Apple Watch上也可以用
 
 
 335
-00:16:45,816 --> 00:16:49,786
-we would introduce an acceptable
-amount of jitter in the pace,
+00:18:08,488 --> 00:18:09,590
+计步器了
 
 
 336
-00:16:50,766 --> 00:16:54,536
-and the pedometer takes
-care of this and ensures
+00:18:10,991 --> 00:18:13,093
+我们接着来谈谈压力感应
 
 
 337
-00:16:54,536 --> 00:16:57,006
-that the pace estimation
-is smooth.
+00:18:13,861 --> 00:18:17,531
+通过高度表传感器可以获得压力数据
 
 
 338
-00:16:57,656 --> 00:17:02,346
-The other part is you could
-try to get a smooth pace
+00:18:18,198 --> 00:18:21,602
+这是CMAltimeter API
+的一个组成部分
 
 
 339
-00:17:02,346 --> 00:17:05,465
-by looking back at a much
-bigger chunk of the history
+00:18:21,869 --> 00:18:23,437
+它给你提供了两样东西
 
 
 340
-00:17:05,776 --> 00:17:07,566
-and then try to average
-a pace over it.
+00:18:23,504 --> 00:18:25,873
+第一样是原始压力数据
+这就是传感器自身获得的压力
 
 
 341
-00:17:07,616 --> 00:17:11,726
-But the cost of doing that
-is you lose the ability
+00:18:25,939 --> 00:18:29,076
+然后进行过滤后的数据
 
 
 342
-00:17:11,726 --> 00:17:14,705
-to respond quickly to
-changes in the user's pace.
+00:18:29,309 --> 00:18:31,778
+第二样就是相对高度
 
 
 343
-00:17:15,156 --> 00:17:18,856
-Pace from CMPedometer
-also responds very quickly
+00:18:32,246 --> 00:18:34,047
+我们来深入谈谈高度
 
 
 344
-00:17:18,856 --> 00:17:20,316
-to changes and it is responsive.
+00:18:35,315 --> 00:18:37,351
+当我们说到“相对”我们指的是相对
 
 
 345
-00:17:20,376 --> 00:17:24,226
-So smoothness and responsiveness
-is why you should use pace
+00:18:37,417 --> 00:18:39,253
+提供的第一个样本而言的
 
 
 346
-00:17:24,866 --> 00:17:26,126
-from CMPedometer.
+00:18:40,254 --> 00:18:42,923
+这就意味着 你从高度表上获得的
 
 
 347
-00:17:26,866 --> 00:17:28,046
-And that's pace.
+00:18:43,156 --> 00:18:47,528
+第一个样本的相对高度为零
 
 
 348
-00:17:28,916 --> 00:17:33,616
-A close cousin of
-pace is cadence.
+00:18:47,995 --> 00:18:51,231
+后续的样本都会以此为基线
 
 
 349
-00:17:34,496 --> 00:17:37,136
-And we now have cadence
-in the pedometer.
+00:18:53,567 --> 00:18:56,069
+那么要使用高度表
+我们需要知道些什么呢？
 
 
 350
-00:17:37,846 --> 00:17:39,496
-Now, what is cadence?
+00:18:56,603 --> 00:19:02,910
+对于层级的变更来说
+高度表再合适不过了
 
 
 351
-00:17:39,496 --> 00:17:43,206
-Cadence is the rate of your
-steps or in other terms,
+00:19:02,976 --> 00:19:05,245
+而对于人体层级的变更来说
+高度表就差强人意了
 
 
 352
-00:17:43,206 --> 00:17:46,306
-it is how often your feet
-are landing on the ground.
+00:19:05,679 --> 00:19:07,648
+因此也许你不应该使用高度表来感知
 
 
 353
-00:17:46,786 --> 00:17:49,646
-We know that the cadence is
-really important to runners,
+00:19:07,714 --> 00:19:09,449
+用户是否抬起了他们的胳膊
 
 
 354
-00:17:49,726 --> 00:17:51,606
-so now you can provide cadence
+00:19:09,516 --> 00:19:11,185
+差错会让你失望的
 
 
 355
-00:17:51,606 --> 00:17:53,706
-in your apps directly
-from the pedometer.
+00:19:12,286 --> 00:19:14,555
+对于传感器来说
+这些情况都非常具有挑战性
 
 
 356
-00:17:56,076 --> 00:17:56,306
-Yeah! [Applause.]
+00:19:14,621 --> 00:19:15,989
+这一点不要忘了
 
 
 357
-00:17:56,996 --> 00:18:01,376
->> ANIL KANDANGATH: So that is
-our update for the pedometer.
+00:19:16,990 --> 00:19:18,792
+其中一项是环境
 
 
 358
-00:18:01,376 --> 00:18:05,666
-Here is a quick run down of
-the features across platforms
+00:19:19,526 --> 00:19:22,529
+即使位置不变 
+环境也可能随着时间推移发生改变
 
 
 359
-00:18:05,666 --> 00:18:08,486
-and note that the
-pedometer is also available
+00:19:22,596 --> 00:19:25,232
+这样就会让你误以为高度发生了变化
 
 
 360
-00:18:08,486 --> 00:18:09,336
-in the Apple Watch.
+00:19:25,899 --> 00:19:28,702
+举例来说 旧金山最近的冷锋
 
 
 361
-00:18:09,796 --> 00:18:12,896
-Let's move on to
-pressure sensing.
+00:19:28,769 --> 00:19:31,038
+就可以让压力发生很大的变化
 
 
 362
-00:18:13,846 --> 00:18:17,546
-The pressure is available
-through the altimeter sensor.
+00:19:31,138 --> 00:19:33,073
+足以让我们以为
+你的高度发生了变化
 
 
 363
-00:18:18,186 --> 00:18:21,476
-It is available as part
-of the CMAltimeter API.
+00:19:33,140 --> 00:19:35,142
+比如说变化了十五米
 
 
 364
-00:18:21,476 --> 00:18:23,336
-And it gives you two things.
+00:19:35,642 --> 00:19:37,578
+建议你不要长时间使用
 
 
 365
-00:18:23,506 --> 00:18:26,226
-it gives you raw
-pressure which is nothing
+00:19:37,644 --> 00:19:39,680
+传感器
 
 
 366
-00:18:26,226 --> 00:18:28,776
-but a filtered version of the
-pressure from the sensor itself
+00:19:41,415 --> 00:19:44,818
+你的设备所处的外套也可以影响到压力
 
 
 367
-00:18:29,306 --> 00:18:31,716
-and gives you relative altitude.
+00:19:44,885 --> 00:19:48,822
+如果你给你的
+手机使用了刚性密封防水外套
 
 
 368
-00:18:32,256 --> 00:18:34,036
-Let's take a deeper
-look at altitude.
+00:19:49,189 --> 00:19:50,924
+那么你就指望不上压力传感器了
 
 
 369
-00:18:34,846 --> 00:18:37,406
-When we say relative,
-it is relative
+00:19:53,060 --> 00:19:56,196
+说到API的使用
+对你来说它应该很眼熟
 
 
 370
-00:18:37,406 --> 00:18:39,266
-to the first sample provided.
+00:19:56,263 --> 00:19:59,433
+API可以给你提供压力和高度
 
 
 371
-00:18:40,256 --> 00:18:42,986
-What it means is that
-the first sample you get
+00:20:00,000 --> 00:20:03,337
+你访问这个传感器的速度能有多快呢？
 
 
 372
-00:18:42,986 --> 00:18:47,526
-from the altimeter will have
-a relative altitude of zero.
+00:20:04,071 --> 00:20:07,574
+当你第一次进行请求时
+第一个样本需要大约
 
 
 373
-00:18:47,996 --> 00:18:51,246
-And every subsequent sample
-will be baselined against that.
+00:20:08,242 --> 00:20:09,910
+二点六秒可以得出来
 
 
 374
-00:18:52,306 --> 00:18:56,066
-What do we need to know about
-the altimeter to use it?
+00:20:10,177 --> 00:20:13,914
+之后的每次样本以步调的形式出现
+用时一点三秒
 
 
 375
-00:18:56,596 --> 00:19:02,976
-Well, the altimeter is really
-great for floor level changes.
+00:20:14,214 --> 00:20:16,984
+你从高度表上获取数据的速度就这么快
 
 
 376
-00:19:02,976 --> 00:19:05,046
-It is not really great
-for human level changes.
+00:20:18,752 --> 00:20:25,425
+总结一下
+Core Motion已经出现在了
 
 
 377
-00:19:05,676 --> 00:19:07,716
-So you should probably
-not use it to know
+00:20:25,492 --> 00:20:27,194
+多个平台上
 
 
 378
-00:19:07,716 --> 00:19:09,176
-if the user is raising
-their arm.
+00:20:27,261 --> 00:20:29,329
+iPads上有了 
+iPhones有了
 
 
 379
-00:19:09,506 --> 00:19:11,186
-The error is not going
-to be good for you.
+00:20:29,630 --> 00:20:31,265
+Apple Watch上也有了
 
 
 380
-00:19:12,286 --> 00:19:14,606
-There are challenging
-situations for the sensor
+00:20:31,331 --> 00:20:33,200
+在Apple Watch
+上提供不只那些
 
 
 381
-00:19:14,606 --> 00:19:17,326
-that you should keep in mind.
+00:20:33,267 --> 00:20:37,571
+看起来眼熟的APIs
+我们还提供历史传感器数据
 
 
 382
-00:19:17,406 --> 00:19:18,776
-One is the environment.
+00:20:38,205 --> 00:20:41,275
+计步器自身也有了一大堆很酷的更新
 
 
 383
-00:19:19,516 --> 00:19:22,556
-The environment might change
-over time in the same location
+00:20:41,341 --> 00:20:46,480
+它的精确度更高了
+并且有了两个新的APIs
 
 
 384
-00:19:22,606 --> 00:19:25,246
-and give you a false
-sense of altitude changes.
+00:20:46,547 --> 00:20:48,215
+即步幅和步调
 
 
 385
-00:19:25,886 --> 00:19:28,226
-For example, the
-recent cold front
+00:20:48,282 --> 00:20:51,385
+计步器现在是个多面手了
+对于你的健身apps来说
 
 
 386
-00:19:28,226 --> 00:19:30,826
-in San Francisco would have
-changed the pressure enough
+00:20:51,451 --> 00:20:53,120
+这是个好消息
 
 
 387
-00:19:31,136 --> 00:19:33,156
-for us to think that
-your altitude changed
+00:20:54,221 --> 00:20:56,657
+从传统意义上说
+Core Motion已经被用于
 
 
 388
-00:19:33,156 --> 00:19:34,726
-by say 15 meters.
+00:20:57,024 --> 00:20:59,359
+游戏、手势以及健身
 
 
 389
-00:19:35,636 --> 00:19:37,646
-You should probably
-not use the sensor
+00:20:59,426 --> 00:21:02,296
+对于Core Motion来说
+可用的应用程序有很多
 
 
 390
-00:19:37,646 --> 00:19:40,836
-over long durations of time.
+00:21:02,696 --> 00:21:08,068
+Core Motion也可以被用来
+曾强其它的apps的智能
 
 
 391
-00:19:41,416 --> 00:19:44,896
-The case that your device is in
-can also impact the pressure.
+00:21:08,402 --> 00:21:12,105
+我要把加布里埃尔请上来
+请他给你们解释下这个概念
 
 
 392
-00:19:44,896 --> 00:19:48,816
-If you are using a rigid sealed
-waterproof case for your phone,
+00:21:21,381 --> 00:21:22,449
+大家好
 
 
 393
-00:19:49,176 --> 00:19:50,926
-the pressure sensor
-is not your friend.
+00:21:23,350 --> 00:21:25,085
+能到这里我感到十分激动
 
 
 394
-00:19:52,606 --> 00:19:56,256
-In terms of using the API, it
-should be very familiar to you
+00:21:25,819 --> 00:21:29,089
+作为一名开发者 
+我之前从未参加过苹果全球开发者大会
 
 
 395
-00:19:56,256 --> 00:19:59,266
-and it gives you pressure
-and altitude in the API.
+00:21:29,890 --> 00:21:32,726
+但是无论我在哪里工作
+我总是在六月份的第一周内
 
 
 396
-00:20:00,016 --> 00:20:03,336
-How fast can you access
-data from this sensor?
+00:21:32,993 --> 00:21:37,364
+在家里用电脑观看全部会议视频
 
 
 397
-00:20:04,066 --> 00:20:07,226
-So the first time you make a
-request, the first sample takes
+00:21:38,432 --> 00:21:39,933
+我了解到了很多信息
 
 
 398
-00:20:07,226 --> 00:20:09,566
-around 2.6 seconds to come.
+00:21:40,000 --> 00:21:42,336
+但是其中让我头疼的是
 
 
 399
-00:20:10,176 --> 00:20:13,916
-Every subsequent sample comes
-at a cadence of 1.3 seconds.
+00:21:42,503 --> 00:21:43,871
+信息量太大了
 
 
 400
-00:20:14,206 --> 00:20:16,946
-That is how fast you can
-get data from the altimeter.
+00:21:44,805 --> 00:21:48,609
+即使在一个会议视频中
+要吸收的东西也太多了
 
 
 401
-00:20:18,336 --> 00:20:25,506
-So to summarize, Core
-Motion now has, is available
+00:21:48,876 --> 00:21:51,311
+当你看完后
+你可能把过去的一小时内
 
 
 402
-00:20:25,506 --> 00:20:27,266
-on a multitude of platforms.
+00:21:51,378 --> 00:21:53,180
+学到的东西全都忘光
 
 
 403
-00:20:27,266 --> 00:20:29,316
-It is available on
-the iPads, the iPhones
+00:21:54,481 --> 00:21:57,317
+我在这里要做的
+就是把阿尼尔刚刚向你们
 
 
 404
-00:20:29,626 --> 00:20:30,806
-and also the Apple Watch.
+00:21:57,384 --> 00:21:59,019
+提到的事情拿出来
 
 
 405
-00:20:31,326 --> 00:20:33,276
-On the Apple Watch
-we give you access
+00:21:59,553 --> 00:22:01,788
+看看你们到底想在你们的
+应用程序中把它们用起来
 
 
 406
-00:20:33,276 --> 00:20:37,296
-and not just the familiar APIs
-but also historical sensor data.
+00:22:01,855 --> 00:22:04,591
+希望能让你记住这些东西
 
 
 407
-00:20:38,146 --> 00:20:41,326
-The pedometer has a bunch of
-really cool updates of its own.
+00:22:06,293 --> 00:22:10,464
+Core Motion非常棒
+因为它不仅能够用于
 
 
 408
-00:20:41,326 --> 00:20:46,556
-It's more accurate than
-ever, and it has two new APIs
+00:22:10,531 --> 00:22:12,866
+健身语境或者游戏语境
 
 
 409
-00:20:46,556 --> 00:20:48,286
-in the form of pace and cadence.
+00:22:13,433 --> 00:22:16,603
+今天我要向你们展示的
+是不管你的app属于
 
 
 410
-00:20:48,286 --> 00:20:51,456
-So it is a well-rounded
-now and should be great
+00:22:16,970 --> 00:22:18,906
+什么类别 你都可以把它用起来
 
 
 411
-00:20:51,456 --> 00:20:53,126
-for your fitness apps.
+00:22:20,507 --> 00:22:22,409
+Core Motion
+能怎样为你效劳呢？
 
 
 412
-00:20:54,236 --> 00:20:56,356
-Now Core Motion has
-traditionally been used
+00:22:24,077 --> 00:22:27,748
+Core Motion
+允许你检测用户正在做的事情
 
 
 413
-00:20:56,356 --> 00:20:59,336
-for gaming, for gestures,
-for fitness.
+00:22:29,049 --> 00:22:31,385
+你可以知道用户是否正坐在他们的车里
 
 
 414
-00:20:59,336 --> 00:21:02,296
-There's a bunch of
-applications for Core Motion,
+00:22:31,652 --> 00:22:34,321
+是否在跑步是否在骑自行车
 
 
 415
-00:21:02,686 --> 00:21:06,186
-but Core Motion can also be
-used to enhance the intelligence
+00:22:35,022 --> 00:22:37,724
+就像我们之前看到的
+你可以知道他们的步幅变动
 
 
 416
-00:21:06,476 --> 00:21:07,706
-of other kinds of apps.
+00:22:37,791 --> 00:22:39,159
+我们可以帮你让它更加平滑
 
 
 417
-00:21:08,396 --> 00:21:10,556
-To illustrate this
-concept I am going
+00:22:40,127 --> 00:22:42,196
+借助这些变动
 
 
 418
-00:21:10,556 --> 00:21:11,976
-to invite Gabrielle on stage.
+00:22:42,529 --> 00:22:46,400
+我们无需给用户发送提示
+请他们告诉我们
 
 
 419
-00:21:12,516 --> 00:21:20,536
-[Applause.]
+00:22:46,466 --> 00:22:48,202
+就可以知道他们所处的语境
 
 
 420
-00:21:21,036 --> 00:21:22,116
->> GABRIELLE BADIE:
-Hi, everybody.
+00:22:48,569 --> 00:22:52,706
+这样用户的体验就更加神奇了
+我们的apps也就更智能了
 
 
 421
-00:21:23,336 --> 00:21:25,076
-I'm really excited to be here.
+00:22:54,074 --> 00:22:56,510
+其次 我们还能让用户参与进来
 
 
 422
-00:21:25,826 --> 00:21:31,426
-As a developer, I never got to
-attend WWDC, but I spent every,
+00:22:57,311 --> 00:23:01,081
+因为每隔几秒钟就有更新
+我们就可以知道用户的步幅
 
 
 423
-00:21:31,426 --> 00:21:34,586
-that first week of June
-watching all of the sessions
+00:23:01,148 --> 00:23:02,449
+发生了怎样的变动
 
 
 424
-00:21:34,586 --> 00:21:37,366
-on my computer at home
-wherever I was working.
+00:23:02,516 --> 00:23:04,718
+我们可以知道
+他们高度的发生了怎样的变动
 
 
 425
-00:21:38,446 --> 00:21:39,986
-I learned a lot of information,
+00:23:04,785 --> 00:23:08,589
+相应地我们可以快速更新
+我们的app UI
 
 
 426
-00:21:39,986 --> 00:21:41,696
-but one of the really
-difficult things was
+00:23:10,424 --> 00:23:12,359
+最后我们还可以“反射返回”
 
 
 427
-00:21:41,696 --> 00:21:43,856
-that there was too
-much information.
+00:23:13,460 --> 00:23:15,362
+我知道“反射返回”听起来很蹩脚
 
 
 428
-00:21:44,796 --> 00:21:48,596
-Even in a given session
-there is so much to absorb
+00:23:15,829 --> 00:23:18,432
+但是对于Core Motion来说
+很棒的一点就在于
 
 
 429
-00:21:48,876 --> 00:21:51,386
-that when you leave you may
-even forget all of the things
+00:23:18,498 --> 00:23:21,034
+通过始终保持它的运行
+我们可以让你的app看起来好像
 
 
 430
-00:21:51,386 --> 00:21:53,176
-that you learned
-in the last hour.
+00:23:21,101 --> 00:23:24,238
+一天二十四小时、
+一周七天都在努力工作
 
 
 431
-00:21:54,486 --> 00:21:57,396
-What I'm here to do is to
-take a few of the great things
+00:23:24,304 --> 00:23:26,206
+实际上工作的是协处理器
 
 
 432
-00:21:57,396 --> 00:21:59,106
-that Anil just talked
-to you about
+00:23:27,541 --> 00:23:29,710
+我们可以看到过去一周内
+你的活动性更新情况
 
 
 433
-00:21:59,556 --> 00:22:01,846
-and see exactly how you
-might want to use them
+00:23:29,776 --> 00:23:32,012
+你的计步器更新情况
 
 
 434
-00:22:01,846 --> 00:22:04,576
-in your application and
-hopefully make them stick.
+00:23:32,246 --> 00:23:33,447
+这一点很赞
 
 
 435
-00:22:05,226 --> 00:22:10,546
-Now Core Motion is really great
-because it can't be just used
+00:23:35,449 --> 00:23:38,752
+我记住了这三点
+因此我决定来编写一款
 
 
 436
-00:22:10,546 --> 00:22:12,856
-in a fitness context
-or gaming context.
+00:23:38,819 --> 00:23:40,120
+音乐播放器
 
 
 437
-00:22:13,436 --> 00:22:16,156
-What I'm here to show you
-today is how you can use it
+00:23:40,921 --> 00:23:43,857
+不是想与Apple
+ Music或者类似产品进行竞争
 
 
 438
-00:22:16,156 --> 00:22:18,956
-in your app regardless of
-what category it falls in.
+00:23:44,291 --> 00:23:47,661
+Core Motion怎样可以
+让我的app的体验
 
 
 439
-00:22:18,956 --> 00:22:22,526
-So what can Core
-Motion do for you?
+00:23:47,728 --> 00:23:50,264
+更加迷人、更有魔力
 
 
 440
-00:22:23,736 --> 00:22:27,756
-Core Motion allows you to
-detect what a user is doing.
+00:23:52,399 --> 00:23:55,969
+很多音乐应用程序都有
+这个播放列表的概念
 
 
 441
-00:22:28,906 --> 00:22:31,236
-You can see if a
-user is in their car,
+00:23:56,270 --> 00:23:58,639
+我想听到不同的音乐当我在我的车里时
 
 
 442
-00:22:31,666 --> 00:22:34,336
-going on a run, if
-they are cycling.
+00:23:58,705 --> 00:24:02,242
+我想听到广播而如果我是在学习或者
 
 
 443
-00:22:35,006 --> 00:22:37,616
-You can see their changes
-in pace as we've seen,
+00:24:02,309 --> 00:24:04,344
+正在努力工作
+可能就想要听一些古典音乐
 
 
 444
-00:22:37,786 --> 00:22:39,156
-we smooth that out for you.
+00:24:04,411 --> 00:24:06,446
+锻炼身体时
+也有不同的app播放列表
 
 
 445
-00:22:40,116 --> 00:22:42,066
-And so by using those updates,
+00:24:07,381 --> 00:24:10,083
+通过检测某个用户正在做什么
 
 
 446
-00:22:42,536 --> 00:22:46,456
-we can tell what context a user
-is in without prompting them
+00:24:10,417 --> 00:24:13,987
+我的音乐应用程序就可以
+相应地改变我的播放列表
 
 
 447
-00:22:46,456 --> 00:22:47,956
-and asking them to tell us.
+00:24:14,121 --> 00:24:15,989
+而无需让用户进行选择
 
 
 448
-00:22:48,576 --> 00:22:52,706
-This makes that experience more
-magical and our apps smarter.
+00:24:16,890 --> 00:24:20,694
+类似地我们知道了步幅的变化
+我们就可以说
 
 
 449
-00:22:54,086 --> 00:22:56,516
-The next thing we can
-do is engage the user.
+00:24:20,761 --> 00:24:24,198
+嘿！你正在进行慢跑
+可能是因为你刚才跑到太快
 
 
 450
-00:22:57,326 --> 00:23:01,146
-Because updates come in every
-few seconds we can see how their
+00:24:24,264 --> 00:24:26,900
+并且爬了一座非常高的山
+我们就可以给你放一首
 
 
 451
-00:23:01,146 --> 00:23:02,296
-pace is changing.
+00:24:26,967 --> 00:24:29,736
+让人兴奋的歌曲 让你有一种成就感
 
 
 452
-00:23:02,516 --> 00:23:04,536
-We can see how their
-altitude is changing.
+00:24:29,803 --> 00:24:32,239
+或者可以试着与你的步调相匹配
 
 
 453
-00:23:04,786 --> 00:23:08,586
-We can update our app UI
-quickly and accordingly.
+00:24:33,674 --> 00:24:35,342
+下面就到了“反射”部分
 
 
 454
-00:23:10,096 --> 00:23:13,556
-The last thing we can
-do is reflect back.
+00:24:35,876 --> 00:24:37,077
+关于“反射”两点很棒
 
 
 455
-00:23:13,556 --> 00:23:15,366
-And I know that sounds
-really cheesy,
+00:24:37,144 --> 00:24:39,246
+尤其是在我的音乐应用程序
 
 
 456
-00:23:15,826 --> 00:23:18,506
-but one of the great
-things about Core Motion is
+00:24:39,313 --> 00:24:40,514
+这个语境下
 
 
 457
-00:23:18,506 --> 00:23:21,106
-by running all the time
-we can make it look
+00:24:41,882 --> 00:24:45,619
+第一件事我可以看看数据
+了解用户当前正在做的事情
 
 
 458
-00:23:21,106 --> 00:23:24,086
-like your app is
-working really hard 24/7
+00:24:45,819 --> 00:24:47,554
+嘿 你已经有一段时间不跑了
 
 
 459
-00:23:24,316 --> 00:23:27,366
-when actually the
-coprocessor is.
+00:24:47,888 --> 00:24:50,691
+可能你很快就要跑
+也可能你想使用我们的
 
 
 460
-00:23:27,526 --> 00:23:29,776
-We can look at your
-activity updates
+00:24:50,757 --> 00:24:52,626
+应用程序来跑步
 
 
 461
-00:23:29,776 --> 00:23:32,016
-and your pedometer
-updates over the last week,
+00:24:52,826 --> 00:24:54,261
+并且听一下你的播放列表
 
 
 462
-00:23:32,246 --> 00:23:33,436
-which is pretty fantastic.
+00:24:55,128 --> 00:24:57,064
+一天结束时 我们想要刺激我们的用户
 
 
 463
-00:23:35,076 --> 00:23:38,826
-So with these three things in
-mind, I decided I was going
+00:24:57,164 --> 00:24:58,332
+回到我们的app中来
 
 
 464
-00:23:38,826 --> 00:23:40,126
-to make a music player.
+00:24:59,867 --> 00:25:02,469
+我想用户可能想要知道他们昨天
 
 
 465
-00:23:40,926 --> 00:23:43,866
-Nothing to rival Apple
-Music or anything like that.
+00:25:03,637 --> 00:25:07,808
+在车里听的播放列表是什么
+如果我们能实现的话 那就太棒了
 
 
 466
-00:23:44,286 --> 00:23:47,726
-I wanted to see how Core Motion
-could make my app experience a
+00:25:08,242 --> 00:25:13,080
+通过查看活动性信息
+然后把它与我的播放列表信息进行匹配
 
 
 467
-00:23:47,726 --> 00:23:50,266
-little bit more engaging
-and more magical.
+00:25:13,447 --> 00:25:15,115
+我就可以把那个信息提供给用户
 
 
 468
-00:23:50,846 --> 00:23:55,856
-Now a lot of music applications
-have this idea of playlists.
+00:25:16,617 --> 00:25:18,986
+记住了这三件事
 
 
 469
-00:23:56,286 --> 00:23:58,716
-I certainly listen to
-different music when I'm
+00:25:19,419 --> 00:25:22,456
+我们来看看我的应用程序
+实际是什么样子的
 
 
 470
-00:23:58,716 --> 00:24:02,316
-in my car I want podcasts, or
-if I'm studying or working hard,
+00:25:25,459 --> 00:25:27,761
+当用户打开app时
+我们仅仅想把一个基本的
 
 
 471
-00:24:02,316 --> 00:24:04,096
-I'm going to want maybe
-some classical music,
+00:25:27,828 --> 00:25:29,563
+播放列表展示给他们
 
 
 472
-00:24:04,396 --> 00:24:06,456
-and different app playlists
-for working out as well.
+00:25:29,997 --> 00:25:32,966
+对我来说
+我现在是站着不动 对吧？
 
 
 473
-00:24:07,176 --> 00:24:10,086
-By detecting what
-a user is doing,
+00:25:33,333 --> 00:25:35,402
+我们来一些低强度的音乐
 
 
 474
-00:24:10,416 --> 00:24:14,236
-my music application can change
-my playlists accordingly instead
+00:25:35,502 --> 00:25:36,470
+不要太剧烈
 
 
 475
-00:24:14,236 --> 00:24:16,006
-of the user having to select it.
+00:25:37,571 --> 00:25:39,573
+当我们检测到用户正在加速
 
 
 476
-00:24:16,906 --> 00:24:20,776
-Similarly, by seeing changes
-in pace we can say hey,
+00:25:40,073 --> 00:25:42,009
+可能是他们开始进行锻炼了
 
 
 477
-00:24:20,776 --> 00:24:23,986
-you're going on a slow jog
-or maybe you went really fast
+00:25:42,276 --> 00:25:44,011
+我们要对播放列表进行变更
 
 
 478
-00:24:24,266 --> 00:24:26,966
-and climbed up a really
-big hill and we are going
+00:25:44,378 --> 00:25:47,014
+给他们一些更加欢快的音乐
 
 
 479
-00:24:26,966 --> 00:24:29,806
-to play you a really exciting
-song to make you feel good
+00:25:48,348 --> 00:25:50,651
+就是在这里
+app开始与用户接洽起来了
 
 
 480
-00:24:29,806 --> 00:24:32,116
-about that, or try to
-match your cadence.
+00:25:50,717 --> 00:25:53,520
+我们看看发生了什么变动
+也许是步调发生了变动
 
 
 481
-00:24:32,746 --> 00:24:35,156
-Then there's the
-reflection piece.
+00:25:53,887 --> 00:25:57,891
+也许是高度发生了变动
+我们就可以接洽并且跟随
 
 
 482
-00:24:35,866 --> 00:24:37,156
-There are two really
-great things
+00:25:57,958 --> 00:26:01,061
+这些变动 这样当用户加速时
+我们就可以给他们
 
 
 483
-00:24:37,156 --> 00:24:39,306
-about reflection
-especially in the context
+00:26:01,195 --> 00:26:02,663
+一个强度更高的播放列表
 
 
 484
-00:24:39,306 --> 00:24:40,626
-of my music application.
+00:26:04,932 --> 00:26:07,201
+然后我们就想要切换环境了
 
 
 485
-00:24:41,876 --> 00:24:45,616
-One, I can look at data to
-see how a user has been doing.
+00:26:07,267 --> 00:26:10,003
+当用户开车时
+我就想在他们早晨上班路上
 
 
 486
-00:24:45,816 --> 00:24:47,546
-Hey, you haven't been
-running in a while.
+00:26:10,070 --> 00:26:14,308
+把他们的podcast
+或者他们经常听的任何节目
 
 
 487
-00:24:47,896 --> 00:24:50,746
-Maybe you want to go on a run
-really soon and maybe you want
+00:26:14,374 --> 00:26:15,576
+提供给他们
 
 
 488
-00:24:50,746 --> 00:24:52,636
-to use our application
-to do that
+00:26:17,644 --> 00:26:21,081
+这是“检测”部分
+以及“接洽”部分
 
 
 489
-00:24:52,816 --> 00:24:54,066
-and listen to your playlist.
+00:26:21,582 --> 00:26:23,483
+接下来是“反射”部分
 
 
 490
-00:24:55,136 --> 00:24:57,076
-At the end of the day I
-want to motivate users
+00:26:24,651 --> 00:26:27,855
+我想把这个信息分成几个有趣的部分
 
 
 491
-00:24:57,176 --> 00:24:59,616
-to come back to our app.
+00:26:27,921 --> 00:26:30,524
+这样用户就可以向后滚动
+看看他们的“历史”
 
 
 492
-00:24:59,866 --> 00:25:01,916
-Also I thought it
-would be really great
+00:26:30,824 --> 00:26:33,594
+我可能想把这个与用户在不同时刻听的
 
 
 493
-00:25:01,916 --> 00:25:04,796
-if I said the user might want
+00:26:33,660 --> 00:26:36,063
+播放列表连接起来
 
 
 494
-00:25:04,796 --> 00:25:06,536
-to know what playlist
-they were listening
+00:26:38,298 --> 00:26:41,702
+既然我们已经知道了
+app会是什么样子的
 
 
 495
-00:25:06,536 --> 00:25:07,846
-to in the car yesterday.
+00:26:42,202 --> 00:26:44,872
+我们再来看看动作活动性的实际应用
 
 
 496
-00:25:08,226 --> 00:25:11,146
-And so by looking at activity
-information and paring it
+00:26:45,272 --> 00:26:48,642
+看看要实现这些功能
+我们需要什么样的APIs
 
 
 497
-00:25:11,336 --> 00:25:12,246
-with my information
+00:26:51,445 --> 00:26:53,080
+首先我们有“检测”部分
 
 
 498
-00:25:12,246 --> 00:25:15,046
-about playlists I can
-give that info to them.
+00:26:53,146 --> 00:26:56,149
+这个部分是我们希望能够一直运行的
 
 
 499
-00:25:16,256 --> 00:25:18,986
-So with these three
-ideas in mind,
+00:26:56,683 --> 00:26:59,753
+我们想知道用户是否正在开车
 
 
 500
-00:25:19,436 --> 00:25:22,516
-let's see what my application
-actually looks like.
+00:26:59,820 --> 00:27:02,823
+用户是否正在走路
+用户走路的速度有多快
 
 
 501
-00:25:22,516 --> 00:25:27,836
-So when the user opens
-the app, we just want
+00:27:03,323 --> 00:27:04,825
+那么以此我们需要什么？
 
 
 502
-00:25:27,836 --> 00:25:30,026
-to show them a basic playlist.
+00:27:05,959 --> 00:27:08,295
+活动性更新情况以及计步器更新情况
 
 
 503
-00:25:30,026 --> 00:25:32,966
-In my case I'm pretty much
-standing around, right?
+00:27:08,729 --> 00:27:12,299
+我们想要监控这些情况 让它们更平滑
 
 
 504
-00:25:33,346 --> 00:25:35,416
-We're going to have
-low intensity music.
+00:27:12,666 --> 00:27:16,737
+看看哪个信息可以使得我们判定语境
 
 
 505
-00:25:35,516 --> 00:25:36,476
-Nothing too tough.
+00:27:18,405 --> 00:27:20,307
+其次我们有那个“接洽”部分
 
 
 506
-00:25:37,576 --> 00:25:39,586
-As we detect that the
-user is speeding up.
+00:27:21,241 --> 00:27:24,144
+如果用户正在走路或者跑步对于我来说
 
 
 507
-00:25:40,066 --> 00:25:42,006
-Maybe they start
-going for a workout.
+00:27:24,478 --> 00:27:26,580
+我想知道他们的速度有多快
 
 
 508
-00:25:42,266 --> 00:25:44,386
-We're going to change
-the playlist
+00:27:26,847 --> 00:27:31,118
+看看步调 我就可以知道他们是否
 
 
 509
-00:25:44,386 --> 00:25:47,016
-and give them a little
-more upbeat music.
+00:27:31,185 --> 00:27:35,222
+爬了一座高大的丘陵
+这样我就可以给他们播放一首
 
 
 510
-00:25:48,076 --> 00:25:50,476
-But this is where the
-engagement part comes in.
+00:27:35,289 --> 00:27:36,690
+欢快的歌来庆祝他们的成就
 
 
 511
-00:25:50,716 --> 00:25:53,526
-This is where we look at
-maybe changes in cadence
+00:27:36,957 --> 00:27:39,526
+为此 我需要计步器更新情况
 
 
 512
-00:25:53,886 --> 00:25:57,876
-and maybe changes in altitude,
-and we really engage with them
+00:27:39,593 --> 00:27:42,229
+这些情况里面包括步幅、步调的变更
 
 
 513
-00:25:57,946 --> 00:26:01,126
-and follow along, so we can
-give them a more high intensity
+00:27:42,663 --> 00:27:44,131
+以及高度更新情况
 
 
 514
-00:26:01,126 --> 00:26:03,206
-playlist when they speed up.
+00:27:45,933 --> 00:27:47,968
+然后我们还有“反射”部分
 
 
 515
-00:26:04,576 --> 00:26:06,836
-Then we want to context switch.
+00:27:48,602 --> 00:27:50,704
+就像我之前说过
+Core Motion很棒的是
 
 
 516
-00:26:07,256 --> 00:26:10,086
-When the user goes for a
-drive, I want to be able
+00:27:50,771 --> 00:27:53,407
+它们可以一天二十四小时、
+一周七天都为我努力工作
 
 
 517
-00:26:10,086 --> 00:26:14,386
-to give them their podcast or
-whatever they usually listen
+00:27:53,974 --> 00:27:57,377
+因此我就可以进行回顾
+获取那些历史活动性查询
 
 
 518
-00:26:14,386 --> 00:26:15,586
-to on their morning commute.
+00:27:57,678 --> 00:28:02,249
+以及计步器查询
+然后把这个信息分成几个有趣的部分
 
 
 519
-00:26:16,046 --> 00:26:20,946
-So this is the detection
-piece and engagement piece.
+00:28:05,819 --> 00:28:09,690
+既然我已经仔细看了
+我的app长什么样
 
 
 520
-00:26:21,566 --> 00:26:23,266
-Next we have the
-reflection piece.
+00:28:09,756 --> 00:28:12,993
+看了“检测”、“接洽”
+以及“反射”部分
 
 
 521
-00:26:24,636 --> 00:26:27,906
-I want to put this information
-into interesting pieces
+00:28:13,060 --> 00:28:16,363
+也知道了我需要使用Core 
+Motion哪一部分的APIs
 
 
 522
-00:26:27,906 --> 00:26:30,526
-so the user can scroll back and
-see what they have been doing.
+00:28:16,730 --> 00:28:18,932
+我要向你们展示下
+我到底是如何编码的
 
 
 523
-00:26:30,836 --> 00:26:33,656
-This is where I might tie
-in kind of that playlist
+00:28:18,999 --> 00:28:21,401
+最起码要让你们看看我的
+应用程序的数据模型
 
 
 524
-00:26:33,656 --> 00:26:36,066
-that they were listening to
-at different moments in time.
+00:28:23,504 --> 00:28:25,372
+我要打开Xcode
 
 
 525
-00:26:36,646 --> 00:26:41,446
-So now that we have an idea of
-what the app will look like,
+00:28:26,006 --> 00:28:28,308
+但是在我走到这边的电脑之前
 
 
 526
-00:26:42,206 --> 00:26:44,886
-let's see where motion
-activity actually fits in
+00:28:28,709 --> 00:28:31,645
+先提醒你们一下
+屏幕上会出现大量的文本
 
 
 527
-00:26:45,266 --> 00:26:49,186
-and what APIs we might need to
-use for each of these pieces.
+00:28:32,212 --> 00:28:33,780
+别被吓跑了
 
 
 528
-00:26:51,116 --> 00:26:52,966
-First we have the
-detection piece.
+00:28:34,081 --> 00:28:37,050
+示例代码现在已经放到网上了
 
 
 529
-00:26:53,156 --> 00:26:55,956
-This is something we are going
-to want to do all the time.
+00:28:37,184 --> 00:28:39,620
+现在请勿打开
 
 
 530
-00:26:55,956 --> 00:26:59,826
-We are going to want to
-see if a user is driving.
+00:28:42,122 --> 00:28:43,223
+请仅仅关注
 
 
 531
-00:26:59,826 --> 00:27:02,816
-If a user is walking, how
-fast they might be walking.
+00:28:43,290 --> 00:28:45,626
+我为你们高亮显示的部分
 
 
 532
-00:27:03,336 --> 00:27:04,826
-So what are we going
-to need for that?
+00:28:46,093 --> 00:28:48,262
+我之前已经说过了那里会有大量的文本
 
 
 533
-00:27:05,946 --> 00:27:08,296
-Activity updates and
-pedometer updates.
+00:28:48,495 --> 00:28:52,299
+如果仅看那几个东西然后会议结束后
 
 
 534
-00:27:08,636 --> 00:27:12,286
-We'll want to be monitoring
-those and smoothing those out
+00:28:52,366 --> 00:28:54,401
+回去看看示例代码
 
 
 535
-00:27:12,656 --> 00:27:16,726
-and seeing which information
-allows us to determine context.
+00:28:54,701 --> 00:28:57,504
+你就能记住我重点讲的东西
+而不是想要
 
 
 536
-00:27:17,066 --> 00:27:20,026
-Next we have that
-engagement piece.
+00:28:57,571 --> 00:28:59,039
+一次做太多的事
 
 
 537
-00:27:20,486 --> 00:27:24,876
-If the user is walking or
-running, in my case I want
+00:29:00,274 --> 00:29:02,242
+我已经说过了 文本会很多提醒过了
 
 
 538
-00:27:24,876 --> 00:27:26,566
-to see how fast they are going.
+00:29:02,976 --> 00:29:05,078
+就像我说过的
+屏幕上有大量的文本
 
 
 539
-00:27:26,836 --> 00:27:31,176
-Look at that cadence, and
-also I had that idea of maybe
+00:29:05,379 --> 00:29:08,015
+我只想让你们记住三个部分
 
 
 540
-00:27:31,176 --> 00:27:35,276
-if they climb a big hill I can
-give them a great cheerful song
+00:29:09,616 --> 00:29:11,952
+就是“检测”、“接洽”与“反射”
 
 
 541
-00:27:35,276 --> 00:27:36,266
-at their achievement.
+00:29:12,019 --> 00:29:13,520
+记住了这些事情那么我要仔细看看
 
 
 542
-00:27:36,966 --> 00:27:39,606
-For that I would need
-pedometer updates
+00:29:13,587 --> 00:29:16,890
+我的应用程序的数据模型中的这些东西
 
 
 543
-00:27:39,606 --> 00:27:42,236
-which includes those
-pace and cadence changes
+00:29:17,324 --> 00:29:21,261
+这个就是“数据模型”部分
 
 
 544
-00:27:42,676 --> 00:27:44,116
-and altitude updates as well.
+00:29:21,328 --> 00:29:23,197
+剩下的部分供你以后自己探索
 
 
 545
-00:27:45,616 --> 00:27:47,666
-Then we had the reflection
-piece.
+00:29:23,564 --> 00:29:26,400
+我要做的第一件事是“检测”
 
 
 546
-00:27:48,616 --> 00:27:50,776
-As I said, the great
-thing about Core Motion is
+00:29:26,533 --> 00:29:29,436
+这就要求获得活动性更新情况
+以及计步器更新情况
 
 
 547
-00:27:50,776 --> 00:27:53,436
-that they work really
-hard for me 24/7.
+00:29:29,503 --> 00:29:31,238
+我们来看看这些活动性更新情况
 
 
 548
-00:27:53,476 --> 00:27:57,366
-So I can look back and get those
-historical activity queries
+00:29:36,009 --> 00:29:37,144
+很好 文本很多 是吧？
 
 
 549
-00:27:57,676 --> 00:28:00,716
-and pedometer queries
-to put that information
+00:29:38,579 --> 00:29:40,914
+我要做的第一件事
+就是校验下看看这个硬件上
 
 
 550
-00:28:00,746 --> 00:28:02,136
-into interesting segments.
+00:29:40,981 --> 00:29:43,717
+能否使用活动性
 
 
 551
-00:28:02,826 --> 00:28:09,276
-So now that I've gone through
-exactly what my app might look
+00:29:44,551 --> 00:29:47,454
+就像阿尼尔之前提到的
+活动性并不总是可用
 
 
 552
-00:28:09,276 --> 00:28:13,076
-like, the detection, engagement,
-and reflection pieces,
+00:29:47,521 --> 00:29:51,725
+因此在我们查询任何更新情况之前
+我们需要进行这些校验
 
 
 553
-00:28:13,076 --> 00:28:16,366
-and which parts of Core Motion's
-APIs I would need to use,
+00:29:53,794 --> 00:29:55,062
+我们要做的第二件事是 使用
 
 
 554
-00:28:16,716 --> 00:28:18,986
-I'm going to show you
-exactly how I coded it up,
-
-
-555
-00:28:18,986 --> 00:28:21,406
-at least for the data model
-part of my application.
-
-
-556
-00:28:21,966 --> 00:28:25,226
-I am about to open Xcode.
-
-
-557
-00:28:26,006 --> 00:28:28,316
-Before I walk to the
-computer over here,
-
-
-558
-00:28:28,696 --> 00:28:31,636
-be warned that there will be
-a lot of text on the screen.
-
-
-559
-00:28:32,226 --> 00:28:33,716
-Don't be intimidated.
-
-
-560
-00:28:34,076 --> 00:28:37,036
-The sample code is
-already available online.
-
-
-561
-00:28:37,196 --> 00:28:39,386
-Don't go open it now, please.
-
-
-562
-00:28:39,746 --> 00:28:41,746
-[Chuckles.]
-
-
-563
-00:28:42,106 --> 00:28:43,256
->> GABRIELLE BADIE:
-Please just focus
-
-
-564
-00:28:43,296 --> 00:28:45,626
-on the segments I
-highlight for you.
-
-
-565
-00:28:46,096 --> 00:28:48,276
-As I said, there's a
-lot of text on there.
-
-
-566
-00:28:48,486 --> 00:28:52,376
-If you focus on those few things
-and maybe go back and look
-
-
-567
-00:28:52,376 --> 00:28:54,406
-at the sample code
-after the session,
-
-
-568
-00:28:54,696 --> 00:28:57,576
-you'll remember the things I
-focused on instead of trying
-
-
-569
-00:28:57,576 --> 00:28:59,036
-to do too many things at once.
-
-
-570
-00:29:00,076 --> 00:29:01,656
-As I said, a lot of text.
-
-
-571
-00:29:01,656 --> 00:29:02,146
-Be warned.
-
-
-572
-00:29:02,976 --> 00:29:05,086
-So as I said, a lot
-of text on the screen.
-
-
-573
-00:29:05,366 --> 00:29:07,906
-I just want you to
-remember the three parts
-
-
-574
-00:29:09,446 --> 00:29:12,006
-that would be detect,
-engage, and reflect.
-
-
-575
-00:29:12,006 --> 00:29:13,576
-As we keep those in
-mind I am going to go
-
-
-576
-00:29:13,576 --> 00:29:14,956
-through these things here
-
-
-577
-00:29:14,956 --> 00:29:16,916
-in this data model
-of my application.
-
-
-578
-00:29:17,516 --> 00:29:20,796
-This is just the
-data model piece.
-
-
-579
-00:29:21,326 --> 00:29:23,026
-The rest is for you
-to explore later.
-
-
-580
-00:29:23,576 --> 00:29:26,186
-So the first thing I'm going
-to want to do is detect.
-
-
-581
-00:29:26,536 --> 00:29:29,516
-That requires activity
-updates and pedometer updates.
-
-
-582
-00:29:29,516 --> 00:29:31,236
-Let's look at those
-activity updates.
-
-
-583
-00:29:35,716 --> 00:29:37,506
-Great. A lot of text, right?
-
-
-584
-00:29:38,136 --> 00:29:40,936
-So the first thing I'm
-going to want to do is check
-
-
-585
-00:29:40,976 --> 00:29:43,776
-if activity is available
-on this hardware.
-
-
-586
-00:29:43,776 --> 00:29:47,526
-As an Anil noted before
-activity isn't always available,
-
-
-587
-00:29:47,526 --> 00:29:48,356
-so we're going to want
-
-
-588
-00:29:48,356 --> 00:29:51,516
-to do those checks before
-we query for any updates.
-
-
-589
-00:29:52,926 --> 00:29:55,136
-The second thing we
-are going to want
-
-
-590
-00:29:55,136 --> 00:29:58,486
-to do is use the
+00:29:55,128 --> 00:29:58,165
 startActivitiesUpdateToQueue
 
 
+555
+00:29:58,232 --> 00:29:59,733
+API
+
+
+556
+00:30:00,033 --> 00:30:03,770
+对于我而言
+我只是进行了一个简单的NS操作查询
+
+
+557
+00:30:04,838 --> 00:30:06,840
+然后我要对数据进行处理
+
+
+558
+00:30:09,209 --> 00:30:12,312
+动作活动性就频繁显示出来了
+
+
+559
+00:30:12,880 --> 00:30:15,415
+你可以自己决定
+怎样对数据进行平滑操作
+
+
+560
+00:30:15,949 --> 00:30:18,986
+对于我而言当某个用户跑步时
+
+
+561
+00:30:19,253 --> 00:30:22,155
+他们可能会遇到红灯停下
+处于半静止的状态
+
+
+562
+00:30:22,523 --> 00:30:24,992
+我不想从跑步时的播放列表
+转移到非常舒缓的播放列表
+
+
+563
+00:30:25,058 --> 00:30:26,493
+然后这样 来来回回
+
+
+564
+00:30:26,560 --> 00:30:27,761
+往往复复
+
+
+565
+00:30:28,295 --> 00:30:32,499
+所以我想做的是自己指定
+应用程序的平滑操作至于你的应用程序
+
+
+566
+00:30:32,566 --> 00:30:34,701
+最适合什么样的平滑操作
+我就交给你来决定了
+
+
+567
+00:30:36,837 --> 00:30:38,839
+让我们再来看看
+计步器的更新情况
+
+
+568
+00:30:44,344 --> 00:30:47,848
+PedometerUpdates
+API看起来也非常眼熟 你看到的
+
+
+569
+00:30:48,415 --> 00:30:51,752
+我也要校验下 看看计步是否可用
+
+
+570
+00:30:52,486 --> 00:30:54,955
+即使我们假定
+活动性可能是可以用的
+
+
+571
+00:30:55,022 --> 00:30:57,491
+那也并不意味着计步也同样可用
+
+
+572
+00:30:58,959 --> 00:31:02,362
+假定计步真的可用 那么我要
+startPedometerUpdates
+
+
+573
+00:31:02,729 --> 00:31:05,766
+这个API可以允许我们提供一个日期
+
+
+574
+00:31:06,366 --> 00:31:08,635
+如果你所处的是一个更日记化的语境
+你可能就想
+
+
+575
+00:31:08,702 --> 00:31:10,704
+在你的日期一开始 启动这些更新
+
+
+576
+00:31:10,804 --> 00:31:11,738
+就我而言
+
+
+577
+00:31:11,805 --> 00:31:14,808
+我想在我的应用程序的
+生命周期内看到这些更新
+
+
+578
+00:31:14,942 --> 00:31:16,677
+因此我现在就要启动这些更新
+
+
+579
+00:31:19,980 --> 00:31:22,749
+有一件非常重要的事情我需要指出
+
+
+580
+00:31:24,318 --> 00:31:25,485
+我们可能会收到一个错误
+
+
+581
+00:31:27,821 --> 00:31:33,193
+关于Core Motion很棒的是
+
+
+582
+00:31:33,794 --> 00:31:38,098
+它们会做出这样的事：喂！是否想让此
+app使用为你弹出的活动数据？
+
+
+583
+00:31:39,700 --> 00:31:42,169
+但是用户可能会第一次
+打开你的应用程序
+
+
+584
+00:31:42,236 --> 00:31:46,473
+然后允许你访问活动数据
+但是他们可以随时回到
+
+
+585
+00:31:46,940 --> 00:31:49,142
+“偏好”中把授权删除
+
+
+586
+00:31:49,743 --> 00:31:52,679
+在那种情况下
+当你试图接受更新情况时
+
+
+587
+00:31:52,746 --> 00:31:54,548
+我们就会抛出一个授权错误
+
+
+588
+00:31:54,848 --> 00:31:57,084
+那么你就需要平滑地处理这些问题
+
+
+589
+00:31:57,150 --> 00:32:01,321
+提示用户进到应用程序设置中
+
+
+590
+00:32:01,522 --> 00:32:04,758
+再次对你的应用程序进行授权
+
+
 591
-00:29:58,486 --> 00:29:58,876
-API.
+00:32:06,860 --> 00:32:10,097
+我在这里不去设置中了
+但是我会弹出一个简单的UI
 
 
 592
-00:30:00,036 --> 00:30:03,766
-In my case I provide an just
-a simple NS operation queue,
+00:32:10,163 --> 00:32:11,798
+提醒视图 提示要去设置
 
 
 593
-00:30:04,846 --> 00:30:09,016
-and then I want to
-handle the data.
+00:32:13,367 --> 00:32:14,835
+这就是“检测”部分
 
 
 594
-00:30:09,196 --> 00:30:12,296
-Now, activity updates
-come in pretty frequently.
+00:32:15,202 --> 00:32:18,472
+接下来我要做的就是“接洽”部分
 
 
 595
-00:30:12,876 --> 00:30:15,426
-It's up to you how you
-want to do the smoothing.
+00:32:20,140 --> 00:32:23,477
+就我而言 当我看到活动性更新时
 
 
 596
-00:30:15,936 --> 00:30:20,046
-In my case when a user is going
-on a run and maybe they stop
+00:32:23,877 --> 00:32:27,247
+我还想启动、终止高度表的更新
 
 
 597
-00:30:20,046 --> 00:30:22,916
-at a stop light and they are
-semi-stationary , I don't want
+00:32:27,981 --> 00:32:29,349
+我要在这里这样做
 
 
 598
-00:30:22,916 --> 00:30:25,046
-to keep transitioning
-from the running playlist
+00:32:31,118 --> 00:32:34,421
+我进行了平滑处理
+看看用户什么时候在跑步或者在步行
 
 
 599
-00:30:25,046 --> 00:30:26,576
-to the really slow
-playlist and back
+00:32:34,488 --> 00:32:36,890
+在那个例子中
+我对高度的更新情况很感兴趣
 
 
 600
-00:30:26,576 --> 00:30:27,836
-and forth and back and forth.
+00:32:41,595 --> 00:32:43,363
+很好现在你可以在这里看到一个主题了
 
 
 601
-00:30:27,836 --> 00:30:29,096
-So I'm going to want to do
+00:32:44,031 --> 00:32:45,299
+我要做的第一件事
 
 
 602
-00:30:29,096 --> 00:30:32,436
-that application specific
-smoothing myself and I leave it
+00:32:45,365 --> 00:32:47,434
+就是校验下 看看高度更新是否可用
 
 
 603
-00:30:32,436 --> 00:30:34,696
-up to you to do what's
-best for your application.
+00:32:48,569 --> 00:32:50,003
+假定它是可用的 我会
 
 
 604
-00:30:35,226 --> 00:30:39,446
-Let's look at pedometer
-updates next.
+00:32:50,070 --> 00:32:52,940
+startRelativeAltitude
+UpdatesToQueue
 
 
 605
-00:30:42,616 --> 00:30:45,066
-Great. As you can see,
+00:32:54,675 --> 00:32:56,310
+我创建了一个队列
 
 
 606
-00:30:45,066 --> 00:30:47,846
-the PedometerUpdates
-API is very similar.
+00:32:57,010 --> 00:32:58,846
+然后我要对数据进行相应的处理
 
 
 607
-00:30:48,426 --> 00:30:51,746
-I'm also going to want to check
-if step counting is available.
+00:32:59,546 --> 00:33:01,648
+我再校验一次 看看是否有错误
 
 
 608
-00:30:52,496 --> 00:30:55,036
-Even though we assume that
-activity might be available,
+00:33:01,982 --> 00:33:04,384
+如果没有错误
+那么我要在我的应用程序中把那个数据
 
 
 609
-00:30:55,036 --> 00:30:57,016
-that doesn't mean that step
-counting will be available
+00:33:04,818 --> 00:33:08,455
+当成最优服务来处理
+至于你的数据该如何进行
 
 
 610
-00:30:57,016 --> 00:30:57,476
-as well.
+00:33:08,755 --> 00:33:10,824
+最优服务处理 那由你决定
 
 
 611
-00:30:58,946 --> 00:31:02,086
-Assuming that that's true, I'm
-going to startPedometerUpdates.
+00:33:14,061 --> 00:33:16,430
+接下来我要做的就是
+因为我对持续的高度更新
 
 
 612
-00:31:02,736 --> 00:31:05,776
-This API allows us
-to provide a date.
+00:33:16,496 --> 00:33:20,834
+不感兴趣 因此要确保当我不是处于
 
 
 613
-00:31:06,366 --> 00:31:08,686
-If you are in a more journaling
-context you might want
+00:33:21,068 --> 00:33:22,636
+跑步或者走路时把它停掉
 
 
 614
-00:31:08,686 --> 00:31:10,706
-to start these updates at
-the beginning of your day.
+00:33:29,376 --> 00:33:33,580
+很好 在这里这个API非常直接
 
 
 615
-00:31:10,816 --> 00:31:12,546
-In my case I want to look
+00:33:33,647 --> 00:33:35,082
+我校验下可用性
 
 
 616
-00:31:12,546 --> 00:31:14,686
-at them during the
-lifecycle of my application.
+00:33:35,282 --> 00:33:38,485
+我来
+stopRelativeAltitudeUpdates
 
 
 617
-00:31:14,686 --> 00:31:19,746
-So I start these
-updates from right now.
+00:33:40,754 --> 00:33:42,623
+现在我知道了 
+当我说我们想要与用户进行
 
 
 618
-00:31:19,986 --> 00:31:22,756
-Now, there's a really important
-thing I want to point out here.
+00:33:42,689 --> 00:33:44,525
+“接洽”时我们也会同时看到
 
 
 619
-00:31:24,326 --> 00:31:25,486
-We may get an error.
+00:33:44,591 --> 00:33:46,193
+计步器的更新情况
 
 
 620
-00:31:25,626 --> 00:31:33,206
-One of the great things about
-Core Motion is that they do kind
+00:33:46,860 --> 00:33:49,796
+你可能记得
+在我的应用程序的生活周期内
 
 
 621
-00:31:33,206 --> 00:31:34,656
-of the: Hey, do you want
+00:33:49,863 --> 00:33:52,966
+我已经看到了计步器的更新情况 因此
 
 
 622
-00:31:34,656 --> 00:31:38,116
-to let this app use
-motion data pop up for you.
+00:33:53,033 --> 00:33:54,501
+我无需再次启动、停止它们
 
 
 623
-00:31:38,666 --> 00:31:42,236
-But while a user may first
-open your application
+00:33:54,801 --> 00:33:57,871
+我可以把这些融合到高度更新中来用
 
 
 624
-00:31:42,236 --> 00:31:44,876
-and give you access to
-motion data, they can go back
+00:33:57,971 --> 00:34:01,141
+给我提供我的应用程序需要的东西
 
 
 625
-00:31:44,876 --> 00:31:49,156
-at any time in the preferences
-and remove that authorization.
+00:34:01,208 --> 00:34:03,043
+也就是通过音乐来激励用户
 
 
 626
-00:31:49,746 --> 00:31:52,476
-In that case then we would
-throw an authorization error
+00:34:04,811 --> 00:34:06,547
+这就是“反射”部分
 
 
 627
-00:31:52,636 --> 00:31:54,526
-when you try to receive updates.
+00:34:12,252 --> 00:34:15,755
+那么在这里
+我要看看活动性的更新情况
 
 
 628
-00:31:54,526 --> 00:31:56,946
-You are going to want
-to handle those smoothly
+00:34:15,822 --> 00:34:18,792
+以便我以有趣的部分的形式
+提供这些东西
 
 
 629
-00:31:57,146 --> 00:32:01,306
-and prompt the user to go
-into the settings application
+00:34:18,859 --> 00:34:20,159
+就像我之前给你们看的那样
 
 
 630
-00:32:01,536 --> 00:32:04,746
-and give your application
-authorization again.
+00:34:27,234 --> 00:34:30,404
+很好 我希望你们看的 第一件事
 
 
 631
-00:32:05,296 --> 00:32:10,166
-I won't go into it here, but I
-pop up a simple UI alert view
+00:34:30,771 --> 00:34:33,172
+就是我们可以查询日期后的
+所有的活动性的更新情况
 
 
 632
-00:32:10,166 --> 00:32:11,806
-to prompt to go into settings.
+00:34:33,507 --> 00:34:36,243
+就我而言
+我想看看过去一周的情况
 
 
 633
-00:32:12,366 --> 00:32:14,706
-So that is the detection piece.
+00:34:36,643 --> 00:34:38,779
+即使我们不看
+那一周的应用程序的使用情况
 
 
 634
-00:32:15,216 --> 00:32:18,256
-The next thing I'm going to want
-to do is the engagement piece.
+00:34:38,978 --> 00:34:41,315
+我们也可以获取所有的数据
 
 
 635
-00:32:18,996 --> 00:32:23,486
-In my case when I'm looking
-at activities updates,
+00:34:41,380 --> 00:34:42,850
+然后把它们放到一起
 
 
 636
-00:32:23,866 --> 00:32:27,106
-I also want to start and
-stop altimeter updates,
+00:34:46,719 --> 00:34:49,523
+就我而言
+我对那个数据进行下处理
 
 
 637
-00:32:27,976 --> 00:32:30,896
-so I'm going to do that here.
+00:34:49,590 --> 00:34:51,225
+让它们为我以有趣的部分的形式显示
 
 
 638
-00:32:31,106 --> 00:32:34,456
-I smooth out to see when the
-user is running or is walking.
+00:34:51,291 --> 00:34:53,560
+我等不及想看看你们自己
 
 
 639
-00:32:34,496 --> 00:32:36,886
-In that case I'm interested
-in altitude updates.
+00:34:53,627 --> 00:34:54,828
+会怎么做了
 
 
 640
-00:32:37,316 --> 00:32:43,166
-Great. Now you're starting
-to see a theme here.
+00:34:55,495 --> 00:34:57,464
+又出现了 我知道唱片损坏了 对吧？
 
 
 641
-00:32:43,976 --> 00:32:45,356
-First thing I'm going to do,
+00:34:57,931 --> 00:35:00,033
+我要对这个错误进行相应的处理
 
 
 642
-00:32:45,356 --> 00:32:47,436
-check if altitude
-updates are available.
+00:35:01,468 --> 00:35:04,104
+就我而言
+一旦我找到有趣的步行片段
 
 
 643
-00:32:48,566 --> 00:32:49,846
-Assuming that's true,
+00:35:04,371 --> 00:35:07,908
+我就会给出全部的额外的
 
 
 644
-00:32:50,086 --> 00:32:52,946
-I startRelativeAltitude
-UpdatesToQueue.
+00:35:07,975 --> 00:35:09,910
+历史计步器信息
 
 
 645
-00:32:54,686 --> 00:32:56,306
-I provide a queue.
+00:35:09,977 --> 00:35:12,479
+那么我在这里要做的
+我要为某个给定的活动性片段
 
 
 646
-00:32:56,886 --> 00:32:58,856
-And then I handle
-the data accordingly.
+00:35:15,015 --> 00:35:20,621
+请求计步器的更新情况
 
 
 647
-00:32:59,546 --> 00:33:01,646
-I do check again if
-there is an error.
+00:35:26,527 --> 00:35:29,796
+第一件事就是
+queryPedometerDataFromDate
 
 
 648
-00:33:01,996 --> 00:33:04,246
-And if not, I'm going to
-want to handle that data
+00:35:29,863 --> 00:35:32,132
+我提供了一个开始日期
+还提供了一个结束日期
 
 
 649
-00:33:04,246 --> 00:33:08,456
-as best serves my application,
-and I leave that to you
+00:35:32,199 --> 00:35:35,669
+就我而言
+我已经把数据放到程序段中了
 
 
 650
-00:33:09,236 --> 00:33:10,876
-to do as best serves yours.
+00:35:35,736 --> 00:35:38,539
+那么我来看看这些段的开始和结束部分
 
 
 651
-00:33:10,876 --> 00:33:16,506
-The next thing I'm going to want
-to do because I'm not interested
+00:35:40,073 --> 00:35:42,176
+这里我要指出的第二件事是
 
 
 652
-00:33:16,506 --> 00:33:20,846
-in altitude updates all the time
-is make sure that I stop them
+00:35:43,810 --> 00:35:46,346
+如果我想要进行任何UI变更
 
 
 653
-00:33:21,056 --> 00:33:22,626
-when I'm not running or walking.
+00:35:46,413 --> 00:35:49,149
+那么我就需要把这些变更发送到主队列
 
 
 654
-00:33:23,196 --> 00:33:25,876
-Hmm, typo!
+00:35:49,550 --> 00:35:51,051
+如果你在你自己的应用程序内
 
 
 655
-00:33:26,046 --> 00:33:33,636
-Great. And here, the API
-is pretty straightforward.
+00:35:51,118 --> 00:35:53,086
+不这么做 那么你就会遇到问题
 
 
 656
-00:33:33,636 --> 00:33:35,086
-I check for availability.
+00:35:55,189 --> 00:35:56,590
+所以请这么做吧
 
 
 657
-00:33:35,276 --> 00:33:38,476
-And I
-stopRelativeAltitudeUpdates.
+00:35:57,257 --> 00:36:01,895
+我要向你们展示的就是这些
+想你的应用程序添加活动
 
 
 658
-00:33:40,766 --> 00:33:42,686
-Now, I know that
-when I said we want
+00:36:02,196 --> 00:36:04,298
+总共花了我十分钟左右 因此
 
 
 659
-00:33:42,686 --> 00:33:44,586
-to engage the user
-we are going to look
+00:36:04,698 --> 00:36:07,601
+当你回去后 
+给你的应用程序做同样的事
 
 
 660
-00:33:44,586 --> 00:33:46,206
-at pedometer updates as well.
+00:36:07,668 --> 00:36:09,303
+就是这么容易
 
 
 661
-00:33:46,856 --> 00:33:49,866
-As you may recall I was already
-looking at pedometer updates
+00:36:10,170 --> 00:36:13,540
+现在我真的想让你们看看这个app
+但是我不会在这里
 
 
 662
-00:33:49,866 --> 00:33:53,036
-for the lifecycle of my
-application, and so I don't need
+00:36:13,607 --> 00:36:15,108
+跑一圈或者开车
 
 
 663
-00:33:53,036 --> 00:33:54,506
-to start and stop those again.
+00:36:15,442 --> 00:36:18,645
+我要向你们看看
+过去今天内我的历史数据
 
 
 664
-00:33:54,786 --> 00:33:57,876
-I can use those in fusion
-with the altitude updates
+00:36:18,912 --> 00:36:21,515
+让你们看看“反射”部分
+是怎样以有趣的图段的形式
 
 
 665
-00:33:57,976 --> 00:34:01,126
-to give me what I want
-for my application,
+00:36:21,582 --> 00:36:22,783
+来组织数据的
 
 
 666
-00:34:01,196 --> 00:34:03,046
-which is to motivate
-the user through music.
+00:36:28,455 --> 00:36:30,157
+但愿这是一台iPhone
 
 
 667
-00:34:03,476 --> 00:34:06,356
-Now, we have the
-reflection piece.
+00:36:33,660 --> 00:36:36,964
+太好了！这是我的音乐活动应用程序
 
 
 668
-00:34:11,856 --> 00:34:15,826
-So here I'm going to want
-to look at activity updates
+00:36:37,731 --> 00:36:39,666
+你可以看到
+我的活动强度不大
 
 
 669
-00:34:15,826 --> 00:34:18,856
-so I can provide these
-in interesting segments
+00:36:39,733 --> 00:36:41,835
+因此 我现在处于低强度模式
 
 
 670
-00:34:18,856 --> 00:34:19,886
-as I showed you earlier.
+00:36:43,704 --> 00:36:45,672
+现在我再来看看我的历史记录情况
 
 
 671
-00:34:20,416 --> 00:34:29,866
-Great. So the first
-thing I want you to look
+00:36:46,874 --> 00:36:49,409
+我要从昨天早上开始
 
 
 672
-00:34:29,866 --> 00:34:33,176
-at is we can query activity
-updates starting from date.
+00:36:49,877 --> 00:36:51,211
+让你们看看我一天的情况
 
 
 673
-00:34:33,496 --> 00:34:36,206
-In my case I wanted to look
-at it during the last week
+00:36:51,278 --> 00:36:53,580
+我昨天所做的
+就是围绕莫斯康走路
 
 
 674
-00:34:36,326 --> 00:34:38,116
-so that even if we
-are not looking
+00:36:55,148 --> 00:36:58,252
+昨天我醒来后
+我决定快速骑行一段时间
 
 
 675
-00:34:38,275 --> 00:34:41,386
-at using the application during
-that week, we can get all
+00:36:58,852 --> 00:37:02,656
+我所做的就是...
+app已经搞定了
 
 
 676
-00:34:41,386 --> 00:34:46,585
-of that data and
-put it together.
+00:37:02,723 --> 00:37:04,791
+替我把这些放进了一个有趣的图段
 
 
 677
-00:34:46,706 --> 00:34:49,596
-In my case I handle
-that data and I put it
+00:37:06,159 --> 00:37:10,564
+然后我朝着公交车走去
+意识到有点晚了
 
 
 678
-00:34:49,596 --> 00:34:51,126
-into interesting
-segments for me.
+00:37:10,631 --> 00:37:14,301
+于是就开始跑 最终上了公交车
 
 
 679
-00:34:51,275 --> 00:34:53,616
-I can't wait to see
-what you guys want
+00:37:15,169 --> 00:37:19,439
+你可以在这里看到
+我在这里的就是步行的图段
 
 
 680
-00:34:53,616 --> 00:34:54,835
-to do with it yourselves.
+00:37:19,506 --> 00:37:22,709
+有英里信息
+有步幅信息
 
 
 681
-00:34:55,505 --> 00:34:57,526
-Again, I know, broken
-record, right?
+00:37:23,076 --> 00:37:25,946
+层级上升与下降
+这些都替我放进了
 
 
 682
-00:34:57,526 --> 00:35:00,036
-I want to handle the
-error accordingly.
+00:37:26,013 --> 00:37:27,381
+那些有趣的组块中
 
 
 683
-00:35:01,326 --> 00:35:04,516
-Now, in my case also
-I wanted to give all
+00:37:28,215 --> 00:37:30,918
+如果我是在某个单元上
+实际开发一款音乐应用程序
 
 
 684
-00:35:04,516 --> 00:35:07,986
-that extra historical pedometer
-information once I found
+00:37:31,251 --> 00:37:34,555
+那么我可能会把
+当时我听的播放列表
 
 
 685
-00:35:07,986 --> 00:35:09,936
-interesting walking segments.
+00:37:34,621 --> 00:37:36,456
+放到那个图块上
 
 
 686
-00:35:09,976 --> 00:35:15,416
-So what I'm going to do
-is down here I am going
+00:37:37,958 --> 00:37:41,028
+有一件事我要指出 话说今天
 
 
 687
-00:35:15,416 --> 00:35:20,616
-to request pedometer updates
-for a given activity segment.
+00:37:41,695 --> 00:37:43,564
+当我在莫斯康附近 走路的时候
 
 
 688
-00:35:21,116 --> 00:35:29,576
-The first thing I do is
-queryPedometerDataFromDate.
+00:37:43,964 --> 00:37:46,700
+我没有出现任何层级的上升与下降
 
 
 689
-00:35:29,576 --> 00:35:32,186
-And I provide a start
-date and an end date.
+00:37:47,134 --> 00:37:48,235
+这是因为我今天比较懒
 
 
 690
-00:35:32,186 --> 00:35:35,726
-In my case I've already
-put the data into segments.
+00:37:48,302 --> 00:37:49,870
+到处都乘坐了自动扶梯
 
 
 691
-00:35:35,726 --> 00:35:39,146
-So I look at the start
-and end of those segments.
+00:37:50,904 --> 00:37:53,040
+我希望你们也注意到了这一点
 
 
 692
-00:35:39,736 --> 00:35:44,506
-The second thing I want to
-point out here is that if I want
+00:37:55,175 --> 00:37:57,211
+这就是我的
+基础的音乐应用程序
 
 
 693
-00:35:44,506 --> 00:35:48,086
-to make any UI changes I'm
-going to want to dispatch those
+00:37:57,945 --> 00:37:59,079
+我来总结下
 
 
 694
-00:35:48,086 --> 00:35:51,116
-on the main queue, and
-you'll start to find issues
+00:38:03,217 --> 00:38:05,786
+我希望你们喜欢这个演示
 
 
 695
-00:35:51,116 --> 00:35:53,086
-if you don't do that in
-your own applications.
+00:38:06,086 --> 00:38:08,322
+我尽量把重点放在少数几个事情上
 
 
 696
-00:35:53,726 --> 00:35:56,326
-So that's it.
+00:38:08,689 --> 00:38:11,325
+这样你就可以记住
+并且用到你的应用程序上记住
 
 
 697
-00:35:57,266 --> 00:35:59,156
-That's all I really
-have to show you
+00:38:11,992 --> 00:38:15,362
+这里有“检测”片段 使用活动来检测
 
 
 698
-00:35:59,366 --> 00:36:01,956
-with adding motion
-to your application.
+00:38:15,429 --> 00:38:17,431
+某个用户正在做的事情
 
 
 699
-00:36:02,126 --> 00:36:04,356
-And it took me like ten
-minutes or something
+00:38:17,497 --> 00:38:19,366
+而不是让用户告诉你
+他们正在做什么事情
 
 
 700
-00:36:04,356 --> 00:36:07,646
-so it is actually really easy
-for you to go back and for you
+00:38:20,067 --> 00:38:25,172
+通过活动性、计步器、高度表
+推送更新与用户进行“接洽”
 
 
 701
-00:36:07,646 --> 00:36:09,176
-to do in your own applications.
+00:38:26,206 --> 00:38:28,475
+以及“反射回去”
 
 
 702
-00:36:10,156 --> 00:36:12,966
-Now, I really want to show you
-this app but I'm not going to go
+00:38:28,642 --> 00:38:33,247
+把那些历史查询智慧地运用起来
 
 
 703
-00:36:12,966 --> 00:36:15,096
-for a run or drive
-on stage here.
+00:38:34,181 --> 00:38:36,350
+如果你有更多的问题
 
 
 704
-00:36:15,516 --> 00:36:17,446
-So I will show you
-what I have been up to
+00:38:36,817 --> 00:38:38,185
+请到“开发者论坛”看一看
 
 
 705
-00:36:17,446 --> 00:36:19,506
-in the last couple days and how
+00:38:38,452 --> 00:38:40,888
+请务必看看音乐活动
 
 
 706
-00:36:19,506 --> 00:36:21,596
-that reflection piece
-organizing the data
+00:38:40,954 --> 00:38:42,723
+它应该就在开发者入口处
 
 
 707
-00:36:21,596 --> 00:36:22,776
-into interesting segments.
+00:38:43,156 --> 00:38:46,126
+如果是一般的咨询
+请联系我们的福音传道者
 
 
 708
-00:36:28,116 --> 00:36:29,816
-Hopefully this will
-be an iPhone.
+00:38:47,961 --> 00:38:49,863
+此外还有一些会议与本次会议相关
 
 
 709
-00:36:30,336 --> 00:36:36,956
-Great! So here is my
-music motion application.
+00:38:49,963 --> 00:38:51,498
+它们也值得你去看看
 
 
 710
-00:36:37,746 --> 00:36:39,736
-As you can see, I'm
-not doing very much.
+00:38:52,299 --> 00:38:53,967
+如果你参加了苹果全球开发者大会
 
 
 711
-00:36:39,736 --> 00:36:41,886
-So I'm sitting here
-in low intensity mode.
+00:38:54,334 --> 00:38:56,970
+你可能已经看过或者
+还没有看过HealthKit演示、
 
 
 712
-00:36:41,886 --> 00:36:45,686
-Now, let me look at
-my historical updates.
+00:38:57,037 --> 00:38:58,705
+Cocoa Touch演示
 
 
 713
-00:36:45,996 --> 00:36:49,426
-I'm actually going to
-start at yesterday morning
+00:38:59,106 --> 00:39:01,475
+如果你错过了这些演示或者你现在在家
 
 
 714
-00:36:49,866 --> 00:36:51,266
-and I'll take you through today,
+00:39:01,542 --> 00:39:03,177
+那么请去网上看看这些视频
 
 
 715
-00:36:51,266 --> 00:36:53,566
-but all I've really done
-is walk around Moscone.
+00:39:03,610 --> 00:39:05,045
+同样 我也希望你们去看看
 
 
 716
-00:36:55,026 --> 00:36:58,256
-Yesterday I woke up and I
-decided to go for a quick cycle.
+00:39:05,112 --> 00:39:07,447
+Core Location的演示
 
 
 717
-00:36:58,756 --> 00:37:02,716
-What I've done, I've -- the app
-has already figured that out
+00:39:08,982 --> 00:39:12,452
+如果你能够真正把活动数据、健康数据
 
 
 718
-00:37:02,716 --> 00:37:04,796
-and put that into an
-interesting segment for me.
+00:39:12,653 --> 00:39:16,523
+位置数据组合起来
+那么你就可以创建一些绝妙的语境
 
 
 719
-00:37:05,936 --> 00:37:10,626
-Then I walked to my bus,
-realized I was a little late
+00:39:16,590 --> 00:39:18,559
+来让你的应用程序更上一层楼
 
 
 720
-00:37:10,626 --> 00:37:14,296
-and started running, and then
-finally made it on the bus.
+00:39:19,026 --> 00:39:21,862
+我迫不及待想看看你们会在
+App Store上何应用程序
 
 
 721
-00:37:15,156 --> 00:37:19,516
-As you can see, what I've done
-here is the walking segments
-
-
-722
-00:37:19,516 --> 00:37:22,716
-have that mile information,
-the pace information,
-
-
-723
-00:37:23,066 --> 00:37:26,016
-floors ascended and
-descended, and puts those
-
-
-724
-00:37:26,016 --> 00:37:27,366
-into interesting chunks for me.
-
-
-725
-00:37:28,206 --> 00:37:30,906
-Now if I were actually
-developing a music application
-
-
-726
-00:37:31,266 --> 00:37:34,616
-in one of these cells I
-might put attach the playlist
-
-
-727
-00:37:34,616 --> 00:37:36,456
-that I was listening
-to for that segment.
-
-
-728
-00:37:36,906 --> 00:37:41,106
-One thing I want to point
-out as I scroll to today
-
-
-729
-00:37:41,106 --> 00:37:43,556
-when I have been
-walking around Moscone,
-
-
-730
-00:37:43,966 --> 00:37:46,706
-I'm not getting any floors
-ascended or descended.
-
-
-731
-00:37:47,146 --> 00:37:48,306
-That's because I've been lazy
-
-
-732
-00:37:48,306 --> 00:37:49,856
-and taking the escalator
-everywhere,
-
-
-733
-00:37:50,896 --> 00:37:53,056
-and so I just wanted you
-guys to notice that as well.
-
-
-734
-00:37:54,856 --> 00:37:57,226
-So that's my basic
-music application.
-
-
-735
-00:37:57,946 --> 00:38:02,966
-I'm just going to wrap this up.
-
-
-736
-00:38:03,226 --> 00:38:05,866
-So I really hope you
-guys enjoyed the demo.
-
-
-737
-00:38:05,866 --> 00:38:08,346
-I tried to focus on
-just a few things
-
-
-738
-00:38:08,386 --> 00:38:11,336
-so that you can remember
-them for your application.
-
-
-739
-00:38:11,976 --> 00:38:14,836
-Remember, there's the
-detection piece, using motion
-
-
-740
-00:38:14,836 --> 00:38:17,946
-to detect what a user is
-doing instead of a user having
-
-
-741
-00:38:17,946 --> 00:38:19,376
-to tell you what they are doing.
-
-
-742
-00:38:20,056 --> 00:38:23,626
-Engaging with them with the
-push updates from activity,
-
-
-743
-00:38:23,626 --> 00:38:28,686
-pedometer, and altimeter,
-and as well reflecting back
-
-
-744
-00:38:28,686 --> 00:38:33,206
-and really using those
-historical queries wisely.
-
-
-745
-00:38:33,856 --> 00:38:37,116
-If you have any more
-questions, feel free to look
-
-
-746
-00:38:37,116 --> 00:38:38,196
-at the Developer Forums.
-
-
-747
-00:38:38,196 --> 00:38:40,676
-Please do check out
-music motion.
-
-
-748
-00:38:40,956 --> 00:38:42,736
-It should be on the
-developer portal.
-
-
-749
-00:38:43,156 --> 00:38:46,126
-And for any general inquiries,
-contact our evangelist.
-
-
-750
-00:38:47,376 --> 00:38:49,876
-There are also some
-related sessions
-
-
-751
-00:38:49,956 --> 00:38:51,496
-that are really worth
-checking out.
-
-
-752
-00:38:52,296 --> 00:38:54,866
-If you are here at WWDC, you may
-
-
-753
-00:38:54,866 --> 00:38:57,026
-or may not have seen the
-HealthKit presentation
-
-
-754
-00:38:57,026 --> 00:38:58,716
-or the Cocoa Touch presentation.
-
-
-755
-00:38:59,366 --> 00:39:01,546
-If you missed them or
-are sitting at home,
-
-
-756
-00:39:01,546 --> 00:39:03,186
-please go check those
-out online.
-
-
-757
-00:39:03,616 --> 00:39:05,116
-I also encourage you to check
-
-
-758
-00:39:05,116 --> 00:39:07,436
-out the Core Location
-presentation as well.
-
-
-759
-00:39:08,656 --> 00:39:12,436
-If you really combine
-motion data with health data
-
-
-760
-00:39:12,646 --> 00:39:16,606
-and location data, you can
-create some incredible contexts
-
-
-761
-00:39:16,606 --> 00:39:18,556
-to really enhance
-your applications.
-
-
-762
-00:39:19,016 --> 00:39:20,936
-I really can't wait to
-see what you guys put
-
-
-763
-00:39:20,936 --> 00:39:21,846
-out on the App Store.
-
-
-764
-00:39:23,516 --> 00:39:30,856
-[Applause.]
-
-
-765
-00:39:31,356 --> 00:39:31,696
->> GABRIELLE BADIE: Thanks.
-
-
-766
-00:39:31,736 --> 00:39:32,706
-Thank you very much.
-
-
-767
-00:39:33,016 --> 00:39:35,000
-[Applause.]
+00:39:31,738 --> 00:39:33,106
+谢谢 太谢谢了
 

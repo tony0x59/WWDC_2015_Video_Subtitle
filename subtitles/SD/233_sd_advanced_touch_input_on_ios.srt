@@ -1,4658 +1,3566 @@
 1
-00:00:22,516 --> 00:00:25,886
-[ Applause ]
+00:00:25,726 --> 00:00:29,129
+彼得·崔：大家好 下午好
 
 
 2
-00:00:26,386 --> 00:00:28,356
->> PETER TSOI: Hey, everyone.
+00:00:29,196 --> 00:00:31,832
+欢迎参加《iOS高级手写输入》讲座
 
 
 3
-00:00:28,416 --> 00:00:28,926
-Good afternoon.
+00:00:32,366 --> 00:00:33,300
+我是彼得
 
 
 4
-00:00:28,926 --> 00:00:31,606
-And welcome to Advanced
-Touch Input on iOS.
+00:00:33,500 --> 00:00:35,636
+在Apple的iOS性能小组工作
 
 
 5
-00:00:32,476 --> 00:00:33,256
-My name is Peter.
+00:00:36,303 --> 00:00:39,239
+今天和朋友UIKit小组的雅各布
 
 
 6
-00:00:33,566 --> 00:00:35,636
-I work on the iOS
-Performance team on Apple.
+00:00:39,540 --> 00:00:41,108
+准备给大家介绍更多有关
 
 
 7
-00:00:36,306 --> 00:00:39,236
-Today with my friend
-Jacob, from the UIKit team,
+00:00:41,341 --> 00:00:43,510
+手写输入在iOS怎样运行 
 
 
 8
-00:00:39,236 --> 00:00:41,116
-we would like to tell
-you a little bit more
+00:00:43,877 --> 00:00:48,582
+以及怎样用它让
+自己的应用对手写输入更为灵敏
 
 
 9
-00:00:41,386 --> 00:00:44,706
-about how touch input works
-on iOS and how you can use
+00:00:50,117 --> 00:00:51,418
+今天要讲的内容可是不少
 
 
 10
-00:00:44,706 --> 00:00:47,266
-that information to make
-your applications even more
+00:00:51,919 --> 00:00:55,989
+正如前一个幻灯片
+所讲要想让自己的应用 
 
 
 11
-00:00:47,266 --> 00:00:48,586
-responsive to touch input.
+00:00:56,056 --> 00:00:57,391
+反应灵敏的话 
 
 
 12
-00:00:49,576 --> 00:00:51,386
-We've got a lot to
-talk about today.
+00:00:57,524 --> 00:00:59,560
+减少延迟是关键
 
 
 13
-00:00:51,906 --> 00:00:56,016
-As the previous slide alluded
-to, reducing latency is the name
+00:00:59,993 --> 00:01:02,896
+我们将介绍延迟是什么
 
 
 14
-00:00:56,016 --> 00:00:57,396
-of the game when it comes
+00:01:03,030 --> 00:01:04,697
+以及为什么要关注应用中的延迟
 
 
 15
-00:00:57,526 --> 00:00:59,556
-to making your applications
-even more responsive.
+00:01:05,132 --> 00:01:06,900
+以及iOS中的一般性延迟问题
 
 
 16
-00:00:59,556 --> 00:01:03,136
-We will talk about what latency
-is and why you should care
+00:01:08,035 --> 00:01:10,337
+为了探讨延迟是来自哪里
 
 
 17
-00:01:03,136 --> 00:01:04,696
-about latency in
-your application
+00:01:10,571 --> 00:01:13,974
+我们将探讨并剖析iOS中
 
 
 18
-00:01:05,135 --> 00:01:06,906
-and latency in iOS as a whole.
+00:01:14,274 --> 00:01:16,109
+在手指下负责处理
 
 
 19
-00:01:08,046 --> 00:01:10,336
-In order to discuss where
-this latency comes from,
+00:01:16,176 --> 00:01:17,578
+手写输入和绘制像素图之间
 
 
 20
-00:01:10,566 --> 00:01:14,306
-we will discuss and dissect
-the major pieces of iOS,
+00:01:17,911 --> 00:01:21,348
+对触控做出各种反应的主要内容
 
 
 21
-00:01:14,306 --> 00:01:16,106
-which are responsible
-for everything
+00:01:22,983 --> 00:01:25,018
+去年我们对iOS 9的系统
 
 
 22
-00:01:16,106 --> 00:01:17,576
-between handling
-your touch input
+00:01:25,185 --> 00:01:26,720
+做了许多改进我们将向大家
 
 
 23
-00:01:17,966 --> 00:01:20,086
-to drawing the pixels
-underneath your finger
+00:01:26,787 --> 00:01:29,289
+介绍这些改进以及大家可以
 
 
 24
-00:01:20,086 --> 00:01:21,336
-in response to that touch.
+00:01:29,356 --> 00:01:33,093
+用到的部分API 以便充分
+利用我们所做的这些改进
 
 
 25
-00:01:22,506 --> 00:01:25,006
-We have made a lot of
-improvements to this system
+00:01:34,161 --> 00:01:36,597
+最后 我们会告诉大家一些技巧
 
 
 26
-00:01:25,176 --> 00:01:27,666
-over the last year in iOS 9,
-and we would like to tell you
+00:01:36,663 --> 00:01:40,100
+和最佳实践 以便发现 分析
 
 
 27
-00:01:27,666 --> 00:01:29,306
-about the improvements
-as well as some
+00:01:40,167 --> 00:01:42,903
+和解决在应用中出现的性能瓶颈
 
 
 28
-00:01:29,306 --> 00:01:31,616
-of the APIs you guys can
-use to take advantage
+00:01:44,805 --> 00:01:48,141
+为何要关注降低应用中的延迟问题呢？
 
 
 29
-00:01:31,616 --> 00:01:33,096
-of all these improvements
-we have made.
+00:01:49,343 --> 00:01:53,380
+iOS手写输入是
+建立在直接操纵的理念上
 
 
 30
-00:01:34,166 --> 00:01:36,586
-And finally, we would like
-to leave you with some tips
+00:01:53,780 --> 00:01:57,317
+也就是说用户实际上用手指
 
 
 31
-00:01:36,656 --> 00:01:39,846
-and best practices about
-how to find, diagnose,
+00:01:57,384 --> 00:02:01,021
+触碰物理对象 并在虚拟空间中做移动
 
 
 32
-00:01:40,116 --> 00:01:42,916
-and fix the performance
-bottlenecks in your application.
+00:02:01,955 --> 00:02:06,059
+例如 如果用户想要把这个圆
 
 
 33
-00:01:43,446 --> 00:01:45,886
-So why should you care
+00:02:06,260 --> 00:02:10,597
+从A点移动到B点那么预期的结果
 
 
 34
-00:01:46,146 --> 00:01:48,136
-about reducing latency
-in your application?
+00:02:10,864 --> 00:02:13,834
+就是圆感觉被粘在手指指尖
 
 
 35
-00:01:49,346 --> 00:01:51,856
-Touch input on iOS is
-built around the idea
+00:02:14,801 --> 00:02:16,036
+你会注意到在本例中
 
 
 36
-00:01:51,856 --> 00:01:53,386
-of direct manipulation.
+00:02:16,270 --> 00:02:19,473
+这个圆会准确灵敏地随着
 
 
 37
-00:01:53,846 --> 00:01:57,416
-This is the idea that a user
-is actually touching a physical
+00:02:19,773 --> 00:02:20,741
+用户手指移动
 
 
 38
-00:01:57,416 --> 00:01:59,826
-object with their
-finger and moving it
+00:02:22,075 --> 00:02:24,545
+但是一旦降低延迟
 
 
 39
-00:01:59,826 --> 00:02:00,926
-around in a virtual space.
+00:02:24,811 --> 00:02:26,947
+也就是手指移动和圆的移动
 
 
 40
-00:02:01,956 --> 00:02:06,076
-For example, if a user was
-trying to move this circle
+00:02:27,314 --> 00:02:29,850
+二者间的滞后这种直接
 
 
 41
-00:02:06,076 --> 00:02:11,076
-from point A to point B,
-the expected result is
+00:02:29,917 --> 00:02:31,852
+操纵的感觉就会开始被打破
 
 
 42
-00:02:11,076 --> 00:02:13,866
-that the circle feels glued
-to the end of the finger.
+00:02:32,686 --> 00:02:36,690
+在本例中 你可以看到
+圆在跟随手指而动而且并不像
 
 
 43
-00:02:14,836 --> 00:02:16,036
-You'll notice that
-in this example,
+00:02:36,757 --> 00:02:38,692
+是你是在手指周围移动圆
 
 
 44
-00:02:16,306 --> 00:02:19,466
-the circle tracks very
-precisely and responsively
+00:02:40,294 --> 00:02:41,695
+当用户手指移动
 
 
 45
-00:02:19,836 --> 00:02:20,736
-with the user's finger.
+00:02:41,762 --> 00:02:43,430
+速度非常快时情况会越发严重
 
 
 46
-00:02:22,086 --> 00:02:24,556
-However, as soon as
-you reduce latency,
+00:02:43,997 --> 00:02:47,801
+这样 手指与圆之间会形成相当距离
 
 
 47
-00:02:24,836 --> 00:02:26,936
-or the lag between
-when the finger moves
+00:02:48,368 --> 00:02:51,471
+而且不再感觉手指与圆是处于粘合状态
 
 
 48
-00:02:27,346 --> 00:02:29,866
-and the circle moves,
-this illusion
+00:02:51,572 --> 00:02:54,741
+圆此刻是在跟着手指移动
 
 
 49
-00:02:29,866 --> 00:02:31,836
-of direct manipulation
-starts to break down.
+00:02:57,044 --> 00:03:01,415
+这类延迟会影响到iOS的各方面
 
 
 50
-00:02:31,836 --> 00:02:33,806
-In this case, you can see
+00:03:01,481 --> 00:03:03,951
+从按下按钮到移动对象
 
 
 51
-00:02:33,806 --> 00:02:36,946
-that the circle is following
-the finger and it doesn't feel
+00:03:04,384 --> 00:03:06,820
+到滚动任何内容甚至是网页都不可避免
 
 
 52
-00:02:36,946 --> 00:02:38,676
-like you are moving it around
-with your finger anymore.
+00:03:07,821 --> 00:03:10,157
+但是我们可以确定有两三个应用
 
 
 53
-00:02:40,056 --> 00:02:41,736
-This effect is compounded
+00:03:10,224 --> 00:03:13,126
+可以显著增加延迟作用
 
 
 54
-00:02:41,846 --> 00:02:43,416
-when the user is
-moving really quickly.
+00:03:14,161 --> 00:03:17,798
+一种应用类型是绘图应用 
 
 
 55
-00:02:44,066 --> 00:02:47,236
-In this case, the finger gets
-a substantial distance away
+00:03:18,365 --> 00:03:21,335
+不仅是艺术家会被线条末端
 
 
 56
-00:02:47,236 --> 00:02:49,496
-from the circle, and
-it no longer feels
+00:03:21,401 --> 00:03:24,638
+和用户指尖的距离搞得心神不宁
 
 
 57
-00:02:49,496 --> 00:02:51,456
-like the finger is
-glued to the circle,
+00:03:26,240 --> 00:03:29,776
+艺术家通常要依赖应用
 
 
 58
-00:02:51,636 --> 00:02:54,766
-rather the circle is now playing
-catch-up with the finger.
+00:03:29,843 --> 00:03:33,413
+或用户界面的快速灵敏更新
 
 
 59
-00:02:55,876 --> 00:03:01,516
-So this type of latency affects
-iOS as a whole, from everything
+00:03:33,480 --> 00:03:36,283
+以便及时调整物理行为
 
 
 60
-00:03:01,516 --> 00:03:03,946
-from button presses to
-moving objects around,
+00:03:36,350 --> 00:03:38,018
+才能获得希望的结果
 
 
 61
-00:03:04,376 --> 00:03:06,826
-to scrolling anything
-even a web page.
+00:03:38,986 --> 00:03:41,788
+此外 游戏这类应用中的延迟
 
 
 62
-00:03:07,836 --> 00:03:11,106
-But we have identified a couple
-of applications where increases
+00:03:41,855 --> 00:03:43,857
+可能会让游戏很难继续
 
 
 63
-00:03:11,106 --> 00:03:13,136
-in latency are even
-more noticeable.
+00:03:44,491 --> 00:03:47,160
+并会影响到应用的感知质量
 
 
 64
-00:03:13,796 --> 00:03:15,686
-One of these types
+00:03:48,595 --> 00:03:49,997
+这个延迟是从哪里来的呢？
 
 
 65
-00:03:15,686 --> 00:03:17,806
-of applications are
-drawing applications.
+00:03:50,330 --> 00:03:52,165
+是来源自许多不同地方
 
 
 66
-00:03:18,456 --> 00:03:21,336
-Not only is the artist then
-distracted by the amount
+00:03:52,599 --> 00:03:56,737
+为了探讨哪里会产生延迟我们会聊聊
 
 
 67
-00:03:21,336 --> 00:03:24,896
-of distance between the end of
-the line and a user's finger.
+00:03:57,004 --> 00:03:59,473
+在处理触控和相应绘制 
 
 
 68
-00:03:26,236 --> 00:03:29,856
-Artists often rely on
-quick, responsive updates
+00:03:59,540 --> 00:04:02,709
+触控当中系统中的所有不同部分
 
 
 69
-00:03:29,976 --> 00:03:33,386
-to their application or to
-the user interface in order
+00:04:04,144 --> 00:04:05,612
+在讲座接下来的内容中
 
 
 70
-00:03:33,386 --> 00:03:36,476
-to quickly adjust their
-physical behaviors in order
+00:04:05,712 --> 00:04:08,515
+我们会用到很多这些管路图
 
 
 71
-00:03:36,476 --> 00:03:38,006
-to get the result
-they are going for.
+00:04:08,815 --> 00:04:11,451
+我们要确保大家对其中的含义理解相同
 
 
 72
-00:03:39,086 --> 00:03:41,866
-In addition, latency
-in applications
+00:04:12,319 --> 00:04:14,655
+在屏幕上 你会看到5个不同的盒子
 
 
 73
-00:03:41,896 --> 00:03:43,866
-like games makes the
-games harder to play,
+00:04:15,022 --> 00:04:17,357
+每个盒子都代表显示器上
 
 
 74
-00:03:44,596 --> 00:03:47,156
-in effect the perceived
-quality of your application.
+00:04:17,423 --> 00:04:19,660
+显示一帧内容所用的时间
 
 
 75
-00:03:48,696 --> 00:03:50,396
-Where does this latency
-come from?
+00:04:20,560 --> 00:04:23,497
+我们的产品刷新屏幕是60赫兹
 
 
 76
-00:03:50,396 --> 00:03:52,176
-It comes from a lot
-of different places.
+00:04:23,564 --> 00:04:24,831
+也就是每秒60次
 
 
 77
-00:03:52,626 --> 00:03:57,306
-In order to discuss where
-it's caused, we'll discuss all
+00:04:25,332 --> 00:04:27,734
+那么每个盒子所代表的时间
 
 
 78
-00:03:57,306 --> 00:03:59,506
-of the different parts
-of the system involved
+00:04:27,801 --> 00:04:30,871
+大约为1/60秒
 
 
 79
-00:03:59,506 --> 00:04:02,716
-in handling your touches and
-drawing the touches in response.
+00:04:32,272 --> 00:04:36,810
+大家可能听到了每个盒子都代表显示帧
 
 
 80
-00:04:04,156 --> 00:04:05,816
-Throughout the next
-portion of the talk,
+00:04:37,044 --> 00:04:39,246
+显示间隔或显示周期
 
 
 81
-00:04:05,816 --> 00:04:08,506
-we will be relying heavily
-on these pipeline diagrams.
+00:04:39,580 --> 00:04:40,581
+这些都是一个意思
 
 
 82
-00:04:08,866 --> 00:04:09,856
-So let's make sure we are all
+00:04:42,182 --> 00:04:46,486
+现在分割每个盒子的
+垂直线代表显示刷新
 
 
 83
-00:04:09,856 --> 00:04:11,456
-on the same page as
-to what they mean.
+00:04:46,720 --> 00:04:49,256
+这个时间点上显示器上的一帧
 
 
 84
-00:04:12,306 --> 00:04:14,516
-Up on the screen, you
-see five different boxes.
+00:04:49,323 --> 00:04:51,792
+和接下来要显示的帧进行交换
 
 
 85
-00:04:15,126 --> 00:04:17,286
-Each of these boxes
-represents the amount
+00:04:52,559 --> 00:04:55,996
+我接下来会用显示刷新
 
 
 86
-00:04:17,286 --> 00:04:19,666
-of time a frame is shown
-on the display for.
+00:04:56,163 --> 00:04:59,132
+或同步刷新来表示
+这两个基本上也是相同内容
 
 
 87
-00:04:19,666 --> 00:04:23,386
-Our products refresh
-the screen at 60 hertz
+00:05:00,501 --> 00:05:02,302
+显示刷新在iOS中很重要
 
 
 88
-00:04:23,616 --> 00:04:24,846
-or 60 times per second.
+00:05:02,536 --> 00:05:05,038
+因为许多重要系统进程
 
 
 89
-00:04:25,216 --> 00:04:27,796
-So the amount of time
-represented by each
+00:05:05,572 --> 00:05:09,109
+都是由这个显示刷新来启动或触发
 
 
 90
-00:04:27,796 --> 00:04:32,496
-of these boxes is approximately
-one-sixtieth of a second.
+00:05:10,277 --> 00:05:12,946
+我们来具体看看
+在管线中在发生了些什么
 
 
 91
-00:04:32,496 --> 00:04:36,836
-You may hear me refer to each of
-these boxes as a display frame,
+00:05:13,680 --> 00:05:15,949
+管线的第一阶段是
+Multi-Touch
 
 
 92
-00:04:37,076 --> 00:04:39,236
-a display interval,
-or a display cycle.
+00:05:16,583 --> 00:05:20,888
+在这一个进程中硬件将扫描
 
 
 93
-00:04:39,616 --> 00:04:42,026
-They all mean the same thing.
+00:05:20,954 --> 00:05:22,923
+显示器表面寻找触控
 
 
 94
-00:04:42,246 --> 00:04:44,256
-Now, the vertical
-lines separating each
+00:05:23,824 --> 00:05:26,126
+在我们的多数产品中这部分用时
 
 
 95
-00:04:44,256 --> 00:04:46,496
-of these boxes is
-the display refresh.
+00:05:26,193 --> 00:05:29,997
+会小于整个显示帧
+但在我们的部分产品中
 
 
 96
-00:04:46,826 --> 00:04:48,946
-This is the point in
-time where one frame
+00:05:30,063 --> 00:05:32,533
+这会占用整个显示帧
 
 
 97
-00:04:48,946 --> 00:04:51,776
-on the display is swapped out
-with the next one to be shown.
+00:05:32,933 --> 00:05:36,170
+为了更直观我们
+用绿盒子来填充整个盒子
 
 
 98
-00:04:52,636 --> 00:04:56,066
-You will hear me refer to this
-as either the display refresh
+00:05:37,571 --> 00:05:42,309
+Multi-Touch一旦完成
+扫描显示器
 
 
 99
-00:04:56,156 --> 00:04:59,126
-or the v-sync, again they
-mean basically the same thing.
+00:05:42,976 --> 00:05:46,580
+会过滤掉屏幕上
 
 
 100
-00:04:59,946 --> 00:05:02,306
-The display refresh
-is important in iOS
+00:05:46,647 --> 00:05:48,582
+所出现的任何噪音
 
 
 101
-00:05:02,606 --> 00:05:06,896
-because many important system
-processes are kicked off
+00:05:49,283 --> 00:05:53,120
+UI应用的UITouch
+的回调将在靠近下一个
 
 
 102
-00:05:06,896 --> 00:05:09,116
-or triggered by this
-display refresh.
+00:05:53,187 --> 00:05:57,691
+触控帧开始时被调用
+通常是在显示刷新开始后
 
 
 103
-00:05:09,446 --> 00:05:11,596
-So let's actually talk
-about what's going
+00:05:58,825 --> 00:06:01,528
+这个点出现在应用应
 
 
 104
-00:05:11,596 --> 00:05:12,946
-on inside this pipeline.
+00:06:01,595 --> 00:06:04,531
+该对手写输入做出反应时在绘图应用中
 
 
 105
-00:05:13,296 --> 00:05:15,946
-The first stage of the
-pipeline is Multi-Touch.
+00:06:04,932 --> 00:06:07,601
+也许是标定点并连接这些点
 
 
 106
-00:05:16,586 --> 00:05:20,996
-This is the process where the
-hardware will scan the surface
+00:06:08,268 --> 00:06:11,271
+你也许想做平滑处理令线条更流畅
 
 
 107
-00:05:20,996 --> 00:05:22,846
-of the display looking
-for touches.
+00:06:12,072 --> 00:06:14,141
+在不是绘图应用的应用中
 
 
 108
-00:05:23,876 --> 00:05:26,176
-On most of our products,
-this can take less
+00:06:14,474 --> 00:06:16,844
+这里需要通过按下按钮或按键
 
 
 109
-00:05:26,176 --> 00:05:30,036
-than the entire display frame,
-but on some of our products,
+00:06:16,910 --> 00:06:19,713
+来做出反应也许是生成视图 
 
 
 110
-00:05:30,036 --> 00:05:32,536
-it can take up to that
-entire display frame.
+00:06:20,280 --> 00:06:22,349
+视图控制器 并向用户呈现
 
 
 111
-00:05:33,006 --> 00:05:34,526
-In order to symbolize
-that, we will fill
+00:06:23,350 --> 00:06:25,986
+这里所花费的时间是个变量
 
 
 112
-00:05:34,526 --> 00:05:36,176
-in the entire box
-with this green box.
+00:06:26,053 --> 00:06:27,221
+但可以占据一个显示帧
 
 
 113
-00:05:37,076 --> 00:05:42,316
-Once Multi-Touch is finished
-scanning this display
+00:06:27,454 --> 00:06:29,456
+那么我再来填充整个盒子
 
 
 114
-00:05:42,966 --> 00:05:46,626
-and is finished filtering
-out any of the noise
+00:06:30,858 --> 00:06:35,762
+一旦应用完成与触碰
+事件做出反应并相应更新状态
 
 
 115
-00:05:46,736 --> 00:05:48,586
-which was present
-on this screen,
+00:06:36,330 --> 00:06:39,800
+在下一个显示刷新时 Core
+ Animation 就会启动
 
 
 116
-00:05:49,346 --> 00:05:53,126
-your UI application's UITouch
-callback will be called near the
+00:06:40,200 --> 00:06:43,837
+开始将视图和图层
 
 
 117
-00:05:53,126 --> 00:05:56,206
-beginning of the next
-touch frame, usually right
+00:06:44,471 --> 00:06:47,441
+翻译成GPU指令这可以被GPU渲染
 
 
 118
-00:05:56,206 --> 00:05:57,676
-after a display refresh
-has occurred.
+00:06:48,208 --> 00:06:52,946
+你会注意到GPU不必等到
+下一个显示刷新开始的时候
 
 
 119
-00:05:58,526 --> 00:06:01,906
-This is the point in time where
-your application should respond
+00:06:53,013 --> 00:06:54,882
+它在Core Animation
 
 
 120
-00:06:01,906 --> 00:06:04,526
-to the touch inputs and,
-in a drawing application,
+00:06:54,948 --> 00:06:59,219
+给出它需要渲染帧的
+指令时候就会立即开始
 
 
 121
-00:06:04,966 --> 00:06:07,586
-maybe plot the points and
-connect the dots in between.
+00:07:00,020 --> 00:07:03,290
+同样 这些阶段的时间根据应用中的
 
 
 122
-00:06:08,336 --> 00:06:11,136
-You may want to do any smoothing
-to make the line very smooth.
+00:07:03,824 --> 00:07:07,261
+视图复杂程度不同也是变量
 
 
 123
-00:06:11,136 --> 00:06:14,156
-In an application that
-isn't a drawing application,
+00:07:08,395 --> 00:07:11,031
+最后一旦GPU完成渲染帧
 
 
 124
-00:06:14,466 --> 00:06:16,866
-this is where you would
-respond to button presses
+00:07:11,398 --> 00:07:13,500
+这个帧就会在下一个显示刷新
 
 
 125
-00:06:16,866 --> 00:06:21,076
-or key presses, maybe create
-views, view controllers
+00:07:13,867 --> 00:07:16,703
+开始时排队在显示器上显示
 
 
 126
-00:06:21,136 --> 00:06:22,356
-and present them to the user.
+00:07:18,705 --> 00:07:23,143
+大家都明白在显示器上感知触控
 
 
 127
-00:06:23,216 --> 00:06:26,036
-The amount of time spent here
-is variable, but can take
+00:07:23,377 --> 00:07:27,848
+直至画图需要占用若干帧数
+本例中 需要占用4帧
 
 
 128
-00:06:26,036 --> 00:06:27,236
-up to one display frame.
+00:07:28,582 --> 00:07:29,516
+因此不是即刻完成
 
 
 129
-00:06:27,516 --> 00:06:29,306
-So, again, I filled
-in the entire box.
+00:07:30,851 --> 00:07:32,452
+此外 这是管线
 
 
 130
-00:06:30,856 --> 00:06:33,636
-Once your application is done
-responding to the touch events
+00:07:32,686 --> 00:07:36,356
+在应用处理之前正发生的触控时
 
 
 131
-00:06:33,666 --> 00:06:35,766
-and has updated the
-state accordingly,
+00:07:36,423 --> 00:07:38,825
+其他的触控也会发生
 
 
 132
-00:06:36,346 --> 00:06:39,796
-Core Animation will wake up
-at the next display refresh
+00:07:39,426 --> 00:07:42,829
+这就是在管线不同的点经过的进程
 
 
 133
-00:06:40,256 --> 00:06:43,836
-and begin translating
-your views and your layers
+00:07:44,298 --> 00:07:46,667
+我们来谈谈
+作为开发人员该怎样控制
 
 
 134
-00:06:44,476 --> 00:06:47,136
-into GPU commands that can
-be rendered by the GPU.
+00:07:47,134 --> 00:07:50,437
+并没有API可以改变
+Multi-Touch的行为
 
 
 135
-00:06:47,216 --> 00:06:51,086
-You will notice that the
-GPU does not have to wait
+00:07:50,504 --> 00:07:52,005
+或显示器硬件图层
 
 
 136
-00:06:51,086 --> 00:06:52,956
-until the next display
-refresh to begin.
+00:07:52,272 --> 00:07:54,174
+这是系统做出的处理
 
 
 137
-00:06:53,186 --> 00:06:54,776
-It begins immediately as soon
+00:07:55,075 --> 00:08:00,013
+根据应用中的视图复杂程度
+你对Core Animation
 
 
 138
-00:06:54,776 --> 00:06:57,636
-as Core Animation has
-given it the instructions
+00:08:00,347 --> 00:08:03,050
+渲染服务器和GP进行间接控制
 
 
 139
-00:06:57,636 --> 00:06:59,216
-that it needs to
-render the frame.
+00:08:03,684 --> 00:08:06,620
+但是你可以对应用几乎完全控制
 
 
 140
-00:07:00,016 --> 00:07:03,296
-Again, the time in these
-stages is variable,
+00:08:07,054 --> 00:08:08,055
+我们就从这里开始
 
 
 141
-00:07:03,896 --> 00:07:07,266
-based upon how complicated the
-views in your application are.
+00:08:10,357 --> 00:08:12,226
+我刚说过在这个点上
 
 
 142
-00:07:08,406 --> 00:07:11,046
-Finally, once the GPU has
-finished rendering your frame,
+00:08:12,292 --> 00:08:16,263
+要根据手写输入更新应用的状态
 
 
 143
-00:07:11,446 --> 00:07:13,496
-that frame is then
-enqueued to be displayed
+00:08:16,897 --> 00:08:19,566
+例如 在绘图应用中可以标定点
 
 
 144
-00:07:13,886 --> 00:07:16,716
-on the display once the
-next display refresh occurs.
+00:08:19,900 --> 00:08:22,436
+并彼此连接或是根据按下按钮创建视图
 
 
 145
-00:07:17,316 --> 00:07:23,156
-As you can tell, between sensing
-your touch on the display,
+00:08:22,836 --> 00:08:25,873
+这里也许是发布OpenGL
+或Metal指令的位置
 
 
 146
-00:07:23,386 --> 00:07:26,106
-all the way through to drawing
-it, can take several frames.
+00:08:26,940 --> 00:08:28,609
+这里所花费的时间量是个变量
 
 
 147
-00:07:26,316 --> 00:07:27,846
-In this case, it
-takes four frames.
+00:08:28,876 --> 00:08:32,346
+可以进行优化减少所用时间
 
 
 148
-00:07:28,596 --> 00:07:29,506
-So it's not instant.
+00:08:32,412 --> 00:08:33,881
+我们鼓励大家这么做
 
 
 149
-00:07:30,846 --> 00:07:32,456
-In addition, this is a pipeline.
+00:08:34,581 --> 00:08:37,751
+但是当我们优化应用时你会注意到这点
 
 
 150
-00:07:32,796 --> 00:07:36,386
-So other touches that may
-occur while your application is
+00:08:38,085 --> 00:08:42,389
+Core Animation
+并不会进入填充UIKit
 
 
 151
-00:07:36,386 --> 00:07:38,816
-processing that previous
-touch can also be happening.
+00:08:42,756 --> 00:08:44,124
+或应用所留下的空间
 
 
 152
-00:07:39,456 --> 00:07:40,826
-These just go through
-the process
+00:08:45,259 --> 00:08:50,697
+这是因为之前在iOS
+如何更新视图所导致
 
 
 153
-00:07:40,826 --> 00:07:42,816
-at different points
-in the pipeline.
+00:08:51,565 --> 00:08:53,433
+当你在iOS上更新视图状态时 
 
 
 154
-00:07:43,346 --> 00:07:46,656
-Let's talk about what you as
-a developer have control over.
+00:08:53,767 --> 00:08:56,570
+如果用UIMethods更新
+A CATransaction
 
 
 155
-00:07:47,226 --> 00:07:50,506
-There are no APIs to alter the
-behavior of the Multi-Touch
+00:08:57,237 --> 00:08:59,907
+视图属性的话可以显性提交
 
 
 156
-00:07:50,556 --> 00:07:51,996
-or the display hardware layers.
+00:09:00,274 --> 00:09:03,010
+或UIKit将隐性为你生成一个
 
 
 157
-00:07:52,336 --> 00:07:54,186
-This is handled for
-you by the system.
+00:09:03,577 --> 00:09:07,347
+我们用红点来表示
+CATransaction提交
 
 
 158
-00:07:55,146 --> 00:07:56,886
-You exercise indirect control
+00:09:08,749 --> 00:09:12,819
+现在Core Animation 
+没有填入时间
 
 
 159
-00:07:57,156 --> 00:08:00,626
-over the Core Animation render
-server and the GPU based
+00:09:13,187 --> 00:09:14,988
+是因为应用允许在一个
 
 
 160
-00:08:00,626 --> 00:08:03,066
-on how complicated the views
-in your application are.
+00:09:15,189 --> 00:09:18,325
+显示帧中多次升级状态
 
 
 161
-00:08:03,456 --> 00:08:06,616
-But you have almost complete
-control over your application.
+00:09:18,659 --> 00:09:20,994
+在本例中用第二个点表示
 
 
 162
-00:08:07,186 --> 00:08:08,576
-So that's where we will begin.
+00:09:21,962 --> 00:09:24,965
+现在 为减少冗余任务量
 
 
 163
-00:08:09,346 --> 00:08:12,466
-As I mentioned earlier,
-this is the point
+00:09:25,032 --> 00:09:26,733
+或永远不会在显示器上出现的任务
 
 
 164
-00:08:12,466 --> 00:08:14,476
-where you update the
-stay of your application
+00:09:27,167 --> 00:09:31,338
+Core Animation
+分批处理所有更新
 
 
 165
-00:08:14,636 --> 00:08:16,276
-in response to the touch inputs.
+00:09:31,405 --> 00:09:33,740
+并在显示刷新中进行一次渲染
 
 
 166
-00:08:16,916 --> 00:08:19,016
-For example, in a drawing
-application, you plot the points
+00:09:34,074 --> 00:09:37,010
+那么我们将渲染这些
 
 
 167
-00:08:19,016 --> 00:08:21,206
-and connect them,
-or you create views
+00:09:37,077 --> 00:09:39,580
+Core Animation事务的
+综合状态
 
 
 168
-00:08:21,206 --> 00:08:22,426
-in response to button presses.
+00:09:41,782 --> 00:09:45,652
+一旦Core Animation
+在显示刷新时
 
 
 169
-00:08:22,906 --> 00:08:25,246
-This also might be where
-you issue your OpenGL
+00:09:46,320 --> 00:09:51,058
+快照视图它将会开始把
+所有你为之生成的逻辑视图
 
 
 170
-00:08:25,246 --> 00:08:25,926
-or Metal commands.
+00:09:51,592 --> 00:09:54,361
+和图层翻译成GPU指令
+以便由GPU进行渲染
 
 
 171
-00:08:26,206 --> 00:08:28,606
-The amount of time
-spent here is variable.
+00:09:54,928 --> 00:09:58,332
+我刚说过
+一接到Core Animation
 
 
 172
-00:08:28,976 --> 00:08:32,356
-You can optimize this to take
-a smaller amount of time,
+00:09:58,398 --> 00:10:00,801
+的必要指令GPU就会立刻启动
 
 
 173
-00:08:32,395 --> 00:08:35,316
-and we encourage you to do
-this, but you will notice
+00:10:01,168 --> 00:10:04,738
+因此 如果优化
+Core Animation
 
 
 174
-00:08:35,676 --> 00:08:37,765
-that when we optimize
-the application,
+00:10:04,805 --> 00:10:08,609
+或GPU的用时数量
+GPU就会填充所留下的空间
 
 
 175
-00:08:38,076 --> 00:08:41,796
-Core Animation does not slide in
-to fill in the space left behind
+00:10:10,043 --> 00:10:15,115
+Xcode的视图调试器是理解
+视图层次复杂度的很好方法
 
 
 176
-00:08:41,796 --> 00:08:44,116
-by UIKit or your application.
+00:10:15,382 --> 00:10:20,420
+也是找到可以取出的视图的
+很好方法从而可以优化应用
 
 
 177
-00:08:45,326 --> 00:08:47,486
-This is because of how updates
+00:10:21,955 --> 00:10:26,159
+不过我们认识到 
+对视图的需求非常复杂
 
 
 178
-00:08:47,486 --> 00:08:50,456
-to your views have worked
-historically in the past on iOS.
+00:10:26,326 --> 00:10:29,196
+在一个显示帧中很难完全体现
 
 
 179
-00:08:51,636 --> 00:08:53,446
-When you update the state
-of your views on iOS,
+00:10:30,297 --> 00:10:33,500
+那么iOS管线可以灵活处理这点
 
 
 180
-00:08:53,756 --> 00:08:56,576
-you can either explicitly
-commit A CATransaction
+00:10:34,434 --> 00:10:37,171
+如果应用需要花
+费额外的时间渲染视图
 
 
 181
-00:08:57,296 --> 00:08:59,906
-or UIKit will implicitly
-generate one for you
+00:10:37,237 --> 00:10:39,540
+我们可以把Core
+Animation
 
 
 182
-00:09:00,306 --> 00:09:02,806
-if you update the views
-properties with the UIMethods.
+00:10:39,606 --> 00:10:41,241
+和GPU任务分到两个显示帧
 
 
 183
-00:09:03,506 --> 00:09:06,576
-We will represent this
-CATransaction commit
+00:10:41,775 --> 00:10:43,977
+当然 这增加了额外的延迟帧数
 
 
 184
-00:09:06,576 --> 00:09:07,356
-with this red dot.
+00:10:44,178 --> 00:10:47,414
+但是还可以在应用的各处获得
 
 
 185
-00:09:08,816 --> 00:09:11,756
-Now, the reason why Core
-Animation doesn't slide
+00:10:47,748 --> 00:10:50,517
+每秒60帧的流畅动画视图还更为复杂
 
 
 186
-00:09:11,756 --> 00:09:13,436
-in to fill in the time is
+00:10:51,852 --> 00:10:56,590
+并无手动触发选择快慢模式
 
 
 187
-00:09:13,436 --> 00:09:14,996
-because your application
-is allowed
+00:10:56,890 --> 00:11:00,260
+这又是视情况而定而且是系统任意选定
 
 
 188
-00:09:15,226 --> 00:09:18,316
-to update its state several
-time during one display frame,
+00:11:00,661 --> 00:11:05,065
+所以重要的是我们理解
+什么内容可以触发进入更快模式
 
 
 189
-00:09:18,476 --> 00:09:21,016
-in this case, symbolized
-by the second dot.
+00:11:05,332 --> 00:11:07,401
+什么内容可以触发进入更慢模式
 
 
 190
-00:09:22,006 --> 00:09:25,096
-Now, in order to reduce the
-amount of redundant work or work
+00:11:09,436 --> 00:11:12,439
+更快模式叫做双缓冲 
 
 
 191
-00:09:25,096 --> 00:09:26,726
-that will never be
-shown on the display,
+00:11:12,639 --> 00:11:16,810
+这么叫是因为有两个缓冲
+一个是为了引入GPU 
 
 
 192
-00:09:27,166 --> 00:09:31,496
-Core Animation will batch
-up all of your updates
+00:11:17,010 --> 00:11:19,346
+一个是为了LCD向用户显示
 
 
 193
-00:09:31,496 --> 00:09:33,726
-and render it once at
-the display refresh.
+00:11:20,280 --> 00:11:22,983
+在显示刷新中大家回忆一下
 
 
 194
-00:09:34,106 --> 00:09:37,006
-So we will only render
-the combined state of both
+00:11:23,050 --> 00:11:26,086
+Core Animation
+为自己和GPU抓取缓冲
 
 
 195
-00:09:37,006 --> 00:09:39,576
-of those Core Animation
-transactions.
+00:11:26,153 --> 00:11:28,755
+并开始输出该帧的GPU指令
 
 
 196
-00:09:39,956 --> 00:09:44,366
-Once Core Animation decides
-to snapshot your view
+00:11:29,489 --> 00:11:32,693
+一旦GPU获得指令GPU就开始渲染
 
 
 197
-00:09:44,496 --> 00:09:48,646
-at the display refresh, it
-will begin translating all
+00:11:33,093 --> 00:11:36,230
+如果渲染在下一个显示刷新
 
 
 198
-00:09:48,646 --> 00:09:51,896
-of the logical views and layers
-that you have created for it
+00:11:36,330 --> 00:11:40,200
+发生前结束我们就把这个帧放入队列
 
 
 199
-00:09:51,896 --> 00:09:54,346
-into GPU commands that can
-be rendered by the GPU.
+00:11:40,434 --> 00:11:41,702
+在下一个显示刷新中显示
 
 
 200
-00:09:54,996 --> 00:09:58,366
-As I mentioned earlier, the
-GPU starts immediately as soon
+00:11:42,336 --> 00:11:43,904
+一旦到达显示刷新
 
 
 201
-00:09:58,366 --> 00:10:00,026
-as it has the necessary
-instructions
+00:11:44,371 --> 00:11:46,406
+这个帧就会进入屏幕
 
 
 202
-00:10:00,026 --> 00:10:00,816
-from Core Animation.
+00:11:46,673 --> 00:11:48,876
+我们开始处理下一个帧
 
 
 203
-00:10:01,276 --> 00:10:04,786
-So if you optimize the amount
-of time spent in Core Animation
+00:11:49,877 --> 00:11:52,813
+同样 GPU将做渲染
+再把这一帧放入队列
 
 
 204
-00:10:04,786 --> 00:10:07,796
-or in the GPU, the GPU
-will fill in the space
+00:11:52,880 --> 00:11:54,481
+为下一个显示刷新进行显示
 
 
 205
-00:10:07,796 --> 00:10:09,806
-that was left behind it.
+00:11:54,982 --> 00:11:56,416
+一旦开始显示刷新
 
 
 206
-00:10:10,106 --> 00:10:12,366
-The view debugger in Xcode
-is a very helpful way
+00:11:56,650 --> 00:11:59,586
+这两个帧将交换位置
 
 
 207
-00:10:12,366 --> 00:10:15,116
-to understand how complicated
-your view hierarchy is
+00:11:59,853 --> 00:12:03,090
+我们会回收绿色缓冲继续这一进程
 
 
 208
-00:10:15,416 --> 00:10:18,636
-and a great way to find
-views that you can take out
+00:12:03,257 --> 00:12:06,393
+只要应用有需要渲染的视图即可
 
 
 209
-00:10:18,636 --> 00:10:20,406
-and therefore optimize
-your application.
+00:12:07,661 --> 00:12:08,795
+现在都没问题
 
 
 210
-00:10:22,006 --> 00:10:24,976
-However, we recognize
-the need for views
+00:12:09,029 --> 00:12:11,365
+我们已经在一个显示帧完成Core
 
 
 211
-00:10:24,976 --> 00:10:26,146
-that are very complicated,
+00:12:11,431 --> 00:12:12,933
+Core Animation
+和GPU任务
 
 
 212
-00:10:26,376 --> 00:10:28,256
-that can't possibly
-be represented
+00:12:12,999 --> 00:12:14,067
+性能很好
 
 
 213
-00:10:28,256 --> 00:10:29,206
-in one display frame.
+00:12:15,202 --> 00:12:17,738
+可是如果无法做到所有这些 会怎样？
 
 
 214
-00:10:30,296 --> 00:10:33,506
-So the iOS pipeline is
-flexible enough to handle that.
+00:12:18,338 --> 00:12:19,606
+如果无法在一帧中完成呢？
 
 
 215
-00:10:34,446 --> 00:10:35,626
-If your application needs
+00:12:20,174 --> 00:12:22,176
+那我们就进入了三重缓冲模式
 
 
 216
-00:10:35,626 --> 00:10:37,186
-to spend additional
-time rendering views,
+00:12:22,943 --> 00:12:25,712
+同样Core Animation
+会输出GPU指令
 
 
 217
-00:10:37,316 --> 00:10:39,566
-we can split the Core
-Animation and GPU work
+00:12:25,779 --> 00:12:28,882
+GPU随后会渲染不过在本例中
 
 
 218
-00:10:39,616 --> 00:10:41,236
-over two display frames.
+00:12:29,216 --> 00:12:33,921
+在开始显示刷新时
+GPU并没有完成绿色帧的渲染
 
 
 219
-00:10:41,856 --> 00:10:43,966
-Of course, this adds an
-additional frame of latency,
+00:12:34,655 --> 00:12:36,823
+在本例中 因为我们还无法展示 
 
 
 220
-00:10:44,196 --> 00:10:47,426
-but you can still get 60 frames
-per second smooth animations
+00:12:37,224 --> 00:12:40,494
+为了额外的帧蓝色
+帧延伸到屏幕上的情景
 
 
 221
-00:10:47,756 --> 00:10:50,506
-everywhere in your application,
-with more complicated views.
+00:12:41,929 --> 00:12:44,331
+Core Animation现在
+需要分配第三个缓冲
 
 
 222
-00:10:51,556 --> 00:10:54,176
-There is no manual trigger to go
+00:12:44,398 --> 00:12:46,200
+开始处理下一个帧通过生成
 
 
 223
-00:10:54,176 --> 00:10:56,586
-between the faster mode
-and the slower mode.
+00:12:46,600 --> 00:12:48,869
+第三个缓冲来实现这一点
 
 
 224
-00:10:56,946 --> 00:11:00,256
-This, again, happens for you
-and is arbitrated by the system.
+00:12:49,536 --> 00:12:52,039
+Core Animation将
+开始为之输出GPU指令
 
 
 225
-00:11:00,746 --> 00:11:03,546
-So it's important that we
-understand what things can
+00:12:52,105 --> 00:12:54,875
+同时GPU完成前一帧的渲染
 
 
 226
-00:11:03,546 --> 00:11:05,076
-trigger you into the faster mode
+00:12:55,876 --> 00:12:58,712
+然后前一帧将进入队列
 
 
 227
-00:11:05,326 --> 00:11:10,406
-and what things can trigger
-you into the slower mode.
+00:12:58,879 --> 00:13:00,280
+在下一个显示刷新中显示
 
 
 228
-00:11:10,406 --> 00:11:13,486
-The faster mode is called double
-buffering, and we call it this
+00:13:01,315 --> 00:13:02,482
+这一进程随后
 
 
 229
-00:11:13,486 --> 00:11:16,846
-because there are two buffers,
-one for the GPU to draw into,
+00:13:02,883 --> 00:13:06,954
+和Core Animation
+渲染服务器输出GPU指令一起重复
 
 
 230
-00:11:17,026 --> 00:11:19,336
-and one for the LCD
-to show to the user.
+00:13:07,154 --> 00:13:08,622
+GPU会对它们进行渲染
 
 
 231
-00:11:20,126 --> 00:11:23,036
-At the display refresh,
-as you will recall,
+00:13:09,122 --> 00:13:12,492
+思路就是我们交换缓冲回收缓冲
 
 
 232
-00:11:23,036 --> 00:11:26,116
-Core Animation grabs a buffer
-for it and the GPU to use,
+00:13:12,793 --> 00:13:14,127
+然后进程重复进行
 
 
 233
-00:11:26,116 --> 00:11:28,746
-and it will begin outputting
-GPU commands for that frame.
+00:13:17,197 --> 00:13:20,901
+大家可能会想 所有这些幻灯片都
+在说Core Animation
 
 
 234
-00:11:29,506 --> 00:11:32,696
-Once the GPU has those commands,
-the GPU will begin rendering,
+00:13:21,101 --> 00:13:23,303
+我如果不用Core
+Animation会怎样？
 
 
 235
-00:11:33,176 --> 00:11:36,116
-and if the render completes
-before the next display refresh
+00:13:23,370 --> 00:13:24,938
+如果我要优化应用
 
 
 236
-00:11:36,116 --> 00:11:40,216
-has to occur, we enqueue
-that frame for display
+00:13:25,339 --> 00:13:27,241
+使用 Metal or
+OpenGL 会怎样？
 
 
 237
-00:11:40,476 --> 00:11:41,716
-at the next display refresh.
+00:13:28,041 --> 00:13:31,678
+大家可能会想与其让管线变成这样
 
 
 238
-00:11:42,386 --> 00:11:43,896
-Once we reach that
-display refresh,
+00:13:31,845 --> 00:13:35,449
+让显示的帧变成4帧延迟
 
 
 239
-00:11:44,436 --> 00:11:46,416
-the frame is then
-swapped onto the screen
+00:13:35,782 --> 00:13:37,951
+不如改作3帧延迟
 
 
 240
-00:11:46,736 --> 00:11:48,886
-and we begin the process
-with the next frame.
+00:13:39,620 --> 00:13:40,954
+不过这里不行
 
 
 241
-00:11:49,876 --> 00:11:52,846
-Again, the GPU will render
-and then enqueue the frame
+00:13:42,489 --> 00:13:45,792
+在iOS 8
+如果用Metal或OpenGL
 
 
 242
-00:11:52,846 --> 00:11:54,466
-for display at the
-next display refresh.
+00:13:46,093 --> 00:13:48,862
+Core Animation仍会
+作为仲裁器 确保你对...
 
 
 243
-00:11:55,036 --> 00:11:56,416
-Once we hit that
-display refresh,
+00:13:48,929 --> 00:13:52,299
+Core Animation 
+内容在屏幕上所做的
 
 
 244
-00:11:56,716 --> 00:11:59,576
-these two frames
-will swap places,
+00:13:52,633 --> 00:13:54,935
+任何更新 都与这些图层上的GPU 
 
 
 245
-00:11:59,576 --> 00:12:03,076
-we will reclaim the green buffer
-and continue this process,
+00:13:55,402 --> 00:13:58,539
+OpenGL和Metal
+更新保持同步
 
 
 246
-00:12:03,216 --> 00:12:06,406
-as long as your application has
-views that it wants to render.
+00:13:59,540 --> 00:14:01,608
+在使用iOS 8的 OpenGL
 
 
 247
-00:12:07,666 --> 00:12:08,796
-Now, this is all fine and good.
+00:14:01,842 --> 00:14:05,245
+或Metal时你仍有4帧延迟
 
 
 248
-00:12:08,856 --> 00:12:11,456
-We have finished our Core
-Animation and our GPU work
+00:14:06,947 --> 00:14:11,685
+那么我们谈到过iOS管线非常灵活
 
 
 249
-00:12:11,706 --> 00:12:12,746
-within one display frame.
+00:14:11,852 --> 00:14:13,520
+可以处理更为复杂的视图
 
 
 250
-00:12:13,106 --> 00:12:14,056
-We have good performance.
+00:14:13,787 --> 00:14:16,590
+可以实现每秒60帧动画
 
 
 251
-00:12:14,056 --> 00:12:17,576
-But what happens if you
-can't do all of this?
+00:14:16,657 --> 00:14:18,759
+但是在5帧延迟中会怎样
 
 
 252
-00:12:18,426 --> 00:12:19,616
-If you can't do it in one frame?
+00:14:19,092 --> 00:14:23,664
+怎样优化应用通过优化绘图 
 
 
 253
-00:12:20,256 --> 00:12:22,176
-Then we fall into a mode
-called triple buffering.
+00:14:23,897 --> 00:14:25,832
+把延迟降为4帧
 
 
 254
-00:12:22,876 --> 00:12:25,776
-Again, Core Animation
-will output GPU commands,
+00:14:26,767 --> 00:14:30,003
+但是 在本例中没有办法
 
 
 255
-00:12:25,886 --> 00:12:28,866
-which the GPU will then
-render but in this example,
+00:14:30,103 --> 00:14:32,840
+可以实现更快 因为
+Core Animation
 
 
 256
-00:12:29,306 --> 00:12:31,756
-the GPU hasn't finished
-rendering the green frame
+00:14:32,906 --> 00:14:34,541
+需要等到显示刷新开始
 
 
 257
-00:12:31,876 --> 00:12:33,906
-by the time we hit
-the display refresh.
+00:14:34,942 --> 00:14:37,511
+生成GPU指令才行
 
 
 258
-00:12:34,706 --> 00:12:38,056
-In this example, since we can't
-show it yet, the blue frame has
+00:14:39,713 --> 00:14:42,449
+在iOS 9中
+我们去除了这种依赖性
 
 
 259
-00:12:38,056 --> 00:12:40,566
-to be extended on the
-screen for an extra frame.
+00:14:43,483 --> 00:14:46,386
+现在可以在应用完成应用状态升级后 
 
 
 260
-00:12:42,096 --> 00:12:44,386
-Core Animation now needs
-to allocate a third buffer
+00:14:46,453 --> 00:14:48,889
+立刻启动 Core
+Animation 任务
 
 
 261
-00:12:44,386 --> 00:12:47,236
-to begin work on the next
-frame, and it will do
+00:14:49,857 --> 00:14:53,927
+为了充分利用这些功能
+我们在iOS系统中引入了
 
 
 262
-00:12:47,236 --> 00:12:48,856
-so by creating this
-third buffer.
+00:14:53,994 --> 00:14:55,863
+一些新的API和新技巧
 
 
 263
-00:12:49,636 --> 00:12:52,116
-Then Core Animation will
-start outputting GPU commands
+00:14:56,196 --> 00:14:57,664
+为了更多介绍这方面内容
 
 
 264
-00:12:52,116 --> 00:12:54,876
-for it while the GPU finishes
-rendering the previous frame.
+00:14:57,731 --> 00:14:59,399
+有请雅各布
 
 
 265
-00:12:55,896 --> 00:12:58,716
-And then the previous frame
-will be enqueued for display
+00:15:00,934 --> 00:15:01,935
+雅克布·肖：谢谢 彼得
 
 
 266
-00:12:58,876 --> 00:13:00,266
-at the next display refresh.
+00:15:03,337 --> 00:15:04,171
+我将向大家
 
 
 267
-00:13:01,386 --> 00:13:02,486
-This process then repeats
+00:15:04,371 --> 00:15:06,740
+介绍我们在iOS 9中新增的内容
 
 
 268
-00:13:02,876 --> 00:13:06,946
-with the Core Animation render
-server outputting GPU commands,
+00:15:07,341 --> 00:15:10,344
+以及怎样用它们实现app的更低延迟
 
 
 269
-00:13:06,946 --> 00:13:08,606
-and the GPU will
-then render them.
+00:15:12,179 --> 00:15:13,780
+今天我来讲三个问题
 
 
 270
-00:13:09,206 --> 00:13:10,076
-You get the idea.
+00:15:14,448 --> 00:15:17,551
+第一 低延迟
+支持Core Animation
 
 
 271
-00:13:10,156 --> 00:13:12,576
-We swap the buffers,
-reclaim the buffer,
+00:15:18,519 --> 00:15:21,121
+然后是用户触控接合的新系统
 
 
 272
-00:13:12,906 --> 00:13:14,746
-and then the process repeats.
+00:15:22,155 --> 00:15:24,925
+最后是个很酷的系统
+可以在UIKit构建
 
 
 273
-00:13:16,896 --> 00:13:20,906
-So you might be thinking, all of
-these slides say Core Animation.
+00:15:25,092 --> 00:15:26,393
+触控预测
 
 
 274
-00:13:21,336 --> 00:13:22,526
-What if I don't use
-Core Animation?
+00:15:27,928 --> 00:15:30,731
+我们现在先从Core 
+Animation低延迟开始
 
 
 275
-00:13:22,786 --> 00:13:24,946
-What if I have optimized
-my application
+00:15:32,733 --> 00:15:34,735
+彼得讲过在iOS 8中
 
 
 276
-00:13:25,336 --> 00:13:27,096
-to use Metal or OpenGL?
+00:15:35,102 --> 00:15:39,373
+即便是最优化的app
+延迟的降低程度也是非常有限的
 
 
 277
-00:13:28,086 --> 00:13:31,476
-You might think instead of
-your pipeline looking like this
+00:15:40,541 --> 00:15:43,410
+通过使用iOS 9的低延迟
+Core Animation
 
 
 278
-00:13:31,906 --> 00:13:34,926
-and getting your frame out
-to the display in four frames
+00:15:43,877 --> 00:15:47,014
+可以把app的帧和Core
+ Animation的帧相结合
 
 
 279
-00:13:34,926 --> 00:13:37,966
-of latency, that you can do
-it in three frames of latency.
+00:15:47,414 --> 00:15:48,849
+这会实现更低的延迟
 
 
 280
-00:13:39,676 --> 00:13:42,456
-Unfortunately that's
-not the case.
+00:15:49,716 --> 00:15:51,018
+这种功能的最好一点在于
 
 
 281
-00:13:42,566 --> 00:13:45,796
-Under iOS 8, if you
-use Metal or OpenGL,
+00:15:51,218 --> 00:15:52,519
+它是自动发生的
 
 
 282
-00:13:46,216 --> 00:13:48,826
-Core Animation still acts
-an arbiter, to make sure
+00:15:52,786 --> 00:15:54,321
+你不必在app上做任何改变
 
 
 283
-00:13:48,826 --> 00:13:51,756
-that any updates you make to
-any Core Animation content
+00:15:54,588 --> 00:15:56,190
+除了优化你的性能表现之外
 
 
 284
-00:13:51,756 --> 00:13:56,146
-on the screen are synchronized
-with any GPU, OpenGL,
+00:15:57,724 --> 00:15:59,493
+不过 还需要牢记一点
 
 
 285
-00:13:56,146 --> 00:13:58,536
-Metal updates that you
-make to those layers.
+00:15:59,726 --> 00:16:02,629
+当app中的动画激活时 
 
 
 286
-00:13:59,556 --> 00:14:01,596
-So you still have
-four frames of latency
+00:16:02,930 --> 00:16:04,665
+低延迟模式是自动关闭的
 
 
 287
-00:14:01,926 --> 00:14:05,866
-when you use OpenGL
-or Metal in iOS 8.
+00:16:05,866 --> 00:16:09,069
+这包括CA动画和UIKit动画
 
 
 288
-00:14:06,636 --> 00:14:11,796
-So we talked about how the iOS
-pipeline is flexible enough
+00:16:09,736 --> 00:16:11,939
+因此 如果需要
+app中 延迟是绝对最低水平
 
 
 289
-00:14:11,866 --> 00:14:13,506
-to handle very complicated
-views,
+00:16:12,406 --> 00:16:14,374
+在显示器上触控激活时一定确保要
 
 
 290
-00:14:13,796 --> 00:14:18,166
-getting you 60 frames per second
-animation but at five frames
+00:16:14,675 --> 00:16:16,643
+关闭这些动画功能
 
 
 291
-00:14:18,166 --> 00:14:21,326
-of latency and how you can
-optimize your application
+00:16:22,816 --> 00:16:26,320
+现在 系统还可以与Metal
+OpenGL内容配合使用
 
 
 292
-00:14:21,656 --> 00:14:23,676
-to bring that latency
-down to four frames
+00:16:26,954 --> 00:16:29,656
+因此正如之前在iOS 8中所见
 
 
 293
-00:14:23,966 --> 00:14:25,836
-by optimizing what
-you are drawing.
+00:16:30,157 --> 00:16:33,627
+我们必须等额外的
+帧以便让GPU内容得以显示
 
 
 294
-00:14:26,786 --> 00:14:30,576
-However, in this example,
-there is no real way
+00:16:34,595 --> 00:16:36,330
+但是有了新的低延迟模式 
 
 
 295
-00:14:30,576 --> 00:14:33,286
-to make it any faster, because
-Core Animation needs to wait
+00:16:36,663 --> 00:16:39,233
+我们可以在紧邻的下一帧
 
 
 296
-00:14:33,286 --> 00:14:34,556
-until the display refresh
+00:16:39,299 --> 00:16:40,367
+尽快显示这些内容
 
 
 297
-00:14:34,936 --> 00:14:37,386
-to start generating
-the GPU commands.
+00:16:41,335 --> 00:16:42,803
+这些都是自动完成
 
 
 298
-00:14:37,916 --> 00:14:42,436
-In iOS 9, we are
-removing that dependency.
+00:16:42,870 --> 00:16:45,706
+使用CAeagllayer
+或CAMetalLayer即可
 
 
 299
-00:14:43,556 --> 00:14:46,406
-You can now start Core Animation
-work immediately as soon
+00:16:47,140 --> 00:16:49,243
+不过 如果有想和
+OpenGL或Metal内容
 
 
 300
-00:14:46,406 --> 00:14:48,186
-as your application is
-done updating the state
+00:16:49,309 --> 00:16:51,512
+一起显示的Core
+Animation 内容的话
 
 
 301
-00:14:48,186 --> 00:14:48,886
-of your application.
+00:16:51,578 --> 00:16:54,181
+在app中还需要记住一点
 
 
 302
-00:14:49,906 --> 00:14:51,556
-In order to take
-advantage of these,
+00:16:55,349 --> 00:16:58,585
+这样 GPU内容 会尽快拉到
 
 
 303
-00:14:51,556 --> 00:14:53,966
-we have introduced some new APIs
+00:16:58,652 --> 00:17:01,355
+显示器上但是 core
+Animation内容
 
 
 304
-00:14:53,966 --> 00:14:55,856
-and new tricks in
-the iOS system.
+00:17:01,822 --> 00:17:03,824
+则需要更长时间才能过去
 
 
 305
-00:14:56,206 --> 00:14:57,676
-To tell you a little
-bit more about them,
+00:17:05,092 --> 00:17:08,127
+如果是这种情况那么默认状态
 
 
 306
-00:14:57,676 --> 00:14:59,476
-I would like to introduce
-Jacob [applause].
+00:17:08,362 --> 00:17:11,098
+不会确保GPU内容
+会到达Core Animation
 
 
 307
-00:15:01,186 --> 00:15:01,626
->> JACOB XIAO: Thanks, Peter.
+00:17:11,164 --> 00:17:12,432
+内容的同一帧
 
 
 308
-00:15:02,686 --> 00:15:04,186
-So I would like to tell you
+00:17:13,267 --> 00:17:15,903
+如果你希望二者同步的话
+这就会出现问题
 
 
 309
-00:15:04,466 --> 00:15:06,736
-about some additions
-we have made in iOS 9,
+00:17:16,369 --> 00:17:18,638
+例如如果你希望把UIKit内容绘制
 
 
 310
-00:15:07,346 --> 00:15:10,886
-and how you can use them to get
-even lower latency in your apps.
+00:17:18,704 --> 00:17:22,009
+在OpenGL视图
+上面就会出现这样的情况
 
 
 311
-00:15:11,936 --> 00:15:13,726
-I will be talking about
-three things today.
+00:17:23,477 --> 00:17:25,945
+这种情况下 你希望同步更新
 
 
 312
-00:15:14,526 --> 00:15:17,536
-First, low latency
-support in Core Animation.
+00:17:26,313 --> 00:17:28,582
+类似这样这里有个属性
 
 
 313
-00:15:18,576 --> 00:15:22,796
-Then, a new system for touch
-coalescing, and finally,
+00:17:28,649 --> 00:17:29,616
+可实现这一功能
 
 
 314
-00:15:23,156 --> 00:15:24,936
-a really cool system
-for touch prediction
+00:17:29,683 --> 00:17:32,085
+叫做Presents
+With Transaction
 
 
 315
-00:15:25,156 --> 00:15:26,406
-that we built into UIKit.
+00:17:32,152 --> 00:17:34,955
+是在CAeagllayer
+和CAMetalLayer上面
 
 
 316
-00:15:27,936 --> 00:15:30,736
-So let's get started with low
-latency in Core Animation.
+00:17:35,322 --> 00:17:37,524
+当设置这个为False时这是默认值
 
 
 317
-00:15:31,356 --> 00:15:34,806
-As Peter just showed
-you in iOS 8,
+00:17:38,025 --> 00:17:41,461
+那就可以尽快获得显示的GPU内容
 
 
 318
-00:15:35,166 --> 00:15:37,646
-even with a well-optimized
-app there was a limit
+00:17:42,229 --> 00:17:43,530
+但是当设置为True的时候
 
 
 319
-00:15:37,646 --> 00:15:39,386
-to how far you could
-get your latency down.
+00:17:44,031 --> 00:17:45,999
+我们可以将GPU内容
 
 
 320
-00:15:40,636 --> 00:15:43,406
-By using low latency
-Core Animation in iOS 9,
+00:17:46,166 --> 00:17:48,836
+和Core Animation内容
+同步 因此它们会同时
 
 
 321
-00:15:43,956 --> 00:15:47,026
-we can combine the app's frame
-with Core Animation frame,
+00:17:48,902 --> 00:17:50,737
+出现在显示器上
 
 
 322
-00:15:47,236 --> 00:15:48,836
-and this gives you
-much lower latency.
+00:17:52,372 --> 00:17:55,242
+好 接下来 我们谈谈触控接合
 
 
 323
-00:15:49,786 --> 00:15:51,356
-The best thing about
-this feature is
+00:17:56,176 --> 00:17:56,977
+在这之前
 
 
 324
-00:15:51,356 --> 00:15:52,376
-that it happens automatically.
+00:17:57,177 --> 00:17:59,813
+我先介绍一下 iPad Air 2
 
 
 325
-00:15:52,376 --> 00:15:54,846
-There are no changes you have
-to make to your app other
+00:18:01,014 --> 00:18:02,950
+去年 我们推出iPad Air 2
 
 
 326
-00:15:54,846 --> 00:15:56,176
-than optimizing your
-performance.
+00:18:03,650 --> 00:18:05,919
+显示屏更新速率为60赫兹
 
 
 327
-00:15:57,776 --> 00:15:59,506
-However, there's one
-thing to keep in mind,
+00:18:06,186 --> 00:18:09,189
+也就是说显示器每秒更新60次
 
 
 328
-00:15:59,816 --> 00:16:02,616
-which is that this low latency
-mode is automatically disabled
+00:18:09,523 --> 00:18:10,891
+和其他的iOS设备一样
 
 
 329
-00:16:02,996 --> 00:16:05,386
-when you have animations
-active in your app.
+00:18:11,725 --> 00:18:14,394
+它有个很酷的功能可以影响触控
 
 
 330
-00:16:05,926 --> 00:16:09,056
-This includes CA animations
-and UIKit animations,
+00:18:14,461 --> 00:18:17,231
+和触控延迟我今天
+很兴奋能向大家介绍这点
 
 
 331
-00:16:09,546 --> 00:16:12,036
-so if you want the absolute
-lowest latency in your app,
+00:18:18,198 --> 00:18:21,502
+这样它可实现
+120赫兹触控扫描更新速率
 
 
 332
-00:16:12,476 --> 00:16:15,316
-you want to make sure to disable
-those animations while touches
+00:18:25,272 --> 00:18:25,939
+太酷了
 
 
 333
-00:16:15,316 --> 00:16:21,986
-are active on the display.
+00:18:27,541 --> 00:18:31,578
+这意味着扫描触控的
+速率是其他iOS设备的两倍
 
 
 334
-00:16:22,916 --> 00:16:26,306
-Now this system also works
-with Metal and OpenGL content.
+00:18:31,945 --> 00:18:34,281
+这非常棒因为你可以获得
 
 
 335
-00:16:26,976 --> 00:16:29,726
-So as you saw earlier
-before in iOS 8,
+00:18:34,515 --> 00:18:37,384
+用户手指和显示器互动时的更多信息
 
 
 336
-00:16:30,206 --> 00:16:31,646
-we had to wait an
-additional frame
+00:18:38,919 --> 00:18:41,922
+我们来看这会在实践中怎样影响app
 
 
 337
-00:16:31,826 --> 00:16:33,616
-to get your GPU content
-to the display.
+00:18:42,923 --> 00:18:46,326
+使用60赫兹的触
+控扫描速率在用户手指
 
 
 338
-00:16:33,616 --> 00:16:37,146
-But with the new low
-latency mode, we can now get
+00:18:46,393 --> 00:18:48,795
+在显示器上移动时我们会定期采样
 
 
 339
-00:16:37,186 --> 00:16:39,426
-that content to the display
-as quickly as possible
+00:18:48,862 --> 00:18:52,099
+手指的位置
+并把这个信息提供给app
 
 
 340
-00:16:39,426 --> 00:16:40,366
-in the very next frame.
+00:18:53,400 --> 00:18:56,036
+使用120赫兹扫描速率时
+也会发生同样的事情
 
 
 341
-00:16:41,416 --> 00:16:43,116
-This happens automatically just
+00:18:56,370 --> 00:18:59,840
+但是因为是两倍的速率
+你会获得两倍的样本
 
 
 342
-00:16:43,116 --> 00:16:45,566
-by using CAeagllayer
-or CAMetalLayer.
+00:19:00,741 --> 00:19:03,410
+这会让你掌握用户行为的更多信息
 
 
 343
-00:16:45,816 --> 00:16:49,076
-However, if there's one thing
-to keep in mind in your app
+00:19:09,316 --> 00:19:12,186
+现在 一旦获得这些样本
+我们就会把它们转给app
 
 
 344
-00:16:49,556 --> 00:16:51,546
-if you have Core Animation
-content that you want
+00:19:13,086 --> 00:19:16,323
+通过这些 你会了解
+用户想要用触控做些什么
 
 
 345
-00:16:51,546 --> 00:16:54,196
-to draw along with this
-OpenGL or Metal content.
+00:19:16,790 --> 00:19:19,726
+例如 在绘图app中你可能会把这些
 
 
 346
-00:16:55,426 --> 00:16:58,626
-In this case, the GPU content
-will be drawn to the display
+00:19:20,060 --> 00:19:22,362
+连接起来 显示出用户想要实现的绘图
 
 
 347
-00:16:58,626 --> 00:17:02,266
-as quickly as possible but your
-Core Animation content may take
+00:19:23,330 --> 00:19:26,800
+120赫兹的信息会提供更多信息量
 
 
 348
-00:17:02,266 --> 00:17:03,816
-a little longer to go through.
+00:19:26,967 --> 00:19:29,770
+以便会绘图有着更好的表示
 
 
 349
-00:17:04,685 --> 00:17:08,116
-And if that happens, then by
-default, it's not guaranteed
+00:19:31,538 --> 00:19:34,608
+现在我们看到了使用120赫兹的
+触控扫描速率所带来的好处
 
 
 350
-00:17:08,376 --> 00:17:11,165
-that your GPU content will
-arrive in the same frame
+00:19:35,142 --> 00:19:39,446
+我们先来看它会怎样
+影响触控对显示管线的作用
 
 
 351
-00:17:11,165 --> 00:17:12,445
-as your Core Animation content.
+00:19:40,981 --> 00:19:43,951
+这是60赫兹的
+触控扫描速率管线我们之前见过
 
 
 352
-00:17:13,326 --> 00:17:15,915
-Now this may be a problem if you
-want those two to be in sync,
+00:19:44,718 --> 00:19:47,621
+我们主要来看
+管线的Multi-Touch阶段
 
 
 353
-00:17:15,915 --> 00:17:17,816
-and that could happen,
-for example,
+00:19:49,022 --> 00:19:52,726
+在60赫兹水平上 我们
+每帧会获得一个新触控样本
 
 
 354
-00:17:17,816 --> 00:17:20,316
-if you had an OpenGL map
-view, that you wanted
+00:19:53,794 --> 00:19:56,897
+在120赫兹水平上
+我们每次会获得两个样本
 
 
 355
-00:17:20,316 --> 00:17:22,016
-to draw UIKit content on top of.
+00:19:57,764 --> 00:20:00,901
+不过 要注意显示帧依然相同
 
 
 356
-00:17:23,096 --> 00:17:25,935
-In that case, you may want
-to synchronize those updates
+00:20:01,235 --> 00:20:03,804
+因为显示器本身的更新速率相同
 
 
 357
-00:17:26,185 --> 00:17:28,626
-in something like this,
-and there's a property
+00:20:05,606 --> 00:20:08,475
+现在我们可以用这些新的触控样本 
 
 
 358
-00:17:28,626 --> 00:17:29,366
-that allows you to do
+00:20:09,243 --> 00:20:11,445
+并将其转至app而且
+app可以用它来更新绘图
 
 
 359
-00:17:29,366 --> 00:17:31,816
-that called Presents
-With Transaction.
+00:20:11,612 --> 00:20:13,647
+而绘图会把在
+Core Animation
 
 
 360
-00:17:32,206 --> 00:17:34,466
-It's on CAeagllayer
-and CAMetalLayer.
+00:20:13,714 --> 00:20:15,082
+和显示器显示的内容做更新
 
 
 361
-00:17:35,316 --> 00:17:37,536
-When this is set to False,
-which is the default value,
+00:20:16,049 --> 00:20:17,551
+但是你会注意到如果我们这么做
 
 
 362
-00:17:38,206 --> 00:17:40,426
-then it will get your GPU
-content to the display
+00:20:17,918 --> 00:20:21,088
+app的更新次数实际是显示器更新的
+两倍 这会导致app在做
 
 
 363
-00:17:40,426 --> 00:17:41,476
-as quickly as possible.
+00:20:21,321 --> 00:20:22,856
+无用功
 
 
 364
-00:17:42,266 --> 00:17:43,536
-But when you set it to True,
+00:20:24,024 --> 00:20:27,327
+我们介绍了触控接合系统
+来或者两方面的最好效果
 
 
 365
-00:17:44,076 --> 00:17:45,986
-then we synchronize
-your GPU content
+00:20:27,995 --> 00:20:31,865
+这样可以从120赫兹
+触控扫描速率中获得更多信息 
 
 
 366
-00:17:46,256 --> 00:17:48,836
-with the Core Animation
-content so they both appear
+00:20:32,533 --> 00:20:35,802
+但是不会在app中取消太多无用功
 
 
 367
-00:17:48,916 --> 00:17:50,726
-on the display at the same time.
+00:20:36,837 --> 00:20:39,673
+我们来看管线如何与接合一起改变
 
 
 368
-00:17:51,296 --> 00:17:52,326
-All right.
+00:20:40,941 --> 00:20:43,410
+现在我们只能向app
 
 
 369
-00:17:52,496 --> 00:17:55,256
-Next, let's talk about
-touch coalescing.
+00:20:43,877 --> 00:20:45,179
+每个显示帧交付一个触控
 
 
 370
-00:17:56,256 --> 00:17:57,406
-But before we do, I would
+00:20:45,746 --> 00:20:48,115
+当首个触控出现时我们会把它交付给你
 
 
 371
-00:17:57,406 --> 00:17:59,826
-like to tell you a little
-bit about the iPad Air 2.
+00:20:49,483 --> 00:20:51,852
+然后是下一帧我们会交付这一帧
 
 
 372
-00:18:01,086 --> 00:18:02,956
-We introduced the
-iPad Air 2 last year,
+00:20:51,919 --> 00:20:54,821
+的触控 同时还有上次我们发送触控
 
 
 373
-00:18:03,746 --> 00:18:05,936
-and it has a 60-hertz
-display update rate,
+00:20:54,888 --> 00:20:57,357
+到app上时所出现的任何中间触控
 
 
 374
-00:18:06,246 --> 00:18:09,186
-which means the display
-updates at 60 times per second
+00:20:58,725 --> 00:21:03,197
+每次用户要显示更多
+触控时这些都会重复一遍
 
 
 375
-00:18:09,606 --> 00:18:10,886
-like our other iOS devices.
+00:21:03,697 --> 00:21:05,866
+我们提供当前的触控和任何接合触控
 
 
 376
-00:18:11,786 --> 00:18:14,456
-It also has a really cool
-feature that affects touch
+00:21:06,533 --> 00:21:08,468
+只要触控激活这些就会继续
 
 
 377
-00:18:14,456 --> 00:18:16,456
-and touch latency that
-I'm really excited
+00:21:10,103 --> 00:21:13,207
+现在 API使用这些
+接合触控就非常简单
 
 
 378
-00:18:16,456 --> 00:18:17,136
-to announce to you today.
+00:21:13,273 --> 00:21:16,376
+这是UIEvent上的新方法叫做
+Coalesce Touches
 
 
 379
-00:18:17,136 --> 00:18:21,316
-And that's the fact that it has
-a 120-hertz touch scan update
+00:21:16,443 --> 00:21:17,244
+For Touch
 
 
 380
-00:18:21,316 --> 00:18:21,536
-rate [applause].
+00:21:17,978 --> 00:21:20,280
+把这个方法转至正在看的触控
 
 
 381
-00:18:25,366 --> 00:18:25,796
-It's pretty cool.
+00:21:20,781 --> 00:21:23,417
+在上次我们交付 触控到app上之后
 
 
 382
-00:18:27,606 --> 00:18:30,006
-This means that it scans for
-touches at twice the rate
+00:21:23,483 --> 00:21:26,520
+会返回一组所有的接合触控
 
 
 383
-00:18:30,136 --> 00:18:31,516
-of all other iOS devices.
+00:21:28,422 --> 00:21:30,591
+为更好了解这个API该怎样使用
 
 
 384
-00:18:31,616 --> 00:18:34,286
-And this is great, because you
-can get a lot more information
+00:21:30,657 --> 00:21:33,160
+我们来看看触控处理
+一般在iOS上怎样运作
 
 
 385
-00:18:34,506 --> 00:18:35,986
-about where the user's
-finger is going
+00:21:35,028 --> 00:21:36,797
+当用户首先触控显示屏时
 
 
 386
-00:18:36,036 --> 00:18:37,386
-as they interact
-with the display.
+00:21:37,264 --> 00:21:39,466
+我们会调用app上的
+Touches Began 
 
 
 387
-00:18:38,976 --> 00:18:41,776
-Let's take a look at how this
-affects your app in practice.
+00:21:40,133 --> 00:21:42,636
+他们的手指移动时我们
+将调用Touches Moved
 
 
 388
-00:18:42,976 --> 00:18:46,356
-With the 60-hertz touch scan
-rate, as the user's finger moves
+00:21:43,003 --> 00:21:44,905
+当手指从显示屏拿开时
 
 
 389
-00:18:46,356 --> 00:18:48,866
-across the display, we
-will periodically sample
+00:21:44,972 --> 00:21:46,840
+我们会调用
+Touches Ended
 
 
 390
-00:18:48,866 --> 00:18:52,016
-where that finger is and give
-that information to the app.
+00:21:48,008 --> 00:21:50,077
+现在 我们谈论这些触控回调时
 
 
 391
-00:18:53,456 --> 00:18:56,036
-The same thing happens with
-the 120-hertz scan rate,
+00:21:50,377 --> 00:21:52,980
+另一个非常重要的回调
+是Touches Canceled
 
 
 392
-00:18:56,456 --> 00:18:59,716
-but since it's twice as fast,
-you get twice as many samples,
+00:21:54,014 --> 00:21:56,917
+当通往app的触控流中
+断时 就会调用它
 
 
 393
-00:18:59,716 --> 00:19:02,296
-and this gives you a
-lot more information
+00:21:57,518 --> 00:21:59,520
+例如 如果用户从底部滑动
 
 
 394
-00:19:02,296 --> 00:19:09,206
-about what the user is doing.
+00:21:59,586 --> 00:22:01,188
+来激活Control Center
 
 
 395
-00:19:09,396 --> 00:19:12,196
-Now, once we get those samples,
-we will pass them to your app,
+00:22:02,055 --> 00:22:04,525
+在这种情况下 当接收到
+系统手势 app将
 
 
 396
-00:19:12,196 --> 00:19:15,496
-and you can use those to
-know what the user is trying
+00:22:04,591 --> 00:22:06,627
+获得部分初始触控回调
 
 
 397
-00:19:15,496 --> 00:19:16,336
-to do with their touches.
+00:22:07,160 --> 00:22:09,296
+我们将获得
+Touches Canceled
 
 
 398
-00:19:16,806 --> 00:19:19,726
-For example, in a drawing app,
-you might connect them together
+00:22:10,764 --> 00:22:13,800
+用这种方法来清理之前的触控
 
 
 399
-00:19:20,056 --> 00:19:22,346
-to represent the drawing that
-the user is trying to perform,
+00:22:13,867 --> 00:22:16,570
+回调所开始的任何内容
 
 
 400
-00:19:23,346 --> 00:19:26,856
-and this 120-hertz information
-gives you a lot more information
+00:22:17,037 --> 00:22:18,605
+以及回退所做的任何改变都很重要
 
 
 401
-00:19:26,976 --> 00:19:29,766
-that you can use to get a better
-representation of their drawing.
+00:22:19,239 --> 00:22:23,177
+例如 在绘图app中你可能想
+清除用户所画的线条
 
 
 402
-00:19:30,306 --> 00:19:32,806
-So now that we have
-seen the benefits
+00:22:24,945 --> 00:22:27,014
+现在我们了解了
+这些触控回调是怎么起作用
 
 
 403
-00:19:32,806 --> 00:19:36,046
-of 120-hertz touch scan
-rate, let's take a look
+00:22:27,281 --> 00:22:29,383
+我们来看它们怎样和接合触控互动
 
 
 404
-00:19:36,046 --> 00:19:39,446
-at how it affects the
-touch to display pipeline.
+00:22:30,484 --> 00:22:34,121
+我们交付给所有回调的触控
+我们称之为主触控
 
 
 405
-00:19:40,026 --> 00:19:43,146
-This is the 60-hertz
-touch scan rate pipeline
+00:22:34,588 --> 00:22:39,193
+这部分在120赫兹扫描速率
+和60赫兹设备上都完全相同
 
 
 406
-00:19:43,146 --> 00:19:43,866
-that we saw earlier.
+00:22:41,495 --> 00:22:42,696
+但是 有了Coalesce
 
 
 407
-00:19:44,706 --> 00:19:46,906
-And let's focus in on
-just the Multi-Touch stage
+00:22:42,763 --> 00:22:44,865
+Touches For Touch
+方法
 
 
 408
-00:19:46,976 --> 00:19:47,636
-of the pipeline.
+00:22:45,098 --> 00:22:47,267
+你可以通过这些接合触控了解更多信息
 
 
 409
-00:19:49,096 --> 00:19:52,726
-At 60 hertz, we get a new
-touch sample every frame.
+00:22:48,202 --> 00:22:52,773
+接合触控互动不仅
+有着中间触控的相关信息
 
 
 410
-00:19:53,776 --> 00:19:56,906
-And with 120 hertz, we'll now
-get two samples every time.
+00:22:53,240 --> 00:22:56,176
+它们还会提供主触控本身的副本
 
 
 411
-00:19:57,786 --> 00:19:59,196
-However, note that the size
+00:22:57,244 --> 00:22:59,680
+这其中最棒的一点是你可以进行选择
 
 
 412
-00:19:59,196 --> 00:20:00,886
-of the display frame
-is still the same,
+00:23:00,080 --> 00:23:01,782
+你可以来看主触控
 
 
 413
-00:20:01,246 --> 00:20:03,816
-since we have the same update
-rate for the display itself.
+00:23:02,049 --> 00:23:03,851
+如果不需要app的更高触控扫描速率
 
 
 414
-00:20:03,946 --> 00:20:08,076
-Now, we could take those new
-touch samples and pass them
+00:23:04,284 --> 00:23:06,453
+所增加的信息量
 
 
 415
-00:20:08,076 --> 00:20:11,316
-to your app, and your app could
-use that to update its drawing,
+00:23:07,054 --> 00:23:08,622
+或者如果如果想要这些信息
 
 
 416
-00:20:11,666 --> 00:20:13,826
-which would update what it
-showed in Core Animation
+00:23:08,989 --> 00:23:12,593
+可以来看接合触控
+而且你不必担心主触控
 
 
 417
-00:20:13,826 --> 00:20:15,066
-and on to the display.
+00:23:17,598 --> 00:23:20,601
+现在 我们再来看触控序列 
 
 
 418
-00:20:16,076 --> 00:20:17,346
-But you will notice
-that if we did,
+00:23:20,667 --> 00:23:23,837
+看它如何与主触控和接合触控相配合
 
 
 419
-00:20:17,346 --> 00:20:20,056
-that your app would actually
-be updating twice as often
+00:23:25,105 --> 00:23:26,573
+随着用户手指的下滑
 
 
 420
-00:20:20,056 --> 00:20:21,806
-as the display updates,
-which would lead
+00:23:26,974 --> 00:23:31,178
+我们会给app一个
+主触控并将其副本作为接合触控
 
 
 421
-00:20:21,806 --> 00:20:23,746
-to wasted work in your app.
+00:23:32,279 --> 00:23:33,380
+随着手指的移动
 
 
 422
-00:20:24,026 --> 00:20:26,016
-So we introduced the
-touch coalescing system
+00:23:33,447 --> 00:23:35,015
+我们会交付新的主触控
 
 
 423
-00:20:26,116 --> 00:20:27,316
-to get the best of both worlds.
+00:23:35,315 --> 00:23:37,217
+和各自的一组接合触控
 
 
 424
-00:20:28,076 --> 00:20:30,196
-This allows you to get
-the increased information
+00:23:37,985 --> 00:23:39,520
+最后 随着手指离开
 
 
 425
-00:20:30,196 --> 00:20:32,936
-from the 120-hertz
-touch scan rate but not
+00:23:39,720 --> 00:23:41,054
+我们将提供最后的主触控
 
 
 426
-00:20:32,936 --> 00:20:35,586
-to have any wasted work in
-your app withdrawing too much.
+00:23:41,455 --> 00:23:42,956
+和任何其余的接合触控
 
 
 427
-00:20:36,336 --> 00:20:38,926
-Let's take a look at how
-this pipeline changes
+00:23:44,458 --> 00:23:48,829
+这里我希望只展示
+每个主触控的一两个接合触控
 
 
 428
-00:20:38,926 --> 00:20:39,666
-with coalescing.
+00:23:49,263 --> 00:23:52,065
+需要注意的是app可以收到
+不同的数量这点很重要
 
 
 429
-00:20:41,026 --> 00:20:42,756
-Now we will only deliver a touch
+00:23:52,966 --> 00:23:55,202
+如果app花费长时间处理一个触控
 
 
 430
-00:20:42,756 --> 00:20:45,166
-to your app once
-per display frame,
+00:23:55,602 --> 00:23:59,806
+然后我们给你些时间跟进并等着
+跟进之后发送新的触控
 
 
 431
-00:20:45,756 --> 00:20:48,106
-so when the first touch comes
-in, we will deliver that to you.
+00:24:01,008 --> 00:24:01,942
+如果出现这样的情况
 
 
 432
-00:20:49,036 --> 00:20:51,926
-And then in the next frame,
-we will deliver you the touch
+00:24:02,109 --> 00:24:05,879
+那么未交付给你的
+触控稍后会作为接合触控发送给你
 
 
 433
-00:20:51,926 --> 00:20:54,816
-for that frame, and also
-any intermediate touches
+00:24:06,413 --> 00:24:08,515
+因此 确保你的代码对
+所收到的接合触控
 
 
 434
-00:20:54,816 --> 00:20:56,916
-that happened since the
-last time we sent touches
+00:24:08,682 --> 00:24:10,551
+数量 不存在任何依赖性
 
 
 435
-00:20:56,916 --> 00:20:58,326
-to your app.
+00:24:12,519 --> 00:24:14,922
+现在 在这些接合 触控的行为方式
 
 
 436
-00:20:58,836 --> 00:21:02,656
-This repeats each time the
-user makes more touches
+00:24:15,155 --> 00:24:17,658
+和主触控的行为方式之间存在一些区别
 
 
 437
-00:21:02,656 --> 00:21:03,186
-to the display.
+00:24:18,425 --> 00:24:20,727
+其中之一与之前的位置有关
 
 
 438
-00:21:03,686 --> 00:21:05,856
-We'll give you the current
-touch and any coalesce touches,
+00:24:21,762 --> 00:24:23,463
+之前的位置可以通过Previous
 
 
 439
-00:21:06,206 --> 00:21:08,476
-and that continues as long
-as touches are active.
+00:24:23,530 --> 00:24:27,067
+Location In View
+from UITouch方法来获得
 
 
 440
-00:21:09,056 --> 00:21:12,636
-Now, the API to use these
-coalesced touches is
+00:24:28,635 --> 00:24:32,105
+对主触控而言 
+这可以为app提供该触控
 
 
 441
-00:21:12,636 --> 00:21:13,196
-really simple.
+00:24:32,172 --> 00:24:33,707
+在交付时的最后位置
 
 
 442
-00:21:13,926 --> 00:21:16,556
-It's a new method on UIEvent
-called Coalesce Touches
+00:24:34,441 --> 00:24:36,677
+对接合触控而言其行为也非常相似
 
 
 443
-00:21:16,556 --> 00:21:17,106
-For Touch.
+00:24:37,110 --> 00:24:38,212
+它可以提供针对app的
 
 
 444
-00:21:18,056 --> 00:21:20,276
-You pass into that method the
-touch that you're looking at,
+00:24:38,312 --> 00:24:39,746
+最后接合触控的位置
 
 
 445
-00:21:20,766 --> 00:21:23,496
-and we'll give you back an array
-of all the coalesced touches
+00:24:41,715 --> 00:24:43,650
+这就是需要只关注主触控
 
 
 446
-00:21:23,496 --> 00:21:27,246
-since the last time we delivered
-that touch to your app.
+00:24:43,717 --> 00:24:46,420
+或只关注接合触控很重要的原因之一
 
 
 447
-00:21:28,116 --> 00:21:30,186
-To get a better idea
-of how to use this API,
+00:24:47,287 --> 00:24:50,624
+这样 你就不会对
+之前的位置产生任何混淆
 
 
 448
-00:21:30,186 --> 00:21:33,146
-let's look at how touch handling
-works in iOS in general.
+00:24:51,058 --> 00:24:52,926
+因此不要过界非常重要
 
 
 449
-00:21:33,746 --> 00:21:36,786
-When the user first
-touches the display,
+00:24:58,932 --> 00:25:01,668
+在主触控和接合触控之间还有一个区别
 
 
 450
-00:21:36,786 --> 00:21:40,016
-we will call Touches
-Began on your app.
+00:25:01,969 --> 00:25:04,238
+就是UITouch对象本身如何行为
 
 
 451
-00:21:40,246 --> 00:21:43,616
-As their finger moves, we will
-call Touches Moved, and finally,
+00:25:05,572 --> 00:25:08,742
+和主触控一起 每次触控交付
 
 
 452
-00:21:43,936 --> 00:21:45,666
-as their finger is
-removed from the display,
+00:25:08,809 --> 00:25:10,844
+给app时 UITouch  
+实例就会再次使用
 
 
 453
-00:21:45,666 --> 00:21:46,856
-we will call Touches Ended.
+00:25:12,179 --> 00:25:14,581
+这样做很有用因为如果用户
 
 
 454
-00:21:48,066 --> 00:21:50,016
-Now, as we are talking
-about these touch callbacks,
+00:25:14,715 --> 00:25:18,552
+立刻在显示器上使用多个手指的话
+这可以让你区别不同的触控
 
 
 455
-00:21:50,476 --> 00:21:53,016
-another very important
-callback is Touches Canceled.
+00:25:20,654 --> 00:25:22,856
+对接合触控而言这会有所不同
 
 
 456
-00:21:54,076 --> 00:21:55,726
-This gets called when
-the stream of touches
+00:25:23,724 --> 00:25:26,393
+每次 向app交付接合触控时
 
 
 457
-00:21:55,726 --> 00:21:56,906
-to your app is interrupted.
+00:25:26,793 --> 00:25:28,462
+我们交付一个新的具有新属性的
 
 
 458
-00:21:57,516 --> 00:21:59,496
-For example, if the user
-swipes from the bottom
+00:25:29,496 --> 00:25:30,631
+UITouch实例
 
 
 459
-00:21:59,636 --> 00:22:00,686
-to activate Control Center.
+00:25:31,498 --> 00:25:33,166
+所以你可以把这些当作是快照
 
 
 460
-00:22:02,126 --> 00:22:04,986
-In that case, your app will get
-some the initial touch callback,
+00:25:33,333 --> 00:25:35,903
+而不是主触控的共享身份
 
 
 461
-00:22:04,986 --> 00:22:06,616
-and we will get Touches Canceled
+00:25:37,471 --> 00:25:39,540
+现在 你理解了触控接合是如何工作的
 
 
 462
-00:22:07,146 --> 00:22:09,286
-when the system gesture
-takes over.
+00:25:39,606 --> 00:25:42,576
+让我们研究一下某些代码
+如何使用接合触控
 
 
 463
-00:22:09,916 --> 00:22:13,476
-It's important to implement
-this method to do any cleanup
+00:25:43,510 --> 00:25:45,245
+这就是在app中可能用到的部分代码
 
 
 464
-00:22:13,476 --> 00:22:16,636
-for things that you started in
-the previous touch callbacks
+00:25:45,512 --> 00:25:49,449
+可以用于绘图在移动的
+触控中可以用这类内容
 
 
 465
-00:22:17,056 --> 00:22:18,616
-and roll back any
-changes you made.
+00:25:50,450 --> 00:25:52,819
+这里我们会重复我们已有的触控
 
 
 466
-00:22:19,246 --> 00:22:21,376
-For example, in a drawing
-app, you might want
+00:25:53,420 --> 00:25:55,789
+我们在抓取每个触控对应的代码行
 
 
 467
-00:22:21,376 --> 00:22:23,176
-to remove the line that
-the user was drawing.
+00:25:57,024 --> 00:26:00,527
+然后 我们把最后的触控
+作为新样本加入该行的末尾
 
 
 468
-00:22:23,536 --> 00:22:27,016
-So now that we have seen how
-these touch callbacks work,
+00:26:02,095 --> 00:26:06,099
+为了增加触控的接合支持
+我们只需要加上这一小部分代码
 
 
 469
-00:22:27,326 --> 00:22:29,376
-let's see how they interact
-with coalesce touches.
+00:26:07,034 --> 00:26:09,903
+这里我们为给定的主触控
 
 
 470
-00:22:30,576 --> 00:22:32,066
-The touches we deliver to all
+00:26:09,970 --> 00:26:11,071
+重复所有的接合触控
 
 
 471
-00:22:32,066 --> 00:22:34,136
-of those callbacks are
-what we call main touches,
+00:26:12,005 --> 00:26:15,909
+对于各个接合触控
+我们把它加为该行的样本
 
 
 472
-00:22:34,596 --> 00:22:38,046
-and these work the same with the
-120-hertz scan rate as they do
+00:26:16,710 --> 00:26:19,046
+注意 我们只添加样本接合触控
 
 
 473
-00:22:38,046 --> 00:22:39,186
-with 60-hertz devices.
+00:26:19,346 --> 00:26:20,247
+而不是主触控
 
 
 474
-00:22:39,256 --> 00:22:43,756
-However, with the Coalesce
-Touches For Touch method,
+00:26:21,181 --> 00:26:22,382
+这就是触控接合
 
 
 475
-00:22:43,966 --> 00:22:46,116
-you can get access
-to more information
+00:26:27,454 --> 00:26:29,356
+现在我想谈谈触控预测
 
 
 476
-00:22:46,116 --> 00:22:47,186
-with these coalesced touches.
+00:26:30,023 --> 00:26:33,527
+这是我们刚加入
+UIKit中的很酷的系统
 
 
 477
-00:22:48,286 --> 00:22:51,566
-The coalesced touches
-not only have information
+00:26:33,594 --> 00:26:35,996
+用它可以实现app中的更低延迟
 
 
 478
-00:22:51,566 --> 00:22:54,966
-about the intermediate touches
-but they also give you a copy
+00:26:36,964 --> 00:26:42,169
+正如我们交付的app新触控
+也会让你了解到未来
 
 
 479
-00:22:55,176 --> 00:22:56,176
-of the main touch itself.
+00:26:42,436 --> 00:26:45,506
+我们可以预测到用户
+触控在稍后会做些什么
 
 
 480
-00:22:56,826 --> 00:22:59,686
-And the great thing about this
-is that it allows you a choice.
+00:26:46,874 --> 00:26:50,410
+这里的API和接合触控的API
+工作效果很相似
 
 
 481
-00:23:00,176 --> 00:23:01,776
-You can look at the main touches
+00:26:50,811 --> 00:26:54,014
+这是UIEvent上的新方法叫做
+Predicted Touches
 
 
 482
-00:23:02,126 --> 00:23:03,866
-if you don't need the
-increased information
+00:26:54,081 --> 00:26:54,882
+For Touch
 
 
 483
-00:23:04,376 --> 00:23:07,556
-of the higher touch scan
-rate in your app, or,
+00:26:55,649 --> 00:26:58,018
+同样 经过主触控进入这个方法
 
 
 484
-00:23:07,556 --> 00:23:09,406
-if you want that
-information, you can look
+00:26:58,352 --> 00:27:00,287
+然后返回一组预测触控
 
 
 485
-00:23:09,406 --> 00:23:11,726
-at just the coalesced touches
-and you don't have to worry
+00:27:01,855 --> 00:27:04,925
+可以使用这些预测触控来更新绘图
 
 
 486
-00:23:11,726 --> 00:23:12,576
-about the main touches.
+00:27:05,025 --> 00:27:07,160
+或者是你用用户触控所做的其他任务
 
 
 487
-00:23:17,276 --> 00:23:21,166
-So now let's revisit the touch
-sequence that we saw and see how
+00:27:07,861 --> 00:27:09,029
+来获取更低的延迟
 
 
 488
-00:23:21,166 --> 00:23:23,836
-that works with both main
-touches and coalesced touches.
+00:27:10,564 --> 00:27:13,834
+之前我们看到主触控和
+接合触控是如何相关联
 
 
 489
-00:23:24,776 --> 00:23:26,566
-As the user's finger comes down,
+00:27:14,668 --> 00:27:16,803
+而且预测触控的运行方法也非常相似
 
 
 490
-00:23:26,566 --> 00:23:29,886
-we will give your app a
-main touch, and also a copy
+00:27:17,704 --> 00:27:20,474
+它们是与主触控相关的另一组触控
 
 
 491
-00:23:29,886 --> 00:23:31,176
-of that as a coalesced touch.
+00:27:21,542 --> 00:27:24,178
+而且和接合触控一样作为快照发挥作用
 
 
 492
-00:23:32,346 --> 00:23:33,416
-Then as their finger moves,
+00:27:25,712 --> 00:27:27,948
+现在 和接合触控相比预测触控
 
 
 493
-00:23:33,416 --> 00:23:35,756
-we will deliver you new
-main touches and a set
+00:27:28,015 --> 00:27:31,084
+有一点不同那就是
+在发生新触控时的表现
 
 
 494
-00:23:35,756 --> 00:23:37,226
-of coalesced touches
-for each one.
+00:27:31,885 --> 00:27:34,988
+当你获得新的主触控时
+你会获得一组新的
 
 
 495
-00:23:38,066 --> 00:23:39,536
-And finally, as their
-finger leaves,
+00:27:35,889 --> 00:27:39,726
+预测触控 然后你只想
+使用新的预测触控
 
 
 496
-00:23:39,646 --> 00:23:41,066
-we will give you
-the last main touch
+00:27:40,227 --> 00:27:42,529
+任何之前的预测触控都不再有用
 
 
 497
-00:23:41,526 --> 00:23:42,946
-and any remaining
-coalesced touches.
+00:27:42,796 --> 00:27:46,400
+因为我们现在掌握了
+当时用户实际在哪里触控
 
 
 498
-00:23:43,606 --> 00:23:45,986
-Now here, I have shown only one
+00:27:46,733 --> 00:27:49,436
+因此 你一般想扔掉那些旧的预测触控
 
 
 499
-00:23:45,986 --> 00:23:48,836
-or two coalesced touches
-for each main touch.
+00:27:51,071 --> 00:27:53,373
+现在视图中之前的位置
+对预测触控进行类似的处理
 
 
 500
-00:23:49,396 --> 00:23:50,626
-But it's important
-to keep in mind
+00:27:53,440 --> 00:27:55,642
+它对其他触控类型也是如此对待
 
 
 501
-00:23:50,626 --> 00:23:52,076
-that your app can receive
-a different amount.
+00:27:56,476 --> 00:27:57,911
+它指出之前的预测触控
 
 
 502
-00:23:53,036 --> 00:23:55,216
-If your app takes a long
-time to process a touch,
+00:27:57,978 --> 00:28:00,147
+所在的位置或者是针对第一个
 
 
 503
-00:23:55,616 --> 00:23:57,636
-then we will give you some
-time to catch up and wait
+00:28:00,514 --> 00:28:04,618
+预测触控它指出
+交付给app的最后位置
 
 
 504
-00:23:57,636 --> 00:24:00,866
-to send you new touches
-until you have caught up.
+00:28:06,220 --> 00:28:09,690
+因此你可能会奇怪我们怎么会获得
+这些预测触控 其实相当简单
 
 
 505
-00:24:01,106 --> 00:24:02,696
-And if this happens,
-then the touches
+00:28:10,390 --> 00:28:12,526
+我们在每个iOS设备中
+都加上了时间机器
 
 
 506
-00:24:02,696 --> 00:24:04,256
-that weren't delivered
-you to will be sent
+00:28:14,528 --> 00:28:15,562
+其实不是这样的
 
 
 507
-00:24:04,256 --> 00:24:05,886
-to you later as coalesced
-touches.
+00:28:16,163 --> 00:28:19,132
+我们实际上是来看交付给app的
 
 
 508
-00:24:06,416 --> 00:24:08,506
-So make sure that you don't
-hard code any dependencies
+00:28:19,233 --> 00:28:23,871
+触控 并使用一套高度精密的
+算法来确定用户手指此刻
 
 
 509
-00:24:08,736 --> 00:24:10,536
-on the number of coalesced
-touches that you receive.
+00:28:23,937 --> 00:28:27,374
+即将会做些什么
 
 
 510
-00:24:11,226 --> 00:24:14,786
-Now, there are a few
-differences between the way
+00:28:28,175 --> 00:28:30,811
+当我们获得新的触控
+样本时我们会更新预测
 
 
 511
-00:24:14,786 --> 00:24:16,716
-that coalesced touches
-behave and the way
+00:28:30,944 --> 00:28:32,913
+并把新的预测触控交付给app
 
 
 512
-00:24:16,716 --> 00:24:17,666
-that main touches behave.
+00:28:34,248 --> 00:28:37,851
+现在每个预测触控
+都是完整的UITouch
 
 
 513
-00:24:18,496 --> 00:24:20,736
-One of those is related
-to previous location.
+00:28:38,185 --> 00:28:39,820
+对象 而且都填写了所有的属性
 
 
 514
-00:24:21,776 --> 00:24:24,696
-And previous location is
-something that you can get
+00:28:40,053 --> 00:28:41,622
+例如位置和时间标记
 
 
 515
-00:24:24,696 --> 00:24:27,406
-with the method Previous
-Location In View from UITouch.
+00:28:43,457 --> 00:28:47,394
+现在我们来看 预测触控对我们
+在看的管线会有什么影响
 
 
 516
-00:24:28,336 --> 00:24:32,106
-For main touches, this gives
-your app the last location
+00:28:49,062 --> 00:28:54,635
+这是我们之前看到的主触控和
+接合触控我们可以轻松加入预测触控
 
 
 517
-00:24:32,106 --> 00:24:33,696
-that that touch had when
-it was delivered to you.
+00:28:56,103 --> 00:28:58,238
+每一帧 正如app获得主触控
 
 
 518
-00:24:34,436 --> 00:24:36,676
-And for coalesced touches,
-it behaves very similarly.
+00:28:58,338 --> 00:29:00,307
+你也可以获得一组预测触控
 
 
 519
-00:24:36,856 --> 00:24:38,226
-It gives you the location
+00:29:01,441 --> 00:29:04,111
+如果你获得主触控和接合触控
 
 
 520
-00:24:38,326 --> 00:24:40,366
-of the last coalesced
-touch to your app.
+00:29:04,311 --> 00:29:07,848
+那么预测触控是可以获得的更多信息
 
 
 521
-00:24:41,606 --> 00:24:43,696
-And this is one of the reasons
-that it's really important
+00:29:08,916 --> 00:29:11,351
+在新触控交付时会重复这一进程
 
 
 522
-00:24:43,696 --> 00:24:45,216
-to focus on just
-the main touches
+00:29:12,352 --> 00:29:16,490
+要注意的是接合触控的
+和预测触控是独立的
 
 
 523
-00:24:45,426 --> 00:24:46,586
-or just the coalesced touches.
+00:29:16,757 --> 00:29:18,192
+你可以用其中一个而不用另一个
 
 
 524
-00:24:47,346 --> 00:24:49,546
-That way, you won't
-get any confusion
+00:29:18,659 --> 00:29:21,195
+60赫兹和120赫兹
+触控扫描速率设备
 
 
 525
-00:24:49,546 --> 00:24:50,616
-with the previous locations.
+00:29:21,361 --> 00:29:23,697
+均可支持预测触控
 
 
 526
-00:24:51,056 --> 00:24:52,936
-So it's really important
-not to cross the streams.
+00:29:25,499 --> 00:29:27,701
+我们先来看怎么把触控预测
 
 
 527
-00:24:54,516 --> 00:24:58,576
-[ Applause ]
+00:29:28,001 --> 00:29:30,370
+加入我们刚才看的代码之中
 
 
 528
-00:24:59,076 --> 00:25:00,866
-Now, another difference
-between main touches
+00:29:32,005 --> 00:29:34,208
+只需要加上这一小部分代码
 
 
 529
-00:25:00,866 --> 00:25:02,196
-and coalesced touches is
+00:29:35,008 --> 00:29:38,145
+我们要做的是首先删除我们加入
 
 
 530
-00:25:02,196 --> 00:25:04,236
-in how the UITouch
-objects themselves behave.
+00:29:38,212 --> 00:29:39,980
+代码行中的之前的任何预测触控
 
 
 531
-00:25:05,666 --> 00:25:09,156
-With main touches, the same
-UITouch instance is reused every
+00:29:40,514 --> 00:29:44,284
+这很重要 因为我们现在
+有了这些触控的实际位置
 
 
 532
-00:25:09,156 --> 00:25:11,836
-time the touch is
-delivered to your app.
+00:29:50,390 --> 00:29:53,327
+然后 我们会重复运行已有的预测触控
 
 
 533
-00:25:12,246 --> 00:25:14,566
-This is helpful because it
-allows you to differentiate
+00:29:54,228 --> 00:29:58,699
+对于每个预测触控
+我们把它加为代码行的样本
 
 
 534
-00:25:14,726 --> 00:25:17,606
-between different touches if
-the users has multiple fingers
+00:29:59,633 --> 00:30:01,568
+但是注意 我们这里加入预测样本
 
 
 535
-00:25:17,606 --> 00:25:18,566
-on the display at once.
+00:30:01,668 --> 00:30:05,272
+调用的方法不同于调用常规样本的方法
 
 
 536
-00:25:19,216 --> 00:25:22,866
-And for coalesced touches, this
-works a little bit differently.
+00:30:05,706 --> 00:30:10,444
+这样我们可以将样本标记为
+下次运行该代码时需要将之删除
 
 
 537
-00:25:23,596 --> 00:25:26,386
-There, each time we deliver a
-coalesced touch to your app,
+00:30:11,945 --> 00:30:13,847
+这就是触控接合和触控预测
 
 
 538
-00:25:26,896 --> 00:25:28,476
-we deliver a new
-UITouch instance
+00:30:14,915 --> 00:30:16,717
+大家现在看到了所有这些技巧
 
 
 539
-00:25:29,486 --> 00:25:30,626
-that has the new properties.
+00:30:16,783 --> 00:30:18,919
+我们来看看把它们
+结合起来会是什么效果
 
 
 540
-00:25:30,726 --> 00:25:33,696
-And so you can think of
-these as snapshots instead
+00:30:20,988 --> 00:30:23,524
+在iOS 8中 有个优化的app 
 
 
 541
-00:25:33,696 --> 00:25:35,906
-of the shared identity
-that the main touches have.
+00:30:24,057 --> 00:30:25,792
+这就是你可以获取的触控延迟视图
 
 
 542
-00:25:35,966 --> 00:25:39,476
-So now that you understand
-how touch coalescing works,
+00:30:26,593 --> 00:30:28,395
+在触控首次出现和显示器
 
 
 543
-00:25:39,616 --> 00:25:42,426
-let's dig into some code for
-how to use coalesced touches.
+00:30:28,462 --> 00:30:30,163
+更新触控信息之间 
 
 
 544
-00:25:43,216 --> 00:25:45,106
-This is some code that
-you might have in an app
+00:30:30,797 --> 00:30:33,433
+我们测量延迟的时间
 
 
 545
-00:25:45,566 --> 00:25:48,326
-that does something like drawing
-and you could have something
+00:30:34,234 --> 00:30:35,836
+因此 你可以看到在iOS 8中
 
 
 546
-00:25:48,326 --> 00:25:49,456
-like this in touches moved.
+00:30:36,170 --> 00:30:37,538
+我们会有4帧延迟
 
 
 547
-00:25:50,466 --> 00:25:52,836
-Here we are iterating through
-the touches that we have,
+00:30:39,072 --> 00:30:42,576
+通过使用低延迟Core 
+Animation和iOS 9
 
 
 548
-00:25:53,436 --> 00:25:55,776
-and we are grabbing the line
-that corresponds to each touch.
+00:30:42,776 --> 00:30:44,611
+我们可以从中删除一帧延迟
 
 
 549
-00:25:57,066 --> 00:25:59,446
-Then we are adding the
-latest touch as a new sample
+00:30:45,746 --> 00:30:48,115
+通过使用触控接合并在高触控
 
 
 550
-00:25:59,446 --> 00:26:00,526
-onto the end of that line.
+00:30:48,215 --> 00:30:50,150
+扫描速率设备上运行
 
 
 551
-00:26:01,116 --> 00:26:04,786
-And to add touch coalescing
-support, we just need
+00:30:50,751 --> 00:30:55,956
+你不仅可以获得用户触控的
+更多信息量还可以从一开始
 
 
 552
-00:26:04,786 --> 00:26:06,106
-to add this small bit of code.
+00:30:56,190 --> 00:30:56,990
+就删除半帧延迟
 
 
 553
-00:26:07,136 --> 00:26:09,956
-Now, we are iterating through
-all the coalesced touches
+00:30:58,926 --> 00:30:59,626
+但是不仅如此！
 
 
 554
-00:26:09,956 --> 00:26:12,516
-for the given main
-touch, and for each
+00:31:02,296 --> 00:31:03,864
+通过使用触控预测你可以获得
 
 
 555
-00:26:12,516 --> 00:26:14,276
-of those coalesced
-touches, we are adding it
+00:31:04,264 --> 00:31:08,635
+未来用户触控将往何处去的
+大约一帧延迟
 
 
 556
-00:26:14,276 --> 00:26:15,896
-for the sample to the line.
+00:31:09,203 --> 00:31:12,105
+这会让你为用户提供有效延迟
 
 
 557
-00:26:16,726 --> 00:26:18,616
-Notice that we are only
-adding the coalesced touches
+00:31:12,739 --> 00:31:14,942
+也可以减少一帧以上延迟
 
 
 558
-00:26:18,616 --> 00:26:20,236
-of the samples, not
-the main touches.
+00:31:15,609 --> 00:31:18,979
+那么算在一起
+在 iOS 9 你可以为用户降低
 
 
 559
-00:26:21,056 --> 00:26:22,246
-And that's touch coalescing.
+00:31:19,046 --> 00:31:21,048
+约1.5帧延迟这要比iOS 8
 
 
 560
-00:26:22,246 --> 00:26:29,346
-Now I would like to tell
-you about touch prediction.
+00:31:21,281 --> 00:31:24,051
+中的4帧延迟提高很多
 
 
 561
-00:26:30,066 --> 00:26:32,396
-This is a really cool system
-that we have added right
+00:31:31,592 --> 00:31:32,893
+那么我们觉得这的确了不得
 
 
 562
-00:26:32,396 --> 00:26:34,156
-into UIKit that you can use
+00:31:32,993 --> 00:31:35,095
+我很希望大家在app中运用这些技术
 
 
 563
-00:26:34,156 --> 00:26:36,006
-to get even lower
-latency in your apps.
+00:31:35,162 --> 00:31:38,298
+为用户提供更低的延迟体验
 
 
 564
-00:26:37,086 --> 00:26:38,946
-Now, as we deliver your app,
+00:31:39,233 --> 00:31:41,134
+现在我想把讲台交回给彼得
 
 
 565
-00:26:38,946 --> 00:26:42,156
-new touches will also give
-you a look into the future
+00:31:41,435 --> 00:31:42,703
+请他来讲讲怎样调试app
 
 
 566
-00:26:42,426 --> 00:26:44,696
-at what we predict that the
-user's touches will be doing
+00:31:48,542 --> 00:31:49,710
+彼得·崔：谢谢 雅各布
 
 
 567
-00:26:44,776 --> 00:26:45,496
-in the near future.
+00:31:50,444 --> 00:31:53,313
+现在我们了解了一些
+iOS 9中的最新低延迟模式
 
 
 568
-00:26:46,436 --> 00:26:49,416
-And the API for this works
-very similarly to the API
+00:31:53,480 --> 00:31:56,717
+我们还将介绍一些如何利用
 
 
 569
-00:26:49,556 --> 00:26:50,396
-for coalesced touches.
+00:31:57,150 --> 00:31:59,520
+这些来调试应用这样就可以满足
 
 
 570
-00:26:51,326 --> 00:26:54,026
-It's another method on UIEvent
-called Predicted Touches
+00:31:59,753 --> 00:32:05,325
+时间的一个显示帧的要求
+还可以把帧快速地显示出来
 
 
 571
-00:26:54,026 --> 00:26:54,536
-For Touch.
+00:32:06,260 --> 00:32:11,064
+首先 要确保应用在完成最少量的任务
 
 
 572
-00:26:55,726 --> 00:26:58,016
-Once again, you pass in a
-main touch to this method
+00:32:11,131 --> 00:32:14,768
+则要将应用需要完成的任务量最小化
 
 
 573
-00:26:58,016 --> 00:27:00,276
-and you will get back an
-array of predicted touches.
+00:32:15,536 --> 00:32:18,839
+通过雅各布刚介绍的接合触控API
 
 
 574
-00:27:01,526 --> 00:27:04,916
-And you can use those predicted
-touches to update your drawing
+00:32:19,373 --> 00:32:22,543
+你可以享用到iPad Air 2
 
 
 575
-00:27:05,026 --> 00:27:07,156
-or whatever else you are
-doing with the user's touches,
+00:32:22,643 --> 00:32:24,811
+高保真手写输入的好处同时确保
 
 
 576
-00:27:07,946 --> 00:27:09,026
-to get even lower latency.
+00:32:24,878 --> 00:32:28,448
+完成的任务量将在屏幕上显示的图像
 
 
 577
-00:27:10,556 --> 00:27:12,506
-So earlier, we saw
-how main touches
+00:32:29,483 --> 00:32:32,119
+此外 要记住用户只会关心
 
 
 578
-00:27:12,506 --> 00:27:13,846
-and coalesced touches
-are related,
+00:32:32,186 --> 00:32:35,355
+在设备显示器上可以看到的内容
 
 
 579
-00:27:14,696 --> 00:27:16,816
-and predicted touches work
-in a very similar way.
+00:32:35,956 --> 00:32:38,125
+应用可以跟踪屏幕
 
 
 580
-00:27:17,536 --> 00:27:20,466
-They are another set of touches
-associated with a main touch,
+00:32:38,659 --> 00:32:41,962
+以外的环境状态
 
 
 581
-00:27:21,556 --> 00:27:25,566
-and they behave as snapshots
-just like coalesced touches do.
+00:32:42,462 --> 00:32:46,333
+但是 最终 你需要确保
+渲染工作要仅限于
 
 
 582
-00:27:25,826 --> 00:27:27,986
-Now, one thing that's different
-about predicted touches compared
+00:32:46,667 --> 00:32:49,269
+那些最终要在屏幕上
 
 
 583
-00:27:27,986 --> 00:27:30,006
-to coalesced touches
-is what happens
+00:32:49,469 --> 00:32:52,406
+生成显示图像的必要工作
 
 
 584
-00:27:30,006 --> 00:27:31,076
-when new touches come in.
+00:32:54,875 --> 00:32:57,344
+如果准备构建应用
 
 
 585
-00:27:31,976 --> 00:27:34,096
-As you get a new main touch,
-you will get a new set
+00:32:57,511 --> 00:33:01,248
+计算应用在CPU上
 
 
 586
-00:27:34,096 --> 00:27:38,246
-of predicted touches, and the
-new predicted touches are the
+00:33:01,582 --> 00:33:04,117
+所花费时间 Time 
+Profiler是个不错的办法
 
 
 587
-00:27:38,246 --> 00:27:39,726
-only thing you want to use then.
+00:33:04,618 --> 00:33:07,321
+Time Profiler将通过
 
 
 588
-00:27:40,236 --> 00:27:42,536
-Any previous predicted
-touches are no longer useful
+00:33:07,387 --> 00:33:10,724
+在固定间隔取样 
+显示应用在CPU中所用的时间
 
 
 589
-00:27:42,806 --> 00:27:44,106
-since we now have information
+00:33:11,358 --> 00:33:14,228
+在本例中在
+Time Profiler
 
 
 590
-00:27:44,106 --> 00:27:46,416
-about where the user actually
-touched during that time.
+00:33:14,294 --> 00:33:17,397
+我选用的是16毫秒间隔
 
 
 591
-00:27:46,736 --> 00:27:50,126
-So you generally want to throw
-those old predicted touches out.
+00:33:17,531 --> 00:33:19,700
+这基本和一个显示帧相对应
 
 
 592
-00:27:51,156 --> 00:27:53,446
-Now, previous location
-in view works similarly
+00:33:20,634 --> 00:33:23,604
+你可以看出本例中的应用
 
 
 593
-00:27:53,446 --> 00:27:55,656
-for predicted touches as it
-does for other touch types.
+00:33:23,804 --> 00:33:27,407
+只用了其中一小块时间 
 
 
 594
-00:27:56,546 --> 00:27:57,806
-It points to the location
+00:33:28,041 --> 00:33:29,710
+在本例中 是3毫秒
 
 
 595
-00:27:57,806 --> 00:28:00,526
-that the previous
-predicted touch had, or,
+00:33:30,644 --> 00:33:33,080
+如果是要测量并简要介绍
 
 
 596
-00:28:00,526 --> 00:28:03,346
-for the first predicted touch,
-it points to the last location
+00:33:33,146 --> 00:33:36,183
+在CPU方面的表现这也没问题
 
 
 597
-00:28:03,456 --> 00:28:05,286
-that was delivered to your app.
+00:33:36,750 --> 00:33:37,885
+那么GPU会怎样呢？
 
 
 598
-00:28:05,916 --> 00:28:08,336
-So you may be wondering how we
-actually get these predicted
+00:33:39,586 --> 00:33:41,922
+在Xcode调试会话中GPU
 
 
 599
-00:28:08,336 --> 00:28:09,676
-touches, and it's pretty simple.
+00:33:41,989 --> 00:33:46,927
+报告中的每秒
+传输帧数工具会为应用的GPU
 
 
 600
-00:28:10,476 --> 00:28:12,516
-We built a time machine into
-every iOS device [laughter].
+00:33:47,027 --> 00:33:48,829
+表现给出高层视图
 
 
 601
-00:28:14,596 --> 00:28:15,556
-That's not quite how it works.
+00:33:49,496 --> 00:33:53,267
+在本例中 你可以看到
+这个应用是60帧每秒
 
 
 602
-00:28:16,216 --> 00:28:19,186
-What we are actually doing
-is looking at the touches
+00:33:53,800 --> 00:33:57,337
+这是相对较低的GPU帧时
 
 
 603
-00:28:19,286 --> 00:28:21,636
-that are delivered to
-your app and using a set
+00:33:57,638 --> 00:33:59,806
+在本例中仅为3.8毫秒
 
 
 604
-00:28:21,636 --> 00:28:24,026
-of highly tuned algorithms
-to determine
+00:34:00,774 --> 00:34:06,313
+不过要记住这是关于
+应用运行的高层概视图
 
 
 605
-00:28:24,026 --> 00:28:27,386
-where the user's finger looks
-like it's going at this time.
+00:34:06,780 --> 00:34:09,049
+其中并未提供也许会导致
 
 
 606
-00:28:28,186 --> 00:28:30,826
-And as we get new touch samples,
-we will update our prediction
+00:34:09,116 --> 00:34:13,020
+掉帧的单独帧的详细信息
 
 
 607
-00:28:30,936 --> 00:28:34,006
-and deliver new predicted
-touches to your app.
+00:34:14,188 --> 00:34:16,123
+如果需要此类精度
 
 
 608
-00:28:34,236 --> 00:28:37,496
-Now, each of those predicted
-touches are complete UITouch
+00:34:16,723 --> 00:34:20,360
+可以使用新的GPU驱动工具
 
 
 609
-00:28:37,496 --> 00:28:39,816
-objects and they have all of
-their properties filled out,
+00:34:20,726 --> 00:34:22,462
+我们今年在Xcode中就有包括
 
 
 610
-00:28:40,126 --> 00:28:42,246
-like their location
-and time stamp.
+00:34:23,597 --> 00:34:26,699
+GPU驱动工具可以
+在你使用应用的同时
 
 
 611
-00:28:43,156 --> 00:28:46,196
-So now we can look at how those
-predicted touches affect the
+00:34:27,067 --> 00:34:30,204
+显示GPU激活的准确时间
 
 
 612
-00:28:46,196 --> 00:28:47,946
-pipeline that we
-have been looking at.
+00:34:30,838 --> 00:34:33,473
+在本例中 你可以看到我的应用中
 
 
 613
-00:28:48,796 --> 00:28:50,996
-This is what we saw
-earlier from main touches
+00:34:33,540 --> 00:34:37,844
+在顶点和片段着色器所用时间相对较少
 
 
 614
-00:28:51,026 --> 00:28:53,316
-and coalesced touches,
-and we can easily add
+00:34:38,145 --> 00:34:41,014
+实际上 这只是在显示器上
 
 
 615
-00:28:53,316 --> 00:28:54,646
-in predicted touches as well.
+00:34:41,348 --> 00:34:43,650
+显示一帧内容所用时间的一小部分
 
 
 616
-00:28:56,166 --> 00:28:58,246
-Each frame, as your
-app gets a main touch,
+00:34:45,118 --> 00:34:48,422
+注意这里只有两种颜色
 
 
 617
-00:28:58,346 --> 00:29:00,306
-you also get a set
-of predicted touches.
+00:34:48,989 --> 00:34:53,360
+这两种颜色代表着使用
+双缓冲方案的两个缓冲器
 
 
 618
-00:29:00,676 --> 00:29:04,106
-And if you get main touches
-and coalesced touches as well,
+00:34:54,428 --> 00:34:58,031
+如果应用在
+Core Animation
 
 
 619
-00:29:04,396 --> 00:29:06,356
-then the predicted touches
-are just more information
+00:34:58,098 --> 00:35:01,368
+和GPU中花费更多时间你会在这里
 
 
 620
-00:29:06,356 --> 00:29:07,836
-that you have available to you.
+00:35:01,635 --> 00:35:04,905
+看到三种颜色代表系统里
+正在进行的三重缓冲
 
 
 621
-00:29:08,686 --> 00:29:11,356
-And this process just repeats
-as new touches are delivered.
+00:35:06,840 --> 00:35:09,776
+我们谈了很多降低延迟的内容
 
 
 622
-00:29:12,436 --> 00:29:14,936
-One thing to note is
-that coalesced touches
+00:35:09,977 --> 00:35:13,213
+并让应用灵敏度更高不过最终
 
 
 623
-00:29:14,936 --> 00:29:16,506
-and predicted touches
-are independent.
+00:35:13,480 --> 00:35:16,884
+实现出色的iOS 体验是用户
 
 
 624
-00:29:16,506 --> 00:29:17,966
-You can use one without
-the other,
+00:35:16,950 --> 00:35:18,986
+自然和本能的体验
 
 
 625
-00:29:18,756 --> 00:29:21,356
-and predicted touches are
-supported on both 60-hertz
+00:35:19,319 --> 00:35:23,457
+而让应用感觉更生动则是
+实现这一目标的另一种不错的方法
 
 
 626
-00:29:21,406 --> 00:29:23,686
-and 120-hertz touch
-scan rate devices.
+00:35:24,491 --> 00:35:29,796
+去年 我们对系统的
+每个部件都进行了认真的思考 
 
 
 627
-00:29:24,346 --> 00:29:27,716
-So now let's take a look at
-how we can add touch prediction
+00:35:29,863 --> 00:35:31,932
+想方设法使其比以前更快更好
 
 
 628
-00:29:28,056 --> 00:29:30,386
-to the code that we were
-taking a look at earlier.
+00:35:32,699 --> 00:35:35,135
+在这一过程中我们改进了API
 
 
 629
-00:29:30,436 --> 00:29:34,216
-All you need to do is add
-this small bit of code,
+00:35:35,235 --> 00:35:37,638
+为大家提供更多控制和信息
 
 
 630
-00:29:34,216 --> 00:29:38,676
-and what we are doing is first
-removing any previous predicted
+00:35:37,738 --> 00:35:39,106
+来了解系统的运行状况
 
 
 631
-00:29:38,676 --> 00:29:39,996
-touches that we added
-to our line.
+00:35:39,907 --> 00:35:43,277
+有了OpenGL Metal
+和 Core Animation
 
 
 632
-00:29:40,216 --> 00:29:43,116
-And this is important since we
-now have the actual locations
+00:35:43,377 --> 00:35:46,246
+的最新低延迟模式
+你可以在向用户显示帧 
 
 
 633
-00:29:43,416 --> 00:29:44,286
-where those touches were.
+00:35:46,380 --> 00:35:49,950
+以及如何与屏幕上的其他内容 
 
 
 634
-00:29:44,886 --> 00:29:53,336
-Then we are iterating through
-the predicted touches we have.
+00:35:50,017 --> 00:35:51,919
+同步的时候 实现更多控制
 
 
 635
-00:29:54,216 --> 00:29:56,806
-And for each of those predicted
-touches, we are adding it
+00:35:52,786 --> 00:35:56,323
+利用触控接合你可以利用
 
 
 636
-00:29:56,966 --> 00:29:58,696
-as a sample to our line.
+00:35:56,390 --> 00:35:58,792
+所有硬件及其所有出色的功能 向用户
 
 
 637
-00:29:59,706 --> 00:30:01,556
-But notice that we are
-calling a different method here
+00:35:59,126 --> 00:36:00,327
+提供出色体验
 
 
 638
-00:30:01,666 --> 00:30:03,936
-to add the predicted
-sample as what we called
+00:36:00,627 --> 00:36:05,632
+使用触控预测我们可以让你
+少许窥探未来预测触控即将往何处去
 
 
 639
-00:30:03,936 --> 00:30:05,266
-to call the normal samples.
+00:36:06,800 --> 00:36:10,270
+最后我们构建
+并生成部分不错的工具
 
 
 640
-00:30:05,776 --> 00:30:08,066
-This is so that we can mark
-that sample as something
+00:36:10,337 --> 00:36:15,042
+以便你了解应用的性能表现
+这样你可以对之进行改进 
 
 
 641
-00:30:08,066 --> 00:30:09,786
-that will need to be
-removed the next time we go
+00:36:15,242 --> 00:36:17,544
+以便向用户提供更好的体验
 
 
 642
-00:30:09,786 --> 00:30:11,106
-through this code.
+00:36:18,979 --> 00:36:21,782
+在Apple 我们致力于
+让我们的产品
 
 
 643
-00:30:11,676 --> 00:30:13,836
-So that's touch coalescing
-and touch prediction.
+00:36:21,849 --> 00:36:24,685
+使用体验比以往更出色
 
 
 644
-00:30:14,226 --> 00:30:16,746
-Now that you have seen
-all of these techniques,
+00:36:24,751 --> 00:36:27,287
+我们认为通过降低
+延迟是实现这一点的不错方法
 
 
 645
-00:30:17,066 --> 00:30:18,906
-let's see what happens when
-we combine them all together.
+00:36:27,621 --> 00:36:29,489
+我们愿意邀请各位朝这方面努力
 
 
 646
-00:30:20,326 --> 00:30:23,536
-In iOS 8, with a
-well-optimized app,
+00:36:29,556 --> 00:36:31,525
+大家在
+developer.apple.com
 
 
 647
-00:30:24,136 --> 00:30:25,806
-this was the touch latency
-view that you could get.
+00:36:31,592 --> 00:36:36,997
+可以了解到我们今天探讨的技术
+工具和API等更多详情
 
 
 648
-00:30:25,806 --> 00:30:28,356
-We measured the latency
-as the time
+00:36:37,364 --> 00:36:39,733
+我们还想邀请大家参加开发者
 
 
 649
-00:30:28,356 --> 00:30:30,946
-between when the touch
-first comes down to
+00:36:40,000 --> 00:36:43,537
+论坛中的开发者
 
 
 650
-00:30:30,946 --> 00:30:33,436
-when the display has updated
-with that touch's information.
+00:36:43,971 --> 00:36:46,106
+技术对话
 
 
 651
-00:30:34,246 --> 00:30:35,836
-And so you can see
-that in iOS 8,
+00:36:47,708 --> 00:36:50,577
+我们今天介绍了许多不同的新技术
 
 
 652
-00:30:35,836 --> 00:30:37,536
-we would have four
-frames of latency.
+00:36:50,944 --> 00:36:53,614
+今年和往年有过许多
 
 
 653
-00:30:38,186 --> 00:30:42,586
-Now by using low latency
-Core Animation and iOS 9,
+00:36:53,680 --> 00:36:57,784
+与这一讲座相关话题的出色讨论
 
 
 654
-00:30:42,876 --> 00:30:44,606
-we can remove one frame
-of latency from that.
+00:36:58,452 --> 00:37:03,257
+例如 如果你非常感兴趣简要
+介绍应用的GPU性能
 
 
 655
-00:30:45,656 --> 00:30:48,576
-And by using touch
-coalescing and running
+00:37:03,690 --> 00:37:07,261
+如果非常非常想着手尝试
 
 
 656
-00:30:48,576 --> 00:30:50,156
-on a high-touch-scan-rate
-device,
+00:37:07,327 --> 00:37:10,764
+新的GPU工具我将向大家推荐
 
 
 657
-00:30:50,816 --> 00:30:52,566
-you can not only get
-increased information
+00:37:10,831 --> 00:37:13,166
+《Metal性能优化技术》讲座
 
 
 658
-00:30:52,566 --> 00:30:55,476
-about the user's touch, you
-can also remove a half frame
+00:37:13,433 --> 00:37:16,503
+这是今天早些时候的一场讲座
 
 
 659
-00:30:55,476 --> 00:30:58,936
-of latency from the
-beginning [applause].
+00:37:17,137 --> 00:37:20,274
+其中介绍了一整套不同的技术 
 
 
 660
-00:30:59,046 --> 00:30:59,576
-But there's more!
+00:37:20,340 --> 00:37:23,844
+可以用来优化GPU运行
+而不只是说使用Metal
 
 
 661
-00:31:02,356 --> 00:31:05,296
-By also using touch prediction
-you can get information
+00:37:25,179 --> 00:37:29,216
+此外如果Time Profiler
+常出问题 可以试试去听
 
 
 662
-00:31:05,296 --> 00:31:07,166
-about approximately a
-frame into the future
+00:37:29,283 --> 00:37:32,986
+《深度剖析》讲座
+这是昨天的一场讲座
 
 
 663
-00:31:07,216 --> 00:31:08,636
-of where the user's
-touches are going.
+00:37:33,487 --> 00:37:36,456
+其中深度剖析了该怎样
+使用Time Profiler
 
 
 664
-00:31:09,186 --> 00:31:13,026
-And this lets you give the user
-an effective latency that's
+00:37:36,523 --> 00:37:38,892
+并了解你的应用完成任务的情况
 
 
 665
-00:31:13,026 --> 00:31:14,936
-reduced by about a
-frame more as well.
+00:37:39,826 --> 00:37:41,862
+最后 如果大家的确感兴趣
 
 
 666
-00:31:15,646 --> 00:31:17,466
-And so altogether, in iOS 9,
+00:37:41,929 --> 00:37:45,165
+在Core Animation和 
+管线的GPU阶段究竟在做些什么
 
 
 667
-00:31:17,466 --> 00:31:19,246
-you can get down to
-approximately one
+00:37:45,232 --> 00:37:46,600
+这部分内容我们今天讲过
 
 
 668
-00:31:19,246 --> 00:31:21,136
-and a half frames of
-latency for your users
+00:37:46,834 --> 00:37:48,802
+我将向大家推荐去年WWDC的
 
 
 669
-00:31:21,366 --> 00:31:24,056
-which is a huge improvement from
-iOS 8's four frames of latency.
+00:37:48,869 --> 00:37:51,371
+《高级图形和动画》讲座
 
 
 670
-00:31:25,516 --> 00:31:31,586
-[ Applause ]
+00:37:52,606 --> 00:37:55,442
+所有这些讲座和许许多多其他讲座
 
 
 671
-00:31:32,086 --> 00:31:33,096
-So we think this
-is really great,
+00:37:55,509 --> 00:37:58,612
+都可以在开发人员门户网站找到
+developer.apple.com
 
 
 672
-00:31:33,096 --> 00:31:35,256
-and I highly encourage you
-to adopt these techniques
+00:37:58,679 --> 00:38:02,282
+希望大家今天收获很多
+在本周的全部环节中
 
 
 673
-00:31:35,256 --> 00:31:38,296
-in your app to give your users
-a great low latency experience.
+00:38:02,349 --> 00:38:05,719
+我希望大家喜欢WWDC的内容
 
 
 674
-00:31:38,766 --> 00:31:41,126
-Now I would like to turn
-things back over to Peter
-
-
-675
-00:31:41,126 --> 00:31:42,716
-to tell you how to
-fine-tune your app.
-
-
-676
-00:31:44,516 --> 00:31:48,956
-[ Applause ]
-
-
-677
-00:31:49,456 --> 00:31:50,446
->> PETER TSOI: Thanks, Jacob.
-
-
-678
-00:31:50,506 --> 00:31:53,196
-So now that you know about all
-of the new low latency modes
-
-
-679
-00:31:53,546 --> 00:31:56,526
-in iOS 9, we would like to tell
-you how you can take advantage
-
-
-680
-00:31:56,526 --> 00:31:59,866
-of those by fine-tuning your
-applications so you can fit
-
-
-681
-00:31:59,866 --> 00:32:03,616
-within one display frame of
-time so you can get your frames
-
-
-682
-00:32:03,616 --> 00:32:05,316
-out to the display that quickly.
-
-
-683
-00:32:05,726 --> 00:32:08,326
-The first way to ensure
-
-
-684
-00:32:08,326 --> 00:32:11,346
-that your application is doing
-the least amount of work is
-
-
-685
-00:32:11,376 --> 00:32:13,326
-to minimize the amount of work
-
-
-686
-00:32:13,606 --> 00:32:15,306
-that your application
-needs to do.
-
-
-687
-00:32:15,596 --> 00:32:18,626
-By using the coalesced touches
-API that Jacob just introduced
-
-
-688
-00:32:18,626 --> 00:32:22,426
-to you, you can get the benefits
-of high-fidelity touch inputs
-
-
-689
-00:32:22,686 --> 00:32:24,816
-of the iPad Air 2
-while making sure
-
-
-690
-00:32:24,816 --> 00:32:26,906
-that your application
-only renders images
-
-
-691
-00:32:27,096 --> 00:32:28,446
-that will make it
-onto the screen.
-
-
-692
-00:32:29,196 --> 00:32:32,176
-In addition, keep in mind
-that your user only cares
-
-
-693
-00:32:32,176 --> 00:32:35,406
-about the content that they can
-see on the device's display.
-
-
-694
-00:32:36,026 --> 00:32:40,096
-Your application may do the
-work to keep track of the state
-
-
-695
-00:32:40,246 --> 00:32:43,166
-of the world outside of
-the screen, but ultimately,
-
-
-696
-00:32:43,166 --> 00:32:46,336
-you should make sure that the
-rendering work is restricted
-
-
-697
-00:32:46,676 --> 00:32:50,096
-to only the work that is
-necessary to generate the image
-
-
-698
-00:32:50,316 --> 00:32:52,416
-that ultimately shows
-up on the screen.
-
-
-699
-00:32:53,466 --> 00:32:57,356
-If you are trying to
-profile your application,
-
-
-700
-00:32:57,526 --> 00:33:00,436
-to figure out how much time
-your application is spending
-
-
-701
-00:33:00,436 --> 00:33:03,986
-on the CPU, Time Profiler
-is a great way to do this.
-
-
-702
-00:33:04,626 --> 00:33:07,366
-Time Profiler will show you how
-much time your application is
-
-
-703
-00:33:07,366 --> 00:33:10,786
-using on the CPU by sampling
-it at a fixed interval.
-
-
-704
-00:33:11,436 --> 00:33:14,286
-In this case, in Time Profiler,
-
-
-705
-00:33:14,286 --> 00:33:17,386
-I selected a 16-millisecond
-interval,
-
-
-706
-00:33:17,616 --> 00:33:19,716
-which corresponds roughly
-to one display frame.
-
-
-707
-00:33:20,726 --> 00:33:23,616
-You can also tell
-that my application
-
-
-708
-00:33:23,856 --> 00:33:26,516
-in this case is using
-only a small fraction
-
-
-709
-00:33:26,516 --> 00:33:27,406
-of that amount of time.
-
-
-710
-00:33:28,066 --> 00:33:29,706
-In this case, 3 milliseconds.
-
-
-711
-00:33:30,256 --> 00:33:33,196
-Now this is all fine and good
-if you are trying to measure
-
-
-712
-00:33:33,196 --> 00:33:36,316
-and profile how you are
-doing in terms of CPU work.
-
-
-713
-00:33:36,816 --> 00:33:37,886
-What about GPU work?
-
-
-714
-00:33:39,196 --> 00:33:42,696
-The frames per second gauge
-in the GPU report available
-
-
-715
-00:33:42,696 --> 00:33:47,036
-in the Xcode debugging session
-give you a high-level view
-
-
-716
-00:33:47,086 --> 00:33:48,826
-of your application's
-GPU performance.
-
-
-717
-00:33:49,566 --> 00:33:50,856
-In this case, you can see
-
-
-718
-00:33:50,856 --> 00:33:53,276
-that this application is
-hitting 60 frames per second,
-
-
-719
-00:33:53,806 --> 00:33:57,346
-and it has a relatively low
-amount of GPU frame time.
-
-
-720
-00:33:57,706 --> 00:33:59,806
-In this case, just
-3.8 milliseconds.
-
-
-721
-00:34:00,786 --> 00:34:04,506
-Keep in mind, though, that this
-is just a high-level overview
-
-
-722
-00:34:04,916 --> 00:34:06,306
-of what your application
-is doing.
-
-
-723
-00:34:06,846 --> 00:34:09,176
-It doesn't give you
-fine-grained information
-
-
-724
-00:34:09,206 --> 00:34:13,025
-about individual frames that may
-be causing you to drop frames.
-
-
-725
-00:34:14,126 --> 00:34:17,366
-If you require that type of
-precision, then you will want
-
-
-726
-00:34:17,366 --> 00:34:20,366
-to turn to the new
-GPU driver instrument,
-
-
-727
-00:34:20,766 --> 00:34:22,696
-which we have introduced
-in Xcode this year.
-
-
-728
-00:34:23,686 --> 00:34:27,166
-The GPU driver instrument can
-show you exactly how long the
-
-
-729
-00:34:27,166 --> 00:34:30,206
-GPU is active for while you
-are using your application.
-
-
-730
-00:34:30,866 --> 00:34:33,795
-In this case, you can see
-that the amount of time spent
-
-
-731
-00:34:33,795 --> 00:34:35,436
-in the vertex and
-fragment shaders
-
-
-732
-00:34:35,466 --> 00:34:38,065
-of my application
-is relatively small.
-
-
-733
-00:34:38,206 --> 00:34:41,076
-In fact, it's just a small
-fraction of the amount of time
-
-
-734
-00:34:41,426 --> 00:34:43,666
-that a frame is shown
-on the display for.
-
-
-735
-00:34:45,176 --> 00:34:48,416
-Notice you only see
-two colors here.
-
-
-736
-00:34:49,045 --> 00:34:52,076
-These two colors represent
-the two buffers which are used
-
-
-737
-00:34:52,076 --> 00:34:53,366
-in the double-buffering scheme.
-
-
-738
-00:34:54,485 --> 00:34:58,106
-If our application is spending
-more time in Core Animation
-
-
-739
-00:34:58,106 --> 00:35:01,426
-and in GPU, you will
-see three colors here
-
-
-740
-00:35:01,426 --> 00:35:03,426
-to represent the
-triple buffering
-
-
-741
-00:35:03,426 --> 00:35:04,906
-which is happening
-in the system.
-
-
-742
-00:35:05,456 --> 00:35:10,676
-We have talked a lot about
-reducing latency and how
-
-
-743
-00:35:10,676 --> 00:35:13,406
-to make your application more
-responsive, but ultimately,
-
-
-744
-00:35:13,486 --> 00:35:17,026
-building a great iOS experience
-is about building a natural
-
-
-745
-00:35:17,026 --> 00:35:18,976
-and intuitive experience
-for your user
-
-
-746
-00:35:19,316 --> 00:35:22,966
-and making your application feel
-more alive is another great way
-
-
-747
-00:35:22,966 --> 00:35:24,506
-of doing that.
-
-
-748
-00:35:24,506 --> 00:35:28,166
-Over the last year, we thought
-long and hard about each part
-
-
-749
-00:35:28,166 --> 00:35:29,826
-of our system, and we found ways
-
-
-750
-00:35:29,966 --> 00:35:31,916
-to make it better
-and faster than ever.
-
-
-751
-00:35:32,706 --> 00:35:34,876
-Throughout this process,
-we have improved our APIs
-
-
-752
-00:35:35,246 --> 00:35:37,626
-to give you more control
-and more information
-
-
-753
-00:35:37,926 --> 00:35:39,056
-over how the system works.
-
-
-754
-00:35:40,006 --> 00:35:43,276
-With the new low latency
-modes on OpenGL, Metal,
-
-
-755
-00:35:43,366 --> 00:35:46,456
-and Core Animation,
-you have more control
-
-
-756
-00:35:46,456 --> 00:35:50,026
-over when your frame is shown to
-the user and how it synchronizes
-
-
-757
-00:35:50,136 --> 00:35:51,906
-with any other content
-you have on the screen.
-
-
-758
-00:35:52,846 --> 00:35:56,366
-With touch coalescing, you
-can take advantage of all
-
-
-759
-00:35:56,366 --> 00:35:58,786
-of our hardware and all of
-its awesome capabilities
-
-
-760
-00:35:59,136 --> 00:36:00,326
-to provide that to your user.
-
-
-761
-00:36:00,616 --> 00:36:02,996
-And with touch prediction, we
-are offering you a small glimpse
-
-
-762
-00:36:02,996 --> 00:36:05,896
-into the future as to where
-that touch is going to go.
-
-
-763
-00:36:06,876 --> 00:36:10,426
-And finally, we have built
-and created some great tools
-
-
-764
-00:36:10,426 --> 00:36:12,606
-in order for you to
-understand the performance
-
-
-765
-00:36:12,606 --> 00:36:15,036
-of your application so that
-you can improve upon it
-
-
-766
-00:36:15,166 --> 00:36:17,546
-to provide an even better
-experience for your users.
-
-
-767
-00:36:18,016 --> 00:36:21,826
-We at Apple are committed
-to making the experience
-
-
-768
-00:36:21,826 --> 00:36:24,756
-of using our products
-feel more alive than ever,
-
-
-769
-00:36:24,796 --> 00:36:27,356
-and we think reducing latency
-is a great way of doing that,
-
-
-770
-00:36:27,636 --> 00:36:29,506
-and we would like to invite
-you along on this journey.
-
-
-771
-00:36:30,106 --> 00:36:33,736
-You can find more information
-about the technology, tools,
-
-
-772
-00:36:33,736 --> 00:36:36,996
-and APIs we've discussed
-today at developer.apple.com.
-
-
-773
-00:36:36,996 --> 00:36:39,726
-We would also like to
-invite you to take part
-
-
-774
-00:36:39,726 --> 00:36:43,536
-in the developer
-technical conversation
-
-
-775
-00:36:43,956 --> 00:36:46,116
-on our developer forums.
-
-
-776
-00:36:46,676 --> 00:36:48,656
-We talked about a lot
-
-
-777
-00:36:48,656 --> 00:36:50,636
-of different new
-technologies today,
-
-
-778
-00:36:50,966 --> 00:36:53,716
-and there have been really
-great sessions both this year
-
-
-779
-00:36:53,716 --> 00:36:55,996
-and in previous years
-that go over topics
-
-
-780
-00:36:56,306 --> 00:36:57,616
-which are related to this talk.
-
-
-781
-00:36:58,436 --> 00:37:00,056
-For example, if you
-are very interested
-
-
-782
-00:37:00,056 --> 00:37:03,246
-in profiling the GPU
-performance of your application,
-
-
-783
-00:37:03,696 --> 00:37:07,266
-and if you are really, really,
-really excited to get your hands
-
-
-784
-00:37:07,266 --> 00:37:10,856
-on that new GPU instrument,
-I would like to point you
-
-
-785
-00:37:10,856 --> 00:37:13,236
-at the Metal Performance
-Optimization Techniques talk,
-
-
-786
-00:37:13,516 --> 00:37:16,236
-which was given earlier
-today, where they talk
-
-
-787
-00:37:16,236 --> 00:37:20,366
-about a whole bunch of different
-techniques that you can use
-
-
-788
-00:37:20,366 --> 00:37:23,836
-to optimize your GPU work, not
-just if you are using Metal.
-
-
-789
-00:37:25,216 --> 00:37:29,236
-In addition, if Time Profiler is
-your jam, then you want to check
-
-
-790
-00:37:29,236 --> 00:37:33,046
-out the new Profiling in Depth
-talk, which was given yesterday,
-
-
-791
-00:37:33,556 --> 00:37:36,536
-which goes into a deep dive
-on how to use Time Profiler
-
-
-792
-00:37:36,586 --> 00:37:38,886
-to get a great idea of what
-your application is doing.
-
-
-793
-00:37:39,896 --> 00:37:42,176
-And finally, if you guys
-are really interested
-
-
-794
-00:37:42,176 --> 00:37:44,896
-in what is happening in the
-Core Animation and GPU stages
-
-
-795
-00:37:44,896 --> 00:37:46,596
-of the pipeline we
-have discussed today,
-
-
-796
-00:37:46,596 --> 00:37:48,836
-I would like to point you
-to the Advanced Graphics
-
-
-797
-00:37:48,836 --> 00:37:52,426
-and Animation talk
-from last year's WWDC.
-
-
-798
-00:37:52,616 --> 00:37:55,466
-All of these talks and
-many, many more can be found
-
-
-799
-00:37:55,466 --> 00:37:57,906
-on our developer portal
-at developer.apple.com.
-
-
-800
-00:37:58,716 --> 00:38:02,346
-I hope you learned a lot today
-and over the entire course
-
-
-801
-00:38:02,346 --> 00:38:05,636
-of this week, and I hope
-you had an enjoyable WWDC.
-
-
-802
-00:38:06,106 --> 00:38:06,436
-Thank you.
-
-
-803
-00:38:07,516 --> 00:38:21,230
-[ Applause ]
+00:38:05,786 --> 00:38:06,520
+谢谢
 

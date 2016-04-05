@@ -1,5321 +1,4028 @@
 1
-00:00:24,326 --> 00:00:25,236
->> JON ANDREWS: Good morning.
+00:00:19,319 --> 00:00:24,558
+全天电池续航的会议
 
 
 2
-00:00:30,306 --> 00:00:32,036
-Thank you for coming
-to see our session
+00:00:24,725 --> 00:00:25,626
+早上好
 
 
 3
-00:00:32,036 --> 00:00:33,486
-on achieving all-day
-battery Life.
+00:00:30,297 --> 00:00:33,500
+感谢您来观看关于
+实现全天电池续航的会议
 
 
 4
-00:00:34,086 --> 00:00:36,726
-It's an area I am really excited
-to get to talk to you about.
+00:00:34,101 --> 00:00:36,737
+很兴奋能够和您讨论这个领域
 
 
 5
-00:00:37,206 --> 00:00:39,856
-My name is Jon Andrews from
-Core OS, and my colleague,
+00:00:37,204 --> 00:00:39,139
+我是来自于Core OS
+的 強·安德魯斯
 
 
 6
-00:00:39,856 --> 00:00:42,086
-Soren Spies, will
-also be joining me.
+00:00:39,206 --> 00:00:41,408
+同时我的同事
+桑仁·斯碧丝也将加入我们
 
 
 7
-00:00:42,916 --> 00:00:46,466
-So I hope that you all
-charged your phones last night
+00:00:42,910 --> 00:00:46,413
+我希望你们所有人
+昨天晚上都把手机充满电了
 
 
 8
-00:00:46,466 --> 00:00:48,246
-and didn't get to see
-this this morning.
+00:00:46,480 --> 00:00:48,248
+而且在这个早晨不要看它
 
 
 9
-00:00:49,316 --> 00:00:51,226
-We want you to see this
-much later in the day.
+00:00:49,316 --> 00:00:51,218
+我们希望你能在当天晚些时候再去看
 
 
 10
-00:00:52,196 --> 00:00:53,876
-In fact, we'd like you
-to see it even later
+00:00:52,085 --> 00:00:55,189
+事实上 我们想让你看到
+它比你已经看到它的时间要晚
 
 
 11
-00:00:53,876 --> 00:00:55,116
-than you've been able
-to see it to date.
+00:00:56,190 --> 00:00:57,357
+我们将会讨论
 
 
 12
-00:00:55,226 --> 00:00:58,936
-We are going to walk
-through some aspects
+00:00:57,891 --> 00:01:01,128
+在iOS的环境下如何去实现
+全天电池续航的一些具体内容
 
 
 13
-00:00:58,936 --> 00:01:01,686
-of achieving all-day
-battery life under iOS.
+00:01:03,263 --> 00:01:06,166
+我们将会谈到
+用户对于全天电池续航的期待
 
 
 14
-00:01:02,976 --> 00:01:06,166
-We will cover what users expect
-from all-day battery life,
+00:01:07,434 --> 00:01:14,074
+计算做出改进后的大致功耗
 
 
 15
-00:01:07,426 --> 00:01:11,376
-computing energy in general,
-improvements we've made
+00:01:14,975 --> 00:01:19,112
+你在帮助我们实现
+全天电池续航中的任务
 
 
 16
-00:01:11,376 --> 00:01:17,106
-to the OS in terms of energy,
-your role in helping us
+00:01:19,780 --> 00:01:22,249
+之后 桑仁 也将会更深入的
 
 
 17
-00:01:17,106 --> 00:01:19,096
-and the customers achieve
-all-day battery life,
+00:01:22,316 --> 00:01:26,019
+指导你们怎样改进程序
+从而实现这些目的
 
 
 18
-00:01:19,776 --> 00:01:22,316
-and then Soren will give
-you a much deeper dive
+00:01:27,855 --> 00:01:30,057
+先让我们了解一下
+究竟什么是电池全天续航
 
 
 19
-00:01:22,316 --> 00:01:24,866
-on how your software
-can be modified in order
+00:01:31,925 --> 00:01:36,096
+用户在一天中不是一直使用他们的手机
+8或者10个小时
 
 
 20
-00:01:24,866 --> 00:01:26,006
-to help achieve those goals.
+00:01:36,997 --> 00:01:39,600
+他们实际上只是在某个密集的时间
+才会使用它
 
 
 21
-00:01:27,896 --> 00:01:30,786
-So let's look at what
-all-day battery life is.
+00:01:39,666 --> 00:01:42,603
+可能是他们在早上上班的时候
 
 
 22
-00:01:31,956 --> 00:01:34,876
-Users don't just use
-their phone for eight
+00:01:43,103 --> 00:01:45,906
+然后手机就会被闲置
 
 
 23
-00:01:34,876 --> 00:01:36,046
-or ten hours in one go.
+00:01:46,373 --> 00:01:47,975
+那么它就可以做一些后台工作
 
 
 24
-00:01:37,036 --> 00:01:39,656
-They actually spend some
-intense time using it,
+00:01:48,041 --> 00:01:51,578
+比如维护工作和网络通信
+或下载邮件等
 
 
 25
-00:01:39,656 --> 00:01:42,596
-maybe in the morning, as
-they are commuting to work,
+00:01:53,013 --> 00:01:56,049
+这种模式将会持续一整天
+伴随着工作负载的激增
 
 
 26
-00:01:43,136 --> 00:01:45,916
-and then the phone's
-pretty much idle,
+00:01:56,950 --> 00:01:58,552
+随后出现了一段空闲阶段
 
 
 27
-00:01:46,006 --> 00:01:48,086
-and then it's doing
-some background work,
+00:02:00,020 --> 00:02:04,124
+为了实现全天续航
+需要保持一个较低的功耗
 
 
 28
-00:01:48,086 --> 00:01:50,396
-some maintenance work,
-talking to the network,
+00:02:06,293 --> 00:02:10,531
+因此在一天中平均的功耗都很低
 
 
 29
-00:01:50,396 --> 00:01:51,536
-maybe downloading your mail.
+00:02:12,900 --> 00:02:17,804
+而那就是我们在关注操作系统的过程中
+一直去努力追求的目标
 
 
 30
-00:01:52,276 --> 00:01:54,866
-But these kind of patterns
-go on throughout the day,
+00:02:20,407 --> 00:02:24,912
+因此让我们看一下
+计算功耗的基本原理
 
 
 31
-00:01:54,866 --> 00:01:58,546
-with bursts of workload and
-then some periods of idle.
+00:02:25,879 --> 00:02:29,082
+首先功耗有两个要素 功率和时间
 
 
 32
-00:02:00,046 --> 00:02:02,126
-And in order to achieve
-all-day battery life,
+00:02:29,883 --> 00:02:32,219
+而时间因素经常被忽略
 
 
 33
-00:02:02,316 --> 00:02:04,136
-you really want to
-keep that low.
+00:02:33,820 --> 00:02:39,293
+你可以做些耗费很多功率的密集操作
 
 
 34
-00:02:04,826 --> 00:02:10,536
-So the average energy
-during the day is low.
+00:02:39,893 --> 00:02:41,762
+但你需要知道它工作多长时间
 
 
 35
-00:02:11,246 --> 00:02:16,216
-And that's what we are
-looking for in efforts from you
+00:02:43,430 --> 00:02:47,167
+如果在待机的状态下
+它并不会消耗过多的功率
 
 
 36
-00:02:16,216 --> 00:02:20,416
-and we have been
-looking at in the OS.
+00:02:48,101 --> 00:02:50,704
+但是你可以在很长的一段时间内
+保持在待机状态
 
 
 37
-00:02:20,416 --> 00:02:22,576
-So let's look at
-the fundamentals
+00:02:51,638 --> 00:02:55,475
+对于我们的设备来说
+播放音频是另一项低功率的应用
 
 
 38
-00:02:22,736 --> 00:02:24,916
-of how you compute energy.
+00:02:55,742 --> 00:02:58,045
+因此可以提供很长的播放时间
 
 
 39
-00:02:25,876 --> 00:02:29,086
-Energy has two components,
-power and time,
+00:02:59,112 --> 00:03:02,583
+但是当你进一步加强工作负载时
 
 
 40
-00:02:29,146 --> 00:02:32,226
-and the time element is
-often one that is forgotten.
+00:03:03,116 --> 00:03:07,521
+消耗的功率也会随之增加
+所以我们才希望你能减少使用设备时间
 
 
 41
-00:02:32,806 --> 00:02:38,876
-You can do a really intense
-operation that uses a lot
+00:03:09,356 --> 00:03:14,161
+如果工作负载像空闲状态那样
+实现全天续航将会变得非常简单
 
 
 42
-00:02:38,876 --> 00:02:43,646
-of power, but you want to know
-how long you are doing it for.
+00:03:15,729 --> 00:03:18,265
+只要在平均功耗很低的情况下
 
 
 43
-00:02:43,646 --> 00:02:47,156
-If we look at standby, it
-doesn't use much power,
+00:03:18,332 --> 00:03:23,337
+意味着也可以产生
+比较高的功率脉冲
 
 
 44
-00:02:47,746 --> 00:02:49,416
-but you are able
-to stay in standby
+00:03:25,138 --> 00:03:27,808
+现在我们的设备正在增加动态范围
 
 
 45
-00:02:49,416 --> 00:02:50,706
-for a very long period of time.
+00:03:29,042 --> 00:03:32,279
+我们正在开始接近MacBook领域
 
 
 46
-00:02:51,626 --> 00:02:54,496
-Playing audio is one of the
-other very low power use cases
+00:03:32,346 --> 00:03:34,815
+在这里你可以从系统中获取可观的性能
 
 
 47
-00:02:54,496 --> 00:02:56,596
-that we have on our device,
-and that's why we are able
+00:03:34,882 --> 00:03:36,416
+所以你需要非常小心的去使用它
 
 
 48
-00:02:56,596 --> 00:02:58,046
-to offer great playback time.
+00:03:37,618 --> 00:03:38,685
+其它要记住的事情就是
 
 
 49
-00:02:59,126 --> 00:03:02,586
-But as you get further up into
-the more intense workloads,
+00:03:38,752 --> 00:03:40,754
+随着我们不断的增加动态范围
 
 
 50
-00:03:03,106 --> 00:03:04,496
-you use more power
-and, therefore,
+00:03:41,255 --> 00:03:45,425
+每一代的硬件效率也变得更好
 
 
 51
-00:03:04,496 --> 00:03:07,516
-we do expect the time you
-use the device to decrease.
+00:03:45,926 --> 00:03:50,764
+因此我们将会给你更好的能力
+去实现这些低功耗的操作
 
 
 52
-00:03:08,396 --> 00:03:12,046
-So it's pretty easy to
-achieve all-day battery life
+00:03:51,431 --> 00:03:54,801
+但是你也可以为了
+实现密集操作或者超爽的用户体验
 
 
 53
-00:03:12,396 --> 00:03:14,166
-if your workload
-looks like idle.
+00:03:55,269 --> 00:03:58,238
+去使用更高的峰值性能
 
 
 54
-00:03:14,706 --> 00:03:18,296
-And that doesn't mean you
-can't have it be really intense
+00:04:00,107 --> 00:04:03,310
+因此让我们从一个应用程序
+生命循环周期的角度去审视它
 
 
 55
-00:03:18,296 --> 00:03:22,936
-and have high power bursts,
-as long as the average is low.
+00:04:05,345 --> 00:04:08,982
+这幅图中的区域
+表示被应用程序所使用的功耗
 
 
 56
-00:03:24,896 --> 00:03:27,816
-Now our devices are getting
-increased dynamic range.
+00:04:10,450 --> 00:04:13,253
+你启动应用程序时
+有些需要进行的工作
 
 
 57
-00:03:28,656 --> 00:03:32,356
-We are starting to get
-close to MacBook territory,
+00:04:14,688 --> 00:04:18,358
+比如去初始化应用程序
+可能在开始的时候有一些动画
 
 
 58
-00:03:32,356 --> 00:03:34,136
-where you can get a huge
-amount of performance
+00:04:19,091 --> 00:04:23,697
+当你的用户与应用程序进行交互时
+可以会有一些活动的爆发
 
 
 59
-00:03:34,136 --> 00:03:36,146
-out of the system, so you
-want to use it very carefully.
+00:04:24,965 --> 00:04:27,835
+你需要记住的是
+那样可能需要一些固定的消耗
 
 
 60
-00:03:37,626 --> 00:03:38,756
-The other thing to remember is
+00:04:28,335 --> 00:04:32,840
+而且那些功耗正是
+被系统和功耗所正使用的
 
 
 61
-00:03:38,756 --> 00:03:42,096
-that as we increase the
-dynamic range, the efficiency
+00:04:33,340 --> 00:04:35,776
+而那时用户的工作负载是最重要的
 
 
 62
-00:03:42,096 --> 00:03:45,426
-of our hardware gets better
-with every generation.
+00:04:37,377 --> 00:04:40,214
+当用户结束使用应用程序之后
 
 
 63
-00:03:45,916 --> 00:03:48,286
-So we are going to give
-you a better ability
+00:04:40,380 --> 00:04:44,218
+你希望在应用程序
+进入后台时可以进行一些操作
 
 
 64
-00:03:48,286 --> 00:03:50,776
-to achieve those
-low-power operations,
+00:04:44,718 --> 00:04:46,954
+然而最终应用程序被暂停了
 
 
 65
-00:03:51,416 --> 00:03:54,816
-but you can also make use of
-the higher peak performance
+00:04:48,288 --> 00:04:52,759
+在这儿我们可以看到
+有着固定和动态损耗的时间因素
 
 
 66
-00:03:55,266 --> 00:03:58,226
-for intense operations and
-a snappy user experience.
+00:04:54,628 --> 00:04:59,099
+现在我们也只需要
+从一个系统的角度来考虑
 
 
 67
-00:03:59,796 --> 00:04:03,326
-So let's now look at that from
-an app life cycle perspective.
+00:05:00,300 --> 00:05:03,337
+那么就让我们看看
+系统在待机状态中的情况
 
 
 68
-00:04:05,096 --> 00:04:08,186
-The area under this graph
-represents the energy used
+00:05:05,706 --> 00:05:08,275
+在这里绝大部分的组件
+都处于睡眠状态的形式下
 
 
 69
-00:04:08,186 --> 00:04:08,966
-by an application.
+00:05:09,543 --> 00:05:14,214
+屏幕是关闭的
+内存也处于一种低功耗的
 
 
 70
-00:04:10,436 --> 00:04:14,266
-You launch the application, and
-there's some work that goes on,
+00:05:14,982 --> 00:05:17,117
+刷新模式下
 
 
 71
-00:04:14,676 --> 00:04:16,625
-to initialize your application,
+00:05:17,918 --> 00:05:23,056
+只有一些无线电在开着
+仅允许接收传入的流量或者唤醒系统
 
 
 72
-00:04:16,625 --> 00:04:18,356
-maybe you have some
-animations at the beginning.
+00:05:24,157 --> 00:05:25,859
+这种模式的功耗非常低
 
 
 73
-00:04:19,096 --> 00:04:22,916
-And then there's some bursts of
-activity as your user interacts
+00:05:27,794 --> 00:05:32,332
+然后我们讨论一下用户闲置的情况
+在这儿有更多系统的组件被唤醒
 
 
 74
-00:04:22,916 --> 00:04:23,696
-with your application.
+00:05:34,034 --> 00:05:39,640
+你也可看到显示屏处于开启运行状态
+这带来了一些伴随着的的软系统
 
 
 75
-00:04:24,966 --> 00:04:27,356
-There's always some fixed cost
-here that you need to keep
+00:05:41,508 --> 00:05:45,279
+其他的组件
+例如CPU 和GPU等
 
 
 76
-00:04:27,356 --> 00:04:31,526
-in mind, and that's the one
-that the system and, you know,
+00:05:45,946 --> 00:05:49,583
+绝大多数是不活跃的并且闲置时间短
 
 
 77
-00:04:31,526 --> 00:04:32,836
-the frameworks are using,
+00:05:49,950 --> 00:05:51,652
+因此这个周期也很低
 
 
 78
-00:04:33,336 --> 00:04:37,186
-and the user workload
-is then on top of that.
+00:05:52,586 --> 00:05:56,890
+如果我们把它做成动画
+并且展示功耗可能会是什么样子的话
 
 
 79
-00:04:37,386 --> 00:04:40,216
-Of course, the user finishes
-using your application,
+00:05:57,090 --> 00:06:01,195
+那么在一天当中
+用户的电池消耗将会得到很好的减缓
 
 
 80
-00:04:40,396 --> 00:04:43,496
-and you want to do some
-operations as the app goes
+00:06:01,595 --> 00:06:05,832
+希望在进入夜晚
+你准备睡觉时为手机充电
 
 
 81
-00:04:43,496 --> 00:04:45,546
-into the background,
-and then ultimately,
+00:06:08,302 --> 00:06:13,207
+然而假如你想运行
+大功耗的程序比如3D游戏
 
 
 82
-00:04:45,546 --> 00:04:46,966
-your application is suspended.
+00:06:13,774 --> 00:06:16,310
+这将会使用系统的绝大部分
 
 
 83
-00:04:48,016 --> 00:04:50,316
-But here you can see
-there's the time element,
+00:06:17,077 --> 00:06:19,746
+你已经让所有的组件都处于运行状态
 
 
 84
-00:04:50,696 --> 00:04:52,746
-with both the fixed
-and dynamic costs.
+00:06:19,813 --> 00:06:26,486
+为了让GPU复杂的渲染跑起来
+你可能正在使用大量的CPU
 
 
 85
-00:04:54,616 --> 00:04:57,756
-Now, we also need to
-think about that just
+00:06:27,020 --> 00:06:31,992
+播放游戏音频会导致音频系统启动
 
 
 86
-00:04:57,806 --> 00:04:59,086
-from a system perspective too.
+00:06:32,926 --> 00:06:39,900
+因此预期的使用功率稍高
+电池持续的时间相应的也会比较短
 
 
 87
-00:05:00,306 --> 00:05:02,876
-So let's look at what a
-system looks like in standby.
+00:06:45,572 --> 00:06:51,311
+对于这三个组件
+我们有一个非常简单的策略去优化功耗
 
 
 88
-00:05:03,786 --> 00:05:08,266
-Most of the components here are
-in some form of sleep state.
+00:06:52,346 --> 00:06:53,780
+你想做更少的工作
 
 
 89
-00:05:09,536 --> 00:05:14,206
-The display is off, memory
-is in sort of a refresh mode
+00:06:55,582 --> 00:07:00,187
+就需要考虑一下工作
+是否需要现在去做或者随后再做
 
 
 90
-00:05:14,986 --> 00:05:17,126
-and using actually
-very little power,
+00:07:02,689 --> 00:07:06,593
+最终进行那项工作的时候
+需要设法尽可能高效率地完成
 
 
 91
-00:05:17,926 --> 00:05:20,846
-and some of the radios
-are on, just to allow them
+00:07:09,329 --> 00:07:12,900
+桑仁 将会在下次讨论的部分
+涉及到更多的细节问题
 
 
 92
-00:05:20,846 --> 00:05:24,116
-to accept incoming traffic
-and wake the system up.
+00:07:15,302 --> 00:07:17,137
+那么让我们讨论一下
+在iOS 9下的情况
 
 
 93
-00:05:24,256 --> 00:05:27,006
-This is a great low-power mode.
+00:07:18,438 --> 00:07:21,475
+我们的已经有了一流的电池续航能力
 
 
 94
-00:05:27,556 --> 00:05:31,416
-Then we talked about user
-idle, and here more components
+00:07:22,342 --> 00:07:24,011
+然而我们确实认为我们能够做的更好
 
 
 95
-00:05:31,416 --> 00:05:32,346
-of the system are awake.
+00:07:24,912 --> 00:07:26,847
+除此之外我们的顾客
+也希望我们做的更好
 
 
 96
-00:05:32,936 --> 00:05:37,056
-You can see that the display is
-on and active, and that brings
+00:07:27,314 --> 00:07:28,415
+你也希望我们做的更好
 
 
 97
-00:05:37,056 --> 00:05:40,326
-up a certain amount of
-soft systems with it.
+00:07:29,550 --> 00:07:32,853
+我们开始通过优化
+操作系统和集成的应用程序
 
 
 98
-00:05:41,256 --> 00:05:47,166
-The other components, like the
-CPU and GPU, are mostly inactive
+00:07:33,654 --> 00:07:35,789
+从而在现存的硬件中促进电池续航
 
 
 99
-00:05:47,726 --> 00:05:49,596
-and have small periods
-of inactivity,
+00:07:37,024 --> 00:07:41,395
+去增加电池的额外一个小时的寿命
 
 
 100
-00:05:49,956 --> 00:05:51,666
-so the cycle here is really low.
+00:07:42,963 --> 00:07:45,999
+现在我们的做法
+对于你们中的一些人可能很熟悉
 
 
 101
-00:05:52,576 --> 00:05:53,866
-If we were to animate that,
+00:07:46,066 --> 00:07:48,936
+因为我们在OS X Mavericks中
+曾有过相似的努力
 
 
 102
-00:05:53,866 --> 00:05:56,876
-and show you what the
-energy would look like,
+00:07:50,137 --> 00:07:53,373
+我们取消了应用程序
+框架和驱动程序的轮询
 
 
 103
-00:05:57,106 --> 00:05:59,246
-you get this really
-nice slow drain
+00:07:53,440 --> 00:07:54,508
+我们优化了内核
 
 
 104
-00:05:59,246 --> 00:06:01,196
-on the user's battery
-throughout the day,
+00:07:56,276 --> 00:08:00,180
+同时把我们的服务质量
+应用到我们的线程中
 
 
 105
-00:06:01,596 --> 00:06:03,926
-and hopefully now this
-is going into the evening
+00:08:00,948 --> 00:08:03,016
+采用了更多的NS操作
 
 
 106
-00:06:03,926 --> 00:06:06,576
-and you are going to bed
-plugging your phone in.
+00:08:03,750 --> 00:08:06,153
+以及用更加正确的服务质量
+去安排输入输出
 
 
 107
-00:06:07,996 --> 00:06:13,196
-However, if you were to program
-an intense game, 3D game,
+00:08:08,021 --> 00:08:13,093
+我们结合定时器去减少CPU
 
 
 108
-00:06:13,766 --> 00:06:16,326
-you are making the
-most use of our system.
+00:08:13,594 --> 00:08:16,029
+以及像午睡app这样速率限制的
+应用程序的唤醒次数
 
 
 109
-00:06:17,086 --> 00:06:19,806
-You've really got all
-the components lit up,
+00:08:17,364 --> 00:08:21,502
+从系统的角度来看
+重新执行我们的CPU电源管理单元
 
 
 110
-00:06:19,806 --> 00:06:23,576
-you are probably using the CPU
-a lot in order to feed the GPU
+00:08:22,002 --> 00:08:24,538
+功耗将会得到显著的降低
 
 
 111
-00:06:23,946 --> 00:06:28,466
-for some complex rendering,
-and you've got the audio system
+00:08:25,439 --> 00:08:29,710
+然后我们添加了个非常受欢迎的特性
 
 
 112
-00:06:28,466 --> 00:06:32,006
-up because there's some game
-audio that you want to play.
+00:08:29,977 --> 00:08:34,181
+即为电池目录添加“重大能源”标示
 
 
 113
-00:06:32,916 --> 00:06:37,956
-So you'd expect that the power
-used is higher and the time
+00:08:34,414 --> 00:08:38,217
+从而使得你能够看到哪个应用程序
+正在从电池中消耗比较大的能量
 
 
 114
-00:06:37,956 --> 00:06:42,946
-that the battery
-will last is shorter.
+00:08:40,687 --> 00:08:43,657
+因此现在回到iOS中
+看一下我们怎样应用这些措施的
 
 
 115
-00:06:43,316 --> 00:06:49,666
-So there's three components
-to a very simple strategy
+00:08:44,191 --> 00:08:45,726
+我们之所以专注于iPhone
 
 
 116
-00:06:49,666 --> 00:06:51,296
-that we have for
-optimizing for energy.
+00:08:46,360 --> 00:08:50,931
+是因为我们得到很多人的反馈说
+希望提高iphone的电池续航能力
 
 
 117
-00:06:52,336 --> 00:06:53,786
-You want to do less work.
+00:08:52,199 --> 00:08:56,236
+然而从某种程度上来说这些提高措施
+已经应用到我们所有的iOS设备中
 
 
 118
-00:06:55,576 --> 00:06:58,286
-And you want to then think
-about whether that work needs
+00:08:58,172 --> 00:09:01,208
+现在让我们通过这三个组件的策略
 
 
 119
-00:06:58,286 --> 00:07:00,186
-to be done now or whether
-you could do it later.
+00:09:02,643 --> 00:09:03,510
+以减少工作量
 
 
 120
-00:07:01,546 --> 00:07:05,386
-And then when you eventually
-do that work, you want to do it
+00:09:05,646 --> 00:09:11,285
+我们希望进一步优化闲置负载
+以及特别关注睡眠定时器
 
 
 121
-00:07:05,386 --> 00:07:06,596
-as efficiently as possible.
+00:09:11,919 --> 00:09:15,923
+在用户完成交互之后
+系统的绝大部分时间都用在睡眠上
 
 
 122
-00:07:07,086 --> 00:07:11,756
-Soren will go into
-more details on this
+00:09:16,323 --> 00:09:20,394
+现在是基于用户在设备上的
+操作基础上去优化
 
 
 123
-00:07:11,906 --> 00:07:12,886
-in the next part of the talk.
+00:09:21,094 --> 00:09:25,465
+他们与推送的交互究竟是否进行
 
 
 124
-00:07:15,296 --> 00:07:17,136
-So let's talk about
-what we did in iOS 9.
+00:09:27,267 --> 00:09:29,503
+我们减少CPU在空闲时刻
+被唤醒的次数
 
 
 125
-00:07:18,436 --> 00:07:21,486
-We already had best-in-class
-battery life.
+00:09:29,837 --> 00:09:33,240
+我们已经给它添加了
+关于屏幕检测的一个很酷的特性
 
 
 126
-00:07:22,346 --> 00:07:23,996
-However, we really
-thought we could do better,
+00:09:34,007 --> 00:09:37,878
+因此当手机屏幕面向桌面时
 
 
 127
-00:07:24,776 --> 00:07:26,386
-and our customers
-wanted us to do better.
+00:09:39,847 --> 00:09:41,215
+收到一条通知
 
 
 128
-00:07:27,306 --> 00:07:28,286
-You wanted us to do better.
+00:09:42,082 --> 00:09:44,451
+屏幕不会为处理那个通知而去亮起来
 
 
 129
-00:07:29,566 --> 00:07:32,866
-So we set out to improve battery
-life on our existing hardware,
+00:09:44,651 --> 00:09:48,088
+我们让系统尽可能少的做准备工作
 
 
 130
-00:07:33,766 --> 00:07:35,876
-offering up to an hour of
-additional battery life
+00:09:48,155 --> 00:09:51,525
+这样 只有当用户接电话的时候
+通知才被提供给他们
 
 
 131
-00:07:35,876 --> 00:07:40,156
-by optimizing the OS and
-many of the applications
+00:09:54,027 --> 00:09:55,596
+现在开始后续的一些工作
 
 
 132
-00:07:40,156 --> 00:07:41,386
-that are integrated inside it.
+00:09:58,031 --> 00:10:00,300
+我们做了很多努力去将工作推迟到
 
 
 133
-00:07:42,956 --> 00:07:46,826
-Now, this may seem familiar to
-some of you because we did this,
+00:10:00,667 --> 00:10:02,669
+设备被充电时
 
 
 134
-00:07:46,906 --> 00:07:48,636
-a similar effort,
-in OS X Mavericks.
+00:10:03,504 --> 00:10:09,276
+进行用户不需要的后台和维持工作
+是没有意义的
 
 
 135
-00:07:50,126 --> 00:07:51,356
-We eliminated polling
+00:10:09,676 --> 00:10:12,946
+他们可能是一个日常的活动
+所以当给手机充电时可以完成一些操作
 
 
 136
-00:07:51,356 --> 00:07:53,486
-from applications,
-frameworks, drivers.
+00:10:13,013 --> 00:10:16,650
+因为我们知道用户只会
+在一天的某些时候给手机充电
 
 
 137
-00:07:53,546 --> 00:07:56,126
-We optimized the kernel.
+00:10:18,151 --> 00:10:21,722
+因为人们需要对Wi-Fi付费
 
 
 138
-00:07:56,286 --> 00:08:00,196
-We applied our quality
-of service to threads,
+00:10:21,855 --> 00:10:24,458
+所以连接Wi-Fi时
+我们同样也可以推迟网络
 
 
 139
-00:08:00,956 --> 00:08:04,666
-adopted more NS operations,
-scheduled IO
+00:10:25,626 --> 00:10:28,362
+然后我们甚至更多的
+持续利用应用程序接口
 
 
 140
-00:08:04,666 --> 00:08:07,866
-with a correct quality
-of service.
+00:10:28,695 --> 00:10:31,765
+使得当接收器开启时
 
 
 141
-00:08:08,036 --> 00:08:13,086
-We coalesced timers to reduce
-the amount of wakes on the CPU
+00:10:31,832 --> 00:10:36,537
+即使接收器在做一些后台工作
+我们也可以完成一些相应的工作
 
 
 142
-00:08:13,626 --> 00:08:15,696
-and rate-limited applications
-with things like App Nap.
+00:10:38,839 --> 00:10:42,743
+现在对于那项工作来说一切都很好
+但我们想能更有效率的去完成那项工作
 
 
 143
-00:08:17,366 --> 00:08:20,096
-We reimplemented our CPU power
-management so the overhead
+00:10:44,011 --> 00:10:45,179
+因此让我们做一些改变
 
 
 144
-00:08:20,096 --> 00:08:21,496
-of achieving those powers
+00:10:45,612 --> 00:10:47,714
+我们优化我们的iOS和网络堆栈
 
 
 145
-00:08:21,566 --> 00:08:24,526
-from a system perspective
-were significantly lower.
+00:10:48,182 --> 00:10:52,786
+去让4G网络
+特别是4G接收器工作的更好
 
 
 146
-00:08:25,436 --> 00:08:29,166
-Then we added what turned out
-to be a really popular feature
+00:10:53,887 --> 00:10:55,689
+我们再一次优化我们的电源管理单元
 
 
 147
-00:08:29,166 --> 00:08:33,106
-in adding the "Significant
-Energy" identification
+00:10:55,989 --> 00:10:59,493
+去减少维持系统
+在低功耗状态而产生的消耗
 
 
 148
-00:08:33,145 --> 00:08:34,956
-to the battery menu
-so you could see
+00:11:00,661 --> 00:11:03,330
+我们已经降低了日志记录机制的消耗
 
 
 149
-00:08:34,956 --> 00:08:40,496
-which applications were drawing
-a lot of power from the battery.
+00:11:03,830 --> 00:11:07,201
+以至于它们不能和系统进行交互
 
 
 150
-00:08:40,676 --> 00:08:43,655
-So going back to iOS now,
-look at how we applied those,
+00:11:07,901 --> 00:11:12,706
+当然我们继续优化
+我们的numerics库
 
 
 151
-00:08:44,126 --> 00:08:45,396
-we really focused on the iPhone.
+00:11:13,173 --> 00:11:15,309
+使他们更好去优化每一个硬件
 
 
 152
-00:08:46,376 --> 00:08:49,286
-That was a device that
-we got the most feedback
+00:11:16,043 --> 00:11:18,846
+我认为明天可能会有
+关于那个话题的会议
 
 
 153
-00:08:49,286 --> 00:08:50,926
-that people wanted to
-improve battery life.
+00:11:22,082 --> 00:11:26,119
+所以我们谈论一下用户反馈
+及怎样添加进Mavericks中
 
 
 154
-00:08:52,206 --> 00:08:53,816
-However, these improvements
-applied
+00:11:26,620 --> 00:11:32,626
+我们已经设置好了电池
+使其能够显示你的应用程序的使用方法
 
 
 155
-00:08:53,816 --> 00:08:56,226
-to all our iOS products,
-to some extent.
+00:11:33,760 --> 00:11:38,632
+或允许给你提供
+一些周围环境因素的信息
 
 
 156
-00:08:57,536 --> 00:09:00,586
-Now, let's go through
-those three components
+00:11:38,699 --> 00:11:42,202
+以及给想提高电池续航的用户一些建议
 
 
 157
-00:09:00,586 --> 00:09:01,166
-to the strategy.
+00:11:43,237 --> 00:11:44,838
+在这儿已经进入到更进一步的阶段
 
 
 158
-00:09:02,636 --> 00:09:03,456
-Doing less work.
+00:11:45,205 --> 00:11:49,877
+添加每一个应用屏幕或后台时间...
 
 
 159
-00:09:03,486 --> 00:09:09,456
-We want to, again, optimize
-for the idle workloads
+00:11:51,111 --> 00:11:52,312
+到这个设置面板上
 
 
 160
-00:09:09,456 --> 00:09:11,296
-and particularly looked
-at the sleep timers,
+00:11:53,080 --> 00:11:55,082
+所以你在角落里可以看到一个控制
 
 
 161
-00:09:11,926 --> 00:09:13,956
-the amount of time the
-system takes to go to sleep
+00:11:55,349 --> 00:11:56,850
+让我们回过头继续向前走
 
 
 162
-00:09:13,956 --> 00:09:15,916
-after the user is finished
-interacting with it.
+00:11:57,417 --> 00:11:59,953
+你可以看到一个小的控制
+可以让您切换模式
 
 
 163
-00:09:16,336 --> 00:09:18,016
-Those are now optimized based
+00:12:04,992 --> 00:12:07,060
+然后我们已经添加了低功耗的模式
 
 
 164
-00:09:18,016 --> 00:09:20,386
-on what the user was
-doing with the device.
+00:12:09,196 --> 00:12:13,500
+而用户的偏好也将会影响电池的寿命
 
 
 165
-00:09:21,106 --> 00:09:23,986
-Did they actually not
-interact with a notification
+00:12:14,568 --> 00:12:17,571
+它将限制CPU以及后台操作
 
 
 166
-00:09:24,426 --> 00:09:26,106
-or did they interact with it?
+00:12:17,638 --> 00:12:19,840
+导致以前我们引入的
+后台应用程序刷新机制
 
 
 167
-00:09:26,996 --> 00:09:29,506
-So we reduced the number
-of CPU wakes in idle,
+00:12:19,907 --> 00:12:21,808
+在这个模式下失效了
 
 
 168
-00:09:29,506 --> 00:09:32,206
-and then we've added a
-pretty cool feature in terms
+00:12:23,377 --> 00:12:26,747
+我们关掉自由裁量和后台工作
 
 
 169
-00:09:32,206 --> 00:09:33,256
-of face-down detection.
+00:12:27,114 --> 00:12:31,485
+所以如果你想在后台完成预定的下载
+在用户退出前这些行为是不被允许的
 
 
 170
-00:09:33,936 --> 00:09:37,536
-So if you have the phone with
-the screen toward the table,
+00:12:32,853 --> 00:12:34,488
+邮件获取也被禁用了
 
 
 171
-00:09:37,536 --> 00:09:43,056
-say, and a notification comes
-in, the screen won't light
+00:12:35,122 --> 00:12:38,358
+是因为如果收发太多的邮件
+将会让系统产生一个较大的功耗
 
 
 172
-00:09:43,056 --> 00:09:44,466
-to process that notification.
+00:12:41,161 --> 00:12:43,130
+我们已经讨论了
+关于操作系统的内容
 
 
 173
-00:09:44,666 --> 00:09:48,166
-We'll do the minimal amount of
-work to have the system ready
+00:12:43,530 --> 00:12:47,034
+现在让我们谈论一些将会帮助你
+提高电池续航能力的事情
 
 
 174
-00:09:48,166 --> 00:09:50,196
-so that when the user
-picks the phone up,
+00:12:49,069 --> 00:12:53,340
+我们已经使用了一个相当周到的方式
 
 
 175
-00:09:50,196 --> 00:09:53,176
-the notification is
-available to them.
+00:12:54,875 --> 00:12:57,211
+把OS X上能量计移植到iOS中
 
 
 176
-00:09:54,026 --> 00:09:55,606
-So now moving on to
-doing work later.
+00:12:57,277 --> 00:13:02,282
+从而能量计对iOS产生最显著的影响
 
 
 177
-00:09:56,296 --> 00:10:00,316
-We've made a lot of
-effort to defer work
+00:13:02,349 --> 00:13:08,388
+系统除了其它的仪器
+我们又添加了定位仪
 
 
 178
-00:10:00,656 --> 00:10:02,656
-until the device is plugged in.
+00:13:09,489 --> 00:13:13,193
+除了改善OS X的能源指南
 
 
 179
-00:10:03,496 --> 00:10:06,186
-There's no point doing
-background operation,
+00:13:13,894 --> 00:13:17,564
+我们还在网站上写了个
+全新的iOS能源指南
 
 
 180
-00:10:06,186 --> 00:10:09,276
-maintenance operation, that the
-user doesn't need right now.
+00:13:20,200 --> 00:13:22,236
+现在你能用这个指南做些什么事情呢？
 
 
 181
-00:10:09,666 --> 00:10:10,986
-They may be a daily activity.
+00:13:23,770 --> 00:13:27,107
+我们希望你能够优化应用程序的功耗
 
 
 182
-00:10:11,446 --> 00:10:12,976
-You can do that when
-they charge the phone
+00:13:27,908 --> 00:13:29,643
+给你一个简单的例子吧
 
 
 183
-00:10:12,976 --> 00:10:14,466
-because we know they
-are going to charge it
+00:13:32,012 --> 00:13:33,547
+比如你正在全屏播放一个视频
 
 
 184
-00:10:14,466 --> 00:10:17,926
-at some point during the day.
+00:13:33,881 --> 00:13:37,084
+现在让我们做一个优化
+很可能像家里的电视那样
 
 
 185
-00:10:18,156 --> 00:10:22,306
-And we can also, therefore,
-defer networking to when you're
+00:13:37,351 --> 00:13:38,986
+减少backlight
+调整伽玛补偿
 
 
 186
-00:10:22,306 --> 00:10:24,446
-on Wi-Fi because people
-charge on their Wi-Fi.
+00:13:39,286 --> 00:13:42,856
+从而给出同样视觉图像
 
 
 187
-00:10:24,446 --> 00:10:29,036
-And then we've leveraged the
-persistent connection API even
+00:13:43,857 --> 00:13:44,691
+现在
 
 
 188
-00:10:29,036 --> 00:10:31,796
-more so that when
-the radios are on,
+00:13:46,260 --> 00:13:48,362
+这些措施将会使得功耗少量减少
 
 
 189
-00:10:31,796 --> 00:10:33,246
-we are doing work
-that's appropriate,
+00:13:48,662 --> 00:13:52,699
+但是因为时间的因素
+节省的功耗是相当可观的
 
 
 190
-00:10:33,716 --> 00:10:36,546
-even if the radios came on
-to do some background work.
+00:13:53,467 --> 00:13:56,003
+因此你在观看全屏视频的时候
 
 
 191
-00:10:36,946 --> 00:10:40,326
-Now, it's all well and
-good to do that work,
+00:13:56,136 --> 00:13:58,972
+我们也可以得到额外的续航时间
+只是在这个机制非常简单
 
 
 192
-00:10:40,326 --> 00:10:42,746
-but we want to be able to do
-it as efficiently as possible.
+00:13:59,673 --> 00:14:05,345
+一旦你想在屏幕上放置任何用户界面
+这个机制就会失效
 
 
 193
-00:10:44,016 --> 00:10:45,176
-So we made a number of changes.
+00:14:06,013 --> 00:14:12,352
+我们也可以看到全透明用户界面层的
+全屏应用程序会完全禁用这个机制
 
 
 194
-00:10:45,616 --> 00:10:48,746
-We've optimized our iOS and
-networking stack to work best
+00:14:12,419 --> 00:14:14,021
+这对于用户没有任何好处
 
 
 195
-00:10:48,746 --> 00:10:52,786
-with LTE networks and
-specifically our own LTE radios.
+00:14:18,892 --> 00:14:22,029
+在讨论过OS X后
+现在让我们说说iOS
 
 
 196
-00:10:53,876 --> 00:10:55,676
-We, again, optimized
-our power management
+00:14:23,096 --> 00:14:25,232
+在早些时候我们推出了
+的MacBook
 
 
 197
-00:10:55,996 --> 00:10:58,606
-to reduce the overhead
-of keeping the system
+00:14:25,532 --> 00:14:27,568
+因为那是我们
+第一个fanless系统
 
 
 198
-00:10:58,606 --> 00:10:59,506
-in its low power state.
+00:14:27,868 --> 00:14:30,137
+所以它会有点散热的约束
 
 
 199
-00:11:00,666 --> 00:11:03,336
-And we reduced the cost of
-our own logging mechanisms
+00:14:30,637 --> 00:14:34,575
+而MacBook被设计为
+可以很好的应对突发性的工作负载
 
 
 200
-00:11:03,826 --> 00:11:06,626
-so that they don't
-interact with the system.
+00:14:35,209 --> 00:14:39,279
+我们也已经对操作系统进行优化
+让它能与那些机器一起工作
 
 
 201
-00:11:06,726 --> 00:11:12,696
-And, of course, we continue to
-optimize our numerics libraries
+00:14:40,180 --> 00:14:45,219
+你也应当用适当的线程服务质量去
+去标记所有的工作
 
 
 202
-00:11:13,186 --> 00:11:15,316
-so that they are best optimized
-for each piece of hardware.
+00:14:46,553 --> 00:14:50,190
+使用我们已经预装在OS X上
+可用的仪表和仪器
 
 
 203
-00:11:16,056 --> 00:11:19,626
-And there's a session, I
-believe tomorrow, on that.
+00:14:50,557 --> 00:14:52,826
+可以确保你
+利用NSOperation和GCD
 
 
 204
-00:11:21,836 --> 00:11:24,986
-So we talked about
-user feedback and how
+00:14:53,727 --> 00:14:55,629
+来对你的工作进行优先级的考虑
 
 
 205
-00:11:24,986 --> 00:11:26,116
-that was added in Mavericks.
+00:14:56,129 --> 00:14:59,566
+如果现在有用户启动的操作
+确保它被尽可能的标记
 
 
 206
-00:11:26,636 --> 00:11:30,876
-We already had the
-battery setting,
+00:14:59,633 --> 00:15:02,002
+但是如果它后台工作的话
+仍像那样去标记它
 
 
 207
-00:11:31,076 --> 00:11:35,226
-which showed you application
-usage and allowed for --
+00:15:02,669 --> 00:15:08,108
+而操作系统在为这些任务
+提供更强性能的同时
 
 
 208
-00:11:35,226 --> 00:11:38,616
-gave you information
-around environmental factors
+00:15:08,442 --> 00:15:13,113
+还会管理
+该设备的电源和散热
 
 
 209
-00:11:38,696 --> 00:11:42,186
-and suggestions for the user as
-to who to improve battery life.
+00:15:17,818 --> 00:15:21,321
+最后总结一下
+我们知道了功耗是功率乘以时间
 
 
 210
-00:11:43,226 --> 00:11:48,816
-We've gone one stage further
-here and added per-app screen on
+00:15:21,722 --> 00:15:25,092
+当你为提高电池续航的能力
+在思考怎样优化应用程序的时候
 
 
 211
-00:11:48,816 --> 00:11:52,256
-and background time
-to this setting panel.
+00:15:25,759 --> 00:15:27,895
+一定要记住时间的因素是非常重要的
 
 
 212
-00:11:53,086 --> 00:11:55,076
-So you can see there's a
-control in the corner there --
+00:15:29,062 --> 00:15:30,964
+硬件的动态范围正在变得更大
 
 
 213
-00:11:55,336 --> 00:11:56,866
-let me go back and forward --
+00:15:31,231 --> 00:15:36,470
+因此当你正在操作的时候
+必须认真的考虑怎样有效率的完成
 
 
 214
-00:11:57,416 --> 00:11:59,946
-you see that small control that
-allows you to switch mode here.
+00:15:36,737 --> 00:15:40,340
+进行这些工作时认真考虑
+是否这些工作全部需要完成
 
 
 215
-00:12:02,406 --> 00:12:08,306
-And then we've added
-Low Power Mode.
+00:15:41,675 --> 00:15:44,912
+为了实现全天电池续航
 
 
 216
-00:12:08,936 --> 00:12:13,566
-This is a user preference
-that will extend battery life.
+00:15:45,579 --> 00:15:48,715
+你需要让平均功耗尽可能的低
 
 
 217
-00:12:14,556 --> 00:12:17,596
-It limits CPU, restricts
-background operation
+00:15:49,983 --> 00:15:53,287
+现在我将会把这个任务交给我的同事
+桑仁 去更详细的讨论
 
 
 218
-00:12:17,636 --> 00:12:19,916
-so that the background app
-refresh mechanism we introduced
+00:16:01,862 --> 00:16:03,030
+早上好
+谢谢
 
 
 219
-00:12:19,916 --> 00:12:21,816
-a few years ago is
-disabled in this mode.
+00:16:03,397 --> 00:16:05,732
+真的很高兴看到
+你们在这儿学习能量效率的知识
 
 
 220
-00:12:23,376 --> 00:12:26,736
-We turn off discretionary
-and background work,
+00:16:06,099 --> 00:16:11,438
+也很希望自己能够帮助你们理解
+代码在电池续航中心是怎样工作的
 
 
 221
-00:12:27,106 --> 00:12:29,446
-so if you have downloads that
-are scheduled in the background,
+00:16:14,074 --> 00:16:16,410
+我们将讨论两大类事情
 
 
 222
-00:12:29,446 --> 00:12:31,476
-they won't happen until the
-user comes out of this mode.
+00:16:17,811 --> 00:16:21,582
+但是首先我们要从一些
+強 已经讨论过的原则开始
 
 
 223
-00:12:32,856 --> 00:12:34,486
-And mail fetch is disabled.
+00:16:21,648 --> 00:16:22,883
+我们将把这个原则和用户
 
 
 224
-00:12:34,486 --> 00:12:36,416
-People get lots of email
+00:16:22,950 --> 00:16:26,920
+及用户为何是在你的应用程序上
+获取正确的时间关键因素相互联系起来
 
 
 225
-00:12:36,416 --> 00:12:38,356
-and therefore it's a big
-drain on their system.
+00:16:27,654 --> 00:16:29,356
+我们也准备讨论一下能量究竟去了哪里
 
 
 226
-00:12:38,916 --> 00:12:43,136
-We talked a little bit about OS.
+00:16:29,423 --> 00:16:33,126
+特别是CPU以及GPU对OS X
+和iOS来说都是非常重要的
 
 
 227
-00:12:43,516 --> 00:12:45,556
-Now let's talk about some
-things we are going to give you
+00:16:35,062 --> 00:16:38,298
+通过这一部分的讨论
+我将会详细的向你们解释
 
 
 228
-00:12:45,556 --> 00:12:47,686
-to help improve battery life.
+00:16:39,066 --> 00:16:44,371
+怎样实现较低的平均功耗
+从而最终实现全天的电池续航
 
 
 229
-00:12:49,056 --> 00:12:52,676
-Well, we've brought the energy
-gauges that we had in OS X
+00:16:45,038 --> 00:16:46,807
+此外我们也特别的讨论一下iOS
 
 
 230
-00:12:52,676 --> 00:12:57,216
-over to iOS, and we've done
-that in a rather thoughtful way
+00:16:46,874 --> 00:16:50,143
+在我们的iOS设备上
+你可以利用的许多硬件组件
 
 
 231
-00:12:57,216 --> 00:13:02,276
-in bringing gauges that
-make the most impact on iOS.
+00:16:50,210 --> 00:16:53,413
+为了让电池能够全天续航
 
 
 232
-00:13:02,356 --> 00:13:06,896
-So we've added a location
-instrument in addition
+00:16:53,480 --> 00:16:57,451
+需要同时注意功率和时间
 
 
 233
-00:13:06,896 --> 00:13:09,506
-to the other instruments
-that are there.
+00:16:57,751 --> 00:17:02,589
+最后我们谈一下
+怎样把这些理论融入在你的开发过程中
 
 
 234
-00:13:09,506 --> 00:13:14,306
-We've also written an entirely
-new iOS Energy Guide that's
+00:17:02,689 --> 00:17:06,226
+以便每天你都能思考
+一点关于功耗的东西
 
 
 235
-00:13:14,306 --> 00:13:19,066
-up on our website, alongside
-an improved OS X Energy Guide.
+00:17:09,563 --> 00:17:12,398
+在更进一步讨论之前
+我们并不能看到太好的一面
 
 
 236
-00:13:20,196 --> 00:13:22,226
-Now, what can you do
-with these instruments?
+00:17:12,766 --> 00:17:15,435
+但是如果你家的某个地方有个LED灯
+请举起你的手
 
 
 237
-00:13:22,226 --> 00:13:27,106
-We want you to go and optimize
-the power of your application.
+00:17:16,670 --> 00:17:19,039
+好的 你们应该知道什么是LED灯
+很好
 
 
 238
-00:13:27,916 --> 00:13:29,636
-Let me just give you
-a very simple example.
+00:17:19,373 --> 00:17:21,775
+你们家里可能还会留着一些白炽灯
+我家确实还留着一些
 
 
 239
-00:13:32,006 --> 00:13:35,026
-If you are playing full-screen
-video, we have an optimization,
+00:17:21,842 --> 00:17:23,644
+最近我把冰箱中的白炽灯换掉了
 
 
 240
-00:13:35,186 --> 00:13:37,086
-like many of the TVs you
-probably have at home,
+00:17:23,710 --> 00:17:25,679
+而如果在冰箱中放LED灯泡
+则很有意思
 
 
 241
-00:13:37,466 --> 00:13:40,646
-that reduces the backlight,
-adjusts the gamma to compensate,
+00:17:29,183 --> 00:17:31,585
+请不在家时仍然让灯
+一直开的人举起你的手
 
 
 242
-00:13:40,646 --> 00:13:42,856
-and gives the same visual image.
+00:17:33,353 --> 00:17:34,922
+好的 有一个人是那样做的
 
 
 243
-00:13:43,876 --> 00:13:48,356
-Now, that is a small
-reduction in energy,
+00:17:34,988 --> 00:17:37,758
+他是我的办公室同事
+我准备给他一个艰难的时刻
 
 
 244
-00:13:48,686 --> 00:13:49,886
-but because of the
-time component,
+00:17:38,392 --> 00:17:40,894
+他在办公室时并不是让灯一直开的人
 
 
 245
-00:13:49,886 --> 00:13:52,646
-the energy saved is
-pretty substantial.
+00:17:42,863 --> 00:17:47,000
+关键是当我们换了LED灯的时候
+功率可以明显的降下来
 
 
 246
-00:13:53,366 --> 00:13:55,996
-And we can get an additional
-hour of battery life
+00:17:47,601 --> 00:17:50,070
+而且我们也不会让它们整天运行
+不用的时候也会把它关掉
 
 
 247
-00:13:56,176 --> 00:13:57,426
-if you're watching
-full-screen video,
+00:17:50,137 --> 00:17:51,271
+这样的话时间也降下来了
 
 
 248
-00:13:57,686 --> 00:13:58,966
-just from this simple mechanism.
+00:17:52,339 --> 00:17:54,174
+在你的屋子里可能有很多的设备
 
 
 249
-00:13:59,686 --> 00:14:03,916
-However, if you put
-any UI on the screen,
+00:17:54,408 --> 00:17:57,578
+网络 DVR甚至计算机和服务器
 
 
 250
-00:14:03,916 --> 00:14:07,176
-that mechanism is disabled,
-and we've seen applications
+00:17:58,212 --> 00:17:59,646
+而这些设备都将会整天运行
 
 
 251
-00:14:07,216 --> 00:14:10,336
-that have full screen,
-fully transparent UI layers
+00:17:59,713 --> 00:18:02,249
+因为它们并不像灯泡那样点着
+或许你并不会关注它们
 
 
 252
-00:14:10,786 --> 00:14:12,406
-that completely disable
-this mechanism
+00:18:02,349 --> 00:18:05,552
+而我准备帮助你们
+在软件的角度去思考这些问题
 
 
 253
-00:14:12,406 --> 00:14:13,906
-and therefore give no
-benefit to the user.
+00:18:05,686 --> 00:18:10,057
+因为最终是软件来控制硬件上
+所有灯的开关
 
 
 254
-00:14:14,166 --> 00:14:20,986
-Now let's just talk
-about OS X for a moment.
+00:18:10,290 --> 00:18:13,026
+所以为了实现电池的全天续航
+我们必须让灯的开关
 
 
 255
-00:14:20,986 --> 00:14:22,646
-We talked a little about iOS.
+00:18:13,093 --> 00:18:14,795
+在绝大部分的时间中都处于关闭的状态
 
 
 256
-00:14:23,136 --> 00:14:25,426
-We introduced the MacBook
-earlier in the year.
+00:18:15,062 --> 00:18:17,097
+那么让我们谈论一下具体的措施
 
 
 257
-00:14:25,566 --> 00:14:28,396
-That's our first fanless
-system and, therefore,
+00:18:17,831 --> 00:18:20,734
+因为最终我们的目的
+就是完成用户驱动的工作
 
 
 258
-00:14:28,396 --> 00:14:30,126
-it is somewhat thermally
-constrained.
+00:18:21,134 --> 00:18:23,837
+所以我们也希望用户
+能从电池的能量中获益
 
 
 259
-00:14:30,676 --> 00:14:34,596
-It's designed to work best
-with really bursty workloads.
+00:18:23,904 --> 00:18:24,738
+他们已经实现了
 
 
 260
-00:14:35,506 --> 00:14:39,296
-We've optimized the OS to work
-hand in hand with that machine.
+00:18:25,472 --> 00:18:29,176
+软件在很多时候都是很相似的
 
 
 261
-00:14:40,236 --> 00:14:43,256
-So you should be
-tagging any work
+00:18:29,309 --> 00:18:30,878
+我现在有一些事情去处理
+我能去做吗？
 
 
 262
-00:14:43,256 --> 00:14:46,166
-with the appropriate
-thread quality of service.
+00:18:30,944 --> 00:18:32,880
+哦 是的 可以
+让我们再一次完成它
 
 
 263
-00:14:46,546 --> 00:14:48,456
-Use the gauges and instruments
+00:18:33,580 --> 00:18:34,548
+不 不 不
 
 
 264
-00:14:48,456 --> 00:14:49,976
-that we already have
-available on OS X.
+00:18:35,249 --> 00:18:37,651
+我们必须消除
+任何类型的轮询或者计时器
 
 
 265
-00:14:49,976 --> 00:14:54,296
-And then make sure you've
-prioritized your work using
+00:18:37,918 --> 00:18:41,355
+计算机操作的比人类更加的快
 
 
 266
-00:14:54,336 --> 00:14:55,316
-NSOperation and GCD.
+00:18:41,655 --> 00:18:43,290
+确切的说在键击之间
 
 
 267
-00:14:55,316 --> 00:14:59,166
-If you have work that's user
-initiated, make sure it's tagged
+00:18:43,590 --> 00:18:45,692
+即使你是一个超快的打字
+一分钟可以打一百个字
 
 
 268
-00:14:59,166 --> 00:15:01,996
-as such, but if it's
-background work, tag it as that,
+00:18:45,759 --> 00:18:48,262
+在微秒时间尺度的键击之间
 
 
 269
-00:15:02,656 --> 00:15:08,106
-and the OS will schedule that
-work to give great performance
+00:18:48,662 --> 00:18:52,866
+我们仍然可以闲置部分系统
+处理器将会在按键间隙处于休眠状态
 
 
 270
-00:15:08,436 --> 00:15:11,276
-and also be able
-to manage the power
+00:18:53,267 --> 00:18:55,636
+而当用户利用键盘 鼠标
+和计算机进行交互的间隙
 
 
 271
-00:15:11,276 --> 00:15:15,196
-and thermals of that device.
+00:18:56,403 --> 00:18:59,540
+对计算机来说仍有很多的运行时间
 
 
 272
-00:15:15,336 --> 00:15:21,306
-Okay. So, just to recap,
-energy is power times time.
+00:18:59,606 --> 00:19:03,510
+所以你希望你的软件不要
+按照计算机运行的速度运行
 
 
 273
-00:15:21,706 --> 00:15:24,156
-Always remember that time
-component when you are thinking
+00:19:04,011 --> 00:19:06,380
+除非它直接为用户工作
 
 
 274
-00:15:24,156 --> 00:15:26,936
-about optimizing energy
-of your application
+00:19:08,015 --> 00:19:10,050
+你回应用户
+那样很棒
 
 
 275
-00:15:26,936 --> 00:15:27,896
-for all-day battery life.
+00:19:10,284 --> 00:19:13,320
+使用我们超强的硬件
+然后回到空闲状态
 
 
 276
-00:15:29,046 --> 00:15:30,976
-The hardware is getting
-a larger dynamic range.
+00:19:13,921 --> 00:19:15,455
+变得完全平坦
+最后归零
 
 
 277
-00:15:31,246 --> 00:15:34,456
-So when you are doing
-operations, really think
+00:19:17,958 --> 00:19:19,560
+強 已经讨论过延时工作了
 
 
 278
-00:15:34,496 --> 00:15:36,476
-about how you are
-doing them efficiently,
+00:19:19,793 --> 00:19:22,196
+很多时候你可以无限期的延时工作
 
 
 279
-00:15:36,746 --> 00:15:39,366
-when you are doing them,
-and do you, in fact,
+00:19:22,262 --> 00:19:23,163
+我现在需要延时吗？
 
 
 280
-00:15:39,366 --> 00:15:40,356
-even need to do them at all?
+00:19:23,230 --> 00:19:25,532
+并不需要
+稍后或许会用到
 
 
 281
-00:15:41,686 --> 00:15:46,466
-And make your application as low
-power as possible on an average
+00:19:26,600 --> 00:19:28,235
+但总的来说结果就是我们不需要延时
 
 
 282
-00:15:46,686 --> 00:15:48,716
-so that you are able to
-achieve all-day battery life.
+00:19:28,535 --> 00:19:29,636
+如果现在有少量的任务
 
 
 283
-00:15:49,616 --> 00:15:51,756
-And now I'm going to hand it
-over to my colleague Soren
+00:19:30,137 --> 00:19:32,072
+而现在用户不需要它
 
 
 284
-00:15:51,796 --> 00:15:53,296
-who is going to go
-into more detail.
+00:19:32,139 --> 00:19:35,642
+那么最好将其推迟
+可以说
 
 
 285
-00:15:54,516 --> 00:16:01,576
-[ Applause ]
+00:19:36,210 --> 00:19:40,013
+“嗨 系统 请完成这个
+如果有计时器的话”
 
 
 286
-00:16:02,076 --> 00:16:02,386
->> SOREN SPIES: Good morning.
+00:19:40,080 --> 00:19:41,548
+在下个小时的任何时刻
 
 
 287
-00:16:02,666 --> 00:16:03,036
-Thank you.
+00:19:41,615 --> 00:19:44,651
+希望你能给出十分钟
+或者其它有余量的时间
 
 
 288
-00:16:03,386 --> 00:16:05,746
-Really glad you're here to
-learn about energy efficiency,
+00:19:45,786 --> 00:19:47,554
+如果没有计时器的话
+那么只能完成上传和下载了
 
 
 289
-00:16:06,106 --> 00:16:08,756
-hoping to empower you so that
-you can understand how your code
+00:19:47,621 --> 00:19:49,690
+因为系统在随后可能会安排其他
 
 
 290
-00:16:09,006 --> 00:16:11,446
-is at the center of
-all-day battery life.
+00:19:50,123 --> 00:19:51,658
+可能发生的工作
 
 
 291
-00:16:12,256 --> 00:16:16,416
-We are going to talk
-about two big things,
+00:19:52,059 --> 00:19:53,794
+你也可以把所有的任务集中在一起
 
 
 292
-00:16:16,916 --> 00:16:19,266
-but first we are going to
-start out with some principles
+00:19:54,695 --> 00:19:58,465
+因为批处理是获得效率的重要途径
 
 
 293
-00:16:19,266 --> 00:16:21,906
-about how what Jon talked
-about, and we are going to tie
+00:19:58,665 --> 00:20:01,001
+你想打开那个硬件
+但是把它打开需要一些功耗
 
 
 294
-00:16:21,906 --> 00:16:24,416
-that to the user and
-how the user is the key
+00:20:01,068 --> 00:20:04,738
+而你希望在它被关闭之前去使用它
 
 
 295
-00:16:24,416 --> 00:16:26,336
-to getting the right
-time scale in your app.
+00:20:04,805 --> 00:20:07,708
+需要在硬件开启状态下
+尽可能多的完成工作
 
 
 296
-00:16:26,336 --> 00:16:30,006
-We are going to talk about
-where energy goes, in particular
+00:20:08,208 --> 00:20:13,947
+我们能再一次降低功耗
+节省时间是很重要的因素
 
 
 297
-00:16:30,006 --> 00:16:34,466
-on CPU and GPU is important
-for both OS X and iOS.
+00:20:14,715 --> 00:20:18,519
+这是我特别指出的有趣的关键信息
 
 
 298
-00:16:35,056 --> 00:16:36,436
-Throughout this part
-of the talk,
+00:20:18,585 --> 00:20:22,122
+我们有所有的可用能源
+但是你不能在电池上整天的运行
 
 
 299
-00:16:36,436 --> 00:16:39,336
-I am going to be
-explaining to you how
+00:20:22,322 --> 00:20:24,858
+否则设备会变得很热
+而且电池也不能持续运行
 
 
 300
-00:16:39,336 --> 00:16:42,896
-to achieve low average
-power so that you do get
+00:20:25,425 --> 00:20:31,031
+我们真正想让你考虑的是
+占用整个系统10%的负载
 
 
 301
-00:16:42,896 --> 00:16:44,376
-that all-day battery life.
+00:20:31,131 --> 00:20:34,101
+这些负载不仅是软件
+还包括你所做的其它操作
 
 
 302
-00:16:44,376 --> 00:16:46,826
-We are also going to talk
-specifically about iOS.
+00:20:34,535 --> 00:20:38,038
+那么你怎样才能利用你可以实现的措施
 
 
 303
-00:16:46,876 --> 00:16:50,206
-There's a number of hardware
-components in our iOS devices
+00:20:38,305 --> 00:20:42,009
+把负载降到1/10或1/100呢
 
 
 304
-00:16:50,206 --> 00:16:52,896
-that you can take advantage of,
-which you need to be careful
+00:20:42,376 --> 00:20:44,978
+这是当你在屏幕上的情况
+当你后台的时候 我们需要的更少
 
 
 305
-00:16:52,896 --> 00:16:56,546
-about in both the power and time
-components so that you do get
+00:20:46,180 --> 00:20:47,614
+这里我要说一个比较坏的消息
 
 
 306
-00:16:56,546 --> 00:16:57,446
-that all-day battery life.
+00:20:48,081 --> 00:20:50,918
+我也对我们所有的硬件
+做过一些这方面的研究
 
 
 307
-00:16:57,446 --> 00:16:59,006
-And then finally I
-will talk a little bit
+00:20:50,984 --> 00:20:52,819
+人们表现出就像...
+哦不对
 
 
 308
-00:16:59,006 --> 00:17:00,996
-about how you can
-integrate this understanding
+00:20:52,886 --> 00:20:55,689
+这也不是谈话的要点
+关键在于让你去思考这个问题
 
 
 309
-00:17:01,416 --> 00:17:02,596
-into your development process
+00:20:56,623 --> 00:21:00,761
+大概百分之十到百分之五的负载之间
+是仅在打开显示器时产生的
 
 
 310
-00:17:02,706 --> 00:17:05,376
-so that each day you are
-thinking a little bit
+00:21:01,828 --> 00:21:03,297
+现在显示器打开之后的状态良好
 
 
 311
-00:17:05,376 --> 00:17:06,215
-about energy.
+00:21:03,363 --> 00:21:07,201
+因为用户正在从系统中得到更多的好处
+所以这有很大的希望不仅仅是一个通知
 
 
 312
-00:17:06,996 --> 00:17:11,915
-Before I go a little bit
-farther, I can't see too well
+00:21:09,503 --> 00:21:11,038
+然后有百分之十的目标
 
 
 313
-00:17:11,915 --> 00:17:13,455
-out there, but can
-you raise your hand
+00:21:11,672 --> 00:21:13,307
+这就是平均水平
 
 
 314
-00:17:13,455 --> 00:17:15,445
-if you have an LED light
-bulb somewhere in your home.
+00:21:13,373 --> 00:21:14,942
+这听起来就像只实现了5%
 
 
 315
-00:17:16,685 --> 00:17:18,516
-Okay. You know about
-LED light bulbs.
+00:21:15,275 --> 00:21:17,244
+在长周期下的确如此
 
 
 316
-00:17:18,516 --> 00:17:19,026
-Good work.
+00:21:17,578 --> 00:21:20,013
+但在短时间内争取100%
 
 
 317
-00:17:19,126 --> 00:17:21,126
-You probably still have
-a few incandescents left.
+00:21:20,180 --> 00:21:22,883
+将你完成的工作优先呈现出来
 
 
 318
-00:17:21,126 --> 00:17:21,656
-I know I do.
+00:21:22,983 --> 00:21:25,452
+我们将会安排它
 
 
 319
-00:17:21,656 --> 00:17:23,576
-I recently replaced
-the ones in my fridge.
+00:21:26,353 --> 00:21:29,523
+这部分就是这样 你必须让它
+处于百分之5到百分之10之间
 
 
 320
-00:17:23,746 --> 00:17:25,346
-That's an interesting place
-to put LED light bulbs.
+00:21:30,824 --> 00:21:34,094
+现在让我们讨论一下CPU和GPU
 
 
 321
-00:17:25,346 --> 00:17:31,046
-Raise your hand if you leave
-your lights on all the time
+00:21:34,161 --> 00:21:38,198
+在OS X中CPU和GPU
+会消耗大部分的能量
 
 
 322
-00:17:31,046 --> 00:17:33,146
-when you are not home.
+00:21:39,199 --> 00:21:40,133
+它们也是最具活力的
 
 
 323
-00:17:33,366 --> 00:17:34,996
-Okay. We have one
-person who does that,
+00:21:40,200 --> 00:21:46,640
+我们有非常强大的多核CPU
+和大规模并行GPU完成各样任务
 
 
 324
-00:17:34,996 --> 00:17:36,466
-and he's my office
-mate, so I am going
+00:21:47,241 --> 00:21:49,209
+然而如果你把设备插入电源的话
 
 
 325
-00:17:36,466 --> 00:17:37,746
-to give him a hard
-time [laughter].
+00:21:49,776 --> 00:21:52,212
+CPU和GPU一般来说
+确实会消耗电池很多能量
 
 
 326
-00:17:38,376 --> 00:17:40,896
-He's not even the one who leaves
-his light on in the office.
+00:21:52,779 --> 00:21:55,182
+在这儿你已经可以看到
+我们已经完成了大部分工作
 
 
 327
-00:17:40,896 --> 00:17:45,856
-Okay. So key here, when
-we switch to LED lights,
+00:21:55,249 --> 00:21:58,018
+我们已经让CPU开始运行了
+同时也让GPU运行一会儿
 
 
 328
-00:17:46,036 --> 00:17:46,996
-we bring the power down,
+00:21:58,218 --> 00:22:00,921
+而事实上这并不会持续一整天
 
 
 329
-00:17:46,996 --> 00:17:49,196
-but we don't just leave
-them running all day.
+00:22:01,121 --> 00:22:05,225
+但如果这个对于
+你工作方式非常重要的模式
 
 
 330
-00:17:49,196 --> 00:17:51,286
-We still turn them off
-so we get the time down.
+00:22:05,626 --> 00:22:08,262
+如果这个模式持续的话
+将会使得我们不能实现全天续航
 
 
 331
-00:17:51,786 --> 00:17:54,166
-And there's probably a lot
-of equipment in your houses,
+00:22:08,328 --> 00:22:10,197
+因为平均功耗太高了
 
 
 332
-00:17:54,406 --> 00:17:57,586
-networking, maybe DVRs,
-even computers and servers,
+00:22:14,034 --> 00:22:16,236
+那么我们仅唤醒CPU又会怎么样呢？
 
 
 333
-00:17:58,206 --> 00:18:00,526
-that is running all the time,
-and you might not think about it
+00:22:16,503 --> 00:22:18,172
+是否有工作要做？
+是否有工作要做？
 
 
 334
-00:18:00,526 --> 00:18:01,846
-because it doesn't
-light up like a light.
+00:22:18,238 --> 00:22:19,640
+是否有邮件？
+用户是否点击过？
 
 
 335
-00:18:01,846 --> 00:18:04,286
-But I am going to try to help
-you think about that better
+00:22:19,706 --> 00:22:20,741
+有没有什么事情发生？
 
 
 336
-00:18:04,796 --> 00:18:07,646
-in software because software
-ultimately controls all the
+00:22:21,542 --> 00:22:22,376
+嗨 服务器
 
 
 337
-00:18:07,646 --> 00:18:11,076
-light switches in our
-hardware, and we've got
+00:22:23,210 --> 00:22:24,044
+不要那样做
 
 
 338
-00:18:11,076 --> 00:18:13,406
-to get those light switches
-off most of the time in order
+00:22:24,111 --> 00:22:25,679
+当唤醒CPU或者GPU时
 
 
 339
-00:18:13,406 --> 00:18:14,386
-to get all-day battery life.
+00:22:26,513 --> 00:22:29,483
+我们需要大量的能量去让他们加速
 
 
 340
-00:18:15,006 --> 00:18:17,106
-So let's talk about
-the strategy.
+00:22:32,419 --> 00:22:33,353
+有工作要做么？
 
 
 341
-00:18:17,826 --> 00:18:20,726
-Ultimately, we want to be
-doing user-driven work.
+00:22:35,722 --> 00:22:36,557
+没有收到任何工作
 
 
 342
-00:18:21,126 --> 00:18:22,896
-We want the user
-to be benefiting
+00:22:38,458 --> 00:22:41,495
+所有你能看到的这些三角形
+即使是iOS的三角形
 
 
 343
-00:18:22,896 --> 00:18:23,916
-from that energy in the battery.
+00:22:41,562 --> 00:22:44,731
+也在5%到10%的范围中
+占据了很重要的一部分
 
 
 344
-00:18:23,916 --> 00:18:24,556
-They own it.
+00:22:46,300 --> 00:22:47,901
+不要尝试不必要的唤醒
 
 
 345
-00:18:25,476 --> 00:18:29,166
-There's a lot of times
-when software is like, oh,
+00:22:48,502 --> 00:22:50,237
+在OS X上如果你整天唤醒CPU
 
 
 346
-00:18:29,286 --> 00:18:30,446
-I have something
-to do right now.
+00:22:50,304 --> 00:22:52,139
+那么事实上你的电池
+根本不能实现全天续航
 
 
 347
-00:18:30,446 --> 00:18:30,956
-Can I do it?
+00:22:52,206 --> 00:22:54,641
+即使你不运行
+甚至只是做一些检查工作
 
 
 348
-00:18:30,956 --> 00:18:31,696
-Oh, yeah, let's do it.
+00:22:55,108 --> 00:22:55,943
+不要那样做
 
 
 349
-00:18:31,876 --> 00:18:32,876
-Let's do it again.
+00:22:56,009 --> 00:22:59,546
+GPU是一个时间尺度略有不同的怪物
 
 
 350
-00:18:33,596 --> 00:18:34,536
-Don't. Just don't.
+00:23:00,848 --> 00:23:03,116
+它工作的频率比
+你需要唤醒GPU的频率更高
 
 
 351
-00:18:35,256 --> 00:18:37,636
-We've got to eliminate any
-kind of polling or timers.
+00:23:03,183 --> 00:23:05,953
+甚至对于一些漂亮的图形
 
 
 352
-00:18:37,926 --> 00:18:41,366
-Computers operate so much
-more quickly than people do --
+00:23:06,019 --> 00:23:09,389
+在下一帧之前需要15ms
 
 
 353
-00:18:41,646 --> 00:18:43,306
-literally between keystrokes.
+00:23:09,456 --> 00:23:12,860
+然而在1ms之内
+GPU已经可以完成大量的工作了
 
 
 354
-00:18:43,606 --> 00:18:45,756
-Even if you are a super-fast
-typist, 100 words a minute,
+00:23:15,562 --> 00:23:16,797
+现在让我们讨论一下性能
 
 
 355
-00:18:45,756 --> 00:18:48,256
-between keystrokes at
-a microsecond scale,
+00:23:17,564 --> 00:23:19,666
+你来到这里的目的是关注能源性能
 
 
 356
-00:18:48,666 --> 00:18:50,676
-we can idle parts of the system.
+00:23:20,100 --> 00:23:22,336
+而且你做事的时间效率也更高
+完成任务的时间更快
 
 
 357
-00:18:50,746 --> 00:18:52,856
-The processor can actually go
-to sleep between keystrokes,
+00:23:22,402 --> 00:23:26,139
+这些对用户是有好处的
+对能源的效率也是一个关键因素
 
 
 358
-00:18:53,276 --> 00:18:56,896
-and typically, you know,
-click or tap, there's a lot
+00:23:26,306 --> 00:23:27,207
+现在让我解释其原因
 
 
 359
-00:18:56,896 --> 00:18:59,616
-of computer time between
-user interactions.
+00:23:29,142 --> 00:23:31,144
+这里是一个工作负载
+而是一个固定的工作负载
 
 
 360
-00:18:59,616 --> 00:19:02,596
-So you want your software
-to not be trying to run
+00:23:31,211 --> 00:23:32,779
+它的状态也不能持续下去
 
 
 361
-00:19:02,596 --> 00:19:05,866
-at computer speed unless
-it's doing work directly
+00:23:32,846 --> 00:23:34,548
+我只需要完成这个工作
 
 
 362
-00:19:05,866 --> 00:19:06,386
-for the user.
+00:23:35,949 --> 00:23:37,050
+但是它的工作负载很大
 
 
 363
-00:19:08,026 --> 00:19:09,576
-So you want to respond
-to the user.
+00:23:37,451 --> 00:23:38,952
+因此我可能需要优化我的代码
 
 
 364
-00:19:09,576 --> 00:19:10,046
-That's great.
+00:23:39,019 --> 00:23:41,622
+可以访问代码的内部循环
 
 
 365
-00:19:10,296 --> 00:19:12,896
-Use all of our super-powerful
-hardware, and then back
+00:23:41,688 --> 00:23:44,791
+做更少的内存访问和传统的性能工作
 
 
 366
-00:19:12,896 --> 00:19:15,446
-to idle, totally flat, zero.
+00:23:45,592 --> 00:23:47,227
+这样就会使得执行更加的有效率
 
 
 367
-00:19:16,036 --> 00:19:19,576
-Jon talked about delaying work.
+00:23:47,895 --> 00:23:48,962
+但功率增加了
 
 
 368
-00:19:19,786 --> 00:19:22,436
-A lot of times, you can actually
-delay work indefinitely.
+00:23:49,496 --> 00:23:52,065
+然而时间却又变短了
 
 
 369
-00:19:22,436 --> 00:19:23,216
-Do I need this right now?
+00:23:52,399 --> 00:23:54,034
+从而功耗可以大幅的降低
 
 
 370
-00:19:23,216 --> 00:19:23,856
-I don't need this right now.
+00:23:54,468 --> 00:23:56,570
+前面的工作做的非常好
+但是我们能做的更好
 
 
 371
-00:19:23,856 --> 00:19:25,526
-Maybe it can wait
-a little while.
+00:23:56,670 --> 00:24:00,174
+可以将工作并行化
+并使用多核
 
 
 372
-00:19:26,586 --> 00:19:28,226
-Then it turns out I
-didn't need that after all.
+00:24:00,607 --> 00:24:03,610
+最后我们可以更疯狂一点
+让GPU跑起来
 
 
 373
-00:19:28,546 --> 00:19:29,286
-That's less work.
+00:24:04,344 --> 00:24:07,881
+现在的好消息就是
+通常你并不需要写优化代码
 
 
 374
-00:19:30,126 --> 00:19:32,126
-But also if the user
-doesn't need it right now,
+00:24:07,948 --> 00:24:09,750
+但是你却需要找到这个优化代码
 
 
 375
-00:19:32,126 --> 00:19:35,636
-there's a great benefit in
-deferring it, in saying hey,
+00:24:09,816 --> 00:24:12,152
+你需要找到这些优化的数字库
 
 
 376
-00:19:36,206 --> 00:19:38,996
-system, please do this, but
-anytime in the next hour,
+00:24:12,653 --> 00:24:15,722
+在后面我们有一个
+关于会议和能源文件的链接
 
 
 377
-00:19:39,196 --> 00:19:41,616
-ten minutes, any kind
-of leeway you can give,
+00:24:16,356 --> 00:24:20,694
+你必须找到正确的数据结构
+然后审视一下你的应用程序
 
 
 378
-00:19:41,616 --> 00:19:44,326
-whether it's a timer or
-whether -- although, hopefully,
+00:24:21,028 --> 00:24:25,499
+最后谈一下为什么我一直在搅动
+及在规则的旧时间中我又能够优化什么
 
 
 379
-00:19:44,386 --> 00:19:47,486
-there's no timers -- or
-just a download and upload,
+00:24:27,968 --> 00:24:29,403
+这幅图片中的东西是很重要的
 
 
 380
-00:19:47,596 --> 00:19:49,696
-because then the system will
-schedule it with other work
+00:24:30,304 --> 00:24:33,607
+那是直接执行的低功耗解决方案
 
 
 381
-00:19:50,136 --> 00:19:51,646
-that may otherwise happen.
+00:24:33,674 --> 00:24:35,475
+在这个方案中系统就像开始工作一样
 
 
 382
-00:19:51,856 --> 00:19:53,796
-So you can kind of
-batch things together.
+00:24:35,542 --> 00:24:37,344
+而你只需要一等等待存储和加载
 
 
 383
-00:19:54,476 --> 00:19:58,136
-Finally, batching is important
-for getting efficiency.
+00:24:37,411 --> 00:24:38,846
+你已经让一个核心运行了
 
 
 384
-00:19:58,136 --> 00:20:00,366
-You want to turn on that
-hardware, there is some cost
+00:24:39,279 --> 00:24:41,148
+如果我们让多核都运行的话
 
 
 385
-00:20:00,366 --> 00:20:04,806
-to turn it on, you want to
-use it before you turn it off.
+00:24:41,281 --> 00:24:44,084
+那我们才是真正的在使用该系统
+但如果只有单核情况会怎么样呢？
 
 
 386
-00:20:04,806 --> 00:20:06,276
-So you want to do as
-much work as you can
+00:24:44,318 --> 00:24:48,155
+因为时间的因素只会导致
+虽然功率很低但是功耗却很大
 
 
 387
-00:20:06,276 --> 00:20:07,696
-when you manage it turn it on.
+00:24:50,424 --> 00:24:53,594
+现在让我们研究一下为什么会这样
 
 
 388
-00:20:08,206 --> 00:20:11,366
-Again, bring down the power
-when we can, but really pull
+00:24:53,961 --> 00:24:57,898
+在运行系统的其他部分的时候
 
 
 389
-00:20:11,366 --> 00:20:13,956
-in the time is a
-critical factor.
+00:24:57,965 --> 00:24:59,933
+无论CPU GPU
+或是系统的其它部分
 
 
 390
-00:20:14,716 --> 00:20:18,596
-And this is an interesting key
-message that I want you to get.
+00:25:00,868 --> 00:25:03,003
+固定功耗都会慢慢增加
 
 
 391
-00:20:18,596 --> 00:20:20,136
-We have all this
-power available,
+00:25:03,403 --> 00:25:06,106
+你越快把这些固定消耗关掉
+效果自然就越好
 
 
 392
-00:20:20,136 --> 00:20:22,106
-but you just cannot run
-it all day on a battery.
+00:25:06,807 --> 00:25:09,943
+我自己也为GPU增加以下额外的功耗
 
 
 393
-00:20:22,336 --> 00:20:24,856
-The device will get too hot
-and the battery will not last.
+00:25:10,010 --> 00:25:12,913
+因为事实上在使用GPU的过程中
+会产生更多的功耗
 
 
 394
-00:20:25,546 --> 00:20:29,416
-So what we really want you to
-think about is a 10 percent load
+00:25:12,980 --> 00:25:15,782
+观察绿色的部分我们看出
 
 
 395
-00:20:29,416 --> 00:20:31,026
-on the system, total
-system load,
+00:25:16,383 --> 00:25:19,453
+当我们节省时间之后
+是否使用了更少的能量
 
 
 396
-00:20:31,126 --> 00:20:34,116
-which is not just your software,
-but anything you could do,
+00:25:21,655 --> 00:25:24,725
+关键课程
+高速也是能源效率
 
 
 397
-00:20:34,526 --> 00:20:38,046
-how can you make
-that 1/10 or 1/100
+00:25:25,759 --> 00:25:27,394
+我们在看这些在线下是否满足的时候
 
 
 398
-00:20:38,296 --> 00:20:41,996
-of what you could possibly
-achieve to shrink it down?
+00:25:27,728 --> 00:25:29,830
+请谨记按照重要性排列
 
 
 399
-00:20:42,376 --> 00:20:43,286
-That's when you are on screen.
+00:25:31,031 --> 00:25:32,833
+这是最直接的一个措施
 
 
 400
-00:20:43,286 --> 00:20:44,966
-When you are in the
-backgrounds, we want much less.
+00:25:33,233 --> 00:25:36,937
+因为任何一个熟悉高中几何的
+都很清楚那并不满足
 
 
 401
-00:20:46,206 --> 00:20:47,246
-So here's some bad news.
+00:25:37,638 --> 00:25:39,072
+我们会把它拉到平均水平
 
 
 402
-00:20:48,066 --> 00:20:50,996
-Across all of our hardware --
-and I did some research on this,
+00:25:39,139 --> 00:25:40,507
+在这里不再是功率乘以时间
 
 
 403
-00:20:50,996 --> 00:20:52,606
-and people are like oh,
-it's not exactly right.
+00:25:40,574 --> 00:25:41,408
+这只是平均水平
 
 
 404
-00:20:52,606 --> 00:20:54,106
-That's not the point
-of this talk.
+00:25:42,109 --> 00:25:42,943
+将不再适合
 
 
 405
-00:20:54,106 --> 00:20:55,686
-The point is to get you
-to think about this.
+00:25:43,477 --> 00:25:44,545
+至于其他的
 
 
 406
-00:20:56,616 --> 00:21:00,126
-Approximately 5 percent of that
-10 percent load is just turning
+00:25:44,878 --> 00:25:47,414
+注意
+效率有所提高
 
 
 407
-00:21:00,126 --> 00:21:00,756
-on the display.
+00:25:48,315 --> 00:25:49,316
+但是依然不够
 
 
 408
-00:21:01,946 --> 00:21:03,376
-Now, having the display
-on is good
+00:25:50,150 --> 00:25:53,520
+可以看到除了CPU/GPU
+平行线几乎都在线下
 
 
 409
-00:21:03,376 --> 00:21:04,906
-because it means the user
-is getting some value
+00:25:53,720 --> 00:25:56,490
+因为时间很短
+所以确实满足条件
 
 
 410
-00:21:04,906 --> 00:21:07,186
-from the system, hopefully,
-it's not just a notification.
+00:25:56,557 --> 00:25:59,126
+同时虽然功率很高
+但时间很短
 
 
 411
-00:21:07,806 --> 00:21:11,026
-And then there's
-this 10 percent goal,
+00:25:59,193 --> 00:26:00,794
+这些就是你在设计程序
+要遵从的方法
 
 
 412
-00:21:11,676 --> 00:21:13,386
-and our average is
-to be between those.
+00:26:00,861 --> 00:26:03,864
+但是不要重复的使用这些措施
 
 
 413
-00:21:13,386 --> 00:21:14,946
-It sounds like you
-only get 5 percent.
+00:26:04,431 --> 00:26:06,166
+在你做这些之前请稍等一下你的用户
 
 
 414
-00:21:15,286 --> 00:21:17,236
-And that's true on
-a long time scale.
+00:26:09,436 --> 00:26:10,671
+现在让我们调整一下
 
 
 415
-00:21:17,576 --> 00:21:20,006
-But on a short time scale,
-go for it, 100 percent,
+00:26:10,971 --> 00:26:13,640
+这些是应用在OS X和iOS的
+所有CPU和GPU
 
 
 416
-00:21:20,176 --> 00:21:22,876
-give us all the work
-you've got, with priorities,
+00:26:13,774 --> 00:26:16,643
+而它们对OS X尤其重要
 
 
 417
-00:21:22,996 --> 00:21:25,436
-and we will schedule it.
+00:26:16,743 --> 00:26:18,812
+此外我们在衡量能量
+对OS X的影响时
 
 
 418
-00:21:26,366 --> 00:21:26,966
-That's that.
+00:26:18,879 --> 00:26:20,614
+除了系统可以处理的CPU指令
 
 
 419
-00:21:26,966 --> 00:21:30,546
-You've got to get it
-between 5 and 10 percent.
+00:26:20,814 --> 00:26:23,283
+还可以通过人们可以唤醒系统的次数
 
 
 420
-00:21:30,826 --> 00:21:34,156
-Now, let's talk a little
-bit about CPU and GPU.
+00:26:24,051 --> 00:26:28,021
+现在让我们切换到iOS
 
 
 421
-00:21:34,156 --> 00:21:37,956
-These are the biggest
-energy consumers on OS X.
+00:26:28,555 --> 00:26:31,625
+我们知道iOS设备
+不仅有CPU和GPU性能非常强悍
 
 
 422
-00:21:38,066 --> 00:21:40,186
-They are the most dynamic.
+00:26:32,159 --> 00:26:37,197
+而且iOS的网络定位
+和后台运行的能力也很强大
 
 
 423
-00:21:40,186 --> 00:21:44,606
-We have very powerful multicore
-CPUs, massively parallel GPUs,
+00:26:43,036 --> 00:26:47,975
+其中网络的功率很大
+大量的硬件网络
 
 
 424
-00:21:44,606 --> 00:21:46,656
-we can do all kinds of work.
+00:26:48,642 --> 00:26:52,012
+此外还涉及到很重要的时间组件
+也需要详细考虑
 
 
 425
-00:21:47,226 --> 00:21:50,916
-However, it does consume the
-battery and energy in general
+00:26:53,013 --> 00:26:56,049
+定位是一个很好的功能
+用起来很棒
 
 
 426
-00:21:50,916 --> 00:21:51,796
-if you are plugging
-into the wall.
+00:26:56,383 --> 00:26:57,718
+但是它主要的设计目的
 
 
 427
-00:21:52,796 --> 00:21:55,246
-So you can see here we've got
-a significant amount of work.
+00:26:58,118 --> 00:26:59,586
+比如我正在观察地图上的一个点
 
 
 428
-00:21:55,246 --> 00:21:57,636
-We've got the CPU running, we've
-got the GPU running for a while,
+00:26:59,653 --> 00:27:01,722
+此时我准备穿过舞台
+而小点也相应的跟着移动
 
 
 429
-00:21:58,206 --> 00:22:00,906
-and in fact, this is not
-going to last all day.
+00:27:01,788 --> 00:27:05,192
+我很喜欢这个功能让人印象非常深刻
+可以告诉我自己正在穿过舞台
 
 
 430
-00:22:01,126 --> 00:22:04,446
-If this pattern continues --
-and patterns are very important
+00:27:07,261 --> 00:27:10,130
+不幸的是这个应用程序的接口
+很容易被留下继续运行
 
 
 431
-00:22:04,446 --> 00:22:06,616
-in the way you work -- if
-this pattern continues,
+00:27:10,531 --> 00:27:11,765
+甚至当我不在看地图的时候
 
 
 432
-00:22:06,616 --> 00:22:07,856
-we are not going to get
-all-day battery life.
+00:27:12,299 --> 00:27:16,270
+因此我需要除了改进应用程序的接口
 
 
 433
-00:22:08,336 --> 00:22:10,196
-The average power is too high.
+00:27:16,670 --> 00:27:20,407
+我们也需要你在自己需要的最短
+时间之内去使用定位
 
 
 434
-00:22:10,836 --> 00:22:16,246
-So what does it look like
-if we just wake up the CPU?
+00:27:21,074 --> 00:27:23,677
+最终任何时刻都在后台运行
 
 
 435
-00:22:16,506 --> 00:22:17,336
-Is there work to do?
+00:27:24,378 --> 00:27:27,414
+那就会使得设备
 
 
 436
-00:22:17,506 --> 00:22:18,276
-Is there work to do?
+00:27:29,249 --> 00:27:32,286
+增加了保持唤醒的时间
 
 
 437
-00:22:18,326 --> 00:22:18,826
-Is there mail?
+00:27:32,486 --> 00:27:34,888
+每次我按屏幕上的home键
+离开你的应用程序的时候
 
 
 438
-00:22:18,986 --> 00:22:19,586
-Did the user tap?
+00:27:35,189 --> 00:27:37,658
+你都在后台运行
+可能时间很短也许时间会很长
 
 
 439
-00:22:19,726 --> 00:22:20,346
-Anything happen?
+00:27:38,692 --> 00:27:40,827
+我们希望尽可能的消除这种情况
 
 
 440
-00:22:21,556 --> 00:22:22,156
-Hey, server.
+00:27:40,894 --> 00:27:43,597
+因为我们希望设备
+能保持在良好的待机状态
 
 
 441
-00:22:23,286 --> 00:22:23,936
-Let's not do that.
+00:27:44,031 --> 00:27:47,201
+从而使得设备的随机存储器和接收器
+可以保持在一个低功耗的模式下
 
 
 442
-00:22:24,126 --> 00:22:28,166
-When we wake up the CPU and GPU,
-we take a significant amount
+00:27:48,769 --> 00:27:50,470
+让我们讨论一下网络
 
 
 443
-00:22:28,166 --> 00:22:31,276
-of energy to ramp
-it up -- zooooop!
+00:27:51,939 --> 00:27:54,041
+幻灯片橘色的部分状态不好
 
 
 444
-00:22:32,416 --> 00:22:33,366
-Is there work to do?
+00:27:54,575 --> 00:27:55,642
+因为它代表的是消耗
 
 
 445
-00:22:33,366 --> 00:22:36,426
-I don't hear any work.
+00:27:56,577 --> 00:28:01,014
+思考一下
+当你想向网络上特别是蜂窝设备
 
 
 446
-00:22:37,006 --> 00:22:40,186
-Zoooop. But all those
-triangles as you can see,
+00:28:01,081 --> 00:28:03,817
+发送一些数据的时候会发生什么
 
 
 447
-00:22:40,336 --> 00:22:43,136
-even the iOS triangles, are
-taking up a significant portion
+00:28:04,651 --> 00:28:08,522
+系统可能会说“我现在必须发送数据
+因为应用程序告诉我的”
 
 
 448
-00:22:43,136 --> 00:22:44,746
-of that 5 to 10 percent range.
+00:28:09,489 --> 00:28:12,893
+不要把它标记为后台任务
+它不可延迟 必须立即完成
 
 
 449
-00:22:46,306 --> 00:22:47,916
-Try not to wake up
-unnecessarily.
+00:28:13,894 --> 00:28:17,865
+我们之间没有连接起来
+只是通过入站连接与蜂窝系统联系
 
 
 450
-00:22:48,496 --> 00:22:50,306
-On OS X, if you wake
-up the CPU all day,
+00:28:18,131 --> 00:28:19,366
+但是我们没有出站
 
 
 451
-00:22:50,306 --> 00:22:52,106
-you will in fact not
-achieve all-day battery life,
+00:28:20,300 --> 00:28:21,201
+所以举起来
 
 
 452
-00:22:52,256 --> 00:22:54,636
-even if you do not work, even
-if you just check for work.
+00:28:21,735 --> 00:28:24,404
+找到一个基站
+已经找到基站
 
 
 453
-00:22:55,146 --> 00:22:55,686
-Don't do that.
+00:28:24,471 --> 00:28:26,106
+但是总体情况并不太好
+尝试另一个
 
 
 454
-00:22:55,996 --> 00:22:59,546
-The GPU is a slightly
-different time scale monster,
+00:28:26,540 --> 00:28:28,442
+这个基站非常好
 
 
 455
-00:22:59,996 --> 00:23:03,186
-but this is way more often
-than you need to wake the GPU,
+00:28:28,809 --> 00:28:29,910
+我们连上了
 
 
 456
-00:23:03,186 --> 00:23:06,016
-even for really nice graphics.
+00:28:29,977 --> 00:28:32,279
+好的 我发送一些数据
+好的 数据发送了
 
 
 457
-00:23:06,016 --> 00:23:09,406
-Right? The GPU can do tons of
-work in like 1 millisecond,
+00:28:34,681 --> 00:28:36,517
+没有数据发送了 但是仍然连接着
 
 
 458
-00:23:09,456 --> 00:23:12,846
-then there's 15 milliseconds
-before the next frame is needed.
+00:28:36,750 --> 00:28:38,519
+连接时的代价很高
+当我把设备打开时
 
 
 459
-00:23:12,846 --> 00:23:16,786
-Now let's talk about
-performance.
+00:28:39,152 --> 00:28:40,988
+按照蜂窝网络的工作方式
 
 
 460
-00:23:16,866 --> 00:23:18,636
-You've hopefully are
-here because you care
+00:28:41,054 --> 00:28:43,724
+我必须让它运行一到两秒
 
 
 461
-00:23:18,636 --> 00:23:21,366
-about energy performance,
-but time performance
+00:28:44,424 --> 00:28:47,828
+它可能只需要几毫秒时间去发送数据
 
 
 462
-00:23:21,366 --> 00:23:23,026
-where you just do things
-quicker, which is just good
+00:28:47,995 --> 00:28:50,697
+但它可能需要停留长达10秒
+去连接到网络
 
 
 463
-00:23:23,026 --> 00:23:26,126
-for users and in general, is
-also key to energy efficiency.
+00:28:51,031 --> 00:28:52,699
+显然不是高功率模式
 
 
 464
-00:23:26,306 --> 00:23:26,946
-Let's talk about why.
+00:28:52,766 --> 00:28:56,170
+但是功率仍远高于输入连接的闲置等待
 
 
 465
-00:23:29,166 --> 00:23:29,866
-Here's a workload.
+00:28:56,870 --> 00:28:59,540
+因此消耗是一个重要的能源影响
 
 
 466
-00:23:29,946 --> 00:23:31,196
-This is a fixed workload.
+00:29:00,207 --> 00:29:02,876
+正在运行的网络工作量大小并不重要
 
 
 467
-00:23:31,196 --> 00:23:32,836
-This is not a continuous
-state of being.
+00:29:03,210 --> 00:29:06,647
+在某些情况下如果接收机关闭的话
+必须重启后运行
 
 
 468
-00:23:32,836 --> 00:23:34,556
-I just needed to do this
-work and then get it done.
+00:29:07,047 --> 00:29:11,385
+耗费的时间比你实际上
+需要发送数据的时间长一千倍
 
 
 469
-00:23:35,956 --> 00:23:36,706
-Pretty big workload.
+00:29:12,486 --> 00:29:16,056
+而且没有任何方法能降低功率至预期值
 
 
 470
-00:23:36,916 --> 00:23:39,006
-I could probably
-optimize my code.
+00:29:16,223 --> 00:29:19,359
+收音机不能一直开启
+去实现全天续航的目标
 
 
 471
-00:23:39,006 --> 00:23:41,686
-I could look in my inner
-loops and pull stuff out
+00:29:20,694 --> 00:29:22,129
+这对聊天应用程序是一个坏消息
 
 
 472
-00:23:41,686 --> 00:23:44,786
-and do less memory accesses and
-traditional performance work.
+00:29:22,863 --> 00:29:27,034
+好消息是人们并不会在他们的手机上
+点击聊天应用程序长达10个小时
 
 
 473
-00:23:45,576 --> 00:23:47,216
-So I get a more efficient
-implementation.
+00:29:27,100 --> 00:29:27,935
+他们不会这样的
 
 
 474
-00:23:47,896 --> 00:23:48,956
-The power did go up.
+00:29:28,168 --> 00:29:30,037
+因此只要你能够明白
 
 
 475
-00:23:49,506 --> 00:23:52,056
-However, the time is
-now so much shorter
+00:29:30,103 --> 00:29:33,941
+如果没有实时聊天让网络继续下去
 
 
 476
-00:23:52,426 --> 00:23:54,026
-that it's a significant
-energy win.
+00:29:35,175 --> 00:29:36,810
+那么你就可以让电池实现全天续航
 
 
 477
-00:23:54,516 --> 00:23:54,966
-This is good.
+00:29:38,378 --> 00:29:40,347
+我们如何解决这个问题
+我们怎样让它更好
 
 
 478
-00:23:54,966 --> 00:23:56,446
-But we can do better.
+00:29:40,714 --> 00:29:42,683
+因为它们不是一天可以解决的事情
+难度很高
 
 
 479
-00:23:56,686 --> 00:23:57,966
-We can parallelize the work.
+00:29:44,151 --> 00:29:48,021
+我们必须通过合并把它们组合在一起
+通过批处理的方式去解决它
 
 
 480
-00:23:58,196 --> 00:24:00,156
-We can use multiple
-cores, right?
+00:29:48,622 --> 00:29:50,824
+所以在这个特殊的例子里
 
 
 481
-00:24:00,646 --> 00:24:03,596
-And finally, we can really
-go crazy and fire up the GPU.
+00:29:50,891 --> 00:29:53,360
+我们将会把未来的工作
+纳入到旧的工作中
 
 
 482
-00:24:03,726 --> 00:24:06,276
-Now, the good news is
-you typically don't need
+00:29:53,427 --> 00:29:55,963
+如今将来的工作更加的重要
 
 
 483
-00:24:06,276 --> 00:24:08,866
-to write this optimized
-code, but you do need to look
+00:29:56,029 --> 00:29:58,665
+所以你应当推迟以前的工作
+那样可能更容易去完成目标
 
 
 484
-00:24:08,866 --> 00:24:09,866
-for this optimized code.
+00:29:58,765 --> 00:30:01,568
+但是如果你想了解那两项工作
+究竟哪一个更重要
 
 
 485
-00:24:09,866 --> 00:24:12,146
-You need to find those
-optimized numerics libraries.
+00:30:01,969 --> 00:30:05,205
+对于你的应用程序来说目标就是
+现在你可以实现哪一个
 
 
 486
-00:24:12,706 --> 00:24:14,496
-We have a link at the
-end for the session
+00:30:05,272 --> 00:30:07,107
+现在我们将这些很棒的工具展示给你
 
 
 487
-00:24:14,496 --> 00:24:15,656
-and for our energy doc.
+00:30:07,274 --> 00:30:12,579
+基本上在Xcode上的这些图形
+图形表示的新工具都将装在你的软件上
 
 
 488
-00:24:16,386 --> 00:24:19,276
-You need to find the right
-data structures, right?
+00:30:12,846 --> 00:30:13,680
+它非常好
 
 
 489
-00:24:19,276 --> 00:24:20,396
-You need to look at your app
+00:30:14,414 --> 00:30:17,885
+你可以看一下再谈谈为什么我要去做
+这些没有必要 也许没有必要的事情
 
 
 490
-00:24:20,396 --> 00:24:22,486
-and say why am I
-churning all the time?
+00:30:18,785 --> 00:30:21,388
+为什么我的网络模式没有一点效率
 
 
 491
-00:24:22,486 --> 00:24:28,026
-What could I be optimizing on
-the regular old time component?
+00:30:21,555 --> 00:30:23,490
+为什么它时分散的？
+我怎样才能通力合作？
 
 
 492
-00:24:28,026 --> 00:24:29,136
-Something important
-in this graph.
+00:30:23,891 --> 00:30:27,828
+然后我们才能真正达到这个目标
+平均低功耗
 
 
 493
-00:24:30,216 --> 00:24:33,686
-The lowest power solution, which
-is that naive implementation
+00:30:28,195 --> 00:30:29,363
+那就意味着全天的续航
 
 
 494
-00:24:33,686 --> 00:24:35,846
-where the system is like oh
-come on, you're just waiting
+00:30:30,130 --> 00:30:32,132
+因此对网络进行总结
 
 
 495
-00:24:35,846 --> 00:24:37,376
-for loads and stores
-all the time,
+00:30:32,566 --> 00:30:35,035
+如果你想在网络上做更少的工作
 
 
 496
-00:24:37,376 --> 00:24:38,846
-you've got one core running.
+00:30:35,769 --> 00:30:37,971
+就必须正确的设计你的系统
 
 
 497
-00:24:39,326 --> 00:24:41,106
-If we get multiple
-cores running,
+00:30:39,239 --> 00:30:42,809
+即使你有一分钟的网络
+这只增加了几秒钟的消耗
 
 
 498
-00:24:41,406 --> 00:24:42,636
-then we are really
-using the system.
+00:30:43,177 --> 00:30:47,981
+此外 除非用户请求你现在访问网络
 
 
 499
-00:24:42,786 --> 00:24:43,716
-But just one core?
+00:30:48,615 --> 00:30:52,419
+否则直到确实重要的事情
+请不要访问网络
 
 
 500
-00:24:44,336 --> 00:24:46,796
-It's low power but
-has the highest cost
+00:30:53,253 --> 00:30:56,857
+就设计来说 对于卸载系统
 
 
 501
-00:24:47,036 --> 00:24:48,146
-because of that time component.
+00:30:56,924 --> 00:30:59,026
+以及让系统决定什么时候
 
 
 502
-00:24:50,466 --> 00:24:53,486
-Now let's explore more
-about why that is.
+00:30:59,092 --> 00:31:03,463
+在接下来的十分钟内
+下一个小时 下一个二十四小时
 
 
 503
-00:24:53,996 --> 00:24:57,566
-There's a significant fixed
-cost to running any part
+00:31:04,264 --> 00:31:07,201
+怎样变化来说你所能做的就是对允许
+我们对任务进行批量处理
 
 
 504
-00:24:57,566 --> 00:24:59,856
-of the system, whether it's
-CPU, GPU, or anything else.
+00:31:07,267 --> 00:31:08,869
+使得你卸载网络
 
 
 505
-00:25:01,126 --> 00:25:03,016
-That fixed cost adds
-up over time.
+00:31:08,936 --> 00:31:12,673
+当工作完成的时候
+我们将会给你打电话叫醒你
 
 
 506
-00:25:03,406 --> 00:25:06,116
-The sooner you can turn off
-that fixed cost, the better.
+00:31:15,442 --> 00:31:17,778
+很多时候 你可以在工作的时候等待
 
 
 507
-00:25:06,816 --> 00:25:10,176
-Here I added a little extra
-fixed cost for the GPU because,
+00:31:18,612 --> 00:31:21,748
+背景更新 NSURLSession
+都有这个特性
 
 
 508
-00:25:10,176 --> 00:25:12,966
-in fact, there is some more
-fixed cost for using the GPU,
+00:31:22,015 --> 00:31:23,417
+只要等着 推迟它
 
 
 509
-00:25:12,966 --> 00:25:17,426
-but look at how much less energy
-is consumed in the green part
+00:31:24,051 --> 00:31:25,452
+去排队吧 这很好
 
 
 510
-00:25:18,026 --> 00:25:20,026
-when we pull the time in.
+00:31:26,086 --> 00:31:27,788
+但不要强迫它马上发生
 
 
 511
-00:25:21,376 --> 00:25:24,716
-Key lesson: Fast is
-also energy efficient.
+00:31:29,356 --> 00:31:33,393
+这些通知很棒
 
 
 512
-00:25:25,446 --> 00:25:26,926
-But don't forget to prioritize.
+00:31:33,927 --> 00:31:36,496
+但是它们有时候也会脱离控制
 
 
 513
-00:25:27,716 --> 00:25:29,846
-Now let's see if these
-fit under the line.
+00:31:36,563 --> 00:31:37,865
+比如在服务器端
 
 
 514
-00:25:31,026 --> 00:25:32,846
-Here is our naive
-implementation.
+00:31:37,931 --> 00:31:41,535
+记得我曾提到过我们总是和
+进站连接服务器相连接么
 
 
 515
-00:25:33,246 --> 00:25:35,586
-Anybody that's had some high
-school geometry is going
+00:31:41,602 --> 00:31:42,603
+強 也提到过
 
 
 516
-00:25:35,586 --> 00:25:36,946
-to know that's not going
-to fit under our --
+00:31:44,071 --> 00:31:45,172
+入站连接很便宜
 
 
 517
-00:25:36,946 --> 00:25:39,136
-we are going to pull
-it down to the average.
+00:31:45,239 --> 00:31:46,673
+它们基本上都是可靠的
 
 
 518
-00:25:39,136 --> 00:25:40,576
-This is no longer
-power times time.
+00:31:46,974 --> 00:31:51,278
+所以继续发送一些信息而不是轮询
 
 
 519
-00:25:40,576 --> 00:25:41,276
-It's just average.
+00:31:51,578 --> 00:31:55,148
+最好把一些信息发送出去
+而且把这些通知标记为PushKit
 
 
 520
-00:25:42,096 --> 00:25:42,786
-It's not going to fit.
+00:31:55,582 --> 00:31:58,552
+有了一个适当的优先级
+这样我们就可以批量处理了
 
 
 521
-00:25:43,276 --> 00:25:44,416
-But what about the other ones?
+00:31:58,619 --> 00:32:02,022
+而当我得到一个即时消息的时候
+迅速地完成是最重要的
 
 
 522
-00:25:44,866 --> 00:25:46,726
-Hey, look, efficient!
+00:32:02,089 --> 00:32:05,692
+也可能是把
+带有新内容的通知下载到你的
 
 
 523
-00:25:46,876 --> 00:25:47,406
-That's better.
+00:32:05,759 --> 00:32:07,394
+新应用程序或者其他类似的东西上
 
 
 524
-00:25:48,326 --> 00:25:49,156
-But still not that good.
+00:32:08,962 --> 00:32:10,664
+现在让我们讨论一下定位
 
 
 525
-00:25:50,136 --> 00:25:53,526
-Parallel are almost under the
-line, but that CPU/GPU one,
+00:32:12,799 --> 00:32:17,171
+定位也有两个要素
+好消息是定位的功率相对较低
 
 
 526
-00:25:53,726 --> 00:25:56,496
-that actually fit because
-the time was so short.
+00:32:17,638 --> 00:32:19,640
+如果你让定位一直运行
 
 
 527
-00:25:56,556 --> 00:25:59,296
-Power was very tall, but
-the time was very short.
+00:32:19,706 --> 00:32:22,109
+那么只会有很少的空间去做其他的事情
 
 
 528
-00:25:59,296 --> 00:26:02,626
-That's how you should design
-your apps, but don't do it over
+00:32:22,176 --> 00:32:24,311
+因此不要让精确定位一直运行
 
 
 529
-00:26:02,626 --> 00:26:03,876
-and over and over again.
+00:32:24,778 --> 00:32:26,580
+事实上 最好不要一直运行定位
 
 
 530
-00:26:04,416 --> 00:26:07,466
-Wait for the user
-before you do it.
+00:32:26,647 --> 00:32:33,520
+除非用户确实希望在生活中
+一直运行定位程序
 
 
 531
-00:26:09,196 --> 00:26:10,666
-Now let's switch
-gears a little bit.
+00:32:33,587 --> 00:32:36,023
+他们会看你的电池目录
 
 
 532
-00:26:10,976 --> 00:26:13,636
-This is all GPU and CPU
-applies to OS X and iOS,
+00:32:36,089 --> 00:32:38,325
+从而知道 后台定位会占用...
 
 
 533
-00:26:13,786 --> 00:26:16,396
-but it's especially
-important on OS X,
+00:32:39,526 --> 00:32:40,594
+25%的电池
 
 
 534
-00:26:16,396 --> 00:26:19,086
-and we measure basically our
-energy impact on OS X both
+00:32:40,794 --> 00:32:41,628
+那样并不好
 
 
 535
-00:26:19,086 --> 00:26:22,156
-by CPU instructions they
-consume but also by the number
+00:32:41,828 --> 00:32:43,363
+除非你的应用程序就是那样
 
 
 536
-00:26:22,156 --> 00:26:23,286
-of times you wake the system.
+00:32:43,664 --> 00:32:44,631
+那很好
 
 
 537
-00:26:24,046 --> 00:26:27,606
-And let's switch over to iOS.
+00:32:46,900 --> 00:32:48,936
+如此精确的定位是很昂贵的
 
 
 538
-00:26:27,696 --> 00:26:30,506
-iOS devices not only
-have CPUs and GPUs
+00:32:49,002 --> 00:32:50,971
+我们必须打开更多的硬件
+与卫星对话
 
 
 539
-00:26:30,506 --> 00:26:33,826
-that are quite powerful, but
-they also have networking,
+00:32:51,038 --> 00:32:52,773
+联系所有的卫星
 
 
 540
-00:26:34,266 --> 00:26:42,386
-location, and this ability
-to run in the background.
+00:32:52,840 --> 00:32:53,740
+完成
 
 
 541
-00:26:43,036 --> 00:26:47,986
-The networking has very high
-costs, big networking hardware,
+00:32:56,410 --> 00:32:58,712
+不精确的定位便宜很多
+我们只能说
 
 
 542
-00:26:48,626 --> 00:26:51,226
-and it turns out that it has
-some significant time components
+00:32:58,779 --> 00:33:01,215
+我已连接哪个Wi-Fi网络
+我附近的基站是什么
 
 
 543
-00:26:51,226 --> 00:26:51,996
-that you need to think about.
+00:33:01,748 --> 00:33:02,716
+然后我们才能真正
 
 
 544
-00:26:53,016 --> 00:26:56,046
-Location is a wonderful
-feature, it's great to use,
+00:33:02,783 --> 00:33:06,353
+你看到的绿色正是系统运行的地方
+显示正在运行
 
 
 545
-00:26:56,376 --> 00:26:57,726
-but it is designed
-for, you know --
+00:33:06,420 --> 00:33:08,822
+虽然我们的系统大部分是关闭的
 
 
 546
-00:26:58,116 --> 00:26:59,666
-I'm looking at the map
-and watching the dot.
+00:33:09,156 --> 00:33:11,458
+但是仍然在跟踪你的位置
+甚至精确定位
 
 
 547
-00:26:59,666 --> 00:27:00,956
-I am going to walk
-across the stage
+00:33:11,525 --> 00:33:12,359
+它不是免费的
 
 
 548
-00:27:00,956 --> 00:27:01,776
-and the dot is going to move.
+00:33:12,426 --> 00:33:14,695
+不会一直运行
+这些是漏洞
 
 
 549
-00:27:01,776 --> 00:27:03,466
-I am like wow, that's
-really impressive
+00:33:14,761 --> 00:33:16,797
+从而使得我可以确定你在家里
 
 
 550
-00:27:03,526 --> 00:27:05,196
-that it can tell I am
-walking across the stage.
+00:33:17,197 --> 00:33:18,765
+特别是加利福利亚居民
 
 
 551
-00:27:07,246 --> 00:27:10,146
-Unfortunately, that API is
-very easy to leave running,
+00:33:20,834 --> 00:33:22,102
+定位只不过是滴、滴、滴
 
 
 552
-00:27:10,516 --> 00:27:13,016
-even when I am not looking
-at the map, so we need to --
+00:33:22,603 --> 00:33:24,805
+因此我们可以优化它
 
 
 553
-00:27:13,016 --> 00:27:16,276
-we improve the API, but
-we are also needing you
+00:33:25,906 --> 00:33:26,740
+尽量少用它
 
 
 554
-00:27:16,316 --> 00:27:19,346
-to only use location
-for the shortest period
+00:33:26,874 --> 00:33:28,976
+你知道 如果你准备去申请更新定位
 
 
 555
-00:27:19,346 --> 00:27:20,416
-of time that you need.
+00:33:29,176 --> 00:33:30,143
+请不要马上申请
 
 
 556
-00:27:21,076 --> 00:27:23,686
-And finally, any time you are
-operating in the background,
+00:33:30,210 --> 00:33:32,679
+那有一些应用程序
+当我启动时我想知道我的位置
 
 
 557
-00:27:24,366 --> 00:27:32,276
-that is causing a -- the device
-to stay awake, and that adds up.
+00:33:32,746 --> 00:33:34,681
+我想知道公交车什么时候来
 
 
 558
-00:27:32,506 --> 00:27:34,476
-Every time I leave your app,
-I press the Home screen,
+00:33:35,682 --> 00:33:36,517
+那很好
 
 
 559
-00:27:35,176 --> 00:27:36,746
-you run for the background,
-maybe a little bit,
+00:33:36,583 --> 00:33:39,219
+我周围的食物网络应用程序 很棒
 
 
 560
-00:27:36,746 --> 00:27:40,286
-maybe a long time -- we want
-to eliminate that as much
+00:33:39,453 --> 00:33:40,821
+启动 获取位置
 
 
 561
-00:27:40,286 --> 00:27:43,586
-as possible because we want the
-device to get nice and sleepy
+00:33:41,154 --> 00:33:44,591
+否则等待用户去搜索
+或者无论你需要什么
 
 
 562
-00:27:44,026 --> 00:27:45,896
-so that we only have to
-leave the RAM and radios
+00:33:45,125 --> 00:33:48,996
+然后尽快为用户完成设置
+你已经得到了你想要的精确定位
 
 
 563
-00:27:45,896 --> 00:27:47,196
-in a very low-power mode.
+00:33:49,263 --> 00:33:50,097
+然后去申请停止
 
 
 564
-00:27:47,746 --> 00:27:50,476
-Let's talk about networking.
+00:33:51,331 --> 00:33:54,801
+对iOS 9来说 我们已经引入了
+新的应用程序接口来完成这些任务
 
 
 565
-00:27:51,946 --> 00:27:53,176
-There's some orange
-on the slide.
+00:33:54,868 --> 00:33:56,170
+这被称为请求定位
 
 
 566
-00:27:53,176 --> 00:27:54,036
-That orange is not good.
+00:33:56,937 --> 00:33:58,338
+它通过启动和停止
 
 
 567
-00:27:54,566 --> 00:27:55,656
-That orange is the overhead.
+00:33:58,405 --> 00:34:00,474
+确保你得到适当的精度
 
 
 568
-00:27:56,566 --> 00:28:01,096
-Here's what happens when
-you want to send some data
+00:34:00,741 --> 00:34:04,745
+你也不必管理开始和停止
+这种情况只对iOS 9种适用
 
 
 569
-00:28:01,096 --> 00:28:03,816
-over the network, especially
-on a cellular device.
+00:34:04,811 --> 00:34:07,181
+对老版的操作系统仍然要按照
+以前的方法去操作
 
 
 570
-00:28:04,666 --> 00:28:07,246
-The system says, oh, look, I
-have to send this data right now
+00:34:07,481 --> 00:34:09,616
+在幻灯片的结尾有关于定位讨论的链接
 
 
 571
-00:28:07,246 --> 00:28:08,506
-because the app told me to.
+00:34:10,684 --> 00:34:15,121
+我们改变了系统中后台定位的行为方式
 
 
 572
-00:28:09,486 --> 00:28:12,076
-Hasn't tagged it as a background
-work, so I can't delay it.
+00:34:15,188 --> 00:34:17,958
+因此你的应用程序可以请求
+使用后台定位
 
 
 573
-00:28:12,146 --> 00:28:12,886
-Got to do it right now.
+00:34:18,192 --> 00:34:21,628
+但在请求被允许之前
+可能会和用户有更多的交互
 
 
 574
-00:28:12,886 --> 00:28:14,786
-We are not connected.
+00:34:22,029 --> 00:34:25,232
+如果不想再后台使用的话
+你必须对你的应用程序谨慎一点
 
 
 575
-00:28:14,786 --> 00:28:17,246
-We are connected with
-an inbound connection
+00:34:25,866 --> 00:34:28,835
+保持允许后台定位更新的属性
 
 
 576
-00:28:17,246 --> 00:28:19,356
-to the cellular system,
-but we don't have outbound.
+00:34:29,136 --> 00:34:32,940
+除非当你在后台中积极的完成它
+否则就把它设置为假
 
 
 577
-00:28:20,316 --> 00:28:21,096
-So hold up.
+00:34:33,739 --> 00:34:36,310
+当你打开硬件定位的时候
+要能够意识到
 
 
 578
-00:28:21,756 --> 00:28:22,426
-Find a cell tower.
+00:34:36,376 --> 00:34:38,779
+就像打开电灯开关一样
+你实际上在给它供电
 
 
 579
-00:28:22,586 --> 00:28:24,456
-Okay. Got the cell tower.
+00:34:38,846 --> 00:34:40,848
+切换状态也是非常容易的
 
 
 580
-00:28:24,456 --> 00:28:25,386
-That one's not so good.
+00:34:42,416 --> 00:34:44,985
+当你实际使用它的时候
+想把功耗降下来
 
 
 581
-00:28:25,386 --> 00:28:25,946
-Let me try another.
+00:34:45,052 --> 00:34:46,920
+当我们讨论到时间的时说到要节省时间
 
 
 582
-00:28:25,946 --> 00:28:28,436
-Oh, okay, this cell
-tower's really good.
+00:34:47,353 --> 00:34:48,388
+当涉及把功率降下来
 
 
 583
-00:28:28,796 --> 00:28:29,966
-We got the connection going.
+00:34:48,922 --> 00:34:50,657
+我提到过我们实际上可以卸载
 
 
 584
-00:28:29,966 --> 00:28:31,196
-Great. I am going
-to send this data.
+00:34:50,724 --> 00:34:53,025
+所以让我们说一下我们正在做的
+我喜欢自行车
 
 
 585
-00:28:31,566 --> 00:28:32,266
-Okay. I sent the data.
+00:34:53,260 --> 00:34:56,996
+我可以跟踪我的自行车
+你知道 非常准确
 
 
 586
-00:28:34,686 --> 00:28:36,526
-There's no more data to send,
-but I have this connection.
+00:34:57,297 --> 00:34:59,466
+但那是硬件而不是软件
 
 
 587
-00:28:36,746 --> 00:28:37,466
-It was expensive.
+00:34:59,533 --> 00:35:04,538
+所以推迟那些更新
+所以每15分钟就会打电话给你
 
 
 588
-00:28:37,466 --> 00:28:38,146
-I turned it on.
+00:35:04,605 --> 00:35:07,207
+嘿 看 这里是所有的跟踪信息
 
 
 589
-00:28:38,856 --> 00:28:41,046
-And the way the cellular
-network works,
+00:35:07,508 --> 00:35:10,477
+但是大多数系统和你的软件都在休眠
 
 
 590
-00:28:41,046 --> 00:28:43,716
-I have to leave it running
-for at least a second or two.
+00:35:10,544 --> 00:35:12,646
+只有定位芯片在运行
 
 
 591
-00:28:44,416 --> 00:28:47,816
-It may only take a few
-milliseconds to send the data,
+00:35:14,414 --> 00:35:16,783
+最后 我们第三个因素
+对调试软件来说
 
 
 592
-00:28:47,996 --> 00:28:49,546
-but it can take up
-to ten seconds
+00:35:16,850 --> 00:35:19,653
+这确实是我们希望你做的三件事
 
 
 593
-00:28:49,546 --> 00:28:50,696
-of staying connected
-to the network.
+00:35:20,454 --> 00:35:23,056
+你知道 减少网络 减少定位
 
 
 594
-00:28:51,026 --> 00:28:54,166
-Obviously not as high power
-mode, but it is still much,
+00:35:23,490 --> 00:35:24,892
+和后台运行
 
 
 595
-00:28:54,166 --> 00:28:56,186
-much higher than idle waiting
-for incoming connections.
+00:35:27,127 --> 00:35:31,598
+这些只是用户通常看不到的功耗
+当他们推出这个应用程序的时候
 
 
 596
-00:28:56,856 --> 00:28:59,526
-So that overhead is a
-significant energy impact.
+00:35:31,665 --> 00:35:33,634
+用户可能会喜欢
+这个实时更新的应用程序
 
 
 597
-00:28:59,526 --> 00:29:02,876
-It doesn't matter how much
-networking you are doing.
+00:35:33,700 --> 00:35:35,936
+但是尝试使用后台应用程序刷新
 
 
 598
-00:29:03,236 --> 00:29:05,666
-If the radios are off,
-we have to fire them up
+00:35:36,003 --> 00:35:37,838
+尽量呈现优质
+大量的leeways
 
 
 599
-00:29:05,666 --> 00:29:08,356
-and leave them running
-for, in some cases,
+00:35:38,472 --> 00:35:40,707
+如果你发送通知随后被忽略
 
 
 600
-00:29:08,356 --> 00:29:10,746
-a thousand times longer
-than you actually needed
+00:35:41,141 --> 00:35:44,011
+会点亮屏幕
+它正在发射网络 这只是
 
 
 601
-00:29:10,826 --> 00:29:11,376
-to send your data.
+00:35:44,711 --> 00:35:47,581
+不仅是这个消耗
 
 
 602
-00:29:11,376 --> 00:29:14,906
-And there's no way that
-power is significantly
+00:35:47,648 --> 00:35:49,850
+如果你一直运行的话
+将会很快的消耗你的电池
 
 
 603
-00:29:14,906 --> 00:29:16,046
-over our low power target.
+00:35:49,917 --> 00:35:51,952
+但是这是一个...
 
 
 604
-00:29:16,216 --> 00:29:18,026
-You cannot leave the
-radios on all the time
+00:35:53,153 --> 00:35:55,556
+这基本上只是去掉了
 
 
 605
-00:29:18,066 --> 00:29:19,346
-and achieve all-day
-battery life.
+00:35:56,256 --> 00:35:58,292
+适用于其它事物的能量
 
 
 606
-00:29:20,706 --> 00:29:22,116
-This is bad news for chat apps.
+00:35:58,358 --> 00:36:00,694
+它正在减少基本上
+如果我降低了障碍
 
 
 607
-00:29:22,316 --> 00:29:25,676
-The good news is for chat apps
-is the users don't actually tap
+00:36:00,761 --> 00:36:04,298
+那么就是说你已经实现了...
+9%以下而不是10%
 
 
 608
-00:29:25,676 --> 00:29:27,096
-on their phones for
-ten hours straight.
+00:36:04,765 --> 00:36:05,866
+我们需要避免...
 
 
 609
-00:29:27,096 --> 00:29:27,526
-They can't.
+00:36:06,333 --> 00:36:07,968
+而这20%更糟
 
 
 610
-00:29:28,166 --> 00:29:30,116
-So as long as you are wise
+00:36:08,502 --> 00:36:11,138
+因为平均下来你只有5%
 
 
 611
-00:29:30,116 --> 00:29:32,476
-about if there's not
-live chat going on,
+00:36:11,939 --> 00:36:14,241
+只要确定你不在后台运行
+怎样去实现这一目的呢
 
 
 612
-00:29:32,956 --> 00:29:33,926
-let the network go down,
+00:36:15,209 --> 00:36:17,377
+调用后台任务时
 
 
 613
-00:29:35,086 --> 00:29:36,496
-then you can get
-all-day battery life.
+00:36:17,444 --> 00:36:19,713
+我们将让设备保持几分钟的唤醒状态
 
 
 614
-00:29:37,016 --> 00:29:39,206
-How do we fix this?
+00:36:20,647 --> 00:36:23,417
+这样你可以尽快的
+终止后台任务
 
 
 615
-00:29:39,506 --> 00:29:40,356
-How do we make this better?
+00:36:23,851 --> 00:36:27,688
+除了能量指南之外
+还有一个很好的应用程序指南
 
 
 616
-00:29:40,726 --> 00:29:41,656
-So this is not all-day.
+00:36:27,754 --> 00:36:29,857
+那还有一个应用程序生命周期指南
 
 
 617
-00:29:41,946 --> 00:29:42,676
-It's too tall.
+00:36:29,923 --> 00:36:34,361
+这个消息会通知你
+你将进入后台
 
 
 618
-00:29:43,386 --> 00:29:46,806
-We fix it by coalescing,
-bringing it together,
+00:36:35,462 --> 00:36:38,398
+你的用户界面状态保存在那儿
 
 
 619
-00:29:46,846 --> 00:29:48,016
-putting it into a batch of work.
+00:36:38,465 --> 00:36:40,234
+和用户界面对话 保持当前状态
 
 
 620
-00:29:48,636 --> 00:29:51,086
-So in this particular
-case, we are going
+00:36:40,601 --> 00:36:42,870
+如果你有需要保存的重要数据
 
 
 621
-00:29:51,086 --> 00:29:53,416
-to bring the future
-work into the old work.
+00:36:44,371 --> 00:36:46,974
+去开一个后台操作
 
 
 622
-00:29:53,416 --> 00:29:56,046
-Now, it may be that the future
-work is actually more important,
+00:36:48,308 --> 00:36:50,978
+但是确定
+所有的代码申请终止后台任务
 
 
 623
-00:29:56,046 --> 00:29:57,566
-so you would delay the old work.
+00:36:51,044 --> 00:36:52,613
+不要泄露后台任务
 
 
 624
-00:29:57,566 --> 00:29:58,656
-That may be easier to do.
+00:36:53,814 --> 00:36:55,449
+如果你有网络
 
 
 625
-00:29:58,846 --> 00:29:59,826
-Whichever one is more important.
+00:36:55,516 --> 00:36:58,719
+也许像保存到磁盘那样
+这也可能会发生
 
 
 626
-00:29:59,826 --> 00:30:01,556
-But if you know there's
-two pieces of work,
+00:36:59,119 --> 00:37:00,387
+网络活动...
 
 
 627
-00:30:01,976 --> 00:30:03,786
-the goal for your apps --
+00:37:00,654 --> 00:37:04,925
+这是把网络从操作系统中卸载的好机会
 
 
 628
-00:30:04,136 --> 00:30:05,276
-which you can achieve now
+00:37:04,992 --> 00:37:06,627
+嗨 我有这个网络 它需要发生
 
 
 629
-00:30:05,276 --> 00:30:07,106
-because we have these nice
-new tools that will show you,
+00:37:06,693 --> 00:37:09,363
+但它不是时间的关键
+只要在一定的时间范围内
 
 
 630
-00:30:07,286 --> 00:30:09,776
-basically, the new
-tools are these graphs
+00:37:09,963 --> 00:37:11,265
+有机会就一定需要完成它
 
 
 631
-00:30:09,886 --> 00:30:12,586
-in Xcode live on your software.
+00:37:11,598 --> 00:37:14,468
+给系统一个机会去优化
 
 
 632
-00:30:12,856 --> 00:30:13,346
-It's really good.
+00:37:15,669 --> 00:37:17,504
+这也是很好的一个设计时间
 
 
 633
-00:30:14,426 --> 00:30:16,906
-You can look and say why am I
-doing all this unnecessary --
+00:37:17,905 --> 00:37:21,441
+在这方面可以让你
+在设计应用程序的时候更灵活
 
 
 634
-00:30:17,006 --> 00:30:17,886
-maybe not unnecessary --
+00:37:23,110 --> 00:37:24,211
+这是我理想的应用程序
 
 
 635
-00:30:18,786 --> 00:30:21,376
-why is my networking
-pattern inefficient?
+00:37:24,411 --> 00:37:25,712
+強 展示了一个很好的幻灯片
 
 
 636
-00:30:21,546 --> 00:30:22,386
-Why is it spread out?
+00:37:25,846 --> 00:37:28,248
+典型的应用程序
+在你启动它的时候会有很多工作
 
 
 637
-00:30:22,386 --> 00:30:23,476
-How can I pull it together?
+00:37:28,916 --> 00:37:31,818
+我理想的应用程序
+是在你退出的时候几乎没有任何工作
 
 
 638
-00:30:23,896 --> 00:30:27,826
-And then we can actually get to
-that target: average low power.
+00:37:31,952 --> 00:37:33,253
+它不做任何工作
 
 
 639
-00:30:28,186 --> 00:30:29,356
-That means all-day battery life.
+00:37:33,754 --> 00:37:35,255
+直到用户实际交互
 
 
 640
-00:30:30,126 --> 00:30:32,106
-So to sum up the networking,
+00:37:35,556 --> 00:37:36,857
+这很疯狂！
 
 
 641
-00:30:32,566 --> 00:30:34,976
-you want to do less
-work in networking.
+00:37:37,558 --> 00:37:39,793
+很多工作 需要我们完成
+这是所有的工作
 
 
 642
-00:30:35,686 --> 00:30:37,986
-So you've got to design
-your system correctly.
+00:37:39,860 --> 00:37:41,228
+请优先考虑
 
 
 643
-00:30:38,406 --> 00:30:41,286
-Even if you do networking
-once a minute, oh,
+00:37:41,728 --> 00:37:44,131
+然后 在它完成之后再返回
 
 
 644
-00:30:41,286 --> 00:30:44,026
-it's only a few seconds
-of overhead, that adds up.
+00:37:44,498 --> 00:37:45,599
+它是好的而且是空闲的
 
 
 645
-00:30:44,336 --> 00:30:46,836
-Please, unless the user is
-requesting you access the
+00:37:45,766 --> 00:37:49,670
+那样你就可以推翻泛美金字塔
 
 
 646
-00:30:46,836 --> 00:30:49,656
-network right now,
-don't access the network
+00:37:50,070 --> 00:37:51,872
+这达到了预期要求
 
 
 647
-00:30:50,116 --> 00:30:52,366
-until there's something
-really important.
+00:37:54,741 --> 00:37:56,376
+那么你的应用程序是怎样运行的呢
 
 
 648
-00:30:52,876 --> 00:30:56,286
-In terms of design, anything
-that you can do to offload
+00:37:56,510 --> 00:37:58,645
+我们真的很希望你们回家的
+时候运行一下这个工具
 
 
 649
-00:30:56,286 --> 00:30:58,996
-to the system and let
-the system decide when,
+00:37:58,712 --> 00:38:01,081
+完整的运行一遍来检查你的应用程序
 
 
 650
-00:30:59,126 --> 00:31:02,316
-give it some variance of in the
-next 10 minutes, the next hour,
+00:38:01,148 --> 00:38:03,717
+之后这些工具将会告诉
+你对应用程序的操作是什么
 
 
 651
-00:31:02,316 --> 00:31:06,386
-the next 24 hours, that will
-allow us to batch it together
+00:38:04,184 --> 00:38:07,020
+确定应用程序正在做的事情
+对功耗产生的影响
 
 
 652
-00:31:06,496 --> 00:31:08,556
-for you, so you offload
-that networking.
+00:38:07,354 --> 00:38:09,990
+就相当于用户被交付的利益
 
 
 653
-00:31:08,556 --> 00:31:12,606
-We will wake you up and call
-you back when the work is done.
+00:38:10,490 --> 00:38:14,561
+除了OS X 对于iOS来说Xcode
+现在也有了一个能量计
 
 
 654
-00:31:15,176 --> 00:31:17,756
-A lot of times, you
-can wait on the work.
+00:38:14,995 --> 00:38:17,064
+它突出我刚才讨论到的事情
 
 
 655
-00:31:18,106 --> 00:31:21,756
-Background update,
-NSURLSession has this feature.
+00:38:17,130 --> 00:38:19,666
+比如有中央处理器
+网络 定位以及后台
 
 
 656
-00:31:22,056 --> 00:31:23,816
-Just wait, defer it.
+00:38:20,300 --> 00:38:23,036
+把所有的网络融合然后
+控制所有的定位
 
 
 657
-00:31:24,036 --> 00:31:25,456
-Go ahead and queue
-it up, that's fine,
+00:38:23,403 --> 00:38:25,339
+最后再取消后台任务
 
 
 658
-00:31:26,076 --> 00:31:27,736
-but don't force it
-to happen right away.
+00:38:25,939 --> 00:38:27,941
+那么就来到我们下一个话题
+了解一下它
 
 
 659
-00:31:29,376 --> 00:31:33,406
-And these notifications,
-notifications are great,
+00:38:28,675 --> 00:38:31,512
+首先当你设计你的下一个特征
 
 
 660
-00:31:33,966 --> 00:31:36,766
-but they can get out
-of control sometimes.
+00:38:31,812 --> 00:38:34,848
+设计你的下一个应用程序的时候
+请思考一下这些消耗
 
 
 661
-00:31:36,766 --> 00:31:37,816
-And on the server side --
+00:38:35,148 --> 00:38:38,719
+比如原处理器功率
+CPU和GPU的模式
 
 
 662
-00:31:38,006 --> 00:31:40,436
-remember I mentioned that we are
-always connected to the server
+00:38:38,785 --> 00:38:40,387
+我是正在醒来或是准备去休息
 
 
 663
-00:31:40,436 --> 00:31:41,716
-for inbound connections?
+00:38:40,454 --> 00:38:42,589
+我能对它做出更多的约束么
 
 
 664
-00:31:41,716 --> 00:31:42,586
-Jon mentioned this also.
+00:38:43,390 --> 00:38:45,325
+任何像那样的闪烁
 
 
 665
-00:31:44,086 --> 00:31:45,156
-Inbound connections are cheap.
+00:38:45,526 --> 00:38:48,595
+你们中的一些人可能还记得
+早些时候网页上闪烁的标签
 
 
 666
-00:31:45,276 --> 00:31:46,596
-They are basically
-always available.
+00:38:48,829 --> 00:38:51,265
+没有闪烁 特别是在高频下
 
 
 667
-00:31:47,026 --> 00:31:51,186
-So go ahead and send something
-out rather than polling up.
+00:38:52,499 --> 00:38:55,636
+比用户交互更快的任何东西
+都是高频率的
 
 
 668
-00:31:51,576 --> 00:31:52,586
-It's better to send
-something out.
+00:38:56,770 --> 00:38:58,705
+尝试着给自己设定一个期望值
 
 
 669
-00:31:52,586 --> 00:31:55,146
-But tag those notifications
-with PushKit
+00:38:58,772 --> 00:39:01,175
+因为如果你准备写一个聊天应用程序
 
 
 670
-00:31:55,616 --> 00:31:58,566
-with an appropriate priority
-so we can batch them together.
+00:39:01,408 --> 00:39:03,343
+全天下来
+你自己本身可能都变成流媒体了
 
 
 671
-00:31:58,626 --> 00:32:01,196
-So when I get an instant
-message, which is important
+00:39:03,410 --> 00:39:05,812
+你应当把程序安装
+在一个新的硬件设备上
 
 
 672
-00:32:01,196 --> 00:32:03,646
-to do quickly, maybe I will
-also get that notification
+00:39:06,480 --> 00:39:09,149
+这样的话用户就很有可能在你的
+应用程序中实现全天续航
 
 
 673
-00:32:03,646 --> 00:32:06,126
-that there's new content to
-download into your news app
+00:39:09,216 --> 00:39:11,852
+他们必须买一个单独的手机
+事实上是三部手机
 
 
 674
-00:32:06,156 --> 00:32:08,786
-or something like that.
+00:39:11,919 --> 00:39:13,387
+以确保可以整天运行
 
 
 675
-00:32:09,006 --> 00:32:10,566
-Now let's talk about location.
+00:39:15,689 --> 00:39:17,391
+但很遗憾 那个应用程序卖的并不好
 
 
 676
-00:32:11,476 --> 00:32:14,566
-There's two components
-of location.
+00:39:19,493 --> 00:39:21,662
+在你的商业模式中这种计划
 
 
 677
-00:32:14,566 --> 00:32:17,116
-Now, the good news is the
-power is relatively low,
+00:39:21,728 --> 00:39:23,931
+是否与这个应用程序的电池续航能力
+表现的一样呢
 
 
 678
-00:32:17,676 --> 00:32:19,746
-although if you leave
-location running all the time,
+00:39:24,364 --> 00:39:28,769
+我正在使用很多的定位以及很多的网络
+我在后台去完成这些任务
 
 
 679
-00:32:19,746 --> 00:32:22,106
-there's very little space
-to do anything else,
+00:39:29,102 --> 00:39:30,270
+主要是因为它们很昂贵
 
 
 680
-00:32:22,286 --> 00:32:24,316
-so don't leave precise
-location running all the time.
+00:39:31,772 --> 00:39:34,074
+看一下执行效果
+可以通过查阅能源指南
 
 
 681
-00:32:24,796 --> 00:32:26,646
-In fact, don't leave any
-location running all the time
+00:39:34,141 --> 00:39:36,844
+确保你可以给应用程序接口
+传递最佳参数
 
 
 682
-00:32:26,646 --> 00:32:30,346
-unless your app is basically
-an app that says I live
+00:39:37,244 --> 00:39:39,079
+看一下你自己的代码
+再看一下我们的代码
 
 
 683
-00:32:30,346 --> 00:32:33,486
-to run location all the time,
-and the user really wants that.
+00:39:39,146 --> 00:39:41,582
+如果我们的代码在做一些奇怪的事情
+比如提交一个错误
 
 
 684
-00:32:33,486 --> 00:32:36,436
-They are going to see you in
-the battery menu, and it's going
+00:39:41,648 --> 00:39:43,984
+最后看一下你可能使用的第三方代码
 
 
 685
-00:32:36,436 --> 00:32:40,546
-to say location background,
-25 percent of battery.
+00:39:44,751 --> 00:39:48,455
+你有一个广告框架 广告本身很好
+因为它可以支持我们的平台
 
 
 686
-00:32:40,826 --> 00:32:41,376
-That won't be good.
+00:39:49,990 --> 00:39:53,360
+但是 如果他们像其它广告那样
+做很多的下载
 
 
 687
-00:32:41,846 --> 00:32:43,296
-Unless that's what your
-application is about.
+00:39:53,427 --> 00:39:55,629
+下载显示 下载显示 下载显示
 
 
 688
-00:32:43,426 --> 00:32:45,806
-And that is fine.
+00:39:56,063 --> 00:39:58,398
+在很长一段时间之间
+我们必须保持网络开启
 
 
 689
-00:32:46,946 --> 00:32:48,876
-So precise location
-is the most expensive.
+00:39:58,799 --> 00:40:00,701
+那样并不好
+必须要注意到这一点
 
 
 690
-00:32:48,986 --> 00:32:50,836
-We have to turn on more
-hardware, talk to satellites --
+00:40:01,335 --> 00:40:02,302
+在最后 进行测试
 
 
 691
-00:32:51,046 --> 00:32:52,856
-hey, satellite, satellite,
-get all the satellites.
+00:40:02,369 --> 00:40:04,071
+可以通过定期运行这些工具
 
 
 692
-00:32:52,856 --> 00:32:53,756
-Oh, okay, good.
+00:40:04,137 --> 00:40:07,808
+去确保你的应用程序
+可以按照你期望的方式去运行
 
 
 693
-00:32:56,446 --> 00:32:58,276
-Imprecise location
-is a lot cheaper.
+00:40:09,743 --> 00:40:13,614
+如果你已经把这些事情都完成了
+我怀疑你没有 但也许你有
 
 
 694
-00:32:58,276 --> 00:33:00,016
-We can just say oh, what
-Wi-Fi network am I on?
+00:40:13,680 --> 00:40:14,982
+在这项任务中 最重要的工作
 
 
 695
-00:33:00,016 --> 00:33:01,016
-What cell tower am I near?
+00:40:15,682 --> 00:40:19,119
+就是继续进行
+检查你的后台更新间隔
 
 
 696
-00:33:01,476 --> 00:33:02,696
-And then we can actually --
+00:40:19,186 --> 00:40:22,689
+你能够减少或者给你的系统
+更大的自由度么
 
 
 697
-00:33:02,696 --> 00:33:05,026
-you can see the green is
-where the system is running,
+00:40:23,657 --> 00:40:25,592
+你能够更加谨慎的使用声明么
 
 
 698
-00:33:05,106 --> 00:33:06,466
-the display is running.
+00:40:25,659 --> 00:40:29,263
+特别是当你开发VoIP应用程序的时候
+我们给应用程序的接口做了一些改变
 
 
 699
-00:33:06,466 --> 00:33:08,836
-We can actually have a system
-be almost completely off
+00:40:29,396 --> 00:40:31,231
+请记住 这些传入连接是很便宜的
 
 
 700
-00:33:09,206 --> 00:33:11,456
-and still track your location,
-even precise location.
+00:40:31,532 --> 00:40:34,034
+但并不是免费的
+他们会让你回电话
 
 
 701
-00:33:11,496 --> 00:33:13,446
-It's not free, don't leave
-it running all the time.
+00:40:34,101 --> 00:40:35,602
+但不要退出
 
 
 702
-00:33:13,446 --> 00:33:14,756
-Those leaks.
+00:40:36,603 --> 00:40:38,172
+不要弄混显示屏的亮度
 
 
 703
-00:33:14,756 --> 00:33:16,786
-I am sure you fix drips
-in your house, right,
+00:40:38,839 --> 00:40:41,041
+绘画可能是下一个过度的前奏...
 
 
 704
-00:33:17,266 --> 00:33:19,506
-especially California residents.
+00:40:41,375 --> 00:40:44,077
+我讨论到闪烁的知识
+那仍有很多绘画的事情你可以去完成
 
 
 705
-00:33:20,876 --> 00:33:22,496
-Location can just
-drip, drip, drip.
+00:40:44,144 --> 00:40:46,680
+去年谈论到这个话题
+在末尾的链接中
 
 
 706
-00:33:22,636 --> 00:33:25,716
-So let's optimize that.
+00:40:46,947 --> 00:40:48,715
+可以知道相关的主题图是正确的
 
 
 707
-00:33:25,926 --> 00:33:26,616
-Use it less.
+00:40:49,016 --> 00:40:49,983
+也获得了一些工具
 
 
 708
-00:33:26,906 --> 00:33:28,956
-You know, if you are going to
-call start updating location,
+00:40:50,250 --> 00:40:51,084
+最后...
 
 
 709
-00:33:29,216 --> 00:33:30,196
-don't call it right away.
+00:40:51,919 --> 00:40:54,755
+对于OS X和iOS来说
+我们现在已经有一些能量指南
 
 
 710
-00:33:30,196 --> 00:33:30,926
-There are some apps
+00:40:54,821 --> 00:40:57,591
+我只是提出把所有的这些信息
+都记录下来
 
 
 711
-00:33:30,926 --> 00:33:32,786
-when I launch the app,
-I want my location.
+00:40:57,658 --> 00:40:59,693
+我将会继续
+在developer.Apple.com中
 
 
 712
-00:33:32,786 --> 00:33:34,656
-I want to know what
-buses are coming when.
+00:40:59,760 --> 00:41:01,328
+更新这些信息
 
 
 713
-00:33:35,086 --> 00:33:36,166
-Right? That's fine.
+00:41:01,929 --> 00:41:04,131
+所以总结我们所讲过的内容
 
 
 714
-00:33:36,386 --> 00:33:39,116
-Food around me dot app, awesome.
+00:41:05,032 --> 00:41:06,233
+就是功耗是功率
 
 
 715
-00:33:39,476 --> 00:33:40,836
-Launch, get location.
+00:41:07,034 --> 00:41:09,236
+乘以时间
+如果你想减少功耗
 
 
 716
-00:33:41,186 --> 00:33:43,416
-Otherwise, wait for
-the user to do a search
+00:41:09,570 --> 00:41:13,607
+那么相对于你运行的时间来说
+功率是很重要的
 
 
 717
-00:33:43,416 --> 00:33:44,566
-or whatever you need to do.
+00:41:14,208 --> 00:41:16,143
+我们希望你能够降低功率
 
 
 718
-00:33:45,146 --> 00:33:47,606
-Then as soon as the user
-is done with that location,
+00:41:16,210 --> 00:41:19,313
+当然我们的工具本身就是低功率的
+我们的工具在低功率方面表现的不错
 
 
 719
-00:33:47,606 --> 00:33:49,006
-you've got whatever
-precision you want,
+00:41:19,379 --> 00:41:20,681
+你也将会在下一次讨论中涉及到它
 
 
 720
-00:33:49,246 --> 00:33:49,926
-go ahead and call stop.
+00:41:20,747 --> 00:41:23,350
+这些可以支持用户实现
+电池提供全天续航
 
 
 721
-00:33:51,366 --> 00:33:54,886
-For iOS 9, we've introduced a
-new API that helps you do this.
+00:41:24,418 --> 00:41:26,119
+做更少的工作
 
 
 722
-00:33:54,886 --> 00:33:56,146
-It's called request location.
+00:41:26,587 --> 00:41:28,622
+或者延迟工作
+以及提高完成工作的效率
 
 
 723
-00:33:56,946 --> 00:33:58,396
-It does the start and the stop,
+00:41:29,756 --> 00:41:31,291
+这里是我谈论到的链接
 
 
 724
-00:33:58,396 --> 00:34:00,466
-makes sure you get the
-appropriate precision,
+00:41:31,792 --> 00:41:36,330
+文档、视频、指南 以及去年的谈话
 
 
 725
-00:34:00,746 --> 00:34:03,286
-and you don't have to
-manage the start and stop.
+00:41:37,865 --> 00:41:39,766
+我们有我们的标准论坛
 
 
 726
-00:34:03,606 --> 00:34:05,266
-Only available on iOS 9,
-so you're going to need
+00:41:39,833 --> 00:41:42,769
+你可以和其他人交流
+你能够联系我或者DTS的人
 
 
 727
-00:34:05,266 --> 00:34:06,896
-to keep doing the right
-thing for the older OSes.
+00:41:43,170 --> 00:41:44,171
+他们有我的手机号码
 
 
 728
-00:34:06,896 --> 00:34:09,585
-We have a location talk linked
-at the end of the slides.
+00:41:44,371 --> 00:41:48,008
+你不必要我的手机号码 他们有
+和他们谈一下 他们可能会帮助你
 
 
 729
-00:34:09,966 --> 00:34:14,646
-We are also changing how
-background location behaves
+00:41:48,075 --> 00:41:50,978
+如果他们不能的话 他们可以联系我
+或者我的一个出色的队友
 
 
 730
-00:34:14,646 --> 00:34:16,505
-in the system, so your
-app may have permission
+00:41:51,879 --> 00:41:54,248
+保羅 也在这里
+他的电子邮箱附在这张幻灯片中
 
 
 731
-00:34:16,505 --> 00:34:18,446
-to use background
-location, but there's going
+00:41:56,850 --> 00:41:57,851
+参加相关会议
 
 
 732
-00:34:18,446 --> 00:34:20,556
-to be a little bit more
-interaction with the user before
+00:41:58,952 --> 00:42:00,687
+或下一届会议的人请留下来
 
 
 733
-00:34:20,556 --> 00:34:23,255
-that permission is granted,
-and to be careful in your app
+00:42:00,921 --> 00:42:03,190
+我们有一些网络的参数性能
 
 
 734
-00:34:23,255 --> 00:34:25,146
-so you don't accidentally
-use it in the background,
+00:42:03,724 --> 00:42:05,893
+可以看一下 他们将会帮助你
 
 
 735
-00:34:25,636 --> 00:34:28,835
-keep the property allows
-background location updates,
+00:42:05,959 --> 00:42:08,362
+去思考怎样优化
+我刚才所谈论到的所有事情
 
 
 736
-00:34:29,346 --> 00:34:30,676
-keep that set to false except
-
-
-737
-00:34:30,676 --> 00:34:32,886
-when you are actively
-doing it in the background.
-
-
-738
-00:34:33,596 --> 00:34:36,436
-Just be conscious of when you
-turn the location hardware on.
-
-
-739
-00:34:36,436 --> 00:34:37,926
-You are actually
-powering up, like turning
-
-
-740
-00:34:37,926 --> 00:34:40,755
-on the light switch, it's a very
-easy switch to leave turned on.
-
-
-741
-00:34:41,286 --> 00:34:44,896
-And then when you are actually
-using it, bring that power down.
-
-
-742
-00:34:45,076 --> 00:34:46,936
-So we talked about time
-component, pull the time in,
-
-
-743
-00:34:47,376 --> 00:34:49,416
-pull the power down,
-and I mentioned
-
-
-744
-00:34:49,416 --> 00:34:50,666
-that we can actually offload,
-
-
-745
-00:34:50,666 --> 00:34:52,966
-so let's say I am doing
-a -- I like to bicycle.
-
-
-746
-00:34:52,966 --> 00:34:56,946
-I can track my bicycle riding,
-you know, very accurately.
-
-
-747
-00:34:57,336 --> 00:34:59,356
-But the hardware does it
-rather than the software.
-
-
-748
-00:34:59,606 --> 00:35:02,896
-So defer those updates,
-so every 15 minutes
-
-
-749
-00:35:02,896 --> 00:35:05,266
-or so it will call
-you, hey, look,
-
-
-750
-00:35:05,536 --> 00:35:07,216
-here is all the tracking
-information,
-
-
-751
-00:35:07,526 --> 00:35:10,516
-but most of the system and your
-software is completely asleep,
-
-
-752
-00:35:10,556 --> 00:35:12,616
-and just the location
-chip is running.
-
-
-753
-00:35:14,156 --> 00:35:15,436
-Finally, our third area --
-
-
-754
-00:35:15,436 --> 00:35:17,286
-and these are really the
-three things that we want you
-
-
-755
-00:35:17,286 --> 00:35:19,536
-to be doing in terms of
-debugging your software --
-
-
-756
-00:35:19,706 --> 00:35:22,986
-you know, reduce
-networking, reduce location,
-
-
-757
-00:35:23,526 --> 00:35:26,806
-and background running.
-
-
-758
-00:35:27,146 --> 00:35:30,186
-This is just energy that the
-user typically doesn't see,
-
-
-759
-00:35:30,456 --> 00:35:30,716
-right?
-
-
-760
-00:35:30,716 --> 00:35:32,566
-They may appreciate that
-the app is up-to-date
-
-
-761
-00:35:32,566 --> 00:35:36,026
-when they launch it, but try
-to use background app refresh.
-
-
-762
-00:35:36,026 --> 00:35:37,486
-Try to give good, big leeways.
-
-
-763
-00:35:37,486 --> 00:35:40,396
-If you send notifications
-and they get ignored,
-
-
-764
-00:35:40,396 --> 00:35:42,676
-that's actually lighting
-up the screen,
-
-
-765
-00:35:42,676 --> 00:35:45,356
-it's firing up the
-network, and this just --
-
-
-766
-00:35:45,496 --> 00:35:47,706
-this alone is not
-going to consume --
-
-
-767
-00:35:47,706 --> 00:35:48,586
-I mean, if you do
-it all the time,
-
-
-768
-00:35:48,586 --> 00:35:49,896
-it will consume your
-battery pretty quickly.
-
-
-769
-00:35:49,896 --> 00:35:57,236
-But it is a -- it's basically
-just shaving off the energy
-
-
-770
-00:35:57,236 --> 00:35:58,296
-that's available
-for other things.
-
-
-771
-00:35:58,406 --> 00:36:00,766
-It's reducing -- it's
-basically if I lowered the bar
-
-
-772
-00:36:00,766 --> 00:36:04,306
-and said you've got to get under
-9 percent instead of 10 percent.
-
-
-773
-00:36:04,836 --> 00:36:05,966
-We've got to get rid of --
-
-
-774
-00:36:06,276 --> 00:36:10,066
-and that's 20 percent worse
-because you only have 5 percent
-
-
-775
-00:36:10,066 --> 00:36:11,146
-to work with on average.
-
-
-776
-00:36:11,976 --> 00:36:13,346
-Just make sure you are not
-running in the background.
-
-
-777
-00:36:13,486 --> 00:36:14,596
-How do you do that?
-
-
-778
-00:36:15,236 --> 00:36:17,686
-Any time you call start
-background task, we are going
-
-
-779
-00:36:17,686 --> 00:36:19,716
-to keep the device awake for
-up to a couple of minutes,
-
-
-780
-00:36:20,466 --> 00:36:22,656
-so you want to call
-end background task
-
-
-781
-00:36:22,656 --> 00:36:23,426
-as soon as possible.
-
-
-782
-00:36:23,896 --> 00:36:27,776
-There's a great App Guide, in
-addition to the Energy Guide,
-
-
-783
-00:36:27,776 --> 00:36:30,686
-there's also an App Life
-Cycle Guide, and basically
-
-
-784
-00:36:31,076 --> 00:36:32,816
-when you get that message
-that says hey, you are going
-
-
-785
-00:36:32,816 --> 00:36:34,356
-into the background,
-that's fine.
-
-
-786
-00:36:35,496 --> 00:36:38,436
-Do your UI state-saving
-right there.
-
-
-787
-00:36:38,506 --> 00:36:40,236
-Talk to UI, please
-save my state.
-
-
-788
-00:36:40,636 --> 00:36:44,576
-If you've got significant data
-you need to save, go ahead
-
-
-789
-00:36:44,576 --> 00:36:49,046
-and fork off a background
-operation, but make sure
-
-
-790
-00:36:49,046 --> 00:36:50,996
-that all code paths call
-end background task.
-
-
-791
-00:36:51,086 --> 00:36:52,506
-Do not leak background activity.
-
-
-792
-00:36:52,506 --> 00:36:56,406
-And if you've got networking
-to do, like maybe that saving
-
-
-793
-00:36:56,406 --> 00:36:58,706
-to the disk, that's probably
-going to happen, that's fine.
-
-
-794
-00:36:59,146 --> 00:37:02,236
-Network activity -- this is a
-great opportunity to offload
-
-
-795
-00:37:02,236 --> 00:37:04,876
-that networking to the OS.
-
-
-796
-00:37:05,036 --> 00:37:06,696
-Hey, I have this
-networking, it needs to happen
-
-
-797
-00:37:06,696 --> 00:37:10,066
-but it's not time critical, just
-do it whenever you have a chance
-
-
-798
-00:37:10,066 --> 00:37:11,156
-within some time scope.
-
-
-799
-00:37:11,646 --> 00:37:14,396
-That gives the system the
-opportunity to optimize.
-
-
-800
-00:37:15,716 --> 00:37:17,506
-This is also a good
-thing at design time,
-
-
-801
-00:37:17,956 --> 00:37:21,436
-that you can design your app to
-be more flexible in this regard.
-
-
-802
-00:37:21,966 --> 00:37:24,466
-This is my ideal app.
-
-
-803
-00:37:24,466 --> 00:37:27,326
-Jon showed a great slide, sort
-of a typical app that does a lot
-
-
-804
-00:37:27,326 --> 00:37:28,176
-of work when you launch it.
-
-
-805
-00:37:28,946 --> 00:37:31,696
-My ideal app barely does
-any work when you launch it.
-
-
-806
-00:37:31,986 --> 00:37:33,136
-Then it doesn't do any work
-
-
-807
-00:37:33,776 --> 00:37:35,266
-until the user actually
-interacts.
-
-
-808
-00:37:35,576 --> 00:37:36,846
-Then it goes crazy!
-
-
-809
-00:37:37,596 --> 00:37:38,556
-Lots of work!
-
-
-810
-00:37:38,556 --> 00:37:38,956
-Let's do it!
-
-
-811
-00:37:38,956 --> 00:37:39,696
-Here's all the work.
-
-
-812
-00:37:39,886 --> 00:37:41,066
-Prioritized, please.
-
-
-813
-00:37:41,746 --> 00:37:44,026
-And then it's done
-and it goes back.
-
-
-814
-00:37:44,516 --> 00:37:45,196
-It's nice and idle.
-
-
-815
-00:37:45,796 --> 00:37:49,616
-And that you can topple that
-Transamerica pyramid down,
-
-
-816
-00:37:50,086 --> 00:37:51,806
-and it will fit under the line.
-
-
-817
-00:37:54,476 --> 00:37:56,336
-So how is your app doing?
-
-
-818
-00:37:56,636 --> 00:37:58,516
-We really want you to go
-home, run these new tools.
-
-
-819
-00:37:58,746 --> 00:38:00,786
-Check out your app, run
-it through all its paces.
-
-
-820
-00:38:00,946 --> 00:38:03,266
-Because these tools will only
-show you what you ask the app
-
-
-821
-00:38:03,396 --> 00:38:03,706
-to do.
-
-
-822
-00:38:04,216 --> 00:38:05,866
-Make sure that what
-the app is doing,
-
-
-823
-00:38:05,866 --> 00:38:07,006
-in terms of energy impact,
-
-
-824
-00:38:07,376 --> 00:38:09,966
-corresponds to the user
-benefit that's being delivered.
-
-
-825
-00:38:10,546 --> 00:38:14,796
-So Xcode now has an energy
-gauge for iOS as well as OS X,
-
-
-826
-00:38:15,026 --> 00:38:17,176
-and it highlights exactly the
-things I just talked about,
-
-
-827
-00:38:17,176 --> 00:38:19,546
-which are CPU, networking,
-location, background.
-
-
-828
-00:38:20,246 --> 00:38:22,276
-Get all that networking
-coalesced, all that location
-
-
-829
-00:38:22,276 --> 00:38:25,316
-under control, all that
-background activity eliminated.
-
-
-830
-00:38:25,856 --> 00:38:27,906
-So come to our next
-talk, learn about that.
-
-
-831
-00:38:28,746 --> 00:38:31,496
-So as you are designing
-your next feature,
-
-
-832
-00:38:31,806 --> 00:38:34,836
-designing your next app,
-think about these costs.
-
-
-833
-00:38:35,186 --> 00:38:38,796
-Raw CPU power, CPU
-patterns and GPU patterns.
-
-
-834
-00:38:38,796 --> 00:38:40,266
-Am I waking up and
-going to sleep a lot?
-
-
-835
-00:38:40,356 --> 00:38:42,586
-Can I make it more constrained?
-
-
-836
-00:38:43,426 --> 00:38:45,266
-Anything that kind of blinks --
-
-
-837
-00:38:45,556 --> 00:38:47,206
-some of you probably
-remember the blink tag
-
-
-838
-00:38:47,206 --> 00:38:48,506
-from the early web pages.
-
-
-839
-00:38:48,826 --> 00:38:51,276
-No blinking, especially
-at high frequency.
-
-
-840
-00:38:52,476 --> 00:38:55,626
-Anything faster than the user's
-interaction is high frequency.
-
-
-841
-00:38:56,796 --> 00:38:58,766
-And try to set expectations
-for yourself.
-
-
-842
-00:38:58,766 --> 00:39:00,676
-Because if you are writing
-a chat app and you are going
-
-
-843
-00:39:00,836 --> 00:39:03,406
-to be streaming videos
-of yourself all day long,
-
-
-844
-00:39:03,406 --> 00:39:05,726
-you are going to mount it
-on a new hardware device,
-
-
-845
-00:39:06,506 --> 00:39:07,846
-that user hopefully is not going
-
-
-846
-00:39:07,846 --> 00:39:09,116
-to expect all-day battery
-life from that app.
-
-
-847
-00:39:09,116 --> 00:39:10,706
-They are going to have to
-buy a separate phone --
-
-
-848
-00:39:10,856 --> 00:39:12,646
-in fact three phones --
-so that they can have
-
-
-849
-00:39:12,646 --> 00:39:15,446
-that running all day.
-
-
-850
-00:39:15,716 --> 00:39:19,176
-That app is not going to
-sell well, I am sorry.
-
-
-851
-00:39:19,176 --> 00:39:21,796
-So plan this when you are
-like in your business model,
-
-
-852
-00:39:21,796 --> 00:39:23,526
-be like what is the
-battery life of this app?
-
-
-853
-00:39:24,416 --> 00:39:27,516
-Am I using a lot of location,
-am I using a lot of networking,
-
-
-854
-00:39:27,516 --> 00:39:28,756
-am I doing these things
-in the background,
-
-
-855
-00:39:29,136 --> 00:39:29,906
-because they are expensive.
-
-
-856
-00:39:29,906 --> 00:39:32,866
-Look at your implementation.
-
-
-857
-00:39:32,866 --> 00:39:33,936
-Check out the Energy Guide,
-
-
-858
-00:39:34,166 --> 00:39:35,716
-make sure you're passing
-the best arguments
-
-
-859
-00:39:35,756 --> 00:39:36,846
-to the various APIs.
-
-
-860
-00:39:37,276 --> 00:39:38,206
-Look at your own code.
-
-
-861
-00:39:38,206 --> 00:39:38,976
-Look at our code.
-
-
-862
-00:39:39,246 --> 00:39:41,366
-If you see our code doing
-something strange, file a bug.
-
-
-863
-00:39:41,686 --> 00:39:43,946
-Finally, look at any third-party
-code you might be using.
-
-
-864
-00:39:44,236 --> 00:39:46,336
-Say you have an ad framework.
-
-
-865
-00:39:46,336 --> 00:39:48,466
-Ads are good, they support our
-platform, they support you.
-
-
-866
-00:39:50,006 --> 00:39:53,296
-However, if they do a lot of
-downloading, like every ad,
-
-
-867
-00:39:53,506 --> 00:39:55,506
-download display, download
-display, download display,
-
-
-868
-00:39:55,506 --> 00:39:57,786
-and then we're keeping the
-network on for a long time
-
-
-869
-00:39:57,786 --> 00:39:59,286
-in between -- not good.
-
-
-870
-00:39:59,526 --> 00:40:00,616
-Got to take an eye on that.
-
-
-871
-00:40:00,886 --> 00:40:02,296
-Finally, test.
-
-
-872
-00:40:02,376 --> 00:40:04,136
-Run these tools on
-a regular basis
-
-
-873
-00:40:04,136 --> 00:40:07,436
-and make sure your app is
-behaving the way you expect
-
-
-874
-00:40:07,436 --> 00:40:07,746
-it to.
-
-
-875
-00:40:07,956 --> 00:40:10,916
-If you already did
-all these things,
-
-
-876
-00:40:11,056 --> 00:40:13,426
-which I suspect you haven't
-yet, but maybe you have --
-
-
-877
-00:40:13,696 --> 00:40:14,726
-in which case, great work --
-
-
-878
-00:40:15,326 --> 00:40:19,186
-go ahead and check out your
-background update intervals.
-
-
-879
-00:40:19,186 --> 00:40:22,706
-Can you reduce and give you
-greater leeway to the system?
-
-
-880
-00:40:23,396 --> 00:40:25,696
-Can you use notifications
-more sparingly,
-
-
-881
-00:40:25,696 --> 00:40:26,626
-especially if you
-have a VoIP app.
-
-
-882
-00:40:26,656 --> 00:40:28,916
-We changed our API a little bit.
-
-
-883
-00:40:29,436 --> 00:40:31,126
-Remember, those incoming
-connections are cheap,
-
-
-884
-00:40:31,216 --> 00:40:33,286
-they are not free, and
-they will cause you
-
-
-885
-00:40:33,286 --> 00:40:36,536
-to call back, but
-don't pull out.
-
-
-886
-00:40:36,536 --> 00:40:38,156
-Don't mess with the
-display brightness.
-
-
-887
-00:40:38,466 --> 00:40:41,286
-And drawing is probably the
-next front of excessive --
-
-
-888
-00:40:41,446 --> 00:40:42,646
-I talked about blink,
-but there's a lot
-
-
-889
-00:40:42,646 --> 00:40:43,846
-of other drawing
-things you can do.
-
-
-890
-00:40:44,166 --> 00:40:46,666
-Last year's talk at these
-topics, linked at the end,
-
-
-891
-00:40:46,996 --> 00:40:48,696
-is right on topic for drawing.
-
-
-892
-00:40:49,046 --> 00:40:49,956
-Got some tools for that too.
-
-
-893
-00:40:50,266 --> 00:40:54,606
-Finally, we now have Energy
-Guides for OS X and iOS,
-
-
-894
-00:40:54,676 --> 00:40:57,706
-so all this information I just
-presented is fully documented,
-
-
-895
-00:40:57,706 --> 00:40:59,556
-and we'll continue to
-update that information
-
-
-896
-00:40:59,776 --> 00:41:01,316
-on developer.Apple.com.
-
-
-897
-00:41:01,596 --> 00:41:04,136
-So to summarize everything
-that we talked about,
-
-
-898
-00:41:04,996 --> 00:41:08,046
-energy is power times time.
-
-
-899
-00:41:08,046 --> 00:41:09,426
-You want to pull that in.
-
-
-900
-00:41:09,626 --> 00:41:12,886
-The power part is important,
-but it's only important in terms
-
-
-901
-00:41:12,886 --> 00:41:13,566
-of how long you run it.
-
-
-902
-00:41:13,566 --> 00:41:16,206
-And we want to get you
-down to nice low power,
-
-
-903
-00:41:16,266 --> 00:41:17,756
-and that's the low -- our tools.
-
-
-904
-00:41:17,756 --> 00:41:19,156
-Our tools have a
-nice low section,
-
-
-905
-00:41:19,396 --> 00:41:20,296
-as you will learn
-in the next talk.
-
-
-906
-00:41:20,726 --> 00:41:23,176
-That will give our users
-all-day battery life.
-
-
-907
-00:41:24,456 --> 00:41:26,116
-Do less work less often.
-
-
-908
-00:41:26,606 --> 00:41:27,136
-Do it later.
-
-
-909
-00:41:27,806 --> 00:41:28,516
-Do it efficiently.
-
-
-910
-00:41:29,776 --> 00:41:31,296
-Here are those links
-I talked about.
-
-
-911
-00:41:31,816 --> 00:41:36,296
-Documentation, videos,
-guides, last year's talks.
-
-
-912
-00:41:36,716 --> 00:41:39,846
-We've got our standard forums.
-
-
-913
-00:41:39,846 --> 00:41:40,896
-You can interact
-with each other.
-
-
-914
-00:41:40,896 --> 00:41:42,786
-You can contact us,
-the DTS people.
-
-
-915
-00:41:43,176 --> 00:41:44,166
-They have my phone number.
-
-
-916
-00:41:44,416 --> 00:41:45,706
-You don't have my phone number.
-
-
-917
-00:41:45,766 --> 00:41:47,156
-They do. Talk to them.
-
-
-918
-00:41:47,156 --> 00:41:48,106
-They can probably help you.
-
-
-919
-00:41:48,106 --> 00:41:49,766
-If they don't, they
-will call me or one
-
-
-920
-00:41:49,766 --> 00:41:50,916
-of my excellent teammates.
-
-
-921
-00:41:51,896 --> 00:41:52,566
-Paul is here.
-
-
-922
-00:41:52,726 --> 00:41:56,706
-His email gets to
-go on the slide.
-
-
-923
-00:41:56,896 --> 00:41:57,856
-Related sessions.
-
-
-924
-00:41:57,856 --> 00:42:00,606
-The very next session,
-please stick around.
-
-
-925
-00:42:00,606 --> 00:42:03,196
-We've got networking,
-we've got some performance,
-
-
-926
-00:42:03,746 --> 00:42:04,406
-check these out.
-
-
-927
-00:42:04,506 --> 00:42:06,656
-They are going to help
-you think about how
-
-
-928
-00:42:06,656 --> 00:42:08,276
-to optimize all the
-things I just talked about.
-
-
-929
-00:42:08,786 --> 00:42:11,576
-Please go optimize
-your apps for energy.
-
-
-930
-00:42:13,516 --> 00:42:28,570
-[ Applause ]
+00:42:08,762 --> 00:42:11,632
+请继续为了节能优化你的应用程序
 

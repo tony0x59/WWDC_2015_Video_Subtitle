@@ -1,5225 +1,4242 @@
 1
-00:00:21,516 --> 00:00:25,846
-[Applause]
+00:00:20,187 --> 00:00:21,154
+Apps的安全
 
 
 2
-00:00:26,346 --> 00:00:27,886
->> IVAN KRSTIC: My name is
-Ivan, and I head the Security
+00:00:21,488 --> 00:00:22,990
+你们好 谢谢
 
 
 3
-00:00:27,886 --> 00:00:31,686
-and Privacy Strategy group at
-Apple, and today we are going
+00:00:26,360 --> 00:00:29,663
+我是伊凡是Apple公司安全
+及隐私策略小组的负责人
 
 
 4
-00:00:31,686 --> 00:00:32,555
-to talk about security.
+00:00:31,098 --> 00:00:32,566
+今天我们来谈一谈安全
 
 
 5
-00:00:32,555 --> 00:00:36,846
-And, in fact, most of
-today's talk will focus
+00:00:33,834 --> 00:00:38,639
+事实上今天将主要谈的是设备安全
 
 
 6
-00:00:36,846 --> 00:00:38,626
-on security on devices.
+00:00:39,439 --> 00:00:43,143
+现在你们也知道我们
+设备的安全性能非常高
 
 
 7
-00:00:39,436 --> 00:00:42,046
-Now, as you know, we
-have a very strong lineup
+00:00:43,310 --> 00:00:47,347
+有些安全性能是OSX
+或IOS所特有的是两个平台兼有的
 
 
 8
-00:00:42,046 --> 00:00:43,906
-of device security
-features, some of them unique
+00:00:48,215 --> 00:00:50,450
+我们将继续开发这些性能
 
 
 9
-00:00:43,966 --> 00:00:47,356
-to OS X others to iOS, and some
-present on both our platforms.
+00:00:50,651 --> 00:00:54,054
+你们也将看到我们在
+这领域会不断地创新
 
 
 10
-00:00:47,456 --> 00:00:50,446
-We are continually working to
-make these features better,
+00:00:54,721 --> 00:00:58,492
+今天我会抽些时间和
+你们简单谈谈网络安全
 
 
 11
-00:00:50,446 --> 00:00:52,126
-and you're going
-to see us continue
+00:01:00,561 --> 00:01:02,696
+一谈到网络安全你们大部分人都会想到
 
 
 12
-00:00:52,126 --> 00:00:54,046
-to relentlessly innovate
-in this space.
+00:01:02,763 --> 00:01:06,834
+HTTPS我们多数也是在浏览器的
+锁定图标中见过它
 
 
 13
-00:00:54,736 --> 00:00:57,256
-But I'm actually here today to
-have a brief interlude with you
+00:01:08,502 --> 00:01:13,140
+在过去网站会使用HTTPS和TLS
 
 
 14
-00:00:57,366 --> 00:00:58,476
-about network security.
+00:01:13,207 --> 00:01:15,475
+来传输一些敏感信息
 
 
 15
-00:00:58,476 --> 00:01:02,376
-When we think about network
-security most of you think
+00:01:17,144 --> 00:01:20,981
+在我们看来信用卡信息
+已算不上敏感信息
 
 
 16
-00:01:02,376 --> 00:01:05,135
-of HTTPS, which most
-of us experience
+00:01:21,782 --> 00:01:25,152
+所有的用户信息才是真正的敏感信息
 
 
 17
-00:01:05,135 --> 00:01:06,846
-as the lock icon in the browser.
+00:01:25,219 --> 00:01:29,489
+而作为开发者认为不敏感的
+信息在用户看来可能就是敏感信息
 
 
 18
-00:01:07,996 --> 00:01:13,076
-It used to be that
-websites used HTTPS and TLS
+00:01:31,692 --> 00:01:34,595
+TLS真正重要的一点
+也是我们通常想不到的
 
 
 19
-00:01:13,286 --> 00:01:15,476
-if they were transmitting
-sensitive information.
+00:01:34,661 --> 00:01:39,066
+就是它不仅会保护网络运行的信息安全
 
 
 20
-00:01:16,836 --> 00:01:18,706
-But we no longer think of things
+00:01:39,666 --> 00:01:42,069
+而且还保护连接的完整性
 
 
 21
-00:01:18,706 --> 00:01:20,496
-like credit card
-information as sensitive.
+00:01:42,769 --> 00:01:44,905
+网络面临的威胁已经变了
 
 
 22
-00:01:20,496 --> 00:01:24,166
-In fact, today we think of
-all kinds of user information
+00:01:45,873 --> 00:01:48,842
+已不再是戴着黑色面罩躲藏
 
 
 23
-00:01:24,296 --> 00:01:26,386
-as being sensitive, and
-even some things that you
+00:01:48,909 --> 00:01:51,345
+在网络的某些角落
+去窃取你信用卡数字那些人
 
 
 24
-00:01:26,386 --> 00:01:29,496
-as a developer may not think
-of as sensitive, a user may.
+00:01:52,012 --> 00:01:55,182
+事实上 用户是想保护自己免受
+其他威胁攻击
 
 
 25
-00:01:31,436 --> 00:01:33,356
-One other really
-important thing about TLS
+00:01:55,616 --> 00:01:58,151
+例如 网络服务供应商
 
 
 26
-00:01:33,356 --> 00:01:34,866
-that we don't often
-think about is
+00:01:58,218 --> 00:02:00,821
+他们向每个应用中插入跟踪标头信息 
 
 
 27
-00:01:34,866 --> 00:01:37,756
-that it doesn't just protect
-the secrecy of information
+00:02:01,188 --> 00:02:04,558
+或直接记录浏览历史
+以进行广告定向投放
 
 
 28
-00:01:37,756 --> 00:01:39,056
-as it moves across the network.
+00:02:06,260 --> 00:02:11,865
+所以 我们认为TLS在2015年的
+最主要职责就是保护消费者
 
 
 29
-00:01:39,666 --> 00:01:41,876
-It also protects the
-integrity of those connections.
+00:02:12,232 --> 00:02:13,066
+网络信息安全
 
 
 30
-00:01:42,766 --> 00:01:44,896
-And the threats on the
-network have changed.
+00:02:15,836 --> 00:02:17,771
+但是TLS仍有漏洞
 
 
 31
-00:01:45,866 --> 00:01:48,856
-It's no longer just someone
-wearing a black ski mask hiding
+00:02:18,539 --> 00:02:20,941
+很多服务器仍使用TLS 1版本
 
 
 32
-00:01:48,856 --> 00:01:50,096
-on some corner of
-the Internet trying
+00:02:21,241 --> 00:02:23,010
+这个版本太老了已有16年的历史了
 
 
 33
-00:01:50,096 --> 00:01:51,336
-to get your credit card numbers.
+00:02:23,377 --> 00:02:26,747
+连最新版本TLS 1.2
+也已经有7年的历史了
 
 
 34
-00:01:51,466 --> 00:01:53,936
-In fact, users may want
-to protect themselves
+00:02:27,080 --> 00:02:31,785
+TLS 1.2包含了很多重要的
+协议加密升级功能能够抵抗我们
 
 
 35
-00:01:53,936 --> 00:01:55,196
-against other kinds of threats.
+00:02:31,852 --> 00:02:35,322
+正面临或未来要面临的各种威胁
 
 
 36
-00:01:55,606 --> 00:01:58,256
-For example, Internet
-service providers
+00:02:36,523 --> 00:02:40,027
+事实上 连TLS1.2版本也有漏洞
 
 
 37
-00:01:58,256 --> 00:02:00,826
-that are injecting tracking
-headers into every request,
+00:02:41,562 --> 00:02:43,664
+根据TLS的运作方式如果黑客
 
 
 38
-00:02:01,186 --> 00:02:03,476
-or even outright
-recording browsing histories
+00:02:43,730 --> 00:02:46,200
+黑掉一个服务器并窃取你的TLS密钥
 
 
 39
-00:02:03,526 --> 00:02:04,566
-to support ad targeting.
+00:02:46,633 --> 00:02:51,939
+那么他们就可以破解服务
+器曾经加载过的加密数据
 
 
 40
-00:02:04,566 --> 00:02:09,795
-So in 2015 we believe that TLS
-is really a minimum base line
+00:02:52,439 --> 00:02:53,907
+毫无疑问这是非常恐怖的
 
 
 41
-00:02:09,866 --> 00:02:11,856
-for responsibly protecting
-customer information
+00:02:54,474 --> 00:02:57,411
+不过有个正向加密的
+软件可解决这一问题
 
 
 42
-00:02:12,216 --> 00:02:12,796
-on the network.
+00:02:57,511 --> 00:02:59,813
+有了正向加密即使黑客黑掉一个
 
 
 43
-00:02:15,536 --> 00:02:17,756
-But TLS is not quite enough.
+00:02:59,880 --> 00:03:03,083
+服务器窃取了TLS密钥
+他们也只能用密钥
 
 
 44
-00:02:18,526 --> 00:02:20,716
-Many servers still
-use version 1 of TLS,
+00:03:03,150 --> 00:03:04,985
+破解服务器未来加密传输的数据
 
 
 45
-00:02:21,256 --> 00:02:23,026
-which is very old,
-it's 16 years old.
+00:03:05,152 --> 00:03:07,554
+不能破解已加密的历史数据
 
 
 46
-00:02:23,126 --> 00:02:26,756
-And the newest version of TLS,
-1.2, which is 7 years old,
+00:03:08,555 --> 00:03:10,824
+这样非常棒 因为它能减少庞大的网络
 
 
 47
-00:02:27,076 --> 00:02:29,206
-contains a number of really
-important cryptographic
+00:03:10,891 --> 00:03:11,992
+加密数据负荷
 
 
 48
-00:02:29,206 --> 00:02:31,856
-improvements to the protocol,
-which make it more resilient
+00:03:13,861 --> 00:03:17,197
+TLS支持正向加密正向加密过程通过
 
 
 49
-00:02:31,856 --> 00:02:33,986
-to the kinds of threats
-that we are seeing today
+00:03:17,264 --> 00:03:19,433
+使用密码组完成而密码组是由启动
 
 
 50
-00:02:33,986 --> 00:02:35,336
-and will be facing
-in the future.
+00:03:19,499 --> 00:03:22,736
+服务器所必须的加密基元组合而成
 
 
 51
-00:02:35,336 --> 00:02:40,036
-And in fact, even TLS
-1.2 is not quite enough.
+00:03:23,370 --> 00:03:26,773
+所以 你们的服务器无需运行TLS
+只需运行TLS 1.2
 
 
 52
-00:02:40,586 --> 00:02:43,626
-With the way TLS works,
-if an attacker is able
+00:03:26,840 --> 00:03:31,078
+为了获得正向加密
+你们必须对其进行设置
 
 
 53
-00:02:43,626 --> 00:02:47,146
-to compromise a server and
-steal your TLS key, they can use
+00:03:32,479 --> 00:03:36,083
+我为什么告诉你这些呢
+引用蒂姆的话我会让你们读一下
 
 
 54
-00:02:47,146 --> 00:02:50,936
-that key to retroactively
-decrypt all previously encrypted
+00:03:42,789 --> 00:03:44,558
+我们必须修正这问题
 
 
 55
-00:02:50,936 --> 00:02:51,936
-data by that server.
+00:03:46,159 --> 00:03:47,594
+为了帮助你们不出问题
 
 
 56
-00:02:52,446 --> 00:02:53,906
-That's obviously
-very undesirable.
+00:03:48,595 --> 00:03:51,265
+我们将向你们介绍App
+Transport Security
 
 
 57
-00:02:54,486 --> 00:02:56,146
-There's a property
-called forward secrecy
+00:03:51,832 --> 00:03:52,666
+它是这样运行的
 
 
 58
-00:02:56,146 --> 00:02:57,416
-that makes it not true.
+00:03:53,800 --> 00:03:58,405
+在OSX EI Capitan
+或ISO9打开你们的应用
 
 
 59
-00:02:57,526 --> 00:02:59,726
-With forward secrecy,
-if an attacker is able
+00:03:59,540 --> 00:04:03,010
+默认它这样就不会连接到
+不受保护的HTTP链接   
 
 
 60
-00:02:59,726 --> 00:03:03,166
-to compromise a server and steal
-the TLS key, they can only use
+00:04:03,076 --> 00:04:05,846
+它们会连接失败
+而且程序生成的任何TLS连接
 
 
 61
-00:03:03,166 --> 00:03:04,986
-that key to decrypt
-future traffic
+00:04:05,913 --> 00:04:10,184
+也不会按照我刚才描述的最优做法
 
 
 62
-00:03:05,166 --> 00:03:07,546
-that the server encrypts,
-but no prior traffic.
+00:04:10,450 --> 00:04:12,452
+这就是带有正向加密的TLS 1.2
 
 
 63
-00:03:08,556 --> 00:03:10,816
-And this is great because
-it mitigates bulk recording
+00:04:13,020 --> 00:04:16,190
+任何已知的不安全加
+密基元均无法被允许
 
 
 64
-00:03:10,816 --> 00:03:13,686
-of network encrypted data.
+00:04:16,490 --> 00:04:18,825
+密钥尺寸也有最低要求
 
 
 65
-00:03:13,876 --> 00:03:17,246
-TLS supports forward secrecy
-and it does it through the use
+00:04:19,526 --> 00:04:21,695
+现在你可能不会完全按照这些要求去做
 
 
 66
-00:03:17,246 --> 00:03:19,436
-of what are called cipher
-suites which are combinations
+00:04:21,762 --> 00:04:25,132
+立即遵守这些要求不过没关系
 
 
 67
-00:03:19,436 --> 00:03:21,506
-of cryptographic primitives
-that you actually have
+00:04:25,199 --> 00:04:27,367
+你可以在
+Info plist中根据每种情况
 
 
 68
-00:03:21,506 --> 00:03:22,746
-to enable on your server.
+00:04:27,434 --> 00:04:31,872
+指定例外情况或进行全局覆盖
 
 
 69
-00:03:23,356 --> 00:03:26,786
-So your server need only not
-run just TLS, but in fact needs
+00:04:32,472 --> 00:04:35,742
+但是就整个行业而言我们必须尽快做到
 
 
 70
-00:03:26,846 --> 00:03:29,746
-to run TLS 1.2, and in order
-to get forward secrecy,
+00:04:35,809 --> 00:04:38,378
+让用户信息无法接触到未加密网络
 
 
 71
-00:03:29,746 --> 00:03:31,076
-you must configure
-it to do that.
+00:04:39,479 --> 00:04:40,380
+我们需要你们的帮助
 
 
 72
-00:03:32,236 --> 00:03:33,696
-So why am I telling
-you all of this?
+00:04:41,682 --> 00:04:43,717
+谢谢大家下面由我的
+同事皮埃尔给你们谈谈
 
 
 73
-00:03:33,696 --> 00:03:42,506
-Well, here is a quote from Tim,
-and I will let you read it.
-
-
-74
-00:03:42,786 --> 00:03:44,366
->> "We must get this right."
-
-
-75
-00:03:45,026 --> 00:03:47,366
-And to help you get it right,
-
-
-76
-00:03:48,586 --> 00:03:50,926
-we're introducing a feature
-called App Transport Security.
-
-
-77
-00:03:51,696 --> 00:03:52,666
-Here's how it works.
-
-
-78
-00:03:53,816 --> 00:03:58,406
-If you link your app against
-OS X El Capitan or iOS 9,
-
-
-79
-00:03:59,546 --> 00:04:00,736
-by default it won't be able
-
-
-80
-00:04:00,736 --> 00:04:03,106
-to make any unprotected
-HTTP connections;
-
-
-81
-00:04:03,106 --> 00:04:05,816
-they will simply fail,
-and any TLS connections
-
-
-82
-00:04:05,816 --> 00:04:09,276
-that your app makes will have no
-adhere to these best practices
-
-
-83
-00:04:09,276 --> 00:04:10,196
-that I just described.
-
-
-84
-00:04:10,436 --> 00:04:12,456
-And that's TLS 1.2
-with forward secrecy.
-
-
-85
-00:04:13,016 --> 00:04:14,446
-Cryptographic primitives
-that are known
-
-
-86
-00:04:14,446 --> 00:04:16,176
-to be insecure are not allowed,
-
-
-87
-00:04:16,505 --> 00:04:18,826
-and there are minimum key size
-requirements put in place.
-
-
-88
-00:04:19,516 --> 00:04:21,776
-Now, you may not be
-able to comply with all
-
-
-89
-00:04:21,776 --> 00:04:25,116
-of these restrictions
-immediately, and that's okay,
-
-
-90
-00:04:25,116 --> 00:04:27,636
-you can specify exceptions
-in your Info.plist either
-
-
-91
-00:04:27,636 --> 00:04:31,856
-on a case-by-case basis for each
-domain or as a global override.
-
-
-92
-00:04:32,456 --> 00:04:35,826
-But, as an industry we have
-to very soon get to a point
-
-
-93
-00:04:35,826 --> 00:04:38,366
-where no user information
-hits the network unencrypted,
-
-
-94
-00:04:39,486 --> 00:04:40,166
-and we need your help.
-
-
-95
-00:04:41,676 --> 00:04:42,996
-Thank you for that
-and I will turn it
-
-
-96
-00:04:42,996 --> 00:04:44,986
-over to my colleague Pierre
-who's going to tell you
-
-
-97
-00:04:44,986 --> 00:04:46,276
-about System Integrity
-Protection.
-
-
-98
-00:04:47,516 --> 00:04:50,976
-[Applause]
-
-
-99
-00:04:51,476 --> 00:04:52,086
->> PIERRE-OLIVIER
-MARTEL: Thank you Ivan.
-
-
-100
-00:04:54,466 --> 00:04:57,466
-Hi everyone, my name is
-Pierre-Olivier Martel.
-
-
-101
-00:04:57,546 --> 00:04:59,086
-I'm the engineering manager
-
-
-102
-00:04:59,086 --> 00:05:01,116
-for Sandboxing Technologies
-here at Apple.
-
-
-103
-00:05:01,926 --> 00:05:03,386
-And today I'm here
-to talk to you
-
-
-104
-00:05:03,386 --> 00:05:04,836
-about System Integrity
+00:04:43,784 --> 00:04:46,486
+System Integration
 Protection
 
 
+74
+00:04:51,491 --> 00:04:52,326
+谢谢伊凡
+
+
+75
+00:04:54,795 --> 00:04:57,464
+嗨 大家好 我是
+皮埃尔•奥利佛•马特尔
+
+
+76
+00:04:57,798 --> 00:05:01,101
+担任Apple公司
+沙盒技术部的技术经理
+
+
+77
+00:05:02,402 --> 00:05:05,239
+今天我和大家谈谈 System
+Integration Protection
+
+
+78
+00:05:05,405 --> 00:05:07,140
+这是我们在
+El Capitan引进的
+
+
+79
+00:05:07,207 --> 00:05:08,942
+新型硬化机理
+
+
+80
+00:05:10,344 --> 00:05:14,114
+在探究细节之前我想退一步
+
+
+81
+00:05:14,548 --> 00:05:16,650
+给大家说说我们要达成什么目标
+
+
+82
+00:05:17,918 --> 00:05:23,123
+在Apple公司 我们团队的使命
+是确保用户能享受到
+
+
+83
+00:05:23,190 --> 00:05:25,726
+产品带来的极致体验我们相信
+
+
+84
+00:05:25,792 --> 00:05:27,995
+我们可以保护他们的
+
+
+85
+00:05:28,061 --> 00:05:32,366
+个人资料即使资料被
+
+
+86
+00:05:32,666 --> 00:05:35,602
+恶意软件甚至更糟糕的
+
+
+87
+00:05:36,103 --> 00:05:39,206
+编写软件攻击伤害也会很小
+
+
+88
+00:05:40,807 --> 00:05:44,244
+为了达到这个目的我们已设计和集成
+
+
+89
+00:05:44,378 --> 00:05:47,514
+各项安全技术正如伊凡上面所提到的
+
+
+90
+00:05:47,981 --> 00:05:50,217
+这些年研发的iOS和 OS X
+
+
+91
+00:05:50,884 --> 00:05:52,553
+研发所采用的一种
+
+
+92
+00:05:52,619 --> 00:05:56,456
+配额和原则就是深度防御概念
+
+
+93
+00:05:57,724 --> 00:06:00,027
+使用的关键原则你可能也
+
+
+94
+00:06:00,093 --> 00:06:03,197
+有所耳闻 那就是安全与层有关
+
+
+95
+00:06:04,231 --> 00:06:06,900
+你不能把所有鸡蛋都
+放在同一个篮子里
+
+
+96
+00:06:06,967 --> 00:06:10,571
+不要指望单层保护设备就完事大吉了
+
+
+97
+00:06:10,871 --> 00:06:13,006
+因为不管这个保护层
+
+
+98
+00:06:13,774 --> 00:06:18,111
+防弹性 防水性 抗震性有多好
+
+
+99
+00:06:18,178 --> 00:06:21,648
+一旦坏掉就
+
+
+100
+00:06:22,382 --> 00:06:23,984
+功亏一篑
+
+
+101
+00:06:25,652 --> 00:06:28,755
+相反 你们应该依靠多层保护
+
+
+102
+00:06:29,456 --> 00:06:32,793
+原则上有了多层安全保护
+
+
+103
+00:06:33,293 --> 00:06:35,562
+不仅能推迟黑客入侵时间
+
+
+104
+00:06:36,096 --> 00:06:37,564
+还能限制被攻击范围
+
+
 105
-00:05:05,396 --> 00:05:07,036
-which is a new hardening
-mechanism
+00:06:39,132 --> 00:06:41,235
+到现在为止 深度预防
 
 
 106
-00:05:07,236 --> 00:05:08,926
-that we are introducing
-in El Capitan.
+00:06:41,301 --> 00:06:43,637
+这个古老的军事概念被用来捍卫世界
 
 
 107
-00:05:10,346 --> 00:05:13,546
-Before I dive into the details,
-I would like to take a step back
+00:06:43,937 --> 00:06:47,140
+各地城池已有几百年历史了
 
 
 108
-00:05:13,796 --> 00:05:15,386
-and provide some context
+00:06:48,642 --> 00:06:49,977
+我知道你们很喜欢琐事
 
 
 109
-00:05:15,386 --> 00:05:16,646
-around what we're
-trying to achieve here.
+00:06:50,344 --> 00:06:52,613
+所以 我可以告诉你们这个概念是
 
 
 110
-00:05:17,906 --> 00:05:23,176
-My team's mission at Apple is
-to make sure that our users get
+00:06:52,679 --> 00:06:57,417
+塞巴斯蒂安•德•沃邦
+在17世纪70年代正式提出的
 
 
 111
-00:05:23,176 --> 00:05:25,766
-to enjoy the great user
-experience that comes
+00:06:57,484 --> 00:06:59,052
+那时 他受法国国王邀请
 
 
 112
-00:05:25,766 --> 00:05:28,056
-with our product,
-with the confidence
+00:06:59,486 --> 00:07:01,555
+在全国建造堡垒
 
 
 113
-00:05:28,096 --> 00:05:32,376
-that their personal data is
-protected and that malware
+00:07:02,155 --> 00:07:04,758
+以保卫王国安全
 
 
 114
-00:05:32,656 --> 00:05:35,586
-or even simply a poorly
-written piece of software,
+00:07:05,692 --> 00:07:08,061
+你们可能不熟悉这个人
 
 
 115
-00:05:35,946 --> 00:05:39,196
-only has a limited impact
-on their user experience.
+00:07:08,128 --> 00:07:10,130
+但你们肯定见过他的作品
 
 
 116
-00:05:39,616 --> 00:05:44,376
-So to that end we've designed
-and integrated various pieces
+00:07:11,298 --> 00:07:12,699
+这就是他其中的一个城堡设计图
 
 
 117
-00:05:44,376 --> 00:05:47,516
-of security technologies,
-as Ivan mentioned before,
+00:07:14,034 --> 00:07:15,969
+你们可以清楚地看到这几个保护层是
 
 
 118
-00:05:47,996 --> 00:05:51,296
-over the year in iOS and OS X.
+00:07:16,036 --> 00:07:17,971
+用来抵挡不同的袭击 
 
 
 119
-00:05:51,296 --> 00:05:52,546
-One of the quotas and principles
+00:07:19,673 --> 00:07:22,075
+它们可以拖住入侵者然后通过
 
 
 120
-00:05:52,546 --> 00:05:56,446
-that we applied there is the
-concept of defense in depth.
+00:07:22,309 --> 00:07:26,914
+易守难攻的窄道把入侵者抵挡在外面
 
 
 121
-00:05:57,196 --> 00:06:00,096
-Now, the key principle here is
-something you've probably heard
+00:07:28,649 --> 00:07:31,685
+我们来看看如何
+把这个原理用到OS X的安全模型上
 
 
 122
-00:06:00,096 --> 00:06:03,186
-before, which is that
-security is all about layers.
+00:07:32,519 --> 00:07:34,922
+我不知道你们是不是这样
+反正我是经常梦想着
 
 
 123
-00:06:04,226 --> 00:06:06,956
-And for the same reason that you
-shouldn't put all of your eggs
+00:07:34,988 --> 00:07:36,523
+建造自己的堡垒就是这样
 
 
 124
-00:06:06,956 --> 00:06:11,106
-in the same basket, you
-shouldn't rely on a single layer
+00:07:37,824 --> 00:07:40,561
+我们在这之上设置自己的安全层
 
 
 125
-00:06:11,106 --> 00:06:12,996
-of protection to
-defend the device,
+00:07:42,062 --> 00:07:44,565
+我们从底部的网闸开始
 
 
 126
-00:06:13,786 --> 00:06:18,166
-because no matter how
-bulletproof, or water resistant,
+00:07:45,732 --> 00:07:49,369
+网闸要确保从网上下载到
 
 
 127
-00:06:18,166 --> 00:06:21,636
-or shock absorbent this layer
-is, when it starts failing you,
+00:07:49,436 --> 00:07:54,041
+用户设备上的应用是经开发者签字的
 
 
 128
-00:06:22,376 --> 00:06:25,426
-then it's complete game over.
+00:07:54,341 --> 00:07:58,412
+开发者拥有Apple公司发布的
+开发者身份证明
 
 
 129
-00:06:25,666 --> 00:06:28,746
-Instead, you should rely on
-multiple layers of protection,
+00:07:59,513 --> 00:08:02,583
+否则程序将无法运行
 
 
 130
-00:06:29,456 --> 00:06:32,796
-ideally with different
-security properties
+00:08:03,884 --> 00:08:06,019
+网闸要配合系统的其他机制运行
 
 
 131
-00:06:33,296 --> 00:06:35,576
-that will delay the
-advance of an attacker
+00:08:06,086 --> 00:08:08,856
+如恶意软件检测机制
 
 
 132
-00:06:36,086 --> 00:06:37,386
-and reduce your attack surface.
+00:08:09,323 --> 00:08:11,592
+这样才能有效
 
 
 133
-00:06:38,106 --> 00:06:41,286
-Now, the concept of defense
+00:08:12,459 --> 00:08:16,096
+防止恶意软件大规模地
+入侵我们生态系统
 
 
 134
-00:06:41,286 --> 00:06:43,626
-in depth is an old military
-concept that's been used
+00:08:18,131 --> 00:08:19,433
+第二层是沙盒
 
 
 135
-00:06:43,756 --> 00:06:48,296
-to defend fortresses all around
-the world for centuries for now.
+00:08:20,801 --> 00:08:23,537
+回到Lion 我们引入了App沙盒
 
 
 136
-00:06:48,656 --> 00:06:49,886
-Because I you know
-you guys like trivia,
+00:08:23,971 --> 00:08:27,207
+我们强制性规定所有从App Store
+下载的应用都要使用App沙盒
 
 
 137
-00:06:50,076 --> 00:06:52,656
-I can tell that you it
-was actually formalized
+00:08:28,909 --> 00:08:32,145
+对于从App Store
+以外下载的应用
 
 
 138
-00:06:52,656 --> 00:06:57,516
-by this gentleman, Sebastien
-de Vauban, in the 1670s,
+00:08:32,212 --> 00:08:35,082
+比如开发者ID程序
+也强推荐使用App沙盒
 
 
 139
-00:06:57,516 --> 00:06:59,056
-when he was asked by
-the King of France
+00:08:36,482 --> 00:08:38,485
+沙盒是一种控制机制
 
 
 140
-00:06:59,496 --> 00:07:01,566
-to rebuild all the
-fortresses around the country
+00:08:39,253 --> 00:08:42,289
+它能确保即使你们的程序被入侵了
 
 
 141
-00:07:02,166 --> 00:07:04,766
-that were used to
-defend the kingdom.
+00:08:43,090 --> 00:08:47,160
+攻击者也只能访问用户提供的资料
 
 
 142
-00:07:05,696 --> 00:07:08,086
-And you may not be
-familiar with the character,
+00:08:47,794 --> 00:08:50,731
+而不能窃取用户资料
 
 
 143
-00:07:08,086 --> 00:07:11,026
-but maybe you've seen
-some of his work before.
+00:08:51,498 --> 00:08:53,767
+也不能破坏其他系统
 
 
 144
-00:07:11,286 --> 00:07:13,636
-That's the design of
-one of his castles.
+00:08:56,270 --> 00:08:59,640
+如果你们成功绕开前两层
+那么就来到了第三层
 
 
 145
-00:07:14,046 --> 00:07:16,056
-You can clearly see several
-layers of protection here
+00:09:00,307 --> 00:09:02,442
+经典的POSIX权限方案
 
 
 146
-00:07:16,056 --> 00:07:17,966
-that are designed to stop
-different kinds of attacks
+00:09:03,210 --> 00:09:05,679
+在这里 你们的应用
 
 
 147
-00:07:18,946 --> 00:07:22,216
-and that will basically delay
-the attacker and funnel him
+00:09:05,746 --> 00:09:09,216
+只能在系统授予用户的权限下运行
 
 
 148
-00:07:22,296 --> 00:07:27,446
-through different bottlenecks
-that are easier to defend.
+00:09:10,083 --> 00:09:13,387
+所以它既不能访问不同用户资料
 
 
 149
-00:07:28,196 --> 00:07:31,656
-So let's see how this applies
-to the OS X security model.
+00:09:14,154 --> 00:09:19,693
+也不能修改root用户
+对系统进行的配置设置
 
 
 150
-00:07:32,526 --> 00:07:34,906
-And I don't know about you,
-but I've always dreamed
+00:09:21,528 --> 00:09:25,365
+最后 我们把Keychain 
+看成第三层上面的一层
 
 
 151
-00:07:34,906 --> 00:07:37,206
-to build my own fort,
-so there it is,
+00:09:25,432 --> 00:09:28,836
+它是用来保护用户密钥的
 
 
 152
-00:07:37,836 --> 00:07:41,186
-and we'll put our own
-security layers on it.
+00:09:30,504 --> 00:09:33,674
+它通过加密和应用分离
 
 
 153
-00:07:41,736 --> 00:07:44,556
-Starting from the bottom,
-we'll start with Gatekeeper.
+00:09:34,274 --> 00:09:37,377
+确保只有在第一层存储秘密的应用
 
 
 154
-00:07:45,736 --> 00:07:49,406
-So Gatekeeper makes sure that an
-application that gets downloaded
+00:09:37,811 --> 00:09:40,747
+才可以返回此层
 
 
 155
-00:07:49,406 --> 00:07:54,046
-from the Internet onto the
-user's machine has to be signed
+00:09:42,983 --> 00:09:44,351
+所以当你们看到整个方案后
 
 
 156
-00:07:54,326 --> 00:07:56,596
-by a -- we have a
-Developer ID certificate
+00:09:45,052 --> 00:09:46,486
+你们会明白很多事情
 
 
 157
-00:07:56,656 --> 00:07:58,416
-that Apple has issued
-to a developer,
+00:09:47,588 --> 00:09:54,428
+首先 网闸阻止下载到
+机器上的不信任代码
 
 
 158
-00:07:59,106 --> 00:08:02,596
-otherwise the application
-does not get to launch.
+00:09:55,329 --> 00:09:58,165
+但是它还不是真正的控制机制
 
 
 159
-00:08:03,886 --> 00:08:06,146
-And combined with some
-other mechanism that we have
+00:09:58,532 --> 00:10:01,502
+因为启动网闸不会阻止任何应用运行
 
 
 160
-00:08:06,146 --> 00:08:08,856
-on the system, like some
-malware detection mechanism,
+00:10:02,269 --> 00:10:05,472
+而且它也不会保护机器已有代码
 
 
 161
-00:08:09,306 --> 00:08:11,586
-then it's actually a
-pretty effective measure
+00:10:05,539 --> 00:10:08,308
+例如它不会保护OS自带的代码
 
 
 162
-00:08:12,446 --> 00:08:16,106
-to stop a massive malware
-attack on our ecosystem.
+00:10:10,244 --> 00:10:13,914
+所以 虽然它可能是
 
 
 163
-00:08:16,596 --> 00:08:19,436
-The second layer is Sandbox.
+00:10:14,214 --> 00:10:16,149
+我们平台最有效的控制机制
 
 
 164
-00:08:20,786 --> 00:08:23,526
-So back in Lion, we
-introduced App Sandbox
+00:10:17,251 --> 00:10:19,186
+但沙盒机制是OS X的唯一选择
 
 
 165
-00:08:23,976 --> 00:08:24,936
-and we mad it mandatory
+00:10:19,853 --> 00:10:22,656
+我们没有要求规定每个过程都
 
 
 166
-00:08:24,936 --> 00:08:28,676
-for applications coming
-from the App Store.
+00:10:22,956 --> 00:10:24,525
+必须在沙盒中运行
 
 
 167
-00:08:28,896 --> 00:08:32,196
-We also highly recommended it
-for applications coming outside
+00:10:26,593 --> 00:10:30,364
+最后当你们看到POSIX层时
 
 
 168
-00:08:32,196 --> 00:08:34,546
-of the App Store, like for
-instance using the Developer
+00:10:31,532 --> 00:10:36,470
+会发现大部分的Mac系统 
+都是单用户系统
 
 
 169
-00:08:34,546 --> 00:08:35,066
-ID program.
+00:10:37,070 --> 00:10:40,440
+而系统的用户实际上是临时管理员
 
 
 170
-00:08:36,496 --> 00:08:38,476
-Sandbox is a containment
-mechanism.
+00:10:40,507 --> 00:10:42,109
+一直在行使管理特权
 
 
 171
-00:08:39,236 --> 00:08:40,736
-Which means that it
-makes sure that even
+00:10:44,845 --> 00:10:46,914
+root账户通常要么处于保护状态
 
 
 172
-00:08:40,736 --> 00:08:42,296
-if your application
-gets exploited,
+00:10:46,980 --> 00:10:50,450
+要么保护密码较弱甚至没有密码
 
 
 173
-00:08:43,106 --> 00:08:46,106
-then the application only
-has access to the data
+00:10:51,852 --> 00:10:55,289
+事实上如果真的有
+密码而且你想要的话
 
 
 174
-00:08:46,106 --> 00:08:47,346
-that the user actually gave it,
+00:10:55,522 --> 00:10:56,957
+用户也可能会给你
 
 
 175
-00:08:47,786 --> 00:08:50,466
-which means the application
-cannot steal all the user's
+00:10:59,860 --> 00:11:03,530
+而且 当你最后root之后
+实际上已经能控制
 
 
 176
-00:08:50,466 --> 00:08:53,766
-data, and cannot compromise
-the rest of the system.
+00:11:03,997 --> 00:11:07,000
+整个机器 因为root文件可以禁用
+设备上所有的安全措施
 
 
 177
-00:08:54,236 --> 00:08:58,376
-The third layer, if you
-manage to go through
+00:11:07,701 --> 00:11:10,971
+它能替换内核扩展
 
 
 178
-00:08:58,376 --> 00:09:02,426
-or around the first two, is the
-classic POSIX permission scheme,
+00:11:11,471 --> 00:11:15,275
+替代提供其他安全服务
 
 
 179
-00:09:03,196 --> 00:09:05,776
-which means that your
-application only runs
+00:11:15,809 --> 00:11:18,545
+甚至可以扰乱运行中的
+Keychain层
 
 
 180
-00:09:05,776 --> 00:09:09,206
-with the set of privileges that
-the system granted to your user.
+00:11:20,681 --> 00:11:24,051
+所以 事实就是一旦代码在Mac运行
 
 
 181
-00:09:09,796 --> 00:09:12,586
-So the application won't be
-able to access data owned
+00:11:24,551 --> 00:11:26,720
+那么很容易进行root
 
 
 182
-00:09:12,586 --> 00:09:14,826
-by a different user
-and it won't be able
+00:11:27,187 --> 00:11:29,056
+一旦root成功
+你就可以完全控制机器
 
 
 183
-00:09:14,826 --> 00:09:17,396
-to modify a systemwide
-configuration settings
+00:11:29,590 --> 00:11:30,457
+也就是说
 
 
 184
-00:09:17,396 --> 00:09:19,706
-that are usually owned
-by the root user.
+00:11:31,358 --> 00:11:33,794
+任何一段恶意代码实际上就是一个密码
 
 
 185
-00:09:20,226 --> 00:09:25,386
-And finally, we can think of the
-Keychain as yet another layer
+00:11:34,127 --> 00:11:35,562
+或一个可以完全
 
 
 186
-00:09:25,386 --> 00:09:26,866
-on top of that, which
-is designed
+00:11:35,929 --> 00:11:37,664
+控制你机器的漏洞
 
 
 187
-00:09:26,866 --> 00:09:28,886
-to protect the user's secrets.
+00:11:40,033 --> 00:11:44,338
+这表明我们还需要另一个层
 
 
 188
-00:09:29,416 --> 00:09:33,666
-It relies on cryptography
-and application separation
+00:11:45,405 --> 00:11:49,209
+一个能消除机器root权限的层
 
 
 189
-00:09:34,266 --> 00:09:37,866
-to make sure that only the
-application that's stored a
+00:11:50,110 --> 00:11:52,045
+从而在默认情况下保护系统
 
 
 190
-00:09:37,866 --> 00:09:40,736
-secret in the first place
-can get back to it later.
+00:11:52,145 --> 00:11:54,515
+好像是Apple安装到机器上的一样
 
 
 191
-00:09:42,656 --> 00:09:44,366
-So when you look at
-the big picture here,
+00:11:55,349 --> 00:11:57,017
+硬盘和runtime都进行安装
 
 
 192
-00:09:45,066 --> 00:09:46,476
-you realize a couple of things.
+00:11:58,852 --> 00:12:02,589
+因为我们现在正讨论限制root权限
 
 
 193
-00:09:47,576 --> 00:09:51,896
-First, Gatekeeper will stop
-untrusted code downloaded
+00:12:03,323 --> 00:12:06,860
+所以我们需要提供一套配置机制
 
 
 194
-00:09:51,896 --> 00:09:54,416
-on the machine from
-being launched.
+00:12:07,327 --> 00:12:09,897
+防止root被入侵
 
 
 195
-00:09:55,336 --> 00:09:57,366
-But it's not actually a
-containment mechanism.
+00:12:10,831 --> 00:12:13,500
+而且还能重设root权限
 
 
 196
-00:09:57,366 --> 00:09:59,126
-It doesn't stop the application
+00:12:15,602 --> 00:12:18,438
+这就是System
+Integration Protection
 
 
 197
-00:09:59,126 --> 00:10:01,486
-when it's run from
-doing anything.
+00:12:18,872 --> 00:12:20,440
+这是一个新的安全策略
 
 
 198
-00:10:02,276 --> 00:10:05,516
-Also, it does not protect code
-that's already on the machine.
+00:12:20,908 --> 00:12:24,011
+适用于系统中的每个进程
 
 
 199
-00:10:05,516 --> 00:10:07,196
-So code that ships with
-the OS, for instance,
+00:12:24,645 --> 00:12:26,680
+不管这个进程是否
 
 
 200
-00:10:07,196 --> 00:10:08,946
-is not protected by it.
+00:12:26,947 --> 00:12:29,716
+具备附加特权或者在沙箱外运行
 
 
 201
-00:10:09,916 --> 00:10:13,926
-Then, sandboxing, although it's
-probably the most effective
+00:12:31,785 --> 00:12:33,887
+该策略能为磁盘或runtime中的
 
 
 202
-00:10:14,216 --> 00:10:17,256
-containment mechanism
-we have on the platform,
+00:12:34,221 --> 00:12:37,925
+系统组件提供额外保护
 
 
 203
-00:10:17,256 --> 00:10:19,196
-is only an opt-in in OS X.
+00:12:39,126 --> 00:12:43,096
+而且系统如果安装
+Apple签字安装包
 
 
 204
-00:10:19,856 --> 00:10:22,646
-So there's no requirement
-for every single process
+00:12:43,163 --> 00:12:46,900
+二进制只能被安装程序
 
 
 205
-00:10:22,966 --> 00:10:26,936
-to actually run in a sandbox.
+00:12:48,101 --> 00:12:50,003
+或者软件更新机制修改
 
 
 206
-00:10:26,936 --> 00:10:30,366
-Finally, when you look at the
-POSIX layer, you realize that,
+00:12:50,704 --> 00:12:54,308
+这样系统二进制文件就能免受
 
 
 207
-00:10:31,516 --> 00:10:36,476
-well, most of the Macs out there
-are actually single user systems
+00:12:54,374 --> 00:12:58,412
+runtime附件和代码注入的风险
 
 
 208
-00:10:37,066 --> 00:10:40,466
-where the user is the de
-facto administrator running
+00:12:59,980 --> 00:13:01,715
+在探究细节之前
 
 
 209
-00:10:40,466 --> 00:10:43,716
-with administrative
-privileges all the time.
+00:13:01,982 --> 00:13:05,285
+我们先看一下这是如何影响开发者的
 
 
 210
-00:10:44,836 --> 00:10:46,866
-The root account is
-usually protected
+00:13:06,420 --> 00:13:09,456
+好消息是如果你的应用
 
 
 211
-00:10:46,866 --> 00:10:52,186
-or hidden behind an often weak
-password or no password at all.
+00:13:09,523 --> 00:13:12,726
+是App Store下载的 
+那么应用就不会受到此类风险
 
 
 212
-00:10:52,186 --> 00:10:55,296
-And in fact, if there is a
-password and you ask for it,
+00:13:13,694 --> 00:13:16,496
+<br/> 
+因为App Store指南
 
 
 213
-00:10:55,506 --> 00:10:56,946
-the users likely give it to you.
+00:13:16,630 --> 00:13:18,632
+和沙箱策略可以加以保护
 
 
 214
-00:10:58,186 --> 00:11:02,926
-And finally, when you root, then
-you actually have full control
+00:13:18,799 --> 00:13:20,534
+阻止此类行为
 
 
 215
-00:11:02,926 --> 00:11:06,266
-on the machine, because root can
-disable all security measures
+00:13:21,502 --> 00:13:23,604
+然而 如果你们的应用
+不是来自App Store
 
 
 216
-00:11:06,376 --> 00:11:06,986
-on the device.
+00:13:24,338 --> 00:13:26,607
+而且需要修改系统的二进制文件
 
 
 217
-00:11:07,686 --> 00:11:10,956
-It can replace the
-kernel extensions,
+00:13:27,140 --> 00:13:32,880
+或修改磁盘框架
+如果需要将储存信息安装到系统位置
 
 
 218
-00:11:11,466 --> 00:11:15,286
-it can replace launchd, any
-other security services,
+00:13:34,414 --> 00:13:36,283
+那么应用就会受到影响
 
 
 219
-00:11:15,816 --> 00:11:17,956
-it can even interfere
-with the Keychain layers
+00:13:36,683 --> 00:13:39,019
+我将在这里解释一下
 
 
 220
-00:11:17,956 --> 00:11:20,426
-that sit on top of it.
+00:13:39,753 --> 00:13:41,755
+什么是系统位置
 
 
 221
-00:11:20,686 --> 00:11:24,036
-So the reality is that once you
-have code running on the Mac,
+00:13:43,023 --> 00:13:46,894
+最后如果你们的
+应用需要检查系统进程中
 
 
 222
-00:11:24,536 --> 00:11:26,706
-it's actually not that
-hard to become root,
+00:13:46,960 --> 00:13:49,897
+任一进程的的内存状态
 
 
 223
-00:11:27,196 --> 00:11:28,986
-and once you are root, you have
-full control of the machine.
+00:13:50,898 --> 00:13:56,537
+或需要在系统运行的进程中或跨进程
 
 
 224
-00:11:29,606 --> 00:11:31,806
-Which means that any piece
+00:13:56,703 --> 00:13:57,704
+插入库或进行调试
 
 
 225
-00:11:31,806 --> 00:11:33,786
-of malware is actually
-one password,
+00:13:59,773 --> 00:14:02,576
+那么让我们看看新机制的核心
 
 
 226
-00:11:33,786 --> 00:11:35,546
-or one vulnerability away
+00:14:03,076 --> 00:14:05,679
+首先我会了解下新文件系统限制
 
 
 227
-00:11:35,916 --> 00:11:40,336
-from taking full
-control of the device.
+00:14:05,946 --> 00:14:08,582
+我们在Capitan系统
+引入该文件系统
 
 
 228
-00:11:40,416 --> 00:11:44,336
-This shows us that we
-need another layer.
+00:14:09,550 --> 00:14:11,018
+然后再看一下它是如何扩展到
 
 
 229
-00:11:45,416 --> 00:11:48,346
-We need a layer that will
-eliminate the power of root
+00:14:11,318 --> 00:14:13,420
+新runtime保护进程
 
 
 230
-00:11:48,516 --> 00:11:52,046
-on the machine and protect
-the system by default,
+00:14:15,022 --> 00:14:17,090
+最后了解一下该系统与
 
 
 231
-00:11:52,086 --> 00:11:54,506
-as it was installed by
-Apple on the machine.
+00:14:17,157 --> 00:14:20,060
+内核扩展开发流程的关系
 
 
 232
-00:11:55,346 --> 00:11:57,026
-Both on disk and at runtime.
+00:14:20,127 --> 00:14:23,530
+以及它是如何影响kext开发者的
 
 
 233
-00:11:57,566 --> 00:12:02,036
-And because we are talking
-about taking some power away
+00:14:24,798 --> 00:14:27,334
+然后由于这个功能
+是能够被完全禁用的
 
 
 234
-00:12:02,096 --> 00:12:05,276
-from root, then we need
+00:14:28,001 --> 00:14:29,503
+接下来向你们展示一下如何禁用
 
 
 235
-00:12:05,276 --> 00:12:06,856
-to provide a configuration
-mechanism
+00:14:31,138 --> 00:14:32,539
+那就得首先讲讲文件系统
 
 
 236
-00:12:07,326 --> 00:12:09,886
-that root itself
-cannot compromise,
+00:14:33,974 --> 00:14:39,880
+我们想做到的就是
+保护系统存储信息不被修改
 
 
 237
-00:12:10,846 --> 00:12:14,126
-but that can give away
-this power back to root.
+00:14:41,281 --> 00:14:45,986
+为达到这一目的 
+安装程序会标在文件安装过程中
 
 
 238
-00:12:15,296 --> 00:12:18,086
-This is what System
-Integrated Protection is.
+00:14:46,520 --> 00:14:47,855
+标记系统内容
 
 
 239
-00:12:18,876 --> 00:12:21,366
-It is a new security
-policy that applies
+00:14:48,655 --> 00:14:51,291
+我们在Capitan系统中加入了
+新的文件系统标记
 
 
 240
-00:12:21,406 --> 00:12:24,006
-to every single process
-running on the system.
+00:14:52,359 --> 00:14:56,530
+之后在运行过程中内核能阻止任何
 
 
 241
-00:12:24,646 --> 00:12:26,526
-Regardless of whether
-this process is running
+00:14:56,830 --> 00:14:58,932
+企图篡改受保护文件
 
 
 242
-00:12:26,526 --> 00:12:29,856
-with extra privileges, or
-if it's running unsandboxed.
+00:14:58,999 --> 00:15:01,969
+或文件夹的行为除非该行为是
 
 
 243
-00:12:30,296 --> 00:12:33,896
-It's designed to
-provide extra protections
+00:15:02,035 --> 00:15:05,272
+特别授权的进程发出的
 
 
 244
-00:12:34,216 --> 00:12:37,916
-to system components, both
-on disk and at runtime,
+00:15:05,806 --> 00:15:07,908
+Capitan系统只有几种此类进程
 
 
 245
-00:12:39,096 --> 00:12:43,106
-and it makes it so that system
-binaries are only modifiable
+00:15:09,243 --> 00:15:13,881
+内核还会防止
+储存私密内容的块设备被读写
 
 
 246
-00:12:43,106 --> 00:12:46,886
-by the installer, if it installs
-an Apple signed package,
+00:15:15,215 --> 00:15:16,783
+而且还会阻止
 
 
 247
-00:12:48,096 --> 00:12:50,006
-or the Software Update
-mechanism.
+00:15:16,950 --> 00:15:18,252
+私密内容被篡改
 
 
 248
-00:12:50,706 --> 00:12:54,316
-And finally, that the system
-binaries are protected
+00:15:20,187 --> 00:15:22,122
+现在 必须记住一点是
 
 
 249
-00:12:54,386 --> 00:12:58,426
-from runtime attachments,
-and from code injection.
+00:15:22,422 --> 00:15:25,158
+这只适用于root文件和
 
 
 250
-00:12:58,976 --> 00:13:01,556
-So before we dive
-into the details here,
+00:15:25,592 --> 00:15:26,727
+当前运行OS的启动卷
 
 
 251
-00:13:01,976 --> 00:13:05,276
-let's see how this is going
-to impact you the developers.
+00:15:27,995 --> 00:15:30,731
+所以你应该把它看成系统运行时的
 
 
 252
-00:13:06,426 --> 00:13:09,556
-Well the good news is that
-if you ship your application
+00:15:31,031 --> 00:15:33,066
+一种自我保护机制
 
 
 253
-00:13:09,556 --> 00:13:12,256
-on the App Store, then your
-application is not impacted
+00:15:36,270 --> 00:15:39,206
+因为我们现在要
+保护磁盘上的系统存储信息
 
 
 254
-00:13:12,256 --> 00:13:16,496
-by any of this, because
-the App Store guidelines
+00:15:39,273 --> 00:15:41,308
+所以你们必须明确区分
 
 
 255
-00:13:16,636 --> 00:13:18,616
-and the app sandbox policy,
+00:15:41,375 --> 00:15:43,510
+系统内容和第三方内容
 
 
 256
-00:13:18,796 --> 00:13:20,546
-already prohibits all
-of these behaviors.
+00:15:44,912 --> 00:15:48,849
+在Capitan 这张图标左侧
 
 
 257
-00:13:21,506 --> 00:13:23,616
-However, if you ship
-outside of the store,
+00:15:48,916 --> 00:15:51,885
+所有位置都被默认为系统位置
 
 
 258
-00:13:24,346 --> 00:13:26,606
-then your application is
-potentially impacted by this,
+00:15:52,853 --> 00:15:55,189
+这意味着系统会阻止你在那里进行读写
 
 
 259
-00:13:27,136 --> 00:13:31,616
-if it relies on being able
-to modify system binaries
+00:15:55,923 --> 00:15:57,824
+即使是安装程序包下载的也一样
 
 
 260
-00:13:31,736 --> 00:13:32,896
-or frameworks on disk.
+00:15:59,493 --> 00:16:01,728
+因为多年来我们一直建议你们
 
 
 261
-00:13:33,436 --> 00:13:36,276
-If it needs to be able
-to install content
+00:16:02,062 --> 00:16:03,697
+不要读写到这些位置
 
 
 262
-00:13:36,686 --> 00:13:39,966
-in system locations, and I
-will explain a little bit
+00:16:03,964 --> 00:16:05,499
+所以你们当中受影响的人应该不多
 
 
 263
-00:13:39,966 --> 00:13:41,756
-about what system
-locations mean in here.
+00:16:05,732 --> 00:16:08,535
+如果你们的安装包把存储信息放到这里
 
 
 264
-00:13:42,416 --> 00:13:45,176
-And finally, if your
-application needs
+00:16:08,602 --> 00:16:10,671
+Capitan应该不会出现大的故障
 
 
 265
-00:13:45,176 --> 00:13:47,986
-to inspect the memory
-states of any process
+00:16:11,471 --> 00:16:13,674
+如果你想把所有的软件都
+安装在/System路径下
 
 
 266
-00:13:48,096 --> 00:13:52,046
-on a system including system
-processes, or if it needs
+00:16:14,007 --> 00:16:17,010
+那么你需要将此存储信息移到
+subfolder of /Library下
 
 
 267
-00:13:52,046 --> 00:13:56,536
-to be able to inject libraries
-or debug over processes,
+00:16:17,077 --> 00:16:20,681
+如果是系统内的
+存储信息或(tilde)/Library
 
 
 268
-00:13:56,696 --> 00:13:57,706
-including system processes.
+00:16:21,248 --> 00:16:24,318
+如果是用户存储信息
 
 
 269
-00:13:59,456 --> 00:14:02,576
-So let's look at the key
-aspects of this new mechanism.
+00:16:26,119 --> 00:16:29,156
+或者如果你想把软件都安装到
+/bin或者/sbin
 
 
 270
-00:14:03,076 --> 00:14:05,666
-First, we look at new
-filesystem restrictions
+00:16:29,923 --> 00:16:32,125
+或者/usr目录下
 
 
 271
-00:14:05,946 --> 00:14:08,566
-that we are introducing
-in Capitan,
+00:16:32,192 --> 00:16:35,395
+比如/usr/bin, /usr/lib
+或者usr/libexec
 
 
 272
-00:14:08,566 --> 00:14:11,006
-and then we'll see
-how these extend
+00:16:35,996 --> 00:16:39,266
+那么你要把储存信息移到
 
 
 273
-00:14:11,316 --> 00:14:13,426
-to new runtime protections.
+00:16:39,600 --> 00:16:44,271
+/usr/文件夹下的
+适当位置 因为这里是
 
 
 274
-00:14:14,736 --> 00:14:17,206
-Finally, we'll see
-how this all ties
+00:16:44,338 --> 00:16:45,939
+第三方唯一可访问的路径
 
 
 275
-00:14:17,206 --> 00:14:20,166
-in with the kernel
-extension development workflow
+00:16:47,574 --> 00:16:48,709
+然后需要注意的是
 
 
 276
-00:14:20,166 --> 00:14:23,526
-and how it potentially impacts
-you if you are a kext developer.
+00:16:49,676 --> 00:16:52,513
+最佳的存储信息位置仍是
+/Applications路径
 
 
 277
-00:14:23,526 --> 00:14:27,346
-And then because the feature
-can entirely be disabled,
+00:16:52,646 --> 00:16:55,549
+这是因为这个位置是用户可见位置
 
 
 278
-00:14:28,006 --> 00:14:29,516
-I will just show you how.
+00:16:56,149 --> 00:16:58,752
+方便用户把应用拖入
 
 
 279
-00:14:30,016 --> 00:14:32,536
-Let's talk about the
-filesystem first.
+00:16:58,819 --> 00:17:00,454
+垃圾箱并删除存储信息
 
 
 280
-00:14:33,966 --> 00:14:35,456
-What we're trying to
-achieve here is we want
+00:17:01,855 --> 00:17:07,493
+要注意的是 当用户升级 
 
 
 281
-00:14:35,456 --> 00:14:39,866
-to protect system content
-from being modified.
+00:17:07,694 --> 00:17:10,830
+Yosemite install到
+Capitan install时
 
 
 282
-00:14:40,486 --> 00:14:45,876
-To do so, the installer will
-actually flag system content
+00:17:11,431 --> 00:17:14,667
+安装程序会会把系统内
 
 
 283
-00:14:45,876 --> 00:14:47,866
-as it installs the
-files on disk.
+00:17:14,734 --> 00:17:18,505
+发现的第三方存储信息移到系统外
 
 
 284
-00:14:48,646 --> 00:14:50,976
-We have a new filesystem flag
-that we introduced in Capitan.
+00:17:19,640 --> 00:17:23,076
+所以为了不影响这些用户
 
 
 285
-00:14:51,986 --> 00:14:56,536
-And then later on, at runtime,
-the kernel will stop any attempt
+00:17:23,143 --> 00:17:26,680
+务必确保把存储内容尽快转移出去
 
 
 286
-00:14:56,846 --> 00:14:58,946
-at modifying these
-protected files
+00:17:29,783 --> 00:17:31,618
+现在我们看一下runtime保护
 
 
 287
-00:14:58,946 --> 00:15:02,046
-or protected folders
-unless the attempt comes
+00:17:33,086 --> 00:17:35,756
+能够改变runtime中的进程行为
 
 
 288
-00:15:02,046 --> 00:15:05,196
-from a specially
-entitled process,
+00:17:35,923 --> 00:17:38,959
+就相当于能够改变
 
 
 289
-00:15:05,416 --> 00:15:07,916
-of which there's only
-a handful on Capitan.
+00:17:39,026 --> 00:17:40,827
+改变磁盘上的二进制文件
 
 
 290
-00:15:09,016 --> 00:15:12,136
-It will also stop you from
-writing to the block devices
+00:17:41,495 --> 00:17:43,263
+如果想保护磁盘上的二进制文件
 
 
 291
-00:15:12,306 --> 00:15:13,886
-that back this protected
-content.
+00:17:43,530 --> 00:17:46,133
+或系统存储信息我们必须保证
 
 
 292
-00:15:15,216 --> 00:15:16,776
-And it will stop
-you from mounting
+00:17:46,400 --> 00:17:49,536
+不能插入代码或改变
 
 
 293
-00:15:16,966 --> 00:15:18,886
-over this protected content.
+00:17:49,603 --> 00:17:51,538
+这些系统进程的行为
 
 
 294
-00:15:19,846 --> 00:15:22,126
-And one thing you have to
-keep in mind is that for now,
+00:17:53,006 --> 00:17:56,710
+为了实现该目的我们在进程结构中
 
 
 295
-00:15:22,406 --> 00:15:25,166
-this only applies to the
-root, and the boot volume
+00:17:57,344 --> 00:18:01,815
+引入一种新的限定标记这种标记的
+内核适用于每个单一进程
 
 
 296
-00:15:25,576 --> 00:15:27,906
-of the currently running OS.
+00:18:03,050 --> 00:18:06,086
+如果磁盘上的
 
 
 297
-00:15:27,996 --> 00:15:30,736
-So you should see this
-as a way for the system
+00:18:06,854 --> 00:18:09,990
+主要可执行文件受程序保护
 
 
 298
-00:15:31,046 --> 00:15:36,126
-to protect itself at runtime.
+00:18:11,258 --> 00:18:13,193
+或写入Apple
+特别授权的主要可执行文件
 
 
 299
-00:15:36,266 --> 00:15:39,316
-Now, because we are trying to
-protect system content on disk,
+00:18:13,260 --> 00:18:14,695
+那么内核将在准确时刻做出标记
 
 
 300
-00:15:39,316 --> 00:15:41,326
-we need to have a
-clear separation
+00:18:19,967 --> 00:18:22,536
+之后系统将自动区别
 
 
 301
-00:15:41,326 --> 00:15:43,596
-between system content
-and third-party content.
+00:18:22,836 --> 00:18:26,073
+该受限进程和常规进程
 
 
 302
-00:15:44,896 --> 00:15:48,876
-So in Capitan, all the
-locations that are on the left
+00:18:26,940 --> 00:18:29,476
+一方面如果task-for-pid
 
 
 303
-00:15:48,876 --> 00:15:52,016
-of this chart will now be
-considered system locations.
+00:18:29,943 --> 00:18:33,747
+和processor-set-tasks
+SPI需要调用受限进程
 
 
 304
-00:15:52,846 --> 00:15:54,426
-Which means that the system
-will actually stop you
+00:18:34,014 --> 00:18:36,283
+那么它们将无法运行
 
 
 305
-00:15:54,426 --> 00:15:56,986
-from writing there,
-including if it comes
+00:18:37,251 --> 00:18:39,419
+并且会设置EPERM为0
 
 
 306
-00:15:57,036 --> 00:15:57,886
-in an installer package.
+00:18:40,621 --> 00:18:44,191
+这意味着你的产品需要依靠
 
 
 307
-00:15:58,366 --> 00:16:01,226
-So it should not
-impact many of you here
+00:18:44,324 --> 00:18:48,061
+系统进程才能运行
 
 
 308
-00:16:01,226 --> 00:16:03,686
-because we've been
-advising for many years now,
+00:18:48,262 --> 00:18:51,198
+例如Finder 你需要
+向Finder插入代码
 
 
 309
-00:16:03,986 --> 00:16:05,376
-that you shouldn't write
-to these locations.
+00:18:51,265 --> 00:18:53,634
+否则它再也无法运行了
 
 
 310
-00:16:05,746 --> 00:16:08,556
-But it's not going to be
-a hard failure in Capitan
+00:18:56,270 --> 00:19:03,243
+如果你插入exec 
+那么二进制文件将导致子进程受限
 
 
 311
-00:16:08,556 --> 00:16:10,666
-if your package installs
-content in there.
+00:19:04,611 --> 00:19:07,214
+然后系统将自动重新设置
 
 
 312
-00:16:11,506 --> 00:16:13,216
-So if you install
-anything in /System,
+00:19:07,281 --> 00:19:08,949
+子进程的mach特殊接口
 
 
 313
-00:16:13,216 --> 00:16:16,776
-you need to move this content
-into the appropriate subfolder
+00:19:09,650 --> 00:19:11,985
+这样意味着你将 
 
 
 314
-00:16:17,116 --> 00:16:20,666
-of /Library, if it's supposed
-to be system wide content,
+00:19:12,352 --> 00:19:13,587
+无法控制子进程
 
 
 315
-00:16:21,256 --> 00:16:24,316
-or (tilde)/Library if it's
-supposed to be user content.
+00:19:14,421 --> 00:19:18,158
+如果你插入一个特权工具
 
 
 316
-00:16:24,836 --> 00:16:32,156
-If you install anything in /bin,
-or /sbin, or anywhere under /usr
+00:19:18,592 --> 00:19:20,961
+然后想要保持控制
+那么它也将不能运行
 
 
 317
-00:16:32,186 --> 00:16:36,446
-like /usr/bin, /usr/lib,
-/usr/libexec, then you need
+00:19:23,263 --> 00:19:29,469
+连接器将忽视所有
+保护二进制文件的dyld环境变量
 
 
 318
-00:16:36,446 --> 00:16:39,266
-to move this content into
-the appropriate subfolder
+00:19:30,270 --> 00:19:33,407
+所以在执行过程中如果你在进程中
 
 
 319
-00:16:39,596 --> 00:16:44,336
-of the /usr/local folder,
-because that's the only location
+00:19:33,574 --> 00:19:35,509
+将库插入二进制文件
 
 
 320
-00:16:44,336 --> 00:16:45,926
-that is now available
-to third-parties.
+00:19:36,109 --> 00:19:38,745
+连接器忽视新库
 
 
 321
-00:16:46,356 --> 00:16:50,466
-And then a reminder
-that the best location
+00:19:40,314 --> 00:19:44,384
+最终如果使用
+dtrace的话所有针对
 
 
 322
-00:16:50,466 --> 00:16:52,516
-for your content is
-still /Applications
+00:19:44,551 --> 00:19:49,189
+受限进程的dtrace
+探针将无法匹配
 
 
 323
-00:16:52,656 --> 00:16:55,536
-because that's the location
-that is visible to the user
+00:19:49,890 --> 00:19:53,994
+这样就无法看到进程和内核的互动过程
 
 
 324
-00:16:56,136 --> 00:16:58,796
-and it's easy for them to
-actually drag your application
+00:19:54,962 --> 00:19:58,732
+你们也将检测不到受限进程存储空间
 
 
 325
-00:16:58,796 --> 00:17:00,516
-to the trash and just
-remove all content.
+00:19:58,932 --> 00:20:00,968
+也就无法检测到内核内存
 
 
 326
-00:17:01,856 --> 00:17:07,506
-One important note here,
-that when the user upgrades
+00:20:02,836 --> 00:20:05,472
+当然这适用于调试器LLDB
 
 
 327
-00:17:07,685 --> 00:17:10,695
-from a Yosemite install,
-to a Capitan install,
+00:20:06,106 --> 00:20:09,576
+如果你们试图
+调用LLDB作为root
 
 
 328
-00:17:11,435 --> 00:17:14,806
-the installer will actually
-migrate any third-party content
+00:20:09,643 --> 00:20:12,179
+并连接到Finder这样也无济于事
 
 
 329
-00:17:14,806 --> 00:17:17,766
-that it finds in
-system locations outside
+00:20:15,282 --> 00:20:17,384
+现在接下来是kext签字程序
 
 
 330
-00:17:17,766 --> 00:17:18,506
-of these locations.
+00:20:17,751 --> 00:20:21,321
+你们肯定也知道所有带
+Kexts开发者ID证书的扩展
 
 
 331
-00:17:19,656 --> 00:17:23,165
-So you need to make sure that
-today you start migrating
+00:20:21,622 --> 00:20:25,359
+都是Apple公司发行的
 
 
 332
-00:17:23,165 --> 00:17:25,945
-that content away as soon
-as possible so as not
+00:20:26,527 --> 00:20:31,098
+扩展必须安装到
+/Library/Extensions路径下
 
 
 333
-00:17:25,945 --> 00:17:26,816
-to impact these users.
+00:20:32,866 --> 00:20:37,638
+新鲜的是因为我们把
+kext签字程序放置在
 
 
 334
-00:17:26,816 --> 00:17:31,606
-Now, let's look at the
-runtime protections.
+00:20:38,472 --> 00:20:41,909
+System Integrity
+Protection之下进行保护
 
 
 335
-00:17:33,086 --> 00:17:35,766
-Being able to modify the
-behavior of a process
+00:20:42,576 --> 00:20:45,479
+所以kext-dev-mode
+boot-arg就被淘汰了
 
 
 336
-00:17:35,906 --> 00:17:39,016
-at runtime is more
-equivalent to being able
+00:20:46,446 --> 00:20:49,983
+如果你是kext开发者你就需要用
 
 
 337
-00:17:39,016 --> 00:17:40,836
-to modify the binary on disk.
+00:20:50,083 --> 00:20:52,419
+未签字的内核扩展进行测试
 
 
 338
-00:17:41,506 --> 00:17:43,256
-So if you try to protect
-the binary on disk
+00:20:52,486 --> 00:20:55,589
+你需要禁用保护我马上给你们演示一下
 
 
 339
-00:17:43,516 --> 00:17:46,126
-and the system content on
-disk, we have to make sure
+00:20:56,523 --> 00:20:59,693
+这也意味着为了禁用kext签字
 
 
 340
-00:17:46,396 --> 00:17:49,616
-that it's not possible to inject
-code or modify the behavior
+00:20:59,760 --> 00:21:02,829
+你在那里可能也看不到这个注释行 
 
 
 341
-00:17:50,276 --> 00:17:51,536
-of these system processes.
+00:21:03,096 --> 00:21:04,198
+它已经无法运行了
 
 
 342
-00:17:52,696 --> 00:17:56,716
-To do so, we are introducing
-a new restricted flag
+00:21:08,702 --> 00:21:10,337
+下面我们来谈一下配置机制
 
 
 343
-00:17:57,356 --> 00:18:00,426
-in the process structure
-that the kernel holds
+00:21:12,573 --> 00:21:17,110
+我们坚信这个新机制
+对保护对我们的用户至关重要
 
 
 344
-00:18:00,846 --> 00:18:01,806
-for every single process.
+00:21:18,679 --> 00:21:21,815
+话虽这么说但我们也意识到
 
 
 345
-00:18:03,046 --> 00:18:06,086
-And a kernel will set
-that flag at exact time
+00:21:21,882 --> 00:21:24,418
+人无法完全操控他们的机器
 
 
 346
-00:18:06,846 --> 00:18:11,116
-if the main executable
-is protected on disk,
+00:21:25,385 --> 00:21:26,620
+因为我之前就说过
 
 
 347
-00:18:11,256 --> 00:18:13,306
-or if the main executable
-is signed
+00:21:26,887 --> 00:21:28,422
+它保护着磁盘上的内核
 
 
 348
-00:18:13,306 --> 00:18:14,606
-with an Apple-private
-entitlement.
+00:21:28,922 --> 00:21:31,525
+需要所有的内核扩展都必须被签字
 
 
 349
-00:18:15,036 --> 00:18:22,546
-And then later on, the system
-will actually treat these
+00:21:32,192 --> 00:21:34,494
+而且因此kext开发者
 
 
 350
-00:18:22,846 --> 00:18:24,906
-restricted processes
-slightly differently
+00:21:34,561 --> 00:21:36,363
+也不能如愿以偿地测试未签字kext
 
 
 351
-00:18:24,906 --> 00:18:26,076
-than regular processes.
+00:21:38,031 --> 00:21:40,200
+正因如此它被完全弃用了
 
 
 352
-00:18:26,196 --> 00:18:29,406
-For one, the task-for-pid
+00:21:41,301 --> 00:21:44,771
+配置存放在NVRAM配置中
 
 
 353
-00:18:29,956 --> 00:18:35,016
-and the processor-set-tasks SPI
-will now fail if they are called
+00:21:45,272 --> 00:21:48,141
+这意味着可以适用于整个机器
 
 
 354
-00:18:35,116 --> 00:18:36,296
-on a restricted process.
+00:21:48,475 --> 00:21:50,410
+所以如果你有几个
+Capitan安装程序
 
 
 355
-00:18:37,236 --> 00:18:39,626
-And will set an 0 to EPERM.
+00:21:50,777 --> 00:21:52,513
+它们都会有同样的配置 
 
 
 356
-00:18:40,616 --> 00:18:44,196
-Which means that if part of your
-product relies on being able
+00:21:53,680 --> 00:21:55,516
+而且OS安装程序也是如此
 
 
 357
-00:18:44,196 --> 00:18:48,076
-to attach to a system process
-at runtime, for instance,
+00:21:55,649 --> 00:21:59,186
+所以当你从seed 1升级到
+seed 2再升级到GM之后
 
 
 358
-00:18:48,266 --> 00:18:51,226
-the Finder, and that you expect
-to be able to inject code
+00:21:59,753 --> 00:22:01,321
+配置也将保持不变
 
 
 359
-00:18:51,226 --> 00:18:56,246
-into the Finder, that is
-not going to work anymore.
+00:22:01,455 --> 00:22:03,257
+我们安装时不用每次都进行重新配置
 
 
 360
-00:18:56,276 --> 00:19:00,676
-Then if you fork an exec,
-a binary that will result
+00:22:05,359 --> 00:22:08,161
+现在 因为root实际上
+已经设置了NVRAM
 
 
 361
-00:19:00,796 --> 00:19:03,236
-in the child process
-being restricted,
+00:22:08,262 --> 00:22:10,631
+在这里我们不能相信root
 
 
 362
-00:19:03,286 --> 00:19:07,246
-then the system will
-automatically reset the mach
+00:22:11,098 --> 00:22:14,434
+也就是我们不能在
+OS系统上安装配置机制
 
 
 363
-00:19:07,246 --> 00:19:08,956
-special ports on
-this child process,
+00:22:15,068 --> 00:22:17,571
+我们要进行转移 
+把它安装在Recovery OS下
 
 
 364
-00:19:09,666 --> 00:19:11,976
-which means you won't
-be able to keep control
+00:22:18,305 --> 00:22:21,041
+所以NVRAM也就只能在
+Recovery下进行配置设置
 
 
 365
-00:19:12,366 --> 00:19:13,576
-over the child process.
+00:22:21,775 --> 00:22:23,010
+如果你想改变配置
 
 
 366
-00:19:14,436 --> 00:19:18,156
-So if you expect to be able
-to fork a privileged tool
+00:22:23,777 --> 00:22:26,346
+你需要在机器的
+Recovery OS中进行重启
 
 
 367
-00:19:18,586 --> 00:19:19,776
-and then keep control on it,
+00:22:26,413 --> 00:22:29,449
+在引导画面下按Command+R键
+进行开机启动
 
 
 368
-00:19:19,896 --> 00:19:23,156
-that's not going
-to work anymore.
+00:22:30,851 --> 00:22:32,586
+然后在Utilities菜单中 
 
 
 369
-00:19:23,256 --> 00:19:27,526
-The linker is going to ignore
-all the dyld environment
+00:22:32,653 --> 00:22:35,155
+运行安全配置应用
 
 
 370
-00:19:27,526 --> 00:19:29,486
-variables on these
-protected binaries.
+00:22:36,323 --> 00:22:38,926
+检测System
+IntegrityProtection盒
 
 
 371
-00:19:30,256 --> 00:19:33,396
-So if you expect to be
-able to inject the library
+00:22:39,359 --> 00:22:40,694
+应用 然后重启
 
 
 372
-00:19:33,566 --> 00:19:35,506
-into a system binary
-when you exec it,
+00:22:42,029 --> 00:22:44,464
+记住我刚才描述的那些类型很有可能
 
 
 373
-00:19:36,116 --> 00:19:38,746
-the linker will just
-ignore the new library.
+00:22:44,531 --> 00:22:46,300
+在以后的seed版本中会发生变化
 
 
 374
-00:19:39,286 --> 00:19:44,386
-And finally, if you use
-dtrace, all dtrace probes
+00:22:46,433 --> 00:22:51,038
+所以务必阅读注释了解新的操作步骤
 
 
 375
-00:19:44,556 --> 00:19:49,176
-that target a restricted process
-will not be matched anymore,
+00:22:54,007 --> 00:22:55,809
+我们总结一下到到目前
+为止所谈论的内容
 
 
 376
-00:19:49,876 --> 00:19:51,786
-which means you won't be
-able to see an interaction
+00:22:57,277 --> 00:22:59,980
+System Integrity 
+Protection是一种新的策略
 
 
 377
-00:19:51,786 --> 00:19:55,076
-between the process
-and the kernel.
+00:23:00,047 --> 00:23:01,181
+适用于系统的每个进程
 
 
 378
-00:19:55,076 --> 00:19:58,716
-You won't be able to inspect the
-restricted process memory space
+00:23:02,282 --> 00:23:06,520
+Apple公司将其安装
+在磁盘和runtime上
 
 
 379
-00:19:58,926 --> 00:20:00,956
-and you won't be able to
-inspect the kernel memory.
+00:23:06,620 --> 00:23:10,424
+通过限制读写系统位置访问权限
 
 
 380
-00:20:01,556 --> 00:20:05,386
-Of course, this applies
-to our own debugger, LLDB.
+00:23:10,858 --> 00:23:14,995
+以及防止runtime
+连接和代码插入
 
 
 381
-00:20:05,386 --> 00:20:09,586
-If you try to invoke lldb
-even as root and try to attach
+00:23:15,963 --> 00:23:18,599
+从而保护系统
 
 
 382
-00:20:09,586 --> 00:20:15,046
-to the Finder, then
-this is going to fail.
+00:23:20,434 --> 00:23:23,203
+安装程序能有效地把第三方存储内容
 
 
 383
-00:20:15,276 --> 00:20:17,386
-Now, when it comes to
-the kext signing program,
+00:23:23,337 --> 00:23:25,172
+转移到系统位置之外
 
 
 384
-00:20:17,756 --> 00:20:21,336
-I'm sure you know by now, all
-extensions have to be signed
+00:23:25,239 --> 00:23:27,474
+所以要确保尽快转移你的存储内容
 
 
 385
-00:20:21,606 --> 00:20:24,966
-with a Developer ID for Kexts
-certificate that was issued
+00:23:27,908 --> 00:23:30,110
+否则 就只能自认倒霉了
+因为 你会找不到内容
 
 
 386
-00:20:24,966 --> 00:20:28,856
-by Apple, and then these
-extensions have to be installed
+00:23:31,678 --> 00:23:37,918
+最后可使用Recovery OS
+配置机制禁用该功能
 
 
 387
-00:20:29,236 --> 00:20:31,096
-into /Library/Extensions.
+00:23:39,720 --> 00:23:41,388
+这就是我为大家呈现的内容
+谢谢大家
 
 
 388
-00:20:31,576 --> 00:20:33,826
-The new thing here is
+00:23:41,655 --> 00:23:42,789
+下面我把舞台交给安德鲁
 
 
 389
-00:20:33,826 --> 00:20:37,626
-that because we are pulling
-the kext signing program
+00:23:48,996 --> 00:23:49,830
+谢谢你 皮埃尔
 
 
 390
-00:20:38,346 --> 00:20:42,026
-under the System Integrity
-Protection umbrella,
+00:23:51,665 --> 00:23:56,970
+我是安德鲁·惠利在Core OS
+ 安全功能组负责管理数据安全组
 
 
 391
-00:20:42,576 --> 00:20:45,116
-the kext-dev-mode
-boot-arg is now obsolete.
+00:23:59,139 --> 00:24:01,475
+你可能听过app传输安全
 
 
 392
-00:20:46,196 --> 00:20:49,996
-If you are a kext developer,
-you need to be able to test
+00:24:02,142 --> 00:24:04,611
+以及app在连接状态下
 
 
 393
-00:20:50,096 --> 00:20:52,416
-with unsigned kernel
-extensions, you will need
+00:24:05,012 --> 00:24:07,014
+是它如何保护传输中的数据的
 
 
 394
-00:20:52,416 --> 00:20:55,596
-to disable this protection, and
-I'll show you how in a minute.
+00:24:08,015 --> 00:24:11,718
+我将会讨论数据安全的不同保护方式
 
 
 395
-00:20:56,036 --> 00:20:59,696
-But it also means that,
-this comment line here
+00:24:13,187 --> 00:24:16,190
+我会点击Keychain
+然后存储用户信息
 
 
 396
-00:20:59,696 --> 00:21:02,846
-that you probably saw out
-there to disable kext signing,
+00:24:17,491 --> 00:24:21,795
+之后看一下Touch ID
+看看你是如何权衡
 
 
 397
-00:21:03,096 --> 00:21:04,196
-is not doing anything anymore.
+00:24:21,862 --> 00:24:23,463
+程序安全与程序便捷的
 
 
 398
-00:21:04,196 --> 00:21:10,326
-So let's talk about the
-configuration mechanism.
+00:24:25,532 --> 00:24:28,702
+在这个过程中我将体验一下现有的技术
 
 
 399
-00:21:10,326 --> 00:21:14,506
-We strongly believe
-that this new mechanism,
+00:24:28,936 --> 00:24:32,940
+和iOS 9的新功能以及
+如何配合使用
 
 
 400
-00:21:14,506 --> 00:21:17,126
-this new protection, is
-critical for our users.
+00:24:33,407 --> 00:24:36,577
+从而提供适合你们
+app的安全保护等级
 
 
 401
-00:21:17,536 --> 00:21:21,856
-That being said, we realize that
-it gets in the way of people
+00:24:40,080 --> 00:24:42,649
+我们首先快速
+浏览一下Keychain
 
 
 402
-00:21:21,856 --> 00:21:24,416
-who want to have complete
-control over their machine,
+00:24:43,217 --> 00:24:46,587
+你可以把它看作是专业的数据库
 
 
 403
-00:21:25,386 --> 00:21:26,636
-and because of what
-I said before,
+00:24:47,454 --> 00:24:51,425
+通过增加行数来储存数据
+我们称为Keychain项目
 
 
 404
-00:21:26,876 --> 00:21:28,406
-because it protects
-the kernel on disk
+00:24:51,892 --> 00:24:54,761
+然后通过属性进行查询
 
 
 405
-00:21:28,906 --> 00:21:31,536
-and requires all kernel
-extensions to be signed,
+00:24:56,597 --> 00:25:01,301
+为了优化隐私我这里说的隐私包括密码
 
 
 406
-00:21:32,196 --> 00:21:34,806
-then it also gets in the way
-of kext developers who want
+00:25:01,969 --> 00:25:04,771
+标记 cookie或秘钥
 
 
 407
-00:21:34,806 --> 00:21:36,766
-to be able to test
-with unsigned kext.
+00:25:06,139 --> 00:25:10,511
+如果你有成千上万兆字节信息要储存
 
 
 408
-00:21:37,716 --> 00:21:40,186
-So because of that, it
-can be entirely disabled.
+00:25:10,844 --> 00:25:15,549
+那么可以考虑使用基于文件的
+数据保护或者通过API进行
 
 
 409
-00:21:41,206 --> 00:21:44,776
-The configuration is stored
-in your NVRAM setting,
+00:25:16,049 --> 00:25:18,318
+批量加密方法 
+如Common Crypto
 
 
 410
-00:21:45,256 --> 00:21:48,136
-which means that it applies
-to the entire machine.
+00:25:18,585 --> 00:25:20,287
+然后将密钥存储在Keychain中
 
 
 411
-00:21:48,476 --> 00:21:50,416
-So if you have several
-installs of Capitan,
+00:25:25,292 --> 00:25:27,961
+尽管这些SecItem API
+已经存在很长时间了
 
 
 412
-00:21:50,766 --> 00:21:52,496
-they will all be
-configured the same way
+00:25:28,262 --> 00:25:30,631
+但它仍是最好的秘密存储工具
 
 
 413
-00:21:53,466 --> 00:21:55,516
-and it's persistent
-across OS install.
+00:25:30,931 --> 00:25:33,066
+包括新Swift apps中的密码
 
 
 414
-00:21:55,646 --> 00:21:59,196
-So as you move from seed 1 to
-seed 2 up to GM and even later,
+00:25:34,468 --> 00:25:37,838
+这里我们这里有个秘密 
+想通过SecItemAdd
 
 
 415
-00:21:59,766 --> 00:22:01,306
-the configuration will persist.
+00:25:37,905 --> 00:25:40,574
+把它存在Keychain中
 
 
 416
-00:22:01,446 --> 00:22:03,256
-So we won't reset it
-every time we install.
+00:25:42,209 --> 00:25:44,344
+为了这么做我们构建了一个字典
 
 
 417
-00:22:03,256 --> 00:22:08,156
-Now, because root can
-actually set a NVRAM setting
+00:25:44,711 --> 00:25:46,480
+这个字典包括秘密信息
 
 
 418
-00:22:08,266 --> 00:22:10,636
-and we can't trust root to
-do the right thing here,
+00:25:46,947 --> 00:25:51,818
+还有今后查询所必须的某些属性
 
 
 419
-00:22:11,086 --> 00:22:13,326
-it means we cannot have
-the configuration mechanism
+00:25:52,286 --> 00:25:53,554
+和应当采取的保护措施
 
 
 420
-00:22:13,426 --> 00:22:14,446
-in the OS itself.
+00:25:56,256 --> 00:25:59,560
+这种创建包括描述
+项目查询方式字典的方式
 
 
 421
-00:22:15,076 --> 00:22:17,556
-So we actually pulled it and
-installed it in the Recovery OS.
+00:25:59,626 --> 00:26:04,865
+也可用于查询删除 
 
 
 422
-00:22:17,716 --> 00:22:20,656
-So this NVRAM setting can
-only be set in Recovery.
+00:26:05,098 --> 00:26:10,037
+更新条目和其他API
+我后面会谈到这一点
 
 
 423
-00:22:21,766 --> 00:22:23,026
-If you want to change
-the configuration,
+00:26:11,405 --> 00:26:14,074
+有关Keychain API的信息
 
 
 424
-00:22:23,786 --> 00:22:26,336
-you need to reboot your machine
-in Recovery OS, and you can do
+00:26:14,141 --> 00:26:17,711
+2013年的WWDC
+的709会议还有很多
 
 
 425
-00:22:26,336 --> 00:22:29,526
-so by holding the
-Command+R key on boot.
+00:26:20,314 --> 00:26:25,152
+所以在编写访问Keychain
+代码的时候你们要注意以下几点
 
 
 426
-00:22:30,546 --> 00:22:32,566
-Then all you have to do
-is launch the Security
+00:26:26,987 --> 00:26:30,290
+首先处理用户隐私信息
+是代码安全信息当中
 
 
 427
-00:22:32,566 --> 00:22:35,246
-Configuration application
-from the Utilities menu,
+00:26:30,357 --> 00:26:32,326
+真正敏感的一个环节
 
 
 428
-00:22:36,326 --> 00:22:38,556
-and check the System
-Integrity Protection box,
+00:26:33,093 --> 00:26:37,464
+所以你们应该把它分成
+小而简单又可测试的小单元
 
 
 429
-00:22:39,376 --> 00:22:40,706
-apply and reboot.
+00:26:39,499 --> 00:26:42,069
+通常可以使用
+wrapper class
 
 
 430
-00:22:41,536 --> 00:22:44,506
-Keep in mind that these types
-that I just describe are likely
+00:26:44,438 --> 00:26:46,573
+不管是直接使用
+还是使用wrapper
 
 
 431
-00:22:44,506 --> 00:22:46,316
-to change in an upcoming seed.
+00:26:47,107 --> 00:26:49,710
+请确保你的应用
 
 
 432
-00:22:46,446 --> 00:22:49,416
-So make sure you read
-the release notes
+00:26:50,410 --> 00:26:52,312
+受到最高级别的保护
 
 
 433
-00:22:49,536 --> 00:22:51,666
-to know what the new steps are.
+00:26:53,680 --> 00:26:56,984
+我们描述和讨论的数据保护级别
 
 
 434
-00:22:53,676 --> 00:22:57,066
-So let's summarize what
-we discussed so far.
+00:26:57,518 --> 00:27:03,790
+指的是通过加密访问项目的次数
 
 
 435
-00:22:57,276 --> 00:22:59,996
-System Integrity Protection
-is a new policy that applies
+00:27:03,924 --> 00:27:06,360
+例如当设备在iOS8系统上
 
 
 436
-00:22:59,996 --> 00:23:01,196
-to every process on the system.
+00:27:08,562 --> 00:27:12,766
+被锁定的时候我们添加了
+After First Unlock
 
 
 437
-00:23:02,276 --> 00:23:06,516
-It protects the system as it was
-installed by Apple, both on disk
+00:27:14,434 --> 00:27:18,338
+再说一遍这功能早就有了
+当你必须在背景下
 
 
 438
-00:23:06,616 --> 00:23:10,436
-and at runtime, by
-restricting write access
+00:27:18,572 --> 00:27:20,941
+访问这些项目时候你就可以使用它
 
 
 439
-00:23:10,846 --> 00:23:14,986
-to system locations, and by
-preventing runtime attachment
+00:27:21,308 --> 00:27:22,876
+比例你开发的是一款VoIP应用
 
 
 440
-00:23:15,946 --> 00:23:18,596
-and code injection
-on system processes.
+00:27:27,147 --> 00:27:30,651
+iOS 9不支持随时访问
 
 
 441
-00:23:19,076 --> 00:23:23,216
-The installer will actively
-migrate third-party content
+00:27:31,051 --> 00:27:34,688
+所以你们必须着手
+把这些项目移到到更高级别位置
 
 
 442
-00:23:23,336 --> 00:23:25,216
-outside of system locations,
+00:27:40,527 --> 00:27:44,498
+我们已开发出WatchKit 2
+所以你的Watch app现在可以
 
 
 443
-00:23:25,216 --> 00:23:27,046
-so make sure you actually
-migrate your content as soon
+00:27:44,565 --> 00:27:48,969
+访问SecItem API
+虽然在Watch上
 
 
 444
-00:23:27,046 --> 00:23:29,396
-as possible or that you
-fall back gracefully
+00:27:49,036 --> 00:27:52,873
+输入用户全名和密码的
+这种用户体验并非是你想要的
 
 
 445
-00:23:29,396 --> 00:23:30,726
-when you can't find it.
+00:27:54,408 --> 00:27:58,512
+如果你的Watch app
+显示的是配对iOS设备的数据
 
 
 446
-00:23:31,356 --> 00:23:35,526
-Then finally, the feature can be
-disabled using the configuration
+00:27:59,079 --> 00:28:01,415
+那么你只需发送内容
 
 
 447
-00:23:35,526 --> 00:23:38,526
-mechanism that is
-in the Recovery OS.
+00:28:01,748 --> 00:28:03,750
+而无需使用永久证书
 
 
 448
-00:23:39,416 --> 00:23:40,216
-That's it for me.
+00:28:05,586 --> 00:28:07,955
+如果你的Watch app
+确实需要直接访问证书
 
 
 449
-00:23:40,456 --> 00:23:41,236
-Thank you very much, guys.
+00:28:08,822 --> 00:28:14,461
+那么与其保存完整的用户名和密码
 
 
 450
-00:23:41,646 --> 00:23:42,556
-I will leave the
-stage to Andrew.
+00:28:15,162 --> 00:28:18,065
+不如让服务器发送
+一个许可证或cookie
 
 
 451
-00:23:43,516 --> 00:23:48,506
-[Applause]
+00:28:18,365 --> 00:28:22,503
+从而获得权限访问
 
 
 452
-00:23:49,006 --> 00:23:49,526
->> ANDREW WHALLEY:
-Thank you, Pierre.
+00:28:22,669 --> 00:28:26,139
+那些Watch app
+所需要的主要功能内容
 
 
 453
-00:23:51,666 --> 00:23:54,716
-I'm Andrew Whalley, and I
-manage the data security group
+00:28:30,143 --> 00:28:33,447
+不仅仅在Watch上提示用户名
 
 
 454
-00:23:54,846 --> 00:23:56,966
-within Core OS Security
-Engineering.
+00:28:33,514 --> 00:28:35,716
+和密码非常不方便
 
 
 455
-00:23:57,516 --> 00:24:01,466
-You heard about app
-transport security,
+00:28:36,416 --> 00:28:42,823
+在过去的几个版本我们引入了几种
+技术减少密码提示的频率
 
 
 456
-00:24:02,136 --> 00:24:04,626
-and how it helps
-protect data in motion,
+00:28:44,791 --> 00:28:47,060
+第一个就是共享web证书
 
 
 457
-00:24:05,026 --> 00:24:07,006
-through the network
-connections your app makes.
+00:28:48,896 --> 00:28:51,999
+我们都了解也都喜欢
+Safari保存的密码
 
 
 458
-00:24:07,626 --> 00:24:09,746
-I'm going to look
-at the various ways
+00:28:52,266 --> 00:28:54,868
+以及提示和储存密码的方式
 
 
 459
-00:24:09,746 --> 00:24:12,326
-that you can protect
-data at rest.
+00:28:56,370 --> 00:29:00,340
+有了iCloud Keychain
+密码就可以同步 自动保存
 
 
 460
-00:24:12,876 --> 00:24:16,206
-I will touch on the Keychain
-and storing user secrets,
+00:29:00,407 --> 00:29:01,475
+到所有设备上
 
 
 461
-00:24:17,496 --> 00:24:21,796
-look at Touch ID and how you
-can use it to balance security
+00:29:03,844 --> 00:29:05,179
+但是 常见的是一个服务器
 
 
 462
-00:24:21,846 --> 00:24:24,186
-and convenience in your app.
+00:29:05,245 --> 00:29:08,182
+同时拥有一个
+网站和一个iOS app
 
 
 463
-00:24:25,236 --> 00:24:29,306
-Along the way, I will be looking
-at existing technologies as well
+00:29:08,782 --> 00:29:12,619
+所以 如果这些程序都能共享
 
 
 464
-00:24:29,306 --> 00:24:32,936
-as what's new in iOS 9 and
-how they can fit together
+00:29:12,753 --> 00:29:14,354
+Safari保存密码那就太棒了
 
 
 465
-00:24:33,406 --> 00:24:37,256
-to deliver a level of security
-appropriate for your apps.
+00:29:15,122 --> 00:29:17,391
+有了共享web证书就可以办到
 
 
 466
-00:24:39,696 --> 00:24:42,656
-So let's start with a quick
-overview of the Keychain.
+00:29:19,693 --> 00:29:22,262
+这些是你们在登录
 
 
 467
-00:24:43,226 --> 00:24:46,586
-You can think of it as a
-very specialized database.
+00:29:22,362 --> 00:29:24,698
+或注册程序要添加的代码
 
 
 468
-00:24:47,456 --> 00:24:51,416
-You store data by adding rows,
-which we call Keychain items,
+00:29:27,634 --> 00:29:30,204
+SecCreate Shared
+WebCredential Password将
 
 
 469
-00:24:51,896 --> 00:24:54,696
-and then query for them
-with the attributes.
+00:29:30,270 --> 00:29:33,473
+返回一个随机字符串
+和Safari保存的密码格式一样
 
 
 470
-00:24:55,196 --> 00:25:01,316
-It's optimized for small secrets
-and by secret I mean a password,
+00:29:33,574 --> 00:29:34,942
+用于提示密码
 
 
 471
-00:25:01,316 --> 00:25:04,766
-a token or cookie,
-or cryptographic key.
+00:29:36,310 --> 00:29:39,046
+你们能调用SecAdd
+SharedWeb Credential
 
 
 472
-00:25:06,126 --> 00:25:10,516
-If you have tens of thousands,
-thousands of megabytes to store,
+00:29:39,112 --> 00:29:42,382
+告知Safari
+需要将新用户名和密码
 
 
 473
-00:25:10,856 --> 00:25:15,556
-consider using file-based data
-protection or a bulk encryption
+00:29:42,649 --> 00:29:44,651
+自动输入到特定域中
 
 
 474
-00:25:16,036 --> 00:25:18,326
-through an API like
-Common Crypto
+00:29:47,721 --> 00:29:51,091
+在iOS 9我们已经实现这个功能
 
 
 475
-00:25:18,406 --> 00:25:20,176
-and then just store the
-key in the Keychain.
+00:29:51,491 --> 00:29:53,427
+方式是在模拟器上运行时
 
 
 476
-00:25:24,956 --> 00:25:27,976
-These SecItem APIs have
-been around a long time,
+00:29:53,493 --> 00:29:54,928
+降低安全检查等级
 
 
 477
-00:25:28,256 --> 00:25:30,646
-but they're still the best
-place to store secrets,
+00:29:56,530 --> 00:29:57,364
+我们来体验一下
 
 
 478
-00:25:30,946 --> 00:25:33,066
-including in your
-new Swift apps.
+00:29:59,199 --> 00:30:02,803
+我从注册程序开始
 
 
 479
-00:25:34,176 --> 00:25:37,906
-So here we have a secret
-and we want to store it
+00:30:03,237 --> 00:30:06,306
+然后添加刚刚展示过的代码
 
 
 480
-00:25:37,906 --> 00:25:40,206
-in the Keychain using
-SecItemAdd.
+00:30:09,109 --> 00:30:12,012
+然后进入Safari设置
 
 
 481
-00:25:41,146 --> 00:25:44,356
-To do that, we construct
-a dictionary
+00:30:12,145 --> 00:30:15,749
+确保已启用名称和密码自动输入
 
 
 482
-00:25:44,716 --> 00:25:46,486
-which includes both the secret
+00:30:17,518 --> 00:30:19,419
+搜索Safari等待结果
 
 
 483
-00:25:46,956 --> 00:25:51,726
-and some attributes describing
-how to find it in the future
+00:30:22,356 --> 00:30:25,325
+我们回到程序上来
 
 
 484
-00:25:52,296 --> 00:25:54,166
-and what protection
-it should have.
+00:30:25,826 --> 00:30:27,561
+页面上显示用户名称和密码提示
 
 
 485
-00:25:55,576 --> 00:25:59,606
-This pattern of creating a
-dictionary to describe or query
+00:30:29,229 --> 00:30:32,833
+共享网络凭据允许应用
 
 
 486
-00:25:59,606 --> 00:26:05,106
-for an item, is also used by
-the calls to query, delete,
+00:30:32,900 --> 00:30:36,537
+显示一个选择器这个选择器列出了
+Safari在这个域中
 
 
 487
-00:26:05,106 --> 00:26:08,536
-and update an item, as well
-as some of the other APIs,
+00:30:36,603 --> 00:30:37,704
+保存的所有账号
 
 
 488
-00:26:08,536 --> 00:26:10,046
-I should be talking about later.
+00:30:40,507 --> 00:30:43,010
+每当用户选择一个账号 用户名
 
 
 489
-00:26:11,396 --> 00:26:13,466
-There's a lot more
-about Keychain APIs
+00:30:43,076 --> 00:30:46,446
+和密码就会根据
+Shared Web Credential
 
 
 490
-00:26:13,506 --> 00:26:17,076
-in Session 709 from 2013's WWDC.
+00:30:46,580 --> 00:30:52,252
+返回到已完成处理的
+程序中然后就可以登录了
 
 
 491
-00:26:17,076 --> 00:26:21,866
-So here's some things
-to consider
+00:30:55,989 --> 00:30:58,091
+如果你想要在设备上使用这个功能
 
 
 492
-00:26:22,416 --> 00:26:25,156
-when you are writing code
-to access the Keychain.
+00:30:58,158 --> 00:31:02,262
+而不是只在模拟器上使用
+你就需要在你的应用上
 
 
 493
-00:26:26,696 --> 00:26:30,866
-The first is dealing with user
-secrets is a really security
+00:31:03,363 --> 00:31:06,099
+添加一个授权你可以在
+Xcode的权限标签页的
 
 
 494
-00:26:30,866 --> 00:26:32,326
-sensitive part of your code.
+00:31:06,233 --> 00:31:08,202
+相关域部分中进行该操作
 
 
 495
-00:26:33,106 --> 00:26:37,456
-So you should factor it into
-small, simple, testable units.
+00:31:10,938 --> 00:31:14,274
+你需要将JSON文件放在服务器中
 
 
 496
-00:26:37,926 --> 00:26:44,256
-Often this is done
-with a wrapper class.
+00:31:14,942 --> 00:31:16,376
+不过你可能已经有了
 
 
 497
-00:26:44,426 --> 00:26:46,586
-Whether you are using it
-directly or through a wrapper,
+00:31:16,710 --> 00:31:19,246
+毕竟它跟Handoff和
+iOS 9应用链接中
 
 
 498
-00:26:47,116 --> 00:26:49,716
-make sure it has the
-highest level of protection
+00:31:20,747 --> 00:31:24,685
+所用的是同一个
 
 
 499
-00:26:50,396 --> 00:26:52,296
-that your application can use.
+00:31:30,157 --> 00:31:31,658
+我们对iOS 9做了一个改变
 
 
 500
-00:26:53,666 --> 00:26:56,996
-We describe and talk about
-data protection classes,
+00:31:31,725 --> 00:31:33,126
+让适应性更好这个改变是
 
 
 501
-00:26:57,526 --> 00:27:02,926
-which are the times at which
-cryptographic access is provided
+00:31:33,460 --> 00:31:35,996
+你不再需要分别签署该文件
 
 
 502
-00:27:02,926 --> 00:27:03,796
-to those items.
+00:31:36,530 --> 00:31:39,399
+它将由安全TLS连接所保护
 
 
 503
-00:27:03,926 --> 00:27:06,366
-For example, when the
-device is unlocked.
+00:31:45,539 --> 00:31:49,243
+我提到过Safari通过
+iCloud Keychain保存密码
 
 
 504
-00:27:06,956 --> 00:27:11,646
-In iOS 8, we added the
-AfterFirstUnlock --
+00:31:49,643 --> 00:31:52,045
+但是你们也可以在
+自己的应用中直接使用它
 
 
 505
-00:27:11,646 --> 00:27:15,046
-I beg your pardon.
+00:31:53,146 --> 00:31:55,282
+想象你有一个
+iOS iPad
 
 
 506
-00:27:15,046 --> 00:27:18,326
-That's been around for a while,
-but you can use it if you have
+00:31:55,849 --> 00:31:59,052
+iPhone和OS X 
+App Store app
 
 
 507
-00:27:18,576 --> 00:27:21,776
-to access items in the
-background, for example,
+00:31:59,386 --> 00:32:03,423
+你想要只登陆一个
+就同时登陆所有这些程序
 
 
 508
-00:27:21,776 --> 00:27:26,926
-if you are a VoIP app.
+00:32:05,659 --> 00:32:08,028
+对于能够用于多种设备的应用密码
 
 
 509
-00:27:27,156 --> 00:27:30,636
-Always accessible is going
-to be deprecated in iOS 9.
+00:32:08,095 --> 00:32:11,999
+你们可以考虑将同步性属性
 
 
 510
-00:27:31,056 --> 00:27:33,126
-So you need to start
-moving items out of
+00:32:12,065 --> 00:32:14,034
+添加到所有的SecItem调用
 
 
 511
-00:27:33,246 --> 00:27:34,686
-that into a higher level.
+00:32:15,736 --> 00:32:17,271
+你还需要考虑几件事情
 
 
 512
-00:27:40,216 --> 00:27:44,496
-We have WatchKit 2, your
-Watch apps now have access
+00:32:17,337 --> 00:32:19,973
+比如 删除一个项目
+就会将所有位置的该项目同时删除掉
 
 
 513
-00:27:44,556 --> 00:27:49,006
-to the SecItem APIs, though
-entering a full user name
+00:32:20,107 --> 00:32:22,709
+所以请确保你只在正确的
+情况下进行该操作
 
 
 514
-00:27:49,006 --> 00:27:52,486
-and password on the Watch is
-probably not the user experience
+00:32:24,578 --> 00:32:28,715
+这里还有几个注意事项
+你可以在SecItem.h.
 
 
 515
-00:27:52,486 --> 00:27:52,876
-you want.
+00:32:30,584 --> 00:32:31,985
+查看如果你有兴趣想了解更多
 
 
 516
-00:27:54,416 --> 00:27:58,496
-If your Watch app is displaying
-data from a paired iOS device,
+00:32:32,052 --> 00:32:34,388
+关于iCloud Keychaine
+安全性的信息
 
 
 517
-00:27:59,076 --> 00:28:01,406
-consider just sending
-that content across
+00:32:34,755 --> 00:32:37,925
+或者想知道同步的密码如何
+保护个人隐私
 
 
 518
-00:28:01,736 --> 00:28:03,756
-and not a persistent credential.
+00:32:37,991 --> 00:32:41,128
+不被其他用户看到
+请查看iOS 安全白皮书
 
 
 519
-00:28:04,416 --> 00:28:07,956
-If your Watch app does
-need direct access
+00:32:41,528 --> 00:32:43,096
+会议结束有个链接
 
 
 520
-00:28:08,806 --> 00:28:11,566
-to a credential then
-consider rather
+00:32:46,700 --> 00:32:51,305
+我重申下 
+Keychain存着你所有的秘密
 
 
 521
-00:28:11,566 --> 00:28:14,456
-than storing a full
-user name and password,
+00:32:51,471 --> 00:32:55,309
+而纯文本文件或plist
+文件已经没有密码
 
 
 522
-00:28:15,166 --> 00:28:18,076
-have your server send
-you a token or a cookie
+00:32:56,510 --> 00:32:58,979
+所有请尽可能保护好它们
 
 
 523
-00:28:18,376 --> 00:28:22,506
-that only has the permissions
-to access the content
-
-
-524
-00:28:22,686 --> 00:28:26,136
-that the focused functionality
-of your Watch app requires.
-
-
-525
-00:28:26,676 --> 00:28:33,546
-It's not just on the
-Watch that user name
-
-
-526
-00:28:33,546 --> 00:28:35,726
-and password prompts
-can be inconvenient,
-
-
-527
-00:28:36,406 --> 00:28:39,566
-and over the last few releases
-we have introduced a couple
-
-
-528
-00:28:39,566 --> 00:28:42,836
-of technologies to help you
-prompt for passwords less often.
-
-
-529
-00:28:44,516 --> 00:28:47,076
-The first is shared
-web credentials.
-
-
-530
-00:28:48,576 --> 00:28:51,796
-We all know and love
-Safari saved passwords
-
-
-531
-00:28:52,276 --> 00:28:55,506
-and how it will suggest
-and store them for us.
-
-
-532
-00:28:56,096 --> 00:29:00,436
-With iCloud Keychain, passwords
-will be synced and autofilled
-
-
-533
-00:29:00,436 --> 00:29:01,486
-on all of your devices.
-
-
-534
-00:29:02,006 --> 00:29:05,226
-However, it's common
-for a service
-
-
-535
-00:29:05,226 --> 00:29:08,166
-to have both a website
-and an iOS app.
-
-
-536
-00:29:08,766 --> 00:29:12,606
-So it would be great to have
-those applications participate
-
-
-537
-00:29:12,766 --> 00:29:14,366
-in Safari saved passwords
-
-
-538
-00:29:15,106 --> 00:29:19,506
-and with shared web
-credentials you can.
-
-
-539
-00:29:19,686 --> 00:29:22,276
-Here's some code you might
-want to include in the sign-up
-
-
-540
-00:29:22,346 --> 00:29:24,706
-or the registration flow
-of your application.
-
-
-541
-00:29:27,316 --> 00:29:29,896
-SecCreateShared
-WebCredentialPassword will
-
-
-542
-00:29:29,896 --> 00:29:33,476
-return a random string in the
-same format that Safari uses
-
-
-543
-00:29:33,476 --> 00:29:34,946
-for it's suggested passwords.
-
-
-544
-00:29:36,296 --> 00:29:38,606
-Can you can call
-SecAddSharedWebCredential
-
-
-545
-00:29:38,606 --> 00:29:42,396
-to let Safari know that there's
-a new user name and password
-
-
-546
-00:29:42,646 --> 00:29:44,636
-to autofill for a
-specific domain.
-
-
-547
-00:29:47,396 --> 00:29:51,086
-In iOS 9, we've made it easy to
-give this functionality a try
-
-
-548
-00:29:51,486 --> 00:29:53,476
-by relaxing some of
-the security checks
-
-
-549
-00:29:53,476 --> 00:29:54,766
-when you're running
-in the Simulator.
-
-
-550
-00:29:54,766 --> 00:29:59,086
-So let's have a look at that.
-
-
-551
-00:29:59,196 --> 00:30:02,816
-Here I'm going through the
-registration flow of my app
-
-
-552
-00:30:03,226 --> 00:30:06,306
-to which I just added the code
-I showed you a few moments ago.
-
-
-553
-00:30:06,306 --> 00:30:12,026
-After that, just pop in
-to the settings for Safari
-
-
-554
-00:30:12,026 --> 00:30:15,746
-and make sure that name and
-password autofill is enabled.
-
-
-555
-00:30:16,386 --> 00:30:19,426
-Go to Safari and
-see the results.
-
-
-556
-00:30:19,426 --> 00:30:25,336
-Here we are back in the
-app, being presented
-
-
-557
-00:30:25,826 --> 00:30:29,146
-with a user name
-and password prompt.
-
-
-558
-00:30:29,236 --> 00:30:32,826
-Shared web credentials
-allows the application
-
-
-559
-00:30:32,826 --> 00:30:36,716
-to display a picker, which lists
-all the accounts Safari has
-
-
-560
-00:30:36,716 --> 00:30:37,696
-saved for that domain.
-
-
-561
-00:30:38,246 --> 00:30:43,036
-When the user has
-picked one, the user name
-
-
-562
-00:30:43,036 --> 00:30:46,456
-and password is returned to your
-app in the completion handler
-
-
-563
-00:30:46,456 --> 00:30:51,616
-for SharedWebCredential and
-you can then log the user
-
-
-564
-00:30:51,726 --> 00:30:52,246
-straight in.
-
-
-565
-00:30:52,246 --> 00:30:58,116
-If you want to use this
-on device and not just
-
-
-566
-00:30:58,116 --> 00:31:01,216
-in the simulator, you're going
-to have to add an entitlement
-
-
-567
-00:31:01,216 --> 00:31:04,026
-to your application,
-and you can do this
-
-
-568
-00:31:04,026 --> 00:31:06,116
-in the Associated
-Domains section
-
-
-569
-00:31:06,236 --> 00:31:08,186
-of the Capabilities
-tab in Xcode.
-
-
-570
-00:31:08,736 --> 00:31:13,776
-You are also going to
-need to put a JSON file
-
-
-571
-00:31:13,886 --> 00:31:16,376
-up on your server, but you
-might have this already.
-
-
-572
-00:31:16,726 --> 00:31:19,256
-As it's the same one
-used for Handoff,
-
-
-573
-00:31:19,816 --> 00:31:24,926
-as well as in iOS 9 app links.
-
-
-574
-00:31:29,796 --> 00:31:31,646
-One change we have made in iOS 9
-
-
-575
-00:31:31,646 --> 00:31:35,116
-to make adoption even easier is
-you no longer need separately
-
-
-576
-00:31:35,116 --> 00:31:35,996
-sign that file.
-
-
-577
-00:31:36,546 --> 00:31:39,406
-It's going to be protected
-with a secure TLS connection.
-
-
-578
-00:31:45,216 --> 00:31:49,256
-I mentioned that Safari saved
-passwords uses iCloud Keychain,
-
-
-579
-00:31:49,646 --> 00:31:52,046
-but you can also use it
-directly in your own apps.
-
-
-580
-00:31:53,156 --> 00:31:59,066
-Imagine you have an iOS, iPad,
-iPhone, and OS X App Store app
-
-
-581
-00:31:59,376 --> 00:32:01,986
-and you want to make
-logging into one the same
-
-
-582
-00:32:01,986 --> 00:32:03,426
-as logging into them all.
-
-
-583
-00:32:03,866 --> 00:32:08,016
-So for all of your apps
-passwords that can be used
-
-
-584
-00:32:08,016 --> 00:32:12,056
-on multiple devices, consider
-just adding the synchronizable
-
-
-585
-00:32:12,056 --> 00:32:13,886
-attribute to all SecItem calls.
-
-
-586
-00:32:13,886 --> 00:32:17,256
-There are a few things that
-you've got to think about,
-
-
-587
-00:32:17,256 --> 00:32:19,976
-for example, deleting an item
-will delete it everywhere,
-
-
-588
-00:32:20,116 --> 00:32:22,696
-so make sure you only do that
-under the right circumstances.
-
-
-589
-00:32:23,166 --> 00:32:27,036
-There are a few more
-caveats, and you can see the,
-
-
-590
-00:32:27,036 --> 00:32:32,056
-in SecItem.h. If you are
-interested in finding out more
-
-
-591
-00:32:32,056 --> 00:32:34,256
-about the security
-of iCloud Keychain
-
-
-592
-00:32:34,746 --> 00:32:37,906
-and how synced passwords are
-never accessible to anyone
-
-
-593
-00:32:37,906 --> 00:32:41,116
-but the user, see the
-iOS Security White Paper.
-
-
-594
-00:32:41,536 --> 00:32:43,096
-There's a link at the
-end of the session.
-
-
-595
-00:32:43,666 --> 00:32:51,306
-So to recap, on the Keychain,
-store all your secrets there.
-
-
-596
-00:32:51,476 --> 00:32:53,376
-There really is no
-place for passwords
-
-
-597
-00:32:53,376 --> 00:32:55,316
-in plain text files or plists.
-
-
-598
-00:32:56,506 --> 00:32:58,976
-Protect them at the
-highest level possible
-
-
-599
-00:32:59,456 --> 00:33:03,026
-and if appropriate use
+00:33:00,681 --> 00:33:03,050
+并且如果合适的话请使用
 SharedWedCredentials
 
 
+524
+00:33:03,116 --> 00:33:06,286
+比如我们的Keychain 
+以便在用户的设备上将进行同步
+
+
+525
+00:33:06,453 --> 00:33:08,222
+同时尽量不用密码提示
+
+
+526
+00:33:13,026 --> 00:33:16,597
+所以虽然有些秘密能在
+多台设备上同步但你只想它们
+
+
+527
+00:33:17,264 --> 00:33:18,465
+在一台设备上安全待着
+
+
+528
+00:33:18,532 --> 00:33:21,535
+这时候iCloud
+Keychain就派上大用场了
+
+
+529
+00:33:23,337 --> 00:33:25,639
+安全通讯应用就是一个例子
+
+
+530
+00:33:26,006 --> 00:33:29,943
+这种应用的加密是设备对设备
+而不是用户对用户
+
+
+531
+00:33:32,779 --> 00:33:35,082
+我已经提到过的不同保护级别中
+
+
+532
+00:33:35,182 --> 00:33:37,251
+有一个
+ThisDeviceOnly级别
+
+
+533
+00:33:38,118 --> 00:33:40,921
+项目会被备份但只能被
+
+
+534
+00:33:41,088 --> 00:33:42,322
+恢复到它们最初始的设备中
+
+
+535
+00:33:44,191 --> 00:33:47,794
+去年 我们增加了
+WhenPassCodeSet级别
+
+
+536
+00:33:48,295 --> 00:33:50,464
+确保项目始终处于
+
+
+537
+00:33:50,564 --> 00:33:52,533
+本地设备密码保护之下
+
+
+538
+00:33:54,268 --> 00:33:56,069
+你可以使用
+AccessControl表
+
+
+539
+00:33:56,136 --> 00:33:59,339
+以对项目进行更为严密的控制
+
+
+540
+00:34:03,777 --> 00:34:04,711
+既然我们在谈论
+
+
+541
+00:34:04,811 --> 00:34:07,447
+保护特定设备证书的事情
+
+
+542
+00:34:07,881 --> 00:34:10,918
+那么让我们来看一看
+iOS设备的安全域
+
+
+543
+00:34:12,319 --> 00:34:14,821
+用户空间也就是应用运行的空间
+
+
+544
+00:34:15,889 --> 00:34:19,092
+以及皮埃尔提到过的
+能够提供进程分离和
+
+
+545
+00:34:19,159 --> 00:34:21,228
+其它安全功能的内核
+
+
+546
+00:34:22,563 --> 00:34:25,831
+不过它也提供了很多很多其它OS工具
+
+
+547
+00:34:26,033 --> 00:34:28,335
+这意味着它有着
+一个相当强大的防攻击服务
+
+
+548
+00:34:29,036 --> 00:34:32,306
+我们在iPhone 5s中
+加入了Secure Enclave
+
+
+549
+00:34:35,475 --> 00:34:40,681
+Secure Enclave
+是独立运行的在设计之时
+
+
+550
+00:34:40,813 --> 00:34:42,850
+始终将安全性视为最高原则
+
+
+551
+00:34:44,484 --> 00:34:48,222
+我们在其中放置了
+Touch ID来保护隐私
+
+
+552
+00:34:48,288 --> 00:34:50,924
+以及你的指纹信息的安全
+
+
+553
+00:34:52,626 --> 00:34:55,661
+我们将KeyStore从内核
+
+
+554
+00:34:55,728 --> 00:34:58,532
+移进
+Secure Enclave就是它
+
+
+555
+00:34:58,866 --> 00:35:02,069
+控制着Keychain项目的密码
+
+
+556
+00:35:02,169 --> 00:35:03,070
+以及数据保护
+
+
+557
+00:35:07,374 --> 00:35:09,409
+所以让我们现在
+着重了解一下Touch ID
+
+
+558
+00:35:11,311 --> 00:35:13,547
+我们把它视为一种安全技术
+
+
+559
+00:35:13,947 --> 00:35:16,350
+但它真正出色的是它的便利性
+
+
+560
+00:35:17,150 --> 00:35:20,320
+你可以不用总是输入密码
+就可以解锁你的设备
+
+
+561
+00:35:21,788 --> 00:35:24,458
+不过它本身也可以带给我们
+一些安全上面的好处
+
+
+562
+00:35:25,125 --> 00:35:29,029
+比如如今拥有复杂的长密码
+变得更加容易了
+
+
+563
+00:35:29,897 --> 00:35:32,132
+它能够提高数据保护的安全性
+
+
+564
+00:35:33,467 --> 00:35:37,871
+或者现在你的手机能够立即上锁
+
+
+565
+00:35:38,038 --> 00:35:40,707
+从而减少被攻击和解锁状态的时间
+
+
+566
+00:35:44,745 --> 00:35:48,649
+在iOS 8我们提供了一些API
+所以当你在安全性和便利性之间
+
+
+567
+00:35:48,715 --> 00:35:52,486
+做权衡的时候你可以使用
+应用里的Touch ID
+
+
+568
+00:35:53,187 --> 00:35:55,556
+但为何是这两者它们如何不同？
+
+
+569
+00:35:56,890 --> 00:35:59,393
+若想知道首先
+你得了解Touch ID
+
+
+570
+00:35:59,459 --> 00:36:01,495
+和生物特征识别的工作机制
+
+
+571
+00:36:01,862 --> 00:36:05,365
+幸运的是 这很简单
+它可以归结为一个条件句
+
+
+572
+00:36:06,300 --> 00:36:10,003
+如果伸出的手指和登记的手指相匹配
+
+
+573
+00:36:10,537 --> 00:36:11,772
+就要做出反应
+
+
+574
+00:36:13,173 --> 00:36:16,376
+造成差别的原因是这种反应是什么
+
+
+575
+00:36:16,944 --> 00:36:17,845
+以及反应在哪里发生
+
+
+576
+00:36:21,148 --> 00:36:22,816
+让我们从Local
+Authentication开始谈起
+
+
+577
+00:36:24,785 --> 00:36:27,287
+当一根手指被放在
+Touch ID感应器下
+
+
+578
+00:36:27,654 --> 00:36:29,556
+在Secure Enclave
+里得到匹配
+
+
+579
+00:36:32,059 --> 00:36:33,227
+匹配的消息
+
+
+580
+00:36:33,327 --> 00:36:36,730
+会通过Local Authentication
+发送到你的应用
+
+
+581
+00:36:37,297 --> 00:36:38,298
+从而成功计算出布尔值 
+
+
+582
+00:36:40,067 --> 00:36:43,770
+你的应用就是这样
+对那条信息的做出反应的
+
+
+583
+00:36:46,740 --> 00:36:50,143
+进程虽然在Secure 
+Enclave开始
+
+
+584
+00:36:50,911 --> 00:36:54,982
+但最终安全决策却是
+
+
+585
+00:36:55,449 --> 00:36:58,352
+用户空间里的应用做出
+
+
+586
+00:37:01,355 --> 00:37:03,323
+所以你什么时候可能想要通过
+Local Authentication
+
+
+587
+00:37:03,390 --> 00:37:04,391
+使用Touch ID呢
+
+
+588
+00:37:05,826 --> 00:37:09,062
+想想你的应用如果你有任何安全障碍
+
+
+589
+00:37:09,530 --> 00:37:12,799
+比如输入密码来确认一项操作
+
+
+590
+00:37:13,333 --> 00:37:15,335
+即使用户已经登录了
+
+
+591
+00:37:17,004 --> 00:37:19,239
+使用Touch ID会更容易
+
+
+592
+00:37:21,108 --> 00:37:23,944
+或者你可能不想要总是
+使用Touch ID 
+
+
+593
+00:37:24,511 --> 00:37:30,484
+但在验证过程中采取额外的
+措施这会是一个大障碍
+
+
+594
+00:37:34,188 --> 00:37:36,890
+比如你可以在查看敏感数据前
+
+
+595
+00:37:37,057 --> 00:37:38,458
+做出提示
+
+
+596
+00:37:40,160 --> 00:37:45,766
+或者在某个操作之前做出提示
+比如永久性删除账户
+
+
+597
+00:37:49,770 --> 00:37:52,372
+一种模式是在你的应用流中
+
+
+598
+00:37:52,472 --> 00:37:53,774
+做出一个Touch ID提示
+
+
+599
+00:37:55,042 --> 00:37:59,012
+但这可能导致这种情况发生
+那就是 用户刚刚用Touch ID解锁
+
+
 600
-00:33:03,026 --> 00:33:06,276
-like our Keychain to sync them
-around your user's devices
+00:37:59,446 --> 00:38:02,549
+但没过多久应用又会发来提示
 
 
 601
-00:33:06,336 --> 00:33:08,906
-and present fewer
-password prompts.
+00:38:04,785 --> 00:38:09,089
+在iOS9 我们添加了
+TouchIDAuthentication
 
 
 602
-00:33:12,636 --> 00:33:15,586
-So iCloud Keychain is great
-for the secrets that can go
+00:38:09,223 --> 00:38:12,726
+AllowableReuseDuration
+这是在Local Authentication
 
 
 603
-00:33:15,586 --> 00:33:18,486
-on multiple devices but
-sometimes you want them
+00:38:12,793 --> 00:38:13,694
+环境下的一项属性
 
 
 604
-00:33:18,486 --> 00:33:21,546
-to stay firmly and
-securely on just one device.
+00:38:14,962 --> 00:38:16,630
+你可以使用它来指定一个窗口
 
 
 605
-00:33:22,176 --> 00:33:25,636
-An example might be a
-secure messaging app,
+00:38:17,297 --> 00:38:19,600
+如果用户最近刚用Touch ID
 
 
 606
-00:33:26,006 --> 00:33:29,956
-where encryption is device to
-device rather than user to user.
+00:38:20,100 --> 00:38:22,369
+来解锁他们的设备在期间
 
 
 607
-00:33:30,516 --> 00:33:35,536
-The various protection classes
-I already mentions have a
+00:38:22,536 --> 00:38:23,437
+你就不需要再次提示
 
 
 608
-00:33:35,536 --> 00:33:37,236
-ThisDeviceOnly variant.
+00:38:25,138 --> 00:38:27,875
+那是让你的策略宽松一些的一种办法
 
 
 609
-00:33:38,126 --> 00:33:40,906
-Items will be backed up,
-but only ever restored
+00:38:29,676 --> 00:38:32,379
+但或许你想让你的策略在某些情况下
 
 
 610
-00:33:40,906 --> 00:33:44,366
-to the device they came from.
+00:38:32,513 --> 00:38:33,514
+更严格一些
 
 
 611
-00:33:44,366 --> 00:33:47,796
-Last year, we added the
-WhenPassCodeSet class,
+00:38:33,580 --> 00:38:37,017
+比如 对一个新登记的指纹做出反应
 
 
 612
-00:33:48,286 --> 00:33:50,476
-that ensures items
-are always protected
+00:38:40,420 --> 00:38:44,625
+同样也是一项新技术我们有
+evaluatedPolicyDomainState属性
 
 
 613
-00:33:50,576 --> 00:33:52,546
-by a local device passcode.
+00:38:46,326 --> 00:38:47,828
+这是一个完全隐秘的值
 
 
 614
-00:33:53,096 --> 00:33:56,166
-And you can use AccessControl
-lists
+00:38:48,262 --> 00:38:51,064
+代表了已登记指纹的当前情况
 
 
 615
-00:33:56,166 --> 00:33:59,356
-for even finer grained
-control over items.
+00:38:52,833 --> 00:38:55,636
+你真正能做的是实时做一下比较
 
 
 616
-00:33:59,356 --> 00:34:04,696
-So since we are talking
+00:38:56,403 --> 00:39:00,574
+如果它改变了
+那就是设置里的已登记指纹中
 
 
 617
-00:34:04,816 --> 00:34:07,446
-about protecting
-device-specific credentials,
+00:39:00,741 --> 00:39:02,409
+有一个指纹信息已经被添加或移除
 
 
 618
-00:34:07,866 --> 00:34:10,906
-let's look at the security
-domains on an iOS device.
+00:39:04,912 --> 00:39:07,047
+如果你察觉到并且它适合
 
 
 619
-00:34:12,315 --> 00:34:14,806
-User space, where
-your application runs,
+00:39:07,147 --> 00:39:11,251
+你的应用或许你可以再次提示
 
 
 620
-00:34:15,666 --> 00:34:19,106
-and the kernel, which as Pierre
-mentioned provides process
+00:39:11,318 --> 00:39:14,054
+看看用户是否还想
+使用应用上的Touch ID
 
 
 621
-00:34:19,106 --> 00:34:21,216
-separation and other
-security functionality.
+00:39:14,555 --> 00:39:16,623
+或者输入一个密码来重新启动它
 
 
 622
-00:34:22,545 --> 00:34:25,835
-But it also provides many,
-many other OS facilities,
+00:39:19,693 --> 00:39:22,863
+那么我们来看看iOS 9的本地授权
+有哪些新功能
 
 
 623
-00:34:26,045 --> 00:34:28,335
-which means it has quite
-a large attack service.
+00:39:24,731 --> 00:39:27,267
+我已经提到了
+AllowableReuseDuration
 
 
 624
-00:34:29,036 --> 00:34:32,315
-So with iPhone 5s, we
-added Secure Enclave.
+00:39:27,334 --> 00:39:29,136
+和
+PolicyDomainState
 
 
 625
-00:34:34,795 --> 00:34:40,676
-Secure Enclave is a separate on
-core that has been architected
+00:39:30,637 --> 00:39:34,408
+另外你可以取消本地授权功能 
 
 
 626
-00:34:40,815 --> 00:34:43,525
-from the ground up
-with security in mind.
+00:39:34,908 --> 00:39:38,812
+并且如果用户现在会收到
+Touch ID提示 
 
 
 627
-00:34:44,176 --> 00:34:48,266
-That's where we put Touch
-ID to ensure the privacy
+00:39:38,879 --> 00:39:42,749
+那么取消后系统会自动为用户选择取消
 
 
 628
-00:34:48,266 --> 00:34:50,866
-and the security of your
-fingerprint biometrics.
+00:39:43,183 --> 00:39:44,284
+并关闭对话框
 
 
 629
-00:34:52,636 --> 00:34:55,696
-We also moved the KeyStore
-component from the kernel
+00:39:46,220 --> 00:39:50,190
+evaluateAccessControl
+让本地授权可以
 
 
 630
-00:34:55,696 --> 00:34:58,516
-into Secure Enclave
-and it's that component
+00:39:50,257 --> 00:39:56,129
+和Keychain Access Control
+Lists一同使用我将稍后介绍 
 
 
 631
-00:34:58,876 --> 00:35:02,056
-which controls the cryptography
-around Keychain items
+00:39:56,230 --> 00:39:59,566
+也会给出很多示例和示例代码
 
 
 632
-00:35:02,166 --> 00:35:03,076
-and the data protection.
+00:40:02,302 --> 00:40:05,305
+所以说起Keychain Access
+Control Lists
 
 
 633
-00:35:07,016 --> 00:35:11,026
-So let's focus for a
-moment on Touch ID.
+00:40:05,639 --> 00:40:07,941
+这是第二种方式你可以
+在应用内使用Touch ID
 
 
 634
-00:35:11,306 --> 00:35:13,546
-While we think of it as
-a security technology,
+00:40:08,208 --> 00:40:10,978
+然后用来保护特定的
+Keychain项目
 
 
 635
-00:35:13,946 --> 00:35:16,356
-where it really excels
-is convenience.
+00:40:12,312 --> 00:40:13,947
+这是我们的结构图
 
 
 636
-00:35:17,156 --> 00:35:18,936
-You can unlock your
-device without having
+00:40:15,382 --> 00:40:18,919
+和之前一样 Touch ID
+在安全区域内发生匹配
 
 
 637
-00:35:18,936 --> 00:35:20,316
-to enter your passcode
-all the time,
+00:40:19,653 --> 00:40:22,623
+但是这次匹配信息会从安全区域内
 
 
 638
-00:35:20,846 --> 00:35:24,456
-but that itself can give
-us some security benefits.
+00:40:23,156 --> 00:40:25,659
+发送到Keystore
 
 
 639
-00:35:25,116 --> 00:35:29,036
-For example it's now much easier
-to have a long, complex passcode
+00:40:27,327 --> 00:40:32,499
+只有在此之后
+你的Keychain项目才会
 
 
 640
-00:35:29,896 --> 00:35:32,126
-which improves the
-security of data protection.
+00:40:32,933 --> 00:40:33,767
+被释放回到应用中
 
 
 641
-00:35:33,466 --> 00:35:37,976
-Or your phone can now lock
-immediately so it's vulnerable
+00:40:37,504 --> 00:40:39,840
+所以如果你想要对特定的
+文件进行保护的话
 
 
 642
-00:35:37,976 --> 00:35:44,756
-and unlocked for as
-small a time as possible.
+00:40:39,907 --> 00:40:41,808
+这么这种方式非常有用
 
 
 643
-00:35:44,756 --> 00:35:48,646
-In iOS 8, we provided some
-APIs so you can use Touch ID
+00:40:43,477 --> 00:40:46,280
+另外这也充分利用了安全区域的
 
 
 644
-00:35:48,646 --> 00:35:50,026
-in your own applications
+00:40:46,680 --> 00:40:48,615
+额外保护功能
 
 
 645
-00:35:50,076 --> 00:35:52,486
-as you balance security
-and convenience.
+00:40:50,617 --> 00:40:55,522
+也许有时候你在权衡应用的安全性
 
 
 646
-00:35:53,176 --> 00:35:55,556
-But why two and how
-do they differ?
+00:40:55,789 --> 00:40:58,125
+然后你发现有些东西你实在不想要保留
 
 
 647
-00:35:56,886 --> 00:35:59,566
-Well to understand you're going
-to have to know how Touch ID
+00:40:58,192 --> 00:41:00,394
+不要每次或者经常收到提示
 
 
 648
-00:35:59,566 --> 00:36:01,496
-and biometrics security works.
+00:41:01,862 --> 00:41:04,298
+你可以使用Access
+Control Lists进行保存
 
 
 649
-00:36:01,846 --> 00:36:03,616
-But luckily, it's very simple.
+00:41:04,398 --> 00:41:07,901
+然后使用Touch ID进行保护
+从而提供更好的用户体验
 
 
 650
-00:36:03,616 --> 00:36:05,366
-It boils down to
-an if statement.
+00:41:09,670 --> 00:41:12,406
+或者你可以将其用来
 
 
 651
-00:36:06,306 --> 00:36:10,006
-If a presented finger matches
-one that's been enrolled,
+00:41:12,673 --> 00:41:14,641
+增加已经保存的项目的安全性
 
 
 652
-00:36:10,546 --> 00:36:11,786
-then do something.
+00:41:18,011 --> 00:41:21,682
+你可以通过指定两项安全属性
+创建访问控制列表
 
 
 653
-00:36:12,176 --> 00:36:16,386
-It's what that something
-is, and where it happens
+00:41:23,250 --> 00:41:25,886
+第一是数据有效保护类型
 
 
 654
-00:36:16,946 --> 00:36:17,826
-that makes the difference.
+00:41:26,653 --> 00:41:30,290
+指的是需要使用密码
 
 
 655
-00:36:18,306 --> 00:36:22,806
-Let's start with
-Local Authentication.
+00:41:32,860 --> 00:41:35,329
+才能访问安全区域里的数据
+接下来你可以制定一项策略
 
 
 656
-00:36:24,496 --> 00:36:28,496
-A finger is placed on the
-Touch ID sensor and is matched
+00:41:36,697 --> 00:41:38,999
+该策略指定了一种情况 
 
 
 657
-00:36:28,496 --> 00:36:29,556
-within the Secure Enclave.
+00:41:39,600 --> 00:41:42,002
+只有这种情况满足后
+安全区域才会释放项目
 
 
 658
-00:36:31,776 --> 00:36:33,246
-With Local Authentication,
+00:41:42,135 --> 00:41:44,137
+单单访问密码是无法查阅的
 
 
 659
-00:36:33,296 --> 00:36:36,156
-knowledge of the match
-just a Boolean success
+00:41:47,608 --> 00:41:50,177
+因此我们来看看策略类型
 
 
 660
-00:36:36,156 --> 00:36:38,906
-or failure, is sent to your app.
+00:41:51,979 --> 00:41:53,580
+第一种是UserPresence
 
 
 661
-00:36:39,776 --> 00:36:43,226
-And it's there that
-your app does something
+00:41:54,047 --> 00:41:56,083
+这种策略会提示需要
+Touch ID匹配 
 
 
 662
-00:36:43,356 --> 00:36:46,576
-with that knowledge.
+00:41:56,149 --> 00:41:58,252
+然后返回到设备密码
 
 
 663
-00:36:46,736 --> 00:36:51,746
-So while the process started
-in Secure Enclave, ultimately,
+00:41:59,486 --> 00:42:02,389
+另外你也可以直接
+跳转到DevicePasscode
 
 
 664
-00:36:51,746 --> 00:36:54,976
-it's the application
-in user space
+00:42:04,791 --> 00:42:06,994
+iOS 9的新功能是
+TouchIDAny
 
 
 665
-00:36:55,436 --> 00:36:59,006
-where a security
-decision is being made.
+00:42:08,395 --> 00:42:12,165
+这种策略需要Touch Id匹配
+但是不会有反馈
 
 
 666
-00:37:00,976 --> 00:37:02,906
-So when might you
-want to use Touch ID
+00:42:13,800 --> 00:42:18,138
+另外更为严格的新策略是
+TouchIDCurrentSet
 
 
 667
-00:37:02,906 --> 00:37:04,146
-with Local Authentication?
+00:42:19,173 --> 00:42:22,442
+使用该策略只有在保存项目
+时候使用的登记指纹组
 
 
 668
-00:37:05,476 --> 00:37:09,076
-Think about your app and if
-you have any security barriers,
+00:42:22,509 --> 00:42:24,611
+不发生变化的情况下
 
 
 669
-00:37:09,546 --> 00:37:12,796
-such as requiring a passcode
-to confirm an operation,
+00:42:24,912 --> 00:42:26,346
+项目才会释放
 
 
 670
-00:37:13,346 --> 00:37:15,326
-even though the user
-is already logged in.
+00:42:28,282 --> 00:42:29,483
+我想要详细谈谈这种策略
 
 
 671
-00:37:15,326 --> 00:37:19,236
-Touch ID at that
-would be much easier.
+00:42:29,850 --> 00:42:33,353
+因为你的应用可能用得着
 
 
 672
-00:37:19,316 --> 00:37:24,696
-Or maybe you always wanted
-to have an extra step
+00:42:33,487 --> 00:42:36,423
+因为这种策略提供多要素授权
 
 
 673
-00:37:24,696 --> 00:37:27,626
-in an authentication
-process but without Touch ID,
+00:42:38,492 --> 00:42:40,727
+当谈到多要素的时候
+你可能经常会想到
 
 
 674
-00:37:27,626 --> 00:37:30,486
-it would have been really
-just too much of a barrier.
+00:42:40,861 --> 00:42:46,066
+比如像是密码还有其他一些
+你可以想到的东西
 
 
 675
-00:37:31,156 --> 00:37:37,066
-So, for example, you could
-prompt before viewing,
+00:42:46,133 --> 00:42:49,770
+比如物理标记智能卡
 
 
 676
-00:37:37,066 --> 00:37:38,446
-especially sensitive data.
+00:42:50,804 --> 00:42:54,041
+或者是iOS设备的安全区域
+和Touch ID
 
 
 677
-00:37:39,036 --> 00:37:49,616
-Or before an operation like
-permanently deleting an account.
+00:42:56,910 --> 00:42:59,079
+如果你保存一个文件 
 
 
 678
-00:37:49,786 --> 00:37:52,356
-One pattern is to have
-a Touch ID prompt early
+00:42:59,179 --> 00:43:03,016
+然后使用TouchIDCurrentSet
+策略进行保护 
 
 
 679
-00:37:52,486 --> 00:37:53,666
-in your application's flow.
+00:43:03,083 --> 00:43:06,253
+如果无法成功进行Touch ID
+匹配那么是无法访问文件的
 
 
 680
-00:37:55,026 --> 00:37:58,246
-But this can lead to a situation
-where the user has just unlocked
+00:43:07,688 --> 00:43:08,922
+而且没有其他方式可以访问
 
 
 681
-00:37:58,246 --> 00:38:01,666
-with Touch ID, and then moments
-later has been prompted again
+00:43:09,323 --> 00:43:13,961
+另外如果对手有设备密码 
 
 
 682
-00:38:01,666 --> 00:38:02,536
-by your application.
+00:43:14,628 --> 00:43:17,331
+他们无法访问设置登记指纹 
 
 
 683
-00:38:04,476 --> 00:38:09,216
-In iOS 9, we have added
-the TouchIDAuthentication
+00:43:17,831 --> 00:43:19,199
+这样对手就无法访问文件了
 
 
 684
-00:38:09,216 --> 00:38:11,946
-AllowableReuseDuration,
-which is a property
+00:43:24,705 --> 00:43:27,274
+最后的两种策略
+ApplicationPassword
 
 
 685
-00:38:11,946 --> 00:38:13,696
-on the Local Authentication
-context.
+00:43:27,341 --> 00:43:28,876
+和
+PrivateKeyUsage
 
 
 686
-00:38:14,816 --> 00:38:17,696
-You can use this to
-specify a window during
+00:43:29,376 --> 00:43:32,946
+让你可以执行高级功能
+这是Touch ID之上的高级功能
 
 
 687
-00:38:17,696 --> 00:38:19,596
-which you won't need
-to prompt again
+00:43:34,815 --> 00:43:36,850
+第一个是
+ApplicationPassword
 
 
 688
-00:38:20,086 --> 00:38:22,356
-if the user has recently
-unlocked their device
+00:43:37,818 --> 00:43:41,822
+为了说明让我们看看
+WhenUnlocked类别的项目
 
 
 689
-00:38:22,526 --> 00:38:23,846
-with Touch ID.
+00:43:41,922 --> 00:43:43,156
+是如何被加密保护的
 
 
 690
-00:38:24,776 --> 00:38:28,546
-So that's one way to make
-your policy a little more lax.
+00:43:45,025 --> 00:43:49,096
+同样的即使是最好的门锁
+如果你忘带钥匙还是白塔
 
 
 691
-00:38:29,376 --> 00:38:32,366
-But maybe you want to make your
-policy a little more strict
+00:43:49,596 --> 00:43:52,032
+因此如果加密数据
+和秘钥保存在同一个地方
 
 
 692
-00:38:32,526 --> 00:38:33,576
-in some situations.
+00:43:52,466 --> 00:43:54,101
+那么数据实际上没有得到保护
 
 
 693
-00:38:33,576 --> 00:38:39,756
-For example, by reacting to a
-new fingerprint being enrolled.
+00:43:56,036 --> 00:43:58,872
+数据保护和Keychain
+安全实质上是使用设备密码保护
 
 
 694
-00:38:40,416 --> 00:38:44,146
-Also new, we have the
-evaluatedPolicyDomainState
+00:43:59,373 --> 00:44:01,008
+而且密码已经保存在我们已知的
 
 
 695
-00:38:44,146 --> 00:38:44,616
-property.
+00:44:02,042 --> 00:44:06,180
+最为复杂的系统之中即用户的大脑
 
 
 696
-00:38:45,216 --> 00:38:47,836
-It's a totally opaque value
+00:44:08,549 --> 00:44:10,584
+用户记得密码
+可以使用密码访问设备
 
 
 697
-00:38:48,266 --> 00:38:51,066
-that represents the current
-set of enrolled fingers.
+00:44:11,151 --> 00:44:14,054
+在我们输入密码然后
+会生成一把密码钥匙
 
 
 698
-00:38:51,156 --> 00:38:55,626
-All you can really do with
-it is compare it over time.
+00:44:14,521 --> 00:44:16,690
+这把秘钥能破解项目密码
 
 
 699
-00:38:56,406 --> 00:39:00,566
-If it changed, then a finger
-has been added or removed
+00:44:19,993 --> 00:44:23,730
+现在让我们看看受
+ApplicationPassword保护的项目
 
 
 700
-00:39:00,566 --> 00:39:02,406
-to the enrolled set in settings.
+00:44:28,502 --> 00:44:32,072
+只有设备密码往往是不够的
 
 
 701
-00:39:02,956 --> 00:39:07,056
-If you detect that,
-and it's appropriate
+00:44:33,640 --> 00:44:36,510
+你的应用还必须有自己的密码
 
 
 702
-00:39:07,056 --> 00:39:11,266
-for your application, maybe
-you can prompt again to see
+00:44:37,578 --> 00:44:40,314
+因此我们生成了密码钥匙
 
 
 703
-00:39:11,266 --> 00:39:14,056
-if users still wants to use
-Touch ID on your application,
+00:44:40,881 --> 00:44:45,352
+而且只有在设备密码
+和应用密码都正确后
 
 
 704
-00:39:14,566 --> 00:39:17,226
-or require a password
-to reenable it.
+00:44:45,953 --> 00:44:48,822
+密码钥匙才会授权给
+Keychain访问项目
 
 
 705
-00:39:19,336 --> 00:39:22,876
-So let's recap what's new for
-Local Authentication in iOS 9.
+00:44:51,825 --> 00:44:55,863
+正如我提到的如果
+你将密码保存到设备上或者应用中
 
 
 706
-00:39:23,466 --> 00:39:27,146
-I have already mentioned
-AllowableReuseDuration,
+00:44:56,530 --> 00:44:58,732
+这实际上并没有提供额外的保护功能
 
 
 707
-00:39:27,326 --> 00:39:28,666
-and PolicyDomainState.
+00:44:59,600 --> 00:45:02,903
+因此你必须考虑除了设备
+你还可以将密码保存在哪里
 
 
 708
-00:39:29,266 --> 00:39:34,396
-You can also invalidate a
-Local Authentication context
+00:45:04,404 --> 00:45:07,407
+也许是服务器服务器
+可以执行自己的策略
 
 
 709
-00:39:34,896 --> 00:39:38,836
-and if a Touch ID prompt is
-currently being presented
+00:45:07,474 --> 00:45:09,076
+决定何时反馈密码到你的应用上
 
 
 710
-00:39:38,836 --> 00:39:42,746
-to the user, it will behave as
-if the user had hit canceled
+00:45:11,111 --> 00:45:15,182
+或者也许你有物理配件
+而且你也觉得用户有物理配件
 
 
 711
-00:39:43,176 --> 00:39:46,116
-and tear down the dialogue.
+00:45:16,483 --> 00:45:19,520
+如果配件无法向你的应用提供密码 
 
 
 712
-00:39:46,236 --> 00:39:50,316
-evaluateAccessControl allows
-Local Authentication to be used
+00:45:20,387 --> 00:45:22,656
+那么就无法破解Keychain项目
 
 
 713
-00:39:50,366 --> 00:39:53,396
-with Keychain Access
-Control Lists, I will touch
+00:45:23,123 --> 00:45:24,858
+而你也无法访问数据
 
 
 714
-00:39:53,396 --> 00:39:56,126
-on that later and there's
-also a lot more examples
+00:45:28,996 --> 00:45:34,067
+如要使用ApplicationPasswords 
+你需要创建AccessControl列表
 
 
 715
-00:39:56,226 --> 00:40:00,256
-in some example code
-we are releasing today.
+00:45:34,668 --> 00:45:36,537
+和本地授权指令
 
 
 716
-00:40:01,736 --> 00:40:04,306
-So talking of Keychain
-Access Control Lists,
+00:45:37,638 --> 00:45:40,407
+第一个列表会要求你使用应用密码
 
 
 717
-00:40:04,306 --> 00:40:06,486
-that's the second way
-you can use Touch ID
+00:45:40,874 --> 00:45:43,177
+第二指令会自行设定密码
 
 
 718
-00:40:06,486 --> 00:40:07,606
-within your application,
+00:45:44,978 --> 00:45:47,247
+然后你可以取下这二者然后添加到
 
 
 719
-00:40:08,216 --> 00:40:10,966
-by using it to protect
-specific Keychain items.
+00:45:47,314 --> 00:45:49,449
+Secltem Call字典之中
 
 
 720
-00:40:12,306 --> 00:40:13,956
-Here's our architecture
-diagram again.
+00:45:51,218 --> 00:45:56,757
+这是使用本地授权指令
 
 
 721
-00:40:15,136 --> 00:40:18,916
-As before, the Touch ID match
-occurs in Secure Enclave
+00:45:56,957 --> 00:45:59,092
+和Keychain项目的例子
 
 
 722
-00:40:19,646 --> 00:40:22,626
-but this time, knowledge
-of the match is sent
+00:46:01,862 --> 00:46:03,130
+那么这就是
+ApplicationPassword
 
 
 723
-00:40:23,156 --> 00:40:27,286
-within Secure Enclave
-to the KeyStore.
+00:46:04,431 --> 00:46:07,034
+最后的新策略指的是私人秘钥用途
 
 
 724
-00:40:27,366 --> 00:40:32,486
-Only then will your Keychain
-item be released back
+00:46:09,369 --> 00:46:10,637
+这是比较早的表格 
 
 
 725
-00:40:32,926 --> 00:40:33,676
-to your application.
+00:46:11,238 --> 00:46:14,308
+在这里我们可以看到一个Keychain
+项目从安全区域内的KeyStore
 
 
 726
-00:40:34,286 --> 00:40:39,886
-So this is useful in you
-want to add protection
+00:46:14,374 --> 00:46:16,710
+被释放出来返回到了应用中
 
 
 727
-00:40:39,886 --> 00:40:41,796
-to a particular saved
-credential.
+00:46:18,445 --> 00:46:22,983
+很明显如果你将密码
+用于登录服务器的话就需要它了 
 
 
 728
-00:40:42,356 --> 00:40:46,286
-And to take advantage
-of additional security
+00:46:23,550 --> 00:46:26,987
+但是这暴露了你的密码
+让用户空间存在潜在危险
 
 
 729
-00:40:46,696 --> 00:40:48,616
-around Secure Enclave.
+00:46:28,989 --> 00:46:30,791
+所以如果有办法在安全区域内 
 
 
 730
-00:40:48,616 --> 00:40:54,106
-Maybe at the moment you've
-looked at the security tradeoffs
+00:46:30,924 --> 00:46:33,460
+保存密码的话就不妙了
 
 
 731
-00:40:54,106 --> 00:40:55,526
-of your particular application
+00:46:33,894 --> 00:46:35,095
+那么这还有用吗？ 
 
 
 732
-00:40:55,776 --> 00:40:58,216
-and there are some things you
-really don't want to save,
+00:46:35,929 --> 00:46:38,131
+而且这里使用的是不对称加密技术 
 
 
 733
-00:40:58,216 --> 00:41:00,406
-you're prompting every
-time or very frequently.
+00:46:39,499 --> 00:46:43,036
+这里我们有的不仅仅是
+单一的秘钥 而是一组秘钥
 
 
 734
-00:41:01,866 --> 00:41:04,236
-Maybe using Access Control
-Lists you can save it,
+00:46:44,671 --> 00:46:47,307
+公共秘钥并不需要任何保护 
 
 
 735
-00:41:04,386 --> 00:41:05,386
-protect it with Touch ID
+00:46:47,841 --> 00:46:49,877
+但是私人秘钥就必须要好好保护了
 
 
 736
-00:41:05,386 --> 00:41:07,906
-and provide a more
-convenient experience.
+00:46:54,114 --> 00:46:57,518
+使用这种策略会用到
+SecKey APi 
 
 
 737
-00:41:09,666 --> 00:41:12,396
-Or you could use it to
-increase the security
+00:46:57,885 --> 00:47:00,254
+而且具体说的话几分钟说不完 
 
 
 738
-00:41:12,686 --> 00:41:14,646
-of something you're
-already saving.
+00:47:00,320 --> 00:47:03,924
+这里就略过了但是这里
+有概括图可以看看流程
 
 
 739
-00:41:17,676 --> 00:41:19,586
-You create access control lists
+00:47:05,492 --> 00:47:09,429
+如果你设定某些新的额外参数的话 
 
 
 740
-00:41:19,586 --> 00:41:21,686
-by specifying two
-security properties.
+00:47:09,796 --> 00:47:12,065
+调用SecKeyGeneratePair会让
 
 
 741
-00:41:21,686 --> 00:41:25,876
-The first is effectively
-the data protection class.
+00:47:12,165 --> 00:47:14,568
+私人秘钥保存到安全区域中
 
 
 742
-00:41:26,656 --> 00:41:30,296
-That's when the data is
-cryptographically accessible
+00:47:15,802 --> 00:47:19,673
+但是公共秘钥仍会返回到应用中保存
 
 
 743
-00:41:31,086 --> 00:41:33,096
-to the Secure Enclave.
+00:47:23,977 --> 00:47:26,613
+如果你尝试检索使用
+SecItemCopyMatching的私人秘钥 
 
 
 744
-00:41:33,096 --> 00:41:34,926
-Next, you specify a policy.
+00:47:26,680 --> 00:47:28,615
+那么你会得到一个参数 
 
 
 745
-00:41:35,556 --> 00:41:38,306
-The policy describes a condition
+00:47:30,083 --> 00:47:35,222
+但是无法在安全区域之外
+获得实际的数据
 
 
 746
-00:41:38,306 --> 00:41:41,996
-that must be met before Secure
-Enclave will release the item
+00:47:37,658 --> 00:47:38,926
+因此实际上该如何使用呢？
 
 
 747
-00:41:42,126 --> 00:41:44,906
-even if it has cryptographic
-access to it.
+00:47:39,726 --> 00:47:42,563
+好 你也许有一些数据是需要保留的
 
 
 748
-00:41:47,236 --> 00:41:50,826
-So let's have a look
-at the policy types.
+00:47:43,197 --> 00:47:48,802
+因此你可以调用SecKeyRawSign
+然后将数据传输到安全区域
 
 
 749
-00:41:51,676 --> 00:41:53,466
-The first is .UserPresence.
+00:47:50,137 --> 00:47:52,606
+如果你已经设置了使用
+Touch ID保护私人秘钥
 
 
 750
-00:41:54,036 --> 00:41:56,826
-This will prompt for a
-Touch ID match and fall back
+00:47:52,673 --> 00:47:53,907
+那么只有在成功指纹匹配后
 
 
 751
-00:41:56,826 --> 00:41:57,936
-to the device passcode.
+00:47:54,875 --> 00:47:59,246
+私人秘钥才能用于访问数据
 
 
 752
-00:41:58,036 --> 00:42:00,276
-And you can go straight
+00:47:59,413 --> 00:48:02,950
+之后再返回到应用中
 
 
 753
-00:42:00,276 --> 00:42:02,376
-to .DevicePasscode
-as well if you want.
+00:48:09,356 --> 00:48:13,727
+因此也许你会想使用该策略作为第二
+要素加强Touch ID的安全性
 
 
 754
-00:42:02,976 --> 00:42:07,006
-New in iOS 9, it's .TouchIDAny.
+00:48:15,429 --> 00:48:18,532
+我会给你看个示例流程但是请注意
 
 
 755
-00:42:08,406 --> 00:42:12,156
-This will require a Touch ID
-match and there is no fallback.
+00:48:18,832 --> 00:48:22,469
+在编写加密协议的时候
+这里有很多复杂的细节
 
 
 756
-00:42:13,786 --> 00:42:17,986
-Also new, and stricter
-still, is .TouchIDCurrentSet.
+00:48:22,903 --> 00:48:24,738
+所以请别把这个示例当成标准
 
 
 757
-00:42:19,186 --> 00:42:22,446
-With this, items will only
-be released if the set
+00:48:26,907 --> 00:48:28,675
+首先在登记流程中
 
 
 758
-00:42:22,446 --> 00:42:24,606
-of enrolled fingers
-has not changed
+00:48:29,076 --> 00:48:30,377
+你会生产一个密钥对
 
 
 759
-00:42:24,916 --> 00:42:26,346
-since the item was stored.
+00:48:32,646 --> 00:48:37,751
+然后将公共秘钥和用户
+一般登录信息发送到服务器上
 
 
 760
-00:42:26,816 --> 00:42:31,496
-I'm going to focus on
-this because it might be
+00:48:39,953 --> 00:48:43,790
+服务器会将公共秘钥
+和用户信息相关联并记录
 
 
 761
-00:42:31,496 --> 00:42:33,356
-that your application
-could benefit
+00:48:43,857 --> 00:48:47,194
+这就是登录流程
 
 
 762
-00:42:33,356 --> 00:42:36,416
-from this providing a form of
-multifactor authentication.
+00:48:49,429 --> 00:48:52,199
+之后当服务器想要验证你是
 
 
 763
-00:42:36,416 --> 00:42:40,726
-When you think about multiple
-factors, you often talk
+00:48:52,266 --> 00:48:55,135
+从同一台物理设备登录的 
 
 
 764
-00:42:40,726 --> 00:42:46,086
-about something you know, like a
-password, and something you have
+00:48:56,937 --> 00:48:59,039
+服务器会向应用发送一个挑战 
 
 
 765
-00:42:46,086 --> 00:42:49,776
-and carry with you, like a
-physical token, a smart card,
+00:48:59,940 --> 00:49:02,342
+挑战反过来会调用
+SecKeyRawSign
 
 
 766
-00:42:50,806 --> 00:42:54,686
-or maybe an iOS device with
-Secure Enclave and Touch ID.
+00:49:04,878 --> 00:49:06,713
+用户这时候会进行指纹识别 
 
 
 767
-00:42:56,576 --> 00:42:59,066
-If you store an item, protected
+00:49:07,147 --> 00:49:08,348
+然后匹配Touch ID
 
 
 768
-00:42:59,176 --> 00:43:02,986
-with the TouchIDCurrentSet
-policy, there's no way to get
+00:49:10,717 --> 00:49:14,121
+这样挑战就通过了
+然后应用会将挑战返回到服务器
 
 
 769
-00:43:02,986 --> 00:43:06,266
-at the item without a
-successful Touch ID match.
+00:49:16,256 --> 00:49:19,459
+之后服务器会使用之前保存的公共秘钥
 
 
 770
-00:43:07,506 --> 00:43:08,576
-There's no fallback.
+00:49:19,993 --> 00:49:21,061
+进行验证签字
 
 
 771
-00:43:09,316 --> 00:43:13,956
-And if maybe an adversary
-has the device passcode,
+00:49:25,032 --> 00:49:27,167
+再具体展开看一下细节
 
 
 772
-00:43:14,616 --> 00:43:17,246
-they can't go into
-settings, enroll a finger,
+00:49:27,701 --> 00:49:30,571
+通过验证的秘钥是
+Elliptic Curve P256
 
 
 773
-00:43:17,246 --> 00:43:24,496
-and then have access
-to that item.
+00:49:31,738 --> 00:49:35,142
+私人秘钥则无法提取
+即使在保护情况下亦不可
 
 
 774
-00:43:24,716 --> 00:43:27,266
-The last two policies,
-.ApplicationPassword
+00:49:35,709 --> 00:49:38,579
+然后应用是RawSign
+和RawVerify
 
 
 775
-00:43:27,266 --> 00:43:29,716
-and .PrivateKeyUsage allow you
+00:49:43,016 --> 00:49:46,620
+总结一下 我已经大概讲解了
+Keychain的情况
 
 
 776
-00:43:29,716 --> 00:43:31,706
-to implement some
-advanced functionality
+00:49:47,621 --> 00:49:50,057
+以及大家可能会用到
+Keychain的情况
 
 
 777
-00:43:31,706 --> 00:43:33,606
-that goes beyond Touch ID.
+00:49:52,359 --> 00:49:56,396
+我谈论的技术是我们应当避免
+让用户被密码提示反复骚扰
 
 
 778
-00:43:34,536 --> 00:43:36,506
-The first is
-ApplicationPassword.
+00:49:58,465 --> 00:50:02,336
+看看这两个Touch
+ID API 本地授权
 
 
 779
-00:43:36,996 --> 00:43:40,226
-To help illustrate,
-let's look at how an item
+00:50:02,736 --> 00:50:04,705
+和Keychain
+Access Controls
 
 
 780
-00:43:40,226 --> 00:43:43,166
-in the WhenUnlocked class is
-cryptographically protected.
+00:50:06,340 --> 00:50:10,043
+另外之前说的新的高级功能
+大家可以开发出新的东西
 
 
 781
-00:43:43,716 --> 00:43:47,716
-In the same way that even
-the best door lock is useless
+00:50:10,244 --> 00:50:13,547
+我们已经添加到
+iOS 9的新API之中了
 
 
 782
-00:43:47,716 --> 00:43:49,186
-if you've left your
-key in the door,
+00:50:17,751 --> 00:50:22,289
+App密码以及安全区
+域保护的私人秘钥
 
 
 783
-00:43:49,596 --> 00:43:52,026
-encrypted data isn't
-actually protected
+00:50:24,391 --> 00:50:25,659
+我总是非常期待
 
 
 784
-00:43:52,466 --> 00:43:54,296
-if stored alongside the key.
+00:50:25,959 --> 00:50:28,862
+看看大家会如何利用新的API
 
 
 785
-00:43:55,716 --> 00:43:59,636
-The security of data protection
-and the Keychain comes
+00:50:28,929 --> 00:50:30,731
+开发出什么更好玩的
 
 
 786
-00:43:59,636 --> 00:44:03,066
-down to the device passcode
-and that's stored in one
+00:50:31,164 --> 00:50:36,103
+也想看看大家是如何在应用中
+权衡安全性和便捷性的
 
 
 787
-00:44:03,066 --> 00:44:06,176
-of the most complex systems
-we know, the user's brain.
+00:50:39,173 --> 00:50:41,642
+另外线上还有其他更多的资料
 
 
 788
-00:44:08,176 --> 00:44:10,576
-They remember it, enter
-it into the device,
+00:50:43,677 --> 00:50:46,213
+包括我之前提到的iOS安全白皮书
 
 
 789
-00:44:10,686 --> 00:44:14,306
-and we take that passcode and
-derive a cryptographic key
+00:50:49,383 --> 00:50:51,919
+周四的NSURL网络会议上
+还会有更多的关于
 
 
 790
-00:44:14,526 --> 00:44:19,786
-and it's that, which
-decrypts the item.
+00:50:52,352 --> 00:50:55,189
+应用传输安全的内容
 
 
 791
-00:44:20,006 --> 00:44:22,436
-Now, let's look at
-an item protected
+00:50:59,593 --> 00:51:02,262
+另外欢迎明早和周四上午来到
 
 
 792
-00:44:22,436 --> 00:44:23,726
-with ApplicationPassword.
+00:51:02,663 --> 00:51:04,398
+安全私人实验室会见我们
 
 
 793
-00:44:28,156 --> 00:44:32,086
-Just the device passcode
-is no longer sufficient.
-
-
-794
-00:44:33,636 --> 00:44:36,516
-Your application has also got
-to provide its own password.
-
-
-795
-00:44:37,566 --> 00:44:41,496
-Again, we derive a cryptographic
-key from it, and it's only
-
-
-796
-00:44:41,496 --> 00:44:45,366
-when the device passcode and the
-app password are both present
-
-
-797
-00:44:45,966 --> 00:44:48,806
-that access is granted
-to the Keychain item.
-
-
-798
-00:44:49,356 --> 00:44:55,266
-As I mentioned, if you store the
-password on device or it's baked
-
-
-799
-00:44:55,266 --> 00:44:57,866
-into your app, this
-really doesn't offer any
-
-
-800
-00:44:57,866 --> 00:44:58,736
-additional protection.
-
-
-801
-00:44:58,736 --> 00:45:00,796
-So you have to think
-about where off
-
-
-802
-00:45:00,796 --> 00:45:02,916
-that device you can
-store that password.
-
-
-803
-00:45:04,406 --> 00:45:07,506
-Maybe it's up on a server, which
-can implement its own policy
-
-
-804
-00:45:07,506 --> 00:45:09,766
-about when it's released
-back to your app.
-
-
-805
-00:45:10,816 --> 00:45:13,866
-Or perhaps you have a
-physical accessory and you want
-
-
-806
-00:45:13,866 --> 00:45:16,766
-to prove the user has it.
-
-
-807
-00:45:16,766 --> 00:45:19,506
-If the accessory can't
-give your app a password,
-
-
-808
-00:45:20,376 --> 00:45:22,666
-then it can't decrypt
-a Keychain item
-
-
-809
-00:45:23,136 --> 00:45:25,426
-and you know it's not present.
-
-
-810
-00:45:28,696 --> 00:45:34,076
-To use ApplicationPasswords, you
-create both a AccessControl list
-
-
-811
-00:45:34,616 --> 00:45:36,526
-and a Local Authentication
-context.
-
-
-812
-00:45:37,626 --> 00:45:39,506
-The first says please
-use application password
-
-
-813
-00:45:39,506 --> 00:45:43,176
-for this item, and the second
-specifies the password itself.
-
-
-814
-00:45:43,706 --> 00:45:47,296
-You then take both of
-these and add to them
-
-
-815
-00:45:47,296 --> 00:45:49,446
-to the dictionary you
-passed the SecItem call.
-
-
-816
-00:45:49,446 --> 00:45:56,746
-This is an example of using a
-Local Authentication context
-
-
-817
-00:45:56,966 --> 00:45:59,106
-in conjunction with
-the Keychain item.
-
-
-818
-00:45:59,106 --> 00:46:03,136
-So that was ApplicationPassword.
-
-
-819
-00:46:04,436 --> 00:46:07,116
-The final new policy,
-it's Private Key Usage.
-
-
-820
-00:46:07,576 --> 00:46:10,636
-Here's the diagram from earlier,
-
-
-821
-00:46:11,236 --> 00:46:14,086
-where we saw a Keychain item
-being released from the KeyStore
-
-
-822
-00:46:14,086 --> 00:46:16,696
-in Secure Enclave, back
-to your application.
-
-
-823
-00:46:17,166 --> 00:46:21,896
-This obviously is needed if you
-take that password and use it
-
-
-824
-00:46:21,896 --> 00:46:22,656
-to log into a server,
-
-
-825
-00:46:22,736 --> 00:46:27,026
-but it exposes the password
-it a potentially compromised
-
-
-826
-00:46:27,476 --> 00:46:28,806
-user space.
-
-
-827
-00:46:28,986 --> 00:46:30,776
-So wouldn't it be
-great if there's a way
-
-
-828
-00:46:30,916 --> 00:46:33,636
-to keep the secret
-inside Secure Enclave
-
-
-829
-00:46:33,906 --> 00:46:35,096
-but still have it be usable?
-
-
-830
-00:46:35,916 --> 00:46:38,126
-And there is, using
-asymmetric cryptography.
-
-
-831
-00:46:39,486 --> 00:46:42,766
-There we don't just have a
-single key, but a key pair.
-
-
-832
-00:46:43,606 --> 00:46:47,306
-A public key that doesn't
-require any protection,
-
-
-833
-00:46:47,826 --> 00:46:53,906
-and a private key we
-have to keep safe.
-
-
-834
-00:46:54,116 --> 00:46:58,656
-Using this requires the
-SecKey API and the details
-
-
-835
-00:46:58,656 --> 00:47:00,336
-that are somewhat
-beyond the scope
-
-
-836
-00:47:00,336 --> 00:47:03,106
-of the few minutes I have left,
-but here is an overview just
-
-
-837
-00:47:03,106 --> 00:47:05,506
-so you can see the flow.
-
-
-838
-00:47:05,506 --> 00:47:09,436
-Calling SecKeyGeneratePair
-will cause the private key
-
-
-839
-00:47:09,796 --> 00:47:11,946
-to be stored in Secure Enclave,
-
-
-840
-00:47:12,176 --> 00:47:14,576
-if you specify some new
-additional parameters.
-
-
-841
-00:47:15,796 --> 00:47:18,366
-But the public key
-is still returned
-
-
-842
-00:47:18,366 --> 00:47:19,676
-to your application to store.
-
-
-843
-00:47:23,716 --> 00:47:26,396
-If you try and retrieve
-the private key,
-
-
-844
-00:47:26,676 --> 00:47:30,966
-using SecItemCopyMatching,
-you can get a reference,
-
-
-845
-00:47:31,006 --> 00:47:35,216
-but cannot get the actual
-data out of Secure Enclave.
-
-
-846
-00:47:35,766 --> 00:47:38,936
-So how do you actually use it?
-
-
-847
-00:47:39,736 --> 00:47:42,566
-Well, you might have some
-data you want to be signed.
-
-
-848
-00:47:43,206 --> 00:47:47,736
-So you can call SecKeyRawSign
-and pass the data
-
-
-849
-00:47:47,736 --> 00:47:52,016
-into Secure Enclave, and if
-you've set up the private key
-
-
-850
-00:47:52,016 --> 00:47:53,826
-to be protected by Touch ID,
-
-
-851
-00:47:54,886 --> 00:47:59,246
-only after a successful match
-will the private key be used
-
-
-852
-00:47:59,416 --> 00:48:02,936
-to sign that data, and have it
-returned to your application.
-
-
-853
-00:48:09,036 --> 00:48:10,626
-So one place you might want
-
-
-854
-00:48:10,626 --> 00:48:13,716
-to use this is strengthening
-Touch ID as a second factor.
-
-
-855
-00:48:13,786 --> 00:48:18,246
-I'm going to give an example
-flow, but bear in mind
-
-
-856
-00:48:18,246 --> 00:48:20,916
-that there are a lot
-of intricate details
-
-
-857
-00:48:20,916 --> 00:48:22,656
-in writing cryptographic
-protocol.
-
-
-858
-00:48:22,906 --> 00:48:24,746
-So please don't take this
-to be too prescriptive.
-
-
-859
-00:48:25,156 --> 00:48:28,906
-First of all, for
-the enrollment flow,
-
-
-860
-00:48:29,086 --> 00:48:33,946
-you would generate a key pair,
-and send the public key back
-
-
-861
-00:48:33,946 --> 00:48:37,746
-to the server, along with a
-user's regular login details.
-
-
-862
-00:48:39,656 --> 00:48:43,836
-The server would record the
-public key as being associated
-
-
-863
-00:48:43,836 --> 00:48:47,206
-with that user, and
-that's enrollment.
-
-
-864
-00:48:47,206 --> 00:48:52,316
-Later on, when the server wants
-to verify that you're logging
-
-
-865
-00:48:52,316 --> 00:48:55,436
-in from the same physical
-device that you were before,
-
-
-866
-00:48:55,836 --> 00:48:59,036
-it can send a challenge
-to your application,
-
-
-867
-00:48:59,946 --> 00:49:02,336
-which in turn calls
-SecKeyRawSign.
-
-
-868
-00:49:04,556 --> 00:49:06,716
-The user will present
-their finger
-
-
-869
-00:49:07,156 --> 00:49:08,356
-and have a Touch ID match.
-
-
-870
-00:49:08,906 --> 00:49:12,596
-That will result in the
-challenge being signed
-
-
-871
-00:49:12,656 --> 00:49:14,136
-and you can send it
-back to the server.
-
-
-872
-00:49:14,736 --> 00:49:19,446
-And the server can then use the
-public key it previously stored
-
-
-873
-00:49:19,996 --> 00:49:21,056
-to validate the signature.
-
-
-874
-00:49:21,576 --> 00:49:27,156
-Just a few more details
-on this topic.
-
-
-875
-00:49:27,706 --> 00:49:30,466
-The supported keys are
-Elliptic Curve P256,
-
-
-876
-00:49:31,726 --> 00:49:34,376
-the private key is not
-extractible in any form,
-
-
-877
-00:49:34,376 --> 00:49:37,776
-even protected, and the
-applications are RawSign
-
-
-878
-00:49:37,806 --> 00:49:38,566
-and RawVerify.
-
-
-879
-00:49:42,656 --> 00:49:46,616
-So in summary, I have given
-an overview of the Keychain,
-
-
-880
-00:49:47,616 --> 00:49:50,666
-and some situations where
-you might want to use it.
-
-
-881
-00:49:52,076 --> 00:49:53,966
-I talked about the
-technologies we have
-
-
-882
-00:49:53,966 --> 00:49:56,626
-to avoid presenting the
-user with password prompts.
-
-
-883
-00:49:57,096 --> 00:50:02,336
-Looked at the two Touch ID
-APIs, Local Authentication
-
-
-884
-00:50:02,736 --> 00:50:04,396
-and Keychain Access Controls.
-
-
-885
-00:50:04,916 --> 00:50:10,056
-And told you about some new
-advanced features you can build
-
-
-886
-00:50:10,236 --> 00:50:13,536
-on top the new things we
-added to those APIs iOS 9.
-
-
-887
-00:50:17,436 --> 00:50:22,966
-App passwords and Secure
-Enclave protected private keys.
-
-
-888
-00:50:24,086 --> 00:50:27,076
-I'm always fascinated to find
-
-
-889
-00:50:27,076 --> 00:50:28,976
-out what wonderful
-things you are going
-
-
-890
-00:50:28,976 --> 00:50:30,736
-to make using these new APIs
-
-
-891
-00:50:31,156 --> 00:50:34,856
-and how you can better balance
-security and convenience
-
-
-892
-00:50:34,856 --> 00:50:36,106
-in your own applications.
-
-
-893
-00:50:38,856 --> 00:50:41,986
-There's some more
-information available online,
-
-
-894
-00:50:42,206 --> 00:50:46,226
-including the iOS Security
-White Paper I mentioned earlier.
-
-
-895
-00:50:46,226 --> 00:50:52,126
-There's more information
-about app transport security
-
-
-896
-00:50:52,336 --> 00:50:55,196
-on Thursday's Networking
-with NSURL Session, session.
-
-
-897
-00:50:55,856 --> 00:51:02,246
-And come and visit us tomorrow
-morning and Thursday morning
-
-
-898
-00:51:02,656 --> 00:51:04,396
-in the Security and
-Privacy labs.
-
-
-899
-00:51:05,106 --> 00:51:06,066
-Thank you very much, indeed.
-
-
-900
-00:51:07,516 --> 00:51:11,500
-[Applause]
+00:51:05,098 --> 00:51:06,066
+非常感谢大家
 

@@ -1,3247 +1,3488 @@
 1
-00:00:24,516 --> 00:00:29,826
-[Applause]
+00:00:19,653 --> 00:00:26,960
+《SceneKit改进》
 
 
 2
-00:00:30,326 --> 00:00:30,816
->> Thank you.
+00:00:30,130 --> 00:00:31,031
+谢谢大家
 
 
 3
-00:00:31,656 --> 00:00:33,176
-So good afternoon, and welcome
+00:00:31,698 --> 00:00:35,602
+下午好 欢迎参加
+《SceneKit改进》讲座环节
 
 
 4
-00:00:33,176 --> 00:00:35,586
-to the enhancements
-to SceneKit session.
+00:00:35,903 --> 00:00:38,138
+我叫 托马斯·古森斯
 
 
 5
-00:00:35,886 --> 00:00:37,896
-My name is Thomas Goossens.
+00:00:39,206 --> 00:00:41,775
+如果您还不知道SceneKit
+是什么
 
 
 6
-00:00:37,896 --> 00:00:43,096
-If you don't already know what
-SceneKit is, here is an overview
+00:00:41,842 --> 00:00:46,246
+这里有一个关于iOS 10上的
+各种不同框架的概述
 
 
 7
-00:00:43,176 --> 00:00:46,156
-of the different
-frameworks on iOS 10.
+00:00:46,980 --> 00:00:50,951
+SceneKit和
+SpriteKit是高级API
 
 
 8
-00:00:46,996 --> 00:00:50,296
-SceneKit and SpriteKit
-are the high-level APIs.
+00:00:51,351 --> 00:00:53,987
+SpriteKit 是2D 的
+而 SceneKit 是3D 的
 
 
 9
-00:00:51,366 --> 00:00:53,926
-SpriteKit for 2D
-and SceneKit for 3D.
+00:00:54,655 --> 00:00:57,991
+您可以将他们
+与其他游戏开发技术配合使用
 
 
 10
-00:00:54,656 --> 00:00:57,986
-You can use them with other game
-technologies like Model I/O,
+00:00:58,258 --> 00:01:00,360
+如Model I/O GameplayKit 
+以及 GameController
 
 
 11
-00:00:58,396 --> 00:01:02,706
-GameplayKit, and GameController,
-and give you access
+00:01:01,028 --> 00:01:05,032
+有需要的话SceneKi
+t也 可以让您使用低级API
 
 
 12
-00:01:02,706 --> 00:01:07,236
-to the low-level APIs,
-which are OpenGL and Metal.
+00:01:05,199 --> 00:01:07,367
+即OpenGL和Metal
 
 
 13
-00:01:07,786 --> 00:01:12,476
-SceneKit was introduced
-on OS X on Mountain Lion
+00:01:09,002 --> 00:01:12,539
+SceneKit是随OS X
+Mountain Lion推出的
 
 
 14
-00:01:12,886 --> 00:01:15,476
-and last year on iOS in iOS 8.
+00:01:12,873 --> 00:01:15,609
+而且去年也在iOS 8上推出了
 
 
 15
-00:01:17,216 --> 00:01:21,616
-Last year, we added a few
-new features to SceneKit
+00:01:17,211 --> 00:01:21,682
+去年 我们在SceneKit上
+添加了一些新的特性
 
 
 16
-00:01:21,836 --> 00:01:25,306
-to make it ready for casual
-games, like particle systems,
+00:01:21,849 --> 00:01:25,319
+使其方便用于休闲游戏
+如粒子系统
 
 
 17
-00:01:25,836 --> 00:01:29,276
-physics, force fields, and the
-integration with SpriteKit,
+00:01:25,853 --> 00:01:29,423
+物理学 力场
+以及与SpriteKit的集成
 
 
 18
-00:01:29,606 --> 00:01:32,026
-for example, for all
-the 2D game overlays.
+00:01:29,590 --> 00:01:32,059
+例如对于所有2D游戏场景叠加
 
 
 19
-00:01:34,036 --> 00:01:36,506
-This year, the two
-main additions
+00:01:34,361 --> 00:01:37,164
+今年对SceneKit的
+两个主要扩展
 
 
 20
-00:01:36,506 --> 00:01:38,786
-to SceneKit are the
-transition to Metal
+00:01:37,431 --> 00:01:38,932
+是向Metal的过渡
 
 
 21
-00:01:38,786 --> 00:01:40,796
-and the new Scene Editor.
+00:01:39,199 --> 00:01:40,968
+以及新的场景编辑器
 
 
 22
-00:01:40,896 --> 00:01:43,866
-In this presentation
-we will start
+00:01:42,236 --> 00:01:43,837
+我们的这个演示将从
 
 
 23
-00:01:43,866 --> 00:01:45,726
-by showing you the
-new Scene Editor,
+00:01:43,904 --> 00:01:45,739
+向您展示最新的
+场景编辑器开始
 
 
 24
-00:01:46,226 --> 00:01:48,806
-then explain why we are
-transitioning to Metal
+00:01:46,240 --> 00:01:48,775
+然后解释为何
+我们过渡到Metal
 
 
 25
-00:01:48,806 --> 00:01:51,146
-and what it means for
-you in terms of adoption.
+00:01:48,842 --> 00:01:51,144
+以及它的采用对您意味着什么
 
 
 26
-00:01:51,876 --> 00:01:55,236
-And we will finish by presenting
-a few new features that we added
+00:01:51,912 --> 00:01:53,313
+最后我们将展示一些
 
 
 27
-00:01:55,236 --> 00:01:56,456
-to the engine this year.
+00:01:53,547 --> 00:01:56,550
+我们今年对引擎添加的新特性
 
 
 28
-00:01:56,616 --> 00:01:57,326
-All right.
+00:01:58,252 --> 00:02:00,187
+好
+最新的场景编辑器
 
 
 29
-00:01:57,956 --> 00:02:00,076
-The new Scene Editor.
+00:02:01,955 --> 00:02:04,191
+它在Xcode 7上提供
 
 
 30
-00:02:00,816 --> 00:02:06,696
-It is available in Xcode 7,
-so we can run it in El Capitan
+00:02:04,758 --> 00:02:07,928
+因此我们可以在El Capitan
+或 Yosemite上运行它
 
 
 31
-00:02:07,176 --> 00:02:10,916
-or Yosemite, and it is
-available in the force field.
+00:02:08,762 --> 00:02:11,198
+而且它也在Force Field中
+提供对力场的支持
 
 
 32
-00:02:12,266 --> 00:02:18,816
-To open it, simply open a 3D
-file with SceneKit, for example,
+00:02:12,432 --> 00:02:13,300
+要打开它
 
 
 33
-00:02:18,816 --> 00:02:26,586
-DAE, OBJ, olympic, or you can
-create using template chooser.
+00:02:13,800 --> 00:02:17,204
+只须打开一个SceneKit
+支持的3D文件
 
 
 34
-00:02:27,476 --> 00:02:32,186
-In that case, it will create
-a new empty SceneKit document
+00:02:18,138 --> 00:02:20,908
+如DAE OBJ Alembic
 
 
 35
-00:02:32,696 --> 00:02:34,606
-with the extension .scn,
+00:02:22,042 --> 00:02:26,747
+或者您可以使用模版选择器
 
 
 36
-00:02:35,966 --> 00:02:41,436
-and an scn file is simply an
-scn scene instance archived
+00:02:27,447 --> 00:02:28,282
+创建一个新的
 
 
 37
-00:02:41,466 --> 00:02:42,916
-with an archiver.
+00:02:28,982 --> 00:02:32,319
+SceneKit文件
+那样它将创建一个新的
 
 
 38
-00:02:44,006 --> 00:02:46,996
-That means that you can produce
-your own SceneKit document
+00:02:32,686 --> 00:02:34,755
+扩展名为.scn的
+空SceneKit文件
 
 
 39
-00:02:47,476 --> 00:02:50,226
-programmatically if you
-want, and this is very handy
+00:02:35,956 --> 00:02:40,360
+而scn文件不过是一个由
+NSKeyedarchiver存档
 
 
 40
-00:02:50,226 --> 00:02:51,316
-for the production flow.
+00:02:40,827 --> 00:02:43,063
+的一个scn场景实例
 
 
 41
-00:02:51,846 --> 00:02:55,676
-Then the main goal of
-the Scene Editor is
+00:02:43,997 --> 00:02:47,167
+那意味着若您愿意
+您可以使用程序代码 
 
 
 42
-00:02:55,726 --> 00:02:57,986
-to let you build the
-levels of your game.
+00:02:47,467 --> 00:02:49,436
+制作一个您自己的
+SceneKit文件
 
 
 43
-00:02:58,546 --> 00:03:01,956
-You will see that it's really
-easy to combine multiple assets
+00:02:49,503 --> 00:02:51,305
+而这对生产流程而言是很方便的
 
 
 44
-00:03:01,956 --> 00:03:04,206
-from different files
-into a single scene
+00:02:53,574 --> 00:02:55,676
+那么场景编辑器的主要目的是
 
 
 45
-00:03:04,406 --> 00:03:08,216
-by keeping references
-to the original assets.
+00:02:55,742 --> 00:02:58,045
+让您为您的游戏构建多个平面
 
 
 46
-00:03:09,416 --> 00:03:13,496
-The Scene Editor also includes
-some visual editors for some
+00:02:58,545 --> 00:02:59,913
+您会发现
 
 
 47
-00:03:13,496 --> 00:03:16,046
-of the key features of
-SceneKit, for example,
+00:03:00,214 --> 00:03:01,415
+通过引用原始资源
 
 
 48
-00:03:16,046 --> 00:03:20,336
-to let you configure particle
-systems live in a 3D scene,
+00:03:01,481 --> 00:03:04,318
+将来自于不同文件的
+多种资源
 
 
 49
-00:03:21,356 --> 00:03:25,546
-configure your physics, inspect
-and configure the physics shapes
+00:03:04,384 --> 00:03:05,919
+结合起来而构成一个
+单一场景
 
 
 50
-00:03:25,546 --> 00:03:28,176
-of your objects, and preview
-a simulation for example,
+00:03:05,986 --> 00:03:07,554
+确实是容易的
 
 
 51
-00:03:29,266 --> 00:03:33,156
-sensing for force fields, and
-it includes an action editor
+00:03:09,723 --> 00:03:13,493
+场景编辑器也为SceneKit
+的一些关键特性
 
 
 52
-00:03:33,156 --> 00:03:35,166
-to let you build
-action sequences
+00:03:13,560 --> 00:03:15,329
+加入了一些视觉效果编辑器
 
 
 53
-00:03:35,466 --> 00:03:36,846
-with a graphic user interface.
+00:03:15,529 --> 00:03:20,501
+例如 让您在一个3D场景中
+实时配置粒子系统
 
 
 54
-00:03:38,236 --> 00:03:40,866
-Scene Editor also includes
-some more advanced features,
+00:03:21,368 --> 00:03:22,803
+配置您的物理学
 
 
 55
-00:03:40,866 --> 00:03:42,226
-for example, if you want
+00:03:23,203 --> 00:03:26,139
+检查并配置您的
+对象的物理形状
 
 
 56
-00:03:42,326 --> 00:03:45,726
-to editor your shared
-modifiers live in your scene,
+00:03:26,206 --> 00:03:28,175
+并对模拟效果进行预览
 
 
 57
-00:03:46,546 --> 00:03:49,296
-and some baking tools,
-for example,
+00:03:29,209 --> 00:03:30,477
+如力场的感知
+而
 
 
 58
-00:03:49,296 --> 00:03:52,226
-to bake ambient occlusion,
-and for this please refer
+00:03:31,044 --> 00:03:32,913
+且它还包含一个动作编辑器
 
 
 59
-00:03:52,226 --> 00:03:56,906
-to the Model IO session for
-more information about this.
+00:03:32,980 --> 00:03:35,182
+让您通过图形用户界面
 
 
 60
-00:03:57,326 --> 00:03:59,866
-Okay. But nothing better
-than a demo to show you this,
+00:03:35,415 --> 00:03:36,717
+构建动作序列
 
 
 61
-00:04:00,256 --> 00:04:03,616
-so let me bring Amaury on stage
-for presentation of Xcode 7.
+00:03:38,585 --> 00:03:41,121
+场景编辑器
+也包含一些更高级的特性
 
 
 62
-00:04:03,616 --> 00:04:03,896
-Thank you.
+00:03:41,188 --> 00:03:43,557
+如 如果您希望在您的场景中
 
 
 63
-00:04:04,516 --> 00:04:10,206
-[Applause]
+00:03:43,624 --> 00:03:45,726
+实时编辑共享修改器
 
 
 64
-00:04:10,706 --> 00:04:11,076
->> AMAURY BALLIET: Hello.
+00:03:46,593 --> 00:03:47,961
+以及一些烘培工具
 
 
 65
-00:04:11,346 --> 00:04:13,656
-My name is Amaury, and
-I am a software engineer
+00:03:48,462 --> 00:03:50,564
+如烘培环境光遮蔽
 
 
 66
-00:04:13,876 --> 00:04:14,736
-with the SceneKit team.
+00:03:50,831 --> 00:03:52,232
+关于此内容
 
 
 67
-00:04:15,346 --> 00:04:18,906
-We dramatically improved the
-SceneKit editor in Xcode 7,
+00:03:52,299 --> 00:03:55,135
+请参考 MondelIo 讲座环节
+以了解更多信息
 
 
 68
-00:04:19,505 --> 00:04:22,096
-and with its new
-editing capabilities,
+00:03:57,304 --> 00:04:00,073
+好了 最好还是
+为您做一个这方面的展示
 
 
 69
-00:04:22,196 --> 00:04:24,566
-it's now really easy to
-build scenes from the ground
+00:04:00,240 --> 00:04:04,811
+那么现在让我请Amaury
+上台演示Xcode 7 谢谢
 
 
 70
-00:04:24,566 --> 00:04:28,526
-up in a visual and
-interactive manner.
+00:04:10,784 --> 00:04:13,787
+大家好 我叫 阿莫瑞
+是SceneKit团队的
 
 
 71
-00:04:28,586 --> 00:04:33,996
-Later on in the session, I will
-show you how we used SceneKit
+00:04:13,887 --> 00:04:14,755
+一名软件工程师
 
 
 72
-00:04:33,996 --> 00:04:38,336
-in editor to build Red
-Panda, the puzzle game,
+00:04:15,355 --> 00:04:18,892
+我们极大地改进了Xcode 7
+中的SceneKit编辑器
 
 
 73
-00:04:38,336 --> 00:04:41,516
-but right now we will start
-with something more simple,
+00:04:19,493 --> 00:04:22,129
+而且由于它的最新编辑功能
 
 
 74
-00:04:42,116 --> 00:04:45,166
-a small game of physical
-scale, which consists
+00:04:22,196 --> 00:04:23,897
+现在很容易完全
 
 
 75
-00:04:45,166 --> 00:04:48,506
-of building a tower of blocks
-that will eventually collapse
+00:04:23,964 --> 00:04:27,000
+以直观和互动的方式构建场景
 
 
 76
-00:04:48,666 --> 00:04:54,866
-as we remove blocks from it.
+00:04:27,968 --> 00:04:30,204
+稍后在本节讲座中
+我将向您展示
 
 
 77
-00:04:55,176 --> 00:04:58,446
-So what you see here is a
-SceneKit Scene Editor showing an
+00:04:30,270 --> 00:04:32,806
+如何在编辑器中使用SceneKit
 
 
 78
-00:04:58,446 --> 00:04:59,006
-empty scene.
+00:04:32,873 --> 00:04:36,243
+构建拼图游戏Red Panda
 
 
 79
-00:05:00,056 --> 00:05:03,536
-On the right side, you have
-the usually utility area,
+00:04:36,810 --> 00:04:41,582
+但是目前我们将从一些
+更简单的东西开始
 
 
 80
-00:05:03,716 --> 00:05:06,116
-with its inspectors
-and libraries.
+00:04:42,115 --> 00:04:44,151
+一个物理尺寸的小游戏
 
 
 81
-00:05:07,196 --> 00:05:10,106
-In the object library, you can
-find many SceneKit objects,
+00:04:44,351 --> 00:04:46,954
+它包括构建一个由木块组成的塔
 
 
 82
-00:05:10,666 --> 00:05:17,666
-such as modes, lights,
-cameras, parametric geometries,
+00:04:47,020 --> 00:04:48,422
+随着我们把木块从它上面移除
 
 
 83
-00:05:18,176 --> 00:05:19,936
-as well as physics fields.
+00:04:48,655 --> 00:04:49,990
+塔将最终倒掉
 
 
 84
-00:05:20,406 --> 00:05:24,856
-Now, for our wooden block, we
-use a simple box geometric.
+00:04:55,162 --> 00:04:56,463
+那么您在这里看到的是
 
 
 85
-00:05:26,776 --> 00:05:32,376
-To customize its appearance,
-I can drop and imagine it.
+00:04:56,530 --> 00:04:59,032
+一个显示空场景的
+SceneKit场景编辑器
 
 
 86
-00:05:33,906 --> 00:05:36,456
-Okay. So now just like
-in Interface Builder,
+00:05:00,067 --> 00:05:03,637
+在右侧通常是应用区
 
 
 87
-00:05:36,956 --> 00:05:39,656
-inspectors as well can
-edit all the properties
+00:05:03,704 --> 00:05:06,273
+这里有检测器和库
 
 
 88
-00:05:39,656 --> 00:05:40,646
-of your 3D objects.
+00:05:07,207 --> 00:05:08,308
+在对象库里面
 
 
 89
-00:05:41,386 --> 00:05:45,136
-For instance, in the attributes
-inspector, I can change the size
+00:05:08,375 --> 00:05:10,244
+您可以发现很多SceneKit对象
 
 
 90
-00:05:45,136 --> 00:05:49,746
-of my geometry to
-be 2 by 1 by 6.
+00:05:10,677 --> 00:05:11,512
+比如模式
 
 
 91
-00:05:50,316 --> 00:05:54,916
-And to center it in the scene,
-I can use the node inspector
+00:05:12,513 --> 00:05:13,347
+光线
 
 
 92
-00:05:55,896 --> 00:05:58,426
-and set its position to zero.
+00:05:14,314 --> 00:05:15,148
+照相机
 
 
 93
-00:05:59,626 --> 00:06:01,706
-But actually, there is a
-more simple way to do that.
+00:05:16,083 --> 00:05:17,651
+几何参数
 
 
 94
-00:06:03,106 --> 00:06:04,626
-Using the 3D manipulator,
+00:05:18,185 --> 00:05:19,953
+以及物理场
 
 
 95
-00:06:04,816 --> 00:06:08,996
-I can freely move the
-object in the scene.
+00:05:21,021 --> 00:05:22,489
+现在 对于我们的木块
 
 
 96
-00:06:09,226 --> 00:06:11,966
-Okay. So now that our wooden
-block is ready, we will use it
+00:05:22,556 --> 00:05:24,858
+我们使用一个简单的
+几何形状盒子
 
 
 97
-00:06:11,966 --> 00:06:14,406
-as a template to
-build other blocks.
+00:05:27,027 --> 00:05:29,062
+为了对它的外观进行自定义
 
 
 98
-00:06:15,696 --> 00:06:19,196
-Using the 3D manipulator,
-I can easily make copies
+00:05:29,296 --> 00:05:30,831
+我可以把它拖放到这里看看效果
 
 
 99
-00:06:19,516 --> 00:06:21,146
-by holding the alt key.
+00:05:33,901 --> 00:05:36,537
+那么现在正如在
+Interface Builder中
 
 
 100
-00:06:22,456 --> 00:06:29,746
-I can repeat the
-operation, make a selection,
+00:05:36,970 --> 00:05:40,707
+检测器也能编辑
+您的3D对象的所有属性
 
 
 101
-00:06:30,236 --> 00:06:36,046
-duplicate that selection,
-rotate it, make a new selection,
+00:05:41,375 --> 00:05:43,710
+例如 在属性检测器中
 
 
 102
-00:06:37,116 --> 00:06:43,446
-repeat the operation, and one
-last time to finish the tower.
+00:05:43,777 --> 00:05:46,346
+我可以把几何形状的大小
 
 
 103
-00:06:43,656 --> 00:06:47,996
-Okay. We are now ready to use
-the physics engine that's built
+00:05:46,747 --> 00:05:50,050
+改为
+2… X 1... X 6
 
 
 104
-00:06:47,996 --> 00:06:50,516
-into SceneKit to make the
-scene more interesting.
+00:05:50,984 --> 00:05:52,553
+而为了把它放置在场景中央
 
 
 105
-00:06:51,586 --> 00:06:53,386
-I will simply select
-all the objects,
+00:05:52,619 --> 00:05:55,122
+我可以使用节点检测器
 
 
 106
-00:06:54,336 --> 00:06:56,666
-head to the physics inspector,
+00:05:55,889 --> 00:05:58,625
+并将其位置设为...零
 
 
 107
-00:06:57,736 --> 00:07:00,546
-and add a dynamic
-body to each block.
+00:05:59,626 --> 00:06:01,695
+但是实际上
+有一个更简单的做法
 
 
 108
-00:07:01,916 --> 00:07:04,646
-We are now ready to
-run the simulation.
+00:06:03,096 --> 00:06:04,631
+即使用 3D 操纵器
 
 
 109
-00:07:05,606 --> 00:07:08,526
-As you can see, our blocks
-are now subject to gravity
+00:06:04,831 --> 00:06:06,967
+我可以自由地在场景中移动对象
 
 
 110
-00:07:08,606 --> 00:07:09,846
-and fall indefinitely.
+00:06:09,236 --> 00:06:11,305
+好了 那么既然
+我们的木块已经准备好了
 
 
 111
-00:07:10,766 --> 00:07:13,596
-To prevent that, we will
-add a floor to the scene,
+00:06:11,505 --> 00:06:14,575
+我们将把它
+作为一个构建其他木块的模版
 
 
 112
-00:07:14,746 --> 00:07:20,606
-so I open the objects library,
-put a floor, position it,
+00:06:15,709 --> 00:06:19,246
+使用3D操纵器
+我可以轻易地通过按住alt键盘
 
 
 113
-00:07:22,066 --> 00:07:24,986
-and I need a static body
-so that it participates
+00:06:19,513 --> 00:06:21,148
+进行复制
 
 
 114
-00:07:24,986 --> 00:07:29,336
-in the simulation but
-is not allowed to move.
+00:06:22,616 --> 00:06:23,917
+我可以重复这个操作
 
 
 115
-00:07:29,336 --> 00:07:31,756
-If we run the simulation
-again, nothing happens.
+00:06:25,953 --> 00:06:26,920
+进行选择
 
 
 116
-00:07:32,696 --> 00:07:39,776
-But as we remove a few
-blocks from the tower,
+00:06:29,156 --> 00:06:30,924
+把选定的部分复制
 
 
 117
-00:07:39,996 --> 00:07:43,666
-we get a fair idea of what
-the game could look like.
+00:06:32,459 --> 00:06:33,293
+旋转
 
 
 118
-00:07:44,516 --> 00:07:49,366
-[Applause]
+00:06:35,028 --> 00:06:36,063
+再重新选择
 
 
 119
-00:07:49,866 --> 00:07:50,926
-One additional thing I would
+00:06:37,130 --> 00:06:38,098
+重复操作
 
 
 120
-00:07:50,926 --> 00:07:52,726
-like to show you
-is a scene review.
+00:06:39,299 --> 00:06:41,802
+再最后一次复制以完成塔的构建
 
 
 121
-00:07:53,196 --> 00:07:54,516
-You can review the scene review
+00:06:44,938 --> 00:06:48,809
+我们现在准备好使用
+SceneKit 内置的物理引擎
 
 
 122
-00:07:54,516 --> 00:07:56,276
-in the lower left
-corner of the editor.
+00:06:48,876 --> 00:06:50,577
+来使场景更有吸引力
 
 
 123
-00:07:57,696 --> 00:08:00,416
-The scene review is where
-you can see all the nodes
+00:06:51,578 --> 00:06:53,547
+我将直接选定所有对象
 
 
 124
-00:08:00,416 --> 00:08:04,256
-in your scene, and it is where
-you can edit the node hierarchy.
+00:06:54,915 --> 00:06:56,650
+来到物理检测器界面
 
 
 125
-00:08:05,116 --> 00:08:09,056
-For instance, we have our
-floor, the many wooden boxes,
+00:06:57,751 --> 00:06:59,953
+并向每个木块添加
+一个动态实体
 
 
 126
-00:08:09,506 --> 00:08:12,116
-but we also have a spotlight.
+00:07:02,689 --> 00:07:04,725
+现在我们已经准备好运行模拟
 
 
 127
-00:08:12,116 --> 00:08:14,556
-I placed this light
-in the scene right
+00:07:05,592 --> 00:07:08,529
+如您所见 
+我们的木块现在受到重力影响
 
 
 128
-00:08:14,556 --> 00:08:16,316
-after I created the project.
+00:07:08,595 --> 00:07:09,830
+无限下落
 
 
 129
-00:08:17,056 --> 00:08:21,146
-It is currently hidden and has
-no effect, so let's show it.
+00:07:10,764 --> 00:07:13,600
+为防止这种情况
+我们将向场景添加一个地板
 
 
 130
-00:08:22,036 --> 00:08:23,776
-To further improve the lighting,
+00:07:14,735 --> 00:07:16,870
+因此我打开对象库
 
 
 131
-00:08:24,296 --> 00:08:26,276
-and to avoid these
-completely dark areas,
+00:07:17,905 --> 00:07:18,839
+放一个地板
 
 
 132
-00:08:26,796 --> 00:08:29,476
-I will simply add an
-ambient light to the scene.
+00:07:20,007 --> 00:07:20,841
+将其定位
 
 
 133
-00:08:30,006 --> 00:08:32,946
-And that's it.
+00:07:22,075 --> 00:07:23,610
+我需要一个静态实体
 
 
 134
-00:08:33,346 --> 00:08:36,076
-Just through the editor,
-we built an entire scene
+00:07:23,677 --> 00:07:26,380
+以便让它参与模拟
 
 
 135
-00:08:36,155 --> 00:08:40,836
-with 3D objects, textures,
-lighting, and dynamic bodies
+00:07:26,446 --> 00:07:28,015
+但却不允许移动
 
 
 136
-00:08:41,236 --> 00:08:43,846
-that could make a nice game
-after we implement gestures.
+00:07:28,949 --> 00:07:31,852
+如果我们再次运行模拟
+什么都不会发生
 
 
 137
-00:08:43,846 --> 00:08:49,476
-So the SceneKit Scene Editor
-really allows you to build more
+00:07:32,686 --> 00:07:35,455
+但是当我们从塔上
+移除一些木块时
 
 
 138
-00:08:49,476 --> 00:08:53,316
-of your game up by
-writing less code.
+00:07:39,993 --> 00:07:43,664
+我们就很好地了解了
+游戏会是什么样子
 
 
 139
-00:08:53,886 --> 00:08:56,206
-And there's actually much
-more things that you can do
+00:07:49,870 --> 00:07:52,739
+另外一个我想为您展示的特性
+是场景检查
 
 
 140
-00:08:56,206 --> 00:08:59,556
-with Editor, and to
-cover that, let's switch
+00:07:53,207 --> 00:07:56,243
+您可以在编辑器的左下角
+进行场景检查
 
 
 141
-00:08:59,556 --> 00:09:06,146
-to the Red Panda demo, and
-let's see the demo again.
+00:07:57,711 --> 00:08:01,081
+在场景检查中
+您可以查看场景中的所有节点
 
 
 142
-00:09:06,256 --> 00:09:09,266
-So Red Panda is a puzzle
-game in the 3D world,
+00:08:01,782 --> 00:08:04,318
+也可以编辑节点层次
 
 
 143
-00:09:09,586 --> 00:09:12,896
-where you can manipulate
-the camera with pan gestures
+00:08:05,185 --> 00:08:07,187
+例如 我们有地板
 
 
 144
-00:09:12,896 --> 00:09:17,156
-and control the character
-on his path.
+00:08:07,387 --> 00:08:09,056
+很多木盒子
 
 
 145
-00:09:17,156 --> 00:09:23,206
-The goal of this game is
-to collect these flowers
+00:08:09,489 --> 00:08:10,757
+但是我们也有聚光灯
 
 
 146
-00:09:23,706 --> 00:09:25,776
-and here is the first one.
+00:08:11,725 --> 00:08:13,794
+建立了工程之后
 
 
 147
-00:09:25,776 --> 00:09:32,886
-On his path, Red Panda will
-also have to collect items.
+00:08:13,861 --> 00:08:16,330
+我就把这个灯放在场景右边
 
 
 148
-00:09:32,886 --> 00:09:35,366
-See how the world is rich and
-animated with many details?
+00:08:17,064 --> 00:08:19,099
+目前它是隐藏并没有效果的
 
 
 149
-00:09:35,576 --> 00:09:39,386
-We have lots of particle
-systems and animated vegetation.
+00:08:19,733 --> 00:08:20,701
+让我们把它显示出来
 
 
 150
-00:09:39,876 --> 00:09:44,326
-Now, Red Panda can go
-everywhere in the level.
+00:08:22,336 --> 00:08:23,804
+为了进一步改善照明
 
 
 151
-00:09:44,476 --> 00:09:47,126
-For instance, he
-can climb hills.
+00:08:24,304 --> 00:08:26,473
+也为了避免
+这些完全黑暗的区域
 
 
 152
-00:09:47,126 --> 00:09:54,286
-But on his path Red Panda will
-also have to avoid obstacles.
+00:08:26,807 --> 00:08:29,476
+我将直接向场景添加环境光线
 
 
 153
-00:09:54,286 --> 00:09:58,276
-Notice the sound became
-louder as we pushed.
+00:08:32,412 --> 00:08:33,246
+就是这样
 
 
 154
-00:09:58,276 --> 00:10:02,666
-It's because we used one of
-SceneKit new API's 3D audio.
+00:08:33,313 --> 00:08:36,082
+仅仅通过编辑器
+我们就构建了整个场景
 
 
 155
-00:10:02,666 --> 00:10:06,646
-Many of the features
-are in play here.
+00:08:36,149 --> 00:08:37,284
+它包括3D对象
 
 
 156
-00:10:06,646 --> 00:10:08,846
-We have the physics
-engine for navigation
+00:08:37,683 --> 00:08:40,821
+质地
+灯光和动态实体
 
 
 157
-00:10:08,846 --> 00:10:09,946
-and collision detection.
+00:08:41,221 --> 00:08:42,556
+在我们执行了手势之后
 
 
 158
-00:10:10,266 --> 00:10:12,496
-Lots of particle systems.
+00:08:42,623 --> 00:08:44,157
+它们就会组成一个不错的游戏
 
 
 159
-00:10:12,496 --> 00:10:15,716
-And shadow modifiers and actions
-help to bring the scene to life.
+00:08:45,559 --> 00:08:48,195
+因此SceneKit场景编辑器
+确实能够
 
 
 160
-00:10:15,716 --> 00:10:18,726
-So we just collected
-our seventh flower,
+00:08:48,729 --> 00:08:51,598
+让您以更少的代码
 
 
 161
-00:10:18,726 --> 00:10:23,816
-and by moving the camera, we
-can see where objects hide.
+00:08:51,999 --> 00:08:53,367
+编写游戏
 
 
 162
-00:10:23,816 --> 00:10:26,126
-We have a quick tour
-under the arch,
+00:08:53,901 --> 00:08:56,904
+通过编辑器
+您实际上还可以做更多事情
 
 
 163
-00:10:26,126 --> 00:10:30,976
-and the level is completed.
+00:08:57,404 --> 00:08:58,505
+而为了说明那一点
 
 
 164
-00:10:31,516 --> 00:10:35,306
-[Music]
+00:08:58,739 --> 00:08:59,606
+让我们切换到
 
 
 165
-00:10:35,806 --> 00:10:36,486
-Thank you, Thomas.
+00:08:59,673 --> 00:09:00,841
+Red Panda演示
 
 
 166
-00:10:37,516 --> 00:10:42,906
-[Applause]
+00:09:00,908 --> 00:09:02,876
+并再次查看那个演示
 
 
 167
-00:10:43,406 --> 00:10:46,456
-So we are now going to see how
-we built this game using the
+00:09:06,246 --> 00:09:09,583
+那么Red Panda是一个
+3D拼图游戏
 
 
 168
-00:10:46,456 --> 00:10:47,686
-SceneKit Scene Editor.
+00:09:09,650 --> 00:09:13,253
+在里面您可以通过全景动作
+操纵摄像机
 
 
 169
-00:10:53,696 --> 00:10:57,406
-So this is a starting
-point for our game.
+00:09:15,155 --> 00:09:18,825
+并控制角色的行走路线
 
 
 170
-00:10:57,406 --> 00:10:58,486
-A quick and easy way
+00:09:20,561 --> 00:09:23,430
+游戏的目标是收集这些花
 
 
 171
-00:10:58,626 --> 00:11:02,396
-to immediately improve your
-scene is to add a skybox.
+00:09:24,598 --> 00:09:26,733
+而这里是第一朵花
 
 
 172
-00:11:03,046 --> 00:11:09,096
-A skybox is simply a
-collection of six images
+00:09:27,100 --> 00:09:30,571
+在它的路上 
+Red Panda将必须收集物品
 
 
 173
-00:11:09,286 --> 00:11:11,076
-that represent the environment.
+00:09:32,806 --> 00:09:33,874
+您看 有了那么多细节
 
 
 174
-00:11:12,096 --> 00:11:15,486
-After we add a skybox to
-the scene, we have a context
+00:09:33,941 --> 00:09:35,442
+这个世界是多么丰富多彩
+栩栩如生
 
 
 175
-00:11:15,486 --> 00:11:17,066
-in which we can build the level.
+00:09:35,843 --> 00:09:39,546
+我们有大量的粒子系统
+和具有动画效果的植物
 
 
 176
-00:11:17,806 --> 00:11:22,276
-So if we now take a look at
-the resources in our project,
+00:09:41,148 --> 00:09:44,184
+现在Red Panda可以
+在平面上到处游逛
 
 
 177
-00:11:22,876 --> 00:11:25,146
-we can see that our
-artist provided us
+00:09:44,251 --> 00:09:45,953
+例如 它可以爬山
 
 
 178
-00:11:25,186 --> 00:11:27,636
-with many building
-blocks, and by that I mean
+00:09:47,054 --> 00:09:50,157
+但是在它的路上 
+Red Panda还必须躲开障碍
 
 
 179
-00:11:27,636 --> 00:11:34,326
-that we have separate files for
-the bamboos, for the flowers
+00:09:53,360 --> 00:09:57,264
+是否注意到当我们强行推进的时候
+叫声就会变大？
 
 
 180
-00:11:35,096 --> 00:11:38,306
-to collect, for the
-pearls to collect,
+00:09:58,131 --> 00:10:02,669
+这是因为我们使用了
+SceneKit最新API的3D音频
 
 
 181
-00:11:38,306 --> 00:11:40,156
-as well as the many
-structural elements.
+00:10:03,370 --> 00:10:06,106
+这里很多特性都在起作用
 
 
 182
-00:11:41,426 --> 00:11:45,506
-So now how do you use these
-external building blocks
+00:10:06,740 --> 00:10:10,077
+我们有用于导航和
+碰撞检测的物理引擎
 
 
 183
-00:11:45,506 --> 00:11:46,106
-in your scene?
+00:10:10,210 --> 00:10:11,845
+我们有很多粒子系统
 
 
 184
-00:11:46,546 --> 00:11:49,976
-Well, you go to the
-scene, and if you drag
+00:10:12,513 --> 00:10:15,716
+而阴影修改器和各种动作
+让场景变得生灵活现
 
 
 185
-00:11:49,976 --> 00:11:52,646
-and drop an external
-building block in the scene,
+00:10:15,916 --> 00:10:17,951
+那么我们刚刚收集了第七朵花
 
 
 186
-00:11:53,226 --> 00:11:55,556
-you can see that the
-reference node has been created
+00:10:18,585 --> 00:10:19,820
+而通过移动摄像机
 
 
 187
-00:11:55,736 --> 00:11:57,966
-as indicated by this
-little arrow icon.
+00:10:20,153 --> 00:10:21,788
+我们可以看到物体藏在哪里
 
 
 188
-00:11:59,056 --> 00:12:02,976
-It is very nice and convenient
-to have these external resources
+00:10:23,423 --> 00:10:26,260
+让我们快速走过拱门
 
 
 189
-00:12:02,976 --> 00:12:06,886
-as external files because that
-way you can design the level
+00:10:29,897 --> 00:10:31,732
+这一关就完成了
 
 
 190
-00:12:07,096 --> 00:12:09,926
-and still have a chance
-to save the assets,
+00:10:35,736 --> 00:10:36,570
+谢谢你托马斯
 
 
 191
-00:12:10,386 --> 00:12:12,396
-and you can also
-reuse these assets
+00:10:43,410 --> 00:10:44,678
+那么我们现在将看一下
 
 
 192
-00:12:12,566 --> 00:12:15,066
-to build other levels
-for your game.
+00:10:44,745 --> 00:10:46,914
+如何通过SceneKit场景编辑器
 
 
 193
-00:12:15,916 --> 00:12:22,526
-So as you can see, I've already
-included other reference nodes
+00:10:46,980 --> 00:10:47,848
+构建这个游戏
 
 
 194
-00:12:23,456 --> 00:12:26,066
-for other industrial elements.
+00:10:53,987 --> 00:10:56,023
+那么这是我们的游戏起点
 
 
 195
-00:12:26,066 --> 00:12:30,706
-So this is how you
-typically build a level.
+00:10:57,224 --> 00:10:58,525
+一个快速而简易
 
 
 196
-00:12:31,146 --> 00:12:33,686
-You would add your
-building blocks one
+00:10:58,592 --> 00:11:00,460
+和立刻改进您的场景的方式
 
 
 197
-00:12:34,046 --> 00:12:36,656
-after the other and iterate.
+00:11:00,928 --> 00:11:02,496
+是添加一个贵宾看台
 
 
 198
-00:12:36,656 --> 00:12:43,246
-You would do the same thing
-for the flowers to collect.
+00:11:05,199 --> 00:11:06,099
+贵宾看台...
 
 
 199
-00:12:43,376 --> 00:12:43,986
-The pearls.
+00:11:06,834 --> 00:11:11,205
+只不过是代表环境的
+一组六张图片
 
 
 200
-00:12:43,986 --> 00:12:46,546
-And finally, the vegetation.
+00:11:12,105 --> 00:11:14,241
+在我们向场景添加了贵宾看台后
 
 
 201
-00:12:47,186 --> 00:12:51,836
-So here you can see
-how far we went
+00:11:14,575 --> 00:11:17,177
+我们有了一个
+可以构建这个平面的环境
 
 
 202
-00:12:52,426 --> 00:12:54,036
-with just a simple operation.
+00:11:18,946 --> 00:11:22,416
+那么如果我们看一下
+在我们项目中的资源
 
 
 203
-00:12:55,616 --> 00:12:58,196
-So as you remember,
-our scene is rich
+00:11:22,883 --> 00:11:25,152
+我们可以看到
+我们的艺术家为我们
 
 
 204
-00:12:58,196 --> 00:12:59,856
-and animated with many details.
+00:11:25,219 --> 00:11:26,420
+提供了很多构成要素
 
 
 205
-00:13:00,096 --> 00:13:01,646
-We have a lot of
-particle systems,
+00:11:26,820 --> 00:11:30,324
+就是说我们有
+用于竹子
 
 
 206
-00:13:02,846 --> 00:13:05,206
-but we also have
-animated vegetation.
+00:11:31,992 --> 00:11:33,660
+要采集的花
 
 
 207
-00:13:05,876 --> 00:13:09,086
-Many were animated with skimming
+00:11:35,362 --> 00:11:37,030
+珍珠以及很多结构元素
 
 
 208
-00:13:09,346 --> 00:13:12,236
-which is a fairly Complicated
-animation technique that has
+00:11:37,898 --> 00:11:40,400
+所需的不同文件
 
 
 209
-00:13:12,236 --> 00:13:14,806
-to be done in a special tool.
+00:11:42,302 --> 00:11:43,770
+那么现在您如何在您的场景中
 
 
 210
-00:13:15,316 --> 00:13:17,956
-But for we use shadow modifiers.
+00:11:43,837 --> 00:11:46,106
+使用这些外部构件呢？
 
 
 211
-00:13:18,946 --> 00:13:22,856
-Actually, there is one last
-element to animate here
+00:11:47,808 --> 00:11:48,709
+你到场景中
 
 
 212
-00:13:23,566 --> 00:13:24,726
-in the small waterfall.
+00:11:49,276 --> 00:11:52,679
+并把一个外部构件拖拽
+并放置到场景中
 
 
 213
-00:13:25,326 --> 00:13:31,316
-So to do that, I will open
-the scene for our waterfall,
+00:11:53,213 --> 00:11:55,682
+您可以看到
+这个小的箭头图标
 
 
 214
-00:13:31,776 --> 00:13:33,956
-and the SceneKit's
-editor now allows you
+00:11:55,749 --> 00:11:57,951
+表明参照节点已被建立
 
 
 215
-00:13:34,536 --> 00:13:38,676
-to add modifiers right into this
-scene for immediate feedback
+00:11:59,686 --> 00:12:04,291
+有这些外部文件作为外部资源
+是很好很方便的
 
 
 216
-00:13:39,466 --> 00:13:40,866
-and live compilation issues.
+00:12:04,358 --> 00:12:06,894
+因为那样您就可以设计这个平面
 
 
 217
-00:13:42,456 --> 00:13:44,726
-You can add and edit
-each of the modifiers
+00:12:07,094 --> 00:12:09,930
+而以后仍有机会编辑这些资源
 
 
 218
-00:13:45,006 --> 00:13:46,306
-in the assistant editor.
+00:12:10,397 --> 00:12:12,399
+您也可以将这些资源再次用于
 
 
 219
-00:13:47,616 --> 00:13:50,926
-So here I select the
-waterfall and choose
+00:12:12,566 --> 00:12:14,334
+您的游戏的其他平面
 
 
 220
-00:13:50,926 --> 00:13:52,406
-to add a geometry modifier.
+00:12:16,170 --> 00:12:18,205
+那么我把这个项目加入进来
 
 
 221
-00:13:52,596 --> 00:13:59,426
-I add the modifier, and you
-can immediately see its effect.
+00:12:19,206 --> 00:12:22,543
+如您所见
+我已为其他工业元素
 
 
 222
-00:14:00,706 --> 00:14:03,056
-You can play with your
-shadow modifier and try
+00:12:23,443 --> 00:12:26,313
+加入其他参考节点
 
 
 223
-00:14:03,056 --> 00:14:05,396
-to tweak the final rendering.
+00:12:27,648 --> 00:12:30,717
+那么这就是您通常
+如何构建一个游戏平面
 
 
 224
-00:14:05,666 --> 00:14:09,246
-You can try to find what
-the final modifiers are.
+00:12:31,151 --> 00:12:34,888
+您要一个接一个地添加构件
 
 
 225
-00:14:10,706 --> 00:14:12,116
-Once you are happy
-with your scene,
+00:12:35,923 --> 00:12:36,757
+进行迭代
 
 
 226
-00:14:13,456 --> 00:14:17,286
-you close the assistant editor
-and go back to your main level.
+00:12:38,959 --> 00:12:41,662
+您要为将要采集的花和珍珠
 
 
 227
-00:14:17,916 --> 00:14:22,636
-As you can see, our
-mountain is now animated.
+00:12:43,330 --> 00:12:44,231
+做同样的操作
 
 
 228
-00:14:23,336 --> 00:14:26,826
-This is because we
-used reference nodes,
+00:12:45,032 --> 00:12:46,600
+最后是植物
 
 
 229
-00:14:27,226 --> 00:14:29,586
-and when you edit assets,
+00:12:49,837 --> 00:12:52,005
+那么这里您可以看到
+只是通过一个简单的操作
 
 
 230
-00:14:29,886 --> 00:14:32,166
-they are automatically
-reflected in the scene.
+00:12:52,439 --> 00:12:54,107
+我们就能达到什么样的状态
 
 
 231
-00:14:33,316 --> 00:14:36,086
-One last thing we
-want to do here is
+00:12:55,609 --> 00:12:58,011
+大家记得
+由于有了很多细节
 
 
 232
-00:14:36,086 --> 00:14:37,526
-to add an enemy in the scene.
+00:12:58,078 --> 00:12:59,913
+是丰富的动画效果的
 
 
 233
-00:14:39,566 --> 00:14:41,476
-So this is a scene
-for our enemy.
+00:13:00,080 --> 00:13:01,715
+我们有很多粒子系统
 
 
 234
-00:14:42,316 --> 00:14:44,426
-As you can see, it is static.
+00:13:03,217 --> 00:13:05,419
+而且我们也有栩栩如生的植物
 
 
 235
-00:14:44,736 --> 00:14:45,606
-It has no behavior.
+00:13:06,920 --> 00:13:09,223
+很多动画是通过“蒙皮” 
 
 
 236
-00:14:45,606 --> 00:14:49,846
-To add the behavior,
-we will use actions.
+00:13:09,356 --> 00:13:11,592
+这种相当复杂的
+动画特技实现的
 
 
 237
-00:14:50,686 --> 00:14:52,916
-The Scene Editor now
-allows you to add
+00:13:11,825 --> 00:13:14,161
+它需要一个特殊工具完成
 
 
 238
-00:14:53,446 --> 00:14:55,386
-and edit actions
-right in the scene.
+00:13:15,896 --> 00:13:17,397
+但是我们都使用阴影修改器
 
 
 239
-00:14:56,736 --> 00:14:58,486
-So this is the action editor.
+00:13:18,932 --> 00:13:20,934
+实际上
+这里还有最后一个元素
 
 
 240
-00:14:59,256 --> 00:15:00,446
-I will select my enemy.
+00:13:21,001 --> 00:13:22,870
+需要做成动画
 
 
 241
-00:15:00,446 --> 00:15:03,656
-Choose a row detection.
+00:13:23,570 --> 00:13:24,738
+它就在小瀑布里面
 
 
 242
-00:15:04,316 --> 00:15:11,176
-Add it. Set it to
-rotate along the Y axis.
+00:13:26,940 --> 00:13:29,042
+那么为了实现它
 
 
 243
-00:15:12,636 --> 00:15:14,646
-And make it repeat forever.
+00:13:29,510 --> 00:13:31,311
+我将为我们的瀑布打开场景
 
 
 244
-00:15:15,286 --> 00:15:20,496
-So this is a simple behavior
-that we have for our enemy,
+00:13:31,778 --> 00:13:33,947
+现在SceneKit的编辑器
+让您能够
 
 
 245
-00:15:21,326 --> 00:15:25,176
-but the action editor allows you
-to build some complex scenarios,
+00:13:34,548 --> 00:13:38,685
+直接向场景中添加修改器
+以便获得即时反馈
 
 
 246
-00:15:25,416 --> 00:15:27,686
-and for more information
-about that, I invite you
+00:13:39,453 --> 00:13:40,854
+和解决实时编译问题
 
 
 247
-00:15:27,686 --> 00:15:29,566
-to watch the What's New
-in SpriteKit session.
+00:13:42,456 --> 00:13:44,925
+您可以在辅助编辑器中
 
 
 248
-00:15:30,976 --> 00:15:36,746
-We can now go back to our level,
-add a reference to our enemy,
+00:13:44,992 --> 00:13:46,460
+添加并修改每个修改器
 
 
 249
-00:15:38,176 --> 00:15:39,816
-and our scene is finished.
+00:13:47,628 --> 00:13:49,696
+那么在这里我将选定瀑布
 
 
 250
-00:15:40,366 --> 00:15:44,216
-So just -- we just saw
-how the editor allows you
+00:13:50,464 --> 00:13:52,533
+并选择添加一个
+几何形状修改器
 
 
 251
-00:15:44,216 --> 00:15:47,526
-to build an entire level
-from external building blocks
+00:13:54,768 --> 00:13:55,936
+我添加修改器
 
 
 252
-00:15:47,886 --> 00:15:49,756
-and how you can bring
-life to the scene
+00:13:57,604 --> 00:13:59,439
+而你可以立刻看到它生效了
 
 
 253
-00:15:49,756 --> 00:15:51,586
-with shadow modifiers
-and actions.
+00:14:00,707 --> 00:14:02,676
+你可以把玩一下阴影修改器
 
 
 254
-00:15:52,216 --> 00:15:55,206
-And with that, I hand over
-to Thomas, who will talk
+00:14:02,743 --> 00:14:06,180
+并试图对瀑布的最后效果图
+进行微调
 
 
 255
-00:15:55,206 --> 00:15:57,346
-about the architecture
-of the game.
+00:14:06,413 --> 00:14:09,249
+你可以试图弄清
+最后的修改器是什么
 
 
 256
-00:15:58,201 --> 00:16:00,201
-[Applause]
+00:14:10,717 --> 00:14:12,119
+一旦你对您的场景满意
 
 
 257
-00:16:00,386 --> 00:16:01,606
->> THOMAS GOOSSENS: So
-yeah, we are very happy
+00:14:13,420 --> 00:14:15,589
+您就关闭辅助编辑器
 
 
 258
-00:16:01,836 --> 00:16:04,786
-to give you this nice
-demo as a sample code.
+00:14:15,989 --> 00:14:17,291
+并回到您的主平面
 
 
 259
-00:16:05,546 --> 00:16:07,076
-It's available on the
-developer website.
+00:14:19,193 --> 00:14:20,227
+如您所见
 
 
 260
-00:16:07,076 --> 00:16:11,016
-You will see it's very
-simple and straightforward.
+00:14:20,761 --> 00:14:22,629
+我们的山现在具有动画效果
 
 
 261
-00:16:11,146 --> 00:16:14,606
-It's about 1,000 items of
-code for both iOS and OS X,
+00:14:23,330 --> 00:14:26,834
+这是因为我们使用了参考节点
 
 
 262
-00:16:14,716 --> 00:16:17,916
-it includes everything like
-the sound, the controls,
+00:14:27,234 --> 00:14:29,570
+而且当您编辑资源时
 
 
 263
-00:16:18,176 --> 00:16:21,386
-everything you just saw.
+00:14:29,870 --> 00:14:32,172
+它们会自动在场景中有所反映
 
 
 264
-00:16:21,636 --> 00:16:24,556
-So Amaury showed
-you what was done
+00:14:33,273 --> 00:14:34,875
+这里我们想做的最后一件事情
 
 
 265
-00:16:24,556 --> 00:16:26,376
-in Xcode 7 to build this demo.
+00:14:35,809 --> 00:14:38,312
+是在场景中添加一个敌人
 
 
 266
-00:16:26,416 --> 00:16:29,586
-I will quickly present
-the rest, what was done
+00:14:39,580 --> 00:14:41,548
+那么这就是我们的敌人的场景
 
 
 267
-00:16:29,586 --> 00:16:32,476
-on the inside and the outside.
+00:14:42,316 --> 00:14:43,150
+如您所见
 
 
 268
-00:16:33,246 --> 00:16:37,186
-The first thing we did
-was to define a direction
+00:14:43,650 --> 00:14:44,484
+它是静态的
 
 
 269
-00:16:37,846 --> 00:16:40,076
-and a simple game
-play for our game.
+00:14:44,751 --> 00:14:45,752
+它没有任何行为
 
 
 270
-00:16:40,076 --> 00:16:42,086
-So we started with
-our main character.
+00:14:47,621 --> 00:14:49,857
+为了添加行为
+我们使用动作
 
 
 271
-00:16:42,606 --> 00:16:44,706
-Then we defined the
-shape of our level,
+00:14:50,691 --> 00:14:53,160
+现在场景编辑器让您能够
+直接在场景中
 
 
 272
-00:16:44,936 --> 00:16:47,336
-including where the
-collectible items should be
+00:14:53,460 --> 00:14:55,395
+添加和编辑动作
 
 
 273
-00:16:47,616 --> 00:16:48,786
-and where the enemy should be.
+00:14:56,730 --> 00:14:58,498
+那么这就是动作编辑器
 
 
 274
-00:16:49,766 --> 00:16:53,046
-And we defined the final
-appearance we wanted
+00:14:59,266 --> 00:15:00,534
+我将选定我的敌人
 
 
 275
-00:16:53,046 --> 00:16:54,416
-to achieve using SceneKit.
+00:15:02,302 --> 00:15:03,737
+选择一个行检测
 
 
 276
-00:16:55,716 --> 00:17:00,836
-Then the next step was to scope
-the 3D models in the 3D tool,
+00:15:06,807 --> 00:15:07,641
+添加它
 
 
 277
-00:17:02,086 --> 00:17:05,596
-to paint the different
-textures, configure,
+00:15:08,575 --> 00:15:11,245
+将其设为沿 Y 轴旋转
 
 
 278
-00:17:05,596 --> 00:17:07,816
-and animate our character.
+00:15:12,646 --> 00:15:14,648
+并让它永远...重复
 
 
 279
-00:17:08,786 --> 00:17:12,616
-And the final polish was done
-by adding some particles,
+00:15:17,651 --> 00:15:20,487
+那么这就是我们为敌人
+赋予的简单行为
 
 
 280
-00:17:12,886 --> 00:17:16,185
-vegetation, and fog,
-and we finished the game
+00:15:21,321 --> 00:15:25,192
+但是动作编辑器也让您
+构建一些复杂的情景
 
 
 281
-00:17:16,185 --> 00:17:20,766
-by adding some 2D
-overlays on top of that.
+00:15:25,425 --> 00:15:27,294
+而关于那个话题的更多信息
+我邀您观看
 
 
 282
-00:17:20,766 --> 00:17:23,506
-Then the first challenge
-on the code side was
+00:15:27,361 --> 00:15:29,796
+“SpriteKit中的新特性”
+这一讲座环节
 
 
 283
-00:17:23,506 --> 00:17:24,856
-to manage the collisions.
+00:15:30,964 --> 00:15:32,766
+现在可以回到
+我们的游戏平面
 
 
 284
-00:17:25,356 --> 00:17:28,076
-For example, we don't want our
-character to cross the walls.
+00:15:34,535 --> 00:15:36,737
+向我们的敌人添加一个参考
 
 
 285
-00:17:28,966 --> 00:17:32,246
-To do this with collisions,
-we work with collision meshes.
+00:15:38,172 --> 00:15:39,806
+那么我们的场景就建完了
 
 
 286
-00:17:32,246 --> 00:17:37,056
-A collision mesh is a simplified
-version of a rounded mesh
+00:15:41,475 --> 00:15:44,211
+那么刚才我们看到了
+编辑器如何让您
 
 
 287
-00:17:37,616 --> 00:17:41,146
-that has a similar shape so that
-the collision feels consistent
+00:15:44,278 --> 00:15:47,514
+使用来自于外部的构成要素
+构建整个游戏平面
 
 
 288
-00:17:41,146 --> 00:17:42,136
-with what you see on the screen.
+00:15:47,881 --> 00:15:49,750
+以及如何借助阴影修改器和动作
 
 
 289
-00:17:43,366 --> 00:17:45,756
-It's very important to
-work with collision meshes
+00:15:49,816 --> 00:15:51,585
+让场景变得栩栩如生
 
 
 290
-00:17:45,806 --> 00:17:49,206
-and not the rendered mesh
-when you deal with physics
+00:15:52,352 --> 00:15:54,321
+话到此处
+我要把舞台还给托马斯
 
 
 291
-00:17:49,206 --> 00:17:51,156
-and collisions for
-performance reasons.
+00:15:54,755 --> 00:15:56,890
+他将谈一下游戏架构
 
 
 292
-00:17:51,206 --> 00:17:56,726
-And as for the ground, we
-want our character to be able
+00:16:00,227 --> 00:16:01,662
+是的
+我们非常乐于
 
 
 293
-00:17:56,726 --> 00:17:58,946
-to progress everywhere
-in the level
+00:16:01,728 --> 00:16:05,032
+将这个不错的演示
+作为示例代码提供给您
 
 
 294
-00:17:59,286 --> 00:18:00,706
-but always stick on the ground.
+00:16:05,299 --> 00:16:07,201
+它在开发者站点上提供下载
 
 
 295
-00:18:01,326 --> 00:18:03,696
-So we need to know
-what is the elevation
+00:16:07,868 --> 00:16:11,004
+你将看到它是非常简单和直接的
 
 
 296
-00:18:03,696 --> 00:18:05,366
-at any point in the 3D world.
+00:16:11,104 --> 00:16:14,608
+那里有大约一千个同时适用于
+iOS 和 OS X的代码项目
 
 
 297
-00:18:06,616 --> 00:18:08,396
-For that, there are
-several solutions.
+00:16:14,708 --> 00:16:17,911
+它包括诸如声音和控件等一切
 
 
 298
-00:18:08,666 --> 00:18:12,036
-What we did here was to again
-work with the collision meshes.
+00:16:18,178 --> 00:16:19,580
+您刚才看到的一切
 
 
 299
-00:18:13,676 --> 00:18:18,956
-And we do array intersection,
-vertical array and meshes,
+00:16:21,748 --> 00:16:23,617
+Amaury刚才向您展示了
 
 
 300
-00:18:19,696 --> 00:18:21,446
-this I was go us an
-intersection point,
+00:16:23,684 --> 00:16:26,486
+为了构建此演示
+在Xcode 7中所做的工作
 
 
 301
-00:18:22,136 --> 00:18:23,796
-and this is where we
-can place our character.
+00:16:26,553 --> 00:16:28,622
+我将快速地展示剩余的内容
 
 
 302
-00:18:24,816 --> 00:18:27,756
-Then whe we move the
-character with the touchscreen
+00:16:28,689 --> 00:16:32,626
+包括在内部和外部的工作
 
 
 303
-00:18:27,906 --> 00:18:32,186
-of the keyboard, we simply
-move it on the X and Z plane.
+00:16:33,260 --> 00:16:34,561
+我们做的第一件事
 
 
 304
-00:18:33,376 --> 00:18:36,656
-Then we do a new intersection
-where the character is.
+00:16:35,295 --> 00:16:37,264
+是为我们的游戏
 
 
 305
-00:18:37,896 --> 00:18:40,726
-This gives us a new intersection
-point, and we use that point
+00:16:37,831 --> 00:16:40,067
+定义一个方向
+和一个简单的游戏播放控制
 
 
 306
-00:18:40,726 --> 00:18:43,426
-to adjust the Y position
-of our character.
+00:16:40,133 --> 00:16:42,169
+我们是从游戏的
+主要角色开始的
 
 
 307
-00:18:44,296 --> 00:18:48,086
-We redo that at every frame,
-and this is how simple it is
+00:16:42,603 --> 00:16:44,705
+然后我们定义了
+我们的平面的形状
 
 
 308
-00:18:48,086 --> 00:18:51,946
-to animate our character
-in the game.
+00:16:44,938 --> 00:16:47,274
+包括可收集物品应在的位置
 
 
 309
-00:18:52,816 --> 00:18:53,686
-Then animations.
+00:16:47,608 --> 00:16:48,775
+以及敌人应在的位置
 
 
 310
-00:18:54,276 --> 00:18:56,236
-There are several animated
-elements in the game.
+00:16:49,776 --> 00:16:53,046
+而且我们定义了
+我们希望通过使用SceneKit
 
 
 311
-00:18:56,936 --> 00:19:01,186
-The character is animated
-when it is idle or working.
+00:16:53,113 --> 00:16:54,648
+而实现的外观
 
 
 312
-00:19:02,506 --> 00:19:04,596
-The grass and the
-bamboos are animated
+00:16:55,883 --> 00:16:57,751
+然后下一步就是
 
 
 313
-00:19:04,596 --> 00:19:06,336
-to simulate wind effect.
+00:16:58,218 --> 00:17:00,821
+在3D工具中仔细查看3D模型
 
 
 314
-00:19:07,026 --> 00:19:09,696
-And as a nice side effect, you
-can see that the shadows casted
+00:17:02,089 --> 00:17:05,893
+描绘出不同的质地
+配置我们的角色
 
 
 315
-00:19:09,696 --> 00:19:12,956
-by the bamboos are also
-automatically animated.
+00:17:06,593 --> 00:17:07,895
+并使其具有动画效果
 
 
 316
-00:19:13,596 --> 00:19:15,546
-And all these animations
-are important
+00:17:08,795 --> 00:17:09,930
+最后的润色
 
 
 317
-00:19:16,066 --> 00:19:18,936
-because they contribute
-making your game more live.
+00:17:10,263 --> 00:17:12,633
+是通过添加某些粒子
 
 
 318
-00:19:20,346 --> 00:19:23,626
-And technically, the character
+00:17:12,900 --> 00:17:14,635
+植物以及烟雾完成的
 
 
 319
-00:19:23,626 --> 00:19:26,036
-and the bamboos are
-animated using skinning.
+00:17:14,902 --> 00:17:16,036
+我们最后通过在上面
 
 
 320
-00:19:26,186 --> 00:19:30,456
-So the artist already built
-the skeleton and the animations
+00:17:16,103 --> 00:17:18,438
+添加一些二维叠加层
+而完成的游戏的制作
 
 
 321
-00:19:30,616 --> 00:19:33,736
-in the 3D tool and
-exported that to a DAE file,
+00:17:20,707 --> 00:17:23,443
+然后在代码方面的
+第一个挑战是
 
 
 322
-00:19:34,236 --> 00:19:37,206
-so they are absolutely no good
-to do here for the developer.
+00:17:23,510 --> 00:17:24,845
+对碰撞的处理
 
 
 323
-00:19:37,786 --> 00:19:40,896
-And the grass was animated
+00:17:25,345 --> 00:17:28,214
+比如 我们不希望
+我们的角色穿过墙壁
 
 
 324
-00:19:41,086 --> 00:19:45,736
-with a shadow modifier
-directly in Xcode 7.
+00:17:28,982 --> 00:17:30,450
+为了通过碰撞实现它
 
 
 325
-00:19:45,856 --> 00:19:48,276
-Related to animations,
-particle effects.
+00:17:30,617 --> 00:17:32,319
+我们采用了“碰撞网”
 
 
 326
-00:19:49,956 --> 00:19:52,636
-So there are several particle
-effects in the game, and again,
+00:17:33,253 --> 00:17:37,057
+“碰撞网”简化版本的
+圆形网格
 
 
 327
-00:19:52,636 --> 00:19:57,886
-they were all done entirely
-in Xcode 7, no code here.
+00:17:37,624 --> 00:17:38,825
+它有一个类似的形状
 
 
 328
-00:19:57,886 --> 00:20:03,656
-The pearl and the flower
-with some sparkles emitted.
+00:17:39,193 --> 00:17:42,129
+因此碰撞的感觉
+与您在屏幕上所看到的一致
 
 
 329
-00:20:04,116 --> 00:20:07,226
-And the enemy throws some fire.
+00:17:43,363 --> 00:17:45,766
+当您出于性能原因
+处理物理问题或碰撞时
 
 
 330
-00:20:07,386 --> 00:20:14,296
-That was done with a --
-modulated with a color gradient.
+00:17:45,832 --> 00:17:48,468
+应采用“碰撞网”
+而不是“渲染网”
 
 
 331
-00:20:14,436 --> 00:20:18,726
-The particle was done with
-four images of dots more
+00:17:48,535 --> 00:17:51,171
+这一点是很重要的
 
 
 332
-00:20:18,856 --> 00:20:22,986
-or less blurred with random
-sizes and an initial velocity
+00:17:52,873 --> 00:17:54,675
+而对于地面
 
 
 333
-00:20:22,986 --> 00:20:26,426
-to simulate the wind effect.
+00:17:55,075 --> 00:17:56,810
+我们希望角色能够
 
 
 334
-00:20:26,556 --> 00:20:28,226
-Now, one note about
-our materials
+00:17:56,877 --> 00:17:58,645
+在平台上各处行进
 
 
 335
-00:20:29,086 --> 00:20:31,286
-and how we achieve this
-great-looking materials
+00:17:59,346 --> 00:18:00,714
+但仍然紧贴地面
 
 
 336
-00:20:31,286 --> 00:20:32,976
-in the game.
+00:18:01,315 --> 00:18:03,383
+因此我们需要知道 
 
 
 337
-00:20:33,196 --> 00:20:36,686
-So here is our looks
-like in the game,
+00:18:03,450 --> 00:18:05,419
+在3D世界里任一点的标高
 
 
 338
-00:20:37,046 --> 00:20:39,306
-but if you just take its
-geometry and render it
+00:18:06,620 --> 00:18:08,522
+对此有几个解决方案
 
 
 339
-00:20:39,306 --> 00:20:41,396
-with flat colors, it
-would look like this,
+00:18:08,655 --> 00:18:12,025
+我们这里仍然采用了“碰撞网”
 
 
 340
-00:20:41,816 --> 00:20:43,416
-which is a little
-bit too simplistic.
+00:18:13,660 --> 00:18:14,728
+我们绘制了
 
 
 341
-00:20:44,146 --> 00:20:47,606
-So the first thing we did was
-to set a diffused texture,
+00:18:15,329 --> 00:18:18,966
+阵列交叉
+垂直阵列以及网格
 
 
 342
-00:20:48,086 --> 00:20:50,386
-and this gives us a base
-color of our objects.
+00:18:19,700 --> 00:18:21,568
+这给了我们一个交叉点
 
 
 343
-00:20:51,156 --> 00:20:55,806
-Then we added a normal map
-that added very fine details
+00:18:22,135 --> 00:18:23,804
+是我们应该放置角色的位置
 
 
 344
-00:20:56,036 --> 00:20:58,706
-to our surface without
-adding many polygons.
+00:18:24,805 --> 00:18:28,809
+然后当我们使用触屏或键盘
+移动角色时
 
 
 345
-00:20:58,776 --> 00:21:00,266
-So this is quite cheap.
+00:18:29,510 --> 00:18:32,246
+我们只是在X平面
+或Z平面上移动它
 
 
 346
-00:21:00,976 --> 00:21:06,626
-Then we added a light map using
-the self-illumination property,
+00:18:33,380 --> 00:18:36,650
+然后我们在角色所在位置
+绘制了一个新的交叉
 
 
 347
-00:21:07,066 --> 00:21:08,536
-which is new in this release.
+00:18:37,885 --> 00:18:39,620
+这为我们提供了一个新的交叉点
 
 
 348
-00:21:09,976 --> 00:21:11,966
-And the light map
-adds very fine details
+00:18:39,753 --> 00:18:43,423
+我们利用这个点调整我们的角色
+在Y平面上的位置
 
 
 349
-00:21:11,966 --> 00:21:14,566
-about global illumination
-to our objects.
+00:18:44,958 --> 00:18:48,362
+我们在每个帧上都重复操作
+这说明了让我们的角色
 
 
 350
-00:21:14,566 --> 00:21:17,306
-You can see in the
-corner of the stone,
+00:18:48,595 --> 00:18:50,697
+在游戏中动起来
+是多么的简单
 
 
 351
-00:21:17,856 --> 00:21:20,896
-you can see some
-occlusion, for example,
+00:18:52,799 --> 00:18:53,767
+然后是多个动画
 
 
 352
-00:21:20,896 --> 00:21:24,726
-that is baked in the light map.
+00:18:54,268 --> 00:18:56,336
+游戏中有几个动画元素
 
 
 353
-00:21:24,946 --> 00:21:27,946
-Then the last thing we did
-was a reflective cube map
+00:18:56,937 --> 00:19:01,175
+角色不管在空闲或工作时
+都是动画的
 
 
 354
-00:21:28,376 --> 00:21:31,126
-to reflect an environment
-and, in particular, the sky.
+00:19:02,509 --> 00:19:04,945
+草和竹子的动画
 
 
 355
-00:21:31,126 --> 00:21:35,276
-So the reflective cube
-map looks like this.
+00:19:05,012 --> 00:19:06,413
+是为了模拟风的效果
 
 
 356
-00:21:35,276 --> 00:21:38,306
-We attenuate its effect
-using an attenuateer
+00:19:07,014 --> 00:19:08,415
+作为一个不错的意外效果
 
 
 357
-00:21:39,166 --> 00:21:42,846
-to attenuate the
-reflection on the surfaces
+00:19:08,482 --> 00:19:10,417
+你会发现竹子投射的影子
 
 
 358
-00:21:42,956 --> 00:21:46,476
-that are facing the
-point of view.
+00:19:10,484 --> 00:19:12,953
+也自动具有动画效果
 
 
 359
-00:21:46,686 --> 00:21:50,256
-Now, one note about
-the light map.
+00:19:13,587 --> 00:19:15,556
+所有这些动画都是重要的
 
 
 360
-00:21:50,256 --> 00:21:52,746
-It only baked the
-global illumination
+00:19:16,056 --> 00:19:19,059
+因为它们都有助于
+让您的游戏更加栩栩如生
 
 
 361
-00:21:52,746 --> 00:21:56,446
-and not the main direct light
-and not the main shadows
+00:19:20,694 --> 00:19:21,628
+在技术上
 
 
 362
-00:21:57,066 --> 00:21:59,066
-because we want the
-main lighting
+00:19:23,430 --> 00:19:26,033
+角色和竹子是通过蒙皮
+而实现的动画效果
 
 
 363
-00:21:59,066 --> 00:22:00,776
-to continue to be fully dynamic.
+00:19:26,533 --> 00:19:31,572
+因此艺术家们已经在3D工具中
+构建了骨架和动画
 
 
 364
-00:22:01,416 --> 00:22:04,326
-That way if we want, we can
-animate the position of the sun
+00:19:31,772 --> 00:19:33,740
+并已将其导出为DAE文件
 
 
 365
-00:22:04,326 --> 00:22:07,996
-if needed, but most of all,
-a character can progress
+00:19:34,241 --> 00:19:37,211
+因此在这里
+开发者完全没有什么好做的
 
 
 366
-00:22:07,996 --> 00:22:11,076
-in the game, and its shadows
-are live and automatically,
+00:19:39,313 --> 00:19:41,014
+草的动画是直接在Xcode 7中
 
 
 367
-00:22:11,076 --> 00:22:14,226
-you have nothing to do here.
+00:19:41,081 --> 00:19:44,151
+通过阴影修改器实现的
 
 
 368
-00:22:14,446 --> 00:22:16,076
-So that's about it
-for this demo,
+00:19:45,853 --> 00:19:48,488
+与动画相关的是颗粒效果
 
 
 369
-00:22:16,076 --> 00:22:17,936
-and I hand over to
-Sebastien to talk
+00:19:49,957 --> 00:19:52,059
+游戏中已有了几种粒子效果
 
 
 370
-00:22:17,936 --> 00:22:19,396
-about the transition to Metal.
+00:19:52,125 --> 00:19:55,095
+而且它们也是全部在Xcode7
+中完成的
 
 
 371
-00:22:19,746 --> 00:22:19,976
-Thank you.
+00:19:55,162 --> 00:19:56,096
+<br/>
+这里没有代码
 
 
 372
-00:22:20,516 --> 00:22:24,596
-[Applause]
+00:19:57,264 --> 00:20:03,570
+对于珍珠和鲜花
+燃烧的火球发出的一些火花
 
 
 373
-00:22:25,096 --> 00:22:27,276
->> SEBASTIEN METROT:
-Thank you, Thomas.
+00:20:05,572 --> 00:20:07,307
+以及敌人吐出的一些火苗
 
 
 374
-00:22:27,276 --> 00:22:30,556
-So I am Sebastien, and I
-am working on SceneKit,
+00:20:07,374 --> 00:20:11,111
+都是通过颜色渐变的调节而完成的
 
 
 375
-00:22:30,946 --> 00:22:34,316
-and I am going to talk to you
-about the transition to Metal
+00:20:11,278 --> 00:20:12,746
+由白色到黄色
+然后到红色
 
 
 376
-00:22:34,316 --> 00:22:37,096
-as well as a bunch
-of new features
+00:20:13,380 --> 00:20:15,549
+环境的颗粒效果
 
 
 377
-00:22:37,096 --> 00:22:38,366
-that we have added this year.
+00:20:15,616 --> 00:20:17,918
+是四张由随机大小
 
 
 378
-00:22:39,946 --> 00:22:43,136
-So SceneKit is transitioning
-to Metal.
+00:20:17,985 --> 00:20:19,753
+且或多或少模糊的点
 
 
 379
-00:22:43,136 --> 00:22:45,036
-Metal, as you know,
-is very low-level
+00:20:20,053 --> 00:20:21,588
+构成的图造成的
 
 
 380
-00:22:45,226 --> 00:22:50,476
-and low-overhead graphic API
-that brings better performances
+00:20:21,788 --> 00:20:23,090
+而且那些点都具有初始速度
 
 
 381
-00:22:50,636 --> 00:22:54,646
-and in much more modern
-API to the platforms,
+00:20:23,156 --> 00:20:24,157
+以模拟风的效果
 
 
 382
-00:22:55,406 --> 00:22:58,266
-and most importantly for you
-SceneKit users, it just works.
+00:20:26,560 --> 00:20:28,328
+现在需要提一下我们的材质
 
 
 383
-00:23:00,216 --> 00:23:02,486
-It also brings some new
-features to SceneKit,
+00:20:29,096 --> 00:20:31,632
+以及我们如何在游戏中
+实现这种看起来很棒的材质效果
 
 
 384
-00:23:03,206 --> 00:23:06,516
-like compute shaders so
-you can just use a Metal --
+00:20:33,166 --> 00:20:34,001
+这里就是...
 
 
 385
-00:23:06,516 --> 00:23:13,086
-or the geometry source or Metal
-texture as material property.
+00:20:34,268 --> 00:20:36,670
+我们的木块
+在游戏中的样子
 
 
 386
-00:23:14,046 --> 00:23:16,836
-It also allows us to
-do automatic batching.
+00:20:37,037 --> 00:20:38,572
+但是如果您只是取它的几何形状
 
 
 387
-00:23:17,216 --> 00:23:19,876
-So if you have the geometry used
+00:20:38,639 --> 00:20:40,207
+并用单调的颜色渲染它
 
 
 388
-00:23:19,876 --> 00:23:22,306
-by multiple objects
-using the same material,
+00:20:40,274 --> 00:20:41,542
+它看上去就像是这个样子
 
 
 389
-00:23:22,566 --> 00:23:25,666
-we can dramatically reduce
-the number of [Inaudible].
+00:20:41,808 --> 00:20:43,410
+有点过于简单化了
 
 
 390
-00:23:26,446 --> 00:23:28,226
-I will show you that
-with a demo.
+00:20:44,144 --> 00:20:45,312
+因此我们做的第一件事
 
 
 391
-00:23:29,326 --> 00:23:32,266
-So what you see is a simple
-SceneKit application running
+00:20:45,379 --> 00:20:47,614
+是设置发散性的质地
 
 
 392
-00:23:32,266 --> 00:23:33,976
-on the OpenGL ES editor.
+00:20:48,081 --> 00:20:50,384
+这给了我们物体的基本颜色
 
 
 393
-00:23:34,346 --> 00:23:37,666
-It is displaying a planet
-with orbiting asteroids,
+00:20:51,151 --> 00:20:52,986
+然后我们添加一个常规图
 
 
 394
-00:23:38,266 --> 00:23:41,176
-and on the OpenGL
-is eating up much
+00:20:53,820 --> 00:20:55,956
+它使我们的表面
+进一步变得极其细化
 
 
 395
-00:23:41,176 --> 00:23:43,076
-of the CPU just displaying
-the asteroids.
+00:20:56,023 --> 00:20:58,725
+同时不会增加大量的多边形
 
 
 396
-00:23:43,116 --> 00:23:46,986
-As you can see, we cannot
-add many more asteroids
+00:20:58,792 --> 00:20:59,893
+因此这是很容易做到的
 
 
 397
-00:23:47,106 --> 00:23:49,866
-without maxing CPU and
-reducing the frame rate.
+00:21:01,261 --> 00:21:03,063
+然后我们添加一个光线图
 
 
 398
-00:23:51,066 --> 00:23:54,136
-But if we move to the
-same application running
+00:21:03,263 --> 00:21:06,633
+使用此次版本中最新的
 
 
 399
-00:23:55,306 --> 00:23:58,486
-on the Metal renderer, we
-can add many more asteroids,
+00:21:07,067 --> 00:21:08,535
+自照明属性
 
 
 400
-00:23:58,916 --> 00:24:02,586
-as you will see in a moment.
+00:21:09,970 --> 00:21:12,206
+在对我们的物体的整体照明方面
 
 
 401
-00:24:02,716 --> 00:24:06,326
-Yes. Of course, the CPU
-starts to be eaten too,
+00:21:12,272 --> 00:21:14,508
+光线图让细部进一步细化
 
 
 402
-00:24:06,666 --> 00:24:10,686
-but we can raise the number
-of asteroids dramatically.
+00:21:14,575 --> 00:21:15,776
+比如
+您可以看到...
 
 
 403
-00:24:11,336 --> 00:24:14,566
-I think it's quite awesome.
+00:21:16,243 --> 00:21:17,377
+石头的角
 
 
 404
-00:24:15,366 --> 00:24:17,366
-[Applause]
+00:21:17,611 --> 00:21:19,880
+您可以看到一些光的遮蔽
 
 
 405
-00:24:17,716 --> 00:24:17,976
-Thank you.
+00:21:20,280 --> 00:21:22,115
+例如它在光线图中具有
+烘培效果
 
 
 406
-00:24:24,536 --> 00:24:29,196
-So how do you adopt Metal with
-your SceneKit applications?
+00:21:24,952 --> 00:21:28,155
+然后我们做的最后一件事
+是建立一个反射立方图
 
 
 407
-00:24:30,416 --> 00:24:33,356
-Well, first is the default
-on iOS 9, so you just have
+00:21:28,388 --> 00:21:29,790
+以便反映环境
 
 
 408
-00:24:33,356 --> 00:24:35,726
-to recompile your
-application with the new SDK,
+00:21:29,857 --> 00:21:31,325
+尤其是天空
 
 
 409
-00:24:36,096 --> 00:24:39,156
-and it will use Metal on all
-the hardware that supports it.
+00:21:32,059 --> 00:21:32,893
+反射立方图
 
 
 410
-00:24:40,316 --> 00:24:41,626
-It's also backward compatible,
+00:21:32,960 --> 00:21:33,894
+看起来就是这样
 
 
 411
-00:24:41,626 --> 00:24:43,476
-so if you have an
-existing application
+00:21:34,962 --> 00:21:38,298
+我们使用衰减器
+使环境效果逐渐减弱
 
 
 412
-00:24:43,476 --> 00:24:46,146
-that you didn't change
-and didn't recompile,
+00:21:39,433 --> 00:21:42,836
+使朝向目光方向的
 
 
 413
-00:24:46,146 --> 00:24:48,496
-it will work on OpenGL
-by default.
+00:21:42,970 --> 00:21:44,671
+表面上的反射减弱
 
 
 414
-00:24:49,686 --> 00:24:53,536
-And you can opt for using the
-OpenGL renderer, if you want to,
+00:21:46,673 --> 00:21:49,209
+现在关于光线图
+还有一点需要注意
 
 
 415
-00:24:53,896 --> 00:24:55,946
-for example, if you
-have custom shaders
+00:21:49,943 --> 00:21:52,679
+它只烘培整体照明
 
 
 416
-00:24:55,986 --> 00:24:57,746
-that are OpenGL specific.
+00:21:52,746 --> 00:21:56,450
+而不烘培直射的
+主要光线和主要阴影
 
 
 417
-00:24:58,896 --> 00:25:02,106
-Choosing the renderer
-is really easy,
+00:21:57,050 --> 00:21:59,052
+因为我们希望整体照明
 
 
 418
-00:25:02,106 --> 00:25:03,816
-if you have a built-in
-application
+00:21:59,119 --> 00:22:00,787
+保持充分的动态感
 
 
 419
-00:25:03,816 --> 00:25:08,966
-with built-in renderer, you just
-have to use this small button
+00:22:01,421 --> 00:22:04,825
+如果我们想 有需要时
+我们可以让太阳的位置也动起来
 
 
 420
-00:25:08,966 --> 00:25:10,016
-to change the default.
+00:22:05,225 --> 00:22:06,193
+但是最重要的是
 
 
 421
-00:25:11,186 --> 00:25:12,916
-You can also do it
-programmatically.
+00:22:06,493 --> 00:22:07,928
+在游戏中角色可以行进
 
 
 422
-00:25:12,916 --> 00:25:16,916
-So if you created your
-scene view at runtime,
+00:22:07,995 --> 00:22:10,664
+它的影子也是活跃和自动的
 
 
 423
-00:25:17,326 --> 00:25:21,486
-you will give it the
-right option, use Metal
+00:22:10,731 --> 00:22:12,432
+在这里
+您无事可做
 
 
 424
-00:25:21,546 --> 00:25:23,136
-or OpenGL, as you want.
+00:22:14,434 --> 00:22:16,069
+那么
+那就是演示内容
 
 
 425
-00:25:23,756 --> 00:25:27,366
-And what's new also is
-that we have added support
+00:22:16,136 --> 00:22:17,871
+我把舞台移交给塞巴斯蒂安
 
 
 426
-00:25:27,366 --> 00:25:28,446
-for Metal shaders.
+00:22:17,938 --> 00:22:20,007
+他将继续讨论向Metal的过渡
+谢谢大家
 
 
 427
-00:25:28,446 --> 00:25:31,696
-So how do you deal with shaders
-in SceneKit with the new API?
+00:22:24,778 --> 00:22:25,746
+谢谢你 托马斯
 
 
 428
-00:25:32,696 --> 00:25:37,226
-The first way to use custom
-shaders with SceneKit is
+00:22:26,880 --> 00:22:28,315
+我是 塞巴斯蒂安
 
 
 429
-00:25:37,496 --> 00:25:39,556
-to use Metal shader modifiers.
+00:22:29,016 --> 00:22:31,251
+我正在从事SceneKit研发
 
 
 430
-00:25:39,886 --> 00:25:43,016
-Shadow modifyers used
-to be only in GSL.
+00:22:31,485 --> 00:22:34,321
+我将跟大家谈谈向Metal
 
 
 431
-00:25:43,126 --> 00:25:45,296
-Now we support both languages.
+00:22:34,388 --> 00:22:36,156
+以及我们今年增加的
 
 
 432
-00:25:45,566 --> 00:25:51,396
-If you add on GLSL modifier, it
-will work as it is on OpenGL,
+00:22:36,223 --> 00:22:38,358
+很多新特性的过渡
 
 
 433
-00:25:51,396 --> 00:25:53,336
-and it will be translated
-to Metal.
+00:22:39,860 --> 00:22:41,695
+那么
+SceneKit正朝Metal过渡
 
 
 434
-00:25:54,006 --> 00:25:55,586
-It works in most situations.
+00:22:42,596 --> 00:22:45,165
+大家知道
+Metal是一个非常低水平的
 
 
 435
-00:25:56,156 --> 00:25:58,206
-If you write your
-shadow modifier
+00:22:45,232 --> 00:22:47,501
+低开销的图形 API
 
 
 436
-00:25:58,206 --> 00:26:01,056
-with Metal shadow
-language, it will not work,
+00:22:48,902 --> 00:22:51,738
+它为多个平台带来了
+更优的性能
 
 
 437
-00:26:01,056 --> 00:26:05,356
-it will be ignored, but
-it will work as Metal.
+00:22:51,805 --> 00:22:54,775
+以及更加现代的API
 
 
 438
-00:26:06,676 --> 00:26:13,496
-The second way to use shaders in
-SceneKit is to use SCNPrograms.
+00:22:55,409 --> 00:22:58,478
+对您们SceneKit用户来说
+最重要的是它确实奏效
 
 
 439
-00:26:14,286 --> 00:26:16,246
-In this case, there is
-no automatic translation,
+00:23:00,214 --> 00:23:02,482
+它也为SceneKit带来了
+一些新特性
 
 
 440
-00:26:16,246 --> 00:26:17,716
-so you will do it by hand.
+00:23:03,083 --> 00:23:06,620
+比如对阴影着色的计算
+因此您可以仅使用...Metal
 
 
 441
-00:26:17,946 --> 00:26:19,546
-Will you have to
-translate all your code.
+00:23:06,887 --> 00:23:11,225
+或是几何资源或是Metal质地
 
 
 442
-00:26:20,276 --> 00:26:23,196
-It's supported -- it
-supports both GLSL
+00:23:11,291 --> 00:23:13,093
+作为材质属性
 
 
 443
-00:26:23,296 --> 00:26:28,266
-and Metal shading languages,
-so you can support both
+00:23:14,061 --> 00:23:16,830
+它还让我们进行自动批处理
 
 
 444
-00:26:28,266 --> 00:26:29,396
-in the same application.
+00:23:17,231 --> 00:23:20,934
+所以如果您的几何资源
+被多个物体使用
 
 
 445
-00:26:30,146 --> 00:26:31,516
-You can compile them offline.
+00:23:21,134 --> 00:23:22,402
+而且使用相同的材质
 
 
 446
-00:26:32,316 --> 00:26:35,356
-You just have to provide the
-function names for the shader
+00:23:22,569 --> 00:23:25,706
+我们可以极大地降低
+[听不清] 的数量
 
 
 447
-00:26:35,356 --> 00:26:37,526
-for the fragment
-and vertex shader,
+00:23:26,440 --> 00:23:28,375
+我将通过演示向您表明这一点
 
 
 448
-00:26:38,176 --> 00:26:39,926
-or you can compile
-it at runtime.
+00:23:29,343 --> 00:23:31,912
+您看到的是一个
+运行在OpenGL ES编辑器上的
 
 
 449
-00:26:39,956 --> 00:26:42,466
-In this case, you just have to
-give the source code in addition
+00:23:31,979 --> 00:23:33,981
+简单的SceneKit 应用
 
 
 450
-00:26:42,466 --> 00:26:44,586
-to the function names.
+00:23:34,348 --> 00:23:37,651
+它显示的是一个
+有小行星围绕其轨道运动的行星
 
 
 451
-00:26:45,256 --> 00:26:47,106
-I will show you now
-how you do it
+00:23:38,252 --> 00:23:40,487
+仅是显示小行星就让
 
 
 452
-00:26:47,776 --> 00:26:51,316
-by creating a very small shader
-that would work in SceneKit.
+00:23:40,554 --> 00:23:43,056
+OpenGL占用了大量的CPU空间
 
 
 453
-00:26:51,386 --> 00:26:53,786
-The first operation that
-you will have to do is
+00:23:43,123 --> 00:23:43,991
+如您所见
 
 
 454
-00:26:53,926 --> 00:26:58,526
-to include our SceneKit header
-so that you can have access
+00:23:44,691 --> 00:23:47,027
+不增大CPU并降低帧速率的话
 
 
 455
-00:26:58,926 --> 00:27:03,726
-to some semantics and, for
-example, the default metrics.
+00:23:47,094 --> 00:23:49,863
+我们无法添加更多小行星
 
 
 456
-00:27:04,416 --> 00:27:09,726
-Here we define our custom
-vertex structure that is
+00:23:51,064 --> 00:23:54,201
+但如果我们转到Metal渲染器上
+运行的同样的应用
 
 
 457
-00:27:09,726 --> 00:27:13,486
-in the correct data
-in SceneKit thanks
+00:23:55,302 --> 00:23:58,572
+我们可以增添多得多的小行星
 
 
 458
-00:27:13,486 --> 00:27:15,106
-to the semantic definition.
+00:23:58,906 --> 00:24:00,707
+过一会儿您就会看到
 
 
 459
-00:27:16,116 --> 00:27:21,316
-We can also define the use of
-a metrics that is, for example,
+00:24:03,610 --> 00:24:06,313
+当然
+CPU也开始被吃掉
 
 
 460
-00:27:21,386 --> 00:27:22,386
-the model view projection.
+00:24:06,680 --> 00:24:10,784
+但是我们可以
+大幅增加小行星的数量
 
 
 461
-00:27:23,086 --> 00:27:28,116
-And we can define our own
-structure with our own data
+00:24:13,220 --> 00:24:14,555
+我觉得这是很棒的
 
 
 462
-00:27:28,116 --> 00:27:30,836
-for the algorithm we
-are trying to create.
+00:24:17,524 --> 00:24:18,358
+谢谢大家
 
 
 463
-00:27:32,146 --> 00:27:36,196
-Then we just have to
-create the vertex function
+00:24:25,032 --> 00:24:29,336
+那么您怎样在您的SceneKit
+应用上采用Metal呢？
 
 
 464
-00:27:36,776 --> 00:27:42,566
-by giving the arguments for the
-structure that we have defined.
+00:24:30,404 --> 00:24:32,606
+首先
+它是默认在iOS 9上运行的
 
 
 465
-00:27:42,566 --> 00:27:43,046
-Really easy.
+00:24:32,673 --> 00:24:35,676
+因此您将不得不使用最新的SDK
+对您的应用进行重新编译
 
 
 466
-00:27:44,146 --> 00:27:47,916
-Then in the program, we just
-define the same structures,
+00:24:36,109 --> 00:24:39,146
+然后它将在所有支持它的硬件上
+使用Metal的硬件上运行
 
 
 467
-00:27:47,916 --> 00:27:50,236
-we have to use the same
-types and the same layout
+00:24:40,314 --> 00:24:41,648
+它也是向后兼容的
 
 
 468
-00:27:50,236 --> 00:27:52,486
-for the structure as we used
-in the Metal definition.
+00:24:41,715 --> 00:24:43,417
+因此如果您现有一个应用
 
 
 469
-00:27:53,626 --> 00:27:56,686
-We created a program,
-give the vertex
+00:24:43,483 --> 00:24:46,220
+您没有对其进行更改
+也没有进行重编译
 
 
 470
-00:27:56,686 --> 00:27:58,446
-and fragment function names.
+00:24:46,286 --> 00:24:48,488
+它将默认在OpenGL上运行
 
 
 471
-00:27:59,736 --> 00:28:03,756
-And then we can give some
-data by using the structure
+00:24:49,690 --> 00:24:50,924
+而且如果您想的话
 
 
 472
-00:28:03,756 --> 00:28:06,566
-and wrapping it around
-time stamps.
+00:24:50,991 --> 00:24:53,527
+您可以选择使用
+OpenGL渲染器
 
 
 473
-00:28:07,476 --> 00:28:08,046
-Very simple.
+00:24:53,894 --> 00:24:55,929
+比如
+如果您有专用于OpenGL的
 
 
 474
-00:28:09,696 --> 00:28:14,516
-The last way to use shaders in
-SceneKit is to use techniques,
+00:24:55,996 --> 00:24:57,731
+自定义着色器的话
 
 
 475
-00:28:14,996 --> 00:28:16,836
-techniques were introduced
-last year.
+00:24:58,899 --> 00:25:02,002
+选择渲染器是非常简单的
 
 
 476
-00:28:17,216 --> 00:28:19,376
-It's a great way to
-do post-processing
+00:25:02,069 --> 00:25:04,838
+如果您有一个
+配有内置渲染器的内置应用
 
 
 477
-00:28:19,376 --> 00:28:25,456
-for all your applications on the
-role scene, and in this case,
+00:25:04,905 --> 00:25:08,909
+您只须使用这个小小的按钮
 
 
 478
-00:28:25,766 --> 00:28:28,456
-you just have to give the
-correct function names
+00:25:08,976 --> 00:25:10,010
+更改默认选项
 
 
 479
-00:28:28,756 --> 00:28:32,666
-for the Metal shaders in your
-pass definition, and that's it.
+00:25:11,178 --> 00:25:12,913
+您也可以通过编程方式实现
 
 
 480
-00:28:32,836 --> 00:28:34,706
-It will work just like
-the OpenGL version.
+00:25:12,980 --> 00:25:16,016
+因此 如果您在运行时
 
 
 481
-00:28:35,706 --> 00:28:37,116
-That was it for Metal.
+00:25:16,083 --> 00:25:18,185
+创建了自己的场景视图
 
 
 482
-00:28:37,116 --> 00:28:38,966
-Let's move on to
-some new features
+00:25:18,519 --> 00:25:22,222
+您将为其做出正确的选择
+那就是使用Metal或OpenGL
 
 
 483
-00:28:38,966 --> 00:28:40,236
-that we have added
-for you this year.
+00:25:22,523 --> 00:25:23,357
+由您任选
 
 
 484
-00:28:41,616 --> 00:28:46,226
-The first one is the
-integration with Model I/O,
+00:25:23,757 --> 00:25:26,193
+关于...Meta的新特性
 
 
 485
-00:28:46,226 --> 00:28:50,496
-so we have added the support for
-Model I/O, both for importing
+00:25:26,260 --> 00:25:28,395
+我们也增加了对
+Metal着色器的支持
 
 
 486
-00:28:50,496 --> 00:28:53,426
-and exporting of your
-models and scenes.
+00:25:28,462 --> 00:25:31,965
+那么您如何使用配有最新API的
+SceneKit处理着色器呢？
 
 
 487
-00:28:54,036 --> 00:29:01,266
-As you can see, not all the file
-formats support all the data
+00:25:32,699 --> 00:25:36,637
+在SceneKit上使用自定义
+着色器的第一种方法
 
 
 488
-00:29:01,266 --> 00:29:04,376
-that we are supporting in
-SceneKit, so choose the one
+00:25:36,937 --> 00:25:39,540
+是使用Metal阴影修改器
 
 
 489
-00:29:04,376 --> 00:29:06,886
-that is most suited
-for your application.
+00:25:39,873 --> 00:25:43,343
+阴影修改器曾只用GLSL编写
 
 
 490
-00:29:07,496 --> 00:29:12,206
-We have also added scene
-transition with one line
+00:25:43,744 --> 00:25:45,412
+现在我们同时支持这两种语言
 
 
 491
-00:29:12,206 --> 00:29:14,336
-of code, very easy, you
-can create transitions
+00:25:45,579 --> 00:25:48,949
+如果您添加一个GLSL修改器
 
 
 492
-00:29:14,336 --> 00:29:17,076
-between scenes, and
-with great animations.
+00:25:49,283 --> 00:25:51,151
+在OpenGL上它将以
+当前格式运行
 
 
 493
-00:29:18,236 --> 00:29:19,886
-Really easy to use.
+00:25:51,218 --> 00:25:53,520
+而在Metal上
+它将被转换成Metal格式
 
 
 494
-00:29:21,596 --> 00:29:23,596
-We have added also
-debug options,
+00:25:54,021 --> 00:25:55,589
+它在大多数情况下可行
 
 
 495
-00:29:24,066 --> 00:29:27,076
-so you can visualize your
-boxes, your physics shapes,
+00:25:56,156 --> 00:25:59,793
+如果您使用Metal着色语言
+编写了自己的阴影修改器
 
 
 496
-00:29:27,386 --> 00:29:30,076
-everything at one time
-for debugging purposes.
+00:26:00,060 --> 00:26:01,195
+在OpenGL渲染器上
 
 
 497
-00:29:30,656 --> 00:29:36,056
-We have also added
-blend modes to material
+00:26:01,261 --> 00:26:03,030
+它将变为不可行 而被忽略
 
 
 498
-00:29:36,516 --> 00:29:38,756
-so you can choose how
-transparency works
+00:26:03,096 --> 00:26:05,399
+但是在Metal上将以
+当前格式运行
 
 
 499
-00:29:38,886 --> 00:29:42,786
-for each node -- for each
-material in your application.
+00:26:07,034 --> 00:26:11,538
+在SceneKit中使用着色器的
+第二种方法
 
 
 500
-00:29:43,446 --> 00:29:45,026
-You can create new
-effects with that.
+00:26:12,139 --> 00:26:13,674
+是使用SCNPrograms
 
 
 501
-00:29:45,666 --> 00:29:50,256
-And we have also added an
-audio engine that works
+00:26:14,274 --> 00:26:16,243
+这种情况下是没有自动转换的
 
 
 502
-00:29:50,256 --> 00:29:52,266
-for everything in SceneKit.
+00:26:16,310 --> 00:26:17,711
+因此您将手动进行
 
 
 503
-00:29:52,796 --> 00:29:57,326
-We can create 3D sounds,
-attach them to nodes,
+00:26:17,945 --> 00:26:19,546
+您将必须转换您的所有代码
 
 
 504
-00:29:57,436 --> 00:30:00,196
-and they will move with
-the nodes in the scene.
+00:26:20,280 --> 00:26:21,882
+这是被支持的
 
 
 505
-00:30:01,076 --> 00:30:03,236
-It also works with
-ambience and music,
+00:26:21,949 --> 00:26:26,019
+它支持GLSL和Metal两种着色
+语言
 
 
 506
-00:30:03,236 --> 00:30:07,886
-so you can digital position
-audio and loop the sound.
+00:26:26,486 --> 00:26:28,188
+因此您可以在相同的应用中
 
 
 507
-00:30:07,886 --> 00:30:11,196
-The listener is placed on the
-camera node, but you can move it
+00:26:28,255 --> 00:26:29,389
+同时支持两种语言
 
 
 508
-00:30:11,196 --> 00:30:12,326
-to any node in the scene.
+00:26:30,157 --> 00:26:31,525
+您可以离线编译它们
 
 
 509
-00:30:12,326 --> 00:30:12,996
-It's really easy.
+00:26:32,326 --> 00:26:35,362
+您只须提供着色器片段
 
 
 510
-00:30:14,846 --> 00:30:18,016
-It's based on the AVAudioEngine,
-so you just have to annotate
+00:26:35,429 --> 00:26:37,531
+以及定点着色器的函数名称
 
 
 511
-00:30:18,236 --> 00:30:22,246
-from AV audio node, and you can
-do your own audio processing
+00:26:38,232 --> 00:26:39,933
+或者您可以运行时编译它
 
 
 512
-00:30:22,246 --> 00:30:24,536
-if you want to if you have
-an existing audio engine.
+00:26:40,000 --> 00:26:42,202
+在本例中
+除了函数名称外
 
 
 513
-00:30:25,326 --> 00:30:29,086
-And last, we have added also
-a way to created sound action
+00:26:42,269 --> 00:26:43,704
+您只须给出源代码
 
 
 514
-00:30:29,086 --> 00:30:32,406
-so you can integrate sound
-into your action sequences.
+00:26:45,539 --> 00:26:47,441
+现在我将向您展示
+您如何通过创建一个
 
 
 515
-00:30:32,406 --> 00:30:35,476
-That's really easy to do.
+00:26:47,774 --> 00:26:49,810
+将能在SceneKit中工作的
 
 
 516
-00:30:35,736 --> 00:30:39,076
-And here is how you
-use the sound API.
+00:26:50,244 --> 00:26:51,445
+极其小巧的着色器来实现
 
 
 517
-00:30:39,576 --> 00:30:43,756
-First you have to instantiate an
-audio sound from the file fame.
+00:26:51,512 --> 00:26:53,146
+您要做的第一步操作
 
 
 518
-00:30:44,236 --> 00:30:46,846
-Then you create a player and
-attach the player to any node
+00:26:53,413 --> 00:26:56,683
+是加入我们的SceneKit标头
 
 
 519
-00:30:47,016 --> 00:30:50,206
-in the scene, and it will start
-to play right away and stop
+00:26:57,217 --> 00:26:58,652
+以便您能够...
 
 
 520
-00:30:50,256 --> 00:30:51,136
-when the sound is finished.
+00:26:58,919 --> 00:27:00,888
+读取一些顶点语义
 
 
 521
-00:30:51,926 --> 00:30:53,666
-If you want to do
-ambience or music,
+00:27:00,954 --> 00:27:03,891
+以及默认度量指标
 
 
 522
-00:30:53,936 --> 00:30:57,656
-you have to just flip a switch,
+00:27:05,792 --> 00:27:09,196
+在这里我们确定
+我们的自定义顶点结构
 
 
 523
-00:30:58,076 --> 00:31:01,356
-like digital positional
-audio and start looping.
+00:27:09,429 --> 00:27:11,899
+由于语义上的定义
 
 
 524
-00:31:03,006 --> 00:31:06,866
-And last, it's really easy to
-create a play song selection.
+00:27:11,965 --> 00:27:15,102
+这是SceneKit所
+与生俱来的正确数据
 
 
 525
-00:31:06,866 --> 00:31:10,046
-It's just one line, and you
-can run the action or add it
+00:27:16,103 --> 00:27:20,741
+我们还可以阐明
+标准度量指标的使用
 
 
 526
-00:31:10,136 --> 00:31:12,226
-to an existing action sequence.
+00:27:20,807 --> 00:27:22,442
+比如 模型视图投影
 
 
 527
-00:31:13,956 --> 00:31:18,086
-This API was used in the
-sample code for all the sound,
+00:27:24,211 --> 00:27:28,115
+而且我们可以
+使用我们自己的数据
 
 
 528
-00:31:18,606 --> 00:31:21,906
-and we used the collision
-mesh as --
+00:27:28,182 --> 00:27:30,851
+为自己将试图使用的算法
+定义我们自己的结构
 
 
 529
-00:31:21,906 --> 00:31:26,436
-that Thomas showed you
-sooner to detect kind
+00:27:32,152 --> 00:27:36,190
+然后 我们只须通过
+为我们已经定义的结构
 
 
 530
-00:31:26,436 --> 00:31:29,916
-of ground the character
-is working on.
+00:27:36,790 --> 00:27:38,525
+给出参数
 
 
 531
-00:31:30,246 --> 00:31:35,746
-For example [scratching sound]
-when he walks on the grass.
+00:27:38,759 --> 00:27:40,627
+从而创建顶点函数
 
 
 532
-00:31:36,036 --> 00:31:37,626
-Or when he walks on a rock.
+00:27:42,396 --> 00:27:43,230
+真的很简单
 
 
 533
-00:31:38,276 --> 00:31:41,766
-It was really easy to do.
+00:27:44,131 --> 00:27:45,599
+然后在程序中
 
 
 534
-00:31:42,036 --> 00:31:42,766
-So that's about it.
+00:27:45,666 --> 00:27:47,801
+我们只须定义同样的结构
 
 
 535
-00:31:42,766 --> 00:31:46,386
-And I give you back to Thomas
-for the wrap-up of this session.
+00:27:47,868 --> 00:27:50,237
+我们必须为我们在
+Metal定义中使用的结构
 
 
 536
-00:31:46,556 --> 00:31:46,866
-Thank you.
+00:27:50,304 --> 00:27:52,506
+使用同样的类型
+以及同样的布局
 
 
 537
-00:31:48,516 --> 00:31:52,756
-[Applause]
+00:27:53,640 --> 00:27:54,675
+我们创建了程序
 
 
 538
-00:31:53,256 --> 00:31:53,506
->> THOMAS GOOSSENS: Okay.
+00:27:54,875 --> 00:27:58,545
+给出了顶点
+以及片段的函数名称
 
 
 539
-00:31:53,506 --> 00:31:56,706
-So that was an overview of what
-we added to SceneKit this year.
+00:27:59,746 --> 00:28:01,815
+然后我们可以通过使用该结构
 
 
 540
-00:31:57,356 --> 00:32:00,936
-So a great new Scene Editor
-that will save you tons of lines
+00:28:01,882 --> 00:28:04,651
+并将其围绕时间戳进行封装 
 
 
 541
-00:32:00,936 --> 00:32:03,736
-of code and do more for
-your game insight tools,
+00:28:04,718 --> 00:28:06,553
+提供一些数据
 
 
 542
-00:32:03,926 --> 00:32:06,146
-which is usually a good idea.
+00:28:07,387 --> 00:28:08,222
+非常简单
 
 
 543
-00:32:06,146 --> 00:32:07,776
-A smooth transition to Metal
+00:28:10,390 --> 00:28:12,693
+在SceneKit中使用着色器的
 
 
 544
-00:32:08,126 --> 00:32:10,386
-which should boost the
-performance of your game
+00:28:12,759 --> 00:28:14,528
+最后一种方式是使用技巧
 
 
 545
-00:32:11,306 --> 00:32:13,786
-with nothing to do on your
-side most of the time.
+00:28:14,995 --> 00:28:17,164
+技巧
+是去年推出的
 
 
 546
-00:32:15,146 --> 00:32:18,336
-And some new features that were
-presented, and we covered some
+00:28:17,231 --> 00:28:19,399
+它是对您的所有
+在角色场景上的应用
 
 
 547
-00:32:18,336 --> 00:32:19,406
-of them in this session,
+00:28:19,466 --> 00:28:20,701
+进行后期处理的
 
 
 548
-00:32:19,576 --> 00:32:23,976
-but check the documentation
-for a list.
+00:28:21,034 --> 00:28:22,369
+一种很不错的方式
 
 
 549
-00:32:24,726 --> 00:32:27,976
-And an amazing demo app
-that we are really proud
+00:28:23,136 --> 00:28:24,137
+在本例中
 
 
 550
-00:32:27,976 --> 00:32:29,116
-to share the code with you.
+00:28:24,204 --> 00:28:28,542
+您只须给出
+在您的Pass定义中的
 
 
 551
-00:32:30,066 --> 00:32:32,816
-Search for fox on the developer
-website, and you should find it.
+00:28:28,742 --> 00:28:31,645
+Metal着色器的
+正确函数名称
 
 
 552
-00:32:34,526 --> 00:32:38,686
-Now for more information,
-please check the resources
+00:28:31,845 --> 00:28:32,679
+就是那么简单
 
 
 553
-00:32:38,686 --> 00:32:40,276
-and documentation
-we have online,
+00:28:32,846 --> 00:28:34,882
+它的工作原理
+将与OpenGL版本类似
 
 
 554
-00:32:41,086 --> 00:32:42,476
-and for general inquiries,
+00:28:36,049 --> 00:28:37,351
+关于Metal就讲那么多
 
 
 555
-00:32:42,586 --> 00:32:44,606
-contact our Evangelist,
-Allan Schaffer.
+00:28:37,584 --> 00:28:38,952
+让我们继续往下进行
+查看一些
 
 
 556
-00:32:45,856 --> 00:32:49,436
-Some related sessions,
-Model I/O,
+00:28:39,019 --> 00:28:40,287
+今年我们为您添加的新特性
 
 
 557
-00:32:49,436 --> 00:32:51,496
-great new frameworks
-introduced this year,
+00:28:43,390 --> 00:28:44,291
+第一个...
 
 
 558
-00:32:52,536 --> 00:32:55,806
-and check the What's New
-in SpriteKit session.
+00:28:44,558 --> 00:28:46,260
+是与Model I/O的集成
 
 
 559
-00:32:55,896 --> 00:32:58,786
-They have a really great
-demo of the scene editors
+00:28:46,326 --> 00:28:49,129
+我们已经增加了
+对Model I/O的支持
 
 
 560
-00:32:58,786 --> 00:33:00,476
-that go much deeper
-into details.
+00:28:49,396 --> 00:28:51,398
+包括将你们的模型和场景
 
 
 561
-00:33:00,476 --> 00:33:02,416
-So you definitely
-want to see that one.
+00:28:51,665 --> 00:28:53,433
+导入...导出
 
 
 562
-00:33:03,236 --> 00:33:04,146
-And that's about it.
+00:28:55,002 --> 00:28:56,103
+如您所见
 
 
 563
-00:33:04,426 --> 00:33:05,806
-Thanks, and enjoy
-the conference.
+00:28:56,170 --> 00:28:59,940
+并不是
+所有的文件格式都支持
 
 
 564
-00:33:05,916 --> 00:33:06,176
-Thank you.
+00:29:00,007 --> 00:29:03,076
+我们在SceneKit中
+支持的所有数据
 
 
 565
-00:33:07,508 --> 00:33:09,508
-[Applause]
+00:29:03,143 --> 00:29:06,947
+因此请选择
+最适合您的应用的那个
+
+
+566
+00:29:09,917 --> 00:29:11,752
+我们也已经增加了场景过渡
+
+
+567
+00:29:11,818 --> 00:29:13,287
+只用了一行代码
+非常简单
+
+
+568
+00:29:13,353 --> 00:29:15,222
+所以您可以在场景之间
+建立过渡
+
+
+569
+00:29:15,556 --> 00:29:17,157
+而且有不错的动画
+
+
+570
+00:29:18,225 --> 00:29:19,293
+确实简单易用
+
+
+571
+00:29:21,828 --> 00:29:23,697
+我们也增加了调试选项
+
+
+572
+00:29:24,064 --> 00:29:27,067
+因此您可以一次性地
+把您的箱子 各种物理形状
+
+
+573
+00:29:27,401 --> 00:29:30,070
+所有东西进行视觉化处理
+以便调试
+
+
+574
+00:29:33,774 --> 00:29:36,176
+我们也增加了材质的混合模式
+
+
+575
+00:29:36,510 --> 00:29:38,846
+因此您可以为每个节点
+
+
+576
+00:29:38,912 --> 00:29:40,781
+为您应用中的每种材质
+
+
+577
+00:29:40,848 --> 00:29:42,783
+选择透明度的工作方式
+
+
+578
+00:29:43,450 --> 00:29:45,018
+您可以用它创建新的特效
+
+
+579
+00:29:47,387 --> 00:29:50,324
+此外 我们还增加了一个
+能够在SceneKit中
+
+
+580
+00:29:50,390 --> 00:29:52,259
+为所有元素工作的音频引擎
+
+
+581
+00:29:52,793 --> 00:29:53,760
+我们可以创建...
+
+
+582
+00:29:54,027 --> 00:29:55,996
+3D声音
+
+
+583
+00:29:56,230 --> 00:29:57,364
+将它们附加到各个节点
+
+
+584
+00:29:57,431 --> 00:30:00,267
+然后它们将
+随着节点在场景中移动
+
+
+585
+00:30:01,068 --> 00:30:03,237
+它也能与环境和
+音乐协同工作
+
+
+586
+00:30:03,303 --> 00:30:04,671
+因此您可以禁用位置音频
+
+
+587
+00:30:04,738 --> 00:30:06,240
+并让自己创建的声音循环
+
+
+588
+00:30:07,007 --> 00:30:10,477
+监听器被放在了摄像头节点
+
+
+589
+00:30:10,544 --> 00:30:12,346
+但是您可以把它移动到
+场景中的任何节点
+
+
+590
+00:30:12,412 --> 00:30:13,247
+真的是很简单的
+
+
+591
+00:30:14,848 --> 00:30:16,917
+它是基于
+AVAudioEngine的
+
+
+592
+00:30:16,984 --> 00:30:19,586
+因此您只须从AV音频节点
+进行备注
+
+
+593
+00:30:19,653 --> 00:30:21,522
+而且如果您想或
+您有现有音频引擎的话
+
+
+594
+00:30:21,588 --> 00:30:24,525
+您可以进行自己的音频处理工作
+
+
+595
+00:30:25,325 --> 00:30:29,029
+最后 我们也添加了
+一种创建声音动作的方式
+
+
+596
+00:30:29,096 --> 00:30:32,432
+因此 您可以把声音
+整合到您的动作序列中
+
+
+597
+00:30:32,566 --> 00:30:33,500
+真是简单易行的
+
+
+598
+00:30:35,736 --> 00:30:39,273
+这里讲一下如何使用声音API
+
+
+599
+00:30:39,573 --> 00:30:40,841
+首先
+您必须从文件名上
+
+
+600
+00:30:41,074 --> 00:30:43,744
+把一个声音实例化
+
+
+601
+00:30:44,244 --> 00:30:47,581
+然后您创建一个播放器
+并把它附加到场景中的任意节点
+
+
+602
+00:30:47,848 --> 00:30:49,583
+它将立刻开始播放
+
+
+603
+00:30:49,783 --> 00:30:51,151
+当声音结束时即会停止
+
+
+604
+00:30:51,919 --> 00:30:53,654
+如果您希望播放音效或音乐
+
+
+605
+00:30:53,921 --> 00:30:57,658
+您必须进行切换操作
+
+
+606
+00:30:58,091 --> 00:31:01,361
+如 数字音效 位置声音
+以及开始循环播放
+
+
+607
+00:31:02,996 --> 00:31:03,830
+最后
+
+
+608
+00:31:03,897 --> 00:31:06,800
+非常容易
+创建一个歌曲播放选项
+
+
+609
+00:31:06,867 --> 00:31:08,068
+它只有一行
+
+
+610
+00:31:08,135 --> 00:31:10,037
+您可以手动执行或将其添加到
+
+
+611
+00:31:10,137 --> 00:31:11,772
+一个现有的动作序列上
+
+
+612
+00:31:14,274 --> 00:31:16,543
+这个API 曾在示例代码中
+
+
+613
+00:31:16,810 --> 00:31:18,078
+被用于所有声音
+
+
+614
+00:31:18,612 --> 00:31:21,515
+而我们使用碰撞网...
+
+
+615
+00:31:21,582 --> 00:31:24,885
+刚才托马斯向您展示了
+
+
+616
+00:31:25,419 --> 00:31:28,422
+来探测行走中的角色脚下的地面
+
+
+617
+00:31:29,223 --> 00:31:30,057
+比如
+
+
+618
+00:31:32,860 --> 00:31:34,194
+当他在草上行走时
+
+
+619
+00:31:36,563 --> 00:31:37,764
+或者当他在岩石上行走时
+
+
+620
+00:31:39,333 --> 00:31:40,400
+真的很简单易行
+
+
+621
+00:31:41,969 --> 00:31:42,936
+那么 就讲那么多了
+
+
+622
+00:31:43,003 --> 00:31:45,272
+我将把舞台还给托马斯
+
+
+623
+00:31:45,339 --> 00:31:47,007
+来为这个讲座进行一下总结
+谢谢大家
+
+
+624
+00:31:53,180 --> 00:31:56,717
+这就是我们今年为SceneKit
+添加的特性的概述
+
+
+625
+00:31:57,351 --> 00:32:01,388
+一个很棒的场景编辑器
+将为您节省无数行的代码
+
+
+626
+00:32:01,455 --> 00:32:03,857
+并将为您的Game Insight
+工具做更多的工作
+
+
+627
+00:32:03,924 --> 00:32:05,125
+这通常是一个不错的主意
+
+
+628
+00:32:05,993 --> 00:32:07,861
+向Metal的平滑过渡
+
+
+629
+00:32:08,128 --> 00:32:10,397
+将提升您的游戏的表现
+
+
+630
+00:32:10,898 --> 00:32:13,800
+而且多数时间
+您自己什么都不用做
+
+
+631
+00:32:15,135 --> 00:32:17,504
+在这个讲座中
+我们也展示了
+
+
+632
+00:32:17,571 --> 00:32:19,406
+一些新的特性
+
+
+633
+00:32:19,573 --> 00:32:24,111
+但是为了获得活动列表
+请查看在线文稿
+
+
+634
+00:32:25,112 --> 00:32:27,014
+还有一个令人惊叹的演示app
+
+
+635
+00:32:27,147 --> 00:32:29,116
+我们将极其自豪地
+与您分享它的代码
+
+
+636
+00:32:29,783 --> 00:32:31,185
+在开发者站点上搜索 "Fox"
+
+
+637
+00:32:31,351 --> 00:32:32,886
+你们应该能找到它
+
+
+638
+00:32:34,521 --> 00:32:36,223
+如想获取更多信息
+
+
+639
+00:32:36,557 --> 00:32:40,427
+请查看我们的
+网上资源和在线文稿
+
+
+640
+00:32:41,094 --> 00:32:41,929
+一般事务的问询
+
+
+641
+00:32:41,995 --> 00:32:44,631
+请联系我们的技术传播者
+Allan Schaffer
+
+
+642
+00:32:45,799 --> 00:32:47,334
+还有一些相关讲座
+
+
+643
+00:32:48,101 --> 00:32:49,203
+如Model I/O
+
+
+644
+00:32:49,269 --> 00:32:51,672
+今年推出的很棒的新框架
+
+
+645
+00:32:52,539 --> 00:32:53,473
+并请查看
+
+
+646
+00:32:53,540 --> 00:32:55,843
+《SpriteKit中的新特性》
+讲座
+
+
+647
+00:32:55,909 --> 00:32:58,579
+他们有一个确实很棒的
+关于场景编辑器的演示
+
+
+648
+00:32:58,645 --> 00:33:00,480
+会更加深入详细
+
+
+649
+00:33:00,747 --> 00:33:02,583
+因此您一定会希望观看那个讲座
+
+
+650
+00:33:03,250 --> 00:33:04,251
+就讲这么多
+
+
+651
+00:33:04,418 --> 00:33:05,652
+谢谢
+敬请畅享讲座
+
+
+652
+00:33:05,853 --> 00:33:06,687
+谢谢大家
 

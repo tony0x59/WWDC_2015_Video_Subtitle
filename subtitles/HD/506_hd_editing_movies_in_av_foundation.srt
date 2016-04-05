@@ -1,3927 +1,3037 @@
 1
-00:00:23,806 --> 00:00:25,486
->> Welcome to session 506.
+00:00:20,721 --> 00:00:22,890
+AV Foundation编辑电影
 
 
 2
-00:00:25,486 --> 00:00:27,446
-My name is Tim Monroe,
-and I am a member
+00:00:23,790 --> 00:00:27,427
+欢迎来到506号讲座我是
+蒂姆·门罗 是AVFoundation
 
 
 3
-00:00:27,446 --> 00:00:30,576
-of the AVFoundation engineering
-Team, and I want to talk
+00:00:27,494 --> 00:00:30,497
+工程团队成员今天我和大家谈谈
 
 
 4
-00:00:30,576 --> 00:00:33,756
-to you today about editing
-movies in AVFoundation.
+00:00:30,564 --> 00:00:33,767
+在AVFoundation
+编辑电影的问题
 
 
 5
-00:00:34,656 --> 00:00:36,816
-The takeaway message
-is very simple.
+00:00:34,668 --> 00:00:36,603
+讲述的内容很简单
 
 
 6
-00:00:37,626 --> 00:00:39,696
-AVFoundation provides
-new classes
+00:00:37,638 --> 00:00:40,240
+AVFoundation 
+为编辑QuickTime
 
 
 7
-00:00:39,696 --> 00:00:41,966
-for editing QuickTime
-movie files.
+00:00:40,307 --> 00:00:41,975
+电影文件提供新类
 
 
 8
-00:00:42,546 --> 00:00:44,056
-Oh, come on.
+00:00:43,610 --> 00:00:45,946
+哦 好啦 你可以做得更好
+我们来听听掌声
 
 
 9
-00:00:44,056 --> 00:00:44,936
-You can do better than that.
+00:00:47,714 --> 00:00:48,549
+谢谢
 
 
 10
-00:00:44,936 --> 00:00:45,846
-Let's hear some applause.
+00:00:50,717 --> 00:00:53,053
+我对这样的功能感到兴奋
 
 
 11
-00:00:46,016 --> 00:00:47,756
-[Applause]
+00:00:53,120 --> 00:00:56,356
+大家一会儿就会看到这会为我所管理的
 
 
 12
-00:00:47,756 --> 00:00:48,106
-Thank you.
+00:00:56,423 --> 00:00:59,259
+个人项目提供工具在过去十年左右
 
 
 13
-00:00:50,726 --> 00:00:53,166
-Now, I am excited about
-this capability because,
+00:01:00,761 --> 00:01:04,230
+我都在忙着这件事儿在某种程度上
 
 
 14
-00:00:53,166 --> 00:00:56,466
-as you'll see in a little
-bit, this provides the tools
+00:01:04,298 --> 00:01:07,768
+这为我过去大约35年来所做的项目
 
 
 15
-00:00:56,466 --> 00:01:01,116
-that I need to manage a personal
-project that I have been working
+00:01:07,835 --> 00:01:09,770
+带来了新的高度
 
 
 16
-00:01:01,116 --> 00:01:04,346
-on for about the last ten
-years, and in some sense,
+00:01:10,137 --> 00:01:14,441
+对此我可是投入巨大
+希望大家喜欢今天的讲座内容
 
 
 17
-00:01:04,346 --> 00:01:07,786
-it brings to a culmination a
-project that I have been doing
+00:01:15,442 --> 00:01:18,412
+我们可以编辑QuickTime 
+电影文件意味着什么
 
 
 18
-00:01:07,786 --> 00:01:09,776
-for about the last 35 years.
+00:01:18,478 --> 00:01:20,414
+我们可以打开
+QuickTime电影文件
 
 
 19
-00:01:10,146 --> 00:01:11,786
-So I've got a lot of
-skin in this game,
+00:01:20,948 --> 00:01:24,685
+对电影和轨道执行基于范围的编辑
 
 
 20
-00:01:11,786 --> 00:01:14,426
-and I hope you'll enjoy
-the presentation today.
+00:01:24,751 --> 00:01:27,688
+可以选择一个部分电影的一个片段
 
 
 21
-00:01:15,016 --> 00:01:18,416
-So what does it mean to say we
-can edit QuickTime movie files.
+00:01:27,921 --> 00:01:30,123
+复制到其他影片中
 
 
 22
-00:01:18,466 --> 00:01:20,426
-Well, we can open
-QuickTime movie files
+00:01:30,858 --> 00:01:32,359
+可以增减轨道
 
 
 23
-00:01:20,936 --> 00:01:24,756
-and perform range-based
-editing on movies and tracks.
+00:01:32,826 --> 00:01:35,362
+可以设置轨道间的联系
 
 
 24
-00:01:24,756 --> 00:01:27,696
-So you select a section,
-a segment of a movie,
+00:01:35,429 --> 00:01:38,398
+比如在另一个章节轨道的
+一个轨道上做标记
 
 
 25
-00:01:27,916 --> 00:01:30,126
-and copy it into
-some other movie.
+00:01:40,167 --> 00:01:43,070
+可以增加或调整
+轨道和电影元数据
 
 
 26
-00:01:30,866 --> 00:01:32,366
-We can add and remove tracks.
+00:01:44,338 --> 00:01:47,074
+我们可以创建电影文件
 
 
 27
-00:01:32,816 --> 00:01:35,376
-We can set tracks
-associations between tracks --
+00:01:47,140 --> 00:01:49,543
+以及所谓URL样本引用电影文件
 
 
 28
-00:01:35,376 --> 00:01:38,386
-so say to mark one track at
-a chapter track of another.
+00:01:52,179 --> 00:01:53,380
+今天你会怎么做呢？
 
 
 29
-00:01:40,176 --> 00:01:43,076
-We can add or modify
-track and movie metadata.
+00:01:53,714 --> 00:01:58,185
+首先我会
+根据AVFoundation中
 
 
 30
-00:01:44,326 --> 00:01:47,136
-And we can create movie
-files and what I am going
+00:01:59,052 --> 00:02:02,756
+现有的类来放置这些新类
 
 
 31
-00:01:47,136 --> 00:01:49,556
-to call URL sample
-reference movie files.
+00:02:03,490 --> 00:02:05,893
+然后我会做API爬虫文件 
 
 
 32
-00:01:49,556 --> 00:01:53,396
-So how are we going
-to do this today?
+00:02:05,959 --> 00:02:07,294
+其中会介绍并触及
 
 
 33
-00:01:53,706 --> 00:01:58,176
-First thing I am going to do
-is situate these new classes
+00:02:07,361 --> 00:02:10,197
+已经加入这些类的新方法的高点
 
 
 34
-00:01:59,066 --> 00:02:02,766
-in respect to the existing
-classes we have in AVFoundation.
+00:02:10,997 --> 00:02:12,666
+最后我会回过头来返回谈一谈
 
 
 35
-00:02:02,766 --> 00:02:05,986
-Then I am going to do sort of
-an API crawl where I go through
+00:02:12,733 --> 00:02:14,868
+我提到的这个个人项目
 
 
 36
-00:02:05,986 --> 00:02:07,336
-and touch on the high points
+00:02:15,202 --> 00:02:18,472
+其中清楚显示了这些新功能
 
 
 37
-00:02:07,336 --> 00:02:10,196
-of the new methods we've
-added to these classes.
+00:02:18,739 --> 00:02:22,843
+可以将我所搜集的大量数据
+做出有趣的事情来
 
 
 38
-00:02:10,985 --> 00:02:12,706
-And finally, I am going
-to go back and talk
+00:02:23,944 --> 00:02:28,015
+我们来谈谈
+AVFoundation编辑类
 
 
 39
-00:02:12,706 --> 00:02:14,876
-about this personal
-project that I've mentioned
+00:02:28,482 --> 00:02:31,518
+如果已经在编辑环境用过
+AVFoundation
 
 
 40
-00:02:15,196 --> 00:02:19,206
-and show you very clearly how
-these new capabilities allow me
+00:02:32,052 --> 00:02:38,025
+就会知道我们将用到两个类操作抽象类
 
 
 41
-00:02:19,206 --> 00:02:21,696
-to do interesting things
-with this large amount
+00:02:38,091 --> 00:02:41,762
+是复合类可以获得
+AVCompositions
 
 
 42
-00:02:21,696 --> 00:02:22,856
-of data that I've collected.
+00:02:42,062 --> 00:02:45,332
+并在可变水平实现
+AVMutableCompositions
 
 
 43
-00:02:24,066 --> 00:02:28,006
-So let's talk about the
-AVFoundation editing classes.
+00:02:45,799 --> 00:02:47,801
+现在复合类是很酷的内容
 
 
 44
-00:02:28,496 --> 00:02:30,476
-If you've done any
-work with AVFoundation
+00:02:47,868 --> 00:02:50,170
+可以做出相当棒的效果
 
 
 45
-00:02:30,476 --> 00:02:35,096
-in the editing space, you
-know that we have two classes
+00:02:50,671 --> 00:02:53,173
+AVMutableComposition
+只有一点
 
 
 46
-00:02:35,096 --> 00:02:38,096
-that you work with, the
-operative abstraction is
+00:02:53,507 --> 00:02:54,942
+不如人意
 
 
 47
-00:02:38,096 --> 00:02:41,766
-that of a composition, and so
-you can have AVCompositions
+00:02:55,509 --> 00:02:58,212
+没有标准文件格式用来
 
 
 48
-00:02:41,956 --> 00:02:45,346
-and at the mutable level,
-AVMutableCompositions.
+00:02:58,545 --> 00:03:01,315
+序列化复合类
 
 
 49
-00:02:45,786 --> 00:02:47,826
-Now, compositions are
-really cool stuff.
+00:03:02,649 --> 00:03:07,321
+这使得很难将你漂亮的
+复合类和其他应用进行互换
 
 
 50
-00:02:47,826 --> 00:02:50,176
-You can make some really
-exciting presentations.
+00:03:08,322 --> 00:03:11,425
+我们前往
+AVMovie和AVMutableMovie时
 
 
 51
-00:02:50,676 --> 00:02:52,766
-There's just one
-pesky little drawback
+00:03:11,758 --> 00:03:14,228
+问题不复存在了因为其中
 
 
 52
-00:02:52,836 --> 00:02:54,926
-to AVMutableComposition,
+00:03:14,294 --> 00:03:16,964
+有QuickTime电影文件格式
 
 
 53
-00:02:55,506 --> 00:02:58,216
-which is there's no
-standard file format
+00:03:17,197 --> 00:03:20,267
+我们可以打开 编辑重新编写
 
 
 54
-00:02:58,536 --> 00:03:01,306
-into which you can
-serialize your composition.
+00:03:21,702 --> 00:03:24,905
+在轨道层面 我们有相似的设置
 
 
 55
-00:03:02,196 --> 00:03:03,436
-So it makes it hard
+00:03:25,472 --> 00:03:28,642
+如大家所知 复合类包括复合轨道
 
 
 56
-00:03:03,436 --> 00:03:05,946
-to interchange your
-snazzy composition
+00:03:28,942 --> 00:03:29,943
+并在可变水平
 
 
 57
-00:03:05,946 --> 00:03:07,326
-with other applications.
+00:03:30,010 --> 00:03:32,513
+我们有
+AVMutableComposition轨道
 
 
 58
-00:03:08,306 --> 00:03:11,416
-Well, when we move to
-AVMovie and AVMutableMovie,
+00:03:32,880 --> 00:03:36,149
+在El Capitan 我们可以在
+轨道层面添加两个新类
 
 
 59
-00:03:11,446 --> 00:03:14,306
-that problem goes away
-because this is tied
+00:03:36,450 --> 00:03:39,686
+AVMovieTrack和
+AVMutableMovieTrack
 
 
 60
-00:03:14,306 --> 00:03:16,956
-to the QuickTime
-movie file format.
+00:03:41,121 --> 00:03:44,291
+我们的确有五个新类需要你们操心
 
 
 61
-00:03:17,186 --> 00:03:20,266
-We can now open these, edit
-them, and write them back.
+00:03:44,658 --> 00:03:46,093
+电影和可变电影电影轨道
 
 
 62
-00:03:21,256 --> 00:03:25,186
-At the track level, we
-have a similar setup.
+00:03:46,994 --> 00:03:48,862
+可变电影轨道
 
 
 63
-00:03:25,456 --> 00:03:28,636
-As you know, a composition is
-composed of composition tracks,
+00:03:49,329 --> 00:03:52,866
+第五类叫做
+AVMediaDataStorage
 
 
 64
-00:03:28,926 --> 00:03:29,976
-and at the mutable level,
+00:03:53,267 --> 00:03:57,437
+这是很简单的类全部任务
 
 
 65
-00:03:29,976 --> 00:03:32,136
-we have AVMutableComposition
-tracks.
+00:03:57,504 --> 00:04:02,609
+就是表明写入文件的
+新样本数据在哪里该结束
 
 
 66
-00:03:32,866 --> 00:03:36,466
-In El Capitan, we are adding two
-new classes at the track level,
+00:04:06,146 --> 00:04:09,816
+AVMovie代表符合
+QuickTime电影
 
 
 67
-00:03:36,466 --> 00:03:39,326
-AVMovieTrack and
-AVMutableMovieTrack.
+00:04:10,184 --> 00:04:13,587
+文件格式的视频音频文件数据
 
 
 68
-00:03:41,116 --> 00:03:43,576
-So we have, really, five
-new classes that you have
+00:04:14,188 --> 00:04:15,923
+如果你熟悉QuickTime电影
 
 
 69
-00:03:43,576 --> 00:03:47,756
-to worry about, movie and
-mutable movie, movie track
+00:04:15,989 --> 00:04:18,892
+你会知道存在若干相关文件格式
 
 
 70
-00:03:47,756 --> 00:03:48,856
-and mutable movie track,
+00:04:19,493 --> 00:04:23,163
+都是基于QuickTime 
+电影文件格式转换而来
 
 
 71
-00:03:48,856 --> 00:03:52,876
-and then this fifth class
-called AVMediaDataStorage.
+00:04:23,597 --> 00:04:27,100
+这些合称为ISO基媒体文件格式
 
 
 72
-00:03:53,276 --> 00:03:56,686
-That's a very simple class,
-and its whole job in life is
+00:04:27,534 --> 00:04:30,470
+AVMovie和可变电影
+可以很好地处理这些
 
 
 73
-00:03:56,686 --> 00:04:00,836
-to indicate where you want new
-sample data that you are writing
+00:04:30,537 --> 00:04:32,539
+和应对QuickTime
+电影文件没有区别
 
 
 74
-00:04:00,836 --> 00:04:03,286
-into a file to end up.
+00:04:33,907 --> 00:04:37,511
+这些文件的主要特点是什么?
 
 
 75
-00:04:05,796 --> 00:04:10,636
-So an AVMovie represents the
-data in an audiovisual file
+00:04:37,578 --> 00:04:42,850
+在我看来特点是
+文件格式在样本数据
 
 
 76
-00:04:10,636 --> 00:04:13,596
-that conforms to the
-QuickTime movie file format.
+00:04:42,916 --> 00:04:49,189
+和组织样本进入轨道和电影的
+数据间执行严格的区分
 
 
 77
-00:04:14,196 --> 00:04:15,906
-Now, if you are familiar
-with QuickTime movies,
+00:04:51,692 --> 00:04:55,963
+这里是QuickTime
+电影文件的基本示意图
 
 
 78
-00:04:15,906 --> 00:04:18,896
-you know that there are also a
-number of related file formats
+00:04:56,396 --> 00:04:58,799
+先是文件类型框
 
 
 79
-00:04:19,505 --> 00:04:23,226
-that were devised based on the
-QuickTime movie file format,
+00:04:59,132 --> 00:05:03,971
+这是非常简单的少量数据表明这个文件
 
 
 80
-00:04:23,586 --> 00:04:26,036
-and these are collectively
-called ISO base media
+00:05:04,037 --> 00:05:06,406
+符合哪个系列中的文件格式
 
 
 81
-00:04:26,036 --> 00:04:27,106
-file formats.
+00:05:07,274 --> 00:05:09,877
+这里还有个电影框我刚说过
 
 
 82
-00:04:27,526 --> 00:04:30,566
-And AVMovie and mutable movie
-can handle these just as well
+00:05:09,943 --> 00:05:13,580
+代表所有样本数据的组织信息
 
 
 83
-00:04:30,596 --> 00:04:32,386
-as they can QuickTime
-movie files.
+00:05:13,981 --> 00:05:15,582
+是在自身的框中可以找到
 
 
 84
-00:04:33,516 --> 00:04:37,626
-Now, what's the key
-feature about these files?
+00:05:16,316 --> 00:05:20,254
+大部分的顺序都是任意的
 
 
 85
-00:04:37,626 --> 00:04:39,096
-From my point of
-view, it's this,
+00:05:20,654 --> 00:05:22,723
+文件类型框必须在最前面
 
 
 86
-00:04:39,526 --> 00:04:42,956
-that the file format
-enforces a strict separation
+00:05:23,090 --> 00:05:25,526
+但是其他框可以是任何顺序
 
 
 87
-00:04:42,956 --> 00:04:47,746
-between sample data and the data
-that organizes that sample data
+00:05:25,592 --> 00:05:28,362
+那么我们可以把电影框放在文件最后
 
 
 88
-00:04:47,746 --> 00:04:49,176
-into tracks and movies.
+00:05:28,929 --> 00:05:33,300
+可以位于两个样本数据框的中间
 
 
 89
-00:04:49,726 --> 00:04:55,966
-So here's a basic diagram
-of a QuickTime movie file.
+00:05:33,700 --> 00:05:36,370
+甚至可以成为未用文件的部分
 
 
 90
-00:04:56,386 --> 00:04:58,796
-It starts with what's
-called a file type box,
+00:05:36,436 --> 00:05:39,506
+也许之前曾有过数据但是现在没有了
 
 
 91
-00:04:59,136 --> 00:05:02,596
-and this is a very simple little
-bit of data that indicates
+00:05:41,041 --> 00:05:42,543
+现在 电影框里是什么呢?
 
 
 92
-00:05:02,596 --> 00:05:04,056
-which of the file formats
+00:05:42,743 --> 00:05:46,346
+这里有我们今天要考虑的三类信息
 
 
 93
-00:05:04,056 --> 00:05:06,416
-in this family this
-file conforms to.
+00:05:47,447 --> 00:05:49,750
+首先是全局设置
 
 
 94
-00:05:07,276 --> 00:05:09,916
-There's also a movie box
-which, as I just said,
+00:05:50,117 --> 00:05:53,754
+没有这部分信息就
+不会真正有电影的存在
 
 
 95
-00:05:09,916 --> 00:05:13,566
-is the organizing information
-about all that sample data,
+00:05:54,188 --> 00:05:56,490
+其中包括电影中有多少轨道
 
 
 96
-00:05:13,966 --> 00:05:15,566
-which is found in its own box.
+00:05:56,857 --> 00:05:58,425
+电影时长是多少
 
 
 97
-00:05:16,326 --> 00:05:20,256
-Now, the order of most
-of this is arbitrary.
+00:05:58,892 --> 00:06:03,864
+文件何时生成播放时的最佳速率是什么
 
 
 98
-00:05:20,646 --> 00:05:22,736
-The file type box
-has to come first,
+00:06:05,332 --> 00:06:08,802
+电影框里还有元数据 这属于
 
 
 99
-00:05:23,086 --> 00:05:25,526
-but the other boxes can come
-in pretty much any order.
+00:06:08,869 --> 00:06:14,441
+可选数据 对媒体播放而言
+并非必不可少
 
 
 100
-00:05:25,526 --> 00:05:28,356
-So we could have the movie
-box at the end of the file,
+00:06:14,942 --> 00:06:16,009
+但是如果具备也会有用
 
 
 101
-00:05:28,926 --> 00:05:33,306
-it could be situated between
-a couple of sample data boxes,
+00:06:16,276 --> 00:06:18,512
+这有点像是版权声明的内容
 
 
 102
-00:05:33,706 --> 00:05:36,426
-there can even be parts of
-the file that are unused.
+00:06:18,946 --> 00:06:21,882
+表明作者是谁片名是什么
 
 
 103
-00:05:36,456 --> 00:05:39,516
-Maybe they used to contain
-data, but they don't anymore.
+00:06:22,382 --> 00:06:24,685
+也许还有一些你或其他app写入
 
 
 104
-00:05:41,056 --> 00:05:42,546
-Now, what's in this movie box?
+00:06:24,751 --> 00:06:27,354
+电影框中的自定义数据
 
 
 105
-00:05:42,736 --> 00:05:45,086
-Well, there are three types of
-information that we are going
+00:06:28,655 --> 00:06:33,160
+在电影框中发现的最后一项内容
+是轨道框这部分信息
 
 
 106
-00:05:45,086 --> 00:05:46,356
-to be concerned with here today.
+00:06:33,393 --> 00:06:36,230
+定义了电影中的不同轨道
 
 
 107
-00:05:46,856 --> 00:05:49,746
-First is what I like to
-call global settings.
+00:06:37,531 --> 00:06:39,333
+其中包括轨道类型
 
 
 108
-00:05:50,106 --> 00:05:51,976
-This is information that without
+00:06:40,100 --> 00:06:44,505
+指出轨道所需的样本数据
 
 
 109
-00:05:51,976 --> 00:05:53,746
-which you wouldn't
-really have a movie,
+00:06:45,172 --> 00:06:46,874
+也包括轨道元数据
 
 
 110
-00:05:54,186 --> 00:05:56,486
-things like how many
-tracks are in the movie,
+00:06:46,940 --> 00:06:49,676
+当然 如果愿意 也可以
+在这里编写自定义轨道元数据
 
 
 111
-00:05:56,866 --> 00:05:58,436
-what's the duration
-of the movie,
+00:06:50,511 --> 00:06:53,213
+还有轨道相关性的相关信息
 
 
 112
-00:05:58,876 --> 00:06:02,496
-when was this file created,
-and what's the preferred rate
+00:06:53,280 --> 00:06:56,149
+也就是电影中轨道
+和其他轨道之间的关联
 
 
 113
-00:06:02,496 --> 00:06:04,866
-that you would like
-this played back at.
+00:06:58,051 --> 00:07:01,622
+这里的主要特点是样本数据位置
 
 
 114
-00:06:05,326 --> 00:06:09,396
-There's also in a movie box
-some metadata, which is sort
+00:07:01,688 --> 00:07:04,825
+因此样本数据本身并不存在于轨道框中
 
 
 115
-00:06:09,396 --> 00:06:12,916
-of optional data that isn't
-strictly speaking necessary
+00:07:05,392 --> 00:07:11,331
+轨道框包括到样本数据的参考信息之类
 
 
 116
-00:06:12,916 --> 00:06:16,006
-for the playback of the
-media, but is useful to have.
+00:07:16,803 --> 00:07:19,573
+对样本数据而言轨道可能会
 
 
 117
-00:06:16,286 --> 00:06:18,526
-And this would be stuff
-like a copyright statement,
+00:07:19,640 --> 00:07:22,042
+存在于其他文件中
 
 
 118
-00:06:18,946 --> 00:06:21,866
-an indication of who the
-author, what the title is,
+00:07:22,342 --> 00:07:24,811
+这样你也可以有外部样本参考
 
 
 119
-00:06:22,396 --> 00:06:24,746
-and maybe even some
-custom metadata that you
+00:07:26,146 --> 00:07:30,918
+还可以是只有外部样本数据的样本参考
 
 
 120
-00:06:24,746 --> 00:06:27,346
-or some other app has
-written into this movie box.
+00:07:31,518 --> 00:07:34,688
+在这种情况下小电影框
 
 
 121
-00:06:28,076 --> 00:06:29,766
-The last thing that
-you will find
+00:07:34,755 --> 00:07:38,559
+及其文件类型框
+被叫做样本参考电影文件
 
 
 122
-00:06:29,766 --> 00:06:33,746
-in a movie box are track
-boxes, and these are pieces
+00:07:39,059 --> 00:07:42,329
+框中并无真实数据
 
 
 123
-00:06:33,746 --> 00:06:36,216
-of information that define
-the tracks in the movie.
+00:07:42,596 --> 00:07:44,164
+它只是指向其他位置的数据
 
 
 124
-00:06:37,546 --> 00:06:39,336
-So they contain the track type,
+00:07:44,698 --> 00:07:48,902
+现在这成为你与其他媒体文件
 
 
 125
-00:06:40,086 --> 00:06:44,506
-they point to the sample data
-that's needed for the track.
+00:07:50,103 --> 00:07:52,739
+一起工作时功能非常强大的工具
 
 
 126
-00:06:45,186 --> 00:06:46,826
-They also contain
-track metadata.
+00:07:53,841 --> 00:07:58,011
+为什么？因为我可以编辑少量信息
 
 
 127
-00:06:46,826 --> 00:06:48,806
-And again, you can write
-custom track metadata
+00:07:58,278 --> 00:08:01,481
+而不需要触及大量媒体数据
 
 
 128
-00:06:48,806 --> 00:06:49,686
-in there if you'd like.
+00:08:03,150 --> 00:08:06,954
+但是 可以想象这其中会有一些脆弱性
 
 
 129
-00:06:50,386 --> 00:06:53,216
-And there's also information
-about track association,
+00:08:08,488 --> 00:08:11,892
+为什么呢？因为我在参考数据
+数据 如果所参考的数据手
 
 
 130
-00:06:53,216 --> 00:06:56,156
-so how this track relates to
-other tracks in the movie.
+00:08:11,959 --> 00:08:16,296
+碰巧在移动或者是被删掉我就会很糟心
 
 
 131
-00:06:56,716 --> 00:07:01,606
-So the key feature here is that
-the sample data location --
+00:08:16,396 --> 00:08:18,498
+我再也不能播放演示作品了
 
 
 132
-00:07:01,606 --> 00:07:04,816
-so the sample data itself is
-not contained in the track box.
+00:08:19,499 --> 00:08:22,569
+可以通过两种方式降低这种脆弱性
 
 
 133
-00:07:05,376 --> 00:07:08,406
-The track box contains
-references
+00:08:22,970 --> 00:08:26,073
+主要是通过相关URL
 
 
 134
-00:07:08,846 --> 00:07:16,086
-to the sample data,
-sort of like this.
+00:08:26,139 --> 00:08:30,310
+当我制作这些样本参考时
+我们会些许看到该怎么做
 
 
 135
-00:07:16,816 --> 00:07:19,666
-Now, it's possible for the
-sample data that a track refers
+00:08:32,513 --> 00:08:34,780
+在今天结束的时候大家可能会想
 
 
 136
-00:07:19,666 --> 00:07:22,036
-to exist in another
-file altogether,
+00:08:34,847 --> 00:08:36,650
+试试自包含电影
 
 
 137
-00:07:22,326 --> 00:07:24,816
-so you can have external
-sample references.
+00:08:36,717 --> 00:08:40,687
+如果想给朋友看看
+或是在网页上发送发帖
 
 
 138
-00:07:26,146 --> 00:07:29,606
-It's even possible for the
-sample references to refer only
+00:08:41,087 --> 00:08:42,322
+需要这么做的时候
 
 
 139
-00:07:29,606 --> 00:07:30,926
-to external sample data.
+00:08:42,623 --> 00:08:45,025
+可以通过
+AVAssetExportSession
 
 
 140
-00:07:31,506 --> 00:07:34,766
-Now, when we have this
-situation, the little movie box
+00:08:45,092 --> 00:08:47,060
+运行自己的可变电影
 
 
 141
-00:07:34,766 --> 00:07:38,566
-and its file type box is called
-a sample reference movie file.
+00:08:47,361 --> 00:08:49,229
+可以获得极好的自包含文件
 
 
 142
-00:07:39,066 --> 00:07:42,316
-So there's no actual
-data in that box;
+00:08:51,231 --> 00:08:54,234
+好的我们现在来看刚引入的
+电影编辑API
 
 
 143
-00:07:42,596 --> 00:07:44,176
-it just points to
-data elsewhere.
+00:08:56,603 --> 00:09:00,274
+在不可变层面
+AVMovie是AVAsset 
 
 
 144
-00:07:44,686 --> 00:07:48,906
-Now, it turns out that this
-is an incredibly powerful tool
+00:09:00,340 --> 00:09:03,944
+不可变的子类 
+我们实际上做了些有趣的事情
 
 
 145
-00:07:50,096 --> 00:07:52,746
-to have available when you
-are working with media files.
+00:09:04,178 --> 00:09:06,079
+我们可以查看电影
 
 
 146
-00:07:53,826 --> 00:07:54,396
-Why is that?
+00:09:06,380 --> 00:09:08,215
+可以获得电影头文件
 
 
 147
-00:07:54,396 --> 00:07:58,016
-Because I can edit that small
-little bit of information
+00:09:08,649 --> 00:09:10,817
+可以在新文件中编写电影头文件
 
 
 148
-00:07:58,266 --> 00:08:02,186
-and never have to touch that
-huge amount of media data.
+00:09:13,320 --> 00:09:16,190
+所谓电影头文件我是指文件类型框
 
 
 149
-00:08:02,876 --> 00:08:04,706
-However, as you can imagine,
+00:09:16,256 --> 00:09:19,092
+和电影框而不是样本数据
 
 
 150
-00:08:04,706 --> 00:08:08,076
-there's a certain
-fragility involved here.
+00:09:22,262 --> 00:09:24,097
+怎样初始化AVMovie?
 
 
 151
-00:08:08,476 --> 00:08:11,906
-Why? Because I'm referring
-to data, and if the data
+00:09:24,164 --> 00:09:27,734
+如果初始化过
+AVRL 就知道该怎么做了
 
 
 152
-00:08:11,906 --> 00:08:13,776
-that I am referring
-to happens to move
+00:09:27,801 --> 00:09:30,604
+你提供URL我们返还AVMovie
 
 
 153
-00:08:14,026 --> 00:08:16,306
-or gets deleted,
-I am out of luck.
+00:09:31,772 --> 00:09:38,412
+如果有电影头文件比如说在
+粘贴板上则可以进入
 
 
 154
-00:08:16,406 --> 00:08:18,486
-I can't play my presentation
-anymore.
+00:09:38,779 --> 00:09:41,148
+并从数据块生成电影
 
 
 155
-00:08:18,876 --> 00:08:20,796
-Now, it's possible to reduce
+00:09:41,481 --> 00:09:44,585
+在讲座中我们不会更多探讨这方面问题
 
 
 156
-00:08:20,796 --> 00:08:22,556
-that fragility in
-a couple of ways.
+00:09:45,052 --> 00:09:48,622
+但是如果你看样本代码包
+AVMovieEditor
 
 
 157
-00:08:22,986 --> 00:08:26,096
-Primarily by using relative URLs
+00:09:48,922 --> 00:09:51,792
+则会清楚看到该怎样把内容
 
 
 158
-00:08:26,096 --> 00:08:29,186
-when I make these sample
-references, and we'll see how
+00:09:52,025 --> 00:09:53,727
+从粘贴板提取或放置
 
 
 159
-00:08:29,186 --> 00:08:30,416
-to do that in a little bit.
+00:09:55,729 --> 00:09:59,466
+这里就是可以轻松
+生成样本参考电影文件
 
 
 160
-00:08:30,806 --> 00:08:34,765
-But at the end of the
-day, you are going to want
+00:10:00,033 --> 00:10:04,338
+我们将把URL作为
+AVMovie打开
 
 
 161
-00:08:34,765 --> 00:08:36,686
-to have what's called
-a self-contained movie.
+00:10:04,471 --> 00:10:08,775
+不好意思我们调用...
 
 
 162
-00:08:36,686 --> 00:08:39,515
-If you want to give it to
-a friend to view or post it
+00:10:09,610 --> 00:10:14,515
+我们想生成的文件类型指示
 
 
 163
-00:08:39,515 --> 00:08:40,686
-for delivery on the Web.
+00:10:14,882 --> 00:10:16,083
+然后是部分选项
 
 
 164
-00:08:41,086 --> 00:08:42,316
-And when you need to do that,
+00:10:16,617 --> 00:10:21,889
+在本例中 我们指定的
+选项是电影头文件的删节目的地
 
 
 165
-00:08:42,616 --> 00:08:45,046
-you can just run
-your mutable movie
+00:10:22,589 --> 00:10:25,993
+基本上而言 这是指如果有任何数据
 
 
 166
-00:08:45,046 --> 00:08:47,046
-through an AVAssetExportSession
+00:10:26,059 --> 00:10:29,129
+在该URL上它都会被挤走
 
 
 167
-00:08:47,376 --> 00:08:49,236
-to get a nice self-contained
-file.
+00:10:29,396 --> 00:10:32,132
+最后在文件中就只剩电影头文件
 
 
 168
-00:08:49,796 --> 00:08:53,086
-Okay. So let's look at
-the movie editing API
+00:10:33,433 --> 00:10:36,069
+还可以是不同的选项
 
 
 169
-00:08:53,086 --> 00:08:54,236
-that we are introducing.
+00:10:36,303 --> 00:10:39,006
+不再挤走文件中已有的任何数据
 
 
 170
-00:08:54,836 --> 00:09:00,376
-At the immutable level -- so
-AVMovie is an immutable subclass
+00:10:39,072 --> 00:10:42,142
+这就是将电影头文件
+添加到目的地选项
 
 
 171
-00:09:00,376 --> 00:09:03,956
-of AVAsset -- we can actually do
-some interesting things already.
+00:10:47,481 --> 00:10:49,483
+我们来继续讲
+AVMovie的可变子类
 
 
 172
-00:09:04,186 --> 00:09:06,296
-We can inspect the movie.
+00:10:49,550 --> 00:10:51,552
+AVMutableMovie
 
 
 173
-00:09:06,386 --> 00:09:08,206
-We can get what's
-called the movie header.
+00:10:52,152 --> 00:10:55,422
+这会提供基于范围的
+电影编辑 增减轨道
 
 
 174
-00:09:08,656 --> 00:09:10,826
-And we can write this movie
-header into a new file.
+00:10:55,489 --> 00:10:58,425
+增加或调整电影
 
 
 175
-00:09:12,736 --> 00:09:16,286
-By movie header, I just
-mean the file type box
+00:10:58,959 --> 00:11:02,563
+元数据的编辑方法
 
 
 176
-00:09:16,286 --> 00:09:19,096
-and the movie box together,
-none of the sample data.
+00:11:04,431 --> 00:11:06,800
+怎样初始化
+AVMutableMovie?
 
 
 177
-00:09:19,726 --> 00:09:24,086
-So how do we initialize
-an AVMovie?
+00:11:06,867 --> 00:11:09,169
+和初始化AVMovie的
+做法基本相同
 
 
 178
-00:09:24,086 --> 00:09:27,816
-If you have initialized an
-AVRL, you know how to do it.
+00:11:09,636 --> 00:11:12,306
+我们会传递一个URL但是在本例中
 
 
 179
-00:09:27,816 --> 00:09:30,606
-You give us a URL, and we
-give you back an AVMovie.
+00:11:12,372 --> 00:11:14,341
+我们需要能够
+调整可能会出现的任何错误
 
 
 180
-00:09:31,046 --> 00:09:35,856
-You can also, if you
-have a movie header, say,
+00:11:15,642 --> 00:11:18,979
+还可以从零建造
+AVMutableMovie
 
 
 181
-00:09:35,856 --> 00:09:38,406
-on the paste board,
-you can access that
+00:11:19,213 --> 00:11:22,850
+本代码行给我们返回
+空的AVMutableMovie文件
 
 
 182
-00:09:38,786 --> 00:09:41,146
-and create a movie
-from a block of data.
+00:11:23,217 --> 00:11:27,321
+我们可以在其中添加轨道
+接着在轨道中添加部分数据等等
 
 
 183
-00:09:41,146 --> 00:09:44,016
-We are not actually going
-to talk about this anymore
+00:11:29,857 --> 00:11:33,694
+这些是在AVMutableMovie
+可用的片段编辑方法
 
 
 184
-00:09:44,016 --> 00:09:45,566
-in this talk, but if you look
+00:11:33,760 --> 00:11:36,096
+如果大家用过
+AVMutable复合类
 
 
 185
-00:09:45,566 --> 00:09:48,636
-at our sample code package
-called AVMovieEditor,
+00:11:36,163 --> 00:11:39,600
+这很相似因为实际上
 
 
 186
-00:09:48,906 --> 00:09:51,786
-you will see very nicely
-how you can put stuff
+00:11:39,666 --> 00:11:43,370
+只有一处存在例外
 
 
 187
-00:09:51,786 --> 00:09:53,726
-and take stuff off
-of the paste board.
+00:11:44,438 --> 00:11:48,909
+就是插入时间范围方法
+会需要额外的参数
 
 
 188
-00:09:54,266 --> 00:09:57,516
-So here is how easy it is
+00:11:48,976 --> 00:11:53,747
+表明你是否要复制样本数据
 
 
 189
-00:09:57,516 --> 00:09:59,456
-to create a sample
-reference movie file.
+00:11:53,814 --> 00:11:56,917
+到目标文件或仅仅复制样本参考
 
 
 190
-00:10:00,026 --> 00:10:04,326
-We'll open a URL as an AVMovie.
+00:12:00,087 --> 00:12:06,260
+如果复制样本数据到目标可变电影
 
 
 191
-00:10:04,456 --> 00:10:11,806
-Sorry. Then we call the right --
+00:12:06,560 --> 00:12:09,429
+你需要告知它编写样本数据的位置
 
 
 192
-00:10:11,806 --> 00:10:14,506
-an indication of the type
-of file we want to create,
+00:12:09,563 --> 00:12:11,265
+它不会默认做任何事情
 
 
 193
-00:10:14,896 --> 00:10:16,076
-and then some options.
+00:12:11,798 --> 00:12:16,170
+例如 它不会自己将数据编写在
+电影框所在的文件中
 
 
 194
-00:10:16,616 --> 00:10:18,326
-Now, in this case, the option
+00:12:16,570 --> 00:12:18,705
+所以必须明确规定你需要
 
 
 195
-00:10:18,326 --> 00:10:20,716
-that we've specified
-is truncate destination
+00:12:19,039 --> 00:12:23,810
+将写入电影的任何新的样本
+数据放置的位置
 
 
 196
-00:10:20,716 --> 00:10:21,886
-to movie header only.
+00:12:24,178 --> 00:12:27,748
+可以通过规定可变电影的默认
 
 
 197
-00:10:22,576 --> 00:10:26,046
-Essentially, this means if
-there's any data already
+00:12:27,814 --> 00:12:29,917
+媒体数据存储属性来实现
 
 
 198
-00:10:26,046 --> 00:10:29,126
-at that output URL, it's
-going to get blown away
+00:12:30,417 --> 00:12:35,255
+这就是该
+AVMediaDataStorage类出马啦
 
 
 199
-00:10:29,126 --> 00:10:30,286
-and what's going to end up in
+00:12:35,789 --> 00:12:38,292
+同样 它此刻只是包裹了URL 
 
 
 200
-00:10:30,286 --> 00:10:32,116
-that file is simply
-the movie header.
+00:12:40,894 --> 00:12:44,965
+有生成和删除轨道的方法要生成轨道
 
 
 201
-00:10:33,426 --> 00:10:36,056
-Now, it's possible to
-pass in a different option
+00:12:45,032 --> 00:12:47,067
+必须要表明所需的轨道类型
 
 
 202
-00:10:36,296 --> 00:10:39,006
-and not blow away any data
-that might be in that file,
+00:12:47,134 --> 00:12:50,003
+要的是视频轨道是音频轨道等等
 
 
 203
-00:10:39,056 --> 00:10:42,136
-so that would be the add movie
-header to destination option.
+00:12:50,971 --> 00:12:53,640
+如果喜欢如果有现有轨道
 
 
 204
-00:10:42,136 --> 00:10:49,596
-So let's move to
-the mutable subclass
+00:12:53,707 --> 00:12:57,110
+希望以此复制新轨道我们把它作为
 
 
 205
-00:10:49,596 --> 00:10:51,536
-of AVMovie, AVMutableMovie.
+00:12:57,277 --> 00:13:02,182
+参数传递 从现有轨道 使用它们
+采取相关的属性
 
 
 206
-00:10:52,166 --> 00:10:55,466
-This provides editing
-methods that aus
+00:13:04,818 --> 00:13:07,588
+这里有个简单的小案例研究
 
 
 207
-00:10:55,466 --> 00:11:00,236
-to perform range-based movie
-editing, add and remove tracks,
+00:13:08,355 --> 00:13:11,158
+为更新现有电影文件
+我们可以从URL打开
 
 
 208
-00:11:00,766 --> 00:11:02,576
-add or modify movie metadata.
+00:13:11,225 --> 00:13:14,962
+使用我们刚才所见的方法做些编辑
 
 
 209
-00:11:03,166 --> 00:11:06,806
-So how do we initialize
-an AVMutableMovie?
+00:13:15,829 --> 00:13:18,932
+然后我们可以使用正确的电影头文件
 
 
 210
-00:11:06,806 --> 00:11:09,166
-Pretty much the same way
-we initialize an AVMovie.
+00:13:19,299 --> 00:13:22,169
+作为URL方法 将电影
+头文件写入相同文件
 
 
 211
-00:11:09,166 --> 00:11:12,326
-We will pass it a URL,
-but in this case we need
+00:13:22,236 --> 00:13:24,538
+这就是就地编辑
 
 
 212
-00:11:12,326 --> 00:11:14,336
-to be able toened had ale
-any errors that might occur.
+00:13:25,038 --> 00:13:27,541
+这里 我们并未移动任何样本数据
 
 
 213
-00:11:15,636 --> 00:11:18,966
-It's also possible to create
-an AVMutableMovie from scratch.
+00:13:28,208 --> 00:13:30,844
+我们所做的就是调整电影框
 
 
 214
-00:11:19,196 --> 00:11:22,846
-So this line of code gives us
-back an empty AVMutableMovie
+00:13:31,078 --> 00:13:32,646
+并把它放回相同的文件
 
 
 215
-00:11:23,226 --> 00:11:26,246
-that we are going to want to
-add tracks to and then some data
+00:13:34,248 --> 00:13:36,416
+我们来谈谈轨道编辑API
 
 
 216
-00:11:26,246 --> 00:11:27,866
-to the tracks and so forth.
+00:13:37,951 --> 00:13:41,154
+这可以允许我们调整
+QuickTime电影文件的轨道 
 
 
 217
-00:11:29,516 --> 00:11:32,606
-These are the segment
-editing methods available
+00:13:41,622 --> 00:13:44,525
+我们有基于范围的轨道编辑
 
 
 218
-00:11:32,606 --> 00:11:33,786
-on AVMutableMovie.
+00:13:44,591 --> 00:13:46,326
+正如我们在电影层面所见 
 
 
 219
-00:11:33,786 --> 00:11:36,126
-If you have worked with
-AVMutable composition,
+00:13:46,927 --> 00:13:52,299
+我们还可以设置轨道之间的关联性
+可以增加或调整轨道元数据
 
 
 220
-00:11:36,126 --> 00:11:39,646
-this is familiar because
-they are, in fact,
+00:13:53,634 --> 00:13:55,869
+这里是片段编辑方式
 
 
 221
-00:11:39,646 --> 00:11:45,136
-identical with one exception,
+00:13:55,936 --> 00:13:58,972
+它们看似熟悉因为我们刚刚见过
 
 
 222
-00:11:45,136 --> 00:11:48,936
-which is the insert time range
-method takes an additional
+00:14:01,008 --> 00:14:05,946
+在电影层面唯一的不同在于
+我们没有插入资产的时间范围 
 
 
 223
-00:11:48,936 --> 00:11:53,866
-parameter that indicates whether
-you want to copy the sample data
+00:14:06,013 --> 00:14:07,681
+而是插入了轨道的时间范围
 
 
 224
-00:11:53,866 --> 00:11:56,906
-into the target or just
-copy sample references.
+00:14:09,850 --> 00:14:12,920
+同样 当我们插入
+时间范围时 必须规定
 
 
 225
-00:11:57,396 --> 00:12:06,076
-Now, if you copy sample data
-into the target mutable movie,
+00:14:12,986 --> 00:14:14,555
+你是否想要复制样本数据
 
 
 226
-00:12:06,566 --> 00:12:09,446
-you need to tell it where
-to write that sample data.
+00:14:14,821 --> 00:14:16,990
+还是只想放入样本参考
 
 
 227
-00:12:09,576 --> 00:12:11,266
-It does nothing by default.
+00:14:17,357 --> 00:14:20,093
+如果复制样本数据轨道必须要知道
 
 
 228
-00:12:11,796 --> 00:12:13,626
-It's not going to
-write it into the file
+00:14:20,160 --> 00:14:21,929
+样本数据要去往何处
 
 
 229
-00:12:13,626 --> 00:12:16,186
-that the movie box is
-located in, for instance.
+00:14:22,396 --> 00:14:25,732
+通过使用在电影层面完全相同的类 
 
 
 230
-00:12:16,586 --> 00:12:18,696
-So you have to explicitly
-specify
+00:14:26,033 --> 00:14:30,304
+设置轨道的媒体数据电影层面所见
 
 
 231
-00:12:19,026 --> 00:12:21,466
-where you want any new
-sample data that's written
+00:14:32,472 --> 00:14:33,740
+这里是另一个案例研究
 
 
 232
-00:12:21,466 --> 00:12:23,826
-into this movie to be put.
+00:14:34,107 --> 00:14:36,844
+假设这里有一小段剪辑
+我想做静音处理
 
 
 233
-00:12:24,186 --> 00:12:27,846
-And you do that by specifying
-the default media data storage
+00:14:36,910 --> 00:14:40,380
+也许这段剪辑中有部分不合时宜的语言
 
 
 234
-00:12:27,846 --> 00:12:29,926
-property of the mutable movie.
+00:14:40,881 --> 00:14:43,483
+很简单 只要找到电影
 
 
 235
-00:12:30,426 --> 00:12:34,676
-And this is where this
-AVMediaDataStorage class comes
+00:14:43,550 --> 00:14:49,790
+第一个音频轨道定义时间范围即希望
 
 
 236
-00:12:34,676 --> 00:12:35,246
-into play.
+00:14:50,090 --> 00:14:52,960
+静音的范围 删除时间范围
 
 
 237
-00:12:35,776 --> 00:12:40,716
-Again, it just simply
-wraps a URL at this point.
+00:14:53,260 --> 00:14:56,196
+在相同的点插入空的时间范围
 
 
 238
-00:12:40,896 --> 00:12:43,796
-There are methods for
-creating and removing tracks,
+00:14:56,763 --> 00:15:00,067
+这个代码的净效果就是在原先的不当
 
 
 239
-00:12:43,796 --> 00:12:45,096
-and you see to create a track,
+00:15:00,400 --> 00:15:02,870
+语言处加入了空片段
 
 
 240
-00:12:45,096 --> 00:12:47,136
-we have to say what
-type of track we want.
+00:15:05,339 --> 00:15:07,407
+处理轨道关联性相当简单
 
 
 241
-00:12:47,136 --> 00:12:48,106
-Do we want a video track,
+00:15:07,474 --> 00:15:11,378
+可以增加轨道关联性
+或删除轨道关联性
 
 
 242
-00:12:48,106 --> 00:12:50,106
-do we want an audio
-track, and so forth.
+00:15:11,445 --> 00:15:14,248
+稍后我们来看怎样使用
 
 
 243
-00:12:50,956 --> 00:12:53,666
-And if we like, if we have an
-existing track that we want
+00:15:16,917 --> 00:15:19,720
+我说过 当复制样本
+数据进入轨道后 
 
 
 244
-00:12:53,666 --> 00:12:57,106
-to model this new one on,
-we can pass it in as an --
+00:15:19,786 --> 00:15:22,956
+我会告知大家 怎样使用相关URL
 
 
 245
-00:12:57,286 --> 00:13:00,276
-as a parameter and say take
-the relevant properties
+00:15:23,490 --> 00:15:24,658
+要这样做
 
 
 246
-00:13:00,276 --> 00:13:02,176
-from that existing
-track and use those.
+00:15:24,925 --> 00:15:29,029
+打开每个轨道
 
 
 247
-00:13:02,176 --> 00:13:07,576
-So here's a simple
-little case study.
+00:15:29,096 --> 00:15:34,735
+我们会设置样本参考基URL属性
 
 
 248
-00:13:08,366 --> 00:13:11,026
-To update an existing movie
-file, we could open it
+00:15:35,302 --> 00:15:39,006
+到包括电影的电影部分共同父类
 
 
 249
-00:13:11,026 --> 00:13:14,576
-up from a URL, do some edits
-using the methods we've just
+00:15:39,072 --> 00:15:43,043
+包括电影框的文件和包括所有
+媒体数据的文件
 
 
 250
-00:13:14,576 --> 00:13:18,946
-seen, and then we can use the
-right movie header to URL method
+00:15:46,313 --> 00:15:48,782
+好 我们来继续...
 
 
 251
-00:13:19,296 --> 00:13:22,176
-to write the movie header
-back into that same file.
+00:15:50,050 --> 00:15:53,453
+讲我说过的
+个人项目我想称之为
 
 
 252
-00:13:22,246 --> 00:13:24,526
-This is what's known
-as in-place editing.
+00:15:53,520 --> 00:15:58,492
+《血字(和灰字)研究》
+需要向柯南·道尔爵士致歉
 
 
 253
-00:13:25,026 --> 00:13:27,536
-So here we haven't
-moved any sample data.
+00:15:59,393 --> 00:16:02,296
+我们回到1980年
+我们说的是什么？
 
 
 254
-00:13:28,196 --> 00:13:30,856
-All we've done is
-tweak the movie box
+00:16:02,362 --> 00:16:03,630
+35年前
 
 
 255
-00:13:31,086 --> 00:13:32,636
-and put it back into
-the same file.
+00:16:04,331 --> 00:16:07,668
+当时我还是伯克利海湾区
+那边的研究生 
 
 
 256
-00:13:32,636 --> 00:13:37,056
-So let's talk about
-the track editing API.
+00:16:08,468 --> 00:16:10,771
+需要找个方法释放多余的精力
 
 
 257
-00:13:37,616 --> 00:13:39,836
-This allows us to
-modify tracks that are
+00:16:10,838 --> 00:16:12,706
+我出去买了轮滑鞋因为我发现伯克利
 
 
 258
-00:13:39,836 --> 00:13:41,166
-in a QuickTime movie file,
+00:16:13,974 --> 00:16:17,044
+是轮滑者的理想场所位置
 
 
 259
-00:13:41,616 --> 00:13:44,616
-and we have range-based
-track editing,
+00:16:17,110 --> 00:16:19,379
+因为这里有些不错的山地
 
 
 260
-00:13:44,616 --> 00:13:46,316
-just like we saw
-at the movie level.
+00:16:20,814 --> 00:16:24,284
+我非常喜欢我不断去找
 
 
 261
-00:13:46,916 --> 00:13:50,866
-We can also set associations
-between tracks, and we can add
+00:16:24,351 --> 00:16:28,522
+更高的山爬上去之后再滑下来
 
 
 262
-00:13:50,866 --> 00:13:52,296
-or modify track metadata.
+00:16:29,223 --> 00:16:33,994
+1984年 你们可以看到
+我在奥克兰克莱蒙大道的顶端
 
 
 263
-00:13:52,876 --> 00:13:55,896
-So here are the segment
-editing methods,
+00:16:34,695 --> 00:16:39,099
+远处 你可以看到旧金山 
+是海湾区的这一侧 
 
 
 264
-00:13:55,896 --> 00:14:00,576
-and they should look familiar
-because we've just seen them.
+00:16:39,166 --> 00:16:42,569
+是爱莫瑞维尔这非常棒
 
 
 265
-00:14:00,786 --> 00:14:01,906
-At the movie level.
+00:16:42,636 --> 00:16:44,771
+几乎就像从我面前轮滑飞驰而过
 
 
 266
-00:14:01,906 --> 00:14:05,416
-The only difference being that
-instead of insert time range
+00:16:46,006 --> 00:16:48,408
+我不太清楚举起手是做什么
 
 
 267
-00:14:05,416 --> 00:14:09,186
-of asset, we have insert
-time range of track.
+00:16:48,475 --> 00:16:52,446
+也许是为了我们要誓死效忠的什么东西
 
 
 268
-00:14:09,856 --> 00:14:12,986
-And again, when we do insert
-time range, we have to specify,
+00:16:53,313 --> 00:16:54,648
+我可没准备豁出命去
+很好
 
 
 269
-00:14:12,986 --> 00:14:15,586
-do you want to copy the sample
-data, or do you just want
+00:16:56,783 --> 00:17:01,121
+为了跟踪我的位置我去买了街道地图
 
 
 270
-00:14:15,586 --> 00:14:17,006
-to put in sample references.
+00:17:01,989 --> 00:17:03,824
+我把自己设成黄色高亮
 
 
 271
-00:14:17,356 --> 00:14:20,206
-And if you copy the sample
-data, the track has to know
+00:17:04,358 --> 00:17:07,928
+我开始在地图上标出自己去过的地方
 
 
 272
-00:14:20,206 --> 00:14:21,936
-where that sample
-data is going to go,
+00:17:08,694 --> 00:17:10,597
+那里的山地非常好
 
 
 273
-00:14:21,936 --> 00:14:25,716
-and we do that by setting the
-media data storage property
+00:17:11,531 --> 00:17:15,068
+如果你和我一样这么做会糟糕的很
 
 
 274
-00:14:26,046 --> 00:14:29,486
-of that track using exactly
-the same class we used
+00:17:15,135 --> 00:17:18,472
+因为最后会把整幅地图都涂满颜色
 
 
 275
-00:14:29,486 --> 00:14:30,296
-at the movie level.
+00:17:19,906 --> 00:17:22,742
+然后是2000年 不好意思
 
 
 276
-00:14:30,866 --> 00:14:33,756
-So here is another case study.
+00:17:22,809 --> 00:17:26,914
+大约是1985年我在弄一个项目
 
 
 277
-00:14:34,106 --> 00:14:35,586
-Suppose there's a
-little bit of a clip
+00:17:26,980 --> 00:17:29,983
+我称之为蒂姆的奥克兰疯狂轮滑之旅
 
 
 278
-00:14:35,666 --> 00:14:36,906
-that I want to silence out.
+00:17:30,551 --> 00:17:34,755
+或简称轮滑之旅目标很简单
 
 
 279
-00:14:36,906 --> 00:14:40,376
-Maybe there's some unfortunate
-language in that clip.
+00:17:34,821 --> 00:17:37,791
+就是在奥克兰的每条街道都轮滑
+滑过街道的全长
 
 
 280
-00:14:40,486 --> 00:14:44,986
-I could do it it quite simply
-by finding the first audio track
+00:17:38,792 --> 00:17:42,796
+从1985年一直持续到2005年
 
 
 281
-00:14:44,986 --> 00:14:49,486
-in the movie; define a time
-range, which is the range I want
+00:17:42,863 --> 00:17:45,933
+所以十年前 我完成了
+怎么样？
 
 
 282
-00:14:49,486 --> 00:14:52,966
-to silence; remove
-that time range;
+00:17:47,835 --> 00:17:48,669
+谢谢
 
 
 283
-00:14:53,246 --> 00:14:56,206
-and then insert an empty
-time range at that same spot.
+00:17:51,004 --> 00:17:53,874
+在奥克兰需要滑过
+近800英里的公路 
 
 
 284
-00:14:56,756 --> 00:15:00,066
-The net effect of this code
-is to have an empty segment
+00:17:53,941 --> 00:17:55,876
+才能实现这个目标
 
 
 285
-00:15:00,406 --> 00:15:05,096
-where there used to be some
-offensive language, say.
+00:17:57,010 --> 00:18:01,215
+2005年完成时 我没有位置数据
 
 
 286
-00:15:05,336 --> 00:15:07,436
-Working with track
-associations is very simple.
+00:18:01,281 --> 00:18:03,283
+我开始时GPS还没有发明出来
 
 
 287
-00:15:07,436 --> 00:15:11,366
-You can add a track association
-or remove a track association.
+00:18:03,650 --> 00:18:05,252
+当时可能是没有的
 
 
 288
-00:15:11,366 --> 00:15:14,236
-We will see this in use later.
+00:18:05,686 --> 00:18:08,388
+实际上我有所有的位置数据
 
 
 289
-00:15:14,786 --> 00:15:19,756
-And I said I would tell you
-how to use relative URLs
+00:18:08,455 --> 00:18:10,791
+因为如果打开我的地图
 
 
 290
-00:15:19,756 --> 00:15:22,966
-when you copy sample
-data into your track,
+00:18:12,626 --> 00:18:16,029
+你会看到在右侧都是黄色
 
 
 291
-00:15:23,476 --> 00:15:24,646
-and you do it like this.
+00:18:16,129 --> 00:18:18,866
+不全是 但是阿拉米达皮埃蒙特
 
 
 292
-00:15:24,936 --> 00:15:29,046
-You open. For each track,
+00:18:19,032 --> 00:18:21,235
+爱莫利维尔有整整9码的距离
 
 
 293
-00:15:29,046 --> 00:15:34,726
-we will set sample
-reference base URL property
+00:18:23,537 --> 00:18:26,874
+我当时没有视频
 
 
 294
-00:15:35,286 --> 00:15:39,026
-to some common parent of the
-movie that contains the movie --
+00:18:27,808 --> 00:18:29,643
+如果大家回想那个时候 
 
 
 295
-00:15:39,026 --> 00:15:41,696
-file that contains the
-movie box and the files
+00:18:29,710 --> 00:18:32,779
+1985年扛的相机都是大块头 
 
 
 296
-00:15:41,696 --> 00:15:43,736
-that contain all the media data.
+00:18:32,846 --> 00:18:35,616
+还很娇气外出轮滑的时候
+肯定是不希望背着的
 
 
 297
-00:15:45,976 --> 00:15:46,576
-All right.
+00:18:37,484 --> 00:18:39,152
+所以当我完成的时候
+我的确是...
 
 
 298
-00:15:46,576 --> 00:15:51,286
-So let's move on to
-this personal project
+00:18:39,319 --> 00:18:41,388
+这是个疯狂的项目这点我承认
 
 
 299
-00:15:51,286 --> 00:15:53,836
-that I talk about, and I
-want to call it A Study
+00:18:42,122 --> 00:18:45,692
+我绝对没有花心思告诉任何人这件事
 
 
 300
-00:15:53,836 --> 00:15:58,496
-in Scarlet (and Gray)
-apologies to Conan Doyle.
+00:18:46,193 --> 00:18:49,730
+可是不巧 估计《旧金山纪事报》 
+听说了此事
 
 
 301
-00:15:58,496 --> 00:16:01,756
-Let's jump back in time to 1980.
+00:18:51,131 --> 00:18:55,435
+并且写了篇文章报道
+就是那种有人情味的故事
 
 
 302
-00:16:01,756 --> 00:16:02,406
-What are we talking?
+00:18:57,337 --> 00:18:59,273
+奥克兰市参议会得知此事
 
 
 303
-00:16:02,406 --> 00:16:03,646
-35 years ago.
+00:18:59,339 --> 00:19:02,442
+通过一项决议表彰了此项
 
 
 304
-00:16:04,336 --> 00:16:07,006
-At that time, I was a
-graduate student across the bay
+00:19:02,509 --> 00:19:05,846
+卓绝的壮举...
+是他们这么说的 不是我
 
 
 305
-00:16:07,006 --> 00:16:10,796
-at Berkeley, and I needed a
-way to blow off some energy,
+00:19:07,614 --> 00:19:10,384
+奥克兰的几个制片人听说此事
 
 
 306
-00:16:10,796 --> 00:16:14,876
-so I went out and bought a pair
-of skates, and I discovered
+00:19:10,784 --> 00:19:15,355
+花费了几年时间为这个项目
+拍摄了漂亮的小纪录片
 
 
 307
-00:16:14,876 --> 00:16:17,046
-that Berkeley is a great
-place to be a skater
+00:19:15,989 --> 00:19:19,593
+在一年前在湾区的独立
 
 
 308
-00:16:17,046 --> 00:16:19,396
-because it's got these
-really nice hills.
+00:19:19,660 --> 00:19:21,361
+剧场进行了几轮上映
 
 
 309
-00:16:20,826 --> 00:16:22,816
-And I really enjoyed that.
+00:19:21,628 --> 00:19:22,863
+简直是太疯狂了
 
 
 310
-00:16:22,816 --> 00:16:27,036
-So I kept finding higher
-and higher hills to climb up
+00:19:26,266 --> 00:19:30,737
+在我完成这个项目大约两年后
 
 
 311
-00:16:27,036 --> 00:16:28,526
-and then go flying down.
+00:19:31,305 --> 00:19:34,274
+我开始在东海岸花了些时间
 
 
 312
-00:16:29,296 --> 00:16:31,956
-So here in 1984, you
-can see me at the top
+00:19:34,341 --> 00:19:37,477
+特别是在马萨诸塞州波士顿
 
 
 313
-00:16:31,956 --> 00:16:33,996
-of Claremont avenue in Oakland.
+00:19:38,011 --> 00:19:40,681
+更是在剑桥
 
 
 314
-00:16:34,606 --> 00:16:38,946
-In the distance, you can see
-San Francisco, just this side
+00:19:40,948 --> 00:19:44,017
+我想 好吧 就让这事儿
+继续上路吧
 
 
 315
-00:16:38,946 --> 00:16:42,606
-of the bay, we have Emeryville,
-and we have this wonderful,
+00:19:44,518 --> 00:19:48,288
+我花了几年时间
+在剑桥和萨默维尔轮滑
 
 
 316
-00:16:42,606 --> 00:16:44,776
-almost looks like a
-ski run in front of me.
+00:19:48,689 --> 00:19:51,859
+最后产生了
+波士顿轮滑之旅的想法
 
 
 317
-00:16:44,996 --> 00:16:48,476
-I am not quite sure what
-the hand up is doing.
+00:19:52,459 --> 00:19:56,530
+同样的想法 在波士顿的每条街道轮滑
 
 
 318
-00:16:48,476 --> 00:16:50,256
-Maybe it's the sort
-of we who are
+00:19:57,631 --> 00:20:00,968
+大概是从2011年开始的
 
 
 319
-00:16:50,256 --> 00:16:54,026
-about to die salute you
-thing, and I didn't die.
+00:20:01,602 --> 00:20:03,237
+我看了看地图估计需要5年时间
 
 
 320
-00:16:54,106 --> 00:16:54,646
-It's okay.
+00:20:03,303 --> 00:20:05,239
+来完成这件事情
 
 
 321
-00:16:56,726 --> 00:16:58,926
-[Laughter] Well, what I
-did in order to keep track
+00:20:06,373 --> 00:20:08,442
+前几年的冬天也不大冷
 
 
 322
-00:16:58,926 --> 00:17:01,116
-of where I was, I went out
-and I bought a street map,
+00:20:08,709 --> 00:20:10,210
+城市大小和奥克兰差不多
 
 
 323
-00:17:01,976 --> 00:17:03,826
-and I got myself a
-yellow highlighter,
+00:20:11,078 --> 00:20:14,214
+在两年半的时间我就完成了
 
 
 324
-00:17:04,356 --> 00:17:07,915
-and I started marking off on my
-map exactly where I had been,
+00:20:14,381 --> 00:20:19,219
+因此在2013年5月
+我完成了波士顿轮滑之旅
 
 
 325
-00:17:08,705 --> 00:17:10,586
-which hills were
-particularly good.
+00:20:20,654 --> 00:20:24,424
+这次我就有准备了因为在轮滑时
 
 
 326
-00:17:11,516 --> 00:17:14,185
-Well, if you are like me,
-that's a really bad thing
+00:20:24,791 --> 00:20:27,227
+我在头盔上装了运动摄像机
 
 
 327
-00:17:14,185 --> 00:17:16,366
-to start doing because
-you're going to want to end
+00:20:27,294 --> 00:20:32,032
+iPhone上还有
+GPS app
 
 
 328
-00:17:16,366 --> 00:17:18,526
-up coloring in the entire map.
+00:20:32,666 --> 00:20:39,506
+结果就是我攒了490个
+MPEG-4文件拍摄了
 
 
 329
-00:17:19,006 --> 00:17:22,786
-And so about 2000 -- sorry.
+00:20:40,240 --> 00:20:42,276
+200次不同的轮滑
 
 
 330
-00:17:22,786 --> 00:17:27,046
-About 1985, I came
-up with a project
+00:20:42,743 --> 00:20:46,413
+共有1.5万亿字节的数据
 
 
 331
-00:17:27,086 --> 00:17:29,976
-that I called Tim's Radical
-Inline Skate Tour of Oakland,
+00:20:47,447 --> 00:20:50,918
+我还有GPX文件形式的GPS数据
 
 
 332
-00:17:30,566 --> 00:17:34,866
-or TRISTO, and the
-goal was really simple,
+00:20:50,984 --> 00:20:54,388
+是那种XML版本的
+位置数据 大家稍后会看到
 
 
 333
-00:17:34,866 --> 00:17:36,776
-to skate every street
-in Oakland,
+00:20:55,255 --> 00:20:57,891
+有着大约150兆字节的数据
 
 
 334
-00:17:36,776 --> 00:17:38,496
-the entire length of it.
+00:20:59,459 --> 00:21:04,431
+可想而知影片会是什么样子
+我们来看其中一个
 
 
 335
-00:17:38,806 --> 00:17:42,866
-This continued from
-1985 until about 2005,
+00:21:05,999 --> 00:21:08,502
+这些是摄像机直接拍摄的视频
 
 
 336
-00:17:42,866 --> 00:17:44,566
-so ten years ago, and I made it.
+00:21:08,569 --> 00:21:10,804
+我只是做了重新命名这样有了日期
 
 
 337
-00:17:45,556 --> 00:17:45,946
-Okay?
+00:21:10,871 --> 00:21:13,841
+和文件名 会让我更容易查找
 
 
 338
-00:17:46,016 --> 00:17:47,876
-[Applause]
+00:21:15,309 --> 00:21:17,411
+我们在QuickTime
+播放器中打开
 
 
 339
-00:17:47,876 --> 00:17:48,226
-Thank you.
+00:21:17,644 --> 00:21:20,447
+这是第二个是接在第一个的
 
 
 340
-00:17:50,996 --> 00:17:54,006
-Oakland has about 800 miles of
-roadways that you would have
+00:21:20,514 --> 00:21:24,184
+结尾部分继续
+我们来选中第一个视频
 
 
 341
-00:17:54,006 --> 00:17:55,876
-to skate in order
-to accomplish this.
+00:21:24,651 --> 00:21:26,620
+我们可以看到阳光明媚
 
 
 342
-00:17:57,026 --> 00:18:01,256
-Now, when I was done in
-2005, I had no location data.
+00:21:27,020 --> 00:21:28,956
+是在11月下旬
 
 
 343
-00:18:01,256 --> 00:18:03,286
-GPS hadn't been invented
-when I started,
+00:21:29,356 --> 00:21:30,524
+当时是工作日
 
 
 344
-00:18:03,636 --> 00:18:05,256
-and it certainly
-wasn't available.
+00:21:31,124 --> 00:21:35,128
+我们来播放
+看得出是秋天因为地上有落叶
 
 
 345
-00:18:05,676 --> 00:18:08,846
-Actually, I did have location
-data because if you open
+00:21:35,762 --> 00:21:37,397
+如果有音频文件也许会听得到
 
 
 346
-00:18:08,846 --> 00:18:16,026
-up my map, you will see that
-it is right side up all yellow,
+00:21:37,464 --> 00:21:39,800
+当天的呼呼风声
 
 
 347
-00:18:16,116 --> 00:18:18,876
-not just -- but Alameda,
-Piedmont,
+00:21:41,368 --> 00:21:42,970
+不过 令人感觉有些奇怪
 
 
 348
-00:18:19,036 --> 00:18:21,246
-Emeryville, the whole
-nine yards.
+00:21:43,170 --> 00:21:44,705
+因为街上没有人
 
 
 349
-00:18:23,226 --> 00:18:26,886
-I also had no video.
+00:21:44,938 --> 00:21:46,273
+没有一个行人
 
 
 350
-00:18:26,916 --> 00:18:29,576
-If you remember back
-to that time, I mean,
+00:21:46,740 --> 00:21:48,242
+我们往前快进一点
 
 
 351
-00:18:29,576 --> 00:18:32,606
-the camera you would be
-carrying in 1985 would be clunky
+00:21:49,109 --> 00:21:51,345
+还是没有行人只是有些车子
 
 
 352
-00:18:32,606 --> 00:18:34,356
-and fragile, and you just
-wouldn't want to have it
+00:21:51,879 --> 00:21:53,647
+我在朗伍德医疗区
 
 
 353
-00:18:34,356 --> 00:18:35,626
-with you when you are
-out there skating.
+00:21:53,914 --> 00:21:56,149
+这里交通很是拥堵
 
 
 354
-00:18:36,226 --> 00:18:39,256
-So when I finished
-this, I really --
+00:21:56,350 --> 00:21:58,552
+却没有人 这是商业区
 
 
 355
-00:18:39,336 --> 00:18:41,376
-this is a wacko project,
-I admit that,
+00:21:59,620 --> 00:22:01,121
+没有人<c.blue> </c>像个鬼城
 
 
 356
-00:18:42,106 --> 00:18:45,696
-and I made absolutely no effort
-to tell anybody about this.
+00:22:01,321 --> 00:22:02,489
+出什么事儿了？
 
 
 357
-00:18:46,186 --> 00:18:51,576
-Unfortunately, the San Francisco
-chronicle learned of this feat,
+00:22:03,423 --> 00:22:05,692
+我们稍后会解决这个问题
 
 
 358
-00:18:51,576 --> 00:18:54,096
-I guess, and wrote a nice
-little newspaper article,
+00:22:08,529 --> 00:22:10,631
+基本上我所获得的
+是一以大堆干草
 
 
 359
-00:18:54,096 --> 00:18:55,446
-one of these human
-interest stories.
+00:22:11,064 --> 00:22:14,468
+还有一把银针
+我制作了500小时的视频
 
 
 360
-00:18:56,996 --> 00:18:59,346
-The Oakland City
-Council learned about it,
+00:22:15,035 --> 00:22:17,938
+即便99%都没什么用处
 
 
 361
-00:18:59,346 --> 00:19:02,466
-they passed a resolution
-praising the extraordinary
+00:22:18,238 --> 00:22:21,842
+那也还能找出5小时有趣的视频
 
 
 362
-00:19:02,466 --> 00:19:05,856
-physical accomplishment --
-that's their words, not mine.
+00:22:23,443 --> 00:22:26,146
+不过 部分问题是我甚至不
+知道这些银针是什么样
 
 
 363
-00:19:06,796 --> 00:19:10,476
-A couple of filmmakers
-in Oakland heard about it
+00:22:26,213 --> 00:22:28,315
+因为我不知道500小时视频中
 
 
 364
-00:19:10,796 --> 00:19:12,496
-and spent literally years off
+00:22:28,549 --> 00:22:30,751
+哪些比较重要
 
 
 365
-00:19:12,496 --> 00:19:15,346
-and on making a nice little
-documentary about this project,
+00:22:32,853 --> 00:22:35,656
+我知道<c.blue> </c>我喜欢看部分内容
 
 
 366
-00:19:16,006 --> 00:19:19,616
-which came out about a year ago
-and has been making the rounds
+00:22:35,756 --> 00:22:38,392
+这里用了蒙太奇手法
 
 
 367
-00:19:19,616 --> 00:19:21,356
-of independent theaters
-in the Bay area.
+00:22:48,268 --> 00:22:50,137
+下雪了 真的吗？好吧
 
 
 368
-00:19:21,356 --> 00:19:25,666
-Just completely wacko.
+00:22:55,108 --> 00:22:56,510
+我没看见路面坑洼吗？
 
 
 369
-00:19:26,176 --> 00:19:30,826
-So about a couple of years
-after I finished this project,
+00:23:06,053 --> 00:23:08,021
+这是我最喜欢的一部分
+因为大家可以看到
 
 
 370
-00:19:31,316 --> 00:19:35,206
-I started spending some time on
-the east coast, in particular
+00:23:08,088 --> 00:23:11,959
+我在往下滑 往前滚动返回 继续滑行
 
 
 371
-00:19:35,206 --> 00:19:37,486
-in the area of Boston,
-Massachusetts,
+00:23:12,659 --> 00:23:14,194
+如果不是... 谢谢大家
 
 
 372
-00:19:38,016 --> 00:19:40,666
-and even more particular,
-in Cambridge.
+00:23:18,765 --> 00:23:20,834
+现在我必须花钱找人帮我挑
 
 
 373
-00:19:40,936 --> 00:19:44,016
-And I thought, all right, let's
-take this thing on the road.
+00:23:20,901 --> 00:23:25,272
+看过全部视频的1/50
 
 
 374
-00:19:44,516 --> 00:19:48,386
-I spent a few years skating
-Cambridge and Somerville,
+00:23:26,173 --> 00:23:27,641
+才挑出这6个剪辑
 
 
 375
-00:19:48,696 --> 00:19:51,846
-and then finally the idea
-for TRISTO Boston was born.
+00:23:27,875 --> 00:23:29,142
+理论上 这一大堆干草中
 
 
 376
-00:19:52,466 --> 00:19:53,336
-Same idea.
+00:23:29,510 --> 00:23:33,614
+会有300个精彩的摔跤镜头
 
 
 377
-00:19:53,336 --> 00:19:56,546
-Skate every street in
-the city of Boston.
+00:23:34,648 --> 00:23:36,717
+要知道 每个跟头5秒钟的话
 
 
 378
-00:19:57,616 --> 00:20:00,976
-So this began about 2011.
+00:23:36,783 --> 00:23:39,319
+我们就会有25分钟这类素材
 
 
 379
-00:20:01,606 --> 00:20:03,256
-I looked at a map, and I
-figured it would take me
+00:23:39,386 --> 00:23:41,255
+这的确看起来很有趣
 
 
 380
-00:20:03,256 --> 00:20:05,236
-about five years
-to complete this.
+00:23:43,190 --> 00:23:45,459
+现在我想怎么来用所有这些数据
 
 
 381
-00:20:06,176 --> 00:20:08,436
-Well, we had a couple
-mild winters in there.
+00:23:45,692 --> 00:23:48,295
+我有1.5万亿太字节的视频数据
 
 
 382
-00:20:08,716 --> 00:20:10,196
-It's about the same
-size as Oakland.
+00:23:48,362 --> 00:23:49,630
+想拿来做点什么
 
 
 383
-00:20:10,956 --> 00:20:14,226
-And I was able to complete this
-in about two and a half years,
+00:23:49,696 --> 00:23:51,098
+我想找出那些银针
 
 
 384
-00:20:14,226 --> 00:20:19,206
-so in May 2013, I
-finished TRISTO Boston.
+00:23:52,099 --> 00:23:55,903
+第一步是要把每次滑轮的摄像
 
 
 385
-00:20:19,296 --> 00:20:24,436
-Now, this time I was prepared
-because as I was skating,
+00:23:55,969 --> 00:23:57,971
+不同文件连接到一起
 
 
 386
-00:20:24,786 --> 00:20:27,366
-I had one of those sports
-action cameras up on the top
+00:23:58,438 --> 00:24:02,176
+做成样本参考电影文件
+这样我可以打开编辑
 
 
 387
-00:20:27,366 --> 00:20:32,046
-of my helmet, and I had
-a GPS app for my iPhone.
+00:24:02,242 --> 00:24:05,245
+而不必担心摄像文件
 
 
 388
-00:20:32,676 --> 00:20:33,766
-And so when I ended up,
+00:24:06,446 --> 00:24:09,216
+第二是我想加入索引元数据
 
 
 389
-00:20:33,766 --> 00:20:40,586
-I had 490 MPEG-4 files
-straight off the camera covering
+00:24:09,516 --> 00:24:12,386
+作为电影元数据
 
 
 390
-00:20:40,586 --> 00:20:43,216
-about 200 different
-skates for a total
+00:24:12,920 --> 00:24:14,955
+那么我要进入文件并做标记
 
 
 391
-00:20:43,216 --> 00:20:46,416
-of about a terabyte
-and a half of data.
+00:24:15,222 --> 00:24:18,392
+好了 我这里开始摔跤
+这就是摔跤的结束部分
 
 
 392
-00:20:47,446 --> 00:20:51,026
-I also had GPS data in
-the form of GPX files --
+00:24:18,725 --> 00:24:20,727
+这里是狗开始追我的地方
 
 
 393
-00:20:51,026 --> 00:20:53,456
-that's sort of an XML
-version of location data --
+00:24:20,794 --> 00:24:23,263
+这里是它们最后觉得
+没办法抓到我的地方
 
 
 394
-00:20:53,456 --> 00:20:54,376
-we will see one later --
+00:24:24,198 --> 00:24:28,302
+这里是我和执法官员交谈
+这些还会继续
 
 
 395
-00:20:55,266 --> 00:20:57,876
-for about 150 megabytes
-worth of data.
+00:24:30,437 --> 00:24:32,773
+我希望对所有素材都进行索引
 
 
 396
-00:20:58,486 --> 00:21:03,176
-So just to get an idea of
-what these movies look like,
+00:24:32,840 --> 00:24:36,009
+这样便于搜索 发现
+所有的银针 可以调用
 
 
 397
-00:21:03,176 --> 00:21:04,416
-let's just look at one.
+00:24:37,544 --> 00:24:41,215
+我还想加入GPS数据 还有所有的
+位置数据 我还什么都没处理
 
 
 398
-00:21:05,606 --> 00:21:08,496
-So these are movies
-straight off the camera.
+00:24:41,281 --> 00:24:43,183
+我希望把它加到文件里
 
 
 399
-00:21:08,496 --> 00:21:09,946
-The only thing I have
-done is rename them
+00:24:43,250 --> 00:24:45,385
+这样可以做成定时元数据轨道
 
 
 400
-00:21:09,946 --> 00:21:10,936
-so that it's got the date
+00:24:46,887 --> 00:24:52,392
+关键在于 我做所有这些都不会修改
+最初原始的摄像机文件
 
 
 401
-00:21:10,936 --> 00:21:13,836
-and title making it
-easy for me to find.
+00:24:52,893 --> 00:24:56,396
+并可以将需要进行的
+数据复制数量最小化
 
 
 402
-00:21:15,306 --> 00:21:17,396
-So we will open these
-up in QuickTime Player.
+00:24:57,664 --> 00:24:58,932
+好的<c.blue> </c>具体该怎样做呢？
 
 
 403
-00:21:17,646 --> 00:21:20,476
-There's the second one, so
-that continues at the end
+00:24:59,366 --> 00:25:03,003
+AVMovie和AVMutableMovie
+为我们提供答案
 
 
 404
-00:21:20,476 --> 00:21:24,186
-of the first one, so we will
-select the first movie here.
+00:25:03,937 --> 00:25:07,040
+第一个问题的解决方案相当简单
 
 
 405
-00:21:24,646 --> 00:21:26,626
-We can see it's a
-bright, sunny day.
+00:25:07,474 --> 00:25:09,743
+我准备用这些摄像机文件
 
 
 406
-00:21:27,266 --> 00:21:28,956
-It's late November.
+00:25:09,810 --> 00:25:12,746
+生成样本参考电影文件
 
 
 407
-00:21:29,296 --> 00:21:30,466
-It's a weekday.
+00:25:12,813 --> 00:25:14,748
+它会指向两个原始文件
 
 
 408
-00:21:31,126 --> 00:21:32,246
-And let's just roll this.
+00:25:15,449 --> 00:25:19,786
+非常简单就是样本参考
+电影文件的标准用法
 
 
 409
-00:21:32,246 --> 00:21:35,136
-We see it's the fall because
-there's leaves on the ground.
+00:25:21,421 --> 00:25:24,525
+第二步的解决方案会在电影框中
 
 
 410
-00:21:35,746 --> 00:21:37,416
-If we had the audio,
-we would hear
+00:25:24,591 --> 00:25:27,694
+加入一些额外的自定义元数据
 
 
 411
-00:21:37,416 --> 00:21:39,806
-that it's actually
-quite windy on this day.
+00:25:29,796 --> 00:25:33,200
+第三步是在新的样本参考电影文件中
 
 
 412
-00:21:40,396 --> 00:21:42,976
-And there's something
-strange here, though.
+00:25:33,467 --> 00:25:37,671
+加入真实的媒体数据
 
 
 413
-00:21:43,186 --> 00:21:44,706
-There's nobody on the street.
+00:25:38,305 --> 00:25:41,208
+这些媒体数据 即便叫做定时元数据
 
 
 414
-00:21:44,936 --> 00:21:46,276
-There's no pedestrians.
+00:25:41,275 --> 00:25:44,511
+也是作为媒体数据或样本数据存储
 
 
 415
-00:21:46,746 --> 00:21:48,226
-Let's jump ahead a
-little bit again.
+00:25:44,578 --> 00:25:46,113
+并会进入文件的新轨道
 
 
 416
-00:21:49,096 --> 00:21:50,456
-No pedestrians.
+00:25:47,347 --> 00:25:50,684
+我准备这么来处理问题
 
 
 417
-00:21:50,456 --> 00:21:51,356
-There's some cars.
+00:25:51,518 --> 00:25:53,520
+第一步其实非常简单
 
 
 418
-00:21:51,876 --> 00:21:53,826
-Here I am at Longwood
-Medical District.
+00:25:53,854 --> 00:25:57,891
+作为可变电影打开第一个的电影
 
 
 419
-00:21:53,926 --> 00:21:56,226
-This is a heavily
-trafficked area.
+00:25:58,458 --> 00:26:02,663
+我们会打开第二个
+以及任何后续的电影作为URL资产
 
 
 420
-00:21:56,366 --> 00:21:56,996
-Nobody there.
+00:26:03,664 --> 00:26:07,467
+我们会在准备插入的资产中定义范围
 
 
 421
-00:21:57,246 --> 00:21:58,756
-Here's a commercial district.
+00:26:07,534 --> 00:26:10,137
+这就是整个资产时长
 
 
 422
-00:21:59,616 --> 00:22:01,136
-Nobody. It's like a ghost town.
+00:26:11,572 --> 00:26:14,675
+我们会在可变电影的结尾将它插入
 
 
 423
-00:22:01,316 --> 00:22:02,486
-So what's going on?
+00:26:15,142 --> 00:26:19,646
+可变电影中记住不要复制样本数据
 
 
 424
-00:22:03,436 --> 00:22:06,376
-Well, we'll solve
-that problem later.
+00:26:19,847 --> 00:26:21,815
+我最后只要样本参考
 
 
 425
-00:22:08,196 --> 00:22:10,646
-So what I've got,
-basically, is a hay stack
+00:26:22,649 --> 00:26:26,587
+最后 我们所需要做的
+就是在新文件中 
 
 
 426
-00:22:11,066 --> 00:22:12,236
-and a bunch of needles.
+00:26:26,653 --> 00:26:31,992
+编写新的电影头文件生成样本参考
 
 
 427
-00:22:12,236 --> 00:22:14,456
-I've got 500 hours of video.
+00:26:32,059 --> 00:26:35,696
+电影文件来指向两个原始
+摄像机文件中的数据
 
 
 428
-00:22:15,036 --> 00:22:19,886
-Even if 99% of it is junk,
-that's still five full hours
+00:26:37,764 --> 00:26:39,032
+我们来看部分演示
 
 
 429
-00:22:19,886 --> 00:22:21,836
-of interesting video
-that I'd like to find.
+00:26:39,433 --> 00:26:41,435
+看怎样解决第二个和第三个问题
 
 
 430
-00:22:23,386 --> 00:22:24,316
-Part of the problem, though,
+00:26:41,835 --> 00:26:45,005
+通常 这个幻灯片是阅读演示
 
 
 431
-00:22:24,316 --> 00:22:26,016
-is I don't even know
-what the needles look
+00:26:45,072 --> 00:26:47,941
+但我对好的回文没有免疫力
 
 
 432
-00:22:26,016 --> 00:22:28,326
-like because I don't
-know what's important
+00:26:50,878 --> 00:26:52,579
+而且也不愿意浪费
 
 
 433
-00:22:28,546 --> 00:22:30,746
-in these 500 hours of video.
+00:26:52,646 --> 00:26:55,182
+Alvin是基于
+AVFoundation
 
 
 434
-00:22:32,846 --> 00:22:35,756
-Well, I do know some things
-that I'd really love to look at,
+00:26:55,249 --> 00:26:58,285
+的线性索引器的缩略
 
 
 435
-00:22:35,756 --> 00:22:38,506
-and here is sort of a
-montage of some of these.
+00:26:59,353 --> 00:27:03,724
+就是用来做我说过的索引工作
 
 
 436
-00:22:48,256 --> 00:22:49,266
-Snow, really?
+00:27:04,124 --> 00:27:07,528
+而且可以把位置数据加入文件中
 
 
 437
-00:22:49,306 --> 00:22:49,976
-I mean, come on.
+00:27:08,328 --> 00:27:09,963
+UI大概是这样
 
 
 438
-00:22:55,116 --> 00:22:56,496
-Like, I didn't see that pothole?
+00:27:10,464 --> 00:27:14,067
+我把电影视图放在左边
+地图视图放在右边
 
 
 439
-00:22:57,516 --> 00:23:04,576
-[Laughter]
+00:27:14,134 --> 00:27:17,704
+下面可以看到有些显示区
 
 
 440
-00:23:05,076 --> 00:23:07,886
-Now, that one's my favorite,
-because as you can see,
+00:27:17,771 --> 00:27:22,776
+是我搜集来的轮滑相关信息的显示
 
 
 441
-00:23:07,886 --> 00:23:11,496
-I go down, I kind of roll over,
-I get back and keep on skating.
+00:27:23,911 --> 00:27:27,047
+我们继续打开电影文件
 
 
 442
-00:23:11,496 --> 00:23:13,976
-You know, if it wasn't
-as -- thank you.
+00:27:27,114 --> 00:27:31,251
+这是我刚生成的样本参考电影文件
 
 
 443
-00:23:14,516 --> 00:23:18,276
-[Applause]
+00:27:32,052 --> 00:27:34,555
+打开 我准备加载GPX文件
 
 
 444
-00:23:18,776 --> 00:23:20,916
-Now, I actually had to
-pay somebody to weed --
+00:27:35,522 --> 00:27:38,492
+我会选择适当的GPS文件
 
 
 445
-00:23:20,916 --> 00:23:25,256
-to look through about
-1/50 of all of my video
+00:27:40,894 --> 00:27:42,162
+我打开文件时
 
 
 446
-00:23:26,186 --> 00:23:27,646
-to get these six clips.
+00:27:42,462 --> 00:27:46,133
+需要填写部分数据
+它会指出这将用多久完成
 
 
 447
-00:23:27,866 --> 00:23:30,626
-So in theory, there's 300
+00:27:46,834 --> 00:27:50,704
+怎样？好了 我可以扩展地图视图
 
 
 448
-00:23:30,626 --> 00:23:33,666
-of these wonderful falls
-somewhere in that hay stack.
+00:27:50,771 --> 00:27:54,641
+清楚显示我们在哪里
+我出去在布鲁克林四周兜了一圈
 
 
 449
-00:23:34,646 --> 00:23:36,756
-So at about, you know,
-five seconds per fall,
+00:27:55,475 --> 00:27:57,711
+这很适合你这里是洛根机场
 
 
 450
-00:23:36,756 --> 00:23:39,416
-we are talking 25
-minutes of this stuff,
+00:27:58,478 --> 00:27:59,880
+绝对是波士顿
 
 
 451
-00:23:39,416 --> 00:23:40,976
-which would be really
-fun to watch.
+00:28:00,814 --> 00:28:01,949
+这里是剑桥
 
 
 452
-00:23:41,061 --> 00:23:43,061
-[Laughter]
+00:28:02,816 --> 00:28:04,718
+我们仔细看看
 
 
 453
-00:23:43,106 --> 00:23:45,456
-So here's what I want to
-do with all this data.
+00:28:05,052 --> 00:28:09,122
+哦 我说过要给大家看GPX文件
 
 
 454
-00:23:45,686 --> 00:23:48,396
-I've got a terabyte and a
-half of video data that I want
+00:28:09,723 --> 00:28:11,325
+GPX文件就是这个样子
 
 
 455
-00:23:48,396 --> 00:23:49,616
-to somehow do something with.
+00:28:11,391 --> 00:28:16,296
+是XML格式经纬度 海拔 时间标记
 
 
 456
-00:23:49,616 --> 00:23:51,086
-I want to find those needles.
+00:28:16,697 --> 00:28:18,398
+就是它了 再没别的
 
 
 457
-00:23:51,466 --> 00:23:55,886
-So the first step is going to
-be to combine the various files
+00:28:21,702 --> 00:28:24,171
+我们来这里运行Web服务
 
 
 458
-00:23:55,886 --> 00:23:57,976
-that came off the
-camera for one skate
+00:28:24,238 --> 00:28:28,408
+我出去到政府Web
+服务器看看当天的天气情况
 
 
 459
-00:23:58,436 --> 00:24:02,306
-into a sample reference movie
-file so that I can just open it
+00:28:28,475 --> 00:28:30,444
+怎样我发现当天风很大
 
 
 460
-00:24:02,306 --> 00:24:05,246
-and edit it and not have to
-worry about the camera files.
+00:28:30,511 --> 00:28:33,981
+风速平均每小时17英里
+对喜欢用公制的人来说
 
 
 461
-00:24:06,436 --> 00:24:09,276
-The second thing I want to
-do is add indexing metadata
+00:28:34,047 --> 00:28:38,018
+就是28.439华氏度
 
 
 462
-00:24:09,516 --> 00:24:12,396
-as movie metadata.
+00:28:38,085 --> 00:28:40,554
+还有种有趣说法3.9摄氏度
 
 
 463
-00:24:12,936 --> 00:24:15,466
-So I want to go in and
-mark in the file, okay,
+00:28:41,788 --> 00:28:44,658
+那天是感恩节所以街上没有人
 
 
 464
-00:24:15,466 --> 00:24:18,386
-this is where I start to fall,
-and this is the end of the fall.
+00:28:44,725 --> 00:28:48,028
+对了 这说明那天正好过节
+还是犹太光明节的第二天
 
 
 465
-00:24:18,736 --> 00:24:20,756
-Or this is where
-dogs are chasing me,
+00:28:49,096 --> 00:28:52,633
+对吧？来看这些Web
+Services这就可以让我们
 
 
 466
-00:24:20,756 --> 00:24:22,236
-and this is where
-they finally figured
+00:28:52,699 --> 00:28:54,668
+推断出为何街上没人
 
 
 467
-00:24:22,236 --> 00:24:24,206
-out they are not
-going to get me.
+00:28:56,203 --> 00:28:58,238
+我跑到另一个Web Service
 
 
 468
-00:24:24,206 --> 00:24:27,096
-Or this is where I am talking
-to a law enforcement officer,
+00:28:58,305 --> 00:29:01,942
+叫做反向地理编码
+我会从Apple服务器
 
 
 469
-00:24:27,096 --> 00:24:28,316
-and that just keeps going.
+00:29:02,276 --> 00:29:04,945
+发出经纬度它会返还
 
 
 470
-00:24:29,806 --> 00:24:32,786
-So I'd like to index all
-this stuff so that it's easy
+00:29:05,012 --> 00:29:08,348
+州 城市 街道的样子
 
 
 471
-00:24:32,786 --> 00:24:36,006
-to search and find all these
-needles, as I call them.
+00:29:08,682 --> 00:29:10,350
+有时甚至还有门牌号
 
 
 472
-00:24:36,006 --> 00:24:38,546
-I want to add GPS data.
+00:29:10,717 --> 00:29:14,154
+基本上 就会提供
+我所经过的街道信息
 
 
 473
-00:24:38,546 --> 00:24:41,306
-I have all that location data
-I haven't done anything with.
+00:29:14,755 --> 00:29:17,391
+等一下 所有的街道图钉会落下
 
 
 474
-00:24:41,306 --> 00:24:43,176
-I want to add it to the
-file, and I am going to do
+00:29:19,226 --> 00:29:24,064
+然后我们可以选出一个
+来看是哪条街道是联邦大道
 
 
 475
-00:24:43,176 --> 00:24:45,376
-that as what's called
-a timed metadata track.
+00:29:25,265 --> 00:29:27,935
+或是布鲁克林的华盛顿大街
 
 
 476
-00:24:46,836 --> 00:24:50,926
-And the key is I want to do all
-of this without modifying any
+00:29:29,503 --> 00:29:32,439
+我这里还加了搜索条可以输入
 
 
 477
-00:24:50,926 --> 00:24:52,446
-of the original camera files,
+00:29:32,506 --> 00:29:35,876
+比如联邦大道如果发现就会标亮
 
 
 478
-00:24:52,886 --> 00:24:57,716
-and by minimizing any data
-copying that I need to do.
+00:29:36,476 --> 00:29:38,478
+如果把数据放入文件
 
 
 479
-00:24:57,716 --> 00:24:58,946
-Okay. How are we
-going to do that?
+00:29:38,545 --> 00:29:41,982
+现在就完成了街道名称的可搜索性
 
 
 480
-00:24:59,376 --> 00:25:03,016
-Well, AVMovie and AVMutableMovie
-give us the answer.
+00:29:42,049 --> 00:29:46,520
+我可以进入 找到所有
+在某条街道的小剪辑
 
 
 481
-00:25:03,926 --> 00:25:07,036
-The solution to the first
-issue is very simple.
+00:29:48,889 --> 00:29:51,091
+我们可以隐藏这些需要做的最后一件事
 
 
 482
-00:25:07,036 --> 00:25:09,746
-I am going to take those
-camera files, and I am going
+00:29:51,158 --> 00:29:54,394
+就是用地址数据同步视频
 
 
 483
-00:25:09,746 --> 00:25:12,746
-to create a sample reference
-movie file that points
+00:29:55,062 --> 00:29:57,231
+我试过各种自动方法来完成
 
 
 484
-00:25:12,786 --> 00:25:14,756
-to the data in those
-two original files.
+00:29:57,297 --> 00:30:00,801
+结果发现最好的办法
+只有一种 就是前往
 
 
 485
-00:25:15,446 --> 00:25:17,926
-Very straightforward,
-standard use
+00:30:00,868 --> 00:30:05,172
+我视频中的帧 
+这里我知道在地图上自己的位置
 
 
 486
-00:25:17,926 --> 00:25:19,776
-of sample reference movie files.
+00:30:05,839 --> 00:30:07,674
+然后我会来到地图 
 
 
 487
-00:25:21,096 --> 00:25:24,516
-The solution for the second
-step is just to add a little bit
+00:30:09,009 --> 00:30:13,580
+点击并同步视频和这个位置
 
 
 488
-00:25:24,516 --> 00:25:27,696
-of extra custom metadata
-to my movie box.
+00:30:14,414 --> 00:30:17,384
+现在 当我这么做时如果返回
+并开始播放视频
 
 
 489
-00:25:28,206 --> 00:25:33,196
-The third step is to add
-some actual media data
+00:30:17,718 --> 00:30:20,721
+大家会看到图钉会沿着视频移动
 
 
 490
-00:25:33,466 --> 00:25:37,656
-into my new sample
-reference movie file.
+00:30:20,988 --> 00:30:22,456
+看 这就是在同步
 
 
 491
-00:25:38,236 --> 00:25:41,036
-And that media data, even though
-it's called timed metadata,
+00:30:23,690 --> 00:30:25,192
+我甚至可以前往另一个方向
 
 
 492
-00:25:41,036 --> 00:25:44,496
-it's stored as media data or
-sample data, and it just goes
+00:30:25,259 --> 00:30:27,995
+我去地图上的某个位置可以点击
 
 
 493
-00:25:44,496 --> 00:25:46,116
-into a new track in the file.
+00:30:28,061 --> 00:30:32,533
+让视频到这里现在我就在联邦大道了
 
 
 494
-00:25:47,346 --> 00:25:50,686
-So that's the way I want
-to approach this issue.
+00:30:32,999 --> 00:30:35,802
+我知道这里是很有趣的下坡路段
 
 
 495
-00:25:51,516 --> 00:25:53,336
-So the first step is
-actually quite simple.
+00:30:35,869 --> 00:30:37,771
+我们可以滑行一秒钟
 
 
 496
-00:25:53,856 --> 00:25:58,036
-We'll open the first
-movie as a mutable movie,
+00:30:38,338 --> 00:30:40,774
+这就是我们这么做的原因这类下坡没有
 
 
 497
-00:25:58,356 --> 00:25:59,536
-and we'll open the second
+00:30:41,175 --> 00:30:45,546
+汽车经过会有什么状况呢？
 
 
 498
-00:25:59,536 --> 00:26:02,646
-and any subsequent
-movies as just URL assets.
+00:30:49,216 --> 00:30:50,417
+好的这就是Alvin
 
 
 499
-00:26:03,666 --> 00:26:07,516
-We'll define the range in the
-asset that we want to insert,
+00:30:50,484 --> 00:30:53,487
+大家可以看出Alvin可以帮我解决
+第二和第三个问题
 
 
 500
-00:26:07,516 --> 00:26:10,126
-and that's just the
-entire asset duration.
+00:30:54,254 --> 00:30:59,459
+可以添加自定义元数据
+到样本参考电影文件
 
 
 501
-00:26:10,826 --> 00:26:15,636
-We will actually insert it into
-the mutable movie at the end
+00:31:00,527 --> 00:31:02,196
+基本是这样的
 
 
 502
-00:26:15,636 --> 00:26:18,966
-of the mutable movie, and
-notice we say don't copy the
+00:31:02,596 --> 00:31:05,766
+通过调用... 将现有的元数据
 
 
 503
-00:26:18,966 --> 00:26:19,656
-sample data.
+00:31:06,133 --> 00:31:07,668
+来看元数据属性
 
 
 504
-00:26:19,776 --> 00:26:21,826
-I just want to end up
-with sample references.
+00:31:08,435 --> 00:31:10,170
+我们会生成新的元数据项
 
 
 505
-00:26:22,656 --> 00:26:26,656
-Finally, all we have to do
-is write a new movie header
+00:31:10,537 --> 00:31:12,706
+我们会相应填入属性
 
 
 506
-00:26:26,656 --> 00:26:32,026
-out to a new file, and we have
-then created a sample reference
+00:31:12,906 --> 00:31:16,109
+例如 平均风速值是我从政府服务器
 
 
 507
-00:26:32,026 --> 00:26:34,016
-movie file that points
-to the data
+00:31:16,176 --> 00:31:19,346
+获得的当天天气情况数据
 
 
 508
-00:26:34,016 --> 00:26:35,706
-in the two original
-camera files.
+00:31:20,147 --> 00:31:22,983
+我还创建了部分识别器可以以后查找
 
 
 509
-00:26:37,476 --> 00:26:39,046
-So let's look at some demos
+00:31:23,050 --> 00:31:26,620
+一旦把这些写入文件加上正确的电影
 
 
 510
-00:26:39,436 --> 00:26:41,436
-of how I solve the
-second and third one.
+00:31:26,687 --> 00:31:30,757
+头文件到URL电影就全部升级了
 
 
 511
-00:26:41,916 --> 00:26:45,096
-Normally this slide would just
-read demos, but I am a sucker
+00:31:32,559 --> 00:31:33,694
+我们再来看看第三步
 
 
 512
-00:26:45,096 --> 00:26:52,616
-for a good palindrome, and
-I just couldn't waste it.
+00:31:33,827 --> 00:31:37,097
+是将位置数据作为定时元数据轨道
 
 
 513
-00:26:52,616 --> 00:26:55,276
-Alvin is a sort of acronym
+00:31:37,831 --> 00:31:39,700
+大家已经知道该怎么做了
 
 
 514
-00:26:55,276 --> 00:26:58,276
-for AVFoundation-based
-linear indexer.
+00:31:39,933 --> 00:31:41,235
+如果去年来过
 
 
 515
-00:26:59,346 --> 00:27:03,836
-Its job is to do the
-indexing I talked about,
+00:31:42,169 --> 00:31:45,205
+听过《驾驭音频视频
+媒体中的元数据》讲座
 
 
 516
-00:27:04,126 --> 00:27:07,536
-but also get the location
-data into my file.
+00:31:45,672 --> 00:31:47,474
+其中他们介绍过两个内容
 
 
 517
-00:27:08,246 --> 00:27:09,976
-This is what the UI looks like.
+00:31:47,541 --> 00:31:51,912
+首先从捕获会话得到位置数据
 
 
 518
-00:27:10,466 --> 00:27:14,116
-I've got a movie view on the
-left, I've got a map view
+00:31:52,546 --> 00:31:55,983
+以及怎样将正确时间的元数据加入电影
 
 
 519
-00:27:14,116 --> 00:27:18,136
-on the right, and down below you
-can see I've got some display
+00:31:56,817 --> 00:32:00,654
+我们可以获得位置数据在GPX文件中
 
 
 520
-00:27:18,136 --> 00:27:20,566
-areas where I am going to
-be displaying information
+00:32:00,721 --> 00:32:02,990
+我们并不需要捕获会话内容
 
 
 521
-00:27:20,566 --> 00:27:22,846
-that I glean about this skate.
+00:32:03,724 --> 00:32:06,226
+我们可以关注在第二个样本
 
 
 522
-00:27:23,796 --> 00:27:27,126
-So let's go ahead and
-open up a movie file.
+00:32:06,293 --> 00:32:08,729
+代码包中获得源代码
 
 
 523
-00:27:27,126 --> 00:27:31,256
-And this is the sample reference
-movie file that I just created.
+00:32:09,062 --> 00:32:10,430
+并把它放入Alvin
 
 
 524
-00:27:32,056 --> 00:27:32,876
-That opens up there.
+00:32:11,965 --> 00:32:13,967
+现在 我们一旦完成在盘里会得到
 
 
 525
-00:27:32,876 --> 00:27:34,566
-I am going to load a GPX file.
+00:32:14,168 --> 00:32:18,038
+带有单个元数据轨道的定时文件
 
 
 526
-00:27:34,566 --> 00:27:38,486
-I will go out and select
-the appropriate GPS file.
+00:32:18,705 --> 00:32:22,676
+我们所需要做的就是复制轨道到
 
 
 527
-00:27:40,356 --> 00:27:42,146
-Now, when I open this file,
+00:32:23,243 --> 00:32:27,915
+电影的新轨道中
+可以打开通过GPS资产来实现
 
 
 528
-00:27:42,466 --> 00:27:44,046
-some of the data's
-going to be filled in.
+00:32:29,283 --> 00:32:31,218
+我们接着会运用
 
 
 529
-00:27:44,046 --> 00:27:46,136
-It's going to figure
-out how long this was.
+00:32:31,318 --> 00:32:35,556
+轨道中恰好有的媒体类型在电影文件中
 
 
 530
-00:27:46,826 --> 00:27:50,706
-Okay? So let's -- I've got it
-so I can expand my map view
+00:32:35,722 --> 00:32:39,626
+添加新轨道我们会从轨道中复制设置
 
 
 531
-00:27:50,706 --> 00:27:51,996
-to make it clear where we are.
+00:32:40,961 --> 00:32:45,933
+最后 我们将范围插入新轨道
 
 
 532
-00:27:51,996 --> 00:27:54,646
-So I went out and made a big
-circuit around Brookline.
+00:32:45,999 --> 00:32:49,336
+同样如果在文件中
+编写头文件 我们弄好了
 
 
 533
-00:27:55,486 --> 00:27:56,476
-This situates you.
+00:32:52,706 --> 00:32:55,809
+现在需要做的最后一件事这是可选内容
 
 
 534
-00:27:56,476 --> 00:27:57,726
-There is Logan Airport.
+00:32:56,210 --> 00:32:59,847
+就是在定时媒体轨道
+和元数据的任何轨道之间
 
 
 535
-00:27:58,466 --> 00:27:59,876
-Here is Boston proper.
+00:33:00,380 --> 00:33:05,118
+生成轨道关联性在本例中
+我们已经选定了视频轨道
 
 
 536
-00:28:00,816 --> 00:28:01,936
-There's Cambridge.
+00:33:06,220 --> 00:33:09,990
+如果跳过这一步定时视频轨道
 
 
 537
-00:28:02,816 --> 00:28:04,706
-Now let's just zoom back in.
+00:33:10,057 --> 00:33:14,661
+则会整体运用到文件中
+关于这些 我们都没问题
 
 
 538
-00:28:05,046 --> 00:28:09,116
-Oh, I said I was going
-to show you a GPX file.
+00:33:20,534 --> 00:33:23,103
+如果你们在用
+AVMutableMovie
 
 
 539
-00:28:09,736 --> 00:28:11,426
-So this is what a
-GPX file looks like.
+00:33:23,370 --> 00:33:24,872
+这里还要注意两点
 
 
 540
-00:28:11,426 --> 00:28:14,636
-It's just XML formatted,
-longitudes, latitudes,
+00:33:25,973 --> 00:33:28,876
+如大家所知 AVMovie 
+或AVMutableMovie
 
 
 541
-00:28:14,636 --> 00:28:16,286
-elevations, time stamps.
+00:33:29,409 --> 00:33:31,645
+属于AVAsset因为它是子类
 
 
 542
-00:28:16,696 --> 00:28:21,486
-That's it, nothing
-more in there.
+00:33:32,312 --> 00:33:36,250
+如果可将AVAsset做什么
+处理的话可以用在可变电影中
 
 
 543
-00:28:21,686 --> 00:28:24,206
-So let's go here and
-run a Web service.
+00:33:36,817 --> 00:33:39,953
+例如 可以用
+AVPlayerItem来播放
 
 
 544
-00:28:24,206 --> 00:28:25,306
-I am going to go out and find
+00:33:40,754 --> 00:33:44,224
+可以用AVAssetImageGenerator
+从中抓取图像
 
 
 545
-00:28:25,306 --> 00:28:27,826
-out from a government Web
-server what the weather was
+00:33:45,526 --> 00:33:49,396
+可以用
+AVAssetExportSession来输出
 
 
 546
-00:28:27,826 --> 00:28:30,276
-like on this day, and I
-discover it was quite windy,
+00:33:50,497 --> 00:33:53,600
+如果在可变电影中进行任何这样的操作
 
 
 547
-00:28:30,276 --> 00:28:33,966
-it was 17 mile an hour average,
-or for those who speak metric,
+00:33:54,134 --> 00:33:56,470
+我们非常建议你对可变电影
 
 
 548
-00:28:33,966 --> 00:28:38,016
-28.4, and it was 39
-degrees Fahrenheit or,
+00:33:56,537 --> 00:34:00,340
+进行拷贝 因为如果你在输出时 
 
 
 549
-00:28:38,016 --> 00:28:40,556
-interesting factoid,
-3.9 centigrade.
+00:34:00,407 --> 00:34:02,776
+是在改变电影文件要以防不测
 
 
 550
-00:28:41,516 --> 00:28:44,666
-Thanksgiving day, that's why
-there's nobody on the street.
+00:34:02,876 --> 00:34:06,213
+只要进行拷贝在输出即可一切都没问题
 
 
 551
-00:28:44,666 --> 00:28:46,456
-You see, it figured out
-this this was a holiday.
+00:34:07,948 --> 00:34:13,120
+第二个最佳实践是如果你在打开
 
 
 552
-00:28:46,456 --> 00:28:48,026
-It's also the second
-night of Hanukkah.
+00:34:13,320 --> 00:34:16,790
+希望插入
+AVMutableMovie的资产
 
 
 553
-00:28:49,086 --> 00:28:52,626
-Okay? So just these Web
-Services have allowed me
+00:34:17,824 --> 00:34:22,362
+则应该设置这个旗标
+AV URL资产喜好精确时长
 
 
 554
-00:28:52,626 --> 00:28:54,656
-to deduce why there's
-nobody on the street.
+00:34:22,429 --> 00:34:24,331
+和定时键为真 
 
 
 555
-00:28:54,926 --> 00:28:58,286
-Now I am running another
-Web Service called reverse
+00:34:25,032 --> 00:34:27,134
+现在我们并未在大家已经见到的任何
 
 
 556
-00:28:58,336 --> 00:29:01,936
-geocoding, where I am sending
-each longitude and latitude
+00:34:27,201 --> 00:34:31,538
+代码片段中这么做因为你
+打开QuickTime电影文件时
 
 
 557
-00:29:02,266 --> 00:29:05,026
-out to a server at
-Apple, and it's going
+00:34:31,737 --> 00:34:33,239
+旗标已经设置为真
 
 
 558
-00:29:05,026 --> 00:29:08,426
-to hand me back a
-state, city, street,
+00:34:33,639 --> 00:34:36,076
+但是如果需要打开MP3文件
 
 
 559
-00:29:08,666 --> 00:29:10,336
-and sometimes even
-a street number.
+00:34:36,143 --> 00:34:38,445
+例如希望将之插入可变电影文件
 
 
 560
-00:29:10,716 --> 00:29:12,486
-Basically, it's going
-to give me information
+00:34:38,779 --> 00:34:39,947
+你需要设置这个旗标
 
 
 561
-00:29:12,486 --> 00:29:14,146
-about the streets that I was on.
+00:34:41,748 --> 00:34:42,683
+我们来总结一下
 
 
 562
-00:29:14,766 --> 00:29:17,396
-So we will wait here while all
-these street pins fall down.
+00:34:44,051 --> 00:34:48,722
+我们加入了新类
+来支持QuickTime电影文件
 
 
 563
-00:29:18,916 --> 00:29:21,946
-Then we can select one of them
-to find out what street that is,
+00:34:50,123 --> 00:34:51,891
+我希望如大家所见这让我们的工作流程
 
 
 564
-00:29:21,946 --> 00:29:24,076
-so that's Commonwealth Avenue.
+00:34:52,559 --> 00:34:55,094
+会变得非常简单非常不错
 
 
 565
-00:29:25,256 --> 00:29:27,936
-Or here's Washington
-Street in Brookline.
+00:34:55,262 --> 00:34:59,666
+我们可以处理参考电影 
+而不是原始的电影本身 
 
 
 566
-00:29:28,526 --> 00:29:32,466
-Now, I added a search bar
-so I could type in, say,
+00:35:00,067 --> 00:35:03,770
+因此 如果在处理大量的数据
+这会非常得力
 
 
 567
-00:29:32,466 --> 00:29:35,876
-Commonwealth Avenue, and it will
-highlight it when it finds it.
+00:35:04,905 --> 00:35:07,574
+如果想在知道在实践中怎么操作
 
 
 568
-00:29:36,466 --> 00:29:38,496
-So if I put this
-data into my file,
+00:35:07,641 --> 00:35:09,943
+下载AVMovieEditor
+仔细看看
 
 
 569
-00:29:38,496 --> 00:29:42,066
-now I have complete
-searchability on street names.
+00:35:11,411 --> 00:35:13,680
+若想了解更多详情就去标准场所
 
 
 570
-00:29:42,066 --> 00:29:45,126
-I can go in and find all
-those little clips where I am
+00:35:14,348 --> 00:35:18,285
+如果这方面存在问题在周四和周五
+我们会在实验室
 
 
 571
-00:29:45,486 --> 00:29:46,646
-on a particular street.
+00:35:19,119 --> 00:35:20,220
+如果想看看
 
 
 572
-00:29:48,496 --> 00:29:51,186
-So let's hide those, and
-the last thing we need
+00:35:20,487 --> 00:35:23,924
+怎样运用复合类
+转到2010年的讲座看看
 
 
 573
-00:29:51,186 --> 00:29:54,406
-to do is synchronize our
-video with our location data,
+00:35:24,758 --> 00:35:27,194
+最后 如果大家想详细了解怎样进行
 
 
 574
-00:29:55,046 --> 00:29:57,256
-and I tried various
-automatic ways to do this,
+00:35:27,261 --> 00:35:29,963
+定时元数据轨道生成
 
 
 575
-00:29:57,286 --> 00:30:00,846
-but I discovered the only really
-good way to do it was to go
+00:35:30,531 --> 00:35:33,567
+可以看看去年的讲座
+《在音频视频媒体中驾驭元数据》
 
 
 576
-00:30:00,846 --> 00:30:05,186
-to a frame in the video where
-I knew where I was on the map,
-
-
-577
-00:30:05,226 --> 00:30:09,616
-and then I am going to come
-over onto the map and click it
-
-
-578
-00:30:09,616 --> 00:30:13,566
-and say synchronize the video
-to this location right here.
-
-
-579
-00:30:14,416 --> 00:30:15,956
-Now, when I do this,
-if I come back
-
-
-580
-00:30:15,956 --> 00:30:17,376
-and start playing the video,
-
-
-581
-00:30:17,376 --> 00:30:20,726
-you will see the pin moves
-along with the video.
-
-
-582
-00:30:20,986 --> 00:30:22,446
-See, these are now synchronized.
-
-
-583
-00:30:23,666 --> 00:30:25,196
-And I can even go
-the other direction.
-
-
-584
-00:30:25,196 --> 00:30:28,016
-I can go to someplace on
-the map, and I can click it
-
-
-585
-00:30:28,016 --> 00:30:31,316
-and say make the movie
-go there, and now I am
-
-
-586
-00:30:31,316 --> 00:30:32,546
-on Commonwealth Avenue,
-
-
-587
-00:30:32,896 --> 00:30:35,896
-and I know this is a
-particularly fun downhill slope,
-
-
-588
-00:30:35,896 --> 00:30:37,776
-and we will just let
-this ride for a second.
-
-
-589
-00:30:38,286 --> 00:30:40,616
-And this is really why we do
-this, right, for these kind
-
-
-590
-00:30:40,616 --> 00:30:45,536
-of downhill with no cars and
-what could possibly go wrong?
-
-
-591
-00:30:46,516 --> 00:30:48,706
-[Laughter]
-
-
-592
-00:30:49,206 --> 00:30:50,356
-Okay. So that's Alvin.
-
-
-593
-00:30:50,356 --> 00:30:52,266
-You can see that Alvin
-has solved the second
-
-
-594
-00:30:52,266 --> 00:30:53,496
-and third problems for me.
-
-
-595
-00:30:54,256 --> 00:30:59,926
-It's added custom metadata to
-my sample reference movie file.
-
-
-596
-00:31:00,386 --> 00:31:02,206
-And it basically
-does it like this.
-
-
-597
-00:31:02,606 --> 00:31:05,776
-It gets the existing
-metadata by calling the --
-
-
-598
-00:31:06,146 --> 00:31:07,666
-looking at the metadata
-property.
-
-
-599
-00:31:08,376 --> 00:31:10,186
-We'll create a new
-metadata item,
-
-
-600
-00:31:10,546 --> 00:31:12,706
-we'll fill in its
-properties accordingly.
-
-
-601
-00:31:12,896 --> 00:31:16,136
-For instance, the average wind
-speed value is the value I got
-
-
-602
-00:31:16,136 --> 00:31:18,786
-from the government server
-telling me what the weather was
-
-
-603
-00:31:18,786 --> 00:31:19,356
-on that day.
-
-
-604
-00:31:20,066 --> 00:31:23,046
-And I just create some
-identifier here that I can look
-
-
-605
-00:31:23,046 --> 00:31:26,726
-for later, and once I've
-written this into the file
-
-
-606
-00:31:26,726 --> 00:31:30,766
-with the right movie header to
-URL, my movie is all updated.
-
-
-607
-00:31:31,346 --> 00:31:33,686
-Now let's look at step three,
-
-
-608
-00:31:33,826 --> 00:31:37,096
-which is to add the location
-data as a time metadata track.
-
-
-609
-00:31:37,836 --> 00:31:39,686
-You already know how to do this.
-
-
-610
-00:31:39,926 --> 00:31:41,236
-If you were here last year
-
-
-611
-00:31:42,166 --> 00:31:45,216
-and heard the talk Harnessing
-Metadata in Audiovisual Media,
-
-
-612
-00:31:45,656 --> 00:31:47,476
-they showed a couple things.
-
-
-613
-00:31:47,556 --> 00:31:51,896
-First how to get location
-data from a capture session,
-
-
-614
-00:31:52,546 --> 00:31:56,046
-and how to right-time
-metadata into a movie.
-
-
-615
-00:31:56,726 --> 00:31:58,966
-Well, we've got our
-location data.
-
-
-616
-00:31:58,966 --> 00:32:00,646
-It's in our GPX file.
-
-
-617
-00:32:00,646 --> 00:32:03,316
-So we don't need that
-capture session stuff.
-
-
-618
-00:32:03,736 --> 00:32:06,256
-We can just focus on
-taking the source code
-
-
-619
-00:32:06,256 --> 00:32:08,716
-in that second sample
-code package
-
-
-620
-00:32:09,046 --> 00:32:10,446
-and putting it into Alvin.
-
-
-621
-00:32:11,236 --> 00:32:13,976
-Now, once we've done
-that, what we end up with
-
-
-622
-00:32:14,176 --> 00:32:18,036
-on disk is a timed file that has
-a single metadata track in it,
-
-
-623
-00:32:18,526 --> 00:32:22,666
-and all we have to do is copy
-that track into a new track
-
-
-624
-00:32:23,246 --> 00:32:27,926
-in our movie, and we will do
-it by opening the GPS asset.
-
-
-625
-00:32:29,276 --> 00:32:31,206
-We'll then add a new track
-
-
-626
-00:32:31,316 --> 00:32:35,736
-to our movie using whatever
-media type happens to be
-
-
-627
-00:32:35,736 --> 00:32:39,636
-in that track, and we will copy
-the settings from that track.
-
-
-628
-00:32:40,956 --> 00:32:45,956
-Finally, we insert that range
-into this new track, and again,
-
-
-629
-00:32:45,956 --> 00:32:49,336
-if we write this header
-into our file, we are done.
-
-
-630
-00:32:49,966 --> 00:32:55,876
-Now, the last thing we need
-to do -- this is optional --
-
-
-631
-00:32:56,226 --> 00:32:59,886
-is create a track association
-between the timed media track
-
-
-632
-00:33:00,386 --> 00:33:03,716
-and whatever track it is
-metadata for, and in this case,
-
-
-633
-00:33:03,716 --> 00:33:05,116
-we have chosen the video track.
-
-
-634
-00:33:06,206 --> 00:33:10,086
-If you leave this step out, the
-timed video track is assumed
-
-
-635
-00:33:10,086 --> 00:33:13,596
-to apply to the file as
-a whole, and we are fine
-
-
-636
-00:33:13,596 --> 00:33:20,826
-as far as that's concerned.
-
-
-637
-00:33:20,826 --> 00:33:23,206
-If you are working
-with AVMutableMovie,
-
-
-638
-00:33:23,366 --> 00:33:24,866
-there are a couple of
-things to keep in mind.
-
-
-639
-00:33:25,746 --> 00:33:30,676
-As you know, an AVMovie or an
-AVMutableMovie is an AVAsset
-
-
-640
-00:33:30,676 --> 00:33:31,786
-because it's a subclass.
-
-
-641
-00:33:32,306 --> 00:33:33,476
-So anything that you can do
-
-
-642
-00:33:33,476 --> 00:33:36,246
-with an AVAsset you can
-do with a mutable movie.
-
-
-643
-00:33:36,706 --> 00:33:39,946
-For instance, you could
-play it using AVPlayerItem,
-
-
-644
-00:33:40,766 --> 00:33:44,216
-you could grab an image from it
-using an AVAssetImageGenerator.
-
-
-645
-00:33:44,336 --> 00:33:47,936
-You could export it using
-an AVAssetExportSession.
-
-
-646
-00:33:48,376 --> 00:33:53,616
-Now, if you do any of these
-operations on a mutable movie,
-
-
-647
-00:33:54,146 --> 00:33:56,236
-we highly recommend
-that you make a copy
-
-
-648
-00:33:56,236 --> 00:34:00,366
-of that mutable movie because if
-you're changing the movie while
-
-
-649
-00:34:00,366 --> 00:34:02,776
-you are exporting it,
-bad things will happen.
-
-
-650
-00:34:02,886 --> 00:34:05,036
-So just make a copy
-of it, do your export,
-
-
-651
-00:34:05,036 --> 00:34:06,226
-and everything works fine.
-
-
-652
-00:34:06,776 --> 00:34:13,226
-The second best practice is
-that if you are opening an asset
-
-
-653
-00:34:13,315 --> 00:34:16,806
-that you want to insert
-into an AVMutableMovie,
-
-
-654
-00:34:17,815 --> 00:34:22,396
-you should set this flag, AV URL
-asset prefer precise duration
-
-
-655
-00:34:22,396 --> 00:34:24,606
-and timing key, to true.
-
-
-656
-00:34:25,045 --> 00:34:27,156
-Now, we haven't done this
-in any of the code snippets
-
-
-657
-00:34:27,156 --> 00:34:31,525
-that you've seen so far because
-when you open a QuickTime movie,
-
-
-658
-00:34:31,726 --> 00:34:33,246
-this flag is already
-set to true.
-
-
-659
-00:34:33,636 --> 00:34:36,166
-But if you were to open
-an MP3 file, for instance,
-
-
-660
-00:34:36,166 --> 00:34:38,485
-and wanted to insert that
-into a mutable movie,
-
-
-661
-00:34:38,775 --> 00:34:41,775
-you would want to set this flag.
-
-
-662
-00:34:41,775 --> 00:34:42,686
-So let's summarize.
-
-
-663
-00:34:44,065 --> 00:34:46,436
-We've added new classes
-to support editing
-
-
-664
-00:34:46,576 --> 00:34:48,726
-on QuickTime movie files.
-
-
-665
-00:34:50,065 --> 00:34:51,806
-This gives us, as
-I hope you've seen,
-
-
-666
-00:34:52,556 --> 00:34:55,085
-a really nice, simplified
-workflow.
-
-
-667
-00:34:55,085 --> 00:34:58,176
-We are able to work on
-reference movies and not
-
-
-668
-00:34:58,176 --> 00:34:59,846
-on the original movies
-themselves.
-
-
-669
-00:35:00,116 --> 00:35:01,666
-So if you are handling
-large amounts
-
-
-670
-00:35:01,666 --> 00:35:03,786
-of data, this is for you.
-
-
-671
-00:35:04,116 --> 00:35:07,616
-If you want to see how
-this works in practice,
-
-
-672
-00:35:07,616 --> 00:35:11,206
-download AVMovieEditor
-and take a look at that.
-
-
-673
-00:35:11,396 --> 00:35:13,686
-For more information, go
-to the standard places.
-
-
-674
-00:35:14,246 --> 00:35:17,106
-And if you have questions
-about this, we'll be in the lab
-
-
-675
-00:35:17,106 --> 00:35:18,296
-on Thursday and Friday.
-
-
-676
-00:35:19,116 --> 00:35:20,486
-If you want to look at the --
-
-
-677
-00:35:20,486 --> 00:35:23,986
-how to work with
-compositions, jump back to 2010.
-
-
-678
-00:35:24,656 --> 00:35:27,236
-And finally, if you want
-to see in great detail how
-
-
-679
-00:35:27,236 --> 00:35:29,976
-to do the timed metadata
-track generation,
-
-
-680
-00:35:30,526 --> 00:35:31,676
-go to last year's session,
-
-
-681
-00:35:31,676 --> 00:35:33,566
-Harnessing Metadata
-in Audiovisual media.
-
-
-682
-00:35:34,426 --> 00:35:34,976
-Thank you very much.
-
-
-683
-00:35:35,516 --> 00:35:40,500
-[Applause]
+00:35:34,568 --> 00:35:35,569
+非常感谢
 

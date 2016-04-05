@@ -1,4302 +1,3569 @@
 1
-00:00:23,516 --> 00:00:28,136
-[Applause]
+00:00:19,686 --> 00:00:24,258
+和DemoBots一起深入GameplayKit
 
 
 2
-00:00:28,636 --> 00:00:29,066
->> DAVE ADDEY: Hello.
+00:00:28,662 --> 00:00:32,064
+大家好欢迎来到“和DemoBots
+一起深入GameplayKit”
 
 
 3
-00:00:29,066 --> 00:00:31,866
-Welcome to Deeper into
-GameplayKit with DemoBots.
+00:00:32,933 --> 00:00:36,336
+今年我们创建了一个新的
+游戏示例名字叫DemoBots
 
 
 4
-00:00:32,906 --> 00:00:36,166
-We created a new game sample
-this year called DemoBots.
+00:00:36,870 --> 00:00:38,405
+如果你想在家玩那么今天你就可以
 
 
 5
-00:00:36,896 --> 00:00:38,336
-If you would like to
-play along at home,
+00:00:38,605 --> 00:00:42,776
+从developer.apple.com/spritekit
+把这个示例下载回来
 
 
 6
-00:00:38,596 --> 00:00:39,876
-you can download
-the sample today
+00:00:44,044 --> 00:00:46,547
+这个游戏利用了大量你们在
+“SpriteKit会话中有什么新料”
 
 
 7
-00:00:40,186 --> 00:00:42,766
-from
-developer.apple.com/spritekit.
+00:00:46,613 --> 00:00:48,815
+以及
+“GameplayKit简介”中
 
 
 8
-00:00:44,046 --> 00:00:46,526
-This game takes advantage of
-lots of the things you learned
+00:00:49,183 --> 00:00:53,654
+学到的东西如果你不会的话就去看看吧
 
 
 9
-00:00:46,526 --> 00:00:48,826
-about in the What's New
-in SpriteKit session
+00:00:55,289 --> 00:00:57,491
+如果不给你们演示我们就无法完成
 
 
 10
-00:00:49,166 --> 00:00:50,406
-and Introducing GameplayKit.
+00:00:58,292 --> 00:00:59,860
+这个叫做DemoBots的游戏
 
 
 11
-00:00:50,486 --> 00:00:53,216
-Check it out if you couldn't.
+00:00:59,927 --> 00:01:02,196
+我们来看一下这个游戏该怎么玩
 
 
 12
-00:00:53,216 --> 00:00:57,506
-We couldn't make a
-game called DemoBots
+00:01:07,968 --> 00:01:12,940
+我们开始一个新游戏 你就是
+PlayerBot就是这里的这个人
 
 
 13
-00:00:58,276 --> 00:01:00,086
-without giving you a demo.
+00:01:13,574 --> 00:01:17,211
+你的任务是在时间用完之前
+找到并干掉每个关卡内的
 
 
 14
-00:01:00,336 --> 00:01:02,036
-Let's take a look and
-see how the game plays.
+00:01:17,411 --> 00:01:19,179
+坏的TaskBots
 
 
 15
-00:01:07,956 --> 00:01:12,846
-We start a new game, you're
-PlayerBot, this guy here.
+00:01:20,080 --> 00:01:22,249
+我们这里还有两个好的TaskBots 
+因为它们的脸是绿色的
 
 
 16
-00:01:13,586 --> 00:01:17,226
-Your job is to find and
-fix all of the bad TaskBots
+00:01:22,316 --> 00:01:24,117
+所以你可以知道
+是好的TaskBots
 
 
 17
-00:01:17,406 --> 00:01:19,176
-on each level before
-the clock runs out.
+00:01:24,551 --> 00:01:27,654
+如果我在这个角落这里溜达一圈
+就可以找到第一个坏TaskBots
 
 
 18
-00:01:20,036 --> 00:01:22,476
-Here we have two good TaskBots,
-you can tell they're good,
+00:01:27,721 --> 00:01:29,356
+在这个例子中他是一个
+GroundBot
 
 
 19
-00:01:22,476 --> 00:01:23,476
-because they've got green faces.
+00:01:29,723 --> 00:01:32,459
+当他发现我的时候他就会朝我
+冲过来并且攻击我
 
 
 20
-00:01:24,576 --> 00:01:27,256
-If I run around the corner here,
-we find the first bad TaskBot.
+00:01:33,260 --> 00:01:34,094
+我损失了一些电量
 
 
 21
-00:01:27,526 --> 00:01:29,716
-He's a GroundBot in this case.
+00:01:34,795 --> 00:01:37,097
+没关系 我要用一道射线搞定他
 
 
 22
-00:01:29,716 --> 00:01:32,326
-When he spots me, he will
-charge toward me and attack me.
+00:01:37,598 --> 00:01:40,634
+我用射线照射了它几秒钟后
+就搞定了 他就成了绿色
 
 
 23
-00:01:33,266 --> 00:01:33,956
-I lose some charge.
+00:01:41,401 --> 00:01:42,302
+我们看看他要去哪儿
 
 
 24
-00:01:34,796 --> 00:01:35,246
-That's okay.
+00:01:44,104 --> 00:01:46,139
+我们又找到了一个
+坏的TaskBots
 
 
 25
-00:01:35,286 --> 00:01:37,106
-I have a beam to zap him with.
+00:01:46,206 --> 00:01:48,175
+我来把他也搞定
 
 
 26
-00:01:37,106 --> 00:01:41,216
-After I zapped him for a few
-seconds he's fixed and green.
+00:01:49,710 --> 00:01:52,913
+时间走完之前我在这个关卡内还有
+两个坏的TaskBots需要搞定 
 
 
 27
-00:01:41,446 --> 00:01:42,086
-Let's see where he's going.
+00:01:53,380 --> 00:01:56,517
+不幸的是 它们也会互相攻击 
 
 
 28
-00:01:44,106 --> 00:01:46,156
-Here we have another
-bad TaskBots,
+00:01:57,150 --> 00:01:58,652
+把对方变成坏的TaskBots 
 
 
 29
-00:01:46,236 --> 00:01:48,166
-I have to fix him as well.
+00:02:00,721 --> 00:02:01,855
+那里就出现了这种情况 
 
 
 30
-00:01:49,726 --> 00:01:51,146
-There are two more on
-this level that I need
+00:02:02,589 --> 00:02:04,157
+把它们全部搞定后
 
 
 31
-00:01:51,146 --> 00:01:52,796
-to fix before the
-timer runs out.
+00:02:08,461 --> 00:02:09,429
+这一关就算完成了 
 
 
 32
-00:01:53,376 --> 00:01:55,326
-Unfortunately they
-have a tendency
+00:02:13,867 --> 00:02:14,835
+这是第二关
 
 
 33
-00:01:55,326 --> 00:01:56,516
-to attack one another as well.
+00:02:17,271 --> 00:02:20,240
+第二关中增加了一种新的
+角色 FlyingBot
 
 
 34
-00:01:57,196 --> 00:01:58,986
-They can turn each other bad.
+00:02:20,541 --> 00:02:23,110
+那里就挂着一台FlyingBot
+他正在自娱自乐
 
 
 35
-00:01:59,736 --> 00:02:01,406
-That's what happened there.
+00:02:23,744 --> 00:02:25,546
+当你找到一台坏的FlyingBot时
 
 
 36
-00:02:02,596 --> 00:02:09,936
-Once all of them are fixed
-the level is complete.
+00:02:25,612 --> 00:02:29,850
+它们有不同的攻击方式 
+当我们撞到他的时候 
 
 
 37
-00:02:10,515 --> 00:02:13,356
-[Applause]
+00:02:30,217 --> 00:02:33,487
+他发起了爆炸攻击 
+影响到了一定半径范围内的全部角色 
 
 
 38
-00:02:13,856 --> 00:02:14,776
-There's a level 2.
+00:02:34,321 --> 00:02:37,491
+好消息是 如果你搞定一台
+FlyingBot 那么它们的攻击
 
 
 39
-00:02:17,266 --> 00:02:20,096
-Level 2 introduces a new
-character, FlyingBot,
+00:02:37,558 --> 00:02:40,460
+就成了善意的攻击 可以搞定
+射程内的其它坏的FlyingBot
 
 
 40
-00:02:20,536 --> 00:02:23,096
-here is a FlyingBot on the side
-hanging out, doing his thing.
+00:02:40,861 --> 00:02:41,862
+跟着他到这儿 
 
 
 41
-00:02:23,836 --> 00:02:25,426
-If you find a bad FlyingBot,
+00:02:43,096 --> 00:02:45,332
+他肯定要撞上另外一台
+坏的FlyingBot了 
 
 
 42
-00:02:25,486 --> 00:02:29,846
-they have a different
-attack.When we bump into him,
+00:02:47,701 --> 00:02:50,137
+他躲开了他 好吧 我可以自己搞定他
 
 
 43
-00:02:30,206 --> 00:02:32,316
-he does a blast attack
-affecting everybody
+00:02:50,838 --> 00:02:53,674
+他肯定要犯个大错了
 
 
 44
-00:02:32,316 --> 00:02:33,236
-within a certain radius.
+00:02:54,107 --> 00:02:57,511
+他正朝着角落那里的一个大巢穴走去了
 
 
 45
-00:02:34,306 --> 00:02:37,496
-The good news, if you fix
-one, they do a good attack
+00:02:58,378 --> 00:02:59,479
+肯定是这样的
 
 
 46
-00:02:37,496 --> 00:02:40,096
-that will cure any other
-FlyingBot within range.
+00:03:01,815 --> 00:03:04,751
+当他被转变成坏的FlyingBot时
+我们可以利用他的爆炸攻击
 
 
 47
-00:02:40,856 --> 00:02:41,806
-Follow him over here.
+00:03:04,818 --> 00:03:09,890
+他把一个两个坏的FlyingBot
+转变成好的了
 
 
 48
-00:02:43,096 --> 00:02:47,856
-He's almost certainly going
-to bump into another bad one.
+00:03:11,825 --> 00:03:17,998
+就剩一个了 还剩一个
 
 
 49
-00:02:47,856 --> 00:02:48,426
-He avoided him.
+00:03:20,534 --> 00:03:21,735
+啊 不好！这可不妙 
 
 
 50
-00:02:48,556 --> 00:02:50,146
-Good. I can cure
-this one as well.
+00:03:25,138 --> 00:03:26,006
+又搞定一个 
 
 
 51
-00:02:50,846 --> 00:02:53,676
-He's almost certainly going to
-do a really, really silly thing,
+00:03:27,841 --> 00:03:28,709
+这一关也完成了 
 
 
 52
-00:02:54,116 --> 00:02:56,366
-to go all the way around
-here to a great big nest
+00:03:35,415 --> 00:03:36,517
+这就是DemoBots 
 
 
 53
-00:02:56,466 --> 00:02:57,506
-of the things around the corner.
+00:03:37,651 --> 00:03:39,486
+我想看看我们使用了哪些工具
 
 
 54
-00:02:58,386 --> 00:02:59,476
-This is almost a certainty.
+00:03:39,553 --> 00:03:42,322
+和技术来实现这款游戏
 
 
 55
-00:03:01,916 --> 00:03:04,406
-We can use his benevolent
-blast after he's been made bad,
+00:03:43,123 --> 00:03:47,294
+你可以看到当TaskBots
+走动时它们有大量的动画状态 
 
 
 56
-00:03:04,816 --> 00:03:14,376
-he can cure one, two,
-all of them in one go.
+00:03:48,095 --> 00:03:52,766
+我们努力做的一件事 
+就是把我们需要的纹理 图像
 
 
 57
-00:03:14,376 --> 00:03:17,986
-[Laughter] One more to go.
+00:03:52,833 --> 00:03:55,536
+保持在最低程度 
+从而让app的大小不太夸张 
 
 
 58
-00:03:18,446 --> 00:03:22,756
-Oh no! [Laughter] This
-is not going well.
+00:03:56,570 --> 00:03:59,873
+我们决定让SpriteKit中的
+新的动作编辑器
 
 
 59
-00:03:25,136 --> 00:03:25,886
-[Laughter] One more.
+00:04:00,274 --> 00:04:03,243
+把动作创建为...把动画创建为
+动作而不是把动画创建为纹理
 
 
 60
-00:03:27,846 --> 00:03:28,596
-Then the level is complete.
+00:04:03,710 --> 00:04:07,181
+你们看到的攻击动画 那个攻击射线 
 
 
 61
-00:03:29,516 --> 00:03:34,906
-[Applause]
+00:04:07,648 --> 00:04:10,617
+是我们制作并应用到GroundBot
+以及FlyingBot
 
 
 62
-00:03:35,406 --> 00:03:36,286
-So that's DemoBots.
+00:04:10,684 --> 00:04:12,052
+上面的参考动作 
 
 
 63
-00:03:36,746 --> 00:03:39,056
-I would like to take
-a look at tools
+00:04:12,486 --> 00:04:15,355
+如果我们点击进到那个动作 
+我们就可以看到它是由
 
 
 64
-00:03:39,056 --> 00:03:43,326
-and technologies we have used
-to make this game a reality.
+00:04:15,422 --> 00:04:17,491
+很多的微小的移动动作
+一个接一个组成的 
 
 
 65
-00:03:43,326 --> 00:03:45,626
-You saw our TaskBots had lots
+00:04:19,293 --> 00:04:22,829
+因为它是一个参考动作 
+我们创建一次后 
 
 
 66
-00:03:45,626 --> 00:03:47,246
-of animation states
-they went through.
+00:04:23,096 --> 00:04:25,632
+就可以不考虑TaskBots的
+方位 把它应用到
 
 
 67
-00:03:47,246 --> 00:03:52,756
-A thing we tried to do is keep
-the textures, images we needed
+00:04:25,699 --> 00:04:27,501
+所有的TaskBots上 
 
 
 68
-00:03:52,756 --> 00:03:55,516
-for those to a minimum to
-keep the app size realistic.
+00:04:28,402 --> 00:04:31,805
+因为它是一个参考动作 
+我们创建一次后 
 
 
 69
-00:03:55,516 --> 00:03:59,886
-We decided to keep the new
-action editor in SpriteKit
+00:04:32,172 --> 00:04:34,675
+还可以对它进行修改对源进行修改 
 
 
 70
-00:04:00,276 --> 00:04:01,136
-to create the actions as --
+00:04:34,741 --> 00:04:36,844
+我们可以看到变更在各个地方
+都生效了 我们就无需
 
 
 71
-00:04:01,136 --> 00:04:03,056
-animations as actions
-rather than textures.
+00:04:36,910 --> 00:04:39,046
+在多个地方对它进行修改 
 
 
 72
-00:04:03,726 --> 00:04:07,086
-The zap animation you
-see, the zap beam,
+00:04:40,848 --> 00:04:43,951
+我们使用动作编辑器来生成射线动画 
 
 
 73
-00:04:07,746 --> 00:04:10,606
-that's a reference action
-we have made and applied
+00:04:44,484 --> 00:04:47,521
+这个射线持续了这样长的
+几秒钟 我们还想让这个射线
 
 
 74
-00:04:10,646 --> 00:04:12,036
-to both the GroundBot
-and FlyingBot.
+00:04:47,588 --> 00:04:51,291
+随着时间衰减 我们也在
+编辑器中创建了那些动作 
 
 
 75
-00:04:12,496 --> 00:04:15,426
-If we click into that action
-we can see it is made of lots
+00:04:51,525 --> 00:04:53,861
+这样我们就能直观地看到它 
+并且把它用到游戏中 
 
 
 76
-00:04:15,426 --> 00:04:17,495
-of small move actions
-one after another.
+00:04:55,629 --> 00:04:59,399
+游戏中所有的资产都是在资产目录中
+创建的这些资产目录在Xcode 7
 
 
 77
-00:04:19,296 --> 00:04:22,826
-Because it is a reference
-action we can create it once
+00:04:59,766 --> 00:05:04,605
+之外 替我们转换成了纹理地图集 
 
 
 78
-00:04:23,086 --> 00:04:26,156
-and apply it to all
-TaskBots we have regardless
+00:05:05,339 --> 00:05:07,174
+这就意味着当我们把它们用在游戏中时
 
 
 79
-00:04:26,156 --> 00:04:27,266
-of the orientation.
+00:05:07,241 --> 00:05:08,876
+我们就可以获得尽可能好的绘制性能 
 
 
 80
-00:04:28,406 --> 00:04:31,796
-Because it is a reference
-action, we can create it once
+00:05:09,810 --> 00:05:11,144
+我们有很多这样的图像 
 
 
 81
-00:04:32,166 --> 00:04:34,666
-and then go and change
-it, the source,
+00:05:11,411 --> 00:05:14,615
+它还使得我们可以指定在不同的设备上
 
 
 82
-00:04:34,836 --> 00:04:36,836
-seeing that change going
-everywhere, we don't have
+00:05:14,815 --> 00:05:15,816
+使用的正确的图像 
 
 
 83
-00:04:36,836 --> 00:04:38,706
-to change it in multiple places.
+00:05:16,917 --> 00:05:18,785
+它还可以帮助我们
+进一步优化图像的尺寸 
 
 
 84
-00:04:40,826 --> 00:04:43,946
-We use the action editor to
-create the beam animation.
+00:05:19,887 --> 00:05:22,856
+当我们设计我们的关卡时 
+我们使用七百六十八点的参考标高 
 
 
 85
-00:04:44,476 --> 00:04:47,556
-It is only fired for so many
-seconds, we want that beam
+00:05:22,923 --> 00:05:26,660
+那边的那个黄色框那是我们想在屏幕上
 
 
 86
-00:04:47,636 --> 00:04:51,306
-to decay over time and we
-create that actions editor too
+00:05:26,727 --> 00:05:29,463
+显示多少个关卡的参考 
 
 
 87
-00:04:51,306 --> 00:04:56,066
-so that we can see it visually
-and use it in the game.
+00:05:30,197 --> 00:05:33,300
+以那个尺寸计算我们的PlayerBot
+是一百二十个点 而如果我们
 
 
 88
-00:04:56,066 --> 00:04:58,276
-All of the assets in the
-game have been created
+00:05:34,668 --> 00:05:39,840
+在一台iPad上使用那个关卡 
+那台iPad就也是七百六十八点 
 
 
 89
-00:04:58,276 --> 00:05:00,056
-in asset catalogs and out
+00:05:39,973 --> 00:05:42,910
+这样我们就知道了PlayerBot
+在屏幕上的尺寸他是一百二十个点
 
 
 90
-00:05:00,056 --> 00:05:03,136
-of Xcode 7 these asset
-catalogs are converted
+00:05:42,976 --> 00:05:45,579
+我们就可以计算出要想在
+屏幕上得到他的清晰图像 
 
 
 91
-00:05:03,136 --> 00:05:04,616
-to texture atlases for us.
+00:05:45,646 --> 00:05:47,614
+他的尺寸应该是多少 
 
 
 92
-00:05:05,336 --> 00:05:07,906
-That means that we get the
-best possible draw performance
+00:05:48,715 --> 00:05:52,186
+如果我们把那个关卡按比例缩小到一部
 
 
 93
-00:05:07,906 --> 00:05:09,876
-when used in a game.
+00:05:52,452 --> 00:05:55,956
+比如三百二十个点高度的
+iPhone上 他就会变小 
 
 
 94
-00:05:09,876 --> 00:05:11,086
-We have a lot of these images.
+00:05:56,123 --> 00:05:57,457
+他的高度就会成为五十个点 
 
 
 95
-00:05:11,426 --> 00:05:14,456
-It also gives us a way to
-specify the right images to use
+00:05:58,258 --> 00:06:00,494
+在iPad上我们不需要这么高
+分辨率的纹理 
 
 
 96
-00:05:14,806 --> 00:05:15,696
-for different devices.
+00:06:00,727 --> 00:06:02,529
+我们就可以节省空间 
 
 
 97
-00:05:16,926 --> 00:05:18,456
-This helps us to
-optimize the size further.
+00:06:03,997 --> 00:06:07,167
+如果我们观察下我们的
+DemoBots支持的设备 
 
 
 98
-00:05:19,886 --> 00:05:22,596
-When we were designing our
-levels we used a reference
+00:06:07,467 --> 00:06:11,905
+iPad iPhone以及Mac
+随着场景高度的变化
 
 
 99
-00:05:22,596 --> 00:05:26,736
-height of 768 points, the yellow
-box there, that's our reference
+00:06:12,372 --> 00:06:14,441
+我们就可以计算出对应的玩家的高度 
 
 
 100
-00:05:26,736 --> 00:05:29,346
-for how much level we wanted
-to be visible onscreen.
+00:06:15,609 --> 00:06:20,914
+iPhone 6比4S到5S
+都略微大一点 
 
 
 101
-00:05:30,166 --> 00:05:35,106
-At that size our PlayerBot is
-120 points, and now if we use
+00:06:20,981 --> 00:06:24,518
+我们使用的也是同样的
+资产它太小了 你没注意到
 
 
 102
-00:05:35,106 --> 00:05:39,826
-that level on an iPad, the
-iPad is also 768 points,
+00:06:26,119 --> 00:06:31,191
+这就意味着你可以计算出
+我们需要的1X 2X 3X资产 
 
 
 103
-00:05:40,086 --> 00:05:41,356
-so we'll know the size of
-the PlayerBot on screen,
+00:06:31,558 --> 00:06:34,862
+让图像看起来清晰 同时又避免了
+使用超出我们需要的更多的像素 
 
 
 104
-00:05:41,356 --> 00:05:43,676
-and he's going to be 120
-points and we can work
+00:06:35,162 --> 00:06:38,966
+为了简单起见我们把iPhone 6 Plus
+向下取整为了一百八十像素 
 
 
 105
-00:05:43,676 --> 00:05:45,796
-out the image size we need
+00:06:40,968 --> 00:06:44,238
+我们可以为每种设备设置
+我们想要的资产 
 
 
 106
-00:05:45,796 --> 00:05:47,416
-to get a sharp image
-of him onscreen.
+00:06:44,872 --> 00:06:46,240
+游戏中我们有很多这样的资产 
 
 
 107
-00:05:48,726 --> 00:05:52,906
-If we scale that level down
-to an iPhone with, say,
+00:06:46,773 --> 00:06:49,943
+我意思是它们的数量非常多数以千计 
 
 
 108
-00:05:52,906 --> 00:05:55,956
-a 320 point height, he
-actually is a bit smaller,
+00:06:51,411 --> 00:06:56,283
+实际上所有的这些角色资产都是在
+一个3D渲染输出上生成的 
 
 
 109
-00:05:56,126 --> 00:05:57,116
-he'll be 50 points high.
+00:06:56,850 --> 00:06:58,151
+我们也可以连接那个渲染输出 
 
 
 110
-00:05:58,246 --> 00:06:00,376
-We don't need such a
-high resolution texture
+00:06:58,585 --> 00:07:02,189
+我们也让那个资产目录的
+生成实现了自动化 
 
 
 111
-00:06:00,376 --> 00:06:02,526
-as on the iPad and
-we can save space.
+00:07:02,823 --> 00:07:05,459
+这里的这个JSON文件 
+这是PlayerBot
 
 
 112
-00:06:04,006 --> 00:06:08,186
-If we look at all of the devices
-that we support with DemoBots,
+00:07:05,526 --> 00:07:07,761
+行走动画的一帧 
 
 
 113
-00:06:08,186 --> 00:06:12,846
-iPad, iPhone and Mac, as that
-Scene height scales we can work
+00:07:08,395 --> 00:07:12,900
+我们同样也可以自动生成这些文件
+这就是Xcode使用资产目录生成的
 
 
 114
-00:06:12,846 --> 00:06:14,446
-out the corresponding
-player height.
+00:07:13,467 --> 00:07:17,104
+我们也可以让为每种设备拾取
+正确的图像这一过程
 
 
 115
-00:06:15,086 --> 00:06:20,876
-The iPhone 6 is slightly bigger
-than the 4S through the 5S,
+00:07:18,071 --> 00:07:20,374
+自动化 我们以后也会公布资产目录
 
 
 116
-00:06:21,046 --> 00:06:24,226
-we used the same assets, it
-is so small, you don't notice.
+00:07:20,440 --> 00:07:23,844
+格式参考 以便让你可以更加容易地
 
 
 117
-00:06:26,126 --> 00:06:31,186
-This then means you work out
-the 1X, 2X, 3X assets we need
+00:07:27,147 --> 00:07:29,850
+自己创建这些文件我们还在游戏中
+使用了另外SpriteKit的一项特性 
 
 
 118
-00:06:31,566 --> 00:06:34,146
-to make them look sharp
-without using any more pixels
+00:07:29,917 --> 00:07:33,620
+即SKCameraNode 
+在那之前 如果我们想要
 
 
 119
-00:06:34,146 --> 00:06:35,176
-than we needed to.
+00:07:34,054 --> 00:07:36,190
+在关卡内移动视图 
+我们就需要实际移动
 
 
 120
-00:06:35,176 --> 00:06:38,326
-We rounded the iPhone 6
-Plus down to 180 pixels just
+00:07:36,590 --> 00:07:39,760
+整个场景 我们就必须
+把关卡自身移动到视图下面 
 
 
 121
-00:06:38,326 --> 00:06:41,276
-to keep things simple.
+00:07:41,828 --> 00:07:44,431
+而有了SKCameraNode 
+事情就变得简单多了 
 
 
 122
-00:06:41,276 --> 00:06:43,976
-We can set up the assets
-we want for each device.
+00:07:45,098 --> 00:07:47,634
+摄像机就是场景中的一个节点
+它有自己的位置
 
 
 123
-00:06:44,756 --> 00:06:46,216
-We have a lot of
-these in the game.
+00:07:48,202 --> 00:07:50,704
+因为它有自己的位置 
+我们就可以通过改变它的位置 
 
 
 124
-00:06:46,706 --> 00:06:48,886
-I really, really do
-mean a lot of them.
+00:07:50,771 --> 00:07:52,873
+来移动摄像机
+就像移动其他节点一样 
 
 
 125
-00:06:48,956 --> 00:06:49,526
-There are thousands.
+00:07:53,440 --> 00:07:55,742
+改变当前视图看到的
+位置就更加容易了 
 
 
 126
-00:06:51,396 --> 00:06:54,196
-All of these character
-assets are actually generated
+00:07:57,978 --> 00:08:01,048
+因为它是一个节点 我们还可以
+用它来做节点能做的事 
 
 
 127
-00:06:54,196 --> 00:06:56,276
-from a 3D rendering output.
+00:08:01,515 --> 00:08:03,550
+举例来说 我们可以向
+那个节点应用约束 
 
 
 128
-00:06:56,916 --> 00:06:57,686
-Which we can also connect.
+00:08:04,151 --> 00:08:06,820
+我们可以用这个把节点的
+摄像机位置约束到
 
 
 129
-00:06:58,596 --> 00:07:02,186
-We automated that creation
-of the asset catalogs too.
+00:08:07,120 --> 00:08:10,524
+一个PlayerBot位置 
+当他朝着屏幕角落跑去时 
 
 
 130
-00:07:02,836 --> 00:07:05,476
-The JSON file here,
-the one frame
+00:08:11,992 --> 00:08:16,864
+我们在他四周就有很多黑色空间 
 
 
 131
-00:07:05,476 --> 00:07:07,576
-of the PlayerBot's
-walk animation,
+00:08:16,930 --> 00:08:19,933
+而不是我们想在屏幕上看到的
+尽可能多的关卡 
 
 
 132
-00:07:08,336 --> 00:07:09,886
-and we can create
-these automatically,
+00:08:21,001 --> 00:08:23,971
+我们还可以使用第二个约束
+来对它进行改进 
 
 
 133
-00:07:09,886 --> 00:07:12,746
-this is what Xcode creates
-with the asset catalogs
+00:08:24,738 --> 00:08:27,741
+这个约束可以确保我们不会
+太过于靠近关卡的边缘 
 
 
 134
-00:07:13,426 --> 00:07:16,226
-and we can automate the process
-of picking the right images
+00:08:28,141 --> 00:08:29,042
+看起来就是这样的 
 
 
 135
-00:07:16,226 --> 00:07:20,406
-for the right device and we'll
-release the Asset Catalog format
+00:08:30,210 --> 00:08:32,513
+一般来说 
+我们会跟随PlayerBot 
 
 
 136
-00:07:20,406 --> 00:07:24,676
-reference in a future seed
-to make it easier for you
+00:08:33,145 --> 00:08:35,716
+但是如果他靠近了边缘 
+我们就会停止跟随他 
 
 
 137
-00:07:25,096 --> 00:07:27,516
-to create these yourself
-as well.
+00:08:35,782 --> 00:08:37,183
+让更多的关卡显示在屏幕上 
 
 
 138
-00:07:27,516 --> 00:07:29,036
-Another SpriteKit
-feature that we used
+00:08:37,683 --> 00:08:41,922
+当敌方bots攻击你的时候 
+这就更容易看出来了 
 
 
 139
-00:07:29,036 --> 00:07:33,546
-in the game was SKCameraNode,
-before that, if we wanted
+00:08:43,756 --> 00:08:44,858
+那么我们是怎样实现的？
 
 
 140
-00:07:34,066 --> 00:07:37,026
-to move the view around
-the level, we actually had
+00:08:45,692 --> 00:08:49,396
+我们首先计算出整个关卡的封边矩形 
 
 
 141
-00:07:37,026 --> 00:07:37,966
-to move the world, we had
+00:08:50,597 --> 00:08:53,233
+然后我们根据它们看到的游戏屏幕的
 
 
 142
-00:07:37,966 --> 00:07:39,756
-to move the level
-itself beneath the view.
+00:08:53,534 --> 00:08:56,403
+宽度和高度得到一个较小的矩形 
 
 
 143
-00:07:41,816 --> 00:07:44,406
-with SKCameraNode
-things are much simpler,
+00:08:57,171 --> 00:09:00,641
+我们再确保摄像机不能
+移动到这个框以外 
 
 
 144
-00:07:45,086 --> 00:07:46,666
-the camera is a node
-in the scene.
+00:09:00,707 --> 00:09:02,209
+我们把它约束到那个矩形 
 
 
 145
-00:07:46,666 --> 00:07:47,496
-It has a position.
+00:09:03,210 --> 00:09:07,114
+这样当摄像机跟随玩家
+四处移动时它就不会太过于靠近
 
 
 146
-00:07:48,186 --> 00:07:50,796
-Because it has a position,
-we can move it around just
+00:09:07,314 --> 00:09:08,148
+关卡的边缘 
 
 
 147
-00:07:50,796 --> 00:07:51,716
-by changing that position.
+00:09:11,051 --> 00:09:14,855
+因为摄像机是一个节点了 
+我们还可以向它添加子节点 
 
 
 148
-00:07:51,886 --> 00:07:52,756
-Same as any other node.
+00:09:15,389 --> 00:09:19,560
+这就非常有利于警告信息的显示
+比如我们在游戏中的计时器标签
 
 
 149
-00:07:52,756 --> 00:07:55,636
-It is easier to change where
-the view is currently looking.
+00:09:20,694 --> 00:09:23,297
+我们不想让计时器标签移动 
+我们想让它顶部居中显示 
 
 
 150
-00:07:57,976 --> 00:08:01,046
-Because it is a node we can
-do node-like things with it.
+00:09:23,897 --> 00:09:27,100
+因此我们就把它添加为
+摄像机的一个子节点 
 
 
 151
-00:08:01,516 --> 00:08:03,536
-We can apply constraints
-to that node for example.
+00:09:27,734 --> 00:09:30,170
+而不是场景的一个子节点
+这样的话当摄像机四处移动时
 
 
 152
-00:08:04,096 --> 00:08:06,826
-We can use this to constrain
-the node's Camera position
+00:09:30,838 --> 00:09:34,208
+标签也会随之移动在屏幕的适当位置
+保持这个固定特效就更加容易了 
 
 
 153
-00:08:07,106 --> 00:08:12,476
-to a PlayerBot position,
-when he runs to the corner
+00:09:37,311 --> 00:09:40,447
+这些就是我们在游戏中用到的
+部分SpriteKit特性 
 
 
 154
-00:08:12,476 --> 00:08:16,986
-of the screen, we have a lot
-of black space around him,
+00:09:41,114 --> 00:09:43,717
+我们再来看看如果我们用的是
+GameplayKit的某些特性会怎样 
 
 
 155
-00:08:16,986 --> 00:08:21,106
-not as much level as we
-would like on the screen.
+00:09:43,917 --> 00:09:45,619
+首先是
+GKStateMachine
 
 
 156
-00:08:21,106 --> 00:08:23,966
-We can make it better to
-use a second restraint
+00:09:45,686 --> 00:09:47,955
+你应该已经在
+GameplayKit会议上
 
 
 157
-00:08:24,726 --> 00:08:27,756
-to make sure we're never too
-near the edge of the level.
+00:09:48,455 --> 00:09:51,892
+见到过它了那场会议讲的是
+你如何使用状态机追踪你的游戏内的
 
 
 158
-00:08:28,126 --> 00:08:29,026
-That's how that looks.
+00:09:51,959 --> 00:09:54,261
+角色 关卡以及其他元素
+发生了什么情况 
 
 
 159
-00:08:30,206 --> 00:08:32,525
-We follow the PlayerBot
-generally speaking
+00:09:55,095 --> 00:09:57,698
+我们把这个以及其他一些东西
+用在了PlayerBot上 
 
 
 160
-00:08:33,155 --> 00:08:35,746
-but if he's near we
-stop following him
+00:09:57,898 --> 00:09:59,066
+这是他的状态 
 
 
 161
-00:08:35,806 --> 00:08:36,986
-and keep more level onscreen.
+00:09:59,333 --> 00:10:00,934
+他首先是处于“出现”阶段 
 
 
 162
-00:08:37,686 --> 00:08:41,926
-This is easier to see when
-the enemy bots attack you.
+00:10:01,435 --> 00:10:03,036
+也就是说他刚被“传送”到了游戏中 
 
 
 163
-00:08:43,756 --> 00:08:45,256
-How do we do that?
+00:10:03,937 --> 00:10:06,874
+为此使用定制状态很棒的一点就在于
 
 
 164
-00:08:45,676 --> 00:08:48,276
-We start by working out
-the banding rectangle
+00:10:07,307 --> 00:10:09,309
+它们可以确保不会发生意外 
 
 
 165
-00:08:48,476 --> 00:08:49,386
-of the entire level.
+00:10:09,743 --> 00:10:15,015
+当他们启动后 就激活了一个
+计时器 过了一定时间后 
 
 
 166
-00:08:50,506 --> 00:08:53,776
-We then make a smaller
-rectangle in set from that based
+00:10:15,649 --> 00:10:18,418
+它就会直接移动到玩家控制状态 
 
 
 167
-00:08:53,776 --> 00:08:55,246
-on the screens width and height
+00:10:18,485 --> 00:10:22,890
+然后打开输入使用
+这样你就可以控制它了
 
 
 168
-00:08:55,246 --> 00:08:56,286
-that they're viewing
-the game on.
+00:10:24,391 --> 00:10:29,096
+当他命中一个目标后 我们
+就把他的状态改为“命中”
 
 
 169
-00:08:57,166 --> 00:09:00,716
-We make sure that the Camera can
-never move outside of that box.
+00:10:29,162 --> 00:10:32,199
+当我们被命中后 我们就输入
+一个不同的动画 就是那个
 
 
 170
-00:09:00,716 --> 00:09:02,206
-We constrain it to
-that rectangle.
+00:10:32,266 --> 00:10:36,203
+跳跃动画 当玩家被命中后 
+就不能再控制玩家了 
 
 
 171
-00:09:03,216 --> 00:09:04,676
-Then when the Camera moves
+00:10:36,637 --> 00:10:39,306
+输入就会关掉 并且继续跟踪状态 
 
 
 172
-00:09:04,676 --> 00:09:07,106
-around following the player
-it never gets too near
+00:10:39,740 --> 00:10:42,709
+当时间过完后再把他移回
+玩家控制状态 
 
 
 173
-00:09:07,326 --> 00:09:11,206
-to the edge of the level.
+00:10:44,378 --> 00:10:47,748
+如果我们被命中的次数足够多 
+我们就必须重新充电 
 
 
 174
-00:09:11,206 --> 00:09:15,576
-Because the Camera is a node we
-can also add child nodes to it,
+00:10:48,048 --> 00:10:50,817
+我们就到了“重新充电”状态 
+而不是“命中”状态 
 
 
 175
-00:09:15,626 --> 00:09:17,516
-which is good for
-heads-up displays
+00:10:51,618 --> 00:10:53,453
+那个会追踪我们重新充电了多长时间 
 
 
 176
-00:09:17,516 --> 00:09:19,326
-like our timer label
-we have in the game.
+00:10:53,921 --> 00:10:55,255
+那个状态也会真的
 
 
 177
-00:09:20,706 --> 00:09:21,876
-We don't want this
-label to move,
+00:10:55,489 --> 00:10:57,191
+给玩家添加更多的电量 
 
 
 178
-00:09:21,876 --> 00:09:23,206
-we want it to stay
-top and center.
+00:10:57,858 --> 00:11:01,328
+最后重新充电结束后它就会回到
+PlayerControlled状态 
 
 
 179
-00:09:23,896 --> 00:09:26,536
-So we add it as a child of the
-Camera rather than had a child
+00:11:03,430 --> 00:11:06,433
+这就是玩家可以拥有的
+一套合理的复杂的行为 
 
 
 180
-00:09:26,536 --> 00:09:28,676
-of the Scene, that way,
-as the Camera moves
+00:11:07,201 --> 00:11:10,938
+使用一台状态机来对状态进行编码 
 
 
 181
-00:09:28,676 --> 00:09:31,826
-around the label moves
-with it and it is easier
+00:11:11,004 --> 00:11:13,841
+引起状态的发生定义要发生的正确的事
 
 
 182
-00:09:31,826 --> 00:09:34,206
-to keep the permanent features
-onscreen in the right place.
+00:11:14,107 --> 00:11:17,277
+从一个状态移动到另一个状态 
+这样要确保游戏内仅仅会
 
 
 183
-00:09:37,316 --> 00:09:39,426
-Those are some of the
-SpriteKit features
+00:11:17,344 --> 00:11:19,146
+发生正确的事就更加容易了 
 
 
 184
-00:09:39,426 --> 00:09:40,456
-that we have used in the game.
+00:11:19,213 --> 00:11:21,715
+我们的PlayerBot不会做出
+我们不想让他做的事
 
 
 185
-00:09:41,036 --> 00:09:43,106
-Let's look at some if of the
-GameplayKit ones we used.
+00:11:23,584 --> 00:11:27,821
+我们同样也把它用到游戏本身上面 
 
 
 186
-00:09:43,916 --> 00:09:46,896
-the first is GKStateMachine,
-you would have seen
+00:11:28,355 --> 00:11:30,657
+当你玩一个关卡时 
+我们就处于一个活动状态 
 
 
 187
-00:09:46,896 --> 00:09:49,656
-from the GameplayKit talk how
-you can use state machines
+00:11:31,525 --> 00:11:33,760
+如果我们点击“暂停”
+那么我们就会进入暂停状态
 
 
 188
-00:09:49,656 --> 00:09:52,806
-to track what's going on
-with characters and levels
+00:11:34,127 --> 00:11:37,197
+这就会通过在你退出
+暂停状态时删除那个
 
 
 189
-00:09:52,976 --> 00:09:54,086
-and other elements of your game.
+00:11:37,431 --> 00:11:38,599
+覆盖 从而对覆盖进行处理 
 
 
 190
-00:09:55,116 --> 00:09:57,286
-We use this amongst other
-things for the PlayerBot,
+00:11:39,566 --> 00:11:41,969
+如果我通关了一个关卡 
+我们就处于一个成功状态
 
 
 191
-00:09:57,896 --> 00:09:58,936
-this is the states he has.
+00:11:42,503 --> 00:11:45,405
+同样地 当我们成功时 
+它就会处理所有的
 
 
 192
-00:09:59,336 --> 00:10:00,936
-He starts in his Appear state
+00:11:45,572 --> 00:11:47,274
+显示按钮、进行覆盖这些任务 
 
 
 193
-00:10:01,006 --> 00:10:03,316
-where he teleports
-into the game.
+00:11:47,541 --> 00:11:49,510
+在这些情况中
+状态知道应该做什么事情 
 
 
 194
-00:10:03,926 --> 00:10:07,606
-The nice thing about using
-custom states for this is
+00:11:52,279 --> 00:11:55,048
+我们还用到了GameplayKit
+的另一个方面 
 
 
 195
-00:10:07,606 --> 00:10:10,256
-that they can make sure that
-the right thing happens.
+00:11:55,115 --> 00:11:55,949
+即实体和元件 
 
 
 196
-00:10:10,256 --> 00:10:15,026
-They start and it starts a
-timer, after the right amount
+00:11:56,783 --> 00:11:59,319
+新的元件是对自含式功能性
+在游戏的不同实体上
 
 
 197
-00:10:15,606 --> 00:10:18,426
-of time passes, it
-moves straight
+00:11:59,386 --> 00:12:03,891
+分享的功能性进行打包的
+一种相当不错的方式 
 
 
 198
-00:10:18,586 --> 00:10:21,236
-to the player control state
-and turns on the input use
+00:12:04,591 --> 00:12:06,960
+我们有三个实体
+我们有PlayerBot
 
 
 199
-00:10:21,236 --> 00:10:22,756
-so you can control it.
+00:12:07,461 --> 00:12:09,463
+GroundBot
+以及FlyingBot 
 
 
 200
-00:10:24,376 --> 00:10:29,096
-If he's hit we move into the
-Hit state, when we have this,
+00:12:10,364 --> 00:12:11,765
+它们有一些共同之处 
 
 
 201
-00:10:29,096 --> 00:10:32,346
-we enter a different
-animation, the jump animation
+00:12:12,432 --> 00:12:14,168
+它们都需要被渲染进场景中 
 
 
 202
-00:10:32,346 --> 00:10:35,896
-and the player can't
-be controlled when hit
+00:12:14,368 --> 00:12:15,335
+它们都需要一个阴影 
 
 
 203
-00:10:35,986 --> 00:10:39,306
-and it turns off
-input, tracks the state,
+00:12:15,669 --> 00:12:18,705
+所以要完成这些事情我们就有了
+一个渲染元件以及一个阴影元件 
 
 
 204
-00:10:39,726 --> 00:10:41,616
-when the time has
-passed, move him back
+00:12:19,506 --> 00:12:22,776
+它们也都有动画 物理现象和智能 
 
 
 205
-00:10:41,736 --> 00:10:44,376
-to the player control state.
+00:12:22,843 --> 00:12:25,112
+这些名称就是我们给予
+状态机 让它跟踪的名称 
 
 
 206
-00:10:44,376 --> 00:10:47,756
-If we get hit enough
-times we have to recharge
+00:12:26,747 --> 00:12:29,416
+此时你可能会以为它们看起来很像 
 
 
 207
-00:10:47,796 --> 00:10:50,786
-and instead the Hit state
-moves to the Recharging state.
+00:12:30,150 --> 00:12:33,320
+为什么不用一个基本
+Bot类来给这三个实体
 
 
 208
-00:10:51,616 --> 00:10:53,446
-That tracks how long we
-have been recharging for.
+00:12:33,387 --> 00:12:35,289
+提供全部功能性呢？
 
 
 209
-00:10:53,926 --> 00:10:55,266
-The state actually does the job
+00:12:36,490 --> 00:12:38,258
+别忘了 它们实际上并不是相似的 
 
 
 210
-00:10:55,476 --> 00:10:57,106
-of adding more charge
-back on to the player.
+00:12:39,193 --> 00:12:42,663
+需要对PlayerBot进行输入 
+我们可以通过一个游戏控制器
 
 
 211
-00:10:57,866 --> 00:11:00,276
-Eventually when recharged,
-it goes back
+00:12:42,963 --> 00:12:46,500
+键盘或者通过触模控制对它进行控制 
 
 
 212
-00:11:00,336 --> 00:11:01,336
-to the PlayerControlled state.
+00:12:47,467 --> 00:12:51,038
+GroundBot以及FlyingBot
+并不需要进行输入你无法控制这些角色
 
 
 213
-00:11:01,336 --> 00:11:05,576
-That's a reasonably
-complex set of behaviors
+00:12:51,104 --> 00:12:53,340
+它们是由一个代理驱动的 
 
 
 214
-00:11:05,576 --> 00:11:06,426
-that the player can have.
+00:12:53,707 --> 00:12:57,044
+稍后你会看到我们是怎样使用代理
+来在关卡中驱动这些角色的 
 
 
 215
-00:11:07,216 --> 00:11:11,026
-By using a state machine to
-not only codify the states,
+00:12:57,611 --> 00:12:59,112
+PlayerBot
+并不需要一个代理 
 
 
 216
-00:11:11,026 --> 00:11:13,826
-make them happen, define the
-right things to happen moving
+00:12:59,179 --> 00:13:00,581
+它的动力来自你的输入 
 
 
 217
-00:11:14,096 --> 00:11:17,386
-from state to state it
-is easier to make sure
+00:13:01,748 --> 00:13:03,817
+同样地GroundBot
+以及FlyingBot
 
 
 218
-00:11:17,386 --> 00:11:19,016
-that only the right thing
-could happen in game.
+00:13:03,884 --> 00:13:06,286
+也需要遵循一些规则 这些
+规则会告诉它们在某个指定
 
 
 219
-00:11:19,016 --> 00:11:23,786
-Our player Bot can't do
-something we don't want him to.
+00:13:06,353 --> 00:13:08,589
+情景下 它们应该怎么做 
+稍后我们也会看看这个 
 
 
 220
-00:11:23,786 --> 00:11:27,456
-We use this also
-for the game itself.
+00:13:09,423 --> 00:13:12,125
+PlayerBot就不需要这些规则
+你会告诉他他该怎么做 
 
 
 221
-00:11:28,346 --> 00:11:30,646
-We have an active state
-when you play a level,
+00:13:12,926 --> 00:13:16,029
+PlayerBot和GroundBot
+确实有一件共同之处 
 
 
 222
-00:11:31,526 --> 00:11:33,706
-if we hit pause we go
-into a pause state.
+00:13:16,530 --> 00:13:18,599
+它们都有一个运动元件 
 
 
 223
-00:11:34,126 --> 00:11:37,186
-This handles overlay,
-by removing that overlay
+00:13:19,633 --> 00:13:21,869
+这个元件的作用就是说 
+举个例子 我在这里 
 
 
 224
-00:11:37,446 --> 00:11:38,596
-when you move out
-of the pause state.
+00:13:22,402 --> 00:13:24,771
+我需要以某个角度 移动这个距离 
 
 
 225
-00:11:39,566 --> 00:11:41,976
-If I complete the level,
-we have a success state.
+00:13:25,105 --> 00:13:26,707
+在场景中把我移过去吧 
 
 
 226
-00:11:42,486 --> 00:11:45,406
-Again, this handles all of the
-tasks of showing the buttons
+00:13:27,274 --> 00:13:31,512
+PlayerBot会使用那个输入
+在场景中渲染它让他四处运动 
 
 
 227
-00:11:45,586 --> 00:11:47,266
-and overlay for when
-we succeeded.
+00:13:32,379 --> 00:13:34,481
+而GroundBot则会用它
+来进行冲锋攻击 
 
 
 228
-00:11:47,526 --> 00:11:49,526
-The state knows the right things
-to do in these situations.
+00:13:34,781 --> 00:13:37,150
+他从这里开始移动 然后发起冲锋 
 
 
 229
-00:11:50,826 --> 00:11:55,036
-Another aspect of GameplayKit
-we have used is entities
+00:13:37,951 --> 00:13:39,686
+FlyingBot
+则不需要那项能力 
 
 
 230
-00:11:55,226 --> 00:11:55,906
-and components.
+00:13:39,753 --> 00:13:42,623
+他不会移动 因此他没有那个元件 
 
 
 231
-00:11:56,776 --> 00:11:59,406
-Now components are a
-really good way to package
+00:13:43,757 --> 00:13:46,627
+这些元件是对功能性进行分解
 
 
 232
-00:11:59,406 --> 00:12:01,306
-up self-contained
-pieces of functionality
+00:13:46,693 --> 00:13:49,630
+并且仅仅把它们分配给
+需要它们的实体的好方法 
 
 
 233
-00:12:01,306 --> 00:12:03,886
-that are shared amongst
-different entities in the game.
+00:13:51,965 --> 00:13:56,170
+这些就是我们在游戏中使用
+GameplayKit功能性的一些方法 
 
 
 234
-00:12:04,586 --> 00:12:06,786
-We have three entities,
-we have PlayerBot,
+00:13:56,904 --> 00:13:59,806
+我想邀请戴夫到台上来 
+再给你们讲讲我们是如何
 
 
 235
-00:12:07,456 --> 00:12:09,016
-GroundBot and FlyingBot.
+00:13:59,873 --> 00:14:01,441
+使用GameplayKit
+来创建我们的
 
 
 236
-00:12:10,356 --> 00:12:11,656
-They have some things in common.
+00:14:01,508 --> 00:14:03,610
+游戏 “逻辑与玩法” 
 
 
 237
-00:12:12,416 --> 00:12:14,036
-They all need to be
-rendered into the Scene
+00:14:09,816 --> 00:14:14,154
+谢谢 戴夫 当我们想到玩法中的逻辑
 
 
 238
-00:12:14,036 --> 00:12:15,266
-and they all need a shadow.
+00:14:14,321 --> 00:14:18,058
+当我想到玩法中的逻辑
+那么最先浮现在我的脑海中的
 
 
 239
-00:12:15,656 --> 00:12:17,126
-So we have a render component
+00:14:18,458 --> 00:14:20,928
+就是我的对手的实际智能
 
 
 240
-00:12:17,126 --> 00:12:18,546
-and a shadow component
-to do these things.
+00:14:22,329 --> 00:14:25,799
+关于智能其中非常重要的一点
 
 
 241
-00:12:19,506 --> 00:12:22,896
-They also all have animation,
-physics and intelligence,
+00:14:25,866 --> 00:14:30,904
+就是在那个空间内 我到底能做什么？
 
 
 242
-00:12:22,896 --> 00:12:25,006
-which is the name we've given
-to the state machine tracking .
+00:14:31,872 --> 00:14:34,775
+就像我们之前在演示中
+看到的 如果我是一个好Bot 
 
 
 243
-00:12:26,086 --> 00:12:29,406
-At this point you may think
-they look very similar.
+00:14:34,842 --> 00:14:37,945
+我会在关卡内四处走动沿着
+线路巡逻维持秩序 
 
 
 244
-00:12:30,156 --> 00:12:33,356
-Why not have a base
-Bot class providing all
+00:14:38,979 --> 00:14:42,115
+而如果我是一个坏的Bot 
+我就想要攻击PlayerBot 
 
 
 245
-00:12:33,356 --> 00:12:34,886
-of the functionality
-to all three?
+00:14:44,318 --> 00:14:45,485
+这次逮到他了 
 
 
 246
-00:12:36,476 --> 00:12:38,266
-They're not actually
-that similar after all.
+00:14:46,753 --> 00:14:50,991
+我可能也不会把其它TaskBots
+变成坏的TaskBots 
 
 
 247
-00:12:39,176 --> 00:12:42,446
-The PlayerBot needs
-input and we can control
+00:14:51,625 --> 00:14:53,360
+因此当它逮到PlayerBot时
+我也可以出点力
 
 
 248
-00:12:42,446 --> 00:12:46,506
-that from a game controller or
-keyboard or from touch control.
+00:14:53,527 --> 00:14:54,361
+又逮到一个 
 
 
 249
-00:12:47,586 --> 00:12:49,186
-The GroundBot and
-FlyingBot don't need that,
+00:14:55,829 --> 00:15:01,935
+最后 我可能会在关卡内
+以相反的方向四周走动 
 
 
 250
-00:12:49,286 --> 00:12:50,656
-you never control
-those characters.
+00:15:02,002 --> 00:15:05,439
+干扰线路上的感应 电流 引发问题 
 
 
 251
-00:12:51,096 --> 00:12:53,186
-They're driven instead
-by an agent.
+00:15:06,940 --> 00:15:08,775
+这就不那么有趣了
 
 
 252
-00:12:53,186 --> 00:12:55,526
-You will see later
-how we use agents
+00:15:09,476 --> 00:15:13,847
+但是既然我们知道了我们能做什么 
+那么问题就变成了我们怎样
 
 
 253
-00:12:55,526 --> 00:12:56,906
-to drive the characters
-around the level.
+00:15:13,914 --> 00:15:16,750
+来决定我们应该做什么 
 
 
 254
-00:12:57,736 --> 00:12:58,976
-Player Bot doesn't
-need an agent,
+00:15:17,818 --> 00:15:19,586
+DemoBots中 我们选择使用
 
 
 255
-00:12:59,186 --> 00:13:00,576
-he's powered by your input.
+00:15:19,653 --> 00:15:24,825
+GKRuleSystem实现了一个
+模糊逻辑系统 
 
 
 256
-00:13:01,866 --> 00:13:03,006
-Likewise, GroundBot
+00:15:25,526 --> 00:15:31,565
+它的优点在于 我们仍然可以接受
+与关卡的当前状态相关的大量信息 
 
 
 257
-00:13:03,066 --> 00:13:05,816
-and FlyingBot have rules
-telling the what they should do
+00:15:32,032 --> 00:15:36,603
+发生了什么事情并且让我们的角色
+对那个信息做出反应 
 
 
 258
-00:13:05,816 --> 00:13:08,486
-in a given situation and we'll
-look at those later on as well.
+00:15:37,471 --> 00:15:40,741
+我们无需使用绵延数百行
+代码的if else树
 
 
 259
-00:13:09,436 --> 00:13:13,046
-Player Bot doesn't, you
-tell him what to do.
+00:15:40,807 --> 00:15:42,943
+就可以实现这一点 
 
 
 260
-00:13:13,046 --> 00:13:15,876
-PlayerBot and GroundBot do
-have one thing in common,
+00:15:43,277 --> 00:15:47,414
+我们有一些简单的规则 
+我们也依赖这些简单的规则
 
 
 261
-00:13:16,516 --> 00:13:18,586
-they both have a
-movement component.
+00:15:47,481 --> 00:15:51,185
+和他人进行互动允许
+出现复杂有趣的行为 
 
 
 262
-00:13:19,636 --> 00:13:22,746
-This component's job is to
-say if I'm here and I need
+00:15:52,452 --> 00:15:57,491
+如果你不熟悉模糊逻辑 那么我再给你
 
 
 263
-00:13:22,746 --> 00:13:25,326
-to move this distance
-at a certain angle make
+00:15:57,558 --> 00:15:59,726
+讲一讲我们在这里谈的是什么 
 
 
 264
-00:13:25,326 --> 00:13:26,556
-that happen within the Scene.
+00:16:00,260 --> 00:16:04,364
+我们提到的“模糊”
+指的是这样一个事实
 
 
 265
-00:13:27,206 --> 00:13:30,276
-Player Bot uses that
-input to render it
+00:16:04,431 --> 00:16:07,868
+所有的事情并不是非黑即白 非真即假
 
 
 266
-00:13:30,276 --> 00:13:31,516
-in the Scene, move him around.
+00:16:08,235 --> 00:16:10,337
+我们的规则并不是互相排斥的
 
 
 267
-00:13:32,366 --> 00:13:35,036
-GroundBot uses it for a
-charge forward attack,
+00:16:12,706 --> 00:16:17,211
+我们的规则是以自然概念
+为模型的 你可以尝试
 
 
 268
-00:13:35,036 --> 00:13:36,576
-he moves from here
-to charge forward.
+00:16:17,277 --> 00:16:20,214
+把它们当做你会对一位同事说的句子
 
 
 269
-00:13:37,956 --> 00:13:39,566
-FlyingBot doesn't
-need that capability.
+00:16:20,781 --> 00:16:22,549
+PlayerBot就类似这个...
 
 
 270
-00:13:39,766 --> 00:13:42,636
-He doesn't move so he
-doesn't have that component.
+00:16:23,917 --> 00:16:27,955
+...在模糊TaskBots
+规则类中实现的就是这些 
 
 
 271
-00:13:43,746 --> 00:13:46,666
-These components, it is a
-good way to break up bits
+00:16:29,289 --> 00:16:30,991
+它是GKRule的一个子类 
 
 
 272
-00:13:46,666 --> 00:13:48,716
-of functionality
-and assign them only
+00:16:31,892 --> 00:16:37,164
+实际上 我们把规则事实
+绑定到了这里的等级上 
 
 
 273
-00:13:48,716 --> 00:13:50,116
-to the entities that need them.
+00:16:38,165 --> 00:16:41,268
+只有当等级大于零时 
+我们才会断言事实 
 
 
 274
-00:13:51,976 --> 00:13:54,506
-So these are some of the
-ways we have used GameplayKit
+00:16:42,870 --> 00:16:46,340
+这很有趣 因为我们会对
+那个等级中能够获得的信息的
 
 
 275
-00:13:54,506 --> 00:13:55,866
-functionality in the game.
+00:16:46,406 --> 00:16:49,076
+实际状态函数进行分级 
 
 
 276
-00:13:55,866 --> 00:13:59,836
-I would like to invite Dave
-on stage to tell you more
+00:16:51,345 --> 00:16:53,914
+而不是某种当你在创建GKRule时
 
 
 277
-00:13:59,836 --> 00:14:01,126
-about how we have
-used GameplayKit
+00:16:53,981 --> 00:16:55,349
+设置的东西 
 
 
 278
-00:14:01,516 --> 00:14:04,566
-to create our games
-Logic and Gameplay.
+00:16:56,450 --> 00:16:58,051
+看看这些
 
 
 279
-00:14:05,516 --> 00:14:09,306
-[Applause]
+00:16:58,619 --> 00:17:04,358
+看看邻近规则是什么样的 
 
 
 280
-00:14:09,806 --> 00:14:10,236
->> DAVE SCHAEFGEN:
-Thank you, Dave.
+00:17:04,758 --> 00:17:07,594
+它考虑的是远近 
 
 
 281
-00:14:10,976 --> 00:14:14,016
-So when we think about
-Logic in Gameplay,
+00:17:08,462 --> 00:17:11,531
+让我们来实际通过一个图表看看这个 
 
 
 282
-00:14:14,336 --> 00:14:16,806
-one of the most immediate
-things that jump to my mind
+00:17:11,665 --> 00:17:13,267
+看看这些函数的工作原理
 
 
 283
-00:14:16,806 --> 00:14:17,566
-when I think about logic
+00:17:14,001 --> 00:17:17,436
+在上面的起点附近你可以看到
+我们有一台PlayerBot 
 
 
 284
-00:14:17,566 --> 00:14:20,926
-in gameplay is the actual
-intelligence of my adversaries.
+00:17:18,005 --> 00:17:21,208
+外面远处 我们能够到的地方 
+我们还有一台TaskBot 
 
 
 285
-00:14:22,326 --> 00:14:26,386
-a big piece of that
-intelligence is going
+00:17:21,808 --> 00:17:24,511
+如果我拿出一个远处规则的图解表示 
 
 
 286
-00:14:26,386 --> 00:14:30,876
-to be what I can
-actually do in that space?
+00:17:24,645 --> 00:17:29,783
+那么看出远处规则的分级
+就是这个类的分级 
 
 
 287
-00:14:31,876 --> 00:14:34,866
-As we saw earlier in the demo,
-if I'm a good Bot I'm moving
+00:17:29,850 --> 00:17:31,952
+这就非常容易了
 
 
 288
-00:14:34,866 --> 00:14:36,866
-around the level,
-patrolling circuits,
+00:17:32,920 --> 00:17:35,489
+如果我把中等距离规则
+以及近处规则拉进来 
 
 
 289
-00:14:36,906 --> 00:14:37,936
-keepings things moving.
+00:17:35,989 --> 00:17:39,693
+那么很明显 它们在这种
+情况下的分级就是零 
 
 
 290
-00:14:38,986 --> 00:14:42,556
-If I'm bad, I may want
-to attack the PlayerBot.
+00:17:40,494 --> 00:17:43,630
+虽然这个阵式看起来不是那么有趣 
 
 
 291
-00:14:42,786 --> 00:14:45,096
-Got him that time.
+00:17:43,797 --> 00:17:48,268
+它看起来也确实是某种程度的
+非黑即白 非真即假 
 
 
 292
-00:14:46,766 --> 00:14:51,016
-I may also wasn't to turn other
-TaskBots bad so I have help
+00:17:49,236 --> 00:17:54,074
+如果我们把我们的TaskBot移近
+一点 那么你就可以更清楚地
 
 
 293
-00:14:51,636 --> 00:14:53,026
-when it comes to
-getting the player Bot.
+00:17:54,208 --> 00:17:55,609
+看到我说的是什么 
 
 
 294
-00:14:53,526 --> 00:14:54,296
-Got that one too.
+00:17:55,876 --> 00:17:57,778
+这是远处规则的分级 
 
 
 295
-00:14:55,816 --> 00:15:01,956
-Finally, I may move around the
-level opposite direction messing
+00:17:58,145 --> 00:18:01,849
+七十五 而中等距离规则大约是
 
 
 296
-00:15:01,956 --> 00:15:05,586
-with induction, currents in
-the circuits, causing problems.
+00:18:02,216 --> 00:18:06,253
+二十五 如果我们继续让他靠近 
+那么事情就发生变化了 
 
 
 297
-00:15:06,926 --> 00:15:09,056
-Not as interesting, but now
+00:18:07,354 --> 00:18:11,491
+就同时属于邻近规则中等距离规则了 
 
 
 298
-00:15:09,466 --> 00:15:13,986
-that we know what we can do
-the question becomes how do we
+00:18:13,727 --> 00:18:16,029
+既然你已经看过了我们会计算
 
 
 299
-00:15:13,986 --> 00:15:16,746
-decide what we are going to do.
+00:18:16,096 --> 00:18:18,699
+我们的分级的函数是什么样的 
 
 
 300
-00:15:17,826 --> 00:15:19,576
-In DemoBots we chose
+00:18:19,967 --> 00:18:24,438
+那么让我们再来看看 一旦
+我们为我们的每一条规则
 
 
 301
-00:15:19,576 --> 00:15:24,826
-to implement a fuzzy logic
-system with GKRuleSystem.
+00:18:24,505 --> 00:18:27,274
+计算出来那些规则
+我们又该怎样做出决定
 
 
 302
-00:15:25,026 --> 00:15:29,466
-The advantages of this were
-we could still take in a lot
+00:18:27,841 --> 00:18:30,878
+这是我们在
+DemoBots上用的规则 
 
 
 303
-00:15:29,466 --> 00:15:31,556
-of information about the
-current state of the level,
+00:18:32,412 --> 00:18:34,815
+我们的第一步就像我说过的 
 
 
 304
-00:15:32,036 --> 00:15:35,686
-what was going on, and
-have our characters react
+00:18:34,882 --> 00:18:36,984
+就是对它们进行评估计算值是什么 
 
 
 305
-00:15:35,686 --> 00:15:36,616
-to that information.
+00:18:37,985 --> 00:18:41,922
+我们接下来要做的事情 
+就是把它们中的几个组合起来 
 
 
 306
-00:15:37,466 --> 00:15:41,076
-We could do that without
-having if else trees that went
+00:18:42,689 --> 00:18:47,127
+判定它们是否属于当我们在
+猎捕PlayerBot时
 
 
 307
-00:15:41,076 --> 00:15:42,946
-on for hundreds of
-lines of code.
+00:18:47,794 --> 00:18:50,964
+我们需要注意的影响因素 
 
 
 308
-00:15:43,276 --> 00:15:47,516
-We have simple rules and rely
-on the simple rules to interact
+00:18:51,665 --> 00:18:54,701
+它读起来就像一个句子 
+你也就可以看 它的工作原理
 
 
 309
-00:15:47,516 --> 00:15:49,426
-with each other and
-allow complex
+00:18:54,768 --> 00:18:56,570
+就类似讲一个故事那样 
 
 
 310
-00:15:49,426 --> 00:15:51,276
-and interesting behaviors
-to emerge.
+00:18:57,504 --> 00:19:00,340
+如果坏的TaskBots的
+百分比较高 
 
 
 311
-00:15:52,466 --> 00:15:57,496
-So if you're unfamiliar with
-fuzzy Logic, I'll give you a bit
+00:19:00,874 --> 00:19:03,377
+PlayerBot离它的
+距离是一个中等距离 
 
 
 312
-00:15:57,496 --> 00:15:59,716
-of an idea of what we're
-talking about here.
+00:19:04,044 --> 00:19:07,614
+而好的TaskBot
+离它的距离也是一个中等距离 
 
 
 313
-00:16:00,246 --> 00:16:04,386
-The fuzzy that we're referring
-to is actually the fact
+00:19:09,750 --> 00:19:11,785
+那么我会想要猎捕这个
+PlayerBot 
 
 
 314
-00:16:04,386 --> 00:16:07,866
-that everything is not black
-and white, true and false.
+00:19:12,586 --> 00:19:14,721
+在这个例子中我想这样做的原因是
 
 
 315
-00:16:08,246 --> 00:16:10,346
-Our rules aren't
-mutually exclusive.
+00:19:14,922 --> 00:19:18,792
+我的思维方式是 
+如果这一关卡中已经有了很多
 
 
 316
-00:16:11,016 --> 00:16:17,286
-We modeled our rules on natural
-concepts and tried to think
+00:19:18,859 --> 00:19:22,162
+坏的TaskBots 
+那么我就不需要去改造它们 
 
 
 317
-00:16:17,286 --> 00:16:20,216
-of them like sentences that
-you would say to a colleague.
+00:19:22,462 --> 00:19:24,698
+此时我就可以猎捕玩家 
 
 
 318
-00:16:20,766 --> 00:16:22,486
-The PlayerBot is nearby.
+00:19:25,866 --> 00:19:30,304
+麻烦在于我有三个不同的等级
 
 
 319
-00:16:23,926 --> 00:16:28,176
-. These are implemented in
-the fuzzy TaskBots rule class.
+00:19:30,671 --> 00:19:33,707
+来表示现在猎捕
+PlayerBot这个概念 
 
 
 320
-00:16:29,086 --> 00:16:30,696
-It is a subclass of GKRule.
+00:19:34,942 --> 00:19:39,880
+因此我们要使用GKRuleSystems 
+来把事实的分级最小化 
 
 
 321
-00:16:30,696 --> 00:16:37,156
-We have actually tied the fact
-of the rule to the grade here.
+00:19:40,347 --> 00:19:45,853
+要抓取我们想要组合的
+每个事实的最小分级 
 
 
 322
-00:16:38,176 --> 00:16:41,266
-Only we assert the fact if the
-grade is greater than zero.
+00:19:47,354 --> 00:19:52,993
+我们选择最小分级的原因在于
+我们猎捕PlayerBot的
 
 
 323
-00:16:42,886 --> 00:16:46,286
-This is interesting because
-we made grade a function
+00:19:53,393 --> 00:19:56,563
+指令所基于的信息强度仅仅
 
 
 324
-00:16:46,286 --> 00:16:51,766
-of the actual state information
-available in the level rather
+00:19:56,630 --> 00:19:59,600
+与起作用的最弱的事实一样 
 
 
 325
-00:16:51,766 --> 00:16:53,946
-than it being something that
-you set up at the moment
+00:20:01,301 --> 00:20:06,807
+我们可以以任何方式
+对这些规则进行组合
 
 
 326
-00:16:53,946 --> 00:16:56,866
-that you create the GKRule.
+00:20:06,907 --> 00:20:10,878
+然后得到几个不同的
+指示符指示到底是应该
 
 
 327
-00:16:56,866 --> 00:17:04,396
-Let's look at what those -- what
-that proximity rule looks like.
+00:20:10,944 --> 00:20:13,780
+猎捕PlayerBot 
+还是应该猎捕TaskBots 
 
 
 328
-00:17:04,636 --> 00:17:07,836
-Thinking about being
-near or far,
+00:20:14,815 --> 00:20:16,416
+在这个阶段我们实际上
 
 
 329
-00:17:08,415 --> 00:17:11,526
-and let's actually use a
-graph to take a look at this
+00:20:17,251 --> 00:20:22,890
+就需要规则清晰下来
+得到一个能够表示猎捕
 
 
 330
-00:17:11,665 --> 00:17:13,256
-and see how these
-functions work.
+00:20:23,290 --> 00:20:26,660
+PlayerBot这一理念的
+简单的数字 
 
 
 331
-00:17:14,006 --> 00:17:17,445
-Up here near the origin you can
-see that we have a PlayerBot
+00:20:28,161 --> 00:20:30,130
+在这个例子中我们把我们的事实取出来
 
 
 332
-00:17:18,016 --> 00:17:19,306
-and out about as far away
+00:20:30,831 --> 00:20:32,799
+使用Swift的归约函数
 
 
 333
-00:17:19,306 --> 00:17:21,215
-as we can get them
-you have the TaskBot,
+00:20:33,567 --> 00:20:36,036
+以及最大函数来把事情组合到一起 
 
 
 334
-00:17:21,806 --> 00:17:24,516
-if I bring in a graphical
-representation
+00:20:36,436 --> 00:20:40,407
+在这个例子中我们实际上
+就需要猎捕PlayerBot
 
 
 335
-00:17:24,646 --> 00:17:29,796
-of the far rule it is pretty
-simple to see that the grade
+00:20:40,474 --> 00:20:42,709
+或者猎捕TaskBots
+通过我们所有的
 
 
 336
-00:17:29,836 --> 00:17:31,936
-for the far rule is going
-to be one in this case.
+00:20:43,043 --> 00:20:46,480
+最强大的分级来表示 
 
 
 337
-00:17:32,486 --> 00:17:35,476
-If I pull in the
-medium and near rules,
+00:20:47,181 --> 00:20:50,851
+看看这些数字很明显 
+我们应该猎捕PlayerBot 
 
 
 338
-00:17:35,846 --> 00:17:37,266
-it is clear that they're going
+00:20:53,153 --> 00:20:56,423
+既然我们知道了我们想要猎捕
+PlayerBot那么我们的第一个问题
 
 
 339
-00:17:37,266 --> 00:17:39,806
-to have a zero grade
-in this situation.
+00:21:02,196 --> 00:21:07,501
+就是我到底怎样
+才能接触到PlayerBot？
 
 
 340
-00:17:40,486 --> 00:17:43,546
-Now that doesn't lineup
-seeming all that interesting,
+00:21:08,202 --> 00:21:10,037
+一般来说这是非常直接的 
 
 
 341
-00:17:43,546 --> 00:17:47,606
-it does kindof seem black and
-white and a bit true/false.
+00:21:11,205 --> 00:21:14,141
+只需要直线移动 
+然后你最终就会接触到它 
 
 
 342
-00:17:47,606 --> 00:17:54,466
-If we move our task Bot closer
-you can see what I'm talking
+00:21:16,376 --> 00:21:18,612
+但是障碍物是一个挑战 
 
 
 343
-00:17:54,466 --> 00:17:55,616
-about clearly.
+00:21:18,745 --> 00:21:22,115
+这里你可以看到 
+FlyingBot就悬挂在那里 
 
 
 344
-00:17:55,866 --> 00:17:58,226
-Here the grade for
-the far rule is.
+00:21:22,716 --> 00:21:26,386
+你回忆起了几年前的
+一个示例“冒险” 
 
 
 345
-00:17:58,226 --> 00:18:02,656
-75 and for the medium
-rule, about.
+00:21:26,753 --> 00:21:31,024
+那个示例中的哥布林 
+也非常喜欢表现出这种行为 
 
 
 346
-00:18:02,656 --> 00:18:08,186
-25. If we move him still
-closer, things switch
+00:21:32,292 --> 00:21:34,461
+我们决定要采取一些行动
 
 
 347
-00:18:08,256 --> 00:18:11,476
-and we have membership in both
-the near and medium rules.
+00:21:34,962 --> 00:21:38,699
+在GameplayKit中我们让你
+对某个场景中寻路的利用
 
 
 348
-00:18:11,476 --> 00:18:16,136
->> Now that you have
-seen how the functions
+00:21:39,099 --> 00:21:43,904
+变得非常容易了这样
+你就可以非常容易地
 
 
 349
-00:18:16,356 --> 00:18:18,696
-that we have calculate
-our grades,
+00:21:44,404 --> 00:21:47,140
+让你的Bots或者你的敌人
+像这样进行移动 
 
 
 350
-00:18:19,966 --> 00:18:24,496
-let's look at how we actually
-make decisions once we have
+00:21:47,774 --> 00:21:50,577
+当你把SpriteKit用在一款
+游戏上时配合其它事情
 
 
 351
-00:18:24,496 --> 00:18:27,416
-calculated those grades
-for each of our rules.
+00:21:50,644 --> 00:21:54,381
+就非常方便了把事情设置好 运行起来
 
 
 352
-00:18:27,856 --> 00:18:30,886
-So here are the rules that
-we actually have in DemoBots.
+00:21:54,815 --> 00:21:56,283
+也就非常容易了 
 
 
 353
-00:18:31,716 --> 00:18:34,826
-Our first step, like I
-said, is to go ahead,
+00:21:56,950 --> 00:21:58,819
+只需要几行代码即可 
 
 
 354
-00:18:34,886 --> 00:18:36,996
-evaluate them, calculate
-the values.
+00:21:59,019 --> 00:22:01,522
+我们来看看这些代码是什么样的 
 
 
 355
-00:18:37,976 --> 00:18:41,936
-The next thing we're going to
-do is combine a few of them
+00:22:04,491 --> 00:22:07,394
+你要做的第一件事实际上
 
 
 356
-00:18:42,686 --> 00:18:48,246
-to decide these are contributing
-factors that we would want
+00:22:08,061 --> 00:22:11,798
+就是获得组成关卡的多边形障碍物
 
 
 357
-00:18:48,246 --> 00:18:50,996
-to pay attention to when
-hunting the PlayerBot.
+00:22:12,099 --> 00:22:18,272
+在我们的例子中 我们首先
+要在场景中搜索我们的节点 
 
 
 358
-00:18:51,666 --> 00:18:54,836
-Read like a sentence, you
-can tell how this is working
+00:22:18,505 --> 00:22:20,073
+它们都被命名为障碍物 
 
 
 359
-00:18:54,836 --> 00:18:56,556
-like a telling of a story.
+00:22:20,174 --> 00:22:23,243
+当我们有了一个那些节点的
+阵列后 我们就把它传递到
 
 
 360
-00:18:57,496 --> 00:19:00,246
-If a percentage of
-bad TaskBots is high
+00:22:23,443 --> 00:22:27,347
+SKNodes在iOS 9上
+的一个便利函数 
 
 
 361
-00:19:00,866 --> 00:19:03,376
-and the PlayerBot is
-a medium distance away
+00:22:27,781 --> 00:22:29,516
+节点物理实体障碍物 
 
 
 362
-00:19:04,056 --> 00:19:07,616
-and the good TaskBot is
-also a medium distance away,
+00:22:30,417 --> 00:22:34,755
+拿出你定义使用的实际物理实体 
 
 
 363
-00:19:07,746 --> 00:19:11,456
-I want to hunt the PlayerBot.
+00:22:34,821 --> 00:22:37,157
+对障碍物进行定义 
 
 
 364
-00:19:12,586 --> 00:19:14,726
-The reason I would want
-to do that in this case,
+00:22:38,091 --> 00:22:40,561
+有了这些障碍物当我们有了这些障碍物
 
 
 365
-00:19:14,916 --> 00:19:18,746
-the way I think about it,
-is there already are a lot
+00:22:41,495 --> 00:22:45,399
+我们就要用它们来构造一个障碍物图表
 
 
 366
-00:19:18,746 --> 00:19:22,166
-of bad TaskBots on this level,
-I don't need to turn them,
+00:22:45,866 --> 00:22:48,001
+并且构造一个缓冲区半径参数
 
 
 367
-00:19:22,466 --> 00:19:24,086
-I may as well hunt the player
+00:22:48,602 --> 00:22:52,940
+这个参数就是围绕实际障碍物的
 
 
 368
-00:19:24,086 --> 00:19:30,306
-at this point.The trouble I have
-is I have 3 different grades
+00:22:53,307 --> 00:22:55,175
+一些附加空格
 
 
 369
-00:19:30,686 --> 00:19:34,726
-to represent this idea of
-hunting the PlayerBot now.
+00:22:55,876 --> 00:22:58,278
+要想理解这一点你可以想想
 
 
 370
-00:19:35,066 --> 00:19:39,176
-So we're going to use
-GKRuleSystems minimum grade
+00:22:58,879 --> 00:23:01,715
+当你朝着一个门口走去当你穿过门口
 
 
 371
-00:19:39,176 --> 00:19:44,906
-for facts to grab the minimum
-grade for each of the facts
+00:23:01,849 --> 00:23:06,687
+你并没有真的走到门框的某个角落
 
 
 372
-00:19:44,906 --> 00:19:47,236
-that we want to combine.
+00:23:07,221 --> 00:23:10,157
+你要瞄准的是门口中间的某个点
 
 
 373
-00:19:47,356 --> 00:19:53,026
-Now, the reason why we pick
-the minimum is our mandate
+00:23:10,424 --> 00:23:14,061
+当你穿过门口的时候你的身体的
+任何部位并不会真的接触到门
 
 
 374
-00:19:53,346 --> 00:19:56,596
-for hunting the PlayerBot based
-on that information is only
+00:23:14,728 --> 00:23:19,032
+半径可以帮助设置围绕障碍物的空格 
 
 
 375
-00:19:56,596 --> 00:20:02,496
-as strong as the weakest
-fact contributing to it.
+00:23:20,267 --> 00:23:26,173
+接下来我们要取出TaskBot
+和PlayerBot的位置 
 
 
 376
-00:20:02,666 --> 00:20:06,806
-We could combine those
-rules in any number of ways
+00:23:26,673 --> 00:23:28,408
+然后把它们连接到图表上 
 
 
 377
-00:20:06,896 --> 00:20:10,866
-and get several different
-indicators saying
+00:23:29,510 --> 00:23:35,148
+最后我们会让图表
+给我们一条从起始节点
 
 
 378
-00:20:10,866 --> 00:20:13,786
-to hunt the PlayerBot
-or to hunt TaskBots.
+00:23:35,883 --> 00:23:37,484
+终端节点的路径 
 
 
 379
-00:20:14,826 --> 00:20:17,746
-This is the stage
-where we get to needing
+00:23:38,118 --> 00:23:40,888
+我们得到的就是单独的节点的阵列 
 
 
 380
-00:20:17,746 --> 00:20:22,886
-to actually defuzz-ify the
-rules to get one simple number
+00:23:41,321 --> 00:23:44,658
+而这些节点对于从A点
+到B点来说是必须的 
 
 
 381
-00:20:23,286 --> 00:20:26,646
-to really represent the idea
-of hunting the PlayerBot.
+00:23:45,392 --> 00:23:49,329
+把事情从走路转变成存储器片 
 
 
 382
-00:20:27,716 --> 00:20:30,126
-In this case we just
-take our facts,
+00:23:49,396 --> 00:23:52,432
+同时实际跟着它们走动就是这么简单
 
 
 383
-00:20:30,816 --> 00:20:32,806
-we use the reduce
-function in Swift
+00:23:53,767 --> 00:23:57,704
+我们有了一条路径有了点 
 
 
 384
-00:20:33,006 --> 00:20:36,036
-and the max function
-to combine things.
+00:23:58,071 --> 00:23:59,806
+但是我怎样才能真的去到那里？
 
 
 385
-00:20:36,426 --> 00:20:40,436
-In this case we actually --
-we want hunting the PlayerBot
+00:24:00,274 --> 00:24:03,110
+我怎样才能真的优雅地去到那里？
 
 
 386
-00:20:40,436 --> 00:20:42,326
-or hunting the TaskBots
-to be represented
+00:24:04,077 --> 00:24:07,981
+GameplayKit再一次给我们
+提供了一个答复 
 
 
 387
-00:20:42,326 --> 00:20:46,396
-by the strongest grade
-available of the ones we have.
+00:24:08,549 --> 00:24:11,385
+这次是GKAgent 2D 
 
 
 388
-00:20:47,166 --> 00:20:48,276
-Looking at these numbers,
+00:24:12,019 --> 00:24:15,689
+这个类是我最喜欢的
+GameplayKit类之一 
 
 
 389
-00:20:48,276 --> 00:20:50,866
-it is pretty obvious
-we'll hunt the PlayerBot.
+00:24:16,690 --> 00:24:20,027
+这是一个GKComponent 
+它和戴夫之前谈到的实体/元件
 
 
 390
-00:20:50,866 --> 00:21:02,896
-Now that we know we want to hunt
-the PlayerBot the first problem
+00:24:20,093 --> 00:24:22,829
+系统配合的天衣无缝 
 
 
 391
-00:21:02,896 --> 00:21:07,756
-we've got is how do I
-actually get to the PlayerBot.
+00:24:24,731 --> 00:24:27,401
+把事情设置好非常简单
 
 
 392
-00:21:08,216 --> 00:21:10,036
-Often that's pretty
-straightforward,
+00:24:28,268 --> 00:24:32,206
+你有一个GKBehavior 
+它描述了你想要这个代理去做的事情 
 
 
 393
-00:21:11,196 --> 00:21:16,006
-just move in a straight line
-and you'll eventually get there.
+00:24:32,506 --> 00:24:35,175
+它就好比是GKGoals的一个容器
 
 
 394
-00:21:16,366 --> 00:21:18,596
-Obstacles present a challenge,
+00:24:35,976 --> 00:24:40,714
+GKGoal 我们很幸运 
+这个例子中实际上就有几个
 
 
 395
-00:21:18,736 --> 00:21:21,816
-here you see the FlyingBot
-getting hung up there.
+00:24:40,781 --> 00:24:46,553
+不同的构造这些构造允许我们兼容路径
 
 
 396
-00:21:21,946 --> 00:21:26,396
-You remember from a sample from
-a couple years ago, Adventure,
+00:24:47,020 --> 00:24:49,289
+因为代理的世界
+GameplayKit的世界
 
 
 397
-00:21:26,766 --> 00:21:31,016
-the goblins in that sample, were
-really fond of this behavior.
+00:24:49,356 --> 00:24:51,525
+不同于SpriteKit的世界 
 
 
 398
-00:21:32,306 --> 00:21:34,956
-We decided to do
-something about that,
+00:24:52,526 --> 00:24:55,762
+这里的委托就使得
+把它们两个集成到一起
 
 
 399
-00:21:34,956 --> 00:21:39,616
-and in GameplayKit we have
-made it really easy for you
+00:24:56,029 --> 00:24:57,164
+非常容易 
 
 
 400
-00:21:39,616 --> 00:21:43,906
-to take advantage of pathfinding
-in a world and get your Bots
+00:24:59,199 --> 00:25:03,203
+我们来看看 实际上...
+你懂得看看代码实际是什么样的 
 
 
 401
-00:21:44,416 --> 00:21:47,296
-or your enemies moving
-easily like this.
+00:25:04,271 --> 00:25:07,641
+我们把我们之前获得的
+路径节点阵列拿出来 
 
 
 402
-00:21:47,676 --> 00:21:50,496
-It has great conveniences
-for working with things
+00:25:10,944 --> 00:25:13,180
+我们要对它们进行初始化 
 
 
 403
-00:21:50,616 --> 00:21:54,376
-when you're using SpriteKit for
-a game and it is really easy
+00:25:15,115 --> 00:25:19,286
+我们要把它传递到一个初始化
+程序来创建我们的路径
 
 
 404
-00:21:54,816 --> 00:21:56,166
-to get things up and running.
+00:25:19,853 --> 00:25:22,723
+这里还有一个参数它就是半径 
 
 
 405
-00:21:56,956 --> 00:21:58,826
-Only a few lines of code.
+00:25:22,789 --> 00:25:28,562
+我想让你们在这里思考下
+你想让这个路径怎样为你的代理下定义
 
 
 406
-00:21:59,006 --> 00:22:02,146
-Let's take a look at what
-those lines look like.
+00:25:28,896 --> 00:25:33,367
+太小的值会让你的代理把你的
+路径当成类似一根绷紧的绳索来对待 
 
 
 407
-00:22:04,136 --> 00:22:05,516
-So the first thing you're going
+00:25:34,101 --> 00:25:37,938
+而较大的值 你懂得 
+就会让它们把它当成类似一条
 
 
 408
-00:22:05,516 --> 00:22:11,096
-to do is actually get the
-polygon obstacles making
+00:25:38,005 --> 00:25:40,774
+八车道高速公路来对待 
+把它们都移动到这个地方 
 
 
 409
-00:22:11,096 --> 00:22:11,796
-up the level.
+00:25:41,275 --> 00:25:44,411
+你可能想要调整下看看
+哪种最适合你的游戏
 
 
 410
-00:22:12,106 --> 00:22:18,256
-In our case we'll first search
-for our nodes within our Scene.
+00:25:46,380 --> 00:25:47,981
+接下来我们要创建一个行为 
 
 
 411
-00:22:18,306 --> 00:22:20,086
-They have all been
-named obstacles.
+00:25:48,549 --> 00:25:51,485
+这只是一个空的行为 
+并没有真的发生什么事情 
 
 
 412
-00:22:20,176 --> 00:22:23,236
-When we have an array of
-those nodes we'll pass it
+00:25:52,452 --> 00:25:54,888
+然后我们向它添加目标 
 
 
 413
-00:22:23,436 --> 00:22:27,336
-to a convenience function
-that SKNodes has in iOS 9,
+00:25:55,822 --> 00:25:59,092
+这些是两个路径相关的目标
+我之前已经谈到过了 
 
 
 414
-00:22:27,786 --> 00:22:29,516
-obstacles for node
-physics bodies
+00:25:59,726 --> 00:26:04,064
+屏幕上的第一个目标 
+我们跟随路径的目标将会
 
 
 415
-00:22:30,416 --> 00:22:34,796
-to take the actual physics
-body you defined to use
+00:26:05,232 --> 00:26:09,136
+确立我们移动我们的阵列的方向 
 
 
 416
-00:22:34,796 --> 00:22:37,156
-that to define the obstacle.
+00:26:09,536 --> 00:26:11,572
+在这个例子中我们会从起始位置
 
 
 417
-00:22:38,076 --> 00:22:42,016
-When those obstacles, when we
-have the obstacles we're going
+00:26:11,738 --> 00:26:15,475
+向前移动 把我们的
+TaskBots移动到终点位置 
 
 
 418
-00:22:42,016 --> 00:22:45,396
-to construct an obstacle
-graph using them,
+00:26:15,542 --> 00:26:17,344
+也就是我们的
+PlayerBot的位置 
 
 
 419
-00:22:45,856 --> 00:22:47,996
-and also a buffer
-radius parameter.
+00:26:18,111 --> 00:26:23,650
+停留在路径上这个目标
+会促使我们的代理
 
 
 420
-00:22:48,596 --> 00:22:52,936
-This parameter is a
-little bit of extra spacing
+00:26:23,984 --> 00:26:30,624
+保持在我们之前定义的路径的边界内 
 
 
 421
-00:22:53,296 --> 00:22:55,166
-around the actual obstacle.
+00:26:32,326 --> 00:26:37,464
+既然我们有了一个工作行为我们把它
+指定给我们的代理让它开始移动 
 
 
 422
-00:22:55,886 --> 00:22:58,286
-A good way for you to
-think about it might be
+00:26:39,733 --> 00:26:42,769
+代理工作的方式
 
 
 423
-00:22:58,866 --> 00:23:01,716
-as you're walking towards a
-doorway and you're walking
+00:26:43,470 --> 00:26:46,707
+和GameplayKit上
+许多其他元件的工作方式类似 
 
 
 424
-00:23:01,716 --> 00:23:04,346
-through the doorway you're
-not actually going to walk
+00:26:47,207 --> 00:26:48,809
+它会在一个循环上进行更新 
 
 
 425
-00:23:04,346 --> 00:23:06,696
-at one corner or the
-other of the door frame.
+00:26:49,409 --> 00:26:52,179
+当你把它添加进你的更新循环时
 
 
 426
-00:23:07,226 --> 00:23:10,166
-You're going to aim for a point
-in the middle of the doorway
+00:26:53,280 --> 00:26:57,751
+它就会在变更前后通知到你 
 
 
 427
-00:23:10,416 --> 00:23:12,086
-where no part of your
-body is actually going
+00:26:57,818 --> 00:27:00,888
+这个变更前后的委托通知
+就是让事情运行起来
 
 
 428
-00:23:12,086 --> 00:23:14,496
-to contact the door when
-you walk through it.
+00:27:01,321 --> 00:27:05,559
+同SpriteKit
+连接起来的理想场所
 
 
 429
-00:23:14,726 --> 00:23:19,466
-This radius helps set that
-spacing around the obstacles.
+00:27:06,894 --> 00:27:12,833
+在WillUpdate中这个位置就是
+你想从你的SpriteKit节点中
 
 
 430
-00:23:20,266 --> 00:23:26,176
-Next we'll take the TaskBot
-and PlayerBot positions
+00:27:14,334 --> 00:27:17,571
+取出信息的位置
 
 
 431
-00:23:26,686 --> 00:23:28,236
-and connect them to the graph.
+00:27:17,738 --> 00:27:20,040
+这些节点表示场景中你的代理
 
 
 432
-00:23:29,516 --> 00:23:35,146
-Finally we will ask the
-graph to give us a path
+00:27:20,874 --> 00:27:24,311
+把那个信息撤回并且更新代理 
 
 
 433
-00:23:35,886 --> 00:23:37,486
-from the start node
-to the end node.
+00:27:25,279 --> 00:27:27,548
+因为我们是在
+SpriteKit更新循环前面
 
 
 434
-00:23:38,126 --> 00:23:40,896
-We'll get back in array
-of the individual nodes
+00:27:28,215 --> 00:27:31,552
+这样做的 
+最后一个SpriteKit更新循环
 
 
 435
-00:23:41,306 --> 00:23:44,646
-that are necessary to get
-from point A to point B
+00:27:31,919 --> 00:27:34,755
+就会涉及到
 
 
 436
-00:23:45,396 --> 00:23:49,326
-and it really is that simple
-to turn things from walking
+00:27:35,022 --> 00:27:38,625
+对物理现象进行模拟
+对你的节点应用约束
 
 
 437
-00:23:49,326 --> 00:23:53,836
-into memory chips and along them
-to actually walking around them.
+00:27:38,859 --> 00:27:41,028
+这就可能导致它的位置
+从代理最后一次思考时
 
 
 438
-00:23:55,126 --> 00:23:57,716
-We have a path, we have points,
+00:27:41,094 --> 00:27:44,064
+代理本以为它在的位置上移开 
 
 
 439
-00:23:58,066 --> 00:23:59,806
-but how am I actually
-going to get there?
+00:27:46,466 --> 00:27:50,304
+在AgentDidUpdate中
+我们会把信息从代理那里拿出来 
 
 
 440
-00:24:00,276 --> 00:24:03,096
-How do I actually get there
-and make it look nice?
+00:27:51,305 --> 00:27:54,141
+它的位置它的旋转类似此类的事情 
 
 
 441
-00:24:04,076 --> 00:24:07,976
-Well, GameplayKit has
-an answer for us again.
+00:27:55,008 --> 00:27:57,911
+然后把它们撤回
+SpriteKit世界 
 
 
 442
-00:24:07,976 --> 00:24:11,396
-This time it is GKAgent 2D.
+00:27:57,978 --> 00:28:01,949
+并且在它此时进入
+物理现象模拟 约束应用
 
 
 443
-00:24:11,676 --> 00:24:15,696
-This is one of my favorite
-classes in GameplayKit.
+00:28:02,349 --> 00:28:04,918
+之前对你的节点进行更新 
 
 
 444
-00:24:16,576 --> 00:24:20,066
-This is a GKComponent,
-so it works very nicely
+00:28:07,221 --> 00:28:11,558
+此时我们用DemoBots
 
 
 445
-00:24:20,066 --> 00:24:22,836
-with the Entity/Component system
-that Dave talked about earlier.
+00:28:12,292 --> 00:28:14,394
+得到的就是这个 
 
 
 446
-00:24:24,326 --> 00:24:27,666
-It is very easy to
-get things set up.
+00:28:15,229 --> 00:28:18,232
+一个工作干的漂亮
+轻而易举就可以围绕屏幕进行移动
 
 
 447
-00:24:28,276 --> 00:24:30,676
-You have a GKBehavior
-that describes what it is
+00:28:18,298 --> 00:28:21,568
+同你的交互非常平滑的智能 
 
 
 448
-00:24:30,676 --> 00:24:32,116
-that you want this agent to do,
+00:28:22,469 --> 00:28:27,241
+我猜这是附加的东西
+我们把调制绘图放到
 
 
 449
-00:24:32,246 --> 00:24:35,316
-it is kind of a container
-for GKGoals.
+00:28:27,941 --> 00:28:30,210
+示例中了你可以去下载 
 
 
 450
-00:24:35,986 --> 00:24:40,806
-GKGoal, lucky for us in this
-case actually has a couple
+00:28:31,211 --> 00:28:33,947
+你可以通过点击斜线键来启用它 
 
 
 451
-00:24:40,806 --> 00:24:46,566
-of different constructions that
-allow us to work with paths.
+00:28:35,816 --> 00:28:38,418
+关于这个很棒的一件事是 
+它可以帮助你想象出
 
 
 452
-00:24:47,016 --> 00:24:49,006
-Because the agent
-world and the world
+00:28:38,485 --> 00:28:40,053
+我们之前谈到的一些参数 
 
 
 453
-00:24:49,006 --> 00:24:50,906
-of GameplayKit is
-different from the world
+00:28:40,420 --> 00:28:44,892
+黄色框是围绕障碍物的缓冲区半径 
 
 
 454
-00:24:50,906 --> 00:24:55,746
-of SpriteKit the delegate
-here makes it very simple
+00:28:46,393 --> 00:28:51,698
+你可以看到玩家放射出粗线
 
 
 455
-00:24:56,036 --> 00:24:58,926
-to integrate the two of them.
+00:28:51,765 --> 00:28:54,735
+TaskBots表示的是
 
 
 456
-00:24:59,206 --> 00:25:01,536
-Let's take a look at
-what it actually --
+00:28:55,235 --> 00:28:59,973
+我们之前谈到的路径那里的路径半径 
 
 
 457
-00:25:01,536 --> 00:25:03,206
-you know, what the
-code looks like.
+00:29:01,375 --> 00:29:02,943
+既然我们有了一款游戏 
 
 
 458
-00:25:04,286 --> 00:25:11,286
-We'll take that array of path
-nodes that we had from before.
+00:29:03,944 --> 00:29:07,047
+我想邀请我的同事迈克尔上台来 
 
 
 459
-00:25:11,286 --> 00:25:13,046
-We're going to initialize them.
+00:29:07,414 --> 00:29:12,452
+他会和你们讨论一下怎样才能让
+你的用户以更快的运行速度玩你的游戏
 
 
 460
-00:25:13,046 --> 00:25:19,006
-We're going to pass them to an
-initializer to create our path.
+00:29:13,086 --> 00:29:13,921
+迈克尔 
 
 
 461
-00:25:19,866 --> 00:25:22,836
-There is another parameter
-here and that is the radius.
+00:29:19,359 --> 00:29:23,864
+谢谢 我们来谈谈
+怎么制作一个有趣的游戏 
 
 
 462
-00:25:22,836 --> 00:25:23,556
-What I want you to think
+00:29:23,931 --> 00:29:27,301
+怎样给你的用户提供一个
+很棒的整体体验 
 
 
 463
-00:25:23,556 --> 00:25:26,946
-about here is how do
-you want this path
+00:29:27,367 --> 00:29:31,638
+我会把它浓缩成一个短语 也就是 
+当然就是找乐子时间到了 
 
 
 464
-00:25:26,976 --> 00:25:28,546
-to be defined for your agent.
+00:29:31,705 --> 00:29:33,841
+你的用户需要多久才能真正开始
 
 
 465
-00:25:28,906 --> 00:25:30,716
-Very small values will result
+00:29:33,907 --> 00:29:35,442
+享受你的游戏？
 
 
 466
-00:25:30,716 --> 00:25:33,356
-in your agent treating your
-path like a tight rope.
+00:29:36,376 --> 00:29:39,580
+第一个要迈过的障碍 
+实际上就是初始下载 
 
 
 467
-00:25:34,096 --> 00:25:38,036
-Larger values, you know,
-could have them treating it
+00:29:40,013 --> 00:29:43,951
+如果你提供的app太大了 
+有些用户就不能通过
 
 
 468
-00:25:38,036 --> 00:25:40,776
-like an 8-lane highway,
-moving all over the place.
+00:29:44,017 --> 00:29:45,752
+蜂窝网数据来下载它 
 
 
 469
-00:25:41,276 --> 00:25:42,516
-You'll want to fine tune
+00:29:46,086 --> 00:29:47,988
+即使通过Wi-Fi下载 
+可能也需要好一阵 
 
 
 470
-00:25:42,516 --> 00:25:44,396
-that for what works
-best for your game.
+00:29:48,989 --> 00:29:50,624
+你的用户在App Store中找到
 
 
 471
-00:25:46,376 --> 00:25:47,966
-Next we'll create a behavior.
+00:29:50,924 --> 00:29:56,597
+app以及决定下载这个app之间
+最大的潜在因素就是这个 
 
 
 472
-00:25:48,546 --> 00:25:50,346
-Here it is just an
-empty behavior,
+00:29:57,531 --> 00:30:01,368
+但是我们知道对于游戏来说 
+很难保持在这个一百万下载限制以内 
 
 
 473
-00:25:50,346 --> 00:25:53,066
-nothing really going on yet.
+00:30:01,702 --> 00:30:05,472
+我们再回到DemoBots看看
+我们是如何处理这个问题的
 
 
 474
-00:25:53,066 --> 00:25:55,956
-Then we'll add goals to it.
+00:30:06,440 --> 00:30:09,243
+如果你仔细看PlayerBot 
+你就会注意到 我们并不是绝对
 
 
 475
-00:25:55,956 --> 00:25:58,276
-These are the two
-path-related goals I was talking
+00:30:09,309 --> 00:30:10,777
+自上而下地看这个角色的 
 
 
 476
-00:25:58,276 --> 00:25:59,076
-about from before.
+00:30:11,378 --> 00:30:14,281
+这不是一个带有等距感觉的2D游戏
 
 
 477
-00:25:59,716 --> 00:26:05,546
-The first one on the screen,
-our goal to follow path is going
+00:30:14,948 --> 00:30:18,852
+我们是通过赋予这个
+角色多个朝向而实现的 
 
 
 478
-00:26:05,546 --> 00:26:09,136
-to establish the direction in
-which we'll travel our array.
+00:30:19,753 --> 00:30:22,456
+当你让这个角色在地图上四处走动时 
 
 
 479
-00:26:09,526 --> 00:26:11,566
-In this case we'll move
-forward in a forward direction
+00:30:22,789 --> 00:30:25,492
+我们就会换出代表这个角色的纹理
 
 
 480
-00:26:11,726 --> 00:26:16,006
-from the start position, our
-TaskBots to the end position,
+00:30:25,726 --> 00:30:27,427
+得到这个透视图 
 
 
 481
-00:26:16,166 --> 00:26:17,086
-which was our PlayerBot.
+00:30:28,328 --> 00:30:32,432
+当你在那里添加各个附加帧的
+时候 它们会占据空间 
 
 
 482
-00:26:18,106 --> 00:26:23,646
-The stay on path goal is
-there to motivate our agent,
+00:30:32,499 --> 00:30:34,968
+它只有六兆字节 
+对于一个游戏来说不大 
 
 
 483
-00:26:23,976 --> 00:26:28,866
-to actually remain within
-the bounds of the path
+00:30:35,035 --> 00:30:38,105
+当你认为它是六兆字节的
+时候 要乘以三个bots 
 
 
 484
-00:26:29,146 --> 00:26:30,626
-that we defined earlier.
+00:30:38,172 --> 00:30:41,575
+我们还要乘以它们可以执行的不同动作
 
 
 485
-00:26:31,186 --> 00:26:35,756
-Now that we have a working
-behavior we assign it
+00:30:41,875 --> 00:30:45,412
+当PlayerBot闲置 攻击
+四处走动时我们还需要定向帧
 
 
 486
-00:26:35,756 --> 00:26:39,366
-to our agent to get him moving.
+00:30:45,479 --> 00:30:49,249
+因此这个数字就开始积少成多了 
 
 
 487
-00:26:39,726 --> 00:26:43,946
-the agent works like many
+00:30:50,450 --> 00:30:54,221
+从传统意义上来说 
+这就意味着所有的资产再加上
 
 
 488
-00:26:43,946 --> 00:26:46,716
-of the other components
-within GameplayKit.
+00:30:54,288 --> 00:30:56,823
+各自的1X 2X 3X版本 
+都打包进了app 
 
 
 489
-00:26:46,716 --> 00:26:48,756
-It is updated on a cycle.
+00:30:58,392 --> 00:31:00,294
+现在我们对此有了一个更好的解决方法
 
 
 490
-00:26:49,416 --> 00:26:55,756
-When you've added it into your
-update loop it will notify you
+00:31:00,694 --> 00:31:02,229
+本周早些时候你可以已经听说过了
 
 
 491
-00:26:55,756 --> 00:26:57,816
-before and after changes,
+00:31:02,729 --> 00:31:06,366
+如果你用的是资产目录的话 
+你可以利用一项叫做
 
 
 492
-00:26:57,866 --> 00:27:00,216
-and this delegate
-notification before
+00:31:06,433 --> 00:31:07,901
+“app分割”的新的特性 
 
 
 493
-00:27:00,216 --> 00:27:02,226
-and after changes
-is the ideal place
+00:31:08,402 --> 00:31:12,906
+“app分割”所做的 
+就是为资产实际运行的设备
 
 
 494
-00:27:02,226 --> 00:27:07,406
-to actually get things working
-and hooked up with SpriteKit.
+00:31:14,408 --> 00:31:16,476
+1X、2X、3X分类 
 
 
 495
-00:27:07,876 --> 00:27:12,306
-In WillUpdate, this is
-a position that you want
+00:31:17,211 --> 00:31:19,880
+只要使用资产目录让App
+Store为你分割你的app 
 
 
 496
-00:27:12,306 --> 00:27:17,556
-to take the information
-from your SpriteKit node
+00:31:20,247 --> 00:31:23,550
+就可以节省我们大量的空间
 
 
 497
-00:27:17,726 --> 00:27:21,326
-that represents your
-agent in Scene and pull
+00:31:24,284 --> 00:31:26,620
+它不仅仅意味着我们现在可以
+节省大量的空间
 
 
 498
-00:27:21,326 --> 00:27:24,296
-that information back
-over and update the agent
+00:31:26,687 --> 00:31:29,423
+它还意味着我们可以用我们的app内
+多余的存储空间来干什么 
 
 
 499
-00:27:25,266 --> 00:27:27,496
-because we're doing
-this at the front
+00:31:29,489 --> 00:31:31,124
+我现在看到的是图表这是个空的图表 
 
 
 500
-00:27:28,226 --> 00:27:31,546
-of the SpriteKit
-update loop and the end
+00:31:31,892 --> 00:31:34,962
+在DemoBots中
+这是有实践含义的
 
 
 501
-00:27:31,906 --> 00:27:34,786
-of the last SpriteKit update
-loop would have involved
+00:31:36,597 --> 00:31:41,134
+我们一开始有八个朝向 
+我在这里给你们看一个视频仔细看 
 
 
 502
-00:27:35,026 --> 00:27:38,626
-simulating physics, applying
-constraints to your node
+00:31:41,201 --> 00:31:44,137
+看起来PlayerBot
+是面朝正前方的 
 
 
 503
-00:27:38,866 --> 00:27:40,866
-which may have caused
-its position to move
+00:31:44,738 --> 00:31:47,574
+你会注意到 仔细看这个动作 
+看看你能不能注意到什么事情 
 
 
 504
-00:27:40,966 --> 00:27:44,056
-from where the agent thought it
-was at the last time through.
+00:31:58,785 --> 00:32:01,488
+具体来说 就是当角色朝着
+地图顶部那里向后移动时 
 
 
 505
-00:27:44,676 --> 00:27:50,306
-In AgentDidUpdate, we'll take
-the information from the agent,
+00:32:01,555 --> 00:32:04,658
+我们把那个动作叫做“滑冰” 
 
 
 506
-00:27:51,296 --> 00:27:54,146
-its position, its rotation,
-things of that nature
+00:32:05,025 --> 00:32:08,862
+虽然我们只有八个朝向
+来表示角色的运动 
 
 
 507
-00:27:54,996 --> 00:27:58,636
-and pull those back over into
-the SpriteKit world updating our
+00:32:09,029 --> 00:32:13,233
+玩家提供的却是三百六十度的
+输入我们可以稍微倾斜下
 
 
 508
-00:27:58,636 --> 00:28:01,946
-node before it goes
-into physics simulation
+00:32:13,300 --> 00:32:16,503
+那个朝向 但并不触发下一个朝向 
 
 
 509
-00:28:02,336 --> 00:28:08,036
-and constraint application
-this time around.
+00:32:16,803 --> 00:32:19,139
+然后你就得到了这个轰炸行为 
 
 
 510
-00:28:08,036 --> 00:28:14,396
-Really, that is what got us
-to this point with DemoBots
+00:32:19,973 --> 00:32:22,876
+使用八个朝向更令人沮丧的是 
 
 
 511
-00:28:15,116 --> 00:28:18,256
-and an intelligence that
-works nicely, moving readily
+00:32:23,410 --> 00:32:27,181
+你可能最后会出现类似这样的情况 
 
 
 512
-00:28:18,256 --> 00:28:23,746
-around the screen, smoothly
-interacting with you.
+00:32:27,347 --> 00:32:29,483
+PlayerBot
+面朝正前方 看起来它应该
 
 
 513
-00:28:23,746 --> 00:28:27,256
-This is something extra I
-guess, we left debug drawing
+00:32:29,716 --> 00:32:33,086
+很容易就可以攻击到那个
+TaskBot实际上并没有攻击到 
 
 
 514
-00:28:27,956 --> 00:28:30,196
-in the sample that
-you can download.
+00:32:33,153 --> 00:32:36,456
+因为调试绘制你可以
+看到玩家瞄准的是侧面
 
 
 515
-00:28:30,996 --> 00:28:33,936
-You can enable it by
-hitting the slash key.
+00:32:36,523 --> 00:32:39,560
+但是玩家却无法看到这个 
 
 
 516
-00:28:35,076 --> 00:28:38,466
-The nice thing about this,
-it helps you visualize some
+00:32:40,227 --> 00:32:43,730
+有了我们通过“app分割”获得的
+多余的空间 我们就可以增加一个缺口
 
 
 517
-00:28:38,466 --> 00:28:40,066
-of the parameters we
-talked about earlier.
+00:32:44,198 --> 00:32:45,999
+我们增加到十六个朝向 
 
 
 518
-00:28:40,406 --> 00:28:44,896
-The orange boxes are buffer
-radius around the obstacles
+00:32:46,500 --> 00:32:49,603
+这样游戏内的运动就感觉更平滑了 
 
 
 519
-00:28:46,386 --> 00:28:51,786
-and the thick lines that you can
-see emanating from the player,
+00:32:50,871 --> 00:32:54,541
+你可以看到我们在这里有了
+更多的动画帧来进行表示 
 
 
 520
-00:28:51,786 --> 00:28:56,616
-the task Bots are a
-representation of that path
+00:32:56,810 --> 00:33:00,180
+然后当进行瞄准时粒度就更多了 
 
 
 521
-00:28:57,536 --> 00:29:01,506
-that we talked about, the
-path radius that was there.
+00:33:00,380 --> 00:33:02,683
+角色朝向的位置基本上精确对应到了
 
 
 522
-00:29:01,506 --> 00:29:04,326
-Now that we have a game, I would
+00:33:02,749 --> 00:33:05,319
+射线将要集中的方向 
 
 
 523
-00:29:04,326 --> 00:29:07,056
-like to invite my colleague
-Michael up on stage.
+00:33:06,119 --> 00:33:10,991
+你在那里点击下用户就可以
+更容易地知道游戏内的情况了
 
 
 524
-00:29:07,426 --> 00:29:09,506
-He's going to discuss
-with you how
+00:33:12,726 --> 00:33:15,462
+“app分割” 我们可以在
+DemoBots中简单地通过
 
 
 525
-00:29:09,506 --> 00:29:12,466
-to get your users playing
-your game that much faster.
+00:33:15,529 --> 00:33:18,232
+把我们的纹理地图册
+放进资产目录中来实现
 
 
 526
-00:29:13,086 --> 00:29:13,346
-Michael.
+00:33:18,632 --> 00:33:21,568
+它可以帮助我们大幅度降低
+app的整体大小 
 
 
 527
-00:29:14,516 --> 00:29:18,846
-[Applause]
+00:33:22,102 --> 00:33:26,373
+不仅如此 我们现在还可以实际提高
+可玩性这是因为我们有了多余空间
 
 
 528
-00:29:19,346 --> 00:29:20,056
->> MICHAEL DEWITT:
-Thank you very much.
+00:33:27,307 --> 00:33:30,777
+这项特性和你在游戏中时刻需要的资产
 
 
 529
-00:29:20,056 --> 00:29:23,826
-We'll talk about
-taking a fun game
+00:33:30,844 --> 00:33:32,012
+配合的非常默契 
 
 
 530
-00:29:23,826 --> 00:29:27,336
-and making a great overall
-experience for your users.
+00:33:32,446 --> 00:33:36,149
+除非我们有PlayerBot 
+否则DemoBots就不太像一个游戏了 
 
 
 531
-00:29:27,336 --> 00:29:29,896
-I'll boil it down to
-one phrase and that is,
+00:33:36,683 --> 00:33:40,420
+但是还有一些其他资产这些资产并
+不是我们时刻都必须用到的 
 
 
 532
-00:29:29,896 --> 00:29:31,466
-of course, time to fun.
+00:33:40,521 --> 00:33:42,556
+针对这点 我们还有一项技术 
 
 
 533
-00:29:31,846 --> 00:29:33,836
-How long does it
-take for your users
+00:33:42,623 --> 00:33:45,759
+你本周早些时候在“点播资源”
+那里可能已经听说过了 
 
 
 534
-00:29:33,836 --> 00:29:35,456
-to start really enjoying
-your game?
+00:33:46,159 --> 00:33:49,229
+简单描述下 
+你可以通过一个简单的字符串 
 
 
 535
-00:29:36,386 --> 00:29:39,566
-The first barrier to entry there
-is really the initial download.
+00:33:49,296 --> 00:33:51,532
+对你的资源进行标记标记为稍后再下载
 
 
 536
-00:29:40,026 --> 00:29:44,036
-If you're shipping an app that's
-too big some users won't be able
+00:33:52,232 --> 00:33:54,501
+我来谈谈我们是怎样在
+DemoBots上把这个用起来的 
 
 
 537
-00:29:44,036 --> 00:29:45,746
-to download it over
-cellular connection
+00:33:54,568 --> 00:33:56,236
+第一个地方就是可能已经很明显了 
 
 
 538
-00:29:46,096 --> 00:29:47,796
-and it can take a
-while even on Wi-Fi.
+00:33:56,303 --> 00:34:00,707
+我们有多个关卡我们可以把这些标记为
+关卡一 关卡二 关卡三 
 
 
 539
-00:29:48,646 --> 00:29:50,616
-This is the biggest latency
+00:34:02,376 --> 00:34:05,312
+好处在于 我们现在已经用
+输出数据寄存器把这些标记出来了
 
 
 540
-00:29:50,926 --> 00:29:53,256
-between your user finding
-the app on the App Store
+00:34:05,679 --> 00:34:09,917
+我们就可以说如果用户初始下载游戏 
+我们知道他们回到关卡一 
 
 
 541
-00:29:53,346 --> 00:29:56,426
-and deciding to get into it.
+00:34:09,983 --> 00:34:13,587
+我们就没有理由把另外
+两个关卡也包括到那里去 
 
 
 542
-00:29:56,426 --> 00:30:00,056
-But we know this 100 mega
-download limit is hard
+00:34:14,821 --> 00:34:18,158
+随着游戏进展事情就更有趣了 
 
 
 543
-00:30:00,056 --> 00:30:01,356
-for games to stay under.
+00:34:18,692 --> 00:34:21,728
+因为我们可以用这个线性流进行预测 
 
 
 544
-00:30:01,736 --> 00:30:03,906
-We'll go back to DemoBots
-and see how we handle this.
+00:34:21,795 --> 00:34:24,063
+用户将会继续到达关卡三 
 
 
 545
-00:30:04,486 --> 00:30:09,126
-If you focus on the PlayerBot
-you notice we're not looking
+00:34:24,431 --> 00:34:30,103
+我们就能提前下载那个关卡 
+用户不大可能会重玩关卡一 
 
 
 546
-00:30:09,126 --> 00:30:10,776
-strictly top-down
-on the character.
+00:34:30,469 --> 00:34:32,539
+因此我们就可以回收一些资源 
 
 
 547
-00:30:11,386 --> 00:30:14,276
-It is not a 2D game but
-an isometric feel here.
+00:34:34,574 --> 00:34:35,842
+我们来再进一步 
 
 
 548
-00:30:14,936 --> 00:30:17,406
-We pulled that off by
-giving this character
+00:34:36,310 --> 00:34:40,147
+如果我们仔细看关卡二你会在这个演示
 
 
 549
-00:30:17,406 --> 00:30:18,836
-multiple orientations.
+00:34:40,214 --> 00:34:42,349
+这个小照片上注意到 
 
 
 550
-00:30:19,566 --> 00:30:22,256
-As you move the character
-around the map,
+00:34:42,416 --> 00:34:44,751
+FlyingBot只会出现在
+这个关卡中 
 
 
 551
-00:30:22,786 --> 00:30:25,486
-we'll swap out the texture
-representing the character
+00:34:45,185 --> 00:34:46,553
+然后在关卡三中又出现了 
 
 
 552
-00:30:25,716 --> 00:30:27,426
-to get this perspective.
+00:34:47,286 --> 00:34:51,425
+把它和出现在关卡一以及
+关卡三中的GroundBot相对照
 
 
 553
-00:30:28,316 --> 00:30:32,446
-When you add all of the extra
-frames in there, it takes space.
+00:34:52,726 --> 00:34:57,631
+但我们单独标记角色时 
+我们就可以对我们的资源做进一步分类
 
 
 554
-00:30:32,506 --> 00:30:34,976
-It is only 6 megabytes,
-that's small for a game.
+00:34:57,764 --> 00:34:59,700
+如果我们知道用户是第一次下载app
 
 
 555
-00:30:34,976 --> 00:30:38,146
-When you consider it is 6
-megabytes times the three bots
+00:34:59,766 --> 00:35:02,803
+我们就只把GroundBot弄到
+关卡一中 我们可以稍后再
 
 
 556
-00:30:38,146 --> 00:30:41,586
-we have times the different
-actions they can perform,
+00:35:03,003 --> 00:35:04,872
+把FlyingBot弄过去 
 
 
 557
-00:30:41,886 --> 00:30:45,476
-we need the orientation frames
-for the Player Bot when idling,
+00:35:05,606 --> 00:35:07,541
+如果你允许的某台
+设备存储空间不太富余
 
 
 558
-00:30:45,476 --> 00:30:50,216
-hit, walking around, so
-this starts to add up.
+00:35:07,608 --> 00:35:10,777
+那么当用户正在玩第二关的
+时候你就可以洗净GroundBot
 
 
 559
-00:30:50,436 --> 00:30:54,226
-Traditionally, that means that
-all of the assets plus the 1X,
+00:35:11,111 --> 00:35:13,180
+然后把它们都弄回关卡三 
 
 
 560
-00:30:54,226 --> 00:30:58,136
-2X, 3X versions, they're
-bundled in the app.
+00:35:14,047 --> 00:35:16,116
+你可以看到我们是怎样在
+“项目导航器”中的
 
 
 561
-00:30:58,386 --> 00:31:00,306
-We have a better
-story for this now.
+00:35:16,450 --> 00:35:19,453
+资源标签下布置标签的 
 
 
 562
-00:31:00,686 --> 00:31:02,196
-You may have heard about
-it earlier this week.
+00:35:20,287 --> 00:35:22,956
+你可以看到关卡一的资产
+被标记为了“预取” 
 
 
 563
-00:31:02,746 --> 00:31:06,456
-If you use asset catalogs
-you will take advantage
+00:35:23,023 --> 00:35:25,692
+这些资产是app安装完毕之后
+很短一段时间内取得的 
 
 
 564
-00:31:06,456 --> 00:31:07,916
-of a new feature
-called app slicing.
+00:35:25,759 --> 00:35:28,495
+但是这些资产并没有包括在安装包中 
 
 
 565
-00:31:08,386 --> 00:31:12,296
-What app slicing will do
-is breakdown the 1X, 2X,
+00:35:28,562 --> 00:35:31,798
+而其他的资源就可以被标记为
 
 
 566
-00:31:12,336 --> 00:31:16,486
-3X for the actual device
-that they're used on.
+00:35:31,865 --> 00:35:33,367
+当我们需要时再下载 
 
 
 567
-00:31:17,226 --> 00:31:20,436
-This is going to save us a ton
-of space right off the bat just
+00:35:34,635 --> 00:35:36,603
+这就是点播资源 
 
 
 568
-00:31:20,436 --> 00:31:21,896
-by using the asset catalogs
+00:35:36,837 --> 00:35:40,641
+我们把它用在DemoBots 
+用来标记稍后下载的资源 
 
 
 569
-00:31:21,946 --> 00:31:24,076
-and letting the App
-Store slice it for us.
+00:35:40,741 --> 00:35:43,076
+这样我们的初始下载速度就更快了 
 
 
 570
-00:31:24,296 --> 00:31:26,776
-It is not only that we
-now save a bunch of space,
+00:35:43,143 --> 00:35:45,612
+我们可以把我们不是
+立即需要的很多东西删去 
 
 
 571
-00:31:26,776 --> 00:31:29,006
-it is what can we do with
-the extra room on our app.
+00:35:46,246 --> 00:35:49,082
+总的来说 它也有助于我们
+保持一个小的存储覆盖区 
 
 
 572
-00:31:29,006 --> 00:31:30,926
-I'm looking at the
-graph and it is empty.
+00:35:49,349 --> 00:35:54,521
+这就是传达的更重要信息你可以制作
+一个更丰富的游戏可以有更多的资产
 
 
 573
-00:31:31,446 --> 00:31:34,966
-In DemoBots, it has
-practical implications.
+00:35:54,855 --> 00:35:57,291
+因为你可以通过点播访问
+所有其它的东西
 
 
 574
-00:31:36,586 --> 00:31:40,306
-We started with 8 orientations
-and I'll show you a video here.
+00:35:57,491 --> 00:35:59,660
+你就仍然可以在设备上
+保持同样的覆盖区
 
 
 575
-00:31:40,306 --> 00:31:41,156
-Watch closely.
+00:36:01,028 --> 00:36:04,198
+我们认为这确实会增加复杂性 
 
 
 576
-00:31:41,156 --> 00:31:44,096
-The PlayerBot, it looks like
-it is facing directly forward,
+00:36:04,998 --> 00:36:08,669
+当你提到显示下一个场景时 
+从传统意义上来说 
 
 
 577
-00:31:44,096 --> 00:31:46,646
-you will notice, watch
-the movement closely,
+00:36:08,969 --> 00:36:12,306
+你知道它们位于本地存储器内 
+你就可以准备这些资源 
 
 
 578
-00:31:46,646 --> 00:31:58,696
-see if you notice something.
+00:36:12,372 --> 00:36:14,308
+然后当用户请求资源时 
+向他们展示这些资源 
 
 
 579
-00:31:58,796 --> 00:32:01,526
-So especially when the character
-is moving back towards the top
+00:36:15,342 --> 00:36:17,144
+现在我们增加了一项额外的复杂状态 
 
 
 580
-00:32:01,526 --> 00:32:04,596
-of the map there, we
-term that skating.
+00:36:17,211 --> 00:36:19,780
+你可能需要下载这些资源
 
 
 581
-00:32:05,026 --> 00:32:07,096
-While we only have
-the eight orientations
+00:36:20,113 --> 00:36:23,450
+当然如果网络连接不佳下载就可能失败
 
 
 582
-00:32:07,096 --> 00:32:08,866
-to represent the
-characters movement,
+00:36:24,551 --> 00:36:26,486
+如果你想要节省空间那么在某个时间点
 
 
 583
-00:32:09,016 --> 00:32:13,236
-the player is supplying 360°
-of input, we can be slightly off
+00:36:26,787 --> 00:36:28,388
+你就需要清除这些资源把它们冲洗掉 
 
 
 584
-00:32:13,306 --> 00:32:17,256
-of that orientation while
-not triggering the next
+00:36:28,989 --> 00:36:30,691
+然后重复整个周期 
 
 
 585
-00:32:17,256 --> 00:32:19,136
-and you get the strafing
-behavior.
+00:36:32,159 --> 00:36:35,128
+这可能会比较复杂 
+我想看看我们在DemoBots中
 
 
 586
-00:32:19,976 --> 00:32:24,146
-More frustrating than that
-though was using the eight
+00:36:35,195 --> 00:36:36,730
+是怎么解决这个问题的 
 
 
 587
-00:32:24,146 --> 00:32:27,176
-orientations means you could
-end up in a situation like this
+00:36:37,164 --> 00:36:39,867
+具体来说 这就回到了
+戴夫在会议开始提到的一项
 
 
 588
-00:32:27,336 --> 00:32:29,496
-where the PlayerBot is
-facing directly forward,
+00:36:39,933 --> 00:36:42,169
+技术即GKStateMachine
 
 
 589
-00:32:29,706 --> 00:32:33,076
-looks like it should be easily
-hitting that TaskBot but isn't
+00:36:43,270 --> 00:36:46,907
+如果我们把它用到这样的模型上 
+我们就把它成为我们的SceneLoader 
 
 
 590
-00:32:33,076 --> 00:32:36,516
-because of the debug drawing,
-you see the player is aiming
+00:36:46,974 --> 00:36:48,842
+它有六个相关的状态 
 
 
 591
-00:32:36,596 --> 00:32:39,546
-to the side and the user
-has no way to see this.
+00:36:49,510 --> 00:36:51,178
+你会注意到 只有两类状态 
 
 
 592
-00:32:40,236 --> 00:32:42,026
-With that extra space we got
+00:36:51,245 --> 00:36:53,447
+正在下载资源状态以及下载失败状态 
 
 
 593
-00:32:42,026 --> 00:32:43,736
-from app slicing we
-bumped it up a notch.
+00:36:53,514 --> 00:36:55,115
+实际上 它们都与输出数据寄存器相关
 
 
 594
-00:32:44,196 --> 00:32:46,016
-We went to 16 orientations,
+00:36:55,215 --> 00:36:58,118
+因为对于模型来说这完全是一个流水线
 
 
 595
-00:32:46,496 --> 00:32:49,616
-that makes movement feel a lot
-smoother throughout the game
+00:36:58,185 --> 00:37:00,387
+把你的资源送到内存 
+无论是来自本地存储 
 
 
 596
-00:32:50,636 --> 00:32:53,776
-so you can see we have many
-more animation frames here
+00:37:00,654 --> 00:37:01,955
+还是需要首先下载 
 
 
 597
-00:32:53,776 --> 00:32:55,146
-to represent that.
+00:37:02,923 --> 00:37:08,428
+使用状态机 我们真正能够获得的
+优势在于我们怎样对状态变迁进行模仿
 
 
 598
-00:32:56,456 --> 00:33:00,186
-Then when it comes to aiming,
-now it is much more granular.
+00:37:08,662 --> 00:37:14,601
+如果我们仔细看正在准备
+资源状态我们就可以通过在我们的
 
 
 599
-00:33:00,396 --> 00:33:02,766
-The direction where the
-character faces almost
+00:37:14,668 --> 00:37:18,238
+GKState子类中覆写
+IsValidNextState决定什么
 
 
 600
-00:33:02,766 --> 00:33:05,036
-corresponds exactly with
-where the beam's going to hit.
+00:37:18,305 --> 00:37:20,307
+是有效的下一个状态 
 
 
 601
-00:33:05,036 --> 00:33:09,786
-You click through there,
-it is easier for the user
+00:37:21,275 --> 00:37:24,244
+我们可以说如果场景确实
+加载过了 那么状态机
 
 
 602
-00:33:09,786 --> 00:33:12,526
-to know what's going
-on with the game.
+00:37:24,311 --> 00:37:27,414
+只会转移到准备状态 
 
 
 603
-00:33:12,716 --> 00:33:15,556
-That's app slicing, we use
-that in DemoBots simply
+00:37:28,282 --> 00:37:30,284
+或者说 如果用户取消这个请求的话 
 
 
 604
-00:33:15,556 --> 00:33:18,246
-by putting our texture
-atlases within Asset Catalogs,
+00:37:30,350 --> 00:37:31,885
+我们就可以移回到可用的状态 
 
 
 605
-00:33:18,636 --> 00:33:21,566
-it helps us to greatly decrease
-the size of the app overall,
+00:37:32,352 --> 00:37:34,488
+当试图准备我们的资源时我们不会回到
 
 
 606
-00:33:21,566 --> 00:33:23,146
-but it's more than that,
+00:37:34,555 --> 00:37:37,658
+下载状态因为我们可以在
+IsValidNextState中
 
 
 607
-00:33:23,216 --> 00:33:25,436
-we can actually improve
-the gameplay now
+00:37:37,724 --> 00:37:41,094
+决定它这样就会导致更多的
+确定性的行为 
 
 
 608
-00:33:25,436 --> 00:33:28,276
-because we have the extra space.
+00:37:42,729 --> 00:37:44,264
+好了 总结一下 
 
 
 609
-00:33:28,276 --> 00:33:30,826
-This feature works super
-well for assets that you need
+00:37:44,698 --> 00:37:48,302
+最后我再和你们分享下我们
+在开发它时学到的一些窍门 
 
 
 610
-00:33:30,826 --> 00:33:32,606
-in your game all the time.
+00:37:48,869 --> 00:37:51,171
+第一如果你用的是点播资源 
 
 
 611
-00:33:32,666 --> 00:33:34,786
-DemoBots is not much of
-a game unless we keep the
+00:37:51,238 --> 00:37:53,307
+提前提出下载请求 
 
 
 612
-00:33:34,786 --> 00:33:35,746
-PlayerBot around.
+00:37:53,640 --> 00:37:56,410
+如果你在游戏中有一个可预测的进展 
 
 
 613
-00:33:36,686 --> 00:33:39,926
-But there are other assets
-we don't necessarily need all
+00:37:56,610 --> 00:37:58,445
+你就可以在玩家一开始玩关卡一就开始
 
 
 614
-00:33:39,926 --> 00:33:40,426
-the time.
+00:37:58,512 --> 00:38:01,048
+下载关卡二 
 
 
 615
-00:33:40,516 --> 00:33:42,636
-For that we have
-another technology
+00:38:02,516 --> 00:38:06,186
+不要忘记Xcode内用于
+输出数据寄存器的工具 
 
 
 616
-00:33:42,636 --> 00:33:43,246
-that you may have heard
+00:38:06,520 --> 00:38:09,790
+你可以看一下磁盘报告工具 
+尤其是看看点播资源
 
 
 617
-00:33:43,246 --> 00:33:45,746
-about earlier this week,
-on demand resources.
+00:38:09,857 --> 00:38:11,291
+下面那里看看你的标签是否已经
 
 
 618
-00:33:46,176 --> 00:33:49,376
-The mild overview of this, it
-lets you tag resources just
+00:38:11,358 --> 00:38:14,094
+被下载了还是当前正在使用中 
 
 
 619
-00:33:49,376 --> 00:33:51,516
-with a simple string
-for download later on.
+00:38:14,161 --> 00:38:17,097
+亦或是已经被清理掉了这真的很有用 
 
 
 620
-00:33:51,516 --> 00:33:54,116
-I'll talk about how we
-use this in DemoBots.
+00:38:18,899 --> 00:38:21,869
+此外如果玩家到了一个接合点 
 
 
 621
-00:33:54,556 --> 00:33:56,236
-The first place,
-maybe it is obvious,
+00:38:22,402 --> 00:38:24,404
+他们需要额外的资源 
 
 
 622
-00:33:56,236 --> 00:33:59,396
-we have multiple levels.We
-can tag those level 1,
+00:38:24,471 --> 00:38:26,540
+但是你尚未下载这些资源 
+尚未准备好这些资源 
 
 
 623
-00:33:59,396 --> 00:34:00,696
-level 2, and level 3 .
+00:38:26,607 --> 00:38:28,575
+你就可以修改你的请求的优先级 
 
 
 624
-00:34:01,236 --> 00:34:04,536
-The advantage here, it is
-now that we have tagged these
+00:38:29,443 --> 00:38:31,512
+这就意味着你可以在
+打包资源请求上提升
 
 
 625
-00:34:04,536 --> 00:34:06,936
-with ODR we can actually say
+00:38:31,578 --> 00:38:35,349
+载入的优先级它的比例是从零到一 
 
 
 626
-00:34:06,936 --> 00:34:09,966
-if the user initially downloads
-the game, we know they'll go
+00:38:35,415 --> 00:38:38,352
+如果用户被阻塞了 而你又
+试图进行下载的话 这里甚至
 
 
 627
-00:34:09,966 --> 00:34:11,996
-to level 1, there is no reason
+00:38:38,418 --> 00:38:39,653
+还有一个供急用的常数 
 
 
 628
-00:34:11,996 --> 00:34:13,585
-to include the other
-two levels there.
+00:38:40,254 --> 00:38:45,325
+我们使用一个NSOperation队列来模仿
+准备的你可以在那里提升服务质量
 
 
 629
-00:34:14,826 --> 00:34:18,156
-It gets even more interesting
-as the game progresses,
+00:38:48,362 --> 00:38:51,899
+总的来说 我们在DemoBots上
+想做的事情很多 
 
 
 630
-00:34:18,696 --> 00:34:21,726
-because we can predict
-with this linear flow
+00:38:51,965 --> 00:38:57,304
+我们十分希望提供一个示例 
+向你们展示开发游戏的各种不同的方面
 
 
 631
-00:34:21,726 --> 00:34:24,076
-that the user will
-proceed on to level 3
+00:38:57,504 --> 00:38:59,039
+我们认为你们都会对这个感兴趣的 
 
 
 632
-00:34:24,426 --> 00:34:28,196
-so we'll start downloading that
-level early and it is unlikely
+00:38:59,540 --> 00:39:02,943
+戴夫一开始就说过了要针对每种设备
 
 
 633
-00:34:28,196 --> 00:34:30,106
-that they'll replay level 1
+00:39:03,010 --> 00:39:05,412
+对你的资产进行微调 
+也包括针对Mac的特殊资产 
 
 
 634
-00:34:30,466 --> 00:34:32,545
-to we can recycle some
-of those resources.
+00:39:06,446 --> 00:39:08,582
+我们也讲过了优雅的角色导航 
 
 
 635
-00:34:32,946 --> 00:34:35,676
-Let's take it a step further.
+00:39:08,649 --> 00:39:10,784
+而无需由你自己写一大堆的运动代码 
 
 
 636
-00:34:36,315 --> 00:34:40,176
-If we look closely at
-level 2 and you will notice
+00:39:11,385 --> 00:39:14,922
+最后 添加额外的资产来提高可玩性 
 
 
 637
-00:34:40,176 --> 00:34:42,335
-from the demo and from
-this small picture
+00:39:14,988 --> 00:39:17,024
+因为我们现在对我们的
+app进行了切割 
 
 
 638
-00:34:42,335 --> 00:34:44,896
-that only the FlyingBot
-shows up in this level
+00:39:17,691 --> 00:39:21,161
+我万分激动地告诉大家 
+GamePlayKit有一堆很棒的特性 
 
 
 639
-00:34:45,045 --> 00:34:46,556
-and shows up again in level 3.
+00:39:21,228 --> 00:39:23,630
+总的来说
+iOS 9会帮助你实现这些事情 
 
 
 640
-00:34:47,275 --> 00:34:51,416
-Contrast that with a GroundBot
-who is in levels 1 and 3.
+00:39:24,531 --> 00:39:25,699
+如果你想看看怎么用它们 
 
 
 641
-00:34:52,726 --> 00:34:55,536
-When we tag the characters
-individually it allows us
+00:39:26,033 --> 00:39:29,870
+你可以通过这个链接来下载这个示例 
 
 
 642
-00:34:55,536 --> 00:34:57,636
-to breakdown our
-resources even further.
+00:39:30,037 --> 00:39:31,338
+我鼓励你们这么做 
 
 
 643
-00:34:57,756 --> 00:34:59,616
-If we know the user
-is downloading the app
+00:39:32,673 --> 00:39:35,676
+这里还有一些额外的资料链接 
 
 
 644
-00:34:59,616 --> 00:35:02,816
-for the first time we only ship
-with the GroundBot in level 1
+00:39:35,742 --> 00:39:37,477
+你也可以联系我们的福音传道者艾伦 
 
 
 645
-00:35:02,996 --> 00:35:04,876
-and we can do the
-FlyingBot later on.
+00:39:39,179 --> 00:39:42,015
+相关的会议 我们在本次会议中
+已经提到过了 
 
 
 646
-00:35:05,606 --> 00:35:07,586
-And if you're on a device
-that's tight for storage,
+00:39:42,082 --> 00:39:44,852
+它们已经结束了你可以在线观看视频 
 
 
 647
-00:35:07,586 --> 00:35:10,206
-maybe when the user's playing
-level 2 you can purge the
-
-
-648
-00:35:10,206 --> 00:35:13,166
-GroundBot and then bring
-them both back for level 3.
-
-
-649
-00:35:14,036 --> 00:35:16,116
-You can see how we
-laid out the tags
-
-
-650
-00:35:16,456 --> 00:35:19,466
-in the Project Navigator
-under resource tags.
-
-
-651
-00:35:20,296 --> 00:35:22,996
-You will see that the assets
-for level 1 are tagged
-
-
-652
-00:35:22,996 --> 00:35:25,756
-as prefetched, those
-are coming down shortly
-
-
-653
-00:35:25,756 --> 00:35:28,616
-after the app has been
-installed, but not included
-
-
-654
-00:35:28,616 --> 00:35:31,826
-in the bundle size, whereas the
-other resources can be tagged
-
-
-655
-00:35:31,826 --> 00:35:33,356
-for download when
-we request them.
-
-
-656
-00:35:34,636 --> 00:35:36,606
-That's on-demand resources.
-
-
-657
-00:35:36,836 --> 00:35:40,626
-We used it in DemoBots to tag
-the resources for later download
-
-
-658
-00:35:40,726 --> 00:35:43,156
-which gives us a faster
-initial download time.
-
-
-659
-00:35:43,156 --> 00:35:45,606
-We can cut a bunch of stuff out
-that we don't need immediately.
-
-
-660
-00:35:46,186 --> 00:35:49,096
-Overall it helps us keep the
-storage footprint small too.
-
-
-661
-00:35:49,356 --> 00:35:50,676
-That's the bigger message here.
-
-
-662
-00:35:50,676 --> 00:35:54,536
-You can make a more rich game
-and have many more assets
-
-
-663
-00:35:54,856 --> 00:35:57,276
-because you are still keeping
-the same footprint on device
-
-
-664
-00:35:57,496 --> 00:36:01,436
-but accessing everything
-else on demand.
-
-
-665
-00:36:01,706 --> 00:36:04,186
-We recognize this
-does add complication.
-
-
-666
-00:36:05,006 --> 00:36:09,066
-When you talk about presenting
-the next Scene traditionally you
-
-
-667
-00:36:09,066 --> 00:36:12,316
-know it is in local storage,
-you can prepare those resources,
-
-
-668
-00:36:12,316 --> 00:36:14,246
-and when the user requests
-it, you can present.
-
-
-669
-00:36:15,326 --> 00:36:17,236
-Now we're adding an
-extra complication.
-
-
-670
-00:36:17,236 --> 00:36:20,556
-Maybe you need to download
-those resources, and of course
-
-
-671
-00:36:20,556 --> 00:36:23,446
-with network connection
-that download can fail.
-
-
-672
-00:36:24,556 --> 00:36:26,496
-If you want to get the
-space savings, you will have
-
-
-673
-00:36:26,496 --> 00:36:29,606
-to purge the resources
-at some point and rinse
-
-
-674
-00:36:29,606 --> 00:36:30,676
-and repeat that whole cycle.
-
-
-675
-00:36:31,566 --> 00:36:35,166
-This can get complicated
-and I want to focus
-
-
-676
-00:36:35,166 --> 00:36:36,726
-on how we solved it in DemoBots.
-
-
-677
-00:36:37,156 --> 00:36:39,916
-Specifically going back to a
-technology that Dave mentioned
-
-
-678
-00:36:39,916 --> 00:36:42,176
-at the top of the talk,
-the GKStateMachine.
-
-
-679
-00:36:42,966 --> 00:36:46,906
-If we use that to model this,
-we call it our SceneLoader
-
-
-680
-00:36:46,906 --> 00:36:48,856
-and it has six associated
-states.
-
-
-681
-00:36:49,516 --> 00:36:51,116
-You will notice that
-only two of the states,
-
-
-682
-00:36:51,116 --> 00:36:53,436
-the downloading resources
-and download failed state,
-
-
-683
-00:36:53,436 --> 00:36:55,116
-they're actually
-associated with ODR
-
-
-684
-00:36:55,206 --> 00:36:58,126
-because this is a full pipeline
-to model bringing your resources
-
-
-685
-00:36:58,126 --> 00:37:00,976
-into memory whether they're
-from local storage or need
-
-
-686
-00:37:00,976 --> 00:37:02,156
-to be downloaded first.
-
-
-687
-00:37:02,926 --> 00:37:04,486
-the real advantage we're getting
-
-
-688
-00:37:04,486 --> 00:37:07,576
-from using the state machine
-is how we model the transition
-
-
-689
-00:37:07,576 --> 00:37:08,436
-from states.
-
-
-690
-00:37:08,646 --> 00:37:09,646
-If we look closely
-
-
-691
-00:37:09,646 --> 00:37:14,646
-at the preparing resources state
-we can enforce what are the
-
-
-692
-00:37:14,646 --> 00:37:18,276
-valid next states by
-overriding IsValidNextState
-
-
-693
-00:37:18,276 --> 00:37:20,316
-in our GKState subclass
-
-
-694
-00:37:21,186 --> 00:37:24,226
-and we can say the state
-machine can only move
-
-
-695
-00:37:24,226 --> 00:37:27,416
-on to the ready state if
-the Scene is indeed loaded,
-
-
-696
-00:37:28,266 --> 00:37:30,296
-or we can move back
-to the available state
-
-
-697
-00:37:30,296 --> 00:37:32,036
-if the user's canceled
-this request.
-
-
-698
-00:37:32,336 --> 00:37:34,466
-We're not going to go back
-to downloading while trying
-
-
-699
-00:37:34,466 --> 00:37:37,356
-to prepare our resources
-because we're able to enforce it
-
-
-700
-00:37:37,356 --> 00:37:39,406
-with this IsValidNextState
-and so it leads
-
-
-701
-00:37:39,406 --> 00:37:41,086
-to much more determininistic
-behavior.
-
-
-702
-00:37:42,716 --> 00:37:44,256
-Alright, so to wrap things up,
-
-
-703
-00:37:44,256 --> 00:37:48,316
-I'll share a final few tips we
-learned developing this game.
-
-
-704
-00:37:48,876 --> 00:37:51,196
-the first, if you're
-using on-demand resources,
-
-
-705
-00:37:51,196 --> 00:37:53,296
-put that download
-request in early.
-
-
-706
-00:37:53,636 --> 00:37:56,396
-If you have a predictable
-progression in the game,
-
-
-707
-00:37:56,626 --> 00:37:58,456
-you can start downloading
-level 2 as soon
-
-
-708
-00:37:58,456 --> 00:38:01,036
-as the player begins level 1.
-
-
-709
-00:38:02,516 --> 00:38:06,196
-Don't forget about the tools
-for ODR that are within Xcode.
-
-
-710
-00:38:06,506 --> 00:38:09,826
-You can look at the disk
-report tool and specifically
-
-
-711
-00:38:09,826 --> 00:38:11,296
-under the on-demand
-resources see
-
-
-712
-00:38:11,296 --> 00:38:14,186
-if your tags have been
-downloaded or are currently
-
-
-713
-00:38:14,186 --> 00:38:16,206
-in use or have already
-been purged.
-
-
-714
-00:38:16,206 --> 00:38:17,086
-This is really useful.
-
-
-715
-00:38:18,896 --> 00:38:21,856
-Additionally, if the player
-is coming up to a junction
-
-
-716
-00:38:22,406 --> 00:38:24,446
-when they'll need
-additional resources
-
-
-717
-00:38:24,446 --> 00:38:26,346
-and you haven't downloaded
-to prepare them yet.
-
-
-718
-00:38:26,616 --> 00:38:28,736
-You can modify the
-priority of your request.
-
-
-719
-00:38:29,446 --> 00:38:31,606
-This means that you can
-bump up the loading priority
-
-
-720
-00:38:31,606 --> 00:38:35,346
-on the bundle resource request,
-it is a scale between 0 and 1
-
-
-721
-00:38:35,346 --> 00:38:38,476
-and there is even a constant for
-urgent if the user is blocked
-
-
-722
-00:38:38,476 --> 00:38:39,626
-and you're trying to download.
-
-
-723
-00:38:40,246 --> 00:38:44,076
-We modeled preparing with an
-NSOperation queue you can bump
-
-
-724
-00:38:44,076 --> 00:38:48,116
-up quality of service there.
-
-
-725
-00:38:48,366 --> 00:38:51,986
-Overall in DemoBots we
-wanted to do a ton of things,
-
-
-726
-00:38:51,986 --> 00:38:55,276
-we really wanted to ship a
-sample that showcased a bunch
-
-
-727
-00:38:55,276 --> 00:38:57,296
-of different aspects
-of developing games
-
-
-728
-00:38:57,296 --> 00:38:58,906
-that we thought you would
-all be interested in.
-
-
-729
-00:38:59,316 --> 00:39:02,946
-So Dave spoke to you initially
-about fine tuning your assets
-
-
-730
-00:39:02,946 --> 00:39:06,696
-for every device, including
-special assets for the Mac.
-
-
-731
-00:39:06,696 --> 00:39:08,576
-We talked about elegant
-character navigation,
-
-
-732
-00:39:08,576 --> 00:39:10,796
-without having to write a
-ton of movement code yourself
-
-
-733
-00:39:11,236 --> 00:39:14,976
-and finally adding additional
-assets to improve gameplay
-
-
-734
-00:39:14,976 --> 00:39:17,776
-because now we're
-slimming down our app.
-
-
-735
-00:39:17,776 --> 00:39:21,156
-I'm excited to say GamePlayKit
-has ton of great features
-
-
-736
-00:39:21,156 --> 00:39:23,626
-and iOS 9 in general to
-help you do these things.
-
-
-737
-00:39:24,526 --> 00:39:25,686
-To check out how they're used,
-
-
-738
-00:39:26,046 --> 00:39:29,856
-you can download the sample
-right now from this link,
-
-
-739
-00:39:29,856 --> 00:39:31,336
-I encourage you to do so.
-
-
-740
-00:39:32,676 --> 00:39:35,666
-Here are additional
-links for documentation,
-
-
-741
-00:39:35,666 --> 00:39:37,476
-you can contact our
-evangelist Allan.
-
-
-742
-00:39:38,076 --> 00:39:42,076
-The related sessions we
-mentioned throughout this talk,
-
-
-743
-00:39:42,076 --> 00:39:44,856
-they have already happened,
-you can catch them online.
-
-
-744
-00:39:46,876 --> 00:39:47,666
-Thank you all so much.
-
-
-745
-00:39:48,516 --> 00:39:51,500
-[Applause]
+00:39:46,887 --> 00:39:47,721
+谢谢 
 

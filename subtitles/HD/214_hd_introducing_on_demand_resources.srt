@@ -1,5374 +1,5079 @@
 1
-00:00:20,516 --> 00:00:22,636
-[Applause]
+00:00:20,220 --> 00:00:23,056
+《有关On Demand Resources之简介》
 
 
 2
-00:00:23,136 --> 00:00:26,026
->> STEVE LEWALLEN:
-Well, good afternoon!
+00:00:23,123 --> 00:00:23,957
+下午好
 
 
 3
-00:00:26,026 --> 00:00:29,066
-And welcome to today's session
-introducing On Demand Resources.
+00:00:25,859 --> 00:00:29,029
+欢迎来到今天关于On Demand
+Resources的介绍会议
 
 
 4
-00:00:29,066 --> 00:00:30,166
-My name is Steve Lewallen.
+00:00:29,096 --> 00:00:30,364
+我是史蒂夫·列瓦伦
 
 
 5
-00:00:30,216 --> 00:00:31,736
-So what do we have
-for you today?
+00:00:30,764 --> 00:00:32,299
+我们今天将给你们准备了些什么呢
 
 
 6
-00:00:32,396 --> 00:00:35,176
-Well, we're going to begin
-by giving you an overview
+00:00:32,366 --> 00:00:34,301
+嗯 我们还是先给你们说说
 
 
 7
-00:00:35,176 --> 00:00:38,126
-of On Demand Resources,
-or ODR, and we're going
+00:00:34,368 --> 00:00:37,471
+On Demand Resources
+或者是ODR的大致情况
 
 
 8
-00:00:38,126 --> 00:00:41,846
-to compare an application built
-with ODR to one built without.
+00:00:37,871 --> 00:00:41,909
+我们来比较一下使用ODR App
+与没有使用它的区别吧
 
 
 9
-00:00:41,846 --> 00:00:45,456
-We will follow that by listing
-all the features and benefits
+00:00:43,010 --> 00:00:45,345
+我们将为ODR开发人员
+以及用户们
 
 
 10
-00:00:45,456 --> 00:00:48,406
-to you, the developer, as well
-as to users of ODR applications.
+00:00:45,412 --> 00:00:48,448
+列出ODR App的
+所有特性和优势
 
 
 11
-00:00:49,666 --> 00:00:52,796
-Then we will deep dive into
-a bit of the details of ODR,
+00:00:49,650 --> 00:00:52,753
+然后我们将
+深入研究ODR的细节
 
 
 12
-00:00:52,946 --> 00:00:55,836
-how an ODR application is
-structured, how you build one.
+00:00:53,020 --> 00:00:55,989
+结构以及如何构建等问题
 
 
 13
-00:00:56,486 --> 00:01:00,036
-We will follow that up by
-giving you a demo using Xcode
+00:00:56,957 --> 00:00:59,993
+接下来我们将给你演示
+使用Xcode
 
 
 14
-00:01:00,396 --> 00:01:03,136
-and the new ODR API we
-have added to Foundation.
+00:01:00,360 --> 00:01:03,130
+并将新的ODR API添加到库里
 
 
 15
-00:01:04,575 --> 00:01:07,116
-And finally, we will wrap
-things up with a segment
+00:01:04,565 --> 00:01:09,670
+最后 我们将演示
+和构建最优ODR API的最佳实践
 
 
 16
-00:01:07,116 --> 00:01:09,136
-on best practices in using
+00:01:09,736 --> 00:01:11,338
+并整理成一个小片段
 
 
 17
-00:01:09,136 --> 00:01:11,316
-and building the
-optimal ODR application.
+00:01:12,172 --> 00:01:13,006
+咱们开始吧
 
 
 18
-00:01:11,946 --> 00:01:12,896
-So let's get started.
+00:01:13,874 --> 00:01:16,510
+我们得先理解
 
 
 19
-00:01:12,896 --> 00:01:16,416
-So to understand where
-we are going with ODR,
+00:01:16,577 --> 00:01:20,013
+传统App的进展状况
+才能理解ODR的进展
 
 
 20
-00:01:16,416 --> 00:01:18,416
-we need to understand
-where we are today
+00:01:20,514 --> 00:01:23,383
+这个App现在将会有一个
+可执行的部分
 
 
 21
-00:01:18,416 --> 00:01:19,756
-with the traditional
-application.
+00:01:23,450 --> 00:01:27,087
+这是编译好的Swift
+Objective-C C++
 
 
 22
-00:01:20,506 --> 00:01:23,476
-Now, this application will
-have an executable segment.
+00:01:27,354 --> 00:01:29,089
+以及一些基础资料
 
 
 23
-00:01:23,476 --> 00:01:25,786
-This is your compiled
-Swift, Objective-C,
+00:01:29,523 --> 00:01:32,292
+和游戏等级资料
+例如 假设这是一个游戏
 
 
 24
-00:01:25,786 --> 00:01:30,456
-C++ as well as some base
-resources, and the levels
+00:01:33,327 --> 00:01:36,163
+当开发人员对这个游戏
+或App感到满意
 
 
 25
-00:01:30,456 --> 00:01:32,186
-in the game, for example,
-if this is a game.
+00:01:36,230 --> 00:01:37,798
+于是你们上传到App Store里
 
 
 26
-00:01:33,366 --> 00:01:35,636
-When you, the developer,
-are happy with this game
+00:01:38,632 --> 00:01:41,134
+这样 用户可以购买
+这个App或游戏
 
 
 27
-00:01:35,636 --> 00:01:37,436
-or application, you
-upload it to the store,
+00:01:41,335 --> 00:01:42,836
+然后他们得到整个程序
 
 
 28
-00:01:38,216 --> 00:01:40,996
-and when the user comes
-along and buys the app
+00:01:43,003 --> 00:01:44,605
+并下载到设备上
 
 
 29
-00:01:41,366 --> 00:01:43,456
-or game they get the
-entire thing and down
+00:01:45,138 --> 00:01:46,773
+然而他们下载的东西
+并不单单如此
 
 
 30
-00:01:43,456 --> 00:01:44,566
-to the device it goes.
+00:01:47,040 --> 00:01:52,713
+其中也包含开发人员为所有用户编写的
+其他有趣的东西包括App和游戏
 
 
 31
-00:01:45,166 --> 00:01:46,536
-And there it is not alone.
+00:01:53,480 --> 00:01:55,949
+他们其实是如此有趣
 
 
 32
-00:01:47,076 --> 00:01:49,636
-Here we have all the other
-compelling applications
+00:01:56,183 --> 00:02:00,954
+人们下载得再多也
+觉得不够而事实亦如此
 
 
 33
-00:01:49,636 --> 00:01:51,106
-and games that you,
-the developer,
+00:02:01,021 --> 00:02:03,690
+设备上没有足够多的空间
 
 
 34
-00:01:51,106 --> 00:01:52,726
-are writing for all
-of these users.
+00:02:04,157 --> 00:02:05,325
+因此我们怎么要做呢
 
 
 35
-00:01:52,996 --> 00:01:55,616
-In fact they are so compelling
-that they can't get enough
+00:02:05,792 --> 00:02:08,695
+好吧 我们能做的就是
+观察每个App
 
 
 36
-00:01:55,696 --> 00:01:58,416
-of them and literally
-this means more
+00:02:08,762 --> 00:02:11,632
+发现并非每个部分都被使用
 
 
 37
-00:01:58,416 --> 00:02:00,996
-and more the case this
-is literally true.
+00:02:11,899 --> 00:02:12,733
+我举个例子
 
 
 38
-00:02:00,996 --> 00:02:03,556
-There just is not enough
-space on the device.
+00:02:12,799 --> 00:02:15,435
+我的游戏级别是7级
 
 
 39
-00:02:04,146 --> 00:02:05,326
-So what are we to do?
+00:02:15,802 --> 00:02:17,871
+我肯定不想再待在1级
 
 
 40
-00:02:05,806 --> 00:02:08,466
-Well, one thing we can do
-is make the observation
+00:02:17,938 --> 00:02:20,941
+而且长时间内
+我可能也到不了30级
 
 
 41
-00:02:08,466 --> 00:02:11,376
-that not every part of every
-app is needed at any one time.
+00:02:21,341 --> 00:02:22,509
+如此一来
 
 
 42
-00:02:11,536 --> 00:02:12,706
-I will give an example.
+00:02:22,576 --> 00:02:24,845
+我们就开始考虑ODR
 
 
 43
-00:02:12,806 --> 00:02:15,276
-I may be on Level 7 of a game.
+00:02:25,145 --> 00:02:27,614
+现在让我们来看ODR的
+一个App吧
 
 
 44
-00:02:15,786 --> 00:02:17,886
-I certainly don't need
-Level 1 any longer
+00:02:28,682 --> 00:02:29,650
+在这种情况下
 
 
 45
-00:02:17,886 --> 00:02:20,986
-and I probably won't need
-Level 30 for quite a while.
+00:02:29,850 --> 00:02:31,318
+我们开始使用相同的比特
 
 
 46
-00:02:21,336 --> 00:02:22,896
-So it's with that
-thought that we started
+00:02:31,385 --> 00:02:32,886
+没有去掉任何东西
 
 
 47
-00:02:22,896 --> 00:02:24,836
-to begin to think about ODR.
+00:02:32,953 --> 00:02:35,122
+但我们要做的是梳理
 
 
 48
-00:02:25,136 --> 00:02:27,456
-So now let's look at
-an ODR application.
+00:02:35,189 --> 00:02:37,257
+每个游戏级别的资料
 
 
 49
-00:02:28,316 --> 00:02:31,386
-In this case, we start
-off with the same bits,
+00:02:37,991 --> 00:02:40,160
+然后我们将整个东西
+上传到商店
 
 
 50
-00:02:31,386 --> 00:02:33,586
-we haven't taken anything
-away, but what we're going
+00:02:40,794 --> 00:02:43,530
+现在当客户购买这个App时
 
 
 51
-00:02:33,586 --> 00:02:35,776
-to do is we are going to
-tease apart the assets
+00:02:44,264 --> 00:02:46,300
+他们得到可操作的基础资料
 
 
 52
-00:02:35,776 --> 00:02:37,106
-for each level of that game.
+00:02:46,433 --> 00:02:48,535
+也许有Level 1的游戏装备
 
 
 53
-00:02:37,606 --> 00:02:39,966
-And then we are going to upload
-the entire thing to the store.
+00:02:49,236 --> 00:02:50,270
+这不是双关语
 
 
 54
-00:02:40,786 --> 00:02:43,016
-Now, when a customer comes
-along and buys the app,
+00:02:50,337 --> 00:02:51,839
+我们已经在游戏中了
 
 
 55
-00:02:44,276 --> 00:02:46,316
-they get the executable
-and the base resources
+00:02:51,905 --> 00:02:55,142
+因为他们能闯过
+游戏的Level 1
 
 
 56
-00:02:46,426 --> 00:02:48,186
-and perhaps the first
-level in the game.
+00:02:55,342 --> 00:02:57,878
+购买和使用App与
+Level 1的时间
 
 
 57
-00:02:49,246 --> 00:02:51,956
-So no pun intended we are
-already ahead of the game here
+00:02:57,945 --> 00:03:01,515
+比那些下载整个App更快
 
 
 58
-00:02:51,956 --> 00:02:54,896
-because they were able to arrive
-at the first level of the game,
+00:03:01,849 --> 00:03:04,484
+而且使用更少的磁盘空间
 
 
 59
-00:02:55,346 --> 00:02:57,726
-the time between buying the app
-and playing that first level,
+00:03:06,119 --> 00:03:08,188
+用户现在开始玩这个游戏
 
 
 60
-00:02:58,026 --> 00:02:59,446
-much more quickly
-than if they had
+00:03:08,655 --> 00:03:10,257
+并开始玩Level 1
 
 
 61
-00:02:59,446 --> 00:03:02,836
-to download the entire
-app first and they had
+00:03:10,991 --> 00:03:13,327
+一个设计良好的ODR App
 
 
 62
-00:03:02,836 --> 00:03:05,716
-to use far less disk
-space to do it.
+00:03:13,393 --> 00:03:15,929
+需要能预测
+比如下一个等级
 
 
 63
-00:03:06,136 --> 00:03:08,026
-Now, the user starts
-playing this game
+00:03:16,063 --> 00:03:17,564
+因此 需要进行下载资料
 
 
 64
-00:03:08,026 --> 00:03:10,646
-and the first level is in use.
+00:03:18,332 --> 00:03:19,967
+用户继续玩
 
 
 65
-00:03:10,986 --> 00:03:13,926
-And a well-designed ODR
-application will anticipate
+00:03:20,033 --> 00:03:21,869
+打到Level 2
 
 
 66
-00:03:13,926 --> 00:03:15,796
-needing, say, the next
-level in the game.
+00:03:22,402 --> 00:03:25,439
+然后ODR内置的缓存机制
 
 
 67
-00:03:16,076 --> 00:03:17,866
-So it will download that.
+00:03:25,506 --> 00:03:27,608
+通知你不再使用Level 2
 
 
 68
-00:03:18,326 --> 00:03:21,646
-The user continues to play,
-they move on to Level 2,
+00:03:27,674 --> 00:03:29,209
+并且作上标记
 
 
 69
-00:03:21,646 --> 00:03:25,006
-and at this point, the
-caching mechanism built
+00:03:29,643 --> 00:03:30,544
+资料还在那儿
 
 
 70
-00:03:25,006 --> 00:03:27,646
-into ODR notices you are
-no longer using Level 2,
+00:03:30,611 --> 00:03:31,545
+我们什么都不用做
 
 
 71
-00:03:27,646 --> 00:03:29,216
-well I'm just going to
-make a note of that.
+00:03:31,612 --> 00:03:34,548
+只需要记住不再用它
 
 
 72
-00:03:29,216 --> 00:03:31,576
-It's still there, we haven't
-done anything with it,
+00:03:34,615 --> 00:03:37,217
+但会一直保留设备上
 
 
 73
-00:03:31,576 --> 00:03:33,516
-but we're just going to
-remember it's no longer needed.
+00:03:37,284 --> 00:03:38,886
+这样空间就慢慢少了
 
 
 74
-00:03:34,156 --> 00:03:37,296
-So this continues until we
-get to the point, perhaps,
+00:03:38,952 --> 00:03:40,487
+无法储存下一个级游戏
 
 
 75
-00:03:37,296 --> 00:03:38,976
-where there is no more
-space on the device
+00:03:40,721 --> 00:03:43,991
+我们检查设备上
+其他可能释放资源的空间
 
 
 76
-00:03:38,976 --> 00:03:40,966
-for the next level of the game.
+00:03:44,057 --> 00:03:46,393
+仅剩下这个游戏的...
 
 
 77
-00:03:40,966 --> 00:03:43,996
-We have looked at every other
-possible place on the device
+00:03:46,660 --> 00:03:49,630
+ODR内容 仅此而已
 
 
 78
-00:03:44,066 --> 00:03:48,256
-to free up resources and all
-we have left is ODR content
+00:03:49,696 --> 00:03:50,631
+在这种情况下
 
 
 79
-00:03:48,406 --> 00:03:49,166
-from this game.
+00:03:50,697 --> 00:03:53,534
+缓存机制可以一步释放空间
 
 
 80
-00:03:49,166 --> 00:03:52,446
-In this case, the caching
-mechanism can step in again
+00:03:53,600 --> 00:03:55,802
+比如 我有1级的内容
 
 
 81
-00:03:52,446 --> 00:03:55,566
-and say, you know, I had
-Level 1, I can free that up
+00:03:55,869 --> 00:03:57,771
+我可以将它释放
 
 
 82
-00:03:55,566 --> 00:03:58,746
-and now the user can
-continue on with the game
+00:03:57,971 --> 00:04:00,073
+这样然后用户可以
+继续玩下一级游戏
 
 
 83
-00:03:58,746 --> 00:03:59,876
-and play the next level.
+00:04:00,641 --> 00:04:03,210
+这是ODR的基本理念
 
 
 84
-00:04:00,726 --> 00:04:02,886
-So this is the basic
-idea behind ODR;
+00:04:03,277 --> 00:04:04,344
+从游戏的购买
 
 
 85
-00:04:02,886 --> 00:04:07,226
-in the case of a game it's fast
-to first play from buy to play
+00:04:04,411 --> 00:04:07,548
+到玩游戏时间更短
 
 
 86
-00:04:07,756 --> 00:04:10,846
-and it's always occupying a
-smaller, more manageable amount
+00:04:07,748 --> 00:04:10,217
+占据设备空间更小
 
 
 87
-00:04:10,846 --> 00:04:14,986
-of space on the device.
+00:04:10,284 --> 00:04:11,752
+更易于...
 
 
 88
-00:04:15,496 --> 00:04:18,266
-So now let's talk about
-all of the features of ODR
+00:04:11,818 --> 00:04:12,653
+管理
 
 
 89
-00:04:18,266 --> 00:04:20,426
-that we provide you,
-the developers.
+00:04:15,489 --> 00:04:18,591
+现在让我们谈谈ODR
 
 
 90
-00:04:21,505 --> 00:04:25,096
-First of all, obviously this
-is a dynamically loaded content
+00:04:18,825 --> 00:04:20,527
+为开发人员提供的所有亮点
 
 
 91
-00:04:25,096 --> 00:04:27,376
-system and you have
-probably used systems sort
+00:04:21,495 --> 00:04:25,365
+首先 这显然是一个
+动态加载的内容体系
 
 
 92
-00:04:27,376 --> 00:04:30,056
-of like this before, but we
-have added some new wrinkles.
+00:04:25,432 --> 00:04:27,868
+你们可能已经使用过
+这样的系统
 
 
 93
-00:04:30,656 --> 00:04:32,326
-First of all we are
-going to host the content
+00:04:27,935 --> 00:04:30,070
+但是我们添加了一些新特性
 
 
 94
-00:04:32,326 --> 00:04:34,516
-on the App Store right
-along with your app.
+00:04:30,671 --> 00:04:32,272
+首先我们可以在App Store中
 
 
 95
-00:04:35,336 --> 00:04:39,336
-Second of all, we can download
-content during app install
+00:04:32,339 --> 00:04:34,408
+储存该App的内容
 
 
 96
-00:04:39,336 --> 00:04:42,556
-as well as by request and
-in fact we can automate,
+00:04:35,342 --> 00:04:39,513
+第二 我们可以在安装
+和请求安装App时
 
 
 97
-00:04:43,796 --> 00:04:49,326
-we can automate this
-content download at any time.
+00:04:39,680 --> 00:04:42,883
+下载内容
+事实上我们可以
 
 
 98
-00:04:49,466 --> 00:04:52,596
-And finally, we also include an
-intelligent caching mechanism
+00:04:43,784 --> 00:04:45,819
+随时自动化...
 
 
 99
-00:04:52,596 --> 00:04:53,166
-that I mentioned.
+00:04:46,053 --> 00:04:47,554
+操作下载
 
 
 100
-00:04:53,956 --> 00:04:58,236
-So, for example, we can free
-up space to load something new.
+00:04:49,389 --> 00:04:52,526
+最后还包括我提到的
+智能缓存机制
 
 
 101
-00:04:58,616 --> 00:05:04,366
-And finally, a traditional app
-maxes out at 4-gig submission
+00:04:52,593 --> 00:04:53,427
+正如刚刚提到的
 
 
 102
-00:05:04,366 --> 00:05:08,596
-in the Store, but with
-ODR your app can now be
+00:04:53,894 --> 00:04:56,763
+所以 我们可以腾出空间来
 
 
 103
-00:05:08,626 --> 00:05:09,876
-up to 20 gigabytes.
+00:04:56,964 --> 00:04:58,232
+加载新的东西
 
 
 104
-00:05:10,566 --> 00:05:14,036
-Most of this, of
-course, is ODR content.
+00:04:59,933 --> 00:05:00,968
+最后
 
 
 105
-00:05:14,036 --> 00:05:14,266
-All right.
+00:05:01,468 --> 00:05:05,072
+App Store传统App
+最大是4千兆字节
 
 
 106
-00:05:15,056 --> 00:05:16,676
-So that's what's in it
-for you, the developer,
+00:05:05,906 --> 00:05:07,508
+但是ODR App
 
 
 107
-00:05:16,676 --> 00:05:17,826
-but what's in it for the user?
+00:05:07,574 --> 00:05:09,977
+现在可以达到20千兆字节
 
 
 108
-00:05:19,176 --> 00:05:23,436
-Well, first of all, we can
-improve the install experience.
+00:05:10,544 --> 00:05:12,546
+当然 这些大多数
+都是ODR的内容
 
 
 109
-00:05:24,106 --> 00:05:28,556
-A traditional DLC system, a game
-written using such a technology,
+00:05:13,914 --> 00:05:14,748
+好的
 
 
 110
-00:05:28,906 --> 00:05:30,996
-provides an experience
-something like this:
+00:05:15,048 --> 00:05:16,149
+因此 这是开发者的优势
 
 
 111
-00:05:30,996 --> 00:05:33,576
-the user downloads the
-app, they are all excited
+00:05:16,216 --> 00:05:17,985
+但对于用户的好处又是什么呢？
 
 
 112
-00:05:33,576 --> 00:05:34,546
-about playing the game.
+00:05:19,186 --> 00:05:21,288
+首先 我们可以...
 
 
 113
-00:05:34,786 --> 00:05:37,786
-They launch it, but oh no,
-the game now needs to go
+00:05:21,655 --> 00:05:23,557
+改善安装体验
 
 
 114
-00:05:37,786 --> 00:05:39,736
-and download new content.
+00:05:24,558 --> 00:05:27,094
+一个传统的DLC系统
 
 
 115
-00:05:39,736 --> 00:05:43,546
-With ODR we can make sure that
-that content is on the device
+00:05:27,160 --> 00:05:28,695
+使用该技术的游戏
 
 
 116
-00:05:43,786 --> 00:05:45,686
-when the app looks
-like it is installed.
+00:05:29,029 --> 00:05:30,931
+会有这样的体验
 
 
 117
-00:05:45,686 --> 00:05:49,286
-So the experience for
-the user is much better.
+00:05:30,998 --> 00:05:32,199
+用户下载App时
 
 
 118
-00:05:50,086 --> 00:05:53,296
-Second, because we are
-occupying a smaller
+00:05:32,266 --> 00:05:34,735
+他们都非常期待玩这个游戏
 
 
 119
-00:05:53,296 --> 00:05:57,306
-and more manageable space on
-device, the footprint of the app
+00:05:34,801 --> 00:05:35,636
+他们启动游戏
 
 
 120
-00:05:57,306 --> 00:06:00,566
-at any one time, we can have
-more apps on the device ready
+00:05:35,736 --> 00:05:38,939
+然后 不是吧
+游戏还需要下载一些新的内容
 
 
 121
-00:06:00,566 --> 00:06:03,266
-to go and more apps ready
-to go at any one time
+00:05:39,439 --> 00:05:43,710
+有了ODR 我们可以确保
+新内容就在设备上
 
 
 122
-00:06:03,266 --> 00:06:04,986
-on the device is always a
-good thing for the user.
+00:05:43,777 --> 00:05:45,612
+App只是看上去已经安装而已
 
 
 123
-00:06:05,626 --> 00:06:09,326
-And finally, for the
-user, because, again,
+00:05:45,679 --> 00:05:48,649
+因此用户体验会更好
 
 
 124
-00:06:09,326 --> 00:06:11,986
-there is more space and we
-are keeping a lot of the app
+00:05:50,083 --> 00:05:50,918
+第二
 
 
 125
-00:06:11,986 --> 00:06:16,806
-or the game in the cloud on the
-App Store, we can have levels
+00:05:51,318 --> 00:05:53,287
+由于我们在设备上占用的
+空间更小
 
 
 126
-00:06:16,846 --> 00:06:19,286
-that are richer and more
-expansive, for example.
+00:05:53,353 --> 00:05:56,190
+在任何时候都更容易管理
 
 
 127
-00:06:19,596 --> 00:06:22,286
-And that is always a good
-thing for the user as well.
+00:05:56,256 --> 00:05:58,358
+App占用的空间小
 
 
 128
-00:06:23,246 --> 00:06:27,816
-Okay. So now let's dive into
-some of the details about ODR.
+00:05:58,425 --> 00:06:02,629
+我们就可以
+存放更多的App在设备上
 
 
 129
-00:06:29,296 --> 00:06:31,906
-First of all, it's an
-elementive app thinning in iOS 9
+00:06:02,696 --> 00:06:04,998
+这对用户来说
+永远都是一件好事
 
 
 130
-00:06:33,176 --> 00:06:35,766
-and it's well integrated
-with app slicing.
+00:06:06,733 --> 00:06:08,435
+最后
+对于用户来说
 
 
 131
-00:06:36,006 --> 00:06:38,586
-In case you missed the
-details of app slicing earlier
+00:06:08,635 --> 00:06:10,370
+同样的
+由于有更多的空间
 
 
 132
-00:06:38,586 --> 00:06:40,496
-in the conference,
-app slicing is all
+00:06:10,437 --> 00:06:12,706
+我们可以在App Store云端
 
 
 133
-00:06:40,496 --> 00:06:43,726
-about tailoring the download of
-an app to a particular device.
+00:06:12,940 --> 00:06:14,675
+存储更多App或是游戏
 
 
 134
-00:06:44,406 --> 00:06:46,446
-So let me give you an
-example: You write an app
+00:06:15,642 --> 00:06:19,279
+例如 我们可以有更丰富和
+昂贵的游戏等级
 
 
 135
-00:06:46,606 --> 00:06:49,526
-that targets many different
-iPhone sizes and iPads.
+00:06:19,580 --> 00:06:22,349
+对于用户
+同样是一件好事
 
 
 136
-00:06:50,726 --> 00:06:53,246
-A user with an iPhone comes
-along and when they buy
+00:06:23,717 --> 00:06:24,551
+好的
 
 
 137
-00:06:53,246 --> 00:06:55,476
-that app, app slicing makes sure
+00:06:25,052 --> 00:06:27,988
+现在让我们深究
+一些关于ODR的细节
 
 
 138
-00:06:55,476 --> 00:06:58,666
-that they only get the resources
-you need for that phone.
+00:06:29,289 --> 00:06:32,092
+首先
+对于IOS 9系统是应用瘦身
 
 
 139
-00:06:59,546 --> 00:07:01,346
-In the past they
-would have gotten all
+00:06:33,227 --> 00:06:36,063
+而且可以很好地与应用分割兼容
 
 
 140
-00:07:01,346 --> 00:07:03,136
-of the assets including
-those for an iPad.
+00:06:36,129 --> 00:06:37,898
+如果你错过了之前
 
 
 141
-00:07:03,916 --> 00:07:08,636
-So now when we combine app
-slicing and we join it with ODR,
+00:06:37,965 --> 00:06:39,433
+关于应用分割会议
 
 
 142
-00:07:08,896 --> 00:07:10,456
-we double the benefits of both.
+00:06:39,499 --> 00:06:43,871
+讨论如何将App 下载到
+特定设备
 
 
 143
-00:07:10,456 --> 00:07:12,306
-The footprint is
-still even smaller.
+00:06:44,404 --> 00:06:45,539
+让我给你举一个例子
 
 
 144
-00:07:12,736 --> 00:07:15,366
-We are getting to
-first play even faster
+00:06:45,739 --> 00:06:46,640
+你编写一个App
 
 
 145
-00:07:15,666 --> 00:07:17,956
-and the constant
-steady state of the app
+00:06:46,707 --> 00:06:49,943
+目标是各种不同型号的
+iPhone和iPad
 
 
 146
-00:07:18,266 --> 00:07:20,476
-on device is much smaller.
+00:06:50,711 --> 00:06:52,579
+当iPhone用户来到
 
 
 147
-00:07:21,076 --> 00:07:26,966
-Okay. So what does
-an ODR app look like?
+00:06:52,646 --> 00:06:53,881
+购买App后
 
 
 148
-00:07:26,966 --> 00:07:27,826
-How is it structured?
+00:06:54,114 --> 00:06:57,284
+应用分割可以确保
+他们所得到的资源是必须的
 
 
 149
-00:07:28,186 --> 00:07:32,686
-It's pretty similar to an
-app today, but as you recall,
+00:06:57,351 --> 00:06:58,986
+而且是适合该
+iPhone版本的
 
 
 150
-00:07:32,686 --> 00:07:35,926
-we teased apart the assets
-for those levels in the game.
+00:06:59,520 --> 00:07:01,321
+在此之前
+用户会下载所有的
 
 
 151
-00:07:36,416 --> 00:07:37,806
-We call these asset packs.
+00:07:01,388 --> 00:07:03,257
+包括适合iPad的资源
 
 
 152
-00:07:38,666 --> 00:07:40,766
-And the rest of the app
-remains your dot app.
+00:07:03,924 --> 00:07:06,860
+因此 现在结合应用分割
 
 
 153
-00:07:41,986 --> 00:07:46,386
-Now, you group these together
-using Xcode with simple tags.
+00:07:07,160 --> 00:07:08,829
+和ODR之后
 
 
 154
-00:07:46,386 --> 00:07:49,006
-For example, these are
-all my assets in Level 1
+00:07:08,896 --> 00:07:10,330
+彼此双方都收益
 
 
 155
-00:07:49,076 --> 00:07:50,096
-of the game, for example.
+00:07:10,397 --> 00:07:12,566
+它占用的空间更小
 
 
 156
-00:07:50,266 --> 00:07:51,776
-It's pretty simple to set up.
+00:07:12,733 --> 00:07:15,536
+我们使App运行更快
 
 
 157
-00:07:52,016 --> 00:07:56,146
-And you can tag a single
-file or a whole folder.
+00:07:15,669 --> 00:07:18,205
+App持续稳定性更好
 
 
 158
-00:07:56,146 --> 00:07:58,606
-This whole folder is
-Level 2, for example.
+00:07:18,272 --> 00:07:20,474
+在设备上占用的空间更小
 
 
 159
-00:07:59,036 --> 00:07:59,786
-All right.
+00:07:21,909 --> 00:07:22,743
+好的
 
 
 160
-00:08:00,136 --> 00:08:01,786
-Now, what can you tag?
+00:07:23,644 --> 00:07:24,478
+那么
 
 
 161
-00:08:03,256 --> 00:08:05,476
-Well, pretty much anything
-that can be in a dot app today.
+00:07:25,145 --> 00:07:26,980
+一个ODR App是什么样的呢
 
 
 162
-00:08:06,386 --> 00:08:11,796
-For example, images,
-sounds, data, scripts,
+00:07:27,047 --> 00:07:27,915
+它是如何构建的呢
 
 
 163
-00:08:12,056 --> 00:08:13,456
-many games have scripts in them,
+00:07:28,182 --> 00:07:30,284
+它与如今的App很类似
 
 
 164
-00:08:13,886 --> 00:08:17,076
-you can also have
-in-app purchased content.
+00:07:30,617 --> 00:07:31,451
+但是
 
 
 165
-00:08:17,076 --> 00:08:19,916
-So now you can tie together
-your in-app purchased receipts
+00:07:31,919 --> 00:07:35,923
+他能够将游戏里的等级
+和资料梳理开
 
 
 166
-00:08:20,376 --> 00:08:21,966
-with in-app purchased content
+00:07:36,423 --> 00:07:37,891
+我们把这叫做资料包
 
 
 167
-00:08:21,966 --> 00:08:24,376
-that you are actually
-downloading via ODR,
+00:07:38,659 --> 00:07:41,128
+剩余的App
+仍是你的 .app
 
 
 168
-00:08:24,376 --> 00:08:26,536
-and taking advantage of
-all the other ODR API
+00:07:41,995 --> 00:07:46,366
+现在 运用Xcode
+和简单的标签进行分组
 
 
 169
-00:08:26,536 --> 00:08:27,446
-to help manage that.
+00:07:46,433 --> 00:07:49,002
+例如 这些是我在游戏
+Level 1中的所有资料
 
 
 170
-00:08:28,426 --> 00:08:31,246
-The only thing you can't have
-is executable content: That's,
+00:07:49,069 --> 00:07:50,103
+假设的说
 
 
 171
-00:08:31,246 --> 00:08:34,306
-again, the compiled
-Swift, Objective-C, C, C++.
+00:07:50,437 --> 00:07:51,438
+这非常容易设置
 
 
 172
-00:08:34,586 --> 00:08:36,926
-Leave that in your dot app.
+00:07:53,440 --> 00:07:56,109
+你可以将它标记为简单的文件
+或一整个文件夹
 
 
 173
-00:08:37,086 --> 00:08:37,816
-All right.
+00:07:56,176 --> 00:07:58,612
+例如 这是Level 2的
+整个文件夹
 
 
 174
-00:08:38,826 --> 00:08:41,796
-So where is this content hosted?
+00:08:00,147 --> 00:08:02,082
+现在 你可以标记什么呢
 
 
 175
-00:08:42,385 --> 00:08:43,846
-Well, I mentioned
-one of the locations;
+00:08:03,250 --> 00:08:05,919
+几乎.app里的任何东西都可以
 
 
 176
-00:08:43,846 --> 00:08:44,926
-it's obviously the App Store.
+00:08:06,386 --> 00:08:07,221
+例如
 
 
 177
-00:08:46,216 --> 00:08:48,766
-We host it in the App Store and
-we serve it on demand as needed,
+00:08:07,654 --> 00:08:08,488
+图像
 
 
 178
-00:08:49,596 --> 00:08:52,666
-but during development, Xcode
-stands in for the App Store,
+00:08:08,922 --> 00:08:09,756
+声音
 
 
 179
-00:08:52,816 --> 00:08:53,666
-whether you are developing
+00:08:10,357 --> 00:08:11,825
+数据和文字
 
 
 180
-00:08:53,666 --> 00:08:55,446
-against a device
-or the simulator.
+00:08:12,059 --> 00:08:13,594
+很多有脚本的游戏
 
 
 181
-00:08:55,886 --> 00:08:59,216
-And it hosts it to your app
-and delivers it on demand.
+00:08:14,595 --> 00:08:17,030
+同样还有App内购买的内容
 
 
 182
-00:09:00,056 --> 00:09:03,006
-Now, another tool in the Xcode
-tool box is the Xcode Server.
+00:08:17,097 --> 00:08:19,900
+那么现在你可以
+将程序内购买的物品
 
 
 183
-00:09:03,496 --> 00:09:05,256
-You can set this up in
-your own department,
+00:08:20,367 --> 00:08:22,636
+和通过ODR下载的
+实际购买的内容
 
 
 184
-00:09:05,956 --> 00:09:09,086
-such that the app along with
-the ODR content is available
+00:08:22,703 --> 00:08:24,338
+相结合起来
 
 
 185
-00:09:09,086 --> 00:09:10,746
-on that server, for example,
+00:08:24,404 --> 00:08:26,473
+利用其它ODR API
 
 
 186
-00:09:10,746 --> 00:09:13,946
-your Q/A engineering
-group to test your app.
+00:08:26,540 --> 00:08:27,574
+实现管理
 
 
 187
-00:09:14,916 --> 00:09:16,406
-And as you might expect,
+00:08:28,775 --> 00:08:30,911
+唯一无法获得的是可执行内容
 
 
 188
-00:09:16,566 --> 00:09:18,526
-TestFlight is fully
-integrated with ODR.
+00:08:30,978 --> 00:08:34,448
+即编译好的Swift
+Objective-C、C、C++
 
 
 189
-00:09:20,036 --> 00:09:21,766
-And finally, if you
-are deploying an app
+00:08:34,581 --> 00:08:35,716
+这些会留在 .app里
 
 
 190
-00:09:21,766 --> 00:09:24,796
-into Enterprise, you can
-actually host ODR content
+00:08:37,083 --> 00:08:37,918
+好的
 
 
 191
-00:09:24,796 --> 00:09:27,886
-on a web server inside of your
-enterprise including behind a
+00:08:38,818 --> 00:08:39,653
+那么
 
 
 192
-00:09:27,886 --> 00:09:31,006
-secure login so that not just
-anyone can get at that content.
+00:08:40,187 --> 00:08:41,788
+这些内容将存储在哪里
 
 
 193
-00:09:32,296 --> 00:09:34,156
-So that's where we
-host ODR content.
+00:08:42,389 --> 00:08:43,789
+好的 我提出其中一个位置
 
 
 194
-00:09:34,676 --> 00:09:36,056
-All right.
+00:08:43,857 --> 00:08:45,158
+显然它是在App Store
 
 
 195
-00:09:36,836 --> 00:09:38,126
-So how do you get started?
+00:08:46,226 --> 00:08:48,762
+我们存储在App Store
+并且按需供应
 
 
 196
-00:09:38,786 --> 00:09:40,296
-Well, as a developer,
-the first thing you need
+00:08:49,596 --> 00:08:52,733
+但在开发过程中
+Xcode代替了App Store
 
 
 197
-00:09:40,296 --> 00:09:43,896
-to do is take a look at all the
-many assets you have in your app
+00:08:52,799 --> 00:08:55,569
+无论你是针对
+设备还是模拟器进行开发
 
 
 198
-00:09:43,896 --> 00:09:45,546
-and start to identify them.
+00:08:55,903 --> 00:08:58,572
+它存储在你的App中
+并根据需求传输
 
 
 199
-00:09:45,546 --> 00:09:46,946
-You need to categorize them.
+00:09:00,040 --> 00:09:03,010
+现在 Xcode的另一款工具是
+Xcode服务器
 
 
 200
-00:09:47,826 --> 00:09:50,566
-You use this, again, by tagging
-them with simple strings.
+00:09:03,510 --> 00:09:05,445
+你可以把它设置在自己部门中
 
 
 201
-00:09:51,016 --> 00:09:53,146
-These are all of the assets
-that are in Level 1 of my game.
+00:09:05,946 --> 00:09:09,750
+这样可以获取服务器上的
+ODR和App
 
 
 202
-00:09:53,786 --> 00:09:55,696
-These are the assets
-for Level 2 of my game.
+00:09:09,816 --> 00:09:11,351
+例如 按照你所安排的
 
 
 203
-00:09:55,936 --> 00:09:58,266
-And you know, there are some
-shared assets between levels?
+00:09:11,418 --> 00:09:13,320
+Q/A工程组测试你的App
 
 
 204
-00:09:59,286 --> 00:09:59,746
-There they are.
+00:09:15,222 --> 00:09:18,992
+正如你所期望Test
+Flight完全整合了ODR
 
 
 205
-00:09:59,746 --> 00:10:03,276
-So you can tag assets with
-multiple tags in order
+00:09:20,027 --> 00:09:22,563
+最后 假如你要为公司部署一款App
 
 
 206
-00:10:03,276 --> 00:10:06,216
-to indicate the sharing
-and avoid duplication.
+00:09:22,930 --> 00:09:26,800
+实际上你可以在公司的
+网络服务器上存储ODR内容
 
 
 207
-00:10:07,046 --> 00:10:10,426
-So this is part one of
-getting ready to use ODR
+00:09:26,867 --> 00:09:28,569
+并设置安全登录
 
 
 208
-00:10:10,426 --> 00:10:11,916
-and that was your
-job as a developer.
+00:09:28,635 --> 00:09:31,071
+以确保不是所有人
+都可以获取该内容
 
 
 209
-00:10:12,256 --> 00:10:15,386
-Now, Xcode does its job because
-it takes all this tagging
+00:09:32,472 --> 00:09:34,174
+这ODR内容的存储位置了
 
 
 210
-00:10:15,736 --> 00:10:17,946
-and groups these
-into asset packs.
+00:09:35,843 --> 00:09:36,677
+好的
 
 
 211
-00:10:18,086 --> 00:10:20,756
-In this case, we ended up
-with three asset packs.
+00:09:36,844 --> 00:09:38,245
+那么 该如何开始的呢
 
 
 212
-00:10:21,656 --> 00:10:25,356
-We have the asset pack for Level
-1, the asset pack for Level 2,
+00:09:38,779 --> 00:09:40,614
+嗯 作为一个开发者
+你要做的第一件事情是
 
 
 213
-00:10:25,656 --> 00:10:27,676
-and we ended up with
-a third asset pack
+00:09:40,681 --> 00:09:43,650
+看看你所有的App资料
 
 
 214
-00:10:27,676 --> 00:10:30,116
-which is the shared assets
-between those two levels,
+00:09:43,817 --> 00:09:45,185
+并且识别它们
 
 
 215
-00:10:30,716 --> 00:10:32,266
-again, avoiding duplication.
+00:09:45,352 --> 00:09:46,720
+你需要对它们进行分类
 
 
 216
-00:10:33,776 --> 00:10:36,206
-Okay. So Xcode has done its job.
+00:09:47,821 --> 00:09:50,657
+再次重复 你可以
+用简单的字符进行标记
 
 
 217
-00:10:36,206 --> 00:10:37,716
-Now, it's back to
-you, the developer.
+00:09:51,024 --> 00:09:53,160
+这些是我游戏
+Level 1的所有资料
 
 
 218
-00:10:39,026 --> 00:10:39,956
-The first thing you need
+00:09:53,794 --> 00:09:55,829
+这些是我游戏
+Level 2的资料
 
 
 219
-00:10:39,956 --> 00:10:42,306
-to do is basically just
-request the resources: Hey,
+00:09:55,929 --> 00:09:58,532
+而且你知道
+等级间有一些共享的资料吗
 
 
 220
-00:10:42,606 --> 00:10:44,456
-I need everything for Level 1,
+00:09:59,233 --> 00:10:00,067
+它们就在那里
 
 
 221
-00:10:45,036 --> 00:10:48,406
-and down come the two asset
-packs, both the dedicated one
+00:10:00,133 --> 00:10:02,569
+你可用多重标签标记资料
 
 
 222
-00:10:48,516 --> 00:10:51,476
-to Level 1, and then the
-one that was sharing assets
+00:10:02,669 --> 00:10:06,206
+以显示共享内容 防止重复
 
 
 223
-00:10:51,476 --> 00:10:52,736
-between Level 1 and Level 2.
+00:10:07,374 --> 00:10:10,444
+这部分是为准备好使用ODR的人
+设计的首个部分
 
 
 224
-00:10:52,816 --> 00:10:55,386
-And because we brought down
-that shared asset pack,
+00:10:10,511 --> 00:10:12,145
+作为开发者 这是你的工作
 
 
 225
-00:10:55,896 --> 00:10:58,706
-when we request Level
-2, we get those assets
+00:10:12,246 --> 00:10:15,382
+现在Xcode起作用了
+它将所有这些标签
 
 
 226
-00:10:59,276 --> 00:11:01,416
-and we already have the
-shared assets on the device.
+00:10:15,749 --> 00:10:17,451
+和组放到资料包中
 
 
 227
-00:11:02,686 --> 00:11:07,326
-So this is a high level overview
-of what ODR is all about as well
+00:10:18,085 --> 00:10:20,754
+在这个案例中
+我们用三个资料包做结尾
 
 
 228
-00:11:07,326 --> 00:11:09,146
-as how to build an
-ODR application.
+00:10:21,655 --> 00:10:23,257
+资料包1为Level 1
 
 
 229
-00:11:09,146 --> 00:11:10,956
-Now, I would like to
-invite on stage Tony Parker
+00:10:23,757 --> 00:10:25,359
+资料包2为Level 2
 
 
 230
-00:11:11,256 --> 00:11:13,516
-to show us how it's done
-in Xcode with a real API.
+00:10:25,659 --> 00:10:27,861
+最后以介于资料包1和2之间
 
 
 231
-00:11:13,896 --> 00:11:14,146
-Tony.
+00:10:27,928 --> 00:10:30,130
+的资料包3作结尾
 
 
 232
-00:11:15,516 --> 00:11:20,086
-[Applause]
+00:10:30,731 --> 00:10:32,266
+再一次
+请避免重复
 
 
 233
-00:11:20,586 --> 00:11:21,306
->> TONY PARKER: Thanks, Steve.
+00:10:33,767 --> 00:10:36,136
+好了 Xcode起作用了
 
 
 234
-00:11:21,956 --> 00:11:23,626
-So, again, my name is Tony
-Parker, I'm the manager
+00:10:36,203 --> 00:10:37,771
+现在轮到开发者了
 
 
 235
-00:11:23,626 --> 00:11:24,796
-of the Foundation team at Apple.
+00:10:39,306 --> 00:10:40,974
+首先你要做的是
 
 
 236
-00:11:25,426 --> 00:11:26,976
-So Steve gave you
-a basic overview
+00:10:41,041 --> 00:10:42,509
+请求资料
 
 
 237
-00:11:26,976 --> 00:11:28,656
-of how the ODR system works.
+00:10:42,609 --> 00:10:44,444
+我需要Level 1的所有东西
 
 
 238
-00:11:29,046 --> 00:11:31,196
-Now we are going to dive
-in to the API that we use
+00:10:45,045 --> 00:10:46,914
+出来两个资料包
 
 
 239
-00:11:31,196 --> 00:11:33,606
-in your application to
-actually make those requests.
+00:10:47,214 --> 00:10:49,449
+都属于Level 1
 
 
 240
-00:11:34,296 --> 00:11:37,516
-There is really just one piece
-of API that you need to know.
+00:10:49,683 --> 00:10:52,819
+然后是介于Level 1
+和Level 2之间的共享资料
 
 
 241
-00:11:37,616 --> 00:11:41,206
-It's a new class in Foundation
-called NSBundleResourceRequest.
+00:10:53,320 --> 00:10:55,522
+因为已经接入共享资料包
 
 
 242
-00:11:41,686 --> 00:11:45,346
-This class follows the
-command design pattern.
+00:10:55,923 --> 00:10:57,324
+在我们请求Level 2时
 
 
 243
-00:11:45,596 --> 00:11:47,066
-So what that means is
-you're going to set up one
+00:10:57,791 --> 00:10:58,792
+我们得到这些资料
 
 
 244
-00:11:47,066 --> 00:11:48,506
-of these objects with
-a set of options,
+00:10:59,259 --> 00:11:01,528
+而这些共享资料
+也已经在我的设备上了
 
 
 245
-00:11:49,096 --> 00:11:51,186
-including of course the set of
-tags that you are interested
+00:11:02,629 --> 00:11:06,600
+以上是关于ODR概念以及
 
 
 246
-00:11:51,186 --> 00:11:54,066
-in using, and then you tell
-it to begin its request.
+00:11:06,967 --> 00:11:09,069
+如何建立一个ODR请求的概述
 
 
 247
-00:11:54,626 --> 00:11:58,666
-So you can create as many of
-these objects as you need.
+00:11:09,136 --> 00:11:10,971
+现在 有请托尼·帕克上台
 
 
 248
-00:11:58,726 --> 00:12:00,866
-That's because the system
-will ref count the tags
+00:11:11,238 --> 00:11:13,807
+为我们展示使用API Xcode中
+发生了什么
 
 
 249
-00:12:00,866 --> 00:12:01,466
-under the hood.
+00:11:13,874 --> 00:11:14,708
+托尼
 
 
 250
-00:12:01,466 --> 00:12:04,006
-So if you have several different
-parts of your application
+00:11:20,547 --> 00:11:21,381
+谢谢你 史蒂芬
 
 
 251
-00:12:04,006 --> 00:12:08,206
-that use ODR and perhaps use
-overlapping tags, you don't need
+00:11:21,915 --> 00:11:25,018
+我叫托尼·帕克
+我是Apple Foundation组的经理
 
 
 252
-00:12:08,206 --> 00:12:10,016
-to create a manager
-class to keep track
+00:11:25,385 --> 00:11:28,689
+史蒂芬为大家介绍了
+ODR系统如何工作的基本信息
 
 
 253
-00:12:10,016 --> 00:12:11,846
-of which ones you
-have in use at a time.
+00:11:29,022 --> 00:11:31,191
+现在我们将详细讲API
 
 
 254
-00:12:11,846 --> 00:12:13,186
-We will go ahead
-and do that for you.
+00:11:31,592 --> 00:11:34,027
+即在你的App 中
+实际用来处理这些请求的API
 
 
 255
-00:12:15,656 --> 00:12:19,156
-The most important point,
-design point about this class is
+00:11:35,362 --> 00:11:37,497
+关于API你必须知道这个
 
 
 256
-00:12:19,156 --> 00:12:21,016
-that the request is decoupled
+00:11:37,564 --> 00:11:41,535
+这是Foundation中的新类叫
+NS Bundle Resource Request
 
 
 257
-00:12:21,016 --> 00:12:23,076
-from the actual use
-of the resources.
+00:11:43,070 --> 00:11:45,472
+这个类遵照命令设计模式
 
 
 258
-00:12:23,766 --> 00:12:26,666
-What this means is that all
-of the APIs that you use today
+00:11:45,539 --> 00:11:48,609
+意思是你将用一组选择
+建立一个对象
 
 
 259
-00:12:26,666 --> 00:12:28,426
-in your application and
-you are already familiar
+00:11:49,076 --> 00:11:51,778
+包括你喜欢用的标签
 
 
 260
-00:12:28,426 --> 00:12:31,186
-with like NSBundle's
-URLForResource,
+00:11:52,246 --> 00:11:54,181
+随后你告诉它开始它的请求
 
 
 261
-00:12:31,456 --> 00:12:35,546
-NSData's dataWithContentsOfURL
-or UIImage imageNamed,
+00:11:56,450 --> 00:11:58,452
+这样 你就可以按需创建对象了
 
 
 262
-00:12:36,116 --> 00:12:38,316
-all of those APIs
-remain actually as is.
+00:11:58,719 --> 00:12:01,388
+因为系统会参照
+高级选项计算标签
 
 
 263
-00:12:38,796 --> 00:12:41,056
-You just need to tell the
-system in advance using one
+00:12:02,089 --> 00:12:05,125
+所以 如果有不同部分
+使用ODR App
 
 
 264
-00:12:41,056 --> 00:12:43,076
-of these request objects
-that you are going
+00:12:05,325 --> 00:12:07,427
+且可能有重叠标签
 
 
 265
-00:12:43,076 --> 00:12:44,626
-to need those resources
-to be present.
+00:12:07,761 --> 00:12:09,596
+你就不需要每次都创建管理类
 
 
 266
-00:12:47,416 --> 00:12:49,476
-This object forms a very
-simple state machine.
+00:12:09,663 --> 00:12:11,465
+跟踪你已经用过的那些
 
 
 267
-00:12:49,726 --> 00:12:51,276
-So start off in init.
+00:12:11,532 --> 00:12:13,133
+我们将为你处理这些问题
 
 
 268
-00:12:52,286 --> 00:12:53,916
-We move it to this
-requested state
+00:12:15,936 --> 00:12:18,705
+最重要的一点 即设计出发点是
 
 
 269
-00:12:53,916 --> 00:12:56,066
-when we anticipate the
-need for those resources.
+00:12:19,006 --> 00:12:23,076
+请求与实际资料利用
+不挂钩
 
 
 270
-00:12:56,686 --> 00:12:59,926
-And we're going to get back
-a completion handler callback
+00:12:23,777 --> 00:12:26,313
+意思是说
+那些你已在App 中使用的
 
 
 271
-00:12:59,926 --> 00:13:02,506
-which will tell us either the
-resources are now available
+00:12:26,380 --> 00:12:28,682
+以及你已经非常熟悉的API
 
 
 272
-00:13:02,506 --> 00:13:05,846
-for you to use and you can
-continue to use those APIs
+00:12:28,749 --> 00:12:31,185
+比如NS Bundle
+URL For Resource
 
 
 273
-00:13:05,846 --> 00:13:08,906
-that we just discussed,
-or an error occurred.
+00:12:31,451 --> 00:12:33,887
+包含URL内容的NS Data数据
 
 
 274
-00:13:09,166 --> 00:13:11,816
-Now, of course, when you are
-using ODR there are a few errors
+00:12:33,954 --> 00:12:35,923
+或UI Image
+imageNamed
 
 
 275
-00:13:11,816 --> 00:13:14,046
-that can occur that we may
-need to present to the user.
+00:12:36,123 --> 00:12:38,425
+这些API将保持不变
 
 
 276
-00:13:14,366 --> 00:13:16,796
-That could include, perhaps,
-there is no network available
+00:12:38,792 --> 00:12:40,594
+你只需事先告诉系统
 
 
 277
-00:13:16,796 --> 00:13:18,196
-and we need it to
-download the content,
+00:12:40,661 --> 00:12:42,262
+使用一个请求对象
 
 
 278
-00:13:18,566 --> 00:13:20,796
-or maybe there is not enough
-disk space on the device even
+00:12:42,462 --> 00:12:44,765
+告诉系统 这个对象里
+的资料是你想显示的
 
 
 279
-00:13:20,796 --> 00:13:23,176
-after we tried purging
-to hold the content.
+00:12:47,701 --> 00:12:49,603
+这个对象组成一个
+非常简单的状态机
 
 
 280
-00:13:23,616 --> 00:13:25,916
-So in any case, you need to
-present that to the user.
+00:12:49,670 --> 00:12:51,205
+从初始化开始
 
 
 281
-00:13:25,976 --> 00:13:27,856
-Perhaps there is something they
-can do to resolve the issue.
+00:12:52,272 --> 00:12:53,740
+在预估资料需求时
 
 
 282
-00:13:28,336 --> 00:13:31,646
-So if the resources were
-available, then, as I said,
+00:12:53,807 --> 00:12:56,143
+我们跳转到请求状态
 
 
 283
-00:13:31,646 --> 00:13:34,936
-you can continue to use
-them, and also important,
+00:12:57,611 --> 00:12:59,813
+我们回到结束处理器回调
 
 
 284
-00:13:34,936 --> 00:13:37,266
-when you are done with those
-resources, please tell us
+00:12:59,880 --> 00:13:03,350
+它将告诉我们
+那些资料可以获得
 
 
 285
-00:13:37,266 --> 00:13:39,616
-about it, and there are
-two mechanisms to do that.
+00:13:03,884 --> 00:13:06,887
+以及你可以继续使用
+刚讨论的API
 
 
 286
-00:13:39,976 --> 00:13:42,836
-The first is to call an
-explicit API on this class
+00:13:07,521 --> 00:13:08,922
+或告诉我们发生的错误
 
 
 287
-00:13:43,246 --> 00:13:45,236
-that tells us you are
-finished with the content.
+00:13:09,156 --> 00:13:11,124
+当然 在使用ODR时
 
 
 288
-00:13:46,016 --> 00:13:48,546
-The second is to allow the
-class to be deallocated,
+00:13:11,191 --> 00:13:14,061
+会有一些错误
+这些需要告诉用户
 
 
 289
-00:13:48,546 --> 00:13:49,876
-allow the object
-to be deallocated,
+00:13:14,361 --> 00:13:16,430
+错误可能包括
+我们需要下载内容
 
 
 290
-00:13:49,876 --> 00:13:51,876
-in which case we are
-going to go ahead
+00:13:16,496 --> 00:13:18,198
+但没有适用的网络
 
 
 291
-00:13:51,876 --> 00:13:54,166
-and end the request
-on your behalf.
+00:13:18,565 --> 00:13:20,767
+或尽管已经做了清理
 
 
 292
-00:13:54,626 --> 00:13:58,026
-So here is what the
-basic methods look like.
+00:13:20,834 --> 00:13:23,170
+设备里仍没有足够的空间
+储存这些内容
 
 
 293
-00:13:58,616 --> 00:14:01,526
-First, an initializer, and
-you can see it takes a set
+00:13:23,604 --> 00:13:25,906
+不管是什么情况
+你都需要告诉用户
 
 
 294
-00:14:01,526 --> 00:14:02,096
-of strings.
+00:13:25,973 --> 00:13:27,875
+或许他们有办法解决这些问题
 
 
 295
-00:14:02,206 --> 00:14:04,316
-Those are the tags that you
-are interested in requesting.
+00:13:28,809 --> 00:13:30,644
+所以若有适用的资料
 
 
 296
-00:14:05,516 --> 00:14:07,736
-The method to begin
-the request is called
+00:13:30,777 --> 00:13:32,980
+就像我说的请继续使用它们
 
 
 297
-00:14:07,736 --> 00:14:09,996
-beginAccessingResources
-WithCompletionHander,
+00:13:33,480 --> 00:13:36,483
+同样重要的是当你用完这些资料
 
 
 298
-00:14:09,996 --> 00:14:11,536
-and you can see there's
-the closure
+00:13:36,683 --> 00:13:37,818
+请告诉我们
 
 
 299
-00:14:11,536 --> 00:14:13,816
-that has the NSError argument.
+00:13:37,885 --> 00:13:39,686
+你可以用这两种方法告诉我们
 
 
 300
-00:14:15,176 --> 00:14:16,306
-And finally that method
+00:13:39,987 --> 00:13:42,990
+第一种
+在这个类中调用明确的API
 
 
 301
-00:14:16,306 --> 00:14:17,706
-that tells the system
-you are finished,
+00:13:43,257 --> 00:13:45,225
+告诉我们你已经完成这个内容
 
 
 302
-00:14:18,016 --> 00:14:20,186
-the explicit
-endAccessingResources call.
+00:13:46,026 --> 00:13:48,462
+第二种 允许种类解除分配
 
 
 303
-00:14:22,306 --> 00:14:24,796
-So next I would like to go
-into a demo and show you some
+00:13:48,529 --> 00:13:50,030
+允许对象解除分配
 
 
 304
-00:14:24,796 --> 00:14:25,776
-of this API in action.
+00:13:50,430 --> 00:13:51,832
+在这种情况下
 
 
 305
-00:14:25,776 --> 00:14:26,426
-All right.
+00:13:51,899 --> 00:13:54,201
+我们将为你结束请求
 
 
 306
-00:14:34,116 --> 00:14:38,586
-So here you have our demo app
-today, it's called iTravel,
+00:13:56,537 --> 00:13:58,138
+这是基本方法
 
 
 307
-00:14:38,996 --> 00:14:41,866
-and iTravel is called iTravel
-because it's a travel guide
+00:13:58,605 --> 00:14:00,040
+首先 初始化程序
 
 
 308
-00:14:42,226 --> 00:14:44,576
-that gives you all kinds
-interesting information
+00:14:00,274 --> 00:14:02,109
+你可看到这里有字符串
 
 
 309
-00:14:44,576 --> 00:14:48,376
-about countries whose names
-begin with the letter I.
+00:14:02,209 --> 00:14:04,478
+这就是正在请求
+你所感兴趣的标签
 
 
 310
-00:14:48,376 --> 00:14:50,446
-As you can see, we support
-two countries today:
+00:14:05,512 --> 00:14:07,047
+开始请求的方法叫做
 
 
 311
-00:14:50,736 --> 00:14:52,446
-There's Iceland and Italy.
+00:14:07,114 --> 00:14:11,151
+beginAccessingResources
+WithCompletionHandler
 
 
 312
-00:14:53,006 --> 00:14:54,896
-Now, this kind of application
-is a great candidate
+00:14:11,218 --> 00:14:12,452
+你可看到有个结尾
 
 
 313
-00:14:54,896 --> 00:14:56,626
-for adopting On Demand
-Resources.
+00:14:12,519 --> 00:14:13,954
+里面有NSR Error证据
 
 
 314
-00:14:56,666 --> 00:14:58,606
-And that is, the reason is
+00:14:15,189 --> 00:14:16,356
+最后 这种方法
 
 
 315
-00:14:58,606 --> 00:15:00,226
-because when the
-user buys this app,
+00:14:16,423 --> 00:14:17,691
+会告诉系统请求完成完成
 
 
 316
-00:15:00,546 --> 00:15:03,186
-they are maybe not interested
-in getting all the information
+00:14:17,891 --> 00:14:20,661
+明确
+endAccessing Resources调用
 
 
 317
-00:15:03,186 --> 00:15:06,226
-about both Iceland and
-Italy or at least not both
+00:14:22,596 --> 00:14:24,131
+接下来 我将展示
 
 
 318
-00:15:06,226 --> 00:15:09,596
-at the same time so we
-can make the install size
+00:14:24,198 --> 00:14:25,899
+已经在运行中的API
 
 
 319
-00:15:09,596 --> 00:15:12,226
-and the download size much
-smaller by downloading
+00:14:34,341 --> 00:14:35,175
+好了
 
 
 320
-00:15:12,226 --> 00:15:13,466
-that content on demand.
+00:14:35,309 --> 00:14:38,846
+这是演示app 叫做iTravel
 
 
 321
-00:15:14,136 --> 00:15:15,746
-So before we adopt
-ODR I just want
+00:14:39,012 --> 00:14:41,882
+之所以叫这个名字
 
 
 322
-00:15:15,746 --> 00:15:18,076
-to show you a brief
-example of how you use this.
+00:14:42,216 --> 00:14:44,618
+是因为它是一本旅行手册
+提供所有你感兴趣的
 
 
 323
-00:15:18,446 --> 00:15:20,426
-First I will go ahead
-and visit Iceland.
+00:14:44,685 --> 00:14:46,954
+以字母i开头的国家信息
 
 
 324
-00:15:21,796 --> 00:15:24,596
-You can see that I get a list
-here of points of interest.
+00:14:47,621 --> 00:14:50,457
+你可以看到
+今天用到的两个国家是
 
 
 325
-00:15:25,216 --> 00:15:26,786
-So I can pick one of these
+00:14:50,724 --> 00:14:52,459
+冰岛和意大利
 
 
 326
-00:15:27,216 --> 00:15:29,626
-and there is some high
-quality pictures, perhaps,
+00:14:52,993 --> 00:14:54,328
+现在 这个App是说明
 
 
 327
-00:15:29,626 --> 00:15:32,086
-or guide text, and
-each of these points
+00:14:54,394 --> 00:14:56,897
+On Demand Resources
+用法的很好的例子
 
 
 328
-00:15:32,086 --> 00:15:34,136
-of interest has more pictures.
+00:14:56,964 --> 00:14:57,998
+原因是...
 
 
 329
-00:15:34,536 --> 00:15:39,436
-So you can see that this could
-add up to quite a bit of data.
+00:14:58,065 --> 00:15:00,300
+用户购买这个app时
 
 
 330
-00:15:39,576 --> 00:15:41,676
-And Italy, of course,
-behaves the same way,
+00:15:00,534 --> 00:15:04,972
+或许对获取冰岛和意大利的
+信息并不感兴趣
 
 
 331
-00:15:42,026 --> 00:15:43,896
-but with a different
-set of content.
+00:15:05,305 --> 00:15:07,274
+或至少不需要同时获得
+两个信息
 
 
 332
-00:15:44,386 --> 00:15:48,356
-So let's look at how this
-application is built.
+00:15:07,407 --> 00:15:09,543
+所以 我们可以通过
 
 
 333
-00:15:48,356 --> 00:15:53,186
-We are going to spend
-most of our time today
+00:15:09,610 --> 00:15:11,678
+只下载所需内容
 
 
 334
-00:15:53,186 --> 00:15:56,156
-in just one class, it's called
-the AlbumTableViewController.
+00:15:11,745 --> 00:15:13,480
+以减小安装和下载大小
 
 
 335
-00:15:56,156 --> 00:15:58,976
-This is the view controller
-that controls this view
+00:15:14,081 --> 00:15:15,482
+在使用ODR之前
 
 
 336
-00:15:58,976 --> 00:16:01,346
-that we see right here with
-the list of points of interest.
+00:15:15,549 --> 00:15:18,085
+我想要简单的展示一下
+如何使用它
 
 
 337
-00:16:02,066 --> 00:16:03,286
-So let me show you how it works.
+00:15:18,452 --> 00:15:20,587
+首先访问冰岛
 
 
 338
-00:16:04,486 --> 00:16:07,056
-When we segue into
-this view, we are going
+00:15:21,788 --> 00:15:24,725
+你可以看到我在这里拿到
+兴趣点清单
 
 
 339
-00:16:07,056 --> 00:16:09,656
-to have this function
-called loadAlbum,
+00:15:25,225 --> 00:15:26,793
+我从中选择一个
 
 
 340
-00:16:09,656 --> 00:16:11,716
-and the argument is going to be
-which album we are interested
+00:15:27,227 --> 00:15:29,429
+里面可能有些优质的图片
 
 
 341
-00:16:11,716 --> 00:16:13,526
-in looking at, either
-Italy or Iceland.
+00:15:29,496 --> 00:15:30,964
+或指南文本
 
 
 342
-00:16:14,856 --> 00:16:17,116
-We set our title and we
-call this helper function
+00:15:31,265 --> 00:15:34,134
+兴趣点清单里的每一点
+都有不少图片
 
 
 343
-00:16:17,116 --> 00:16:18,416
-called populateTable.
+00:15:34,535 --> 00:15:36,904
+你可以看到
+这些增加了不少数据信息
 
 
 344
-00:16:19,136 --> 00:16:21,456
-Now, here in the populateTable
-function, we are going
+00:15:39,573 --> 00:15:41,675
+而意大利 也是一样的
 
 
 345
-00:16:21,456 --> 00:16:25,936
-to use NSBundle's URLForResource
-to find a JSON file
+00:15:42,042 --> 00:15:44,011
+但是内容不同
 
 
 346
-00:16:25,936 --> 00:16:28,216
-which describes all of the
-points of interest with pictures
+00:15:46,813 --> 00:15:48,682
+我们来看看如何创建这个App
 
 
 347
-00:16:28,216 --> 00:16:29,696
-to show what the captions are.
+00:15:51,852 --> 00:15:53,620
+我们今天将花大量的时间
+来讲一个类
 
 
 348
-00:16:29,696 --> 00:16:33,006
-We are using NSData's
-contentsOfURL method
+00:15:53,687 --> 00:15:56,323
+就是
+Album TableViewController
 
 
 349
-00:16:33,006 --> 00:16:35,026
-to actually read that
-JSON file from disk.
+00:15:56,390 --> 00:15:58,992
+这是个视图控制器
 
 
 350
-00:16:35,026 --> 00:16:38,156
-We are using NSJSONSerialization
-to parse it.
+00:15:59,059 --> 00:16:01,361
+控制这个兴趣点清单中的视图
 
 
 351
-00:16:38,206 --> 00:16:40,476
-We are setting up some more
-detailed label text here,
+00:16:02,062 --> 00:16:03,297
+让我来展示下它如何工作的
 
 
 352
-00:16:40,716 --> 00:16:42,676
-and finally we ask the
-tableView to reload itself,
+00:16:04,498 --> 00:16:06,166
+当我们继续这个视图
 
 
 353
-00:16:43,056 --> 00:16:43,856
-and the data source
+00:16:06,400 --> 00:16:09,570
+会有这个函数 叫做loadAlbum
 
 
 354
-00:16:43,856 --> 00:16:47,246
-in the tableView is
-using UIImage.imageNamed
+00:16:09,636 --> 00:16:11,572
+接下来的问题是
+我们想看那个相册
 
 
 355
-00:16:47,386 --> 00:16:49,426
-to actually show that,
-to fetch that picture.
+00:16:11,638 --> 00:16:13,540
+意大利或冰岛
 
 
 356
-00:16:49,986 --> 00:16:54,246
-So the important point here
-is that as we adopt ODR
+00:16:14,842 --> 00:16:15,809
+设置标题
 
 
 357
-00:16:54,246 --> 00:16:55,926
-in this application, nothing
+00:16:15,876 --> 00:16:18,512
+我们把这项辅助函数
+叫做populateTable
 
 
 358
-00:16:55,926 --> 00:16:57,916
-in this populateTable
-function has to change.
+00:16:19,146 --> 00:16:21,048
+现在 在populateTable
+函数里
 
 
 359
-00:16:58,446 --> 00:17:00,766
-So, again, all of the
-APIs that you use today
+00:16:21,148 --> 00:16:24,351
+我们将使用
+NSBundle´s URLForResource
 
 
 360
-00:17:00,766 --> 00:17:04,536
-that access contents of files
-on disk or finds those files
+00:16:24,551 --> 00:16:26,053
+寻找JSON文件
 
 
 361
-00:17:04,536 --> 00:17:07,386
-like NSBundles, those
-remain exactly the same.
+00:16:26,119 --> 00:16:29,823
+这个文件介绍所有兴趣点和清单
+以显示题注
 
 
 362
-00:17:07,965 --> 00:17:10,316
-So the first thing we are going
+00:16:30,791 --> 00:16:33,594
+我们使用NSData的
+contentsOfURL方法
 
 
 363
-00:17:10,316 --> 00:17:12,656
-to do is actually add some
-tags to our application.
+00:16:33,660 --> 00:16:35,229
+从磁盘里读取JSON文件
 
 
 364
-00:17:13,006 --> 00:17:16,086
-So to do that, I will bring
-up the inspector here,
+00:16:35,629 --> 00:16:38,365
+我们使用NSJSONSerialization
+对其进行解析
 
 
 365
-00:17:16,806 --> 00:17:19,536
-and you can see that I have
-already organized my application
+00:16:38,465 --> 00:16:40,467
+我们在这里
+创建一些更详细标签文本
 
 
 366
-00:17:19,536 --> 00:17:22,036
-to have a group called
-Resources,
+00:16:40,701 --> 00:16:42,669
+最后重载tableView
 
 
 367
-00:17:22,396 --> 00:17:25,195
-and folders that contain
-some of my content.
+00:16:43,070 --> 00:16:45,105
+tableView里的数据源
 
 
 368
-00:17:25,346 --> 00:17:29,126
-So this one contains all of the
-picture from Iceland, this one,
+00:16:45,172 --> 00:16:47,374
+使用UI Image.imageNamed
 
 
 369
-00:17:29,126 --> 00:17:32,986
-all of the pictures from
-Italy, and these JSON files
+00:16:47,441 --> 00:16:49,476
+显示信息 获取图片
 
 
 370
-00:17:32,986 --> 00:17:33,756
-that I was discussing.
+00:16:51,178 --> 00:16:52,746
+重点是
 
 
 371
-00:17:33,756 --> 00:17:36,786
-So what I'm going
-to do is go ahead
+00:16:53,013 --> 00:16:55,148
+在这个App中使用ODR
 
 
 372
-00:17:36,786 --> 00:17:40,676
-and select both the JSON file
-for Iceland and the folder
+00:16:55,449 --> 00:16:57,918
+植入Table中的功能无需变动
 
 
 373
-00:17:41,206 --> 00:17:43,706
-and look on the right side
-here in this inspector.
+00:16:58,318 --> 00:16:59,152
+再说一次
 
 
 374
-00:17:43,706 --> 00:17:46,566
-You see there is a new field,
-On Demand Resource Tags,
+00:16:59,219 --> 00:17:02,256
+现在你用来获取磁盘中文件内容
 
 
 375
-00:17:47,376 --> 00:17:49,206
-so all I have to do
-here is start typing
+00:17:02,456 --> 00:17:07,394
+或找出像NSBundles这种文件
+所用的所有API保持不变
 
 
 376
-00:17:49,406 --> 00:17:52,406
-and we will tag our
-content as Iceland.
+00:17:09,396 --> 00:17:10,364
+我们首先要做的是
 
 
 377
-00:17:52,446 --> 00:17:55,446
-And we will do the same
-for our Italy content.
+00:17:10,430 --> 00:17:12,665
+在App中增加一些标签
 
 
 378
-00:17:56,156 --> 00:18:02,836
-So next we just, so that,
-what that does is, of course,
+00:17:12,999 --> 00:17:16,069
+做到这点
+我将在这里创建检测点
 
 
 379
-00:18:02,836 --> 00:18:05,736
-as Steve explained, tell Xcode
-how to split up your content.
+00:17:16,803 --> 00:17:19,506
+你可以看到
+我已经处理过我的App
 
 
 380
-00:18:06,086 --> 00:18:09,276
-Now, the next part is to
-tell the system at runtime
+00:17:19,573 --> 00:17:22,041
+里面有个叫Resources的组
 
 
 381
-00:18:09,576 --> 00:18:11,606
-that when we anticipate the need
+00:17:22,409 --> 00:17:25,212
+以及包含部分内容的文件夹
 
 
 382
-00:18:11,606 --> 00:18:12,936
-for that content
-to be available.
+00:17:25,345 --> 00:17:28,048
+这个包含所有冰岛的图片
 
 
 383
-00:18:12,936 --> 00:18:15,286
-So we will do that here
-in this view controller.
+00:17:28,715 --> 00:17:30,417
+这个包含所有意大利的图片
 
 
 384
-00:18:15,286 --> 00:18:18,906
-So the first thing I'm going to
-do is add an I var to my class
+00:17:31,285 --> 00:17:33,754
+和我刚才讨论的这些JSON文件
 
 
 385
-00:18:18,956 --> 00:18:21,176
-that holds the class that
-we've been talking about,
+00:17:35,489 --> 00:17:36,456
+接下来 我将接续
 
 
 386
-00:18:21,176 --> 00:18:22,366
-NSBundleResourceRequest.
+00:17:36,523 --> 00:17:40,661
+并为冰岛选择JSON文件
+和文件夹
 
 
 387
-00:18:22,996 --> 00:18:24,986
-So what I'm doing is
-taking advantage of the fact
+00:17:41,195 --> 00:17:43,764
+并查看检测点的右边
 
 
 388
-00:18:24,986 --> 00:18:27,016
-that when this view
-controller is torn down,
+00:17:44,097 --> 00:17:47,201
+你可以看到这里有个新的叫
+On Demand Resource标签
 
 
 389
-00:18:27,456 --> 00:18:30,206
-we maintain pretty tight
-control over this object.
+00:17:47,367 --> 00:17:49,269
+所以我所需做的是开始打字
 
 
 390
-00:18:30,206 --> 00:18:33,316
-So we can control its lifetime
-so when it's torn down we know
+00:17:50,304 --> 00:17:52,506
+内容将被标记为冰岛
 
 
 391
-00:18:33,316 --> 00:18:34,386
-that we are done
-with the request
+00:17:53,106 --> 00:17:54,908
+用同样的方法
+处理意大利的内容
 
 
 392
-00:18:34,386 --> 00:18:36,686
-and we can allow the
-system to deallocate it
+00:17:56,443 --> 00:17:57,644
+内容 好了
 
 
 393
-00:18:36,686 --> 00:18:39,366
-and that will tell the system
-we are done with the content.
+00:17:59,580 --> 00:18:02,449
+接下来我们只需 以便
+当然了
 
 
 394
-00:18:39,766 --> 00:18:44,266
-Next in our loadAlbum function
-before we call populate table,
+00:18:02,516 --> 00:18:05,752
+正如Steve说过的
+告诉Xcode如何将你的内容分开
 
 
 395
-00:18:44,266 --> 00:18:47,516
-we are going to create the
-request, we are passing
+00:18:06,086 --> 00:18:07,554
+现在 下一部分是
 
 
 396
-00:18:47,516 --> 00:18:50,216
-in the set of tags, in this
-case it's a set of one tag
+00:18:07,788 --> 00:18:09,289
+告诉运行中的系统
 
 
 397
-00:18:50,246 --> 00:18:51,856
-which is either Italy
-or Iceland.
+00:18:09,590 --> 00:18:11,091
+我们预计什么时间
 
 
 398
-00:18:52,416 --> 00:18:56,136
-We call beginAccessingResources
-WithCompletionHandler (without
+00:18:11,158 --> 00:18:12,893
+需要这些内容备好可用
 
 
 399
-00:18:56,306 --> 00:18:57,876
-space), and when
-we get a result,
+00:18:13,293 --> 00:18:15,262
+我们将在视图控制器中
+进行操作
 
 
 400
-00:18:58,026 --> 00:19:01,806
-this closure will be called,
-and it may have an error.
+00:18:15,762 --> 00:18:18,899
+首先我要在我的类中
+增加一个I var
 
 
 401
-00:19:02,156 --> 00:19:04,796
-So on the main thread, because
-this completion handler will be
+00:18:18,966 --> 00:18:20,400
+以保存我们刚说的类
 
 
 402
-00:19:04,796 --> 00:19:07,666
-called on a non-main thread,
-we are going to first check
+00:18:20,467 --> 00:18:22,803
+NSBundleResourceRequest
 
 
 403
-00:19:07,666 --> 00:19:08,946
-to make sure that
-the error is nil.
+00:18:23,003 --> 00:18:25,105
+当视图控制器进行拆分时
 
 
 404
-00:19:09,326 --> 00:19:11,226
-If it's non-nil, then
-an error occurred
+00:18:25,172 --> 00:18:27,007
+我现在要做的是充分利用
 
 
 405
-00:19:11,226 --> 00:19:13,406
-and as we discussed it's
-important to present
+00:18:27,441 --> 00:18:30,143
+我们很好地控制这个对象
 
 
 406
-00:19:13,406 --> 00:19:15,686
-that to the user, which I'm
-doing in a helper function here.
+00:18:30,210 --> 00:18:31,812
+这样 我们可以控制使用时间
 
 
 407
-00:19:16,616 --> 00:19:18,996
-Then we call the exact
-same populateTable function
+00:18:32,079 --> 00:18:34,314
+当它完成拆分时
+我们知道请求也完成了
 
 
 408
-00:19:19,266 --> 00:19:20,476
-that we just went through.
+00:18:34,381 --> 00:18:36,650
+我们允许系统对其解除分配
 
 
 409
-00:19:20,666 --> 00:19:22,016
-So, again, nothing
-in there changed.
+00:18:36,717 --> 00:18:39,353
+这将告诉系统
+我们处理好内容了
 
 
 410
-00:19:22,746 --> 00:19:24,286
-Let's go ahead and run
-the application again
+00:18:41,221 --> 00:18:44,324
+下一步 在loadAlbum函数
+调用populateTable前
 
 
 411
-00:19:24,286 --> 00:19:25,806
-and see how this looks.
+00:18:44,558 --> 00:18:45,526
+我们将先...
 
 
 412
-00:19:29,636 --> 00:19:33,016
-So now, I'm going to visit
-Iceland and we will see
+00:18:45,826 --> 00:18:46,827
+创建请求
 
 
 413
-00:19:33,016 --> 00:19:36,696
-that my content is here because
-we have made a request for it,
+00:18:46,994 --> 00:18:49,263
+进入一组标签
+在这个情况下
 
 
 414
-00:19:36,696 --> 00:19:39,676
-and I can choose some of these
-pictures or points of interest,
+00:18:49,329 --> 00:18:51,865
+进入意大利
+或冰岛中的一组标签
 
 
 415
-00:19:40,036 --> 00:19:42,196
-and all of my content
-is available just
+00:18:53,200 --> 00:18:54,034
+我们称之为
 
 
 416
-00:19:42,196 --> 00:19:44,146
-as if it had been part of the
-application from the start.
+00:18:54,101 --> 00:18:56,937
+beginAccessingResources
+WithCompletionHandler
 
 
 417
-00:19:44,146 --> 00:19:46,166
-Now, this is a good opportunity
+00:18:57,004 --> 00:18:57,971
+结果出来后
 
 
 418
-00:19:46,166 --> 00:19:48,186
-to show you a new
-debugging feature in Xcode
+00:18:58,038 --> 00:18:59,373
+这个结尾将被调用
 
 
 419
-00:19:48,186 --> 00:19:49,746
-that can really help
-you to understand
+00:19:00,140 --> 00:19:01,808
+或许会产生错误
 
 
 420
-00:19:49,996 --> 00:19:51,816
-if you are using
-these request objects
+00:19:02,142 --> 00:19:04,778
+在主线程中 这个完成处理程序
 
 
 421
-00:19:51,816 --> 00:19:52,826
-in the way you think you are.
+00:19:04,845 --> 00:19:06,113
+将在非主线程中被调用
 
 
 422
-00:19:52,826 --> 00:19:54,956
-And that's a new debug gauge.
+00:19:06,480 --> 00:19:08,949
+我们首先检查
+并确保错误是0
 
 
 423
-00:19:55,766 --> 00:19:56,366
-So I'm going to bring
+00:19:09,316 --> 00:19:10,918
+若不是0
+那就是出现错误了
 
 
 424
-00:19:56,366 --> 00:19:58,766
-up the debug gauge view
-here and choose disk.
+00:19:10,984 --> 00:19:12,252
+正如我们先前所讨论的
 
 
 425
-00:19:59,296 --> 00:20:01,676
-And you'll notice in the middle
-we have a new section called
+00:19:12,319 --> 00:19:15,689
+这需要告诉使用者
+我将在辅助函数里进行操作
 
 
 426
-00:20:02,106 --> 00:20:03,136
-On Demand Resources.
+00:19:16,590 --> 00:19:20,360
+然后调用刚使用过的
+populateTable函数
 
 
 427
-00:20:03,616 --> 00:20:05,886
-It lists all of the tags that
-are part of your application,
+00:19:20,661 --> 00:19:22,029
+再一次
+没有变动任何东西
 
 
 428
-00:20:06,746 --> 00:20:10,776
-so Iceland and Italy, their
-size and their current status.
+00:19:22,729 --> 00:19:24,231
+继续 并再一次运行App
 
 
 429
-00:20:11,196 --> 00:20:13,696
-You notice that Iceland
-is listed as in use,
+00:19:24,298 --> 00:19:25,299
+看看会是什么样的
 
 
 430
-00:20:13,996 --> 00:20:15,666
-and that makes sense
-because we are looking
+00:19:30,070 --> 00:19:32,039
+现在 我访问冰岛
 
 
 431
-00:20:15,666 --> 00:20:18,496
-at the Iceland content right
-here and it remains in use
+00:19:32,306 --> 00:19:34,708
+可以看到我的内容在这边
 
 
 432
-00:20:18,496 --> 00:20:19,886
-as I view some of
-these pictures.
+00:19:35,142 --> 00:19:36,810
+因为我们已经做了请求
 
 
 433
-00:20:20,326 --> 00:20:21,826
-But if I go back
-to the main table
+00:19:36,877 --> 00:19:39,680
+我可以选择一些图片或兴趣点
 
 
 434
-00:20:21,826 --> 00:20:24,446
-of contents its status
-is changed from in use
+00:19:40,047 --> 00:19:42,115
+所有的内容都准备就绪了
 
 
 435
-00:20:24,446 --> 00:20:26,696
-to downloaded, and
-that's because again
+00:19:42,182 --> 00:19:44,384
+就好像从一开始它们就是
+App的一部分一样
 
 
 436
-00:20:26,696 --> 00:20:28,366
-that request object
-was deallocated
+00:19:45,185 --> 00:19:48,088
+现在我们为你展示
+Xcode新调试特征
 
 
 437
-00:20:28,556 --> 00:20:31,456
-and the system now knows we are
-no longer using that content.
+00:19:48,155 --> 00:19:49,690
+若你以你认为的方式
 
 
 438
-00:20:31,916 --> 00:20:35,726
-We didn't delete it off disk
-immediately so if you go back
+00:19:49,990 --> 00:19:51,592
+使用这些请求对象
 
 
 439
-00:20:35,726 --> 00:20:37,756
-to Iceland the content
-is available again
+00:19:51,658 --> 00:19:52,960
+它将帮助你更好的进行理解
 
 
 440
-00:20:38,016 --> 00:20:40,036
-and the status changes
-back to in use.
+00:19:53,627 --> 00:19:55,095
+即新的调试计量器
 
 
 441
-00:20:40,036 --> 00:20:42,856
-Let's see what happens
-if I visit Italy now.
+00:19:55,762 --> 00:19:57,731
+我将把调试计量器视图
+放在这里
 
 
 442
-00:20:42,856 --> 00:20:45,896
-Now, you notice that it's going
+00:19:57,798 --> 00:19:58,799
+选择磁盘
 
 
 443
-00:20:45,896 --> 00:20:48,966
-to take some time to
-show this content.
+00:19:59,299 --> 00:20:01,835
+你可以看到
+在中间我们有一个新部分
 
 
 444
-00:20:49,436 --> 00:20:52,856
-And the reason for
-that is that the size
+00:20:01,969 --> 00:20:03,537
+叫做
+On Demand Resources
 
 
 445
-00:20:52,856 --> 00:20:55,796
-of the Italy tag is actually
-much larger than the one
+00:20:03,604 --> 00:20:05,873
+它列出你App中所有的标签
 
 
 446
-00:20:55,796 --> 00:20:57,686
-for Iceland; it's
-130 megabytes here.
+00:20:06,740 --> 00:20:07,975
+比如冰岛和意大利
 
 
 447
-00:20:58,386 --> 00:21:00,986
-Now, there are two things
-that are important to do here.
+00:20:08,108 --> 00:20:09,209
+他们的大小
 
 
 448
-00:21:01,226 --> 00:21:05,856
-The first is to actually reduce
-the size of the tagged content,
+00:20:09,409 --> 00:20:10,777
+和现在的状态
 
 
 449
-00:21:05,856 --> 00:21:08,576
-split it up into smaller
-chunks, and we are going to go
+00:20:11,211 --> 00:20:13,680
+你看到冰岛的状态是在使用中
 
 
 450
-00:21:08,576 --> 00:21:10,776
-into some more detail on the
-best practices for that later,
+00:20:13,981 --> 00:20:15,115
+这就说得通了
 
 
 451
-00:21:11,316 --> 00:21:12,956
-but for now, what I want
+00:20:15,182 --> 00:20:17,284
+因为我们在这里查看冰岛内容
 
 
 452
-00:21:12,956 --> 00:21:15,286
-to do is show you how you
-can adopt progress reporting
+00:20:17,651 --> 00:20:19,887
+在我看部分图片时
+它保持使用中的状态
 
 
 453
-00:21:15,386 --> 00:21:18,106
-in your application
-in conjunction
+00:20:20,320 --> 00:20:22,556
+但若我回到主内容目录
 
 
 454
-00:21:18,106 --> 00:21:20,266
-with NSBundleResourceRequest
-so that
+00:20:22,789 --> 00:20:25,626
+它的状态由使用中变为已下载
 
 
 455
-00:21:20,266 --> 00:21:22,546
-when you are downloading
-this content you can display
+00:20:25,926 --> 00:20:28,295
+因为请求对象已解除
+系统知道我们
 
 
 456
-00:21:22,546 --> 00:21:25,406
-something to the user so they
-understand what's going on.
+00:20:28,562 --> 00:20:31,465
+不再使用这些内容了
 
 
 457
-00:21:25,406 --> 00:21:32,146
-So let's go back to our
-AlbumTableViewController class.
+00:20:32,966 --> 00:20:35,702
+我们并未立即
+从磁盘中删除信息
 
 
 458
-00:21:32,596 --> 00:21:37,816
-So what we are going
-to do is take advantage
+00:20:35,769 --> 00:20:37,771
+所以当你回到冰岛时
+内容仍旧可用
 
 
 459
-00:21:37,816 --> 00:21:40,806
-of NSBundleResourceRequest
-support for NSProgress,
+00:20:38,005 --> 00:20:40,040
+它的状态也变成使用中
 
 
 460
-00:21:40,806 --> 00:21:44,056
-which is a foundation class
-you can use to report progress
+00:20:41,141 --> 00:20:43,076
+让我们看看访问意大利时
+会出现什么
 
 
 461
-00:21:44,056 --> 00:21:47,216
-and compose progress
-across your application.
+00:20:45,679 --> 00:20:47,414
+现在
+你看到需要花一些时间
 
 
 462
-00:21:48,486 --> 00:21:51,866
-NSProgress supports key value
-observing, so what we're going
+00:20:47,648 --> 00:20:48,982
+内容才会出来
 
 
 463
-00:21:51,866 --> 00:21:54,526
-to do is add this view
-controller as an observer
+00:20:49,449 --> 00:20:52,252
+原因是...
 
 
 464
-00:21:54,526 --> 00:21:58,886
-of the progress and in response
-to updates, change some UI
+00:20:52,419 --> 00:20:56,190
+意大利标签远比冰岛的大
 
 
 465
-00:21:58,886 --> 00:22:00,486
-on the screen, a
-UI progress view,
+00:20:56,256 --> 00:20:57,691
+有130兆字节
 
 
 466
-00:22:00,486 --> 00:22:01,926
-and some detail label text.
+00:20:58,392 --> 00:21:00,994
+这里需要做两件很重要的事
 
 
 467
-00:22:02,916 --> 00:22:06,366
-So right here after
-we create the request,
+00:21:01,228 --> 00:21:05,465
+首先需要减小标签内容大小
 
 
 468
-00:22:06,526 --> 00:22:08,716
-we are going to call
-addObserver.
+00:21:05,532 --> 00:21:07,401
+将其分成小的组块
 
 
 469
-00:22:09,146 --> 00:22:10,376
-This class will be the observer.
+00:21:07,701 --> 00:21:10,838
+随后我们会详细说明
 
 
 470
-00:22:10,376 --> 00:22:12,126
-The progress property
+00:21:11,305 --> 00:21:12,940
+现在
+我想要告诉你
 
 
 471
-00:22:12,126 --> 00:22:14,576
-of the request is the
-object we are observing.
+00:21:13,006 --> 00:21:16,410
+如何使用App中的进度报告
 
 
 472
-00:22:15,606 --> 00:22:18,296
-The key path of the progress
-is fractionCompleted.
+00:21:16,743 --> 00:21:17,578
+并配合使用
 
 
 473
-00:22:18,906 --> 00:22:21,396
-And as always when
-using KVO it's important
+00:21:17,644 --> 00:21:20,013
+NS Bundle Resource Request
 
 
 474
-00:22:21,396 --> 00:22:23,256
-to specify a unique
-context pointer
+00:21:20,080 --> 00:21:23,383
+这样在你下载内容时
+就可以告诉用户一些信息
 
 
 475
-00:22:23,616 --> 00:22:25,076
-which I have defined
-elsewhere in this file.
+00:21:23,450 --> 00:21:25,519
+以帮助他们理解接下来
+会发生什么
 
 
 476
-00:22:26,016 --> 00:22:29,366
-Also, we are going to go ahead
-and unhide a UI progressView
+00:21:27,254 --> 00:21:28,789
+让我们回到
 
 
 477
-00:22:29,546 --> 00:22:31,596
-that I have already hooked
-up in our storyboard.
+00:21:29,456 --> 00:21:32,559
+AlbumTableViewController类
 
 
 478
-00:22:32,246 --> 00:22:36,766
-When we get our response, that's
-a great time to removeObserver
+00:21:35,996 --> 00:21:37,764
+接下来要做的是利用
 
 
 479
-00:22:36,856 --> 00:22:39,096
-because after that point
-we are no longer interested
+00:21:37,831 --> 00:21:40,701
+支持NS Progress的
+NSBundleResourceRequest的优势
 
 
 480
-00:22:39,096 --> 00:22:40,596
-in updates to the progress.
+00:21:40,767 --> 00:21:41,869
+这是个基础类
 
 
 481
-00:22:41,426 --> 00:22:45,376
-And then on the main thread we
-are also going to unhide the --
+00:21:41,935 --> 00:21:47,207
+你可在你的App中
+用它来报告进程和构建进程
 
 
 482
-00:22:45,376 --> 00:22:47,516
-sorry, rehide the
-UI progressView
+00:21:48,475 --> 00:21:50,844
+NS Progress支持键值观察
 
 
 483
-00:22:47,516 --> 00:22:49,026
-because we don't want
-our user to be staring
+00:21:51,211 --> 00:21:55,282
+所以我们要做的是增加
+视图控制器作为进度的观察点
 
 
 484
-00:22:49,026 --> 00:22:50,126
-at complete progress bars.
+00:21:55,649 --> 00:21:57,284
+并更新
 
 
 485
-00:22:50,536 --> 00:22:53,336
-So that adds ourselves
-as an observer
+00:21:57,651 --> 00:22:00,387
+改变屏幕上部分UI
+一个UI进度视图
 
 
 486
-00:22:53,686 --> 00:22:56,566
-and then the second part of
-this is to actually do something
+00:22:00,454 --> 00:22:02,055
+并对一些详细标签文本
+做出反应
 
 
 487
-00:22:56,566 --> 00:22:58,246
-when the value changes,
+00:22:03,724 --> 00:22:06,360
+这里 在创建请求后
 
 
 488
-00:22:58,246 --> 00:23:00,486
-and we do that in the
-traditional KVO method,
+00:22:06,827 --> 00:22:08,795
+调用addObserver
 
 
 489
-00:23:00,796 --> 00:23:02,066
-observeValueForKeyPath.
+00:22:09,129 --> 00:22:10,464
+这类将是观察者
 
 
 490
-00:23:02,706 --> 00:23:04,186
-So here we are first
-checking to make sure
+00:22:11,098 --> 00:22:14,301
+请求的进度属性
+正是我们观察的对象
 
 
 491
-00:23:04,186 --> 00:23:07,106
-that this is the update that
-we are interested in observing
+00:22:15,602 --> 00:22:18,338
+进度中的关键路径是
+fractionCompleted
 
 
 492
-00:23:07,106 --> 00:23:09,356
-by checking the context
-pointer and the key path,
+00:22:18,872 --> 00:22:20,607
+和往常一样 使用KVO时
 
 
 493
-00:23:10,046 --> 00:23:13,216
-and on the main thread, again,
-because this update will come
+00:22:20,841 --> 00:22:23,277
+指定唯一的内容指示器很重要
 
 
 494
-00:23:13,216 --> 00:23:14,956
-on a non-main thread,
-we are going
+00:22:23,577 --> 00:22:25,212
+这个我已经在文件的某处
+进行定义
 
 
 495
-00:23:14,956 --> 00:23:18,396
-to update our UI progressView by
-setting its progress property,
+00:22:25,979 --> 00:22:29,516
+我将继续并显示一个
+UI progressView
 
 
 496
-00:23:18,866 --> 00:23:20,176
-and we are going
-to take advantage
+00:22:29,583 --> 00:22:31,752
+这个进度视图已经
+连接到我的故事板中
 
 
 497
-00:23:20,176 --> 00:23:24,596
-of NSProgress's support for an
-automatic localized description
+00:22:33,353 --> 00:22:36,757
+当收到回应
+就可以移除Observer了
 
 
 498
-00:23:24,596 --> 00:23:26,476
-by using its
-localizedDescription method.
+00:22:36,823 --> 00:22:40,727
+因为之后
+我们不在对更新的进度感兴趣了
 
 
 499
-00:23:27,006 --> 00:23:30,526
-Let's go ahead and run this
-again and see how that works.
+00:22:41,395 --> 00:22:45,132
+然后在主线程中
+我们将继续显示...
 
 
 500
-00:23:36,196 --> 00:23:39,036
-So this time when I visit
-Italy, you will notice
+00:22:45,199 --> 00:22:47,467
+不好意思
+是继续隐藏UI 进程视图
 
 
 501
-00:23:39,036 --> 00:23:41,546
-that at the bottom our detail
-label text has been updated
+00:22:47,534 --> 00:22:50,304
+因为我们不想要用户
+盯着完整的进度指示器一直看
 
 
 502
-00:23:41,546 --> 00:23:45,396
-to show a percent completed, and
-then as the download completes,
+00:22:50,971 --> 00:22:54,208
+所以我们本身也是观察点
 
 
 503
-00:23:45,396 --> 00:23:48,196
-our UI progress view is
-updated to show the user
+00:22:54,274 --> 00:22:55,309
+随后在第二部分
 
 
 504
-00:23:48,196 --> 00:23:49,086
-that something has happened.
+00:22:55,375 --> 00:22:58,345
+在数值变化时 采取一些行动
 
 
 505
-00:23:50,156 --> 00:23:52,696
-Also, again, we didn't
-delete the content eagerly
+00:22:58,545 --> 00:23:00,480
+这里采取的是传统的KVO方法
 
 
 506
-00:23:52,696 --> 00:23:54,566
-so if we go back and
-visit Italy again,
+00:23:00,647 --> 00:23:02,649
+observeValueForKeyPath
 
 
 507
-00:23:54,836 --> 00:23:56,746
-you notice that the content
-is immediately available
+00:23:02,716 --> 00:23:03,884
+首先需要检查
 
 
 508
-00:23:57,286 --> 00:24:00,216
-because it's been cached by
-the On Demand Resources system.
+00:23:03,951 --> 00:23:07,087
+通过检查内容指示器
+和关键路径
 
 
 509
-00:24:00,746 --> 00:24:03,026
-Let's go back to our slides.
+00:23:07,154 --> 00:23:09,556
+确保那就是我们感兴趣的
+观察更新
 
 
 510
-00:24:04,386 --> 00:24:13,106
-So a few more things about
-the progress reporting part
+00:23:10,057 --> 00:23:11,892
+在主线程中 再一次
 
 
 511
-00:24:13,106 --> 00:24:13,666
-of that demo.
+00:23:11,959 --> 00:23:14,461
+因为更新将在非主线程中出现
 
 
 512
-00:24:14,126 --> 00:24:16,136
-So, again, you can find
-information on the progress
+00:23:14,528 --> 00:23:18,665
+我们将通过设置进度属性
+更新UI进度视图
 
 
 513
-00:24:16,136 --> 00:24:18,806
-of the request by looking
-at the progress property.
+00:23:18,832 --> 00:23:23,370
+我们将通过使用它的
+localizedDescription方法
 
 
 514
-00:24:19,846 --> 00:24:22,276
-We also support cancellation,
-pausing, and resuming
+00:23:23,437 --> 00:23:26,540
+充分利用自动局部描述的
+NS Progress支持
 
 
 515
-00:24:22,276 --> 00:24:24,406
-of the request, and those
-are methods you will find
+00:23:28,842 --> 00:23:30,644
+让我们继续 并再次运行
+看看它将如何工作
 
 
 516
-00:24:24,406 --> 00:24:27,286
-on the NSProgress property,
-not the request itself.
+00:23:36,483 --> 00:23:38,485
+所以这次 当我访问意大利时
 
 
 517
-00:24:29,256 --> 00:24:33,256
-Now, actually in iOS 9 and
-OS X 10.11 we have made a lot
+00:23:38,619 --> 00:23:41,522
+你可以看到在详细标签文本
+底部已经更新
 
 
 518
-00:24:33,256 --> 00:24:34,376
-of really great improvements
+00:23:41,588 --> 00:23:45,359
+可以显示完成百分比
+随后 一旦下载完成
 
 
 519
-00:24:34,436 --> 00:24:36,536
-to the NSProgress
-class in Foundation.
+00:23:45,425 --> 00:23:48,161
+UI进度视图将告诉用户
 
 
 520
-00:24:37,066 --> 00:24:40,266
-So to learn more about how to
-use it, how to incorporate it
+00:23:48,228 --> 00:23:49,263
+已经发生的变化
 
 
 521
-00:24:40,266 --> 00:24:42,626
-from this class and from
-elsewhere into your application
+00:23:50,163 --> 00:23:52,566
+所以 再一次 我们并不着急
+删掉这些内容
 
 
 522
-00:24:42,936 --> 00:24:44,926
-in a great way, I really
-recommend you check
+00:23:52,633 --> 00:23:54,568
+这样当我们再次返回
+访问意大利时
 
 
 523
-00:24:44,926 --> 00:24:47,606
-out this talk on
-Friday, Best Practices
+00:23:54,835 --> 00:23:56,737
+你可以看到内容立马就显示了
 
 
 524
-00:24:47,606 --> 00:24:48,476
-for Progress Reporting.
+00:23:57,171 --> 00:24:00,574
+因为这些内容已经存储在
+On Demand Resources系统中
 
 
 525
-00:24:49,086 --> 00:24:54,326
-So the beginAccessing method
-that we used goes ahead
+00:24:02,009 --> 00:24:03,310
+现在回到幻灯片
 
 
 526
-00:24:54,326 --> 00:24:56,946
-and downloads content if
-it's not already available.
+00:24:11,251 --> 00:24:13,654
+关于展示中
+进度报告部分的一些东西
 
 
 527
-00:24:57,366 --> 00:24:59,686
-However, sometimes you may
-want to only use the content
+00:24:14,121 --> 00:24:15,689
+所以 再一次 通过查看进度
 
 
 528
-00:24:59,686 --> 00:25:01,076
-if it's already available
-on disk
+00:24:15,756 --> 00:24:18,992
+你可以找到请求进度的信息
 
 
 529
-00:25:01,076 --> 00:25:03,036
-without triggering a
-download and you can do
+00:24:19,860 --> 00:24:23,197
+我们同样支持取消 暂停
 
 
 530
-00:25:03,036 --> 00:25:05,026
-that using what we call
-a conditional request.
+00:24:23,263 --> 00:24:24,965
+重新开始请求
+这些方法本身并不是请求
 
 
 531
-00:25:05,916 --> 00:25:06,766
-Here's the method:
+00:24:25,032 --> 00:24:27,401
+它们可在NSProgress中找到
 
 
 532
-00:25:06,826 --> 00:25:09,516
+00:24:29,536 --> 00:24:32,539
+现在 事实上在iOS 9
+和 OS X 10.11中
+
+
+533
+00:24:32,606 --> 00:24:34,808
+Foundation中
+NSProgress类
+
+
+534
+00:24:34,875 --> 00:24:36,643
+我们已经做了很多重大改进
+
+
+535
+00:24:37,077 --> 00:24:38,612
+想知道如何使用它们
+
+
+536
+00:24:38,812 --> 00:24:42,616
+如何大规模的将这类整合
+到你的App
+
+
+537
+00:24:42,950 --> 00:24:43,917
+和其他地方
+
+
+538
+00:24:43,984 --> 00:24:46,687
+真的建议你
+关注周五的演讲
+
+
+539
+00:24:46,753 --> 00:24:48,555
+《进度报告的最佳范例》
+
+
+540
+00:24:51,225 --> 00:24:53,360
+在内容还未准备就绪之前
+
+
+541
+00:24:53,627 --> 00:24:56,930
+beginAccessing方法
+将继续运行并下载内容
+
+
+542
+00:24:57,364 --> 00:24:58,799
+然后 有时候你只想
+
+
+543
+00:24:58,866 --> 00:25:01,001
+使用磁盘中已经有的内容
+
+
+544
+00:25:01,068 --> 00:25:02,302
+不想再进行下载
+
+
+545
+00:25:02,669 --> 00:25:05,205
+你可以使用假定请求做到这点
+
+
+546
+00:25:05,906 --> 00:25:06,773
+方法如下
+
+
+547
+00:25:06,840 --> 00:25:10,010
 conditionallyBeginAccessing
 ResourcesWithCompletionHandler
 
 
-533
-00:25:09,576 --> 00:25:10,936
-(without space), and you can see
-
-
-534
-00:25:10,936 --> 00:25:13,116
-that the closure here
-has a Boolean argument,
-
-
-535
-00:25:13,116 --> 00:25:14,766
-so the answer is
-either yes or no,
-
-
-536
-00:25:14,896 --> 00:25:17,166
-depending on whether the content
-is already available or not.
-
-
-537
-00:25:18,026 --> 00:25:22,716
-So in the view of our state
-machine, we start off in init,
-
-
-538
-00:25:23,316 --> 00:25:25,416
-we move to this conditionally
-requested state
-
-
-539
-00:25:25,416 --> 00:25:26,486
-by invoking this method.
-
-
-540
-00:25:26,486 --> 00:25:29,676
-You will get your response,
-either it's available or not.
-
-
-541
-00:25:29,896 --> 00:25:32,566
-If it's available, then
-the resources are available
-
-
-542
-00:25:32,566 --> 00:25:34,166
-to you just as if you had
-called the other method.
-
-
-543
-00:25:34,166 --> 00:25:36,606
-So, again, be sure to
-call endAccessingResources
-
-
-544
-00:25:36,876 --> 00:25:38,286
-or allow the object
-to be deallocated.
-
-
-545
-00:25:38,286 --> 00:25:40,996
-If it wasn't available, at
-that point you have a choice:
-
-
-546
-00:25:40,996 --> 00:25:43,676
-You can either do nothing
-
-
-547
-00:25:43,766 --> 00:25:46,066
-or you can call the
-beginAccessingResources method
-
-
 548
-00:25:46,066 --> 00:25:47,766
-to cause that download
-to happen.
+00:25:10,077 --> 00:25:10,911
+你可看到
 
 
 549
-00:25:48,316 --> 00:25:53,786
-And finally, there are two kinds
-of priority APIs on this class
+00:25:11,178 --> 00:25:13,013
+这里的结尾有布尔参数
 
 
 550
-00:25:53,786 --> 00:25:54,676
-that I want to talk about.
+00:25:13,080 --> 00:25:14,781
+所以不管是是还是否
 
 
 551
-00:25:55,106 --> 00:25:56,766
-The first is called
-a loading priority.
+00:25:14,882 --> 00:25:17,150
+答案取决于内容可用还是不可用
 
 
 552
-00:25:56,766 --> 00:25:59,736
-This is a double, and
-it provides ordering
+00:25:18,018 --> 00:25:21,121
+所以根据状态机
 
 
 553
-00:25:59,736 --> 00:26:02,156
-for the outstanding
-requests in your application.
+00:25:21,355 --> 00:25:22,723
+我们从初始化开始
 
 
 554
-00:26:02,656 --> 00:26:04,056
-The value ranges from 0 to 1.
+00:25:23,323 --> 00:25:25,325
+通过调用这个方法
 
 
 555
-00:26:04,346 --> 00:26:06,896
-So a value of 1 is
-the highest priority
+00:25:25,392 --> 00:25:26,560
+进入假定请求状态
 
 
 556
-00:26:06,896 --> 00:26:08,486
-and the value of
-0 is the lowest.
+00:25:27,194 --> 00:25:29,663
+不管它是否可用
+你都将得到回应
 
 
 557
-00:26:08,486 --> 00:26:12,316
-What we do with these values
-is provide a hint to the system
+00:25:29,897 --> 00:25:32,165
+若可用 资料也将可用
 
 
 558
-00:26:12,376 --> 00:26:15,696
-about which outstanding request
-should be prioritized first.
+00:25:32,232 --> 00:25:33,667
+就好像你已经调用了其他方法
 
 
 559
-00:26:16,176 --> 00:26:19,226
-So because the value is not
-compared across applications
+00:25:33,734 --> 00:25:36,803
+所以 再一次 确认调用
+endAccessingResources
 
 
 560
-00:26:19,226 --> 00:26:21,406
-on the system, but
-only within your app,
+00:25:36,870 --> 00:25:38,438
+或允许对象解除分配
 
 
 561
-00:26:21,626 --> 00:26:23,356
-you can use these
-values as you choose
+00:25:38,872 --> 00:25:41,141
+若不可用
+此时你可以做选择
 
 
 562
-00:26:23,356 --> 00:26:25,926
-to help order the requests
-according to your needs.
+00:25:41,208 --> 00:25:42,209
+你可以...
 
 
 563
-00:26:26,476 --> 00:26:29,526
-We do have a constant that
-you can use here actually;
+00:25:42,910 --> 00:25:43,744
+什么都不做
 
 
 564
-00:26:29,526 --> 00:26:33,636
-it's called loading priority
-urgent, and this is for the case
+00:25:43,810 --> 00:25:46,847
+也可以调用
+beginAccessingResources方法
 
 
 565
-00:26:33,636 --> 00:26:35,866
-where the user is doing nothing
-but waiting for the download
+00:25:46,914 --> 00:25:47,981
+进行下载
 
 
 566
-00:26:35,866 --> 00:26:37,536
-to finish and we will
-talk a little bit more
+00:25:50,017 --> 00:25:54,955
+最后 我讲讲此类中
+API两个优先权
 
 
 567
-00:26:37,536 --> 00:26:38,166
-about this later.
+00:25:55,122 --> 00:25:56,757
+第一个叫做加载优先权
 
 
 568
-00:26:38,736 --> 00:26:42,636
-The second kind of priority is
-called a preservation priority.
+00:25:57,090 --> 00:25:58,625
+这个是双重的
 
 
 569
-00:26:43,266 --> 00:26:46,716
-So this method provides ordering
-of purging for unused tags
+00:25:58,692 --> 00:26:02,162
+它为你的App中
+未解决的请求排序
 
 
 570
-00:26:46,716 --> 00:26:48,486
-in your app, so this
-is not associated
+00:26:02,663 --> 00:26:04,064
+数值为从0到1
 
 
 571
-00:26:48,486 --> 00:26:50,766
-with a particular request,
-which is why it's an extension
+00:26:04,231 --> 00:26:06,867
+所以数值1指最高优先权
 
 
 572
-00:26:50,766 --> 00:26:54,606
-on NSBundle, but instead
-with a tag or set of tags.
+00:26:06,934 --> 00:26:08,602
+数值0指最低优先权
 
 
 573
-00:26:55,066 --> 00:26:57,016
-Again, the value
-ranges from 0 to 1,
+00:26:09,136 --> 00:26:10,804
+当我们处理这些数值时
 
 
 574
-00:26:57,386 --> 00:26:59,586
-with 0 being the least
-interesting to keep
+00:26:10,904 --> 00:26:15,709
+它将提示系统哪个未解决的
+请求应该优先处理
 
 
 575
-00:26:59,686 --> 00:27:01,396
-and 1 being the most
-important to keep.
+00:26:16,176 --> 00:26:19,112
+因为数值只在
+你的app中进行比较
 
 
 576
-00:27:02,246 --> 00:27:05,116
-So you can use this to
-tell the system a hint
+00:26:19,179 --> 00:26:21,515
+并未在系统中的App进行比较
 
 
 577
-00:27:05,156 --> 00:27:08,646
-about which content is the most
-important to keep if we run
+00:26:21,615 --> 00:26:23,450
+你可利用这些数值
 
 
 578
-00:27:08,646 --> 00:27:10,306
-into disk space pressure.
+00:26:23,517 --> 00:26:26,053
+根据你的需要对请求进行排序
 
 
 579
-00:27:10,916 --> 00:27:12,536
-And the value, again,
-is compared only
+00:26:27,487 --> 00:26:29,423
+这里有个常量可以使用
 
 
 580
-00:27:12,536 --> 00:27:13,716
-across your own application,
+00:26:29,489 --> 00:26:31,491
+它叫做紧急装载优先权
 
 
 581
-00:27:13,716 --> 00:27:15,486
-not between applications
-on the system.
+00:26:32,593 --> 00:26:34,761
+当用户只需等待下载完成
+而无需做其他事时
 
 
 582
-00:27:16,006 --> 00:27:19,136
-So with that, I would like
-to bring back Steve to go
+00:26:34,828 --> 00:26:36,430
+就可以使用这个常量
 
 
 583
-00:27:19,136 --> 00:27:21,206
-over some more best
-practices about using ODR.
+00:26:36,697 --> 00:26:38,198
+随后我们会详细讲到这点
 
 
 584
-00:27:22,016 --> 00:27:23,926
-[Applause]
+00:26:40,200 --> 00:26:42,636
+第二种优先权叫做保存优先权
 
 
 585
-00:27:23,926 --> 00:27:24,416
->> STEVE LEWALLEN:
-Thank you, Tony.
+00:26:43,136 --> 00:26:47,140
+这个方法指的是
+在app中未使用的标签清除排序
 
 
 586
-00:27:28,286 --> 00:27:31,246
-All right, so now we
-have an overview of ODR,
+00:26:47,207 --> 00:26:49,209
+这里并不需要特别的请求
 
 
 587
-00:27:31,246 --> 00:27:33,826
-we understand what it's about,
-and we have seen it in use.
+00:26:49,276 --> 00:26:51,578
+这是它成为NSBundle
+延伸功能的原因
 
 
 588
-00:27:34,336 --> 00:27:37,166
-So now let's talk about
-how we build the optimal
+00:26:51,879 --> 00:26:54,681
+由一个标签
+或一组标签进行替代
 
 
 589
-00:27:37,166 --> 00:27:38,036
-ODR application.
+00:26:55,082 --> 00:26:57,084
+数值范围从0到1
 
 
 590
-00:27:38,846 --> 00:27:40,896
-Now, to do that, the
-first thing that you need
+00:26:57,384 --> 00:26:59,586
+0数值表示最不需要保存
 
 
 591
-00:27:40,896 --> 00:27:43,056
-to do before you start
-tagging assets is
+00:26:59,686 --> 00:27:01,388
+1数值表示最需要保存
 
 
 592
-00:27:43,056 --> 00:27:44,776
-to consider your app's behavior,
+00:27:02,256 --> 00:27:05,125
+所以在碰到磁盘存储空间问题时
 
 
 593
-00:27:45,246 --> 00:27:48,036
-because this will inform
-how you need to tag assets.
+00:27:05,192 --> 00:27:07,461
+你可通过它告诉系统
 
 
 594
-00:27:48,866 --> 00:27:51,636
-There are three patterns that
-I can offer up for you today
+00:27:07,861 --> 00:27:10,364
+哪些数值最需要保存
 
 
 595
-00:27:51,636 --> 00:27:54,866
-as to how you might
-use ODR content.
+00:27:10,797 --> 00:27:13,634
+只在你自己的App中进行比较
 
 
 596
-00:27:55,156 --> 00:27:58,716
-The first pattern, this is
-like Tony's iTravel app.
+00:27:13,700 --> 00:27:15,769
+而不是在系统的App中进行比较
 
 
 597
-00:27:59,056 --> 00:28:02,006
-We couldn't quite anticipate
-where the user would want to go.
+00:27:17,104 --> 00:27:18,906
+以上就这些
+有请史蒂芬上台
 
 
 598
-00:28:02,726 --> 00:28:03,756
-This is random access.
+00:27:18,972 --> 00:27:21,341
+说说使用ODR的最佳范例
 
 
 599
-00:28:03,756 --> 00:28:06,046
-And in a random access app,
+00:27:23,810 --> 00:27:24,645
+谢谢你 托尼
 
 
 600
-00:28:06,046 --> 00:28:09,626
-especially when the assets are
-larger, the content in total,
+00:27:28,282 --> 00:27:31,485
+好的 现在我们对ODR
+有了整体的了解
 
 
 601
-00:28:09,626 --> 00:28:13,496
-what you want to do is tag
-more assets and read things
+00:27:31,552 --> 00:27:33,820
+我们知道它是什么
+并观看了如何使用它
 
 
 602
-00:28:13,496 --> 00:28:16,526
-in progressively so that as soon
-as the user makes a decision,
+00:27:34,254 --> 00:27:38,192
+现在来说说
+我们如何建立最佳ODR app
 
 
 603
-00:28:16,846 --> 00:28:18,706
-they can start to
-see some progress
+00:27:38,825 --> 00:27:41,695
+现在开始对资料做标签之前
 
 
 604
-00:28:18,706 --> 00:28:19,806
-of that decision in the UI.
+00:27:41,762 --> 00:27:44,798
+首先需要考虑你的app的反应
 
 
 605
-00:28:21,446 --> 00:28:24,516
-The next pattern is
-called limited prediction.
+00:27:45,232 --> 00:27:48,368
+因为这将告诉你对资料做标签
+需做到哪种程度
 
 
 606
-00:28:24,516 --> 00:28:27,886
-This is like an open
-world game in some sense,
+00:27:48,869 --> 00:27:51,605
+关于你可能如何使用ODR内容
 
 
 607
-00:28:28,356 --> 00:28:30,886
-where though there may be
-almost an infinite number
+00:27:51,672 --> 00:27:54,308
+这里我可以提供三种模式
 
 
 608
-00:28:30,886 --> 00:28:33,036
-of possibilities,
-at any one point
+00:27:55,142 --> 00:27:58,712
+第一种模式
+这个就像托尼的iTravel app
 
 
 609
-00:28:33,036 --> 00:28:34,856
-in time there's only
-a limited subset.
+00:27:59,046 --> 00:28:02,282
+我们无法预测用户将去哪里
 
 
 610
-00:28:34,856 --> 00:28:36,586
-An so again what you want
+00:28:02,716 --> 00:28:04,051
+这是随机访问
 
 
 611
-00:28:36,586 --> 00:28:40,446
-to do is have many tags
-tagging smaller size content,
+00:28:04,484 --> 00:28:05,986
+在随机访问app中
 
 
 612
-00:28:40,726 --> 00:28:43,606
-progressively read that
-in, but also be prepared
+00:28:06,053 --> 00:28:09,590
+特别是资料比较大的时候
 
 
 613
-00:28:43,606 --> 00:28:48,286
-to discard content that the
-user has chosen not to view, as,
+00:28:09,656 --> 00:28:12,759
+你想要的内容标记了很多资料
 
 
 614
-00:28:48,286 --> 00:28:50,916
-for example, the player in the
-game moves around the world
+00:28:12,826 --> 00:28:14,328
+并逐步读取
 
 
 615
-00:28:50,916 --> 00:28:54,526
-and they have left some
-location, you should stop using
+00:28:14,394 --> 00:28:16,530
+所以一旦用户做出决定
 
 
 616
-00:28:54,526 --> 00:28:56,636
-that indexing resources,
-getting rid
+00:28:16,830 --> 00:28:18,599
+他们立即就可以在UI中
 
 
 617
-00:28:56,636 --> 00:28:58,346
-of the NSBundleResourceRequest
-object.
+00:28:18,665 --> 00:28:20,367
+看到那个决定的部分进度
 
 
 618
-00:28:59,206 --> 00:29:02,086
-Now, the third pattern is the
-pattern than I've been using
+00:28:21,435 --> 00:28:24,471
+第二种模式叫做有限预测
 
 
 619
-00:29:02,086 --> 00:29:03,956
-in my example; it's
-the levels in the game.
+00:28:24,538 --> 00:28:27,875
+某种程度上来说
+这就像开放式世界游戏
 
 
 620
-00:29:04,186 --> 00:29:06,676
-This is the linear
-progression game much
+00:28:28,308 --> 00:28:32,012
+它可能是无穷种可能性
 
 
 621
-00:29:06,676 --> 00:29:07,926
-like a first person shooter.
+00:28:32,079 --> 00:28:35,082
+在具体时间点时
+它只是有限的子集
 
 
 622
-00:29:08,446 --> 00:29:11,866
-In this case, the biggest task
-that you have as a developer is
+00:28:35,148 --> 00:28:37,117
+再次 你要做的是
 
 
 623
-00:29:11,866 --> 00:29:15,526
-to anticipate well ahead of
-time what will be needed next,
+00:28:37,184 --> 00:28:40,454
+拥有许多标签
+标记比少的内容
 
 
 624
-00:29:16,016 --> 00:29:17,896
-but you are pretty
-much assured that all
+00:28:40,721 --> 00:28:42,222
+逐步读取
 
 
 625
-00:29:17,896 --> 00:29:20,206
-of the content will be
-consumed, and so you just want
+00:28:42,289 --> 00:28:45,359
+也需要准备好放弃那些
 
 
 626
-00:29:20,206 --> 00:29:22,416
-to start loading that content
+00:28:45,526 --> 00:28:48,262
+用户选择不看的内容
 
 
 627
-00:29:22,896 --> 00:29:26,406
-within a reasonable
-amount of time.
+00:28:48,328 --> 00:28:52,399
+比如 就像游戏玩家
+在世界范围移动
 
 
 628
-00:29:26,626 --> 00:29:31,546
-Okay. Speaking of time, there is
-a rhythm to how you use ODR API.
+00:28:52,466 --> 00:28:54,468
+他们离开一些地方一样
 
 
 629
-00:29:32,296 --> 00:29:34,036
-So let's give ourselves
-a timeline
+00:28:54,535 --> 00:28:55,636
+你需停止使用索引资料
 
 
 630
-00:29:34,106 --> 00:29:36,966
-from the point the app
-launches until it exits.
+00:28:55,702 --> 00:28:58,672
+去掉
+NSBundleResourceRequest对象
 
 
 631
-00:29:38,036 --> 00:29:41,196
-Now, the well-written ODR
-application will anticipate
+00:28:59,706 --> 00:29:02,843
+现在 第三种模式是
+已经在我例子中使用的模式
 
 
 632
-00:29:41,196 --> 00:29:43,236
-needing assets well beforehand.
+00:29:02,910 --> 00:29:04,111
+就是游戏中的等级
 
 
 633
-00:29:43,856 --> 00:29:45,366
-Remember, this is a
-network-based app.
+00:29:04,178 --> 00:29:06,280
+这是直线型进度式游戏
 
 
 634
-00:29:45,366 --> 00:29:47,156
-It's going to have to
-download it from the Store
+00:29:06,346 --> 00:29:08,081
+就像第一人称的射击游戏
 
 
 635
-00:29:47,476 --> 00:29:49,466
-or another location
-we went over earlier,
+00:29:08,448 --> 00:29:09,550
+在这个案例中
 
 
 636
-00:29:49,596 --> 00:29:50,676
-but that will take some time.
+00:29:09,616 --> 00:29:11,752
+作为一名开发者
 
 
 637
-00:29:51,286 --> 00:29:54,066
-So as soon as you anticipate
-needing them, assets,
+00:29:11,818 --> 00:29:15,522
+你最大的任务是
+提早预估下一步需求
 
 
 638
-00:29:54,246 --> 00:29:56,836
-that's when you call
-beginAccessingResources
+00:29:16,023 --> 00:29:17,591
+但是你非常肯定
 
 
 639
-00:29:56,836 --> 00:29:58,486
-and that will kick
-off the download
+00:29:17,658 --> 00:29:19,593
+所有的内容都是必要的
 
 
 640
-00:29:58,896 --> 00:30:00,766
-if the assets are not
-yet on the device.
+00:29:19,660 --> 00:29:21,595
+所以你将只开始加载那些
 
 
 641
-00:30:01,956 --> 00:30:05,826
-Now, the best-laid plans can
-hit, well, network problems,
+00:29:21,662 --> 00:29:26,567
+在一定合理时间内
+可被加载的内容
 
 
 642
-00:30:05,826 --> 00:30:08,386
-for example, and other
-things that may result
+00:29:26,633 --> 00:29:27,467
+好了
 
 
 643
-00:30:08,386 --> 00:30:11,336
-in you needing the resources
-before they are actually ready.
+00:29:27,901 --> 00:29:29,169
+说到时间
 
 
 644
-00:30:11,786 --> 00:30:15,696
-And, again, in this case, you
-want to bring up the progress UI
+00:29:29,236 --> 00:29:32,206
+这里有个插曲
+讲到你如何使用ODR API
 
 
 645
-00:30:15,696 --> 00:30:17,606
-that Tony mentioned using
-the progress property
+00:29:32,272 --> 00:29:34,041
+所以我们给自己一个时间线
 
 
 646
-00:30:17,606 --> 00:30:18,966
-and NSBundleResourceRequest.
+00:29:34,107 --> 00:29:36,977
+即从app开始到退出
 
 
 647
-00:30:19,696 --> 00:30:22,686
-Share your learning screen,
-allow the download to continue,
+00:29:38,011 --> 00:29:40,180
+现在 设计合理的ODR App
 
 
 648
-00:30:22,686 --> 00:30:25,296
-and then at some point
-that will actually finish,
+00:29:40,247 --> 00:29:43,250
+应该可以很好的
+提早预测需求资料
 
 
 649
-00:30:25,586 --> 00:30:27,866
-the resources will be
-available and you can take
+00:29:43,851 --> 00:29:45,285
+请记住 这是网络型app
 
 
 650
-00:30:27,866 --> 00:30:31,076
-down the loading screen, and you
-can begin to use the resources.
+00:29:45,352 --> 00:29:47,321
+它将必须从App Store
 
 
 651
-00:30:31,936 --> 00:30:35,206
-Once you are done using the
-resources, you absolutely want
+00:29:47,487 --> 00:29:49,456
+或我们刚检查过的其他地方下载
 
 
 652
-00:30:35,206 --> 00:30:37,276
-to call endAccessingResources
+00:29:49,590 --> 00:29:50,691
+但这需要花些时间
 
 
 653
-00:30:37,776 --> 00:30:40,056
-or allow the
-NSBundleResourceRequest object
+00:29:51,291 --> 00:29:53,427
+因此 在需要使用资料的时候
 
 
 654
-00:30:40,126 --> 00:30:43,556
-to dealloc in order to tell the
-system, hey, I'm done with this.
+00:29:53,560 --> 00:29:56,897
+且当调出
+beginAccessing Resources
 
 
 655
-00:30:44,026 --> 00:30:46,256
-And remember that that
-doesn't mean we go off
+00:29:56,964 --> 00:29:58,532
+如果还未安装到设备上
 
 
 656
-00:30:46,256 --> 00:30:47,206
-and delete that content.
+00:29:58,899 --> 00:30:00,767
+那么会自动开始下载
 
 
 657
-00:30:47,296 --> 00:30:49,066
-We are just making a note of it.
+00:30:01,969 --> 00:30:05,806
+当前 这是善用网络资源
 
 
 658
-00:30:49,336 --> 00:30:51,866
-So this is the basic timeline
-you need to be aware of,
+00:30:05,873 --> 00:30:08,475
+和解决资料尚未准备就绪
 
 
 659
-00:30:52,186 --> 00:30:54,776
-and you can make multiple
-these requests simultaneously,
+00:30:08,542 --> 00:30:11,411
+就需要使用的最佳办法
 
 
 660
-00:30:54,776 --> 00:30:57,906
-you just need to remember
-the basic parts of this.
+00:30:12,012 --> 00:30:14,848
+而且 在这种情况下
+你可以通过进度属性
 
 
 661
-00:30:58,666 --> 00:31:04,756
-Okay. Now, I had talked about
-how ODR can benefit the user
+00:30:14,982 --> 00:30:17,618
+和NS Bundle
+Resource Request
 
 
 662
-00:31:04,756 --> 00:31:06,896
-by improving the
-installation experience.
+00:30:17,684 --> 00:30:19,219
+加快托尼之前提到的进度UI
 
 
 663
-00:31:07,756 --> 00:31:08,976
-So how is that done?
+00:30:19,686 --> 00:30:22,689
+分享一下屏幕
+同时让下载继续进行
 
 
 664
-00:31:08,976 --> 00:31:10,666
-Well, we need your
-help to do that.
+00:30:23,056 --> 00:30:25,292
+这时候 已经完成下载了
 
 
 665
-00:31:11,726 --> 00:31:13,176
-What you need to do
-as a developer is
+00:30:25,592 --> 00:30:27,361
+资料已经准备就绪
 
 
 666
-00:31:13,176 --> 00:31:16,576
-to consider the assets that the
-user is going to need as soon
+00:30:27,427 --> 00:30:28,962
+你可以关闭下载界面
 
 
 667
-00:31:16,576 --> 00:31:17,406
-as they launch the app.
+00:30:29,196 --> 00:30:31,064
+然后开始使用资料了
 
 
 668
-00:31:18,716 --> 00:31:20,846
-When you know what those
-are, say the first level
+00:30:31,932 --> 00:30:33,767
+一旦资料使用完毕
 
 
 669
-00:31:20,846 --> 00:31:24,126
-in the game is a good one,
-then you want to take the tags
+00:30:33,834 --> 00:30:37,271
+你们绝对会想要调出
+endAccessingResources
 
 
 670
-00:31:24,126 --> 00:31:28,246
-for those assets and put them in
-Xcode's Initial Install Tags UI.
+00:30:37,671 --> 00:30:41,275
+或者允许NS Bundle
+Resource Request对象解除分配
 
 
 671
-00:31:29,816 --> 00:31:33,676
-This will tell the ODR system
-to make sure all the assets
+00:30:41,441 --> 00:30:43,544
+以便让系统知道你已经使用完毕
 
 
 672
-00:31:34,206 --> 00:31:39,066
-with those tags are
-downloaded before the app shows
+00:30:44,011 --> 00:30:47,214
+另外 这不代表我们会关闭服务
+并删除记录
 
 
 673
-00:31:39,066 --> 00:31:40,996
-as being 100% installed.
+00:30:47,281 --> 00:30:48,582
+我们只是在这里提醒大家而已
 
 
 674
-00:31:41,066 --> 00:31:43,186
-That way when it does show
-it's completely installed
+00:30:49,349 --> 00:30:52,119
+因此
+这是需要清楚的基本时间线
 
 
 675
-00:31:43,186 --> 00:31:44,986
-and the user taps on
-it, it's ready to go.
+00:30:52,186 --> 00:30:54,788
+并且你们还可以同时发出多个请求
 
 
 676
-00:31:45,056 --> 00:31:47,126
-They are ready to
-play that game.
+00:30:55,389 --> 00:30:57,891
+只需要记得本部分的基本内容即可
 
 
 677
-00:31:47,126 --> 00:31:50,536
-The size of your app that you
-see in the App Store is going
+00:30:58,659 --> 00:30:59,493
+好的
 
 
 678
-00:31:50,536 --> 00:31:53,726
-to be the size of the
-dot app plus the size
+00:31:00,727 --> 00:31:01,562
+现在
 
 
 679
-00:31:53,726 --> 00:31:56,266
-of the initial ODR content
-that you have tagged here,
+00:31:01,628 --> 00:31:03,664
+我已经谈了ODR
 
 
 680
-00:31:56,686 --> 00:31:58,046
-so just to be aware
-and we will talk
+00:31:03,730 --> 00:31:06,900
+如何通过改善其安装体验
+而提高用户体验
 
 
 681
-00:31:58,046 --> 00:31:59,706
-about this point a
-little bit later as well.
+00:31:07,768 --> 00:31:09,203
+因此 具体怎么完成呢？
 
 
 682
-00:32:00,796 --> 00:32:04,406
-Okay. So now let's talk about
-automating the installation
+00:31:09,269 --> 00:31:10,871
+我们需要大家的帮助
 
 
 683
-00:32:04,406 --> 00:32:07,496
-of ODR content between the
-time the app is actually fully
+00:31:11,738 --> 00:31:12,840
+作为开发者
 
 
 684
-00:32:07,496 --> 00:32:10,306
-installed, but the user has
-still not actually launched it,
+00:31:12,906 --> 00:31:14,975
+你们需要做的是考虑用户
 
 
 685
-00:32:10,436 --> 00:32:12,606
-because you can automate
-that period of time as well.
+00:31:15,042 --> 00:31:17,644
+在登录到app后所需要的资料
 
 
 686
-00:32:13,546 --> 00:32:16,086
-You could use this, for example,
-to make sure the second level
+00:31:18,712 --> 00:31:21,248
+当你们了解是什么之后
+比如游戏Level 1
 
 
 687
-00:32:16,086 --> 00:32:19,376
-in the game is loading,
-or, for example, tutorials.
+00:31:21,415 --> 00:31:22,316
+已经准备就绪
 
 
 688
-00:32:19,496 --> 00:32:21,776
-Maybe some customers want
-to see these tutorials
+00:31:22,683 --> 00:31:24,084
+然后你们需要设置资料标签
 
 
 689
-00:32:21,776 --> 00:32:24,066
-and others don't, so you are
-not going to prevent the app
+00:31:24,151 --> 00:31:28,555
+并放到Xcode的
+初始安装标签UI
 
 
 690
-00:32:24,266 --> 00:32:26,446
-from actually running if
-the tutorial isn't there,
+00:31:29,823 --> 00:31:31,959
+这会通知ODR系统去确认
 
 
 691
-00:32:26,746 --> 00:32:28,286
-but you would like to
-make sure it is there
+00:31:32,025 --> 00:31:33,994
+所有资料的标签...
 
 
 692
-00:32:28,286 --> 00:32:29,366
-if you have the opportunity.
+00:31:34,127 --> 00:31:35,295
+在app被...
 
 
 693
-00:32:29,796 --> 00:32:34,266
-And to do this, you can also
-use Xcode's resource tags UI
+00:31:36,129 --> 00:31:38,432
+完全安装好之前
 
 
 694
-00:32:34,856 --> 00:32:38,276
-and put the tags in the
-pre-fetch tag order section.
+00:31:38,498 --> 00:31:40,968
+可以被下载
 
 
 695
-00:32:39,006 --> 00:32:40,926
-In the actual order
-that you place them
+00:31:41,034 --> 00:31:43,103
+这样 当显示完全安装好之后
 
 
 696
-00:32:40,926 --> 00:32:44,566
-in this section is the
-order we will download them.
+00:31:43,170 --> 00:31:45,005
+用户点击标签后就准备就绪了
 
 
 697
-00:32:44,776 --> 00:32:46,506
-All right.
+00:31:45,072 --> 00:31:46,306
+这时候准备开玩了
 
 
 698
-00:32:46,876 --> 00:32:48,516
-Now, let's talk about caching.
+00:31:46,740 --> 00:31:49,776
+在App Store看到的
+App的大小
 
 
 699
-00:32:48,826 --> 00:32:50,456
-We mentioned caching earlier
+00:31:50,077 --> 00:31:52,212
+是 .app大小
 
 
 700
-00:32:50,456 --> 00:32:53,956
-and we showed how the
-system purged game Level 1
+00:31:52,713 --> 00:31:56,450
+以及初始ODR内容的大小之和
 
 
 701
-00:32:53,956 --> 00:32:55,906
-to make space for a new level.
+00:31:56,683 --> 00:31:58,018
+因此 需要明白这点
 
 
 702
-00:32:56,736 --> 00:32:59,746
-The first thing you need to
-know is we only purge content
+00:31:58,085 --> 00:31:59,987
+此外 我们将在之后会谈谈这点
 
 
 703
-00:32:59,806 --> 00:33:01,706
-when the system is low on space.
+00:32:00,787 --> 00:32:03,457
+好的那么 现在我们可以谈谈
 
 
 704
-00:33:02,596 --> 00:33:04,436
-And the only content
-that is there
+00:32:03,524 --> 00:32:05,292
+自动化安装app和ODR内容
 
 
 705
-00:33:04,436 --> 00:33:05,946
-to be purged is ODR content.
+00:32:05,359 --> 00:32:10,297
+但此时用户还未实际登录
 
 
 706
-00:33:07,056 --> 00:33:10,026
-When we do come to that point,
-there are several attributes
+00:32:10,430 --> 00:32:12,933
+因为你们也可以
+自动设定这段时间
 
 
 707
-00:33:10,026 --> 00:33:11,596
-that come into play to inform us
+00:32:13,534 --> 00:32:16,503
+可以这么做
+以确保游戏的Level 2
 
 
 708
-00:33:11,786 --> 00:33:15,136
-as to what decision we
-should make in deleting
+00:32:16,570 --> 00:32:19,439
+或者教程之类可以开始下载
 
 
 709
-00:33:15,136 --> 00:33:17,376
-which asset pack, for example.
+00:32:19,506 --> 00:32:21,708
+也许某些用户想要看看教程
 
 
 710
-00:33:18,496 --> 00:33:19,446
-These are pretty obvious.
+00:32:21,775 --> 00:32:22,809
+其他人不会想看
 
 
 711
-00:33:20,106 --> 00:33:22,386
-One is when did you
-last use the asset.
+00:32:22,876 --> 00:32:26,446
+因此你应当确保app
+即使没有教程
 
 
 712
-00:33:22,436 --> 00:33:25,846
-So, for example, game Level 1
-that was played last Tuesday,
+00:32:26,747 --> 00:32:28,182
+也能够实际运行教程
 
 
 713
-00:33:25,846 --> 00:33:28,656
-that's probably a better
-candidate to delete
+00:32:28,248 --> 00:32:29,516
+但是最好还是确保有教程
 
 
 714
-00:33:28,656 --> 00:33:31,896
-than the level you
-finished last night.
+00:32:29,783 --> 00:32:30,884
+为了这么做
 
 
 715
-00:33:32,156 --> 00:33:35,306
-Also as Tony mentioned you
-have preservation priority
+00:32:31,552 --> 00:32:34,788
+你们还可以使用Xcode
+的资料标签UI
 
 
 716
-00:33:35,306 --> 00:33:37,116
-which is a ranking
-you can place on tags.
+00:32:34,855 --> 00:32:38,592
+然后将标签放进
+预取标签命令部分
 
 
 717
-00:33:38,026 --> 00:33:39,616
-So this is your own
-ranking but we take
+00:32:38,992 --> 00:32:41,261
+在你放到该部分的命令顺序
 
 
 718
-00:33:39,616 --> 00:33:40,716
-that into account as well.
+00:32:41,328 --> 00:32:43,463
+是实际上下载这些标签的顺序
 
 
 719
-00:33:41,416 --> 00:33:43,496
-And finally, we take
+00:32:44,765 --> 00:32:45,599
+好的
 
 
 720
-00:33:43,496 --> 00:33:45,146
-into account the
-running state of the app.
+00:32:46,867 --> 00:32:48,735
+现在谈谈缓存
 
 
 721
-00:33:45,686 --> 00:33:48,616
-We will not delete any asset
-packs from a running app
+00:32:48,802 --> 00:32:50,437
+我们之前提到缓存
 
 
 722
-00:33:48,986 --> 00:33:51,116
-when those assets
-are actually in use.
+00:32:50,504 --> 00:32:52,005
+而且还展示了系统是
 
 
 723
-00:33:51,726 --> 00:33:56,876
-Now, there are a few
-strategies you can use
+00:32:52,406 --> 00:32:55,876
+如何为新等级腾出
+Level 1的空间
 
 
 724
-00:33:57,136 --> 00:33:59,216
-to help preserve
-your ODR content.
+00:32:56,710 --> 00:32:59,746
+首先 需要了解的是
+我们会清理内容
 
 
 725
-00:33:59,896 --> 00:34:02,116
-One of them is to
-avoid overpurging.
+00:32:59,813 --> 00:33:01,782
+但只在系统内存占用度
+不高的情况进行
 
 
 726
-00:34:02,546 --> 00:34:03,506
-What do I mean by this?
+00:33:02,583 --> 00:33:06,086
+另外 也只有ODR内容会被清理
 
 
 727
-00:34:03,506 --> 00:34:04,886
-Let me give you an example.
+00:33:07,020 --> 00:33:08,689
+当我们这么做的时候
 
 
 728
-00:34:05,366 --> 00:34:07,886
-Let's say the system
-needs 100 megabytes,
+00:33:08,856 --> 00:33:11,692
+这里有几个属性会发挥作用
 
 
 729
-00:34:08,676 --> 00:34:09,985
-and it's gone everywhere else
+00:33:11,758 --> 00:33:14,094
+通知我们是否要
 
 
 730
-00:34:09,985 --> 00:34:11,466
-to find the space,
-it can't find it.
+00:33:14,494 --> 00:33:17,364
+删除哪个资料包
 
 
 731
-00:34:12,436 --> 00:34:14,815
-Through the attributes we
-discussed just a moment ago,
+00:33:18,465 --> 00:33:19,499
+很明显
 
 
 732
-00:34:15,536 --> 00:34:17,326
-it's located one of
-your asset packs,
+00:33:20,067 --> 00:33:22,336
+是删除上次使用的那个资料包
 
 
 733
-00:34:17,356 --> 00:34:19,646
-but that asset pack
-is 512 megabytes.
+00:33:22,402 --> 00:33:23,303
+因此 如果...
 
 
 734
-00:34:20,196 --> 00:34:22,565
-We are going to have to
-purge that asset pack
+00:33:23,670 --> 00:33:25,873
+玩游戏Level 1的时候是
+上周周二
 
 
 735
-00:34:22,565 --> 00:34:25,436
-if it met the conditions
-so we will have overpurged
+00:33:26,373 --> 00:33:30,244
+那么 很可能会在前一天
+完成Level 1的时候就被删除
 
 
 736
-00:34:25,476 --> 00:34:30,085
-by 412 megabytes, so it's better
-to keep your asset pack smaller.
+00:33:32,145 --> 00:33:35,215
+另外 正如托尼之提到的保留优先权
 
 
 737
-00:34:30,085 --> 00:34:33,735
-As I mentioned earlier, this
-is also good because you want
+00:33:35,282 --> 00:33:37,518
+这指的是对标签设置
+的优先级
 
 
 738
-00:34:33,735 --> 00:34:35,916
-to progressively download
-and consume content,
+00:33:37,985 --> 00:33:40,821
+因此 这是你自己的排序
+我们也会加以考虑
 
 
 739
-00:34:36,295 --> 00:34:37,835
-so smaller is better
-there as well.
+00:33:42,589 --> 00:33:45,492
+最后 我们会考虑
+app的运行状态
 
 
 740
-00:34:38,226 --> 00:34:40,786
-But smaller is also better
-here to avoid overpurging.
+00:33:45,993 --> 00:33:48,662
+我们不会在资料包
+正在使用的情况下
 
 
 741
-00:34:41,985 --> 00:34:43,036
-All right.
+00:33:48,962 --> 00:33:51,131
+删除运行中的app的
+任何资料包
 
 
 742
-00:34:44,335 --> 00:34:46,466
-Another thing you might
-be tempted to do is
+00:33:53,934 --> 00:33:56,870
+现在有几种策略
 
 
 743
-00:34:46,466 --> 00:34:49,696
-to tag everything with a
-1.0 preservation priority,
+00:33:57,137 --> 00:33:59,206
+用于保留ODR内容
 
 
 744
-00:34:50,326 --> 00:34:51,775
-but that doesn't
-really help you.
+00:33:59,907 --> 00:34:02,109
+其中之一是避免过度清理
 
 
 745
-00:34:52,286 --> 00:34:55,696
-That just makes more of
-your assets look equivalent
+00:34:02,543 --> 00:34:03,744
+什么意思呢？
 
 
 746
-00:34:55,786 --> 00:34:58,166
-to the system when it
-comes to it looking
+00:34:03,810 --> 00:34:05,045
+我可以举个例子
 
 
 747
-00:34:58,166 --> 00:35:00,206
-at purging something
-from your app.
+00:34:05,379 --> 00:34:07,881
+比如说系统需要100 MB空间
 
 
 748
-00:35:00,206 --> 00:35:03,426
-So you want to use the
-1.0 value judiciously.
+00:34:08,681 --> 00:34:09,949
+那么系统在进行整机搜索
 
 
 749
-00:35:03,996 --> 00:35:08,946
-And finally, again, make
-sure, because we look
+00:34:10,016 --> 00:34:11,618
+然而没有找到够大的空间
 
 
 750
-00:35:08,946 --> 00:35:12,426
-at the last used date that you
-endAccessingResources as soon
+00:34:12,452 --> 00:34:14,955
+通过我们刚提及的属性
 
 
 751
-00:35:12,426 --> 00:35:14,186
-as you are done with the tags
+00:34:15,522 --> 00:34:17,224
+系统会定位到你的资料包
 
 
 752
-00:35:14,916 --> 00:35:18,056
-or you allow the
-NSBundleResourceRequest object
+00:34:17,291 --> 00:34:19,659
+容量为512 MB
 
 
 753
-00:35:18,186 --> 00:35:19,506
-to deallocate as
-soon as possible.
+00:34:20,561 --> 00:34:22,429
+我需要清理资料包
 
 
 754
-00:35:19,806 --> 00:35:22,526
-This helps the system know
-how you are using the assets
+00:34:22,496 --> 00:34:23,797
+以符合空间要求
 
 
 755
-00:35:22,526 --> 00:35:26,286
-so it can make the
-best decisions.
+00:34:24,031 --> 00:34:27,266
+因此 我们需要
+过度清理412MB
 
 
 756
-00:35:26,286 --> 00:35:28,276
-Okay. Now, I would be
-remiss if I didn't talk
+00:34:27,768 --> 00:34:30,337
+所以你的资料包体积
+最好是小一点
 
 
 757
-00:35:28,276 --> 00:35:30,086
-about performance in this talk.
+00:34:30,603 --> 00:34:33,040
+正如我刚提及的 这也有好处
 
 
 758
-00:35:31,506 --> 00:35:33,626
-One of the things that
-we have been doing here
+00:34:33,106 --> 00:34:35,909
+因为想要快点下载好
+而且享用内容
 
 
 759
-00:35:33,626 --> 00:35:37,506
-in this session is to encourage
-you to download content
+00:34:36,275 --> 00:34:38,078
+因此体积越小就越好
 
 
 760
-00:35:37,506 --> 00:35:38,926
-in the background ahead of time.
+00:34:38,212 --> 00:34:40,781
+但是体积越小就越不容易被过度清理
 
 
 761
-00:35:40,056 --> 00:35:43,966
-But we don't want to
-do that at the expense
+00:34:42,748 --> 00:34:43,583
+好的
 
 
 762
-00:35:43,966 --> 00:35:46,326
-of consuming more
-resources of the system
+00:34:44,351 --> 00:34:46,553
+另一件你们可能想做的是
 
 
 763
-00:35:46,656 --> 00:35:47,826
-than your app can tolerate.
+00:34:46,887 --> 00:34:49,790
+对任何事设置1.0的优先权
 
 
 764
-00:35:48,596 --> 00:35:51,776
-So we balance the speed of a
-download with the resources,
+00:34:50,324 --> 00:34:51,925
+但这么做并无卵用
 
 
 765
-00:35:51,776 --> 00:35:54,836
-CPU and otherwise, that we
-consume while we download
+00:34:52,259 --> 00:34:55,195
+这么做只会让系统认为
 
 
 766
-00:35:54,836 --> 00:35:57,136
-and process these asset packs.
+00:34:55,262 --> 00:34:57,397
+更多的资料重要性是相等的
 
 
 767
-00:35:57,226 --> 00:35:58,016
-That's the default.
+00:34:57,531 --> 00:35:00,300
+特别是当系统在对app
+进行清理的情况下
 
 
 768
-00:35:58,496 --> 00:36:00,746
-But if you get into a
-situation or you just want
+00:35:00,601 --> 00:35:03,437
+因此 需要谨慎使用优先权设置
 
 
 769
-00:36:00,746 --> 00:36:02,236
-to manage this all on
-your own and you want
+00:35:06,306 --> 00:35:08,108
+最后请再次确认
 
 
 770
-00:36:02,236 --> 00:36:04,586
-to put full throttle
-down, then you can set it
+00:35:08,175 --> 00:35:10,143
+因为当你做完标注我们会看
 
 
 771
-00:36:04,586 --> 00:36:08,476
-with the urgent priority, and we
-will disregard that balancing,
+00:35:10,410 --> 00:35:14,581
+上次endAccessingResources
+的使用日期
 
 
 772
-00:36:08,476 --> 00:36:10,946
-and we will download the
-content as quickly as possible.
+00:35:14,915 --> 00:35:18,051
+确认允许NS Bundle
+Resource Request对象
 
 
 773
-00:36:11,626 --> 00:36:14,966
-Again, as Tony mentioned, this
-is a good time to set this
+00:35:18,185 --> 00:35:19,520
+尽快解除分配
 
 
 774
-00:36:14,966 --> 00:36:17,096
-when you are putting
-up the loading screen,
+00:35:19,820 --> 00:35:22,389
+这会让系统知道
+你将如何使用该资料
 
 
 775
-00:36:17,616 --> 00:36:20,976
-but your app actually may be
-tolerant to the CPU usage,
+00:35:22,456 --> 00:35:24,258
+这样系统会给出最佳决策
 
 
 776
-00:36:20,976 --> 00:36:24,366
-for example, that we have on the
-system when we are doing this.
+00:35:26,293 --> 00:35:28,195
+好的
+现在 我想开始谈谈
 
 
 777
-00:36:24,596 --> 00:36:27,986
-So it's all up to you.
+00:35:28,262 --> 00:35:30,330
+性能方面的事情
 
 
 778
-00:36:27,986 --> 00:36:32,516
-And also, we should talk
-about performance testing.
+00:35:31,498 --> 00:35:34,568
+其中之一是我们在
+本次会议想做的事
 
 
 779
-00:36:32,516 --> 00:36:35,346
-You need to do real world
-testing for an ODR application.
+00:35:34,635 --> 00:35:38,939
+是鼓励大家
+提前在后台下载内容
 
 
 780
-00:36:35,616 --> 00:36:38,176
-An ODR application is a
-network-based application.
+00:35:40,040 --> 00:35:42,543
+但是我们不想要让大家
 
 
 781
-00:36:38,486 --> 00:36:41,106
-So when you have your
-device connected via USB
+00:35:43,010 --> 00:35:46,313
+浪费更太多的系统资源
 
 
 782
-00:36:41,106 --> 00:36:44,806
-to your MacBook Pro, for
-example, running Xcode,
+00:35:46,613 --> 00:35:48,081
+超过app所能容纳的资源
 
 
 783
-00:36:45,026 --> 00:36:48,006
-that's not a real
-world scenario.
+00:35:48,582 --> 00:35:51,785
+因此 我们平衡了
+下载速度 资源
 
 
 784
-00:36:48,006 --> 00:36:48,976
-That's just far too fast.
+00:35:51,852 --> 00:35:53,086
+CPU和其他属性
 
 
 785
-00:36:49,926 --> 00:36:51,706
-So what you want to do is
+00:35:53,153 --> 00:35:55,022
+这样我们只有在下载
+和使用资料包的时候
 
 
 786
-00:36:51,706 --> 00:36:56,176
-to test your app using perhaps
-TestFlight or Xcode Server.
+00:35:55,088 --> 00:35:56,456
+才会消耗系统资源
 
 
 787
-00:36:57,506 --> 00:37:01,976
-And then also use the Developer
-Tools Network Link Conditioner
+00:35:57,224 --> 00:35:58,058
+这是预设情况
 
 
 788
-00:37:02,696 --> 00:37:05,246
-to test out various
-networking conditions
+00:35:58,492 --> 00:36:01,762
+但如果有需要
+或者想要自行进行管理
 
 
 789
-00:37:06,046 --> 00:37:08,006
-that might cause
-issues for your app
+00:36:01,828 --> 00:36:03,797
+或者想要完全手动操作
 
 
 790
-00:37:08,526 --> 00:37:10,576
-in how soon ODR content
-is downloading.
+00:36:03,864 --> 00:36:05,866
+那么你可以在这里设置紧急优先
 
 
 791
-00:37:11,056 --> 00:37:13,806
-In fact, I would recommend using
-this tool for any networking
+00:36:06,400 --> 00:36:08,435
+系统会忽略平衡设置
 
 
 792
-00:37:13,806 --> 00:37:14,806
-that you are doing
-from your app.
+00:36:08,502 --> 00:36:11,038
+我们将会以最快速度下载内容
 
 
 793
-00:37:14,806 --> 00:37:15,396
-It's really great.
+00:36:11,638 --> 00:36:15,542
+正如托尼提到的
+当你提供载入画面时
 
 
 794
-00:37:15,846 --> 00:37:18,236
-If you haven't used it
-before, I would like to cover
+00:36:15,976 --> 00:36:17,177
+那时候就是设置的好时机
 
 
 795
-00:37:18,236 --> 00:37:19,426
-that now just briefly.
+00:36:17,611 --> 00:36:20,948
+但实际上你的App
+可能与CPU不兼容
 
 
 796
-00:37:19,786 --> 00:37:23,286
-So when you attach
-your device via USB
+00:36:21,014 --> 00:36:23,283
+与我们在系统这样操作情况一样
 
 
 797
-00:37:23,286 --> 00:37:26,506
-to your MacBook Pro again,
-for example, of running Xcode
+00:36:24,451 --> 00:36:25,586
+因此 这完全取决于你
 
 
 798
-00:37:26,506 --> 00:37:28,606
-and you then you go to Settings
-on your device you are going
+00:36:27,821 --> 00:36:29,022
+而且
 
 
 799
-00:37:28,606 --> 00:37:30,676
-to see this entry,
-a developer entry.
+00:36:29,223 --> 00:36:31,191
+我们应该讨论性能测试
 
 
 800
-00:37:30,676 --> 00:37:34,496
-You tap that and you
-will see numerous numbers
+00:36:32,392 --> 00:36:35,362
+你需要为ODR的App做
+现世测试
 
 
 801
-00:37:34,916 --> 00:37:38,596
-of developer settings that you
-can use in logging, et cetera,
+00:36:35,629 --> 00:36:38,165
+ODR App是一个
+基于网络的App
 
 
 802
-00:37:38,596 --> 00:37:41,586
-and in the middle there is
-the Network Link Conditioner.
+00:36:38,832 --> 00:36:41,001
+因此当你使用USB将你的设备
 
 
 803
-00:37:41,936 --> 00:37:46,546
-So you tap that, and now you
-see the options that you can use
+00:36:41,068 --> 00:36:43,904
+连接到你的MacBook Pro
 
 
 804
-00:37:46,546 --> 00:37:49,906
-to cause various
-conditions to be present
+00:36:43,971 --> 00:36:44,972
+并运行Xcode
 
 
 805
-00:37:49,906 --> 00:37:52,296
-when networking out of your app.
+00:36:45,038 --> 00:36:47,975
+那不是真实的场景
 
 
 806
-00:37:52,296 --> 00:37:55,816
-To use this, you enable the
-Network Link Conditioner,
+00:36:48,041 --> 00:36:49,142
+真是太快了
 
 
 807
-00:37:56,206 --> 00:37:59,016
-and then you decide what type
-of situation you want to create.
+00:36:49,910 --> 00:36:51,144
+所以你要做的是
 
 
 808
-00:37:59,406 --> 00:38:03,606
-Perhaps you want to mimic 100%
-loss or very slow network,
+00:36:51,445 --> 00:36:56,216
+使用TestFlight或Xcode
+服务器来测试你的App
 
 
 809
-00:38:04,386 --> 00:38:08,546
-or perhaps a high latency in
-DNS lookups, or you just want
+00:36:57,518 --> 00:37:01,989
+然后使用Developer Tools
+Network Link Conditioner
 
 
 810
-00:38:08,546 --> 00:38:10,266
-to reproduce a really
-bad network.
+00:37:02,689 --> 00:37:05,259
+来测试各种网络条件
 
 
 811
-00:38:10,966 --> 00:38:12,896
-So this is a great tool
+00:37:06,059 --> 00:37:08,362
+你的App在ODR内容下载时
 
 
 812
-00:38:12,896 --> 00:38:17,736
-to use while you test
-your ODR application.
+00:37:08,529 --> 00:37:10,564
+可能会出问题
 
 
 813
-00:38:17,736 --> 00:38:21,016
-Okay. Now, speaking
-of networking issues,
+00:37:11,064 --> 00:37:12,999
+事实上
+我建议你在任何网络App上
 
 
 814
-00:38:21,016 --> 00:38:24,326
-you may encounter a couple of
-networking errors along the way.
+00:37:13,066 --> 00:37:14,868
+使用这个工具
 
 
 815
-00:38:24,986 --> 00:38:26,166
-One of them is this one.
+00:37:14,935 --> 00:37:15,769
+真的很好用
 
 
 816
-00:38:26,166 --> 00:38:27,506
-Obviously there is no network.
+00:37:15,836 --> 00:37:17,271
+如果之前你还没有使用过它
 
 
 817
-00:38:28,046 --> 00:38:31,316
-So if your app needed ODR
-content and there is no network,
+00:37:17,337 --> 00:37:19,439
+那我现在做个简短说明
 
 
 818
-00:38:31,316 --> 00:38:33,526
-you need to be ready to
-handle this situation.
+00:37:20,140 --> 00:37:21,675
+当你把你的...
 
 
 819
-00:38:35,036 --> 00:38:38,756
-Another area you may encounter
-is resource unavailable,
+00:37:22,109 --> 00:37:23,243
+设备通过USB连接到
 
 
 820
-00:38:38,756 --> 00:38:41,556
-and basically what this means is
-we thought the ODR content was
+00:37:23,310 --> 00:37:25,279
+MacBook Pro上
+运行Xcode时
 
 
 821
-00:38:41,556 --> 00:38:43,546
-going to be in a certain
-location and it wasn't.
+00:37:25,546 --> 00:37:27,314
+然后设置设备时候会看到这个条目
 
 
 822
-00:38:44,086 --> 00:38:47,256
-Generally the case or the cause
-of this will be, for example,
+00:37:27,381 --> 00:37:29,583
+一个开发者条目
 
 
 823
-00:38:47,256 --> 00:38:50,206
-setting up a server
-inside of your own company
+00:37:29,883 --> 00:37:32,586
+你点击后会看到大量的
 
 
 824
-00:38:50,206 --> 00:38:52,186
-and someone is managing
-it, moving things around,
+00:37:32,653 --> 00:37:38,825
+开发者设置
+您可以使用日志等等
 
 
 825
-00:38:52,526 --> 00:38:55,506
-and they just weren't ready
-for the users to use that app.
+00:37:38,892 --> 00:37:41,762
+中间有Network
+Link Conditioner
 
 
 826
-00:38:56,176 --> 00:38:59,466
-So just to be ready
-for that error as well.
+00:37:42,162 --> 00:37:43,530
+点击你看到的选项
 
 
 827
-00:38:59,896 --> 00:39:04,056
-Another class of error that
-you can encounter relates
+00:37:43,897 --> 00:37:45,165
+您可以看到
 
 
 828
-00:39:04,056 --> 00:39:05,026
-to storage space.
+00:37:45,232 --> 00:37:47,501
+你可以用来造成App断网时的
 
 
 829
-00:39:06,296 --> 00:39:11,336
-So ODR will allow your app
-to have a maximum of 2 gig
+00:37:47,568 --> 00:37:51,839
+各种情况的... 各选择
 
 
 830
-00:39:11,336 --> 00:39:12,586
-in use at any one time.
+00:37:52,239 --> 00:37:56,009
+要用它 启用Network
+Link Conditioner
 
 
 831
-00:39:13,466 --> 00:39:15,286
-What this means is
-your app is running,
+00:37:56,210 --> 00:37:59,012
+然后决定你想要创建
+什么类型的情况
 
 
 832
-00:39:15,686 --> 00:39:18,916
-you have called
-beginAccessingResources on tags
+00:37:59,413 --> 00:38:02,015
+也许你想模仿100%的无网络状态
 
 
 833
-00:39:19,466 --> 00:39:22,216
-that amount to 2 gigabytes,
+00:38:02,316 --> 00:38:03,851
+或非常缓慢的网络
 
 
 834
-00:39:22,806 --> 00:39:24,936
-you haven't called
-endAccessingResources on any
+00:38:04,384 --> 00:38:07,154
+或者高延时DNS查找
 
 
 835
-00:39:24,936 --> 00:39:28,326
-of those, you haven't allowed
-the NSBundleResourceRequest
+00:38:07,654 --> 00:38:10,591
+或者你只是想重创
+非常糟糕的网络
 
 
 836
-00:39:28,666 --> 00:39:32,166
-to dealloc for any of those,
-so that 2 gig is in use.
+00:38:11,258 --> 00:38:15,696
+这便是使用ODR App的最佳工具
 
 
 837
-00:39:32,486 --> 00:39:34,026
-And then you go and
-make another request.
+00:38:17,364 --> 00:38:18,198
+好的
 
 
 838
-00:39:34,446 --> 00:39:36,116
-That goes over and you
-are going to get an error
+00:38:18,699 --> 00:38:20,200
+说到网络问题
 
 
 839
-00:39:36,116 --> 00:39:37,506
-in your request, a callback.
+00:38:20,267 --> 00:38:24,605
+你可能会遇到几个网络错误
 
 
 840
-00:39:38,316 --> 00:39:40,856
-So be aware of that as well.
+00:38:25,005 --> 00:38:26,173
+其中一个
 
 
 841
-00:39:41,336 --> 00:39:44,576
-Also, of course, we just might
-hit a low-space condition
+00:38:26,240 --> 00:38:27,741
+没有网络
 
 
 842
-00:39:44,866 --> 00:39:46,296
-on local storage on the device.
+00:38:27,975 --> 00:38:31,078
+如果你的App需要ODR内容
+却没有网络
 
 
 843
-00:39:46,296 --> 00:39:48,076
-And you will get
-this notification.
+00:38:31,211 --> 00:38:33,714
+那么你需要准备好处理这种情况
 
 
 844
-00:39:48,806 --> 00:39:51,196
-This can happen if you
-have initiated a download
+00:38:35,048 --> 00:38:38,719
+您可能遇到的另一个问题
+是资源不可用
 
 
 845
-00:39:51,196 --> 00:39:54,736
-or maybe it happens long
-after you made that request.
+00:38:38,785 --> 00:38:41,488
+这基本上意味着
+我们认为ODR的内容
 
 
 846
-00:39:55,766 --> 00:39:57,186
-So just be prepared
-to handle that.
+00:38:41,555 --> 00:38:43,557
+在一个特定的位置
+然而不是那么回事儿
 
 
 847
-00:39:57,566 --> 00:39:59,156
-To handle it you could
-do a couple of things;
+00:38:44,091 --> 00:38:47,227
+一般的原因 例如在公司内部
 
 
 848
-00:39:59,196 --> 00:40:01,006
-you could endAccessingResources
+00:38:47,294 --> 00:38:50,130
+建立自己的服务器并有人管理
 
 
 849
-00:40:01,006 --> 00:40:03,236
-on any ODR content
-you no longer need.
+00:38:50,197 --> 00:38:52,366
+移动服务器文件等
 
 
 850
-00:40:04,656 --> 00:40:06,926
-And you can also look
-at what you are storing
+00:38:52,533 --> 00:38:55,702
+但是还没准备好
+让用户使用App
 
 
 851
-00:40:06,926 --> 00:40:09,416
-on the local device, perhaps
-some caches or other documents
+00:38:56,170 --> 00:38:58,172
+所以要随时准备应对错误发生
 
 
 852
-00:40:09,416 --> 00:40:10,456
-that you actually don't need,
+00:38:59,907 --> 00:39:02,442
+另一类错误可能会遇到
 
 
 853
-00:40:10,866 --> 00:40:12,946
-and you could free those
-up and delete those.
+00:39:03,510 --> 00:39:05,012
+就是存储空间有关的问题
 
 
 854
-00:40:13,486 --> 00:40:18,556
-So now let's talk
-about cellular data.
+00:39:06,280 --> 00:39:07,814
+所以ODR在任何时候
 
 
 855
-00:40:18,866 --> 00:40:21,586
-Again, an ODR application
-is a network application.
+00:39:07,881 --> 00:39:12,786
+将允许你有最大的2G的应用空间
 
 
 856
-00:40:22,066 --> 00:40:25,016
-So it is governed by the
-same cellular data switch
+00:39:13,453 --> 00:39:15,489
+这意味着你的App
+正在运行的时候
 
 
 857
-00:40:25,896 --> 00:40:27,816
-that controls the rest
-of your app's networking.
+00:39:15,689 --> 00:39:19,126
+你已经调用标签2G的
 
 
 858
-00:40:28,246 --> 00:40:30,846
-So if that switch is
-off, you will not be able
+00:39:19,459 --> 00:39:22,396
+beginAccessingResources
 
 
 859
-00:40:30,846 --> 00:40:32,166
-to get any ODR content.
+00:39:22,696 --> 00:39:25,532
+用完后却没调用
+endAccessingResources
 
 
 860
-00:40:33,176 --> 00:40:36,546
-If that switch is on, and you
-are downloading ODR content,
+00:39:25,599 --> 00:39:28,702
+你不允许NS Bundle
+Resource Request
 
 
 861
-00:40:37,176 --> 00:40:41,316
-then any of that data that
-you use over cellular is going
+00:39:28,769 --> 00:39:30,304
+进行终止处理
 
 
 862
-00:40:41,316 --> 00:40:43,176
-to be attributed to your app.
+00:39:30,604 --> 00:39:32,339
+所以占用2G空间
 
 
 863
-00:40:43,576 --> 00:40:46,216
-So this should encourage
-you to make sure you ask
+00:39:32,673 --> 00:39:34,241
+然后你又去启动另一个请求
 
 
 864
-00:40:46,476 --> 00:40:48,256
-for what you need
-and not any more.
+00:39:34,441 --> 00:39:36,944
+你会再次得到一个请求错误
 
 
 865
-00:40:49,016 --> 00:40:52,936
-We don't want to run
-up a user's bill.
+00:39:37,010 --> 00:39:37,845
+回叫反馈
 
 
 866
-00:40:53,146 --> 00:40:56,666
-And finally, the 100-megabyte
-cellular download limit still
+00:39:38,312 --> 00:39:39,646
+所以要注意
 
 
 867
-00:40:56,666 --> 00:40:58,286
-applies to ODR applications,
+00:39:41,348 --> 00:39:44,718
+当然我们可能在
+本地存储在设备上
 
 
 868
-00:40:58,626 --> 00:41:01,966
-so remember where I had
-the dot app plus the size
+00:39:44,785 --> 00:39:46,753
+遇到空间不足的情况
 
 
 869
-00:41:01,966 --> 00:41:04,086
-of initial ODR adding
-to up the size
+00:39:46,820 --> 00:39:48,188
+你就会收到通知
 
 
 870
-00:41:04,086 --> 00:41:05,526
-of the app listed
-in the App Store?
+00:39:48,822 --> 00:39:51,158
+这可能是因为你下载太多
 
 
 871
-00:41:06,046 --> 00:41:09,196
-Well, if that's greater than 100
-megabytes, your app is not going
+00:39:51,225 --> 00:39:55,128
+或者你发出该下载请求太久
 
 
 872
-00:41:09,196 --> 00:41:12,086
-to download over cellular,
-just like a normal app
+00:39:55,762 --> 00:39:57,497
+所以还是需要随时准备
+处理这些问题
 
 
 873
-00:41:12,266 --> 00:41:14,166
-that was greater than
-100 megabytes would not.
+00:39:57,564 --> 00:39:59,333
+这时候你可以采取一些处理步骤
 
 
 874
-00:41:15,206 --> 00:41:18,406
-So you need to be aware of
-that limitation as well.
+00:39:59,399 --> 00:40:00,234
+你可以停止任何
 
 
 875
-00:41:20,656 --> 00:41:24,146
-Finally, as we begin
-to wrap this up,
+00:40:00,300 --> 00:40:03,504
+不再需要的ODR内容的
+Accessing Resources
 
 
 876
-00:41:24,146 --> 00:41:27,146
-there is some vital statistics
-that you need to be aware of.
+00:40:04,671 --> 00:40:06,840
+另外 你可以看看本地设备上
+储存的是什么资料
 
 
 877
-00:41:27,896 --> 00:41:32,996
-First of all, although you can
-have an ODR application have a
+00:40:06,907 --> 00:40:08,642
+也许是一些缓冲数据
 
 
 878
-00:41:32,996 --> 00:41:34,886
-size of up to 20
-gig in the Store,
+00:40:08,709 --> 00:40:10,444
+或者一些已不在需要用到的文件
 
 
 879
-00:41:35,436 --> 00:41:39,666
-a maximum of 2 gig is
-reserved for your dot app.
+00:40:10,878 --> 00:40:12,946
+你可以清理一下并进行删除
 
 
 880
-00:41:40,076 --> 00:41:41,156
-So your dot app itself?
+00:40:15,949 --> 00:40:17,885
+那么 现在我们来谈谈蜂窝数据
 
 
 881
-00:41:41,406 --> 00:41:43,586
-Remember when we teased apart
-the assets from your dot app,
+00:40:18,852 --> 00:40:21,588
+再次说明ODR App
+是一款网络型应用
 
 
 882
-00:41:43,586 --> 00:41:45,136
-we had the asset packs
-and then your dot app?
+00:40:22,189 --> 00:40:25,025
+因此需要使用到蜂窝数据开关
 
 
 883
-00:41:45,586 --> 00:41:47,876
-That dot app can be a
-maximum of 2 gigabytes.
+00:40:25,893 --> 00:40:28,028
+用于控制其他App的网络连接
 
 
 884
-00:41:48,286 --> 00:41:50,706
-The rest of it can be
-ODR content up to 20 gig.
+00:40:28,262 --> 00:40:30,097
+因此 如果关闭开关
 
 
 885
-00:41:50,876 --> 00:41:56,416
-And you can have a
-maximum of 2 gig of initial
+00:40:30,163 --> 00:40:32,165
+那么就不能获取到ODR文件
 
 
 886
-00:41:56,416 --> 00:41:58,126
-and pre-fetched ODR content.
+00:40:33,467 --> 00:40:36,737
+如果开启开关
+并且你正在下载ODR内容
 
 
 887
-00:41:58,126 --> 00:42:00,106
-This is the content we
-set up in Xcode's UI
+00:40:37,171 --> 00:40:39,773
+那么通过蜂窝数据下载的任何数据
 
 
 888
-00:42:01,146 --> 00:42:03,636
-to download things
-during the app install
+00:40:39,940 --> 00:40:42,843
+将算是该App产生网络数据
 
 
 889
-00:42:03,636 --> 00:42:04,736
-and right afterwards.
+00:40:43,577 --> 00:40:45,812
+因此 我们鼓励大家一定确保
 
 
 890
-00:42:05,016 --> 00:42:10,596
-You can have a maximum of two
-gigabytes of that combined,
+00:40:45,879 --> 00:40:48,415
+什么是所需的 什么是不再需要的
 
 
 891
-00:42:10,596 --> 00:42:13,696
-and as I mentioned just a moment
-ago, a maximum of two gigabytes
+00:40:49,016 --> 00:40:50,884
+我们不希望用户
+产生高额的网络费用
 
 
 892
-00:42:13,776 --> 00:42:16,656
-in use at any one time.
+00:40:53,153 --> 00:40:54,021
+最后
 
 
 893
-00:42:16,766 --> 00:42:19,896
-And finally, a given asset
-pack can be a maximum
+00:40:54,421 --> 00:40:56,123
+100MB的蜂窝下载限制
 
 
 894
-00:42:19,896 --> 00:42:21,236
-of 512 megabytes.
+00:40:56,190 --> 00:40:58,292
+仍适用于ODR App 
 
 
 895
-00:42:22,786 --> 00:42:25,366
-So if you take a single tag
-and tag a bunch of resources,
+00:40:58,926 --> 00:41:01,395
+因此 要确认.app本身
 
 
 896
-00:42:25,496 --> 00:42:28,766
-and that adds up to more than
-512 megabytes, Xcode is going
+00:41:01,461 --> 00:41:02,930
+和初始ODR的数据
 
 
 897
-00:42:28,766 --> 00:42:31,586
-to give you a warning, but
-it will allow you to continue
+00:41:02,996 --> 00:41:05,666
+是否超过App Store的
+App体积限制
 
 
 898
-00:42:31,586 --> 00:42:34,946
-to develop your app or game, but
-when you submit to the Store,
+00:41:06,033 --> 00:41:08,135
+如果超过100 MB
 
 
 899
-00:42:34,946 --> 00:42:36,456
-you are going to get
-a submission failure,
+00:41:08,335 --> 00:41:10,704
+那么你的App不会
+通过蜂窝数据下载
 
 
 900
-00:42:36,936 --> 00:42:41,176
-and the submission failure
-error message will explain why.
+00:41:10,771 --> 00:41:12,506
+正如一般的App
+超过100 MB的话
 
 
 901
-00:42:41,406 --> 00:42:45,796
-Okay. So in summary, On Demand
-Resources is a dynamically
+00:41:12,573 --> 00:41:14,174
+就不会通过蜂窝数据下载一样
 
 
 902
-00:42:45,796 --> 00:42:46,966
-loaded content system.
+00:41:15,209 --> 00:41:16,043
+因此
 
 
 903
-00:42:47,896 --> 00:42:49,156
-Hosted in the App Store.
+00:41:16,210 --> 00:41:18,645
+需要注意App的大小
 
 
 904
-00:42:50,156 --> 00:42:51,146
-This can be automated
+00:41:20,914 --> 00:41:24,017
+最后 正如前面所说
 
 
 905
-00:42:51,666 --> 00:42:55,056
-to download content during app
-install time and by request.
+00:41:24,084 --> 00:41:26,687
+你们还需要注意一些
+重要的统计数据
 
 
 906
-00:42:56,236 --> 00:42:58,436
-You can prioritize or
-order these downloads.
+00:41:27,888 --> 00:41:29,022
+首先
 
 
 907
-00:42:59,776 --> 00:43:02,146
-We have an intelligent caching
-mechanism so that, for example,
+00:41:29,556 --> 00:41:32,025
+虽然App Store现在可以储存
 
 
 908
-00:43:02,146 --> 00:43:05,246
-we could get rid of that game
-Level 1 in order to make space
+00:41:32,492 --> 00:41:35,162
+超过20G的ODR App 
 
 
 909
-00:43:05,296 --> 00:43:10,846
-for a following level, and
-you get 20 gig in the Store.
+00:41:35,429 --> 00:41:37,030
+但是对于.app而言...
 
 
 910
-00:43:11,026 --> 00:43:13,916
-So for more information we
-have a great new documentation
+00:41:37,965 --> 00:41:39,833
+只有最高2g的空间
 
 
 911
-00:43:13,916 --> 00:43:16,596
-on ODR; we also have
-sample code,
+00:41:39,900 --> 00:41:41,335
+那么 你的
+.app本身如何呢？
 
 
 912
-00:43:17,066 --> 00:43:19,616
-and the developer forums are
-always a great place to go.
+00:41:41,401 --> 00:41:43,504
+请记得
+当我们分解.app中的资料时
 
 
 913
-00:43:19,616 --> 00:43:22,296
-And if you still have
-questions you can follow
+00:41:43,570 --> 00:41:45,472
+我们分解的资料包
+那么.app本身呢？
 
 
 914
-00:43:22,296 --> 00:43:24,056
-up with our App Frameworks
-evangelist.
+00:41:45,572 --> 00:41:48,008
+.app最高可以有2G
 
 
 915
-00:43:24,966 --> 00:43:26,576
-You may have missed
-a couple of sessions
+00:41:48,275 --> 00:41:50,878
+剩下的ODR内容可以有20G
 
 
 916
-00:43:26,906 --> 00:43:30,556
-on other technologies
-that relate to ODR.
+00:41:52,813 --> 00:41:58,018
+另外 初始ODR和预取ODR内容
+最高也是2G
 
 
 917
-00:43:31,146 --> 00:43:35,156
-Those will be available via
-videos on the developer website.
+00:41:58,085 --> 00:42:00,387
+该内容是我们在
+Xcode的UI中设置的
 
 
 918
-00:43:35,156 --> 00:43:38,716
-And there is going to be a
-session as Tony indicated
+00:42:01,121 --> 00:42:04,758
+用于在App安装过程中
+和后续过程中下载数据
 
 
 919
-00:43:38,716 --> 00:43:43,896
-about progress on Friday as well
-as a lab tomorrow from 11:00
+00:42:04,992 --> 00:42:06,593
+你最高可以有2GB
 
 
 920
-00:43:43,896 --> 00:43:45,766
-to 1:30 dedicated to ODR.
+00:42:06,827 --> 00:42:08,629
+合起来 2GB
 
 
 921
-00:43:46,016 --> 00:43:49,426
-Tony and I and the extended ODR
-engineering team will be there
+00:42:10,531 --> 00:42:12,399
+正如我刚刚所说
 
 
 922
-00:43:49,426 --> 00:43:51,146
-to answer any of your questions,
+00:42:12,466 --> 00:42:15,035
+只能在同一时间使用最高2G
 
 
 923
-00:43:51,146 --> 00:43:52,956
-get you started using
-ODR content,
+00:42:16,837 --> 00:42:18,705
+最后 给定的资料包
 
 
 924
-00:43:52,956 --> 00:43:56,446
-and listen to any
-suggestions you might have.
+00:42:19,039 --> 00:42:21,341
+最高可以有512MB
 
 
 925
-00:43:56,926 --> 00:43:57,536
-Thank you very much!
+00:42:22,743 --> 00:42:25,379
+因此 如果使用一个标签
+标记一堆资料
 
 
 926
-00:43:58,016 --> 00:44:00,000
-[Applause]
+00:42:25,546 --> 00:42:29,716
+且提及超过512M
+那么Xcode将发出警告
+
+
+927
+00:42:29,783 --> 00:42:33,320
+但是Xcode会允许你继续
+开发App或者游戏
+
+
+928
+00:42:33,754 --> 00:42:36,623
+但是当你提交到
+App Store之时
+
+
+929
+00:42:36,924 --> 00:42:39,560
+会收到提交失败的错误信息
+并解释原因
+
+
+930
+00:42:41,395 --> 00:42:44,531
+好的 总结一下
+On Demand Resources
+
+
+931
+00:42:44,598 --> 00:42:47,034
+是一款动态加载内容系统
+
+
+932
+00:42:47,835 --> 00:42:49,369
+服务器在App Store之中
+
+
+933
+00:42:50,137 --> 00:42:51,438
+这样可以允许app...
+
+
+934
+00:42:51,672 --> 00:42:55,242
+在安装期间自动和在有要求提出下
+下载其内容
+
+
+935
+00:42:56,210 --> 00:42:58,445
+你可以对下载内容设置优先级
+
+
+936
+00:42:59,746 --> 00:43:01,181
+我们有了智能缓冲机制
+
+
+937
+00:43:01,248 --> 00:43:06,553
+因此当我们等级提升后
+会为后面的级别腾出空间
+
+
+938
+00:43:07,387 --> 00:43:09,489
+在App Store有
+20G的空间供你使用
+
+
+939
+00:43:10,991 --> 00:43:14,461
+因此 如果想知道更多信息
+我们有关于ODR一份新文件
+
+
+940
+00:43:15,128 --> 00:43:16,296
+还有简单的代码
+
+
+941
+00:43:17,030 --> 00:43:19,633
+以及开发者论坛可为你答疑解惑
+
+
+942
+00:43:20,367 --> 00:43:21,468
+如果你仍有疑问
+
+
+943
+00:43:21,535 --> 00:43:24,137
+你可以联系我们的
+App Frameworks专员
+
+
+944
+00:43:24,972 --> 00:43:26,740
+如果你错过了
+
+
+945
+00:43:26,940 --> 00:43:30,611
+关于ODR大会等其他技术的大会
+
+
+946
+00:43:31,144 --> 00:43:35,249
+你可以到开发者网站去观看视频
+
+
+947
+00:43:35,883 --> 00:43:36,717
+接下来
+
+
+948
+00:43:37,050 --> 00:43:40,754
+会有一场托尼在星期五所说的
+关于ODR进程
+
+
+949
+00:43:41,788 --> 00:43:45,726
+和实验的大会
+时间是明天11点到1点30
+
+
+950
+00:43:45,993 --> 00:43:49,329
+托尼和我以及
+ODR工程组将出席会议
+
+
+951
+00:43:49,396 --> 00:43:51,064
+回答你们的任何疑问
+
+
+952
+00:43:51,131 --> 00:43:52,900
+帮助你们开始使用ODR内容
+
+
+953
+00:43:53,800 --> 00:43:55,769
+并听取大家的建议
+
+
+954
+00:43:56,670 --> 00:43:57,504
+非常感谢
 

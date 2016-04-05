@@ -1,4801 +1,4036 @@
 1
-00:00:24,516 --> 00:00:29,376
-[Cheering and applause]
+00:00:29,863 --> 00:00:30,964
+大家好
 
 
 2
-00:00:29,876 --> 00:00:30,696
->> BRITTANY PAINE: Hi, everyone.
+00:00:31,031 --> 00:00:32,698
+我的名字是布蕾特妮·佩因
 
 
 3
-00:00:30,996 --> 00:00:33,166
-My name is Brittany Paine,
+00:00:32,766 --> 00:00:36,003
+接下来你们将和乔恩·德拉蒙德见面
 
 
 4
-00:00:33,286 --> 00:00:35,966
-and later you will
-meet Jon Drummond.
+00:00:36,336 --> 00:00:38,372
+我们是
+SpringBoard团队的工程师
 
 
 5
-00:00:36,336 --> 00:00:38,386
-We are engineers on
-the SpringBoard team.
+00:00:38,739 --> 00:00:41,542
+今天我们主要想
+和你们聊聊怎么调整你的app 
 
 
 6
-00:00:38,736 --> 00:00:41,326
-Today we are going to talk to
-you about optimizing your app
+00:00:41,608 --> 00:00:44,478
+以运用iPad和
+iOS 9上多任务处理功能
 
 
 7
-00:00:41,606 --> 00:00:44,066
-for multitasking
-on iPad and iOS 9.
+00:00:46,513 --> 00:00:49,883
+这是多任务处理系列中的第三个讲座
 
 
 8
-00:00:46,446 --> 00:00:47,946
-This is actually the third talk
+00:00:50,317 --> 00:00:52,786
+很可惜前面两个已经结束了
 
 
 9
-00:00:47,946 --> 00:00:51,466
-in the series related
-to multitasking.
+00:00:52,853 --> 00:00:56,290
+如果你们还没来得及收看的话 
+应该去看一下
 
 
 10
-00:00:51,466 --> 00:00:52,916
-The first two already happened.
+00:00:58,392 --> 00:01:00,694
+那么我今天有很多话要说
+乔恩也是
 
 
 11
-00:00:53,016 --> 00:00:54,816
-If you didn't get a
-chance to watch them,
+00:01:00,761 --> 00:01:02,663
+我们会讲得很快
 
 
 12
-00:00:55,476 --> 00:00:56,256
-you should go watch them.
+00:01:02,729 --> 00:01:03,730
+请注意听
 
 
 13
-00:00:56,326 --> 00:01:00,076
-So I have a lot to say today.
+00:01:05,566 --> 00:01:07,367
+所以这就是你的app
 
 
 14
-00:01:00,076 --> 00:01:00,746
-Jon does too.
+00:01:07,568 --> 00:01:13,307
+在iOS 8中你的app 
+支配了你的整台仪器
 
 
 15
-00:01:00,746 --> 00:01:02,686
-We are going to go pretty fast.
+00:01:13,373 --> 00:01:16,944
+它可以尽量
+使用仪器上所应许的系统资源分量
 
 
 16
-00:01:02,746 --> 00:01:03,716
-Put on your listening ears.
+00:01:17,878 --> 00:01:21,782
+但在iOS 9中多任务处理
+已经不再像往常一样了
 
 
 17
-00:01:05,576 --> 00:01:07,836
-So this is your app.
+00:01:22,482 --> 00:01:26,787
+它可以也可能
+在同一个屏幕里出现更多的app
 
 
 18
-00:01:07,836 --> 00:01:13,326
-In iOS 8, your app had the
-full device at your disposal.
+00:01:27,287 --> 00:01:30,757
+而在所有屏幕上的app
+现在必须共享同一个系统资源
 
 
 19
-00:01:13,386 --> 00:01:15,616
-It could use as much
-system resources
+00:01:32,092 --> 00:01:36,730
+像是CPU GPU DISK
+I/O之类的一些系统资源
 
 
 20
-00:01:15,616 --> 00:01:16,896
-as the device had available.
+00:01:36,897 --> 00:01:40,200
+随着多个程序互相争夺
+CPU的容量而退化
 
 
 21
-00:01:17,886 --> 00:01:21,626
-However, in multitasking in iOS
-9 this is no longer the case.
+00:01:40,901 --> 00:01:42,870
+让我们以CPU为例子
 
 
 22
-00:01:22,476 --> 00:01:24,906
-There can and probably
-will be more
+00:01:44,404 --> 00:01:46,273
+现在这个是为了我们讲座上的
+新开发者们
 
 
 23
-00:01:24,906 --> 00:01:26,666
-than one app on screen
-at a time.
+00:01:46,340 --> 00:01:50,844
+app响应性的Holy Grail
+在于能够将你的UI更新于
 
 
 24
-00:01:27,296 --> 00:01:29,246
-And all of the apps
-on screen now have
+00:01:50,911 --> 00:01:54,014
+每秒显示帧数为60帧或者60帧率
 
 
 25
-00:01:29,296 --> 00:01:30,646
-to share the system resources.
+00:01:54,781 --> 00:01:57,818
+这意味着你只需大概16毫秒
 
 
 26
-00:01:31,156 --> 00:01:35,596
-Some system resources
-like CPU, GPU,
+00:01:57,885 --> 00:02:00,254
+来完成你所有需要的工作
+并对用户作出反应
 
 
 27
-00:01:35,596 --> 00:01:38,126
-and disk I/O degrade gradually
+00:02:02,990 --> 00:02:04,424
+所以如果这是你的app
 
 
 28
-00:01:38,126 --> 00:01:40,186
-as multiple processes
-compete for them.
+00:02:04,858 --> 00:02:07,728
+比如说它在60 帧率上渲染得很好
 
 
 29
-00:01:40,906 --> 00:01:42,876
-Let's look at an example of CPU.
+00:02:08,027 --> 00:02:10,663
+它可以在仅仅十秒内将所有工作完成
 
 
 30
-00:01:44,406 --> 00:01:47,346
-So for the new developers in
-the audience, the Holy Grail
+00:02:11,665 --> 00:02:14,101
+这其中的每一帧代表一毫秒
 
 
 31
-00:01:47,386 --> 00:01:50,636
-of app responsiveness is to
-be able to update your UI
+00:02:15,536 --> 00:02:18,138
+之后 用户将
+增加另一个附带的app
 
 
 32
-00:01:50,856 --> 00:01:54,816
-at 60 frames per
-second, or 60 FPS.
+00:02:18,639 --> 00:02:21,975
+-这个app
+同样在60帧率上更新得很好
 
 
 33
-00:01:54,816 --> 00:01:57,836
-This means you have
-about 16 milliseconds
+00:02:22,042 --> 00:02:25,012
+而且它在6毫秒内完成所有的工作
 
 
 34
-00:01:57,876 --> 00:02:00,316
-to get all your work done
-in response to a user event.
+00:02:25,913 --> 00:02:30,017
+两个app结合在一起
+像你看到的 已经用了
 
 
 35
-00:02:00,316 --> 00:02:03,466
-So if this is your app,
+00:02:30,083 --> 00:02:32,152
+我们所拥有的全部16毫秒
 
 
 36
-00:02:03,466 --> 00:02:07,346
-let's say it is doing a great
-job rendering at 60 FPS.
+00:02:32,219 --> 00:02:33,921
+以能够在60帧率上渲染
 
 
 37
-00:02:08,026 --> 00:02:10,675
-It can get all its work done
-in only 10 milliseconds.
+00:02:35,722 --> 00:02:37,724
+此时用户打开一个PIP
 
 
 38
-00:02:11,666 --> 00:02:14,086
-Each of these slices
-represents one millisecond.
+00:02:38,058 --> 00:02:40,027
+而这个PiP也同样运行得很好
 
 
 39
-00:02:15,526 --> 00:02:18,046
-Then, the user brings
-in a secondary app.
+00:02:40,093 --> 00:02:42,629
+之后他需要八毫秒来渲染他的UI
 
 
 40
-00:02:18,626 --> 00:02:22,046
-That app is also doing a
-great job updating at 60 FPS.
+00:02:43,297 --> 00:02:45,532
+这三个apps结合在一起
 
 
 41
-00:02:22,046 --> 00:02:25,026
-And it gets all its work
-finished in 6 milliseconds.
+00:02:45,599 --> 00:02:50,637
+在屏幕上24毫秒 而这意味着
 
 
 42
-00:02:25,926 --> 00:02:29,676
-Both apps combined, as you
-can see, are already using
+00:02:50,704 --> 00:02:53,540
+渲染过程其实是大概在40FIPS
+而不是
 
 
 43
-00:02:29,676 --> 00:02:32,206
-up all 16 milliseconds
-that we have in order
+00:02:53,607 --> 00:02:55,242
+我们想要的60 FIPS
 
 
 44
-00:02:32,206 --> 00:02:33,476
-to be able to render at 60 FPS.
+00:02:55,776 --> 00:02:57,277
+用户会意识到卡顿
 
 
 45
-00:02:34,326 --> 00:02:37,496
-And then the user starts a PiP,
+00:02:58,579 --> 00:03:00,614
+同样的问题也适用于GPU
 
 
 46
-00:02:37,496 --> 00:02:39,796
-and the PiP is also
-doing a great job,
+00:03:01,782 --> 00:03:05,953
+但一些系统资源比如内存会产生
 
 
 47
-00:02:40,096 --> 00:02:42,336
-and he needs eight
-milliseconds to render his UI.
+00:03:06,019 --> 00:03:07,788
+一个更加不好的用户体验
 
 
 48
-00:02:43,286 --> 00:02:45,606
-The combined total
-of all three apps
+00:03:07,855 --> 00:03:09,723
+当很多程序一起争取它的容量时
 
 
 49
-00:02:45,606 --> 00:02:50,586
-on screen are 24
-milliseconds, and that means
+00:03:10,591 --> 00:03:11,892
+我们再来看一下这个例子
 
 
 50
-00:02:50,706 --> 00:02:53,616
-that the rendering is actually
-at about 40 FIPS instead
+00:03:12,492 --> 00:03:13,961
+还是这个app
 
 
 51
-00:02:53,616 --> 00:02:55,226
-of the 60 FIPS that we want.
+00:03:14,394 --> 00:03:17,030
+这个iPad下的系统内存占用
 
 
 52
-00:02:55,776 --> 00:02:57,276
-The user will notice stuttering.
+00:03:17,097 --> 00:03:20,234
+你可以看到在最左边 
+我们的系统正在使用用一些档案储存
 
 
 53
-00:02:58,566 --> 00:03:00,616
-The same type of problem
-applies to the GPU.
+00:03:20,734 --> 00:03:22,870
+在中间这是你的app蓝色的app
 
 
 54
-00:03:01,776 --> 00:03:06,036
-However, some system resources
-like memory can result
+00:03:22,936 --> 00:03:23,971
+也在使用一些档案储存
 
 
 55
-00:03:06,036 --> 00:03:07,856
-in a much worse user experience
+00:03:24,538 --> 00:03:26,473
+然后这些剩余空间
 
 
 56
-00:03:07,856 --> 00:03:09,736
-when multiple processes
-are competing for them.
+00:03:26,840 --> 00:03:29,209
+这里有很多使用空间
 
 
 57
-00:03:10,606 --> 00:03:11,876
-Look at the example again.
+00:03:29,476 --> 00:03:30,677
+你可以做各种各样的事情
 
 
 58
-00:03:12,506 --> 00:03:13,976
-Here is the app again.
+00:03:32,813 --> 00:03:35,549
+之后 用户增加了一个二级app
 
 
 59
-00:03:14,386 --> 00:03:17,106
-Below the iPad is the
-system memory footprint.
+00:03:35,749 --> 00:03:37,718
+而这个附带app也需要内存
 
 
 60
-00:03:17,106 --> 00:03:19,486
-You can see on the very left
-we have the system using some
+00:03:38,352 --> 00:03:39,553
+但我们状态依然很好
 
 
 61
-00:03:19,486 --> 00:03:20,146
-amount of memory.
+00:03:39,620 --> 00:03:41,855
+我们还有一点点剩余储存空间
 
 
 62
-00:03:20,146 --> 00:03:22,936
-In the middle, we have
-your app, the blue app,
+00:03:42,990 --> 00:03:45,158
+然后猜猜接下来会发生什么
 
 
 63
-00:03:22,936 --> 00:03:23,966
-using some amount of memory.
+00:03:46,627 --> 00:03:47,661
+PiP出现了
 
 
 64
-00:03:24,546 --> 00:03:26,466
-Then we have all
-of this free space.
+00:03:47,995 --> 00:03:49,196
+现在我们没有记忆体了
 
 
 65
-00:03:26,846 --> 00:03:29,216
-There is so much
-room for activities.
+00:03:49,429 --> 00:03:51,632
+当系统无法找到空间记忆体时
 
 
 66
-00:03:29,466 --> 00:03:30,626
-You can do all kind of stuff.
+00:03:51,698 --> 00:03:52,999
+它必须停止一个app运行
 
 
 67
-00:03:31,396 --> 00:03:35,806
-And then, the user
-brings in a secondary app,
+00:03:53,600 --> 00:03:58,539
+在这种情况下
+用户被活生生地从他/她 
 
 
 68
-00:03:35,806 --> 00:03:37,706
-and the secondary app
-needs memory, too.
+00:03:58,739 --> 00:04:00,374
+可以说是她的当前处境中拉出来
 
 
 69
-00:03:38,356 --> 00:03:39,606
-But we are still in good shape.
+00:04:00,941 --> 00:04:03,210
+然后我们
+又把它带回到SpringBoard
 
 
 70
-00:03:39,606 --> 00:03:41,856
-We have a tiny bit
-of free memory left.
+00:04:03,544 --> 00:04:06,680
+在我看来这是一个更糟糕的用户体验
 
 
 71
-00:03:42,976 --> 00:03:45,566
-Then guess what happens next?
+00:04:07,080 --> 00:04:12,553
+相比之下和当多个程序为CPU
+或者GPU竞争UI将停顿
 
 
 72
-00:03:46,296 --> 00:03:47,396
-The PiP happens.
+00:04:15,289 --> 00:04:17,858
+所以你现在可能在问自己
+SpringBoard是什么
 
 
 73
-00:03:47,396 --> 00:03:49,196
-Now we are out of memory.
+00:04:18,158 --> 00:04:22,529
+以及为什么SpringBoard
+工程师今天会在这里和你谈多任务处理
 
 
 74
-00:03:49,446 --> 00:03:51,686
-When the system can't
-find free memory,
+00:04:23,030 --> 00:04:25,332
+其实
+SpringBoard代表很多东西
 
 
 75
-00:03:51,686 --> 00:03:52,876
-it has to kill a process.
+00:04:26,366 --> 00:04:28,001
+它是主屏幕
 
 
 76
-00:03:53,596 --> 00:03:58,546
-In that instance, the user gets
-ripped out of his or her --
+00:04:28,068 --> 00:04:29,069
+锁屏
 
 
 77
-00:03:58,736 --> 00:04:00,386
-we'll say her --
-current context,
+00:04:29,436 --> 00:04:34,208
+图标 壁纸 姿态系统 通知中心
 
 
 78
-00:04:00,936 --> 00:04:03,196
-and we are taken
-back to SpringBoard.
+00:04:34,775 --> 00:04:35,709
+控制中心
 
 
 79
-00:04:03,546 --> 00:04:06,686
-In my opinion, that is a
-much worse user experience
+00:04:36,376 --> 00:04:37,878
+我有点儿混乱了
 
 
 80
-00:04:07,086 --> 00:04:09,696
-than just the stuttering
-UI that can happen
+00:04:38,478 --> 00:04:42,683
+好吧 除此之外还有更多
 
 
 81
-00:04:09,696 --> 00:04:12,356
-when multiple processes
-compete for CPU or GPU.
+00:04:43,050 --> 00:04:46,887
+但是最重要的一点
+如同所有人我们是一个UI应用程序
 
 
 82
-00:04:12,356 --> 00:04:17,846
-So now you may be asking
-yourself, what is SpringBoard,
+00:04:49,089 --> 00:04:52,159
+SpringBoard
+最初是多任务处理app
 
 
 83
-00:04:18,156 --> 00:04:21,245
-and why are SpringBoard
-engineers here today to talk
+00:04:53,260 --> 00:04:57,231
+在iOS 9和iOS 9之前
 
 
 84
-00:04:21,245 --> 00:04:22,376
-to you about multitasking?
+00:04:57,464 --> 00:05:00,601
+SpringBoard 
+一直被认为在前台操作
 
 
 85
-00:04:23,026 --> 00:04:25,336
-Well, SpringBoard
-is a lot of things.
+00:05:00,667 --> 00:05:02,769
+即使你的app可能被用户看到
 
 
 86
-00:04:26,366 --> 00:04:27,796
-It is the Home screen.
+00:05:04,238 --> 00:05:09,543
+因此 我们面对和你们一样关于
+新多任务处理环境中的挑战
 
 
 87
-00:04:28,176 --> 00:04:29,076
-The Lock screen.
+00:05:11,345 --> 00:05:13,514
+应此我们一路走来学到了很多
 
 
 88
-00:04:29,436 --> 00:04:34,206
-Icons, wallpaper, system
-gestures, notification center.
+00:05:15,215 --> 00:05:18,986
+我们想和你们分享其中一些学到的内容
+这样你们就不会犯同样的错误
 
 
 89
-00:04:34,786 --> 00:04:35,526
-Control center.
+00:05:20,687 --> 00:05:21,855
+我们开始吧
 
 
 90
-00:04:36,386 --> 00:04:38,566
-I got lost.
+00:05:21,922 --> 00:05:25,359
+最简单的
+第一部分是优化你的app
 
 
 91
-00:04:38,816 --> 00:04:42,126
-Okay, all of these
-things and more.
+00:05:26,627 --> 00:05:31,465
+第一件事用泄露工序找到
+并修复电脑的内存泄露问题
 
 
 92
-00:04:43,046 --> 00:04:48,916
-But most importantly, we are a
-UI application just like y'all.
+00:05:33,233 --> 00:05:35,435
+你们当中
+有多少人忘记写DIALEK了
 
 
 93
-00:04:49,206 --> 00:04:53,556
-SpringBoard is also the
-original multitasking app.
+00:05:36,937 --> 00:05:38,338
+应该有更多的人举手
 
 
 94
-00:04:53,616 --> 00:04:57,726
-Prior to iOS 9 and
-also in iOS 9,
+00:05:39,540 --> 00:05:41,208
+好吧 我忘了
 
 
 95
-00:04:57,806 --> 00:05:00,646
-SpringBoard is always considered
-to be running in the foreground,
+00:05:41,275 --> 00:05:42,709
+发生在我们大多数人身上
 
 
 96
-00:05:00,676 --> 00:05:02,576
-even though your app
-is visible to the user.
+00:05:42,876 --> 00:05:45,712
+而泄露工具可以帮助你找到这些问题
 
 
 97
-00:05:02,576 --> 00:05:06,866
-Because of that, we
-face the same challenges
+00:05:45,779 --> 00:05:47,214
+然而它们通常很容易被修复
 
 
 98
-00:05:06,866 --> 00:05:09,436
-that y'all do today in the
-new multitasking environment.
+00:05:48,982 --> 00:05:52,085
+但防止内存泄露问题
+的最好方式是用Swift
 
 
 99
-00:05:09,966 --> 00:05:13,516
-And we've learned a lot
-of lessons along the way.
+00:05:52,419 --> 00:05:53,520
+你们应该用那个
 
 
 100
-00:05:14,086 --> 00:05:16,676
-And we would like to share
-some of those lessons
+00:05:55,656 --> 00:05:58,825
+最后 你应该用定位工具来寻找
 
 
 101
-00:05:16,676 --> 00:05:18,896
-with y'all today so you
-don't make the same mistakes.
+00:05:58,892 --> 00:06:01,662
+并修复保留周期和无限内存增长
 
 
 102
-00:05:19,406 --> 00:05:21,526
-Let's get started.
+00:06:02,729 --> 00:06:06,200
+最后 你应该用实时分析工具来寻找
 
 
 103
-00:05:21,916 --> 00:05:26,436
-Optimizing your app, the
-easy stuff, part one.
+00:06:06,266 --> 00:06:07,467
+和修复低效的电脑算法
 
 
 104
-00:05:26,636 --> 00:05:30,346
-First thing, use the
-Leaks instrument and find
+00:06:08,802 --> 00:06:11,572
+我不会在今天讨论这些问题
 
 
 105
-00:05:30,346 --> 00:05:31,256
-and fix your memory leaks.
+00:06:11,638 --> 00:06:15,042
+这些问题
+都会发生在所有的apps不仅是
 
 
 106
-00:05:33,316 --> 00:05:34,956
-How many of you have
-forgotten to write DIALEK?
+00:06:15,142 --> 00:06:16,577
+多任务处理的apps而已
 
 
 107
-00:05:34,956 --> 00:05:37,936
-There has to be more
-hands than that.
+00:06:17,878 --> 00:06:19,379
+反之 我们会注重于
 
 
 108
-00:05:37,936 --> 00:05:39,686
-Well, I have.
+00:06:19,446 --> 00:06:22,049
+新的多任务处理环境中最重要的事情
 
 
 109
-00:05:39,686 --> 00:05:43,046
-Happens to the best of us.
+00:06:22,749 --> 00:06:26,887
+在我们的经验里我们学到最深的一课是
 
 
 110
-00:05:43,046 --> 00:05:45,786
-And the Leaks instrument can
-help you find those problems,
+00:06:26,954 --> 00:06:29,256
+良好的表现需要权衡
 
 
 111
-00:05:45,786 --> 00:05:47,206
-and they are usually
-really easy to fix.
+00:06:30,090 --> 00:06:32,926
+你是打算预期计算你的数据
+然后存在记忆体里
 
 
 112
-00:05:48,986 --> 00:05:52,076
-However, the best way to
-avoid leaks is to use Swift.
+00:06:33,460 --> 00:06:36,263
+还是打算联机计算并使用CPU
 
 
 113
-00:05:52,416 --> 00:05:53,506
-You should do that instead.
+00:06:37,264 --> 00:06:40,501
+你是打算把所有资源都存在
+本地的磁盘里
 
 
 114
-00:05:55,666 --> 00:05:58,896
-Next, you should use the
-Allocations instrument to find
+00:06:40,834 --> 00:06:43,904
+还是把它们存在cloud里
+然后想用的时候随时都可以取得
 
 
 115
-00:05:58,896 --> 00:06:01,646
-and fix retained cycles and
-unbounded memory growth.
+00:06:44,638 --> 00:06:48,775
+你想要在CPU还是GPU上
+运行动画
 
 
 116
-00:06:02,736 --> 00:06:06,276
-Last, you should use the Time
-Profiler instrument to find
+00:06:50,410 --> 00:06:52,446
+我们来看一个关于我们之前做过的一个
 
 
 117
-00:06:06,276 --> 00:06:07,466
-and fix inefficient algorithms.
+00:06:52,513 --> 00:06:54,448
+叫IconReel样本app的例子
 
 
 118
-00:06:08,816 --> 00:06:11,526
-I'm not going to talk about
-any of these problems today.
+00:06:56,483 --> 00:06:58,185
+所以这是我们app最开始的状态
 
 
 119
-00:06:11,526 --> 00:06:14,946
-These types of problems apply
-to all apps, not just apps
+00:06:58,952 --> 00:07:00,754
+它最初有很多图标
 
 
 120
-00:06:15,136 --> 00:06:16,586
-that are interested
-in multitasking.
+00:07:01,221 --> 00:07:04,258
+当用户点击某图标时 我们将图标放大
 
 
 121
-00:06:17,866 --> 00:06:20,586
-Instead, we are going to focus
-on the things most important
+00:07:04,324 --> 00:07:05,559
+来呈现一个更详细的视图
 
 
 122
-00:06:20,586 --> 00:06:22,056
-in the new multitasking
-environment.
+00:07:06,460 --> 00:07:08,896
+底部有一个dock栏
 
 
 123
-00:06:22,756 --> 00:06:26,966
-In our experience, the
-biggest lesson we learned is
+00:07:08,962 --> 00:07:11,498
+用户可以在这里保存他们 喜欢的图标
 
 
 124
-00:06:26,966 --> 00:06:30,016
-that great performance
-involves trade-offs.
+00:07:11,999 --> 00:07:15,068
+当一个用户添加更多的图标时
+我们会添加更多的页面
 
 
 125
-00:06:30,086 --> 00:06:32,936
-Are you going to precompute
-your data and keep it in memory?
+00:07:15,135 --> 00:07:17,070
+这时用户可以页面之间滑动
 
 
 126
-00:06:33,466 --> 00:06:36,266
-Or are you going to calculate
-it on the fly and use CPU?
+00:07:18,372 --> 00:07:19,907
+有人觉得这个很眼熟吗
 
 
 127
-00:06:37,276 --> 00:06:40,156
-Are you going to keep all your
-resources locally on disk?
+00:07:21,942 --> 00:07:23,177
+是的 是故意的
 
 
 128
-00:06:40,836 --> 00:06:42,516
-Or are you going to
-keep them in the cloud
+00:07:24,378 --> 00:07:26,713
+所以 我们可以保留所有的图标
 
 
 129
-00:06:42,516 --> 00:06:43,716
-and fetch them whenever
-you need them?
+00:07:26,780 --> 00:07:29,983
+内存中是因为每个图标仅为约60KB
 
 
 130
-00:06:44,626 --> 00:06:46,056
-Are you going to
-run your animations
+00:07:30,417 --> 00:07:33,153
+我们会将它们全部存在一个扩展里面
 
 
 131
-00:06:46,056 --> 00:06:48,546
-on the CPU or on the GPU?
+00:07:34,087 --> 00:07:35,656
+结果就是滑动很棒
 
 
 132
-00:06:48,546 --> 00:06:51,516
-Let's look at an example
+00:07:36,323 --> 00:07:38,692
+为什么呢 
+因为我们没有其它可以滑动的屏幕
 
 
 133
-00:06:51,516 --> 00:06:54,436
-of a sample app we have been
-working on called IconReel.
+00:07:39,660 --> 00:07:42,262
+所以我们部分用户喜欢添加更多的图标
 
 
 134
-00:06:55,676 --> 00:06:58,186
-So here is our app
-right out of the box.
+00:07:42,763 --> 00:07:46,333
+所以我们向记忆体中添加更多的图标
 
 
 135
-00:06:58,936 --> 00:07:00,756
-It starts with a
-handful of icons.
+00:07:46,667 --> 00:07:48,368
+目前为止滑动还是可以的
 
 
 136
-00:07:01,206 --> 00:07:04,326
-When the user taps on an
-icon, we zoom up the icon
+00:07:49,570 --> 00:07:51,672
+那么 这个动画可能看起来眼熟
 
 
 137
-00:07:04,326 --> 00:07:05,556
-to show a more detailed view.
+00:07:51,905 --> 00:07:53,507
+那是因为有很多apps 
 
 
 138
-00:07:06,456 --> 00:07:08,966
-There is a sticky
-dock at the bottom
+00:07:53,574 --> 00:07:55,209
+有像这样的一个动画
 
 
 139
-00:07:08,966 --> 00:07:11,486
-where users can save
-their favorite icons.
+00:07:55,709 --> 00:07:59,246
+想一下在一个照片
+或开发视频app中的照片滑动
 
 
 140
-00:07:11,986 --> 00:07:15,146
-When a user adds more
-icons, we add more pages,
+00:08:00,214 --> 00:08:02,149
+你的app里也许有一个类似的动画
 
 
 141
-00:07:15,146 --> 00:07:17,066
-and the user can scroll
-between the pages.
+00:08:03,851 --> 00:08:04,852
+一切都很好
 
 
 142
-00:07:18,366 --> 00:07:19,516
-Does this look familiar
-to anyone?
+00:08:04,918 --> 00:08:07,421
+一些我们很好的用户甚至下载了
 
 
 143
-00:07:19,516 --> 00:07:19,966
-Yeah, that was on purpose
+00:08:07,487 --> 00:08:08,622
+更多图标
 
 
 144
-00:07:20,086 --> 00:07:22,086
-[Laughter]
+00:08:09,089 --> 00:08:12,759
+我们现在的扩展里有更多的图标
 
 
 145
-00:07:22,156 --> 00:07:26,786
->> BRITTANY PAINE: So we
-can keep all of these icons
+00:08:13,160 --> 00:08:15,829
+且结果是滑动依然很完美
 
 
 146
-00:07:26,786 --> 00:07:29,796
-in memory because each icon
-is only about 60 kilobytes.
+00:08:16,930 --> 00:08:20,901
+也就是说 直到我们在
+某时看到IconReel死机
 
 
 147
-00:07:29,796 --> 00:07:32,936
-We will store them all
-in an NSDictionary.
+00:08:21,368 --> 00:08:24,538
+以及在一个多任务处理环境下
+我们有时能看到彼此的
 
 
 148
-00:07:34,086 --> 00:07:35,646
-It turns out scrolling is great.
+00:08:24,605 --> 00:08:26,306
+前台apps死机
 
 
 149
-00:07:36,326 --> 00:07:38,706
-Why? Because we have no
-other pages to scroll to.
+00:08:27,040 --> 00:08:29,443
+我们来看一看这里发生了什么
 
 
 150
-00:07:39,666 --> 00:07:42,276
-So some of our users
-like to add more icons.
+00:08:30,711 --> 00:08:33,614
+我们用一个实时分析器追踪看到CPU
 
 
 151
-00:07:42,766 --> 00:07:46,336
-So we add a few dozen more
-icons to our NSDictionary.
+00:08:33,679 --> 00:08:35,515
+和磁盘I/O在滑动时最小化了
 
 
 152
-00:07:46,666 --> 00:07:48,356
-So far scrolling is okay.
+00:08:36,582 --> 00:08:39,886
+但定位工具告诉我们我们的记忆体使用
 
 
 153
-00:07:49,566 --> 00:07:51,656
-Now, this animation may
-look familiar to you.
+00:08:39,953 --> 00:08:43,490
+其实是非常高的
+因为我们所有图标都在记忆体里
 
 
 154
-00:07:51,906 --> 00:07:53,376
-That's because there
-are a lot of apps
+00:08:45,993 --> 00:08:50,130
+这里的情况是IconReel在快速
+地消耗可用的系统记忆体
 
 
 155
-00:07:53,576 --> 00:07:54,826
-that have an animation
-like this.
+00:08:50,497 --> 00:08:52,633
+而当系统内存短缺时
 
 
 156
-00:07:55,716 --> 00:08:00,076
-Think of photos scrolling around
-in a photos or videos app.
+00:08:53,300 --> 00:08:54,434
+它试图释放一些空间
 
 
 157
-00:08:00,206 --> 00:08:03,936
-You may have an animation
-like this in your app.
+00:08:54,501 --> 00:08:57,571
+如果它找不到任何空间
+那么它必须终止程序
 
 
 158
-00:08:04,076 --> 00:08:05,136
-Everything is going great.
+00:08:58,405 --> 00:09:00,607
+有时这意味会终止IconReel
 
 
 159
-00:08:05,136 --> 00:08:07,706
-Some of our really good
-customers download even
+00:09:01,141 --> 00:09:03,877
+而有的时候这意味着
+终止其它前台app
 
 
 160
-00:08:07,706 --> 00:08:08,646
-more icons.
+00:09:04,344 --> 00:09:07,214
+但上述所有的情况
+都是一个非常糟糕的用户体验
 
 
 161
-00:08:09,086 --> 00:08:12,776
-And now we have several dozen
-more icons in our NSDictionary,
+00:09:07,314 --> 00:09:08,682
+我们想避免这个情况
 
 
 162
-00:08:12,776 --> 00:08:15,826
-and it turns out
-scrolling is still perfect.
+00:09:10,317 --> 00:09:12,853
+作为一个良好的多任务管理
+公民IconReel需要
 
 
 163
-00:08:16,936 --> 00:08:20,886
-That is, until sometimes we
-are seeing IconReel crash,
+00:09:12,920 --> 00:09:14,955
+管理好它的记忆体使用这样的话所有
 
 
 164
-00:08:21,356 --> 00:08:24,806
-and sometimes in a multitasking
-environment we are seeing other
+00:09:15,222 --> 00:09:19,493
+屏幕上的apps可以共存
+并创造很好的用户体验
 
 
 165
-00:08:24,896 --> 00:08:27,236
-foreground apps crash.
+00:09:19,560 --> 00:09:20,894
+这也是我们用户所期望的
 
 
 166
-00:08:27,236 --> 00:08:29,386
-Let's invest what
-is going on here.
+00:09:22,462 --> 00:09:25,332
+这就将我们带到了工作集的概念上来
 
 
 167
-00:08:30,696 --> 00:08:33,676
-We took a time profiler
-trace and saw that CPU
+00:09:27,267 --> 00:09:29,436
+你可以做的最重要的一件
 
 
 168
-00:08:33,676 --> 00:08:35,566
-and disk I/O were
-minimal while scrolling.
+00:09:29,503 --> 00:09:32,272
+优化你记忆体使用的事就是理解
 
 
 169
-00:08:35,566 --> 00:08:39,966
-But the Allocations instrument
-showed us our memory usage was
+00:09:32,339 --> 00:09:33,540
+并管理你的工作集
 
 
 170
-00:08:39,966 --> 00:08:43,476
-very high because all of our
-icons were kept in memory.
+00:09:35,242 --> 00:09:37,744
+你的工作集应该只由重要的东西
 
 
 171
-00:08:44,066 --> 00:08:46,846
-What is happening here is
+00:09:37,811 --> 00:09:40,113
+和你的app目前所需资源组成
 
 
 172
-00:08:46,846 --> 00:08:49,746
-that IconReel is quickly
-exhausting the available system
+00:09:42,216 --> 00:09:43,684
+你应该让它保持小一些
 
 
 173
-00:08:49,746 --> 00:08:52,626
-memory, and when the system
-gets short on free memory,
+00:09:43,750 --> 00:09:45,118
+来确保你的低记忆体使用
 
 
 174
-00:08:53,316 --> 00:08:54,486
-it tries to free some up.
+00:09:46,987 --> 00:09:48,889
+它有可能会根据环境变化
 
 
 175
-00:08:54,486 --> 00:08:57,556
-If there's none it can find,
-it has to terminate processes.
+00:09:48,956 --> 00:09:51,625
+比如 你的工作集可能包含不同对象
 
 
 176
-00:08:58,406 --> 00:09:00,616
-Sometimes this means
-terminating IconReel,
+00:09:52,092 --> 00:09:53,427
+当一个在前台的app
 
 
 177
-00:09:01,126 --> 00:09:03,156
-and sometimes this means
-terminating another
+00:09:53,760 --> 00:09:56,964
+和一个在后台的app相比它可以改变
 
 
 178
-00:09:03,156 --> 00:09:03,826
-foreground app.
+00:09:57,030 --> 00:09:58,365
+当你改变视图控制器时
 
 
 179
-00:09:04,336 --> 00:09:07,216
-But all of the time this is
-a horrible user experience.
+00:09:59,933 --> 00:10:02,202
+最后 你不应该让其无限增长
 
 
 180
-00:09:07,306 --> 00:09:08,526
-We want to avoid this.
+00:10:02,636 --> 00:10:04,638
+我们看过当系统没有记忆体时候的情况
 
 
 181
-00:09:08,856 --> 00:09:12,936
-As a good multitasking
-citizen, IconReel needs
+00:10:05,138 --> 00:10:06,573
+我们不想你成为那个app
 
 
 182
-00:09:12,936 --> 00:09:16,296
-to get its memory usage
-under control so all the apps
+00:10:08,408 --> 00:10:10,577
+让我们
+看一下IconReel的工作集
 
 
 183
-00:09:16,296 --> 00:09:19,686
-on screen can coexist and
-create the great user experience
+00:10:11,044 --> 00:10:12,246
+在最后一个例子的尾端
 
 
 184
-00:09:19,726 --> 00:09:21,486
-that our users expect.
+00:10:12,312 --> 00:10:16,550
+IconReel的工作集就是
+我们在记忆体中保留的那个图标
 
 
 185
-00:09:22,136 --> 00:09:25,226
-This brings me to the
-idea of the working set.
+00:10:17,017 --> 00:10:19,052
+这是最好的工作集吗
 
 
 186
-00:09:27,276 --> 00:09:29,496
-One of the most important
-things you can do
+00:10:20,387 --> 00:10:21,221
+不是
 
 
 187
-00:09:29,496 --> 00:09:32,346
-to optimize your memory
-usage is to understand
+00:10:21,788 --> 00:10:23,824
+那么我们现在真正需要做什么
 
 
 188
-00:09:32,346 --> 00:09:33,536
-and manage your working set.
+00:10:25,225 --> 00:10:29,496
+现在我们真正需要的是
+用户正在看的图标屏幕
 
 
 189
-00:09:35,256 --> 00:09:37,816
-Your working set should consist
-of only the critical objects
+00:10:30,197 --> 00:10:31,832
+所以这是一个更优秀的工作集
 
 
 190
-00:09:37,816 --> 00:09:40,126
-and resources that your
-app needs right now.
+00:10:33,333 --> 00:10:36,436
+那么现在我们来试一下滑动我们
 
 
 191
-00:09:42,206 --> 00:09:43,756
-You should keep it
-small in order
+00:10:36,703 --> 00:10:38,372
+只有一页图标的工作集
 
 
 192
-00:09:43,756 --> 00:09:45,116
-to keep your memory usage low.
+00:10:41,708 --> 00:10:43,644
+噢 噢 好吧
 
 
 193
-00:09:45,876 --> 00:09:48,696
-It might change based
-on context.
+00:10:43,944 --> 00:10:44,978
+这太糟了
 
 
 194
-00:09:48,966 --> 00:09:51,626
-For example, your working set
-may contain different objects
+00:10:45,145 --> 00:10:47,147
+而且如果你因为我站着
+挡住了你没有看到
 
 
 195
-00:09:52,086 --> 00:09:53,436
-when the app is in
-the foreground
+00:10:48,815 --> 00:10:50,250
+那个滑动十分糟糕
 
 
 196
-00:09:53,776 --> 00:09:56,966
-versus when the app is in the
-background, or it might change
+00:10:50,317 --> 00:10:52,619
+有一个多秒的停留在
 
 
 197
-00:09:57,206 --> 00:09:58,356
-when you change view
-controllers.
+00:10:52,686 --> 00:10:54,421
+滑到下一页看到图标时
 
 
 198
-00:09:59,656 --> 00:10:02,196
-Last, you shouldn't
-let it grow unbounded.
+00:10:55,989 --> 00:10:58,091
+我们来看看发生了什么
 
 
 199
-00:10:02,646 --> 00:10:04,646
-We saw what happens when the
-system runs out of memory.
+00:11:00,127 --> 00:11:02,129
+我们用另外一个实时分析器
 
 
 200
-00:10:05,126 --> 00:10:08,516
-We don't want you
-to be that app.
+00:11:02,529 --> 00:11:06,300
+然后我们看到CPU
+而磁盘I/O 事实上在滑动中非常高
 
 
 201
-00:10:08,516 --> 00:10:10,046
-Let's look at IconReel's
-working set.
+00:11:06,934 --> 00:11:10,470
+而分配显示我们的记忆体使用非常低
 
 
 202
-00:10:10,046 --> 00:10:12,286
-At the end of the last example,
+00:11:11,405 --> 00:11:14,508
+这个恰恰是我们刚刚发生相反的问题
 
 
 203
-00:10:12,286 --> 00:10:16,496
-IconReel's working set was every
-icon we were keeping in memory.
+00:11:15,709 --> 00:11:19,112
+就像我说的
+良好的运行包括进行一系列的权衡
 
 
 204
-00:10:16,496 --> 00:10:18,726
-Is this the best working set?
+00:11:19,947 --> 00:11:21,615
+我们如何能修复这个
 
 
 205
-00:10:20,406 --> 00:10:23,826
-No. So what do we
-really need right now?
+00:11:22,950 --> 00:11:25,219
+答案是更好的管理我们CPU的时间
 
 
 206
-00:10:25,226 --> 00:10:28,346
-Well, all we really need is
-the current page of icons
+00:11:26,720 --> 00:11:28,255
+所以你能做的最重要的事
 
 
 207
-00:10:28,346 --> 00:10:29,326
-that the user is viewing.
+00:11:28,322 --> 00:11:30,357
+就是能够让你的app反应做的工作
 
 
 208
-00:10:30,196 --> 00:10:31,746
-So this is a much
-better working set.
+00:11:30,457 --> 00:11:32,993
+在你的主流程上越少越好
 
 
 209
-00:10:33,346 --> 00:10:36,426
-So now let's try scrolling
-with our working set
+00:11:34,061 --> 00:11:37,097
+主流程最优先的事情
+就是对用户时间做出反应
 
 
 210
-00:10:36,696 --> 00:10:41,516
-of only one page of icons.
+00:11:37,464 --> 00:11:39,800
+在你的主流程上做不必要的工作意味着
 
 
 211
-00:10:41,706 --> 00:10:43,656
-Oh! Oh! Okay.
+00:11:39,867 --> 00:11:43,003
+主流程有更少的时间来响应用户事件
 
 
 212
-00:10:43,956 --> 00:10:44,966
-That was horrible.
+00:11:44,605 --> 00:11:46,940
+因为你在分享CPU
+时间给所有的apps
 
 
 213
-00:10:45,036 --> 00:10:46,816
-And if you didn't see it
-because maybe I was standing
+00:11:47,007 --> 00:11:49,276
+在屏幕上你需要特别谨慎
 
 
 214
-00:10:46,816 --> 00:10:50,296
-in your way, scrolling
-was horrible.
+00:11:49,343 --> 00:11:50,711
+应对你的主线程在干什么
 
 
 215
-00:10:50,296 --> 00:10:53,216
-There was a multisecond
-hang before the next page
+00:11:51,645 --> 00:11:54,615
+所有在主线程上进行的没有直接
 
 
 216
-00:10:53,216 --> 00:10:54,426
-of icons scrolled into view.
+00:11:54,681 --> 00:11:57,484
+响应用户事件的工作应在别的地方进行
 
 
 217
-00:10:56,046 --> 00:10:58,766
-Let's investigate
-what is going on.
+00:11:59,419 --> 00:12:02,990
+什么工序是
+我们可以用来保证我们不断地响应
 
 
 218
-00:10:59,576 --> 00:11:03,746
-We took another time profiler
-trace, and we saw that CPU
+00:12:03,056 --> 00:12:04,992
+用户时间但同时确保我们可以
 
 
 219
-00:11:03,746 --> 00:11:06,296
-and disk I/O are actually
-very high while scrolling,
+00:12:05,058 --> 00:12:06,159
+及时地做其它工作
 
 
 220
-00:11:06,936 --> 00:11:10,456
-and Allocation showed us that
-our memory usage is very low.
+00:12:07,828 --> 00:12:10,764
+那么
+答案就是我们可以用GCD和服务质量
 
 
 221
-00:11:11,436 --> 00:11:15,906
-This is the exact opposite
-problem from what we just had.
+00:12:12,165 --> 00:12:15,269
+在WWDC
+2014时有一个很棒的演讲
 
 
 222
-00:11:15,906 --> 00:11:18,456
-Like I said, great performance
-involves making a series
+00:12:15,736 --> 00:12:19,339
+而在来临的周五会有一个
+关于GC和服务质量很棒的演讲
 
 
 223
-00:11:18,456 --> 00:11:19,216
-of trade-offs.
+00:12:19,406 --> 00:12:21,208
+所以我不会在这里细说
 
 
 224
-00:11:20,026 --> 00:11:22,006
-What can we do to fix this?
+00:12:21,775 --> 00:12:23,443
+它们是非常重要的两个东西
 
 
 225
-00:11:22,656 --> 00:11:25,216
-The answer is to manage
-our CPU time better.
+00:12:24,044 --> 00:12:26,713
+第一件事是你的主流程正在
 
 
 226
-00:11:26,706 --> 00:11:28,326
-So the most important
-thing you can do
+00:12:26,780 --> 00:12:29,683
+最高优先地运作
+而那个就是用户交互优先权
 
 
 227
-00:11:28,326 --> 00:11:31,396
-to keep your app responsive
-is to do as little work
+00:12:30,918 --> 00:12:33,120
+另外一件事是
 
 
 228
-00:11:31,396 --> 00:11:32,986
-as possible on your main thread.
+00:12:33,187 --> 00:12:34,788
+服务质量的频率在
 
 
 229
-00:11:34,076 --> 00:11:36,996
-The main thread's top priority
-is to respond to user events,
+00:12:34,855 --> 00:12:36,590
+所有前台应用中分享
 
 
 230
-00:11:37,456 --> 00:11:40,186
-and doing unnecessary work
-on your main thread means
+00:12:37,257 --> 00:12:41,094
+这样每个人的用户发起的队列
+将有相同的机会接触到CPU 
 
 
 231
-00:11:40,186 --> 00:11:42,896
-that the main thread has less
-time to respond to user events.
+00:12:41,161 --> 00:12:44,198
+而每个前台队列
+也有相同的机会接触CPU
 
 
 232
-00:11:44,596 --> 00:11:47,006
-Because you're sharing the
-CPU time with all of the apps
+00:12:44,565 --> 00:12:48,735
+没有一个前台的app比
+另外的跟有优先权
 
 
 233
-00:11:47,006 --> 00:11:49,346
-on screen, you need
-to be hyperaware
+00:12:49,203 --> 00:12:51,405
+如果你能适度的优先你系统的工作
 
 
 234
-00:11:49,346 --> 00:11:50,706
-of what your main
-thread is doing.
+00:12:51,705 --> 00:12:54,942
+那么系统就可以保证我们能够
 
 
 235
-00:11:51,646 --> 00:11:54,676
-Any work being performed on the
-main thread that is not directly
+00:12:55,008 --> 00:12:57,144
+在屏幕上
+有多重apps操作时得到最佳运作
 
 
 236
-00:11:54,676 --> 00:11:57,476
-in response to a user event
-should be performed elsewhere.
+00:12:58,946 --> 00:13:00,714
+所以这个和IconReel有何关系
 
 
 237
-00:11:59,426 --> 00:12:01,956
-What tools can we use to make
-sure that we keep responding
+00:13:01,682 --> 00:13:06,119
+我们会在一个不同的流程上
+使用GCD加载图标
 
 
 238
-00:12:01,956 --> 00:12:04,966
-to user events but also make
-sure we get the extra work
+00:13:06,186 --> 00:13:08,222
+在用户发起的服务质量上
 
 
 239
-00:12:04,966 --> 00:12:06,146
-finished in a timely manner?
+00:13:09,156 --> 00:13:12,092
+我们要做的第一件事 建立调度队列
 
 
 240
-00:12:07,826 --> 00:12:10,776
-Well, the answer is we can use
-GCD and Quality of Service.
+00:13:12,459 --> 00:13:15,362
+这个叫做图标生成队列
 
 
 241
-00:12:12,156 --> 00:12:15,276
-There was a great talk
-last year at WWDC 2014,
+00:13:16,129 --> 00:13:19,566
+当我们在主流程时我们会异步调度
 
 
 242
-00:12:15,726 --> 00:12:18,286
-and there's a great talk
-coming up on Friday on GCD
+00:13:19,633 --> 00:13:22,836
+在我们的图标队列中生成
+在下一个界面生成每个图标队列
 
 
 243
-00:12:18,286 --> 00:12:19,396
-and Quality of Service.
+00:13:23,904 --> 00:13:26,240
+虽然在代码片段中并不明显
 
 
 244
-00:12:19,396 --> 00:12:21,206
-So I'm not going to go
-into a lot of detail here.
+00:13:26,507 --> 00:13:29,776
+但是从主流程中异步调度工作到一个
 
 
 245
-00:12:21,786 --> 00:12:23,436
-There's two important things.
+00:13:29,843 --> 00:13:33,247
+像这样给质量服务降级的队列
 
 
 246
-00:12:24,036 --> 00:12:26,786
-The first thing is that
-your main thread is running
+00:13:33,480 --> 00:13:38,018
+到第二高的服务质量
+的用户发起服务质量中去
 
 
 247
-00:12:26,786 --> 00:12:29,686
-at the highest priority, that's
-the user interactive priority.
+00:13:39,720 --> 00:13:44,525
+所以这个代码能够有效地
+在用户发起服务质量中加载所有图标
 
 
 248
-00:12:29,916 --> 00:12:33,186
-The other thing is
-that the Quality
+00:13:45,859 --> 00:13:47,694
+好 现在让我们再试着滑动一下 
 
 
 249
-00:12:33,186 --> 00:12:34,856
-of Service bands are shared
+00:13:50,764 --> 00:13:52,466
+好的 这好多了
 
 
 250
-00:12:34,856 --> 00:12:36,576
-across all foreground
-applications.
+00:13:53,433 --> 00:13:54,868
+如果你的设计行得通
 
 
 251
-00:12:37,266 --> 00:12:39,936
-So everyone's user-initiated
-queues get equal access
+00:13:54,935 --> 00:13:57,938
+这样你和你apps就能使用这个方案
 
 
 252
-00:12:39,976 --> 00:12:42,826
-to the CPU, and everyone's
-background queues get equal
+00:13:58,238 --> 00:14:01,074
+比如说你可以一边展示你的占位图片
 
 
 253
-00:12:42,856 --> 00:12:43,866
-access to the CPU.
+00:14:01,175 --> 00:14:02,543
+一边等待真正的内容加载出来
 
 
 254
-00:12:44,556 --> 00:12:48,726
-No single foreground app is
-prioritized above any other.
+00:14:03,277 --> 00:14:06,313
+但IconReel的设计不允许这样
 
 
 255
-00:12:49,206 --> 00:12:51,416
-If you prioritize your
-work appropriately,
+00:14:06,380 --> 00:14:10,317
+我们必须有已经加载好的图标
+在它已经在屏幕上滑动之前
 
 
 256
-00:12:51,706 --> 00:12:55,006
-the system can guarantee
-that we get the best possible
+00:14:11,718 --> 00:14:14,087
+所以我们真正需要的是找到一个方式
 
 
 257
-00:12:55,006 --> 00:12:57,026
-performance while there are
-multiple apps on screen.
+00:14:14,221 --> 00:14:17,191
+来暂时促进图标生成队列
 
 
 258
-00:12:57,626 --> 00:13:00,706
-So how does this
-apply to IconReel?
+00:14:17,491 --> 00:14:19,860
+在主流程中达到同样优先权
 
 
 259
-00:13:01,666 --> 00:13:03,746
-Well, we are going
-to load the icons
+00:14:20,194 --> 00:14:22,262
+就在界面滑动图标之前
 
 
 260
-00:13:03,746 --> 00:13:05,646
-on a separate thread using GCD
+00:14:22,329 --> 00:14:24,998
+这样它可以更快地完成图标生成
 
 
 261
-00:13:05,646 --> 00:13:07,976
-at the user-initiated
-Quality of Service.
+00:14:26,166 --> 00:14:27,734
+还有另一种方法是
 
 
 262
-00:13:09,236 --> 00:13:12,086
-The first thing we do, we
-create our dispatch queue,
+00:14:28,535 --> 00:14:30,838
+使用服务质量覆盖
 
 
 263
-00:13:12,446 --> 00:13:16,536
-called Icon Generation Queue,
-and it's a serial queue.
+00:14:32,606 --> 00:14:38,645
+当我们有这一类型的倒置时
+例如有个高优先权流程或队列被阻碍而
 
 
 264
-00:13:16,536 --> 00:13:19,766
-While we are on the main thread,
-we're going to dispatch async,
+00:14:38,712 --> 00:14:42,049
+等待一个低优先权流程或列队来完成一
+些工作这个会非常好用
 
 
 265
-00:13:19,766 --> 00:13:22,826
-generating each icon on the
-next page onto our icon queue.
+00:14:42,983 --> 00:14:45,385
+而最酷的部分是
 
 
 266
-00:13:23,896 --> 00:13:26,256
-It isn't obvious from
-this code snippet,
+00:14:45,452 --> 00:14:47,921
+如果你给系统提供足够的信息
 
 
 267
-00:13:26,516 --> 00:13:29,846
-but dispatch asyncing work
-from the main thread to a queue
+00:14:47,988 --> 00:14:49,957
+服务质量覆盖便可以自动生成
 
 
 268
-00:13:29,846 --> 00:13:33,036
-like this downgrades
-the quality of service
+00:14:50,858 --> 00:14:54,228
+你可能在想 布蕾特妮
+我怎样才能给系统
 
 
 269
-00:13:33,616 --> 00:13:35,686
-to the user-initiated
-quality of service,
+00:14:54,294 --> 00:14:55,329
+提供足够的信息
 
 
 270
-00:13:35,766 --> 00:13:38,546
-which is the second-highest
-quality of service.
+00:14:56,563 --> 00:14:57,831
+这里有一个好用的表格
 
 
 271
-00:13:39,396 --> 00:13:42,156
-So this code is effectively
-loading all the icons
+00:14:58,966 --> 00:15:00,701
+再说一遍 去年的演讲和
 
 
 272
-00:13:42,156 --> 00:13:44,146
-at the user-initiated
-quality of service.
+00:15:00,767 --> 00:15:03,303
+这周五的演讲会更深入地讲解这个
 
 
 273
-00:13:45,856 --> 00:13:47,576
-Okay. So let's try
-scrolling again.
+00:15:04,004 --> 00:15:06,707
+但今天讲的是调度组等和
 
 
 274
-00:13:47,646 --> 00:13:48,326
-All right.
+00:15:06,773 --> 00:15:09,743
+调度信号等不会是你们要的东西
 
 
 275
-00:13:50,096 --> 00:13:52,206
-That was better.
+00:15:10,210 --> 00:15:12,980
+你应该为了这些功能的使用
+审计你的代码
 
 
 276
-00:13:53,436 --> 00:13:56,076
-This solution could work
-for you and your apps
+00:15:13,313 --> 00:15:15,282
+然后意识到他们不会
 
 
 277
-00:13:56,246 --> 00:13:58,196
-if your design allows for it.
+00:15:15,349 --> 00:15:16,850
+在优先倒置中修复这些类型
 
 
 278
-00:13:58,256 --> 00:14:01,166
-Let's say you can show
-placeholder images while you are
+00:15:18,719 --> 00:15:21,154
+那么让我们看一下我们
+在IconReel上会怎么做
 
 
 279
-00:14:01,166 --> 00:14:02,546
-waiting for the real
-content to load.
+00:15:21,688 --> 00:15:26,560
+当在屏幕上图标滑动的 第一行之前
 
 
 280
-00:14:03,266 --> 00:14:06,236
-However, IconReel's design
-doesn't allow for it.
+00:15:27,361 --> 00:15:28,562
+在主流程上我们会
 
 
 281
-00:14:06,386 --> 00:14:09,666
-We have to have the icon
-already loaded before it scrolls
+00:15:28,629 --> 00:15:32,132
+同步调度这个空阻塞到
+我们的图标队列中区
 
 
 282
-00:14:09,666 --> 00:14:10,256
-on screen.
+00:15:32,766 --> 00:15:37,371
+我们需要做的是
+增强图标队列的优先权
 
 
 283
-00:14:11,716 --> 00:14:14,086
-So what we really
-need, we need a way
+00:15:37,437 --> 00:15:39,373
+来和主流程的优先权匹配
 
 
 284
-00:14:14,216 --> 00:14:17,196
-to temporarily boost the
-icon generation queue
+00:15:39,439 --> 00:15:41,241
+直到阻塞被执行
 
 
 285
-00:14:17,506 --> 00:14:19,856
-up to the same priority
-as the main thread,
+00:15:41,341 --> 00:15:43,377
+在图标队列的点
 
 
 286
-00:14:20,186 --> 00:14:22,336
-right before the icon
-scrolls on to screen
+00:15:43,443 --> 00:15:45,012
+会回到其正常优先权
 
 
 287
-00:14:22,336 --> 00:14:26,556
-so that it can finish
-generating the icon faster.
+00:15:46,079 --> 00:15:48,982
+现在我们来看一下滑动
+以及它们是什么样的
 
 
 288
-00:14:26,606 --> 00:14:27,636
-There's a way to do that, too.
+00:15:54,488 --> 00:15:58,192
+对 很好 一个很好的慢滑
 
 
 289
-00:14:28,546 --> 00:14:30,836
-It's by using the quality
-of service overrides.
+00:15:59,459 --> 00:16:03,163
+我们现在来试一下慢滑之后快滑
 
 
 290
-00:14:32,596 --> 00:14:35,656
-This comes in handy when we have
-this type of priority inversion
+00:16:07,601 --> 00:16:10,904
+我的天 我们又回到最初的状况了
 
 
 291
-00:14:35,656 --> 00:14:38,286
-where we have a high-priority
-thread or queue blocked,
+00:16:11,038 --> 00:16:12,406
+就是当到了下一页的时候
 
 
 292
-00:14:38,726 --> 00:14:41,746
-waiting on a low-priority thread
-or queue to finish some work.
+00:16:12,472 --> 00:16:14,575
+在屏幕上有一个停顿
 
 
 293
-00:14:42,996 --> 00:14:45,466
-And the awesome part
-is that quality
+00:16:15,509 --> 00:16:16,410
+现在怎么办
 
 
 294
-00:14:45,466 --> 00:14:47,976
-of service overrides can
-happen for you automatically
+00:16:18,011 --> 00:16:19,813
+这里有一个规律
 
 
 295
-00:14:47,976 --> 00:14:49,946
-if you provide the system
-with enough information.
+00:16:20,080 --> 00:16:23,217
+将工具再次拿出来
+我们拿出另外一个追踪
 
 
 296
-00:14:50,946 --> 00:14:54,296
-You may be thinking: Brittany,
-how can I provide the system
+00:16:23,417 --> 00:16:25,419
+这次我们还有一个计算器
 
 
 297
-00:14:54,296 --> 00:14:55,326
-with enough information?
+00:16:25,953 --> 00:16:29,857
+而且我们要做一点儿计算
+然后我们要找到我们不能加载
 
 
 298
-00:14:56,566 --> 00:14:57,816
-Well, here is a handy chart.
+00:16:30,257 --> 00:16:34,061
+读取图标图片从磁盘中 解码图标图片
 
 
 299
-00:14:58,966 --> 00:15:01,166
-Again, the talk from last
-year and the talk coming
+00:16:34,127 --> 00:16:37,397
+然后让图标变得好看且有时间
 
 
 300
-00:15:01,166 --> 00:15:03,316
-up on Friday go into
-this in more depth.
+00:16:37,464 --> 00:16:40,167
+让一个快速地用户滑动到下一页
 
 
 301
-00:15:04,016 --> 00:15:06,376
-But the take-home here is
-that Dispatch Group Wait
+00:16:41,435 --> 00:16:42,736
+现在做什么
 
 
 302
-00:15:06,776 --> 00:15:10,286
-and Dispatch Semaphore
-Wait are not your friends.
+00:16:43,804 --> 00:16:46,039
+我想我们应该等更快的设备了
 
 
 303
-00:15:10,546 --> 00:15:12,926
-You should audit your code
-for uses of these functions
+00:16:50,210 --> 00:16:51,612
+一些掌声是给它们的
 
 
 304
-00:15:12,996 --> 00:15:15,676
-and be aware that they
-don't fix these types
+00:16:54,548 --> 00:16:55,482
+开个玩笑
 
 
 305
-00:15:15,676 --> 00:15:16,726
-of priority inversions.
+00:16:55,649 --> 00:16:56,550
+我们可以做得更好
 
 
 306
-00:15:18,706 --> 00:15:22,626
-So let's look at what we
-are going to do in IconReel.
+00:16:56,617 --> 00:16:57,651
+我们必须更聪明
 
 
 307
-00:15:22,906 --> 00:15:26,546
-Right before that first column
-of icons scroll on screen,
+00:16:58,352 --> 00:17:02,022
+数学计算告诉我们可以达到更好
 
 
 308
-00:15:27,376 --> 00:15:28,616
-on the main thread we are going
+00:17:02,089 --> 00:17:03,790
+的运行如果我们让
 
 
 309
-00:15:28,616 --> 00:15:32,056
-to dispatch sync this empty
-block onto our icon queue.
+00:17:03,857 --> 00:17:05,791
+下一页的图标已经在记忆体中运行
 
 
 310
-00:15:32,056 --> 00:15:36,916
-What that will do is boost
-the priority of the icon queue
+00:17:06,960 --> 00:17:09,630
+这个确保及时当你
 
 
 311
-00:15:36,916 --> 00:15:39,176
-up to match the priority
-of the main thread
+00:17:09,695 --> 00:17:12,866
+在多重页面中快速滑动
+我们有足够的时间
 
 
 312
-00:15:39,456 --> 00:15:41,026
-until that block executes,
+00:17:12,933 --> 00:17:15,769
+让用户可以再次滑动之前
+加载下一页的图标
 
 
 313
-00:15:41,336 --> 00:15:43,826
-at which point the
-icon queue will go back
+00:17:17,738 --> 00:17:20,707
+现在我们来增加
+我们的工作集从第一页
 
 
 314
-00:15:43,826 --> 00:15:45,016
-down to its normal priority.
+00:17:20,773 --> 00:17:23,609
+到第三页 你们现在所看到的
 
 
 315
-00:15:46,086 --> 00:15:54,726
-Now let's look at scrolling
-and see what it looks like.
+00:17:23,676 --> 00:17:25,145
+页面不是前一页也不是后一页
 
 
 316
-00:15:54,726 --> 00:15:58,186
-Oh, yeah, looks great,
-with a nice slow swipe.
+00:17:25,811 --> 00:17:27,381
+而我们没有一个神奇的八球
 
 
 317
-00:15:59,476 --> 00:16:07,446
-So let's try a slow swipe
-followed by a fast swipe.
+00:17:27,481 --> 00:17:30,150
+来知道用户会滑向哪一页
 
 
 318
-00:16:07,596 --> 00:16:10,736
-Oh, man! We are right
-back to where we started
+00:17:30,484 --> 00:17:33,954
+所以拥有前后两页会是最佳的选项
 
 
 319
-00:16:11,026 --> 00:16:12,876
-where that next page, there's
+00:17:35,722 --> 00:17:37,257
+现在让我们试着滑动
 
 
 320
-00:16:12,876 --> 00:16:14,576
-like a hang before
-it comes on screen.
+00:17:43,096 --> 00:17:44,798
+很好 这看起来好多了
 
 
 321
-00:16:15,506 --> 00:16:16,396
-So now what?
+00:17:45,165 --> 00:17:47,201
+当用户到达下一页时
 
 
 322
-00:16:18,026 --> 00:16:20,176
-There is a pattern here.
+00:17:47,267 --> 00:17:50,838
+我们已经在加载下一页的图标了
 
 
 323
-00:16:20,686 --> 00:16:22,166
-Pulled out Instruments again.
+00:17:50,904 --> 00:17:54,141
+但是 这其实增加了我们的记忆体使用
 
 
 324
-00:16:22,166 --> 00:16:23,096
-We took another trace.
+00:17:54,208 --> 00:17:56,977
+当我们有仅仅一页的工作集时
 
 
 325
-00:16:23,426 --> 00:16:25,416
-This time we also
-got a calculator,
+00:17:57,044 --> 00:17:58,412
+我们有记忆体占用
 
 
 326
-00:16:25,946 --> 00:16:29,856
-and we did some math, and we
-found that we just can't load,
+00:17:58,478 --> 00:18:00,647
+现在我们有了这个记忆体的占用
 
 
 327
-00:16:30,246 --> 00:16:34,326
-read the icon image from
-disk, decode the icon image,
+00:18:00,714 --> 00:18:03,917
+我们应该清楚
+这将会如何影响其它apps
 
 
 328
-00:16:34,326 --> 00:16:37,456
-and make the icon nice and
-pretty in the amount of time
+00:18:05,652 --> 00:18:10,591
+现在来看当用户用IconReel在
+屏幕上打开某二级app时会发生什么
 
 
 329
-00:16:37,456 --> 00:16:39,946
-that it takes for a fast user
-to swipe to the next page.
+00:18:11,658 --> 00:18:16,196
+IconReel调整了大小
+只展示了三行而不是四行
 
 
 330
-00:16:41,446 --> 00:16:42,366
-So now what?
+00:18:17,097 --> 00:18:20,901
+这是个重新评估我们的工作集的好机会
 
 
 331
-00:16:43,816 --> 00:16:45,946
-I guess we can just
-wait for faster devices.
+00:18:21,201 --> 00:18:26,273
+我们依然需要同时有三页的
+四行图标在内存中吗
 
 
 332
-00:16:47,016 --> 00:16:49,016
-[Laughter]
+00:18:27,140 --> 00:18:32,045
+不
+我们仅仅需要同时有三页三行的内存
 
 
 333
-00:16:49,016 --> 00:16:50,000
-[Applause]
+00:18:32,980 --> 00:18:35,282
+高效到它看起来有点儿像这样
 
 
 334
-00:16:50,046 --> 00:16:54,556
->> BRITTANY PAINE:
-Some applause for that.
+00:18:36,416 --> 00:18:38,719
+现在我会手动
 
 
 335
-00:16:54,556 --> 00:16:55,216
-Just kidding.
+00:18:38,785 --> 00:18:41,788
+删除这些多余的图标行
 
 
 336
-00:16:55,656 --> 00:16:56,456
-We can do better.
+00:18:41,855 --> 00:18:43,457
+就是我们不需要用的 但是
 
 
 337
-00:16:56,616 --> 00:16:57,616
-We have to be smarter.
+00:18:43,624 --> 00:18:45,926
+需要很多工作来生成它们
 
 
 338
-00:16:57,616 --> 00:17:02,096
-Math calculations told us
-we would have much better
+00:18:45,993 --> 00:18:48,061
+如果不是特别需要 我不想重新做
 
 
 339
-00:17:02,096 --> 00:17:03,866
-performance if we
-had the next page
+00:18:49,029 --> 00:18:50,998
+如果有一个地方
 
 
 340
-00:17:03,866 --> 00:17:05,786
-of icons already
-loaded in memory.
+00:18:51,064 --> 00:18:53,400
+让我我能够摆放这些图标那该多好
 
 
 341
-00:17:06,945 --> 00:17:10,776
-This ensures that even when
-you are scrolling quickly
+00:18:53,500 --> 00:18:56,670
+如果系统需要内存 我们可以丢掉它们
 
 
 342
-00:17:10,776 --> 00:17:12,935
-through multiple pages,
-we have enough time
+00:18:56,737 --> 00:18:59,806
+如果系统不需要内存 
+那么它们可以留在内存中
 
 
 343
-00:17:12,935 --> 00:17:15,766
-to load the next page of icons
-before the user can swipe again.
+00:18:59,873 --> 00:19:02,376
+然后我们可以再次使用它们
+当我们需要它们的时候
 
 
 344
-00:17:17,736 --> 00:17:20,766
-So let's increase our
-working set size from one page
+00:19:03,043 --> 00:19:04,745
+有一种方法
 
 
 345
-00:17:20,766 --> 00:17:23,685
-to three pages: the page
-you're currently viewing
+00:19:04,811 --> 00:19:07,080
+就是读取内存发出的警告
 
 
 346
-00:17:23,685 --> 00:17:24,796
-and the page on either side.
+00:19:09,483 --> 00:19:13,086
+当系统低于内存限制时
+会出现内存发出的警告
 
 
 347
-00:17:25,796 --> 00:17:27,366
-We don't have a magic
-eight ball.
+00:19:13,153 --> 00:19:15,722
+说你的程序正在达到它的内存限度
 
 
 348
-00:17:27,496 --> 00:17:30,166
-So we don't know which way
-the user is about to scroll.
+00:19:18,058 --> 00:19:21,728
+我非常想给你一个数字
+这样你可以选择你的内存限度代码
 
 
 349
-00:17:30,606 --> 00:17:33,766
-Having one page on either side
-seems like the best compromise.
+00:19:22,129 --> 00:19:23,830
+不幸的是 没有这样一个数字
 
 
 350
-00:17:33,906 --> 00:17:36,246
-Now let's try scrolling.
+00:19:24,464 --> 00:19:28,268
+对于每台设备和
+每个应用上下文的限制是不同的
 
 
 351
-00:17:36,596 --> 00:17:37,686
-All right.
+00:19:28,569 --> 00:19:30,737
+所以我能给出的最好建议就是
 
 
 352
-00:17:42,776 --> 00:17:44,076
-That looks much better.
+00:19:30,804 --> 00:19:33,974
+读取系统发出的警告然后采取行动
 
 
 353
-00:17:44,146 --> 00:17:47,266
-Now by the time the user
-gets to the next page,
+00:19:34,041 --> 00:19:36,276
+所以你应该做什么
 
 
 354
-00:17:47,266 --> 00:17:50,836
-we've already started loading
-the next page of icons.
+00:19:37,277 --> 00:19:39,780
+你应该把不在工作集的东西清理出来
 
 
 355
-00:17:51,016 --> 00:17:54,216
-However, this actually
-increases our memory usage.
+00:19:39,847 --> 00:19:43,150
+这包括清理缓存数据释放图片
 
 
 356
-00:17:54,216 --> 00:17:57,056
-When we had our working set
-that contained only one page,
+00:19:43,217 --> 00:19:44,518
+和释放视图控制器
 
 
 357
-00:17:57,056 --> 00:17:58,326
-we had this memory footprint.
+00:19:46,720 --> 00:19:50,591
+这是你可以
+用来读取内存警告的APIs
 
 
 358
-00:17:58,786 --> 00:18:00,716
-Now we have this
-memory footprint.
+00:19:50,657 --> 00:19:52,559
+然后我想说明一点
 
 
 359
-00:18:00,716 --> 00:18:05,206
-We need to be aware of how
-we are affecting other apps.
+00:19:52,626 --> 00:19:54,628
+这些都不是第一次在iOS 9中出现
 
 
 360
-00:18:05,706 --> 00:18:08,126
-So now let's look at what
-happens when the user brings
+00:19:55,095 --> 00:19:56,496
+它们存在一段时间了
 
 
 361
-00:18:08,126 --> 00:18:10,596
-in a secondary app with
-IconReel already on screen.
+00:19:56,563 --> 00:19:58,665
+希望你们都已经使用它们了
 
 
 362
-00:18:11,656 --> 00:18:16,196
-IconReel resizes to show only
-three columns instead of four.
+00:20:00,234 --> 00:20:02,836
+现在
+我可以检查一个内存警告
 
 
 363
-00:18:17,206 --> 00:18:20,376
-This is a great opportunity
-to reassess our working set.
+00:20:02,903 --> 00:20:05,105
+然后手动去除那些图标
 
 
 364
-00:18:21,196 --> 00:18:24,516
-Do we still need three
-pages of four columns
+00:20:05,205 --> 00:20:07,741
+我很懒而且我不想那么做
 
 
 365
-00:18:24,516 --> 00:18:26,076
-of icons in memory at a time?
+00:20:07,975 --> 00:20:11,912
+如果有一个工具可帮我管理那些玩意儿
 
 
 366
-00:18:27,126 --> 00:18:30,636
-No. We only need three
-pages of three columns
+00:20:11,979 --> 00:20:13,013
+让我不用去做就太好了
 
 
 367
-00:18:30,636 --> 00:18:31,756
-of icons in memory at a time.
+00:20:14,448 --> 00:20:17,484
+而我们也有一个这样的工具
+它叫做NSCache
 
 
 368
-00:18:32,996 --> 00:18:36,326
-So effectively it looks
-a little bit like this.
+00:20:18,151 --> 00:20:19,786
+它和NSDictionary很像
 
 
 369
-00:18:36,426 --> 00:18:38,776
-Now, I could go through
+00:20:19,853 --> 00:20:22,389
+但它对于可以被
+快速重塑的对象来说很好
 
 
 370
-00:18:38,776 --> 00:18:41,866
-and manually throw away
-those extra columns of icons
+00:20:23,557 --> 00:20:25,359
+它还帮你处理内存发出的警告
 
 
 371
-00:18:41,866 --> 00:18:44,376
-that we don't need
-anymore, but it was a lot
+00:20:25,425 --> 00:20:27,861
+自动清理东西然后它
 
 
 372
-00:18:44,376 --> 00:18:45,916
-of work to generate them.
+00:20:28,262 --> 00:20:32,132
+也知道应用上下文比如前台和后台
 
 
 373
-00:18:46,056 --> 00:18:49,136
-I don't want to redo
-it if I don't have to.
+00:20:32,432 --> 00:20:33,901
+然后在必要的时候清理东西
 
 
 374
-00:18:49,136 --> 00:18:50,856
-It would be great
-if there was a place
+00:20:35,202 --> 00:20:38,839
+它还能做很多很酷的东西
+但我们今天没有时间展开讨论
 
 
 375
-00:18:51,066 --> 00:18:53,126
-where I could put
-these icons where,
+00:20:38,906 --> 00:20:41,275
+不要忘了看NSCache上的资料
 
 
 376
-00:18:53,506 --> 00:18:56,726
-if the system needed the memory,
-we could get rid of them.
+00:20:43,210 --> 00:20:46,847
+现在在拆分视图上
+我们可以看到IconReel
 
 
 377
-00:18:56,726 --> 00:18:59,886
-If the system didn't need the
-memory, then they could stay
+00:20:47,281 --> 00:20:49,149
+这次不把这些图标删除
 
 
 378
-00:18:59,886 --> 00:19:01,576
-in memory for us so that
-we could use them again
+00:20:49,683 --> 00:20:51,585
+我们把
+它们放到一个NSCache里面
 
 
 379
-00:19:01,576 --> 00:19:02,166
-when we need them.
+00:20:52,352 --> 00:20:56,990
+实施上我们只把我们生成的每个不在
+工作集中的图标放进NSCache里
 
 
 380
-00:19:03,056 --> 00:19:04,426
-There is a way to do that,
+00:20:57,724 --> 00:20:59,459
+而当我们有一个内存发出的警告时
 
 
 381
-00:19:04,816 --> 00:19:07,066
-and that is by listening
-to memory warnings.
+00:20:59,726 --> 00:21:04,198
+我们可以让NSCache做所有
+清除那些不在我们工作集的图标
 
 
 382
-00:19:09,486 --> 00:19:13,086
-Memory warnings happen when the
-system is under memory pressure
+00:21:06,233 --> 00:21:07,100
+让我们回顾一下
 
 
 383
-00:19:13,146 --> 00:19:15,706
-or your process is
-approaching its memory limit.
+00:21:07,601 --> 00:21:10,737
+我们从这里开始
+每个图标都在内存里面
 
 
 384
-00:19:18,056 --> 00:19:20,236
-I'd really like to give you
-a number that you could code
+00:21:10,938 --> 00:21:15,576
+所以我们的内存使用很高 且
+滑动很流畅而CPU和磁盘I/O很低
 
 
 385
-00:19:20,236 --> 00:19:21,616
-to for your memory limit.
+00:21:16,009 --> 00:21:17,811
+但我们有时看到app崩溃
 
 
 386
-00:19:22,116 --> 00:19:23,836
-Unfortunately, there's
-no such number.
+00:21:18,045 --> 00:21:19,012
+而这并不好
 
 
 387
-00:19:24,466 --> 00:19:26,276
-The limit is different
-per device
+00:21:20,047 --> 00:21:22,382
+所以我们调整我们的工作集
 
 
 388
-00:19:26,476 --> 00:19:28,156
-and per application context.
+00:21:22,449 --> 00:21:25,652
+到只有一页图标中
+然后内存使用很低
 
 
 389
-00:19:28,666 --> 00:19:31,256
-So my best advice
-is to just listen
+00:21:25,986 --> 00:21:28,755
+但是我们的CPU
+和磁盘I/O在滑动时很高
 
 
 390
-00:19:31,256 --> 00:19:33,526
-for memory warnings
-and do things.
+00:21:28,822 --> 00:21:30,958
+而这会产生很差劲的滑动操作
 
 
 391
-00:19:34,216 --> 00:19:36,286
-So what should you do?
+00:21:33,493 --> 00:21:36,997
+现在我们将工作集的大小变为三页图标
 
 
 392
-00:19:37,266 --> 00:19:39,656
-Well, you should remove anything
-not in your working set.
+00:21:37,464 --> 00:21:39,466
+这会给我们的内存增加一点点
 
 
 393
-00:19:39,926 --> 00:19:43,226
-This includes clearing cache
-data, releasing images,
+00:21:39,867 --> 00:21:41,902
+然后每一个我们生成的图标
 
 
 394
-00:19:43,226 --> 00:19:44,526
-and releasing view controllers.
+00:21:41,969 --> 00:21:45,339
+不在工作集中我们就把它们
+丢到NSCache里面
 
 
 395
-00:19:44,606 --> 00:19:49,376
-Here is the APIs that
-you can use to listen
+00:21:46,006 --> 00:21:48,308
+我们增加了整体的内存的使用
 
 
 396
-00:19:49,376 --> 00:19:52,616
-for memory warnings, and I
-want to make it clear that none
+00:21:48,375 --> 00:21:50,277
+但是大量增加内存的使用
 
 
 397
-00:19:52,616 --> 00:19:54,546
-of these are new in iOS 9.
+00:21:50,344 --> 00:21:51,745
+已经使它能够适应内存的限度
 
 
 398
-00:19:54,546 --> 00:19:56,236
-They have been around
-for a while.
+00:21:53,347 --> 00:21:54,882
+对于你们很多人来说 这已经很好了
 
 
 399
-00:19:56,556 --> 00:20:00,326
-Hopefully y'all are
-already using all of them.
+00:21:55,749 --> 00:21:58,418
+如果你的app可以在
+一个多任务处理的环境下运行
 
 
 400
-00:20:00,976 --> 00:20:03,956
-I could go through on a memory
-warning and manually get rid
+00:21:58,552 --> 00:22:03,090
+且在地图上交叉运行
+那么你的状态应该不错
 
 
 401
-00:20:03,956 --> 00:20:05,096
-of these icons myself.
+00:22:04,291 --> 00:22:07,194
+我今天展示了
+一些你们的app可以做到的事情
 
 
 402
-00:20:05,196 --> 00:20:08,376
-I'm lazy and don't
-want to do that.
+00:22:07,261 --> 00:22:08,996
+来成为一个优秀而多任务处理的公民
 
 
 403
-00:20:08,816 --> 00:20:11,606
-It would be great if there was a
-tool that managed all that crap
+00:22:09,062 --> 00:22:12,065
+但是有些时候只靠这些事情还是不够的
 
 
 404
-00:20:11,656 --> 00:20:14,396
-for me so I didn't
-have to do it.
+00:22:12,132 --> 00:22:14,001
+为了和你们聊聊你们接下来可以做什么
 
 
 405
-00:20:14,446 --> 00:20:15,816
-Turns out we have
-one of those, too.
+00:22:14,067 --> 00:22:15,836
+我想请出乔恩德拉蒙德
 
 
 406
-00:20:16,266 --> 00:20:16,936
-It is called NSCache.
+00:22:23,911 --> 00:22:25,679
+谢谢你布蕾特妮 大家好
 
 
 407
-00:20:16,936 --> 00:20:20,426
-It is similar to an
-NSDictionary, and it's great
+00:22:27,514 --> 00:22:30,350
+看来你们已经掌控
+如何使用你的app的内存
 
 
 408
-00:20:20,426 --> 00:20:22,396
-for objects that can
-be re-created quickly.
+00:22:30,851 --> 00:22:32,753
+来极大地帮助你的app和
 
 
 409
-00:20:23,546 --> 00:20:25,416
-It also handles the
-memory warnings for you
+00:22:32,819 --> 00:22:33,921
+其余系统的运行
 
 
 410
-00:20:25,416 --> 00:20:29,276
-by automatically evicting items
-from itself, and it's also aware
+00:22:34,188 --> 00:22:36,223
+但有些时候只靠这些知识并不足够
 
 
 411
-00:20:29,276 --> 00:20:32,116
-of application context like
-foreground versus background
+00:22:36,590 --> 00:22:38,292
+如果你已经做了我们说过的所有事情
 
 
 412
-00:20:32,436 --> 00:20:33,896
-and evicts items when necessary.
+00:22:38,358 --> 00:22:41,528
+并且做得很正确 但是情况还是不对
 
 
 413
-00:20:35,216 --> 00:20:37,766
-It does other cool stuff,
-too, but we don't have time
+00:22:42,296 --> 00:22:44,097
+我们将谈谈一些方法
 
 
 414
-00:20:37,766 --> 00:20:38,836
-to talk about that today.
+00:22:44,298 --> 00:22:47,801
+让你们的apps可以更好地
+管理它们的内存占用
 
 
 415
-00:20:39,016 --> 00:20:41,276
-Make sure to check out
-the NSCache documentation.
+00:22:49,136 --> 00:22:52,239
+首先 我想回到那个多任务管理的例子
 
 
 416
-00:20:41,866 --> 00:20:46,836
-Now when we have IconReel
-up in a split view,
+00:22:52,306 --> 00:22:54,341
+假如我们有一个初级和一个二级app
 
 
 417
-00:20:47,296 --> 00:20:49,136
-instead of throwing
-away these icons,
+00:22:55,142 --> 00:22:57,277
+而现在已经达到内存的极限了
 
 
 418
-00:20:49,696 --> 00:20:50,796
-let's put them in an NSCache.
+00:22:57,344 --> 00:22:58,912
+接着系统会发出一个内存警告
 
 
 419
-00:20:50,856 --> 00:20:55,306
-In fact, let's just put every
-icon we ever generate that's not
+00:22:58,979 --> 00:23:01,949
+身为良好多任务公民apps会管理好
 
 
 420
-00:20:55,306 --> 00:20:58,046
-in our working set in NSCache.
+00:23:02,015 --> 00:23:04,117
+并清理它们的缓存和其它不需要的东西
 
 
 421
-00:20:58,046 --> 00:20:59,466
-And when we have
-a memory warning,
+00:23:04,518 --> 00:23:08,021
+好的 那么现在用户引进了一个PiP
 
 
 422
-00:20:59,726 --> 00:21:03,216
-we can let NSCache do all the
-work of evicting all those icons
+00:23:08,355 --> 00:23:10,090
+我们有足够的内存 这样不错
 
 
 423
-00:21:03,216 --> 00:21:06,446
-that are not in our working set.
+00:23:10,157 --> 00:23:12,426
+虽然我们还没到达内存的极限
+但我们已经接近了
 
 
 424
-00:21:06,446 --> 00:21:06,966
-Let's recap.
+00:23:13,393 --> 00:23:15,996
+现在用户将调整那个二级app
 
 
 425
-00:21:07,606 --> 00:21:10,746
-We started here, where we
-had every icon in memory.
+00:23:16,063 --> 00:23:17,698
+让其达到和初级拥有一对一的比例
 
 
 426
-00:21:10,936 --> 00:21:14,216
-So our memory usage was high,
-but scrolling was great and CUP
+00:23:19,399 --> 00:23:22,736
+因此 这将造成CPU的内存突增
 
 
 427
-00:21:14,216 --> 00:21:15,446
-and disk I/O were low.
+00:23:22,803 --> 00:23:24,905
+这会使系统不能及时做出反应
 
 
 428
-00:21:16,026 --> 00:21:17,496
-But sometimes we were
-seeing apps crash,
+00:23:25,172 --> 00:23:26,573
+很不幸地被逼把
 
 
 429
-00:21:18,056 --> 00:21:20,576
-and that is not good.
+00:23:26,640 --> 00:23:29,443
+初级的app终止即使它不是
 
 
 430
-00:21:20,796 --> 00:21:23,336
-So then we adjusted our working
-set size to only one page
+00:23:29,510 --> 00:23:31,345
+内存增长的正真原因
 
 
 431
-00:21:23,336 --> 00:21:26,776
-of icons, so the memory
-usage was low, but our CPU
+00:23:32,045 --> 00:23:34,615
+回归到SpringBoard
+从来就不是一个好的体验
 
 
 432
-00:21:26,776 --> 00:21:28,656
-and disk I/O were very
-high while scrolling,
+00:23:34,681 --> 00:23:35,983
+就像布蕾特妮刚刚展示的那样
 
 
 433
-00:21:28,816 --> 00:21:30,826
-and this resulted in crappy
-scrolling performance.
+00:23:37,751 --> 00:23:39,152
+在我继续讲或者结束之前
 
 
 434
-00:21:33,176 --> 00:21:36,996
-Then, we revised our working set
-size to be three pages of icons,
+00:23:39,219 --> 00:23:41,088
+我想跟你们分享一句话
 
 
 435
-00:21:37,456 --> 00:21:39,476
-which increased our
-memory usage a little bit.
+00:23:43,724 --> 00:23:47,027
+那就是在
+你程序之外的东西都应该被视为
 
 
 436
-00:21:39,856 --> 00:21:42,606
-And then every other icon
-that we generated that was not
+00:23:47,094 --> 00:23:49,396
+有敌意并且会毁灭你的可能
 
 
 437
-00:21:42,606 --> 00:21:46,336
-in our working set we
-threw into NSCache.
+00:23:50,731 --> 00:23:52,766
+我不是故意说不吉利的话
 
 
 438
-00:21:46,536 --> 00:21:48,366
-We have increased our
-overall memory usage,
+00:23:52,833 --> 00:23:55,302
+且我也不想让你们觉得我疯了
 
 
 439
-00:21:48,366 --> 00:21:50,286
-but most of our increase
-is now adaptable
+00:23:55,869 --> 00:23:58,772
+但身为一个良好的多任务管理
+公民就应该适应
 
 
 440
-00:21:50,286 --> 00:21:51,646
-to the surrounding
-circumstances.
+00:23:58,939 --> 00:24:00,641
+你身边所有会发生的事情
 
 
 441
-00:21:53,346 --> 00:21:54,876
-For many of you this
-is good enough.
+00:24:00,741 --> 00:24:03,810
+有时你身边发生的事情会很离谱
 
 
 442
-00:21:55,746 --> 00:21:58,416
-If your app can run in a
-multitasking environment
+00:24:04,678 --> 00:24:06,180
+你可能觉得一切都操作得很好
 
 
 443
-00:21:58,566 --> 00:22:03,076
-with Maps running Flyover, then
-you are probably in great shape.
+00:24:06,246 --> 00:24:08,916
+但是系统可能在密谋着终结你
 
 
 444
-00:22:04,296 --> 00:22:07,186
-I presented a bunch of things
-that your app can do today
+00:24:08,982 --> 00:24:10,984
+事情虽然不是这样 但如果你有所准备
 
 
 445
-00:22:07,186 --> 00:22:08,736
-to be a good multitasking
-citizen,
+00:24:11,051 --> 00:24:14,354
+这将会帮助你生存
 
 
 446
-00:22:09,056 --> 00:22:12,136
-but sometimes these
-things are not enough.
+00:24:16,523 --> 00:24:17,991
+所以首先
 
 
 447
-00:22:12,136 --> 00:22:14,026
-To talk to you about
-what you should do next,
+00:24:18,492 --> 00:24:20,594
+内存是在iOS中最被约束的资源
 
 
 448
-00:22:14,076 --> 00:22:14,976
-I would like to present
-Jon Drummond.
+00:24:20,994 --> 00:24:23,597
+这不是说其它资源不被约束
 
 
 449
-00:22:15,516 --> 00:22:23,546
-[Applause]
+00:24:23,664 --> 00:24:25,832
+它们会被约束 只是它们
+降级的不同而已
 
 
 450
-00:22:24,046 --> 00:22:24,806
->> JON DRUMMOND:
-Thank you, Brittany.
+00:24:26,099 --> 00:24:27,601
+当系统没有内存的时候
 
 
 451
-00:22:24,806 --> 00:22:25,776
-Hi, everybody.
+00:24:27,701 --> 00:24:28,869
+它就像在砸一堵墙
 
 
 452
-00:22:27,196 --> 00:22:30,366
-So understanding how your
-app uses memory can pay off
+00:24:28,936 --> 00:24:29,803
+有些东西必须离开
 
 
 453
-00:22:30,836 --> 00:22:32,836
-tremendously for both
-your app's performance
+00:24:29,870 --> 00:24:31,471
+它必须将内存拿回来
 
 
 454
-00:22:32,836 --> 00:22:33,906
-and the rest of the system.
+00:24:32,472 --> 00:24:34,141
+就像我们之前看到的例子
 
 
 455
-00:22:34,176 --> 00:22:36,216
-But sometimes that
-just isn't enough.
+00:24:34,541 --> 00:24:38,679
+有时侯系统能够
+以比释放内存更快的速度还原内存
 
 
 456
-00:22:36,596 --> 00:22:38,356
-What if you are doing
-everything we talked about
+00:24:39,112 --> 00:24:41,682
+即使我们有时间发布一个内存警告 
 
 
 457
-00:22:38,356 --> 00:22:41,526
-and doing it all correctly, but
-things are still going wrong?
+00:24:41,748 --> 00:24:43,750
+并且三个apps全部都在运行
 
 
 458
-00:22:42,286 --> 00:22:45,526
-We will talk about some ways
-to be even more adaptive
+00:24:43,817 --> 00:24:46,119
+且都有时间去相应那个警告
+但我们不能够知道
 
 
 459
-00:22:45,576 --> 00:22:47,816
-with the way that your apps
-manage their memory footprint.
+00:24:46,186 --> 00:24:47,754
+它们是否有足够的CPU循环
 
 
 460
-00:22:49,126 --> 00:22:52,316
-To start, I would like to go
-back to the multitasking example
+00:24:47,821 --> 00:24:49,756
+来做一些有意义且
 
 
 461
-00:22:52,316 --> 00:22:54,356
-where we have a primary
-and a secondary app.
+00:24:49,823 --> 00:24:52,426
+可以清除足够内存来还原内存
 
 
 462
-00:22:55,146 --> 00:22:57,346
-We are under memory
-pressure right now,
+00:24:53,594 --> 00:24:55,796
+为了了解系统是否能够收回内存
 
 
 463
-00:22:57,346 --> 00:22:59,506
-so the system issues a
-memory warning and the apps,
+00:24:55,863 --> 00:24:58,699
+我们需要知道内存是如何被分类
 
 
 464
-00:22:59,656 --> 00:23:02,006
-being good multitasking
-citizens, will take care
+00:24:59,333 --> 00:25:01,535
+我会将其分为三个不同的组别
 
 
 465
-00:23:02,006 --> 00:23:04,106
-of trimming their caches and
-other objects they don't need.
+00:25:01,602 --> 00:25:03,604
+第一个类别我们把它叫做脏的
 
 
 466
-00:23:04,516 --> 00:23:08,716
-Great. Now, the user
-brings in a PiP, okay?
+00:25:04,271 --> 00:25:06,673
+这是你的程序使用时活跃的内存
 
 
 467
-00:23:08,876 --> 00:23:10,156
-We have space, it's good.
+00:25:06,807 --> 00:25:09,309
+这些是你的对象这些是你的堆式分配
 
 
 468
-00:23:10,156 --> 00:23:12,166
-We are not under pressure,
-but we are getting close.
+00:25:09,576 --> 00:25:11,845
+静态 球态和所有你缓存的东西
 
 
 469
-00:23:13,396 --> 00:23:15,996
-Now the user goes and
-resizes the secondary app
+00:25:11,912 --> 00:25:13,413
+其实差不多所有的东西
 
 
 470
-00:23:16,066 --> 00:23:17,706
-to be fifty-fifty
-with the primary.
+00:25:13,514 --> 00:25:15,115
+而且这不能被系统召回
 
 
 471
-00:23:18,146 --> 00:23:22,796
-This causes a spike in memory
-growth, and CPU for that matter.
+00:25:15,182 --> 00:25:16,783
+因为这是你在用的
 
 
 472
-00:23:22,796 --> 00:23:24,916
-The system did not have
-time to react to this.
+00:25:18,185 --> 00:25:19,720
+第二个类别叫做可清除的
 
 
 473
-00:23:25,176 --> 00:23:26,646
-Unfortunately, it was forced
+00:25:20,020 --> 00:25:23,357
+这是除了脏的内存以外被明确标注
 
 
 474
-00:23:26,646 --> 00:23:29,496
-to kill the primary app here
-even though the primary app was
+00:25:23,590 --> 00:25:25,893
+不被app使用的
 
 
 475
-00:23:29,496 --> 00:23:31,356
-not the cause of
-the memory growth.
+00:25:25,959 --> 00:25:28,562
+这样系统知道
+当有需要的时候它可以被召回
 
 
 476
-00:23:32,036 --> 00:23:34,666
-Dropping back into SpringBoard
-is never a good experience,
+00:25:29,563 --> 00:25:30,864
+第三种我们叫干净的
 
 
 477
-00:23:34,666 --> 00:23:35,866
-as Brittany showed us.
+00:25:30,931 --> 00:25:33,800
+这是在磁盘上备份的
 
 
 478
-00:23:37,766 --> 00:23:39,226
-Before I finish or
-keep going here,
+00:25:33,867 --> 00:25:35,669
+系统可以召回这些内存
 
 
 479
-00:23:39,226 --> 00:23:43,616
-I want to share a
-quote with you.
+00:25:35,769 --> 00:25:38,639
+因为它永远可以召回
+因为文件已经在这儿了
 
 
 480
-00:23:43,736 --> 00:23:47,086
-That is that "the world outside
-your process should be regarded
+00:25:40,641 --> 00:25:42,543
+回到我们的系统内存条
 
 
 481
-00:23:47,086 --> 00:23:49,406
-as hostile and bent
-upon your destruction."
+00:25:42,609 --> 00:25:43,744
+这看起来怎么样
 
 
 482
-00:23:50,736 --> 00:23:53,946
-I don't mean that to sound
-ominous and I don't want you
+00:25:43,844 --> 00:25:46,847
+我们有一个非常非常小的内存局面
 
 
 483
-00:23:53,946 --> 00:23:56,296
-to think I'm paranoid, but part
+00:25:47,247 --> 00:25:48,982
+但是系统不这么看
 
 
 484
-00:23:56,296 --> 00:23:58,786
-of being a good multitasking
-citizen is adapting
+00:25:49,616 --> 00:25:55,088
+系统知道当它想释放一些内存来增长时
+它可以有余地使用
 
 
 485
-00:23:58,926 --> 00:24:00,626
-to everything that is
-happening around you.
+00:25:55,422 --> 00:25:57,324
+而不用发布内存警告
 
 
 486
-00:24:00,746 --> 00:24:03,826
-Sometimes what is happening
-around you is extreme.
+00:25:57,391 --> 00:25:59,126
+或要求apps来干预
 
 
 487
-00:24:04,686 --> 00:24:06,236
-You might be doing
-everything fine,
+00:26:00,327 --> 00:26:05,232
+你的app的目标和适应内存的使用
 
 
 488
-00:24:06,236 --> 00:24:08,996
-but the system might
-conspire to terminate you.
+00:26:05,299 --> 00:26:07,034
+就是最小化你脏的内存
 
 
 489
-00:24:08,996 --> 00:24:11,546
-It is not really, but being
-prepared for this kind
+00:26:07,768 --> 00:26:10,537
+而最大化你的可清除的和干净的内存
 
 
 490
-00:24:11,546 --> 00:24:14,056
-of situation will
-help you survive.
+00:26:11,004 --> 00:26:12,573
+我们从最小化脏的开始
 
 
 491
-00:24:16,536 --> 00:24:18,006
-So first things first.
+00:26:14,341 --> 00:26:16,009
+首先 对 少用它
 
 
 492
-00:24:18,506 --> 00:24:20,586
-Memory is the most
-constrained resource on iOS.
+00:26:16,710 --> 00:26:18,846
+我知道我站在这里说的很容易
 
 
 493
-00:24:20,996 --> 00:24:23,676
-That is not to say that other
-resources are not constrained.
+00:26:18,912 --> 00:26:21,281
+但如果你管理你的工作集
 
 
 494
-00:24:23,676 --> 00:24:25,836
-They are, but they just
-degrade differently.
+00:26:21,348 --> 00:26:24,017
+然后追溯你在定位的对象使用工具
 
 
 495
-00:24:26,116 --> 00:24:27,586
-When the system runs
-out of memory,
+00:26:24,084 --> 00:26:27,654
+来做所有的事情一旦你做好这些事下一
 
 
 496
-00:24:27,696 --> 00:24:28,936
-it's like hitting a wall.
+00:26:27,721 --> 00:26:30,357
+重新分类脏的内存为可清除的
 
 
 497
-00:24:28,936 --> 00:24:29,886
-Something has to go.
+00:26:31,291 --> 00:26:34,461
+如果你做了这些
+它可以被系统自动召回
 
 
 498
-00:24:29,886 --> 00:24:31,466
-It's got to get the memory back.
+00:26:34,962 --> 00:26:37,097
+然后这是可有可无的数据中最好的
 
 
 499
-00:24:32,466 --> 00:24:34,136
-As we saw from the
-previous example,
+00:26:37,364 --> 00:26:39,733
+你现在不需要的数据
+也许会在未来需要
 
 
 500
-00:24:34,556 --> 00:24:37,826
-sometimes the system can
-acquire memory faster
+00:26:39,800 --> 00:26:42,402
+所有你可能放到一个缓存里的事情 
+比如说
 
 
 501
-00:24:37,826 --> 00:24:38,626
-than it can be released.
+00:26:43,804 --> 00:26:45,539
+我们把
+这个应用到IconReel上
 
 
 502
-00:24:39,116 --> 00:24:41,626
-Even if we had time to issue
-a memory warning there,
+00:26:46,373 --> 00:26:48,308
+这个和我们中断的情况相似
 
 
 503
-00:24:41,626 --> 00:24:43,686
-and even if the apps, all
-three of them running,
+00:26:48,375 --> 00:26:51,144
+我们在工作集的两旁有图标的缓存
 
 
 504
-00:24:43,686 --> 00:24:46,176
-had time to respond
-to it, it's not clear
+00:26:51,445 --> 00:26:52,513
+另外 只是
 
 
 505
-00:24:46,176 --> 00:24:47,806
-that they would have
-had enough CPU cycles
+00:26:54,248 --> 00:26:57,484
+对于这个例子 我将再重新
+把我们的数据分一下类
 
 
 506
-00:24:47,806 --> 00:24:50,226
-to actually do something
-meaningful and clean
+00:26:57,551 --> 00:26:59,253
+比起在一个每个-图标块上工作
 
 
 507
-00:24:50,226 --> 00:24:52,426
-up enough memory to
-accommodate the growth.
+00:26:59,319 --> 00:27:01,421
+我会将图标群分成集列
 
 
 508
-00:24:53,586 --> 00:24:55,856
-To understand how the
-system can reclaim memory,
+00:27:01,488 --> 00:27:04,091
+就因为它可以在这儿变得比较轻松
 
 
 509
-00:24:55,856 --> 00:24:58,576
-we have to understand
-how memory is classified.
+00:27:04,491 --> 00:27:07,227
+这并不意味着会
+改变我们app的动态
 
 
 510
-00:24:58,656 --> 00:25:01,606
-I'm going to break it down
-into three different groups,
+00:27:07,294 --> 00:27:09,563
+当用户来回滑动
+我们更新我们的工作集
 
 
 511
-00:25:01,606 --> 00:25:03,526
-the first of which
-we call dirty.
+00:27:09,630 --> 00:27:11,865
+有些被缓存了 有些被拉出了缓存
 
 
 512
-00:25:03,526 --> 00:25:06,676
-This is memory in active
-use by your process.
+00:27:12,199 --> 00:27:13,233
+这都是一样的
 
 
 513
-00:25:06,796 --> 00:25:09,296
-These are your objects, these
-are your heap allocations,
+00:27:13,734 --> 00:27:15,335
+我们来给这个内存使用分一下类
 
 
 514
-00:25:09,586 --> 00:25:11,916
-statics, globals,
-everything you have cached,
+00:27:16,737 --> 00:27:19,106
+首先 我们正在使用的内存
 
 
 515
-00:25:11,916 --> 00:25:13,306
-actually pretty much everything.
+00:27:19,573 --> 00:27:20,541
+应被分类为脏的
 
 
 516
-00:25:13,506 --> 00:25:15,196
-And it is not reclaimable
-by the system
+00:27:20,908 --> 00:27:21,775
+这是我们的工作集
 
 
 517
-00:25:15,196 --> 00:25:16,566
-because it's in use by you.
+00:27:23,243 --> 00:27:26,346
+我们所有在缓存的对象都是可以清除的
 
 
 518
-00:25:18,176 --> 00:25:19,706
-The second is called purgeable.
+00:27:27,181 --> 00:27:29,816
+这为我们展示了一个有趣的机会
 
 
 519
-00:25:20,006 --> 00:25:23,346
-This is otherwise dirty memory
-that has been explicitly marked
+00:27:30,851 --> 00:27:33,854
+来让我们跟高级地分类内存
 
 
 520
-00:25:23,576 --> 00:25:25,946
-as not in use by the app,
+00:27:34,721 --> 00:27:40,727
+比如说 标记更多在用着的数据
 
 
 521
-00:25:25,946 --> 00:25:28,556
-so the system knows it can
-take it back if needed.
+00:27:40,794 --> 00:27:42,863
+或是脏的甚至有一些是在缓存里的
 
 
 522
-00:25:29,556 --> 00:25:32,206
-The third type we call clean,
-and that is read-only memory
+00:27:43,697 --> 00:27:47,301
+这介绍了一个另一种缓存的方式
 
 
 523
-00:25:32,206 --> 00:25:33,686
-that is backed by files on disk.
+00:27:48,302 --> 00:27:50,470
+第一个那个最外的图标
 
 
 524
-00:25:34,116 --> 00:25:35,676
-The system can reclaim
-the memory
+00:27:50,904 --> 00:27:52,906
+是我们最迟使用到的
 
 
 525
-00:25:35,766 --> 00:25:40,436
-because it can always bring it
-back because the file is there.
+00:27:52,973 --> 00:27:55,909
+我们会让系统在它需要的时候重新召回
+我们不在乎
 
 
 526
-00:25:40,686 --> 00:25:42,556
-Back to our system memory bars.
+00:27:56,810 --> 00:27:58,378
+但是我们想要确保有能力来控制
 
 
 527
-00:25:42,616 --> 00:25:43,756
-What does this look like?
+00:27:58,445 --> 00:27:59,980
+我们可能马上用到的图标
 
 
 528
-00:25:43,836 --> 00:25:46,846
-We have a scenario with very,
-very little free memory.
+00:28:00,614 --> 00:28:02,983
+即使它们依然在缓存中
+我们会标记它们为被使用中
 
 
 529
-00:25:47,256 --> 00:25:48,966
-But it doesn't look
-like that to the system.
+00:28:03,050 --> 00:28:05,319
+这样系统就不会随意拿走它们
 
 
 530
-00:25:49,606 --> 00:25:53,956
-The system knows it has leeway
-to use anytime it wants to free
+00:28:05,719 --> 00:28:08,121
+这些是我们在
+应对一个内存警告的时可释放的
 
 
 531
-00:25:53,956 --> 00:25:56,216
-up memory for growth,
-and it can do this
+00:28:09,423 --> 00:28:10,757
+这就给了我们一个工作集
 
 
 532
-00:25:56,216 --> 00:25:57,406
-without issuing memory warnings
+00:28:10,824 --> 00:28:12,192
+一个我们现在绝对会需要
 
 
 533
-00:25:57,406 --> 00:25:58,886
-or requiring the
-apps to intervene.
+00:28:12,259 --> 00:28:14,061
+但我们却无法为那个工作集做任何东西
 
 
 534
-00:25:59,246 --> 00:26:05,306
-The goals for your app and for
-adapting the memory usage here
+00:28:15,395 --> 00:28:17,598
+这在多任务处理例子中是什么样的
 
 
 535
-00:26:05,306 --> 00:26:07,026
-are minimize your dirty memory
+00:28:18,365 --> 00:28:21,335
+我们回到那个出错的情况
 
 
 536
-00:26:07,766 --> 00:26:10,336
-and maximize your
-purgeable and clean memory.
+00:28:21,802 --> 00:28:22,669
+PiP进来了
 
 
 537
-00:26:10,336 --> 00:26:12,566
-We are going to start
-with minimizing dirty.
+00:28:22,736 --> 00:28:23,604
+我们没有内存了
 
 
 538
-00:26:14,326 --> 00:26:15,996
-First, yeah, use less of it.
+00:28:23,871 --> 00:28:25,906
+但现在系统知道初级和
 
 
 539
-00:26:16,726 --> 00:26:18,906
-I know that's really easy for
-me to say standing up here,
+00:28:25,973 --> 00:28:28,509
+二级的app是良好的多任务处理公民
 
 
 540
-00:26:18,906 --> 00:26:21,336
-but if you manage
-your working set
+00:28:28,809 --> 00:28:31,345
+它们有可以清除的内存的能力
 
 
 541
-00:26:21,336 --> 00:26:24,096
-and track the objects you are
-allocating, use Instruments,
+00:28:31,545 --> 00:28:34,748
+这个系统 不用应对任何人
 
 
 542
-00:26:24,096 --> 00:26:27,706
-do all that, once you've taken
-care of that, the next step is
+00:28:34,815 --> 00:28:36,517
+就可以从app中拿走
 
 
 543
-00:26:27,706 --> 00:26:30,356
-about reclassifying this
-dirty memory as purgeable.
+00:28:36,850 --> 00:28:38,819
+然后让系统回归到一个好的状态
 
 
 544
-00:26:31,276 --> 00:26:33,676
-If you do this, it can be
-automatically reclaimed
+00:28:40,988 --> 00:28:43,290
+但当然了 如果用户继续使用设备
 
 
 545
-00:26:33,676 --> 00:26:37,166
-by the system, and it is
-best for nice-to-have data,
+00:28:43,357 --> 00:28:44,625
+内存将会重新增加
 
 
 546
-00:26:37,166 --> 00:26:39,816
-data that you don't need right
-now, might need in the future,
+00:28:44,691 --> 00:28:46,093
+我们又收到了一个内存警告
 
 
 547
-00:26:39,816 --> 00:26:42,416
-and anything you might otherwise
-put in a cache, for example.
+00:28:46,593 --> 00:28:49,363
+但因为那些apps只失去了
+可清除的数据
 
 
 548
-00:26:43,866 --> 00:26:45,156
-Let's apply this to IconReel.
+00:28:49,429 --> 00:28:51,632
+它们可以自由地响应内存警告
 
 
 549
-00:26:46,366 --> 00:26:48,366
-This resembles the
-scenario we left off.
+00:28:51,698 --> 00:28:55,769
+然后清除缓存
+这样还系统一个好的状态
 
 
 550
-00:26:48,366 --> 00:26:53,006
-We have caches of icons on
-either side in our working set.
+00:28:57,604 --> 00:28:59,673
+在你的apps中应该怎么用你的
+可清除数据
 
 
 551
-00:26:53,906 --> 00:26:57,536
-For this example, I'm going
-to reclassify our data a bit.
+00:28:59,740 --> 00:29:00,941
+这很简单
 
 
 552
-00:26:57,536 --> 00:26:59,316
-Rather than working
-on a per-icon chunk,
+00:29:01,074 --> 00:29:02,609
+这里有一个等级是可清除的数据
 
 
 553
-00:26:59,316 --> 00:27:02,296
-I'm going to group the
-icons into sets of columns,
+00:29:02,676 --> 00:29:05,245
+然后它是一个NS不可变数据的子类别
 
 
 554
-00:27:02,366 --> 00:27:04,106
-just because it makes
-this a bit easier here
+00:29:05,312 --> 00:29:07,181
+它没有别的性能它很简单
 
 
 555
-00:27:04,506 --> 00:27:07,346
-but it doesn't otherwise
-change the dynamic of our app.
+00:29:07,614 --> 00:29:09,316
+唯一的分别是这三个方式
 
 
 556
-00:27:07,346 --> 00:27:09,646
-As the user scrolls around,
-we update our working set,
+00:29:09,483 --> 00:29:11,285
+第一个就是Begin Content Access
 
 
 557
-00:27:09,696 --> 00:27:11,136
-things get cached,
-things get pulled
+00:29:11,351 --> 00:29:13,554
+这个告诉系统你正在使用内存
 
 
 558
-00:27:11,136 --> 00:27:13,786
-out of the cache,
-it's all the same.
+00:29:13,787 --> 00:29:15,122
+不要把它拿走
 
 
 559
-00:27:13,786 --> 00:27:15,186
-Let's classify this memory use.
+00:29:15,622 --> 00:29:18,325
+第二个方式Begin
+Content Access
 
 
 560
-00:27:16,746 --> 00:27:19,116
-First, we've got
-our memory in use.
+00:29:18,392 --> 00:29:20,027
+现在内存被认为是可清除的
 
 
 561
-00:27:19,576 --> 00:27:20,526
-Classified as dirty.
+00:29:20,093 --> 00:29:21,328
+而你可能随时都会失去它
 
 
 562
-00:27:20,916 --> 00:27:21,786
-That's our working set.
+00:29:21,962 --> 00:29:25,666
+第三个方式是断定系统是否在你不用的
+时候把它拿走
 
 
 563
-00:27:23,256 --> 00:27:26,336
-We've got all the objects in
-our caches, those are purgeable.
+00:29:27,034 --> 00:29:29,069
+回到系统资源条上 这差不多是
 
 
 564
-00:27:27,166 --> 00:27:29,826
-This presents us with an
-interesting opportunity
+00:29:30,804 --> 00:29:32,840
+布蕾特妮结束的部分
 
 
 565
-00:27:30,866 --> 00:27:33,866
-to be even fancier with
-the way we classify memory.
+00:29:32,906 --> 00:29:33,907
+我没有改变任何东西
 
 
 566
-00:27:34,736 --> 00:27:41,306
-Let's, for example, mark even
-more of the data as in use
+00:29:33,974 --> 00:29:35,475
+这些图形差不多一样
 
 
 567
-00:27:41,306 --> 00:27:42,866
-or dirty, even some
-that's in the cache.
+00:29:35,676 --> 00:29:38,779
+不同的是我们抽取了一部分自适应内存
 
 
 568
-00:27:43,706 --> 00:27:46,626
-What this has done for us
-is introduced a second level
+00:29:38,979 --> 00:29:40,581
+然后重新分类为可清除的
 
 
 569
-00:27:46,626 --> 00:27:47,066
-of caching.
+00:29:41,281 --> 00:29:44,318
+这使得我们成为一个更好的多任务公民
 
 
 570
-00:27:48,296 --> 00:27:50,486
-The first one, the
-outside-most icons,
+00:29:44,384 --> 00:29:46,920
+因为系统可以代替我们做工作
 
 
 571
-00:27:50,896 --> 00:27:52,966
-the ones we are least
-likely to need soon,
+00:29:47,454 --> 00:29:50,290
+但是有相同的本质表现性能
 
 
 572
-00:27:52,966 --> 00:27:55,196
-we'll let the system reclaim
-whenever the system needs it.
+00:29:50,357 --> 00:29:52,125
+就是如果我失去我的可清除内存
 
 
 573
-00:27:55,196 --> 00:27:55,856
-We don't care.
+00:29:52,292 --> 00:29:55,229
+然后我清除了我的缓存 我现在怎么办
 
 
 574
-00:27:56,826 --> 00:27:58,456
-But we'd like to
-retain some control
+00:29:55,295 --> 00:29:57,164
+我需要重塑所有 我需要的数据
 
 
 575
-00:27:58,456 --> 00:27:59,996
-over icons we might need soon.
+00:29:57,231 --> 00:29:59,099
+及我曾经建造的但这很昂贵
 
 
 576
-00:28:00,696 --> 00:28:02,146
-So even though they're
-still in the cache,
+00:29:59,233 --> 00:30:02,169
+磁盘I/O和CPU出现尖峰 
+这样不好
 
 
 577
-00:28:02,146 --> 00:28:03,066
-we're going to mark them in use
+00:30:03,837 --> 00:30:06,373
+我们分析在app中使用的数据来
 
 
 578
-00:28:03,066 --> 00:28:05,326
-so the system can't take
-them without asking.
+00:30:06,507 --> 00:30:09,343
+看是否我们可以做更多的事情
 
 
 579
-00:28:05,726 --> 00:28:06,776
-These are the ones we'll release
+00:30:10,911 --> 00:30:13,514
+那么IconReel使用什么数据呢
 
 
 580
-00:28:06,776 --> 00:28:08,096
-when we respond to
-a memory warning.
+00:30:13,981 --> 00:30:16,617
+它们是图标 然后第一个特性就是
 
 
 581
-00:28:09,416 --> 00:28:10,826
-This leaves us with
-the working set,
+00:30:16,683 --> 00:30:18,085
+它们绝对重要
 
 
 582
-00:28:10,826 --> 00:28:12,266
-which we absolutely
-need right now,
+00:30:18,151 --> 00:30:19,820
+我们没有图标就没有一个app
 
 
 583
-00:28:12,266 --> 00:28:13,796
-and there's nothing
-to do about that.
+00:30:20,020 --> 00:30:21,788
+某时 用户会滑动到它们
 
 
 584
-00:28:14,466 --> 00:28:17,586
-What does this look like in
-the multitasking example?
+00:30:21,855 --> 00:30:23,590
+我们需要它们 无法避免
 
 
 585
-00:28:18,376 --> 00:28:21,346
-I'll return to the scenario
-where things went wrong before.
+00:30:24,758 --> 00:30:26,360
+第二个它们生成用到很多内存
 
 
 586
-00:28:21,786 --> 00:28:22,746
-The PiP has come in.
+00:30:27,127 --> 00:30:31,231
+从磁盘中读取它们破解它们并润色
 
 
 587
-00:28:22,746 --> 00:28:23,606
-We're out of memory.
+00:30:31,298 --> 00:30:34,134
+你想干什么就干什么
+这样费用浩大的内存
 
 
 588
-00:28:23,876 --> 00:28:25,976
-But now, the system knows
-that both the primary
+00:30:35,335 --> 00:30:37,571
+第三点 其实它们可以被预期计算的
 
 
 589
-00:28:25,976 --> 00:28:28,506
-and the secondary app, being
-good multitasking citizens,
+00:30:37,638 --> 00:30:40,140
+我们将提前知道这些图片会怎样
 
 
 590
-00:28:28,796 --> 00:28:31,336
-have this region of purgeable
-memory that can be cleared.
+00:30:40,507 --> 00:30:43,744
+如果我们有多余的空间
+我们便可以计算它们
 
 
 591
-00:28:31,546 --> 00:28:34,816
-The system, without asking
-or telling anybody anything,
+00:30:45,045 --> 00:30:47,381
+最后一点是它们非常静态
 
 
 592
-00:28:34,816 --> 00:28:36,436
-can take that from the app
+00:30:48,282 --> 00:30:49,616
+有很大的可能性
 
 
 593
-00:28:36,436 --> 00:28:39,346
-and return the system
-to a good state.
+00:30:49,683 --> 00:30:52,352
+如果我提前生成一些东西
+它会和我想要用它的时候一样
 
 
 594
-00:28:40,656 --> 00:28:43,366
-But of course, the user
-keeps using the device
+00:30:52,519 --> 00:30:55,022
+因为它不怎么经常改变
 
 
 595
-00:28:43,366 --> 00:28:44,686
-and memory grows again.
+00:30:55,489 --> 00:30:56,790
+这些所有的观点结合起来
 
 
 596
-00:28:44,686 --> 00:28:46,096
-We have another memory warning.
+00:30:57,724 --> 00:31:01,662
+使得这个数据是一个
+用于文件缓存的最佳选择
 
 
 597
-00:28:46,586 --> 00:28:49,436
-But since the apps have only
-lost the purgeable data,
+00:31:02,696 --> 00:31:03,764
+在我说别的之前
 
 
 598
-00:28:49,436 --> 00:28:51,686
-they are free to respond to
-memory warnings and clear
+00:31:03,830 --> 00:31:07,367
+我想说这个依然是一个缓存
+即使它是一个文件
 
 
 599
-00:28:51,686 --> 00:28:57,796
-up the caches, thus returning
-the system to a good state.
+00:31:07,434 --> 00:31:10,938
+不要将这些缓存写到用户的文件夹中
 
 
 600
-00:28:57,796 --> 00:29:00,226
-How can you use purgeable
-data in your apps?
+00:31:11,004 --> 00:31:12,639
+在你的app的缓存文件中保存
 
 
 601
-00:29:00,226 --> 00:29:00,936
-It is simple.
+00:31:12,706 --> 00:31:14,007
+或在系统的临时目录中保存
 
 
 602
-00:29:01,086 --> 00:29:02,666
-There's a class, and
-it's Purgeable Data.
+00:31:15,843 --> 00:31:16,977
+回到我们的系统资源
 
 
 603
-00:29:02,666 --> 00:29:05,256
-And it is a subclass
-of NS immutable data
+00:31:17,311 --> 00:31:18,879
+我们刚介绍了一个新的题目
 
 
 604
-00:29:05,326 --> 00:29:07,176
-with no other properties,
-it is simple.
+00:31:19,479 --> 00:31:20,414
+那就是磁盘空间
 
 
 605
-00:29:07,606 --> 00:29:09,166
-The only additions are
-these three methods,
+00:31:22,216 --> 00:31:25,085
+我们可以交换一些CPU
+循环来生成这个数据
 
 
 606
-00:29:09,496 --> 00:29:11,246
-the first being Begin
-Content Access.
+00:31:25,786 --> 00:31:28,355
+保存之后 当我们需要的时候
+我们再把它拉出来用
 
 
 607
-00:29:11,356 --> 00:29:13,546
-This tells the system
-you are using the memory,
+00:31:28,889 --> 00:31:32,593
+我们事实上
+完全去除了CPU的使用功能
 
 
 608
-00:29:13,776 --> 00:29:14,896
-and don't take it away from me.
+00:31:33,493 --> 00:31:36,230
+现在
+你也许已经注意到I/O已经运行了
 
 
 609
-00:29:15,616 --> 00:29:18,216
-The second, to go along with
-it, is End Content Access.
+00:31:36,296 --> 00:31:38,799
+因为完全渲染的图片会比
 
 
 610
-00:29:18,386 --> 00:29:20,106
-The memory is now
-considered purgeable,
+00:31:38,866 --> 00:31:41,201
+那些资源文件大 这没关系
 
 
 611
-00:29:20,106 --> 00:29:21,316
-and you may lose it at any time.
+00:31:41,502 --> 00:31:42,603
+这些都是和权衡有关
 
 
 612
-00:29:21,956 --> 00:29:24,546
-And the third, to figure out if
-the system has taken it from you
+00:31:43,770 --> 00:31:47,241
+这就直接到了被净化最大的内存
 
 
 613
-00:29:24,546 --> 00:29:26,106
-when you weren't using it.
+00:31:48,242 --> 00:31:50,944
+你可能会记得我之前说过
+被一个文件备份的内存
 
 
 614
-00:29:26,756 --> 00:29:31,476
-To return to the system resource
-bars, this is pretty much
+00:31:51,011 --> 00:31:52,746
+在磁盘上是被视为干净的
 
 
 615
-00:29:31,476 --> 00:29:32,896
-where we left off with Brittany.
+00:31:53,247 --> 00:31:56,083
+那么现在我们在磁盘上有一个文件
+多巧啊
 
 
 616
-00:29:32,896 --> 00:29:33,986
-I haven't changed anything.
+00:31:56,617 --> 00:31:58,352
+这样一个文件的数据可以被内存映射
 
 
 617
-00:29:33,986 --> 00:29:35,486
-The height of these
-bars is all the same.
+00:31:58,418 --> 00:32:00,821
+系统会定位一块内存给你
 
 
 618
-00:29:35,676 --> 00:29:38,776
-What we have done is take a
-segment of our adaptive memory
+00:32:00,888 --> 00:32:03,857
+然后直接映射磁盘中文件的位置和内容
 
 
 619
-00:29:38,976 --> 00:29:40,576
-and reclassified
-it as purgeable.
+00:32:04,992 --> 00:32:06,994
+这绝对值得注意内存
 
 
 620
-00:29:41,286 --> 00:29:44,376
-This has made us a much
-better multitasking citizen
+00:32:07,060 --> 00:32:10,197
+在文件内容上必须完全一致
 
 
 621
-00:29:44,376 --> 00:29:46,916
-because the system can do
-work for us on our behalf
+00:32:10,264 --> 00:32:13,834
+你不能内存映射一个需要更多破解文件
 
 
 622
-00:29:47,456 --> 00:29:50,276
-but has the same intrinsic
-performance characteristic
+00:32:13,901 --> 00:32:15,636
+或者当它已经加载了的
 
 
 623
-00:29:50,366 --> 00:29:52,116
-where, if I've lost
-my purgeable memory
+00:32:17,070 --> 00:32:19,740
+这对于只读数据来说很理想就像我说的
 
 
 624
-00:29:52,296 --> 00:29:55,296
-and I've cleared my caches,
-what am I going to do now?
+00:32:19,806 --> 00:32:20,807
+它不怎么经常改变
 
 
 625
-00:29:55,296 --> 00:29:57,236
-I need to rebuild
-any data I need,
+00:32:22,309 --> 00:32:24,845
+这里最酷的地方就是
 
 
 626
-00:29:57,236 --> 00:29:59,096
-and we've established
-that's very expensive.
+00:32:24,912 --> 00:32:26,780
+以可清除的内存
 
 
 627
-00:29:59,236 --> 00:30:02,156
-Disk I/O and CPU
-spike, that's not great.
+00:32:26,880 --> 00:32:30,450
+系统可以在当你需要时
+重新召回一些空闲的内存
 
 
 628
-00:30:02,646 --> 00:30:06,786
-Let's, though, analyze the
-data we use in our app to see
+00:32:31,285 --> 00:32:33,153
+但是 它没有消失
 
 
 629
-00:30:06,786 --> 00:30:10,686
-if there's something
-more we can do with that.
+00:32:33,620 --> 00:32:35,622
+当你再次需要它时你再次取数它时
 
 
 630
-00:30:10,896 --> 00:30:13,516
-Well, what is the data
-that IconReel uses?
+00:32:35,789 --> 00:32:37,925
+系统从磁盘中再次加载回来
 
 
 631
-00:30:13,986 --> 00:30:16,686
-Well, they are icons,
-and the first property is
+00:32:37,991 --> 00:32:39,159
+就像它从没消失过一样
 
 
 632
-00:30:16,686 --> 00:30:18,106
-that they are absolutely
-essential.
+00:32:40,727 --> 00:32:42,896
+而且它有很大的随机存取性能
 
 
 633
-00:30:18,136 --> 00:30:19,806
-We don't have an app
-if we don't have icons.
+00:32:42,963 --> 00:32:45,065
+只因为你的工作集在这而你需要的一块
 
 
 634
-00:30:20,016 --> 00:30:21,846
-At some point, the user
-will scroll to them.
+00:32:45,132 --> 00:32:46,733
+数据在别处并不重要
 
 
 635
-00:30:21,846 --> 00:30:22,576
-We need them.
+00:32:47,034 --> 00:32:49,002
+系统可以只读那块的部分文件
 
 
 636
-00:30:22,576 --> 00:30:23,516
-No getting away from it.
+00:32:49,069 --> 00:32:50,838
+然后交给你 你就可以工作了
 
 
 637
-00:30:24,776 --> 00:30:26,376
-Second, they are
-expensive to generate.
+00:32:52,940 --> 00:32:54,007
+这个看起来是什么样的
 
 
 638
-00:30:27,136 --> 00:30:28,916
-Read them off the
-disk, decode them,
+00:32:54,074 --> 00:32:55,375
+我们从内存的数据开始
 
 
 639
-00:30:29,066 --> 00:30:33,256
-do nice rounded corners,
-whatever you want.
+00:32:57,177 --> 00:32:58,745
+然后你在磁盘上写出来
 
 
 640
-00:30:33,506 --> 00:30:33,966
-Expensive.
+00:32:58,812 --> 00:33:01,248
+系统现在把它当成 内存映射
 
 
 641
-00:30:35,326 --> 00:30:37,656
-The third point, though, they
-can actually be precomputed.
+00:33:01,515 --> 00:33:03,417
+如果你存取一部分的数据然后它
 
 
 642
-00:30:37,656 --> 00:30:40,146
-We know ahead of time what
-the images are going to be.
+00:33:04,818 --> 00:33:07,387
+就会把它加载好 然后交给你
 
 
 643
-00:30:40,506 --> 00:30:43,576
-If we have the spare cycles,
-we can calculate them.
+00:33:07,454 --> 00:33:09,990
+当你不再用它的时候 它就被拿走了
 
 
 644
-00:30:43,576 --> 00:30:47,386
-And the last point is that
-they are largely static.
+00:33:12,593 --> 00:33:14,728
+我们如何能
+将此功能应用到IconReel上
 
 
 645
-00:30:48,266 --> 00:30:49,686
-There is a very,
-very good chance
+00:33:14,895 --> 00:33:17,464
+我们从这个工作集开始
+但是事实上我们是把
 
 
 646
-00:30:49,686 --> 00:30:52,346
-if I pregenerated something,
-it is going to be the same
+00:33:17,531 --> 00:33:21,468
+我们生成的每个图标去合拼工作集
 
 
 647
-00:30:52,516 --> 00:30:55,036
-when I actually need it because
-it doesn't change frequently.
+00:33:21,535 --> 00:33:25,506
+创建一个大的数据文件然后写到磁盘上
 
 
 648
-00:30:55,476 --> 00:30:56,786
-All of these points combine
+00:33:29,476 --> 00:33:33,313
+现在回到我们的app中来
+我们再次拿出我们的工作集 三页
 
 
 649
-00:30:57,726 --> 00:31:01,676
-to make this data a perfect
-candidate for caching to a file.
+00:33:34,548 --> 00:33:36,383
+我们访问这三页内存
 
 
 650
-00:31:02,696 --> 00:31:03,846
-Before I move on from this,
+00:33:36,450 --> 00:33:39,219
+然后系统只加载文件的那一部分
 
 
 651
-00:31:03,846 --> 00:31:06,256
-I want to make the point
-this is still a cache even
+00:33:39,286 --> 00:33:41,722
+到内存中然后保持其它部分干净
 
 
 652
-00:31:06,256 --> 00:31:06,956
-if it's a file.
+00:33:41,788 --> 00:33:44,424
+不管那文件是不是上百MB
 
 
 653
-00:31:07,436 --> 00:31:10,686
-Don't go writing such caches
-to the user's documents folder.
+00:33:44,825 --> 00:33:45,993
+它其实并不在内存中
 
 
 654
-00:31:11,006 --> 00:31:12,696
-Keep it for your
-app's cache folder
+00:33:46,126 --> 00:33:48,128
+当我们四处滑动时 一样的事情发生了
 
 
 655
-00:31:12,696 --> 00:31:14,016
-or the system's temp directory.
+00:33:48,762 --> 00:33:50,330
+系统加载了我们需要的数据
 
 
 656
-00:31:14,606 --> 00:31:16,996
-Back to our system resources.
+00:33:50,631 --> 00:33:53,367
+加入我们引进一个会显示通知的功能
 
 
 657
-00:31:17,046 --> 00:31:18,876
-We just introduced a new one.
+00:33:53,433 --> 00:33:55,636
+用于在主界面上的其它图标
 
 
 658
-00:31:19,466 --> 00:31:20,426
-That is disk space.
+00:33:55,836 --> 00:33:57,471
+我们可以把它们拉出来然后
 
 
 659
-00:31:21,076 --> 00:31:25,086
-We can trade some CPU cycles
-up front to generate the data,
+00:33:57,538 --> 00:33:59,139
+不用担心它们在哪和它们是什么
 
 
 660
-00:31:25,906 --> 00:31:28,346
-save it off, and then when we
-actually need to pull it in,
+00:33:59,406 --> 00:34:02,509
+虚拟内存系统为我们做了大部分工作
 
 
 661
-00:31:28,876 --> 00:31:32,606
-we virtually eliminated the
-need for the CPU at all.
+00:34:05,112 --> 00:34:07,214
+这会如何改变我们的资源条
 
 
 662
-00:31:33,486 --> 00:31:36,156
-Now, you may have noticed
-that I/O went up a bit there
+00:34:07,648 --> 00:34:09,315
+这里我们已经将CPU中断了
 
 
 663
-00:31:36,156 --> 00:31:38,846
-because the fully rendered
-images may be larger
+00:34:09,382 --> 00:34:12,085
+但是我们现在的缓存实际上在磁盘上
 
 
 664
-00:31:38,846 --> 00:31:40,466
-than the source files.
+00:34:12,152 --> 00:34:13,687
+那么这个也消失了
 
 
 665
-00:31:40,466 --> 00:31:41,016
-That's okay.
+00:34:14,487 --> 00:34:16,924
+然后我们现在唯一内存占用就是工作集
 
 
 666
-00:31:41,486 --> 00:31:42,616
-These things are all
-about trade-offs.
+00:34:17,157 --> 00:34:18,692
+其它地方都被认为是干净的
 
 
 667
-00:31:43,776 --> 00:31:47,226
-That leads me directly to
-maximizing clean memory.
+00:34:19,193 --> 00:34:20,661
+所以不算是反对我们
 
 
 668
-00:31:48,256 --> 00:31:51,036
-You may recall I said earlier
-that memory backed by a file
+00:34:21,495 --> 00:34:25,632
+且值得注意的是我们有效地消除CPU
 
 
 669
-00:31:51,036 --> 00:31:52,756
-on disk is considered clean.
+00:34:25,699 --> 00:34:29,837
+对前端和后端的需求
+对于我们的数据生命循环来说
 
 
 670
-00:31:53,246 --> 00:31:55,156
-Well, we have a file
-on disk now.
+00:34:30,170 --> 00:34:33,607
+我们不需要CPU来生成数据来展示给
 
 
 671
-00:31:55,256 --> 00:31:55,926
-What a coincidence.
+00:34:33,674 --> 00:34:36,710
+用户或者我们也不用CPU来清理
+干净来应对内存警告
 
 
 672
-00:31:56,626 --> 00:31:58,346
-Data in such a file
-can be memory mapped.
+00:34:36,777 --> 00:34:38,911
+系统都为我们做了
 
 
 673
-00:31:58,426 --> 00:32:00,896
-The system will allocate
-a chunk of memory for you
+00:34:40,179 --> 00:34:42,049
+你如何能用内存映射数据
 
 
 674
-00:32:00,896 --> 00:32:03,786
-that directly maps the file, the
-contents of the file, on disk.
+00:34:42,114 --> 00:34:45,085
+在一次 它是一个在NS数据上的
+简单API
 
 
 675
-00:32:03,786 --> 00:32:07,076
-It is most definitely
-worth noting that memory
+00:34:45,152 --> 00:34:46,719
+这里有些选择你可以
 
 
 676
-00:32:07,076 --> 00:32:09,846
-in the file contents
-must match exactly.
+00:34:46,786 --> 00:34:48,388
+用来开始数据对象
 
 
 677
-00:32:10,296 --> 00:32:13,586
-You cannot memory map a file
-that needs further decoding,
+00:34:48,789 --> 00:34:51,625
+如果你在初始化器中标注映射选项
 
 
 678
-00:32:13,586 --> 00:32:16,186
-or what have you,
-after it is loaded in.
+00:34:52,092 --> 00:34:54,494
+你就会得到一个内存映射数据文件
 
 
 679
-00:32:16,796 --> 00:32:19,806
-This is ideal for read-only
-data, as I mentioned,
+00:34:56,563 --> 00:34:59,266
+如果我没有提到
+我会被看做是玩忽职守
 
 
 680
-00:32:19,806 --> 00:32:20,816
-that doesn't change frequently.
+00:34:59,333 --> 00:35:01,235
+用这个系统时有一些警告
 
 
 681
-00:32:22,296 --> 00:32:25,436
-The coolest part about
-all of this is the same
+00:35:02,202 --> 00:35:04,004
+第一个就是它不适用于
 
 
 682
-00:32:25,436 --> 00:32:26,606
-with purgeable memory,
+00:35:04,071 --> 00:35:05,172
+少量的数据
 
 
 683
-00:32:26,866 --> 00:32:30,446
-the system can reclaim any
-free memory from you as needed.
+00:35:05,472 --> 00:35:07,441
+在页面上自己工作的虚拟内存
 
 
 684
-00:32:31,296 --> 00:32:33,146
-But, it is not gone.
+00:35:07,508 --> 00:35:09,176
+也就是少量数据
 
 
 685
-00:32:33,616 --> 00:32:35,616
-When you need it again,
-when you access again,
+00:35:09,409 --> 00:35:13,780
+如果你的甚至更小你会遇到
 
 
 686
-00:32:35,796 --> 00:32:38,006
-the system loads it
-back from the disk,
+00:35:13,847 --> 00:35:16,383
+覆盖在你原有问题上的新问题
 
 
 687
-00:32:38,006 --> 00:32:39,156
-and it's like it
-never went away.
+00:35:16,717 --> 00:35:20,187
+还有从内存映射文件中
 
 
 688
-00:32:40,736 --> 00:32:42,916
-Furthermore, it has great
-random access properties.
+00:35:20,254 --> 00:35:22,656
+如果你的内存映射一千个图标文件
+比如
 
 
 689
-00:32:42,956 --> 00:32:45,126
-Just because your working set
-is here and you need a piece
+00:35:22,723 --> 00:35:25,792
+这其实有一个对于任何系统可以有的
+打开文件的限制
 
 
 690
-00:32:45,126 --> 00:32:46,726
-of data over here,
-doesn't matter.
+00:35:25,859 --> 00:35:27,461
+这样你会惹上麻烦
 
 
 691
-00:32:47,036 --> 00:32:49,016
-The system can just read
-that portion of the file,
+00:35:27,928 --> 00:35:29,162
+这是其中一个主要原因
 
 
 692
-00:32:49,076 --> 00:32:50,846
-hand it off to you,
-and you're good to go.
+00:35:29,229 --> 00:35:31,665
+为什么我们将数据集合成大块
 
 
 693
-00:32:51,286 --> 00:32:53,826
-What does this look like?
+00:35:31,732 --> 00:35:33,867
+使其对于VM系统更加好管理
 
 
 694
-00:32:54,086 --> 00:32:55,376
-We start with our
-data in memory.
+00:35:35,469 --> 00:35:38,238
+或者你也可以只是滥用虚拟内存系统
 
 
 695
-00:32:56,066 --> 00:32:58,116
-And you write it out to disk.
+00:35:38,305 --> 00:35:40,974
+你所创造的每个可清除的数据对象创造
 
 
 696
-00:32:58,806 --> 00:33:00,846
-The system now considers
-this, that memory map.
+00:35:41,041 --> 00:35:42,442
+在你虚拟内存中的一个区域
 
 
 697
-00:33:00,846 --> 00:33:05,816
-If you go to access a chunk
-of it, all it does is load
+00:35:42,809 --> 00:35:45,312
+如果你创造了太多那些内存映射文件
 
 
 698
-00:33:05,816 --> 00:33:07,386
-that in, hand it off to you.
+00:35:45,379 --> 00:35:47,447
+你会将你整个空间碎片化
 
 
 699
-00:33:07,456 --> 00:33:09,996
-When you are not using it
-anymore, it takes it away.
+00:35:47,881 --> 00:35:49,349
+你同样会使其耗尽
 
 
 700
-00:33:10,766 --> 00:33:14,146
-How can we apply
-this to IconReel?
+00:35:49,483 --> 00:35:51,752
+如果你决定来内存映射一个
+10GB内存的文件
 
 
 701
-00:33:14,906 --> 00:33:17,546
-We'll start with the working
-set, but actually we are going
+00:35:51,818 --> 00:35:53,754
+那么你会完全用光内存
 
 
 702
-00:33:17,546 --> 00:33:18,856
-to combine the working set
+00:35:53,954 --> 00:35:58,725
+不幸的是
+虚拟内存系统的滥用会导致
 
 
 703
-00:33:19,186 --> 00:33:21,396
-with every other icon
-image we generated
+00:35:58,792 --> 00:36:00,194
+你的程序被终结
 
 
 704
-00:33:21,546 --> 00:33:29,316
-and create one big data
-file and write that to disk.
+00:36:00,260 --> 00:36:02,796
+而这是我们最初想要避免的 对吗
 
 
 705
-00:33:29,486 --> 00:33:32,426
-Now, back in our app, we
-bring back our working set.
+00:36:04,731 --> 00:36:07,301
+为了提供最好的多任务处理体验
 
 
 706
-00:33:32,426 --> 00:33:32,936
-Three pages.
+00:36:07,367 --> 00:36:10,170
+对于用户理解你的app使用的数据
 
 
 707
-00:33:34,546 --> 00:33:36,466
-We access those three
-pages of memory,
+00:36:10,237 --> 00:36:13,407
+和数据性能是非常重要的
 
 
 708
-00:33:36,466 --> 00:33:39,296
-and the system just loads
-only that portion of the file
+00:36:14,074 --> 00:36:16,844
+你现在必须能够分辨出可有可无的数据
 
 
 709
-00:33:39,296 --> 00:33:41,536
-into memory for us, keeping
-the rest of this clean.
+00:36:17,177 --> 00:36:19,513
+和你需要的重要数据
 
 
 710
-00:33:41,786 --> 00:33:44,196
-Doesn't matter if that file goes
-out for hundreds of megabytes.
+00:36:20,247 --> 00:36:21,582
+你的数据可以被预计算吗
 
 
 711
-00:33:44,196 --> 00:33:45,726
-It is not there in memory.
+00:36:21,782 --> 00:36:23,550
+重新建立有多贵
 
 
 712
-00:33:46,126 --> 00:33:47,926
-As we scroll around,
-the same happens.
+00:36:24,184 --> 00:36:25,385
+它长时间改变一下
 
 
 713
-00:33:48,826 --> 00:33:50,206
-System loads in the
-data we need.
+00:36:26,019 --> 00:36:28,856
+了解关于你使用的数据可以帮助你找到
 
 
 714
-00:33:50,626 --> 00:33:53,446
-Say if we introduce a feature
-that shows notifications
+00:36:28,922 --> 00:36:32,259
+让你的内存变得最大适用性的正确工具
 
 
 715
-00:33:53,446 --> 00:33:55,636
-for icons that may be
-elsewhere on the home screen,
+00:36:33,160 --> 00:36:36,964
+我们可以一起
+改善我们apps的适用性
 
 
 716
-00:33:55,836 --> 00:33:57,546
-we can pull those
-in without worrying
+00:36:37,030 --> 00:36:40,334
+和提供更好的多任务体验给我们的用户
 
 
 717
-00:33:57,546 --> 00:33:58,826
-about where they
-are, what they are.
+00:36:42,202 --> 00:36:43,971
+在接下来的几周你会更新你的apps
 
 
 718
-00:33:59,416 --> 00:34:02,966
-Virtual memory system does
-all the heavy lifting for us.
+00:36:44,037 --> 00:36:45,706
+为了iOS9的多任务处理
 
 
 719
-00:34:04,776 --> 00:34:06,856
-How does this change our
-system resource bars?
+00:36:45,772 --> 00:36:47,741
+我希望你们把这些话题记住
 
 
 720
-00:34:07,656 --> 00:34:09,166
-We've already killed CPU there.
+00:36:48,475 --> 00:36:53,747
+首先用工具来识别并修复程序错误
 
 
 721
-00:34:09,166 --> 00:34:12,146
-But now our cache
-is actually on disk.
+00:36:54,281 --> 00:36:55,182
+这是简单的东西
 
 
 722
-00:34:12,146 --> 00:34:13,686
-So that goes away, too.
+00:36:55,249 --> 00:36:57,651
+你的内存泄露无效率的数据构造 算法
 
 
 723
-00:34:14,476 --> 00:34:16,926
-And now our only memory
-footprint is the working set.
+00:36:57,851 --> 00:36:58,986
+废弃的内存等
 
 
 724
-00:34:17,166 --> 00:34:18,686
-Everything else is
-considered clean
+00:36:59,319 --> 00:37:00,487
+把它们都修好
 
 
 725
-00:34:19,206 --> 00:34:20,536
-and thus does not
-count against us.
+00:37:00,988 --> 00:37:03,323
+其次适当优先化你的工作
 
 
 726
-00:34:21,366 --> 00:34:25,656
-It is also worth noting that we
-effectively eliminated the CPU
+00:37:03,390 --> 00:37:04,658
+然后别阻隔到主流程
 
 
 727
-00:34:25,686 --> 00:34:28,775
-requirements on both
-the front and back end
+00:37:04,992 --> 00:37:07,494
+我不知道你们多少人在
+这个系列的第一阶段记住了
 
 
 728
-00:34:28,775 --> 00:34:29,846
-of our data's life cycle.
+00:37:07,561 --> 00:37:09,563
+就是系统会真的终端
 
 
 729
-00:34:30,186 --> 00:34:32,835
-We no longer need CPU
-to generate data to show
+00:37:09,630 --> 00:37:11,632
+如果你阻隔主流程太长时间
 
 
 730
-00:34:32,835 --> 00:34:35,326
-to the user, nor do we
-need CPU to clean it
+00:37:11,832 --> 00:37:13,200
+最好了解
 
 
 731
-00:34:35,326 --> 00:34:36,755
-up in response to
-memory warnings.
+00:37:13,267 --> 00:37:15,102
+你的工作应该在哪然后将其归位
 
 
 732
-00:34:36,786 --> 00:34:38,786
-The system is doing
-all of that for us.
+00:37:16,370 --> 00:37:18,672
+第三点就是辨别并管理你的工作集
 
 
 733
-00:34:40,186 --> 00:34:41,565
-How can you use memory map data?
+00:37:18,939 --> 00:37:21,141
+然后了解工作集会改变
 
 
 734
-00:34:42,106 --> 00:34:44,476
-Once again, it's a
-simple API on NSData.
+00:37:21,341 --> 00:37:23,644
+根据应用的目前执行环境
 
 
 735
-00:34:44,476 --> 00:34:46,726
-There are some options
-you can use
+00:37:23,911 --> 00:37:26,813
+你是前台 后台 PiP
 
 
 736
-00:34:46,775 --> 00:34:48,376
-to initialize the data object.
+00:37:27,047 --> 00:37:28,315
+了解你现在的位置
 
 
 737
-00:34:48,775 --> 00:34:51,616
-If you specified the mapped
-option in your initializer,
+00:37:28,382 --> 00:37:30,551
+因为你的工作集不应该是相同的
 
 
 738
-00:34:52,096 --> 00:34:54,545
-you will get a memory
-map data file.
+00:37:31,852 --> 00:37:34,588
+第四个是使用缓存 然后响应内存警告
 
 
 739
-00:34:54,545 --> 00:34:59,326
-I would be remiss, however,
-if I did not mention
+00:37:34,655 --> 00:37:39,226
+这个是作为一个多任务处理
+好公民的基本
 
 
 740
-00:34:59,326 --> 00:35:01,236
-that there were caveats
-with using this system.
+00:37:39,626 --> 00:37:40,460
+请回应它们
 
 
 741
-00:35:02,186 --> 00:35:04,066
-The first being that
-it is not appropriate
+00:37:42,362 --> 00:37:44,064
+下一个利用虚拟内存系统
 
 
 742
-00:35:04,066 --> 00:35:05,156
-for small chunks of data.
+00:37:44,131 --> 00:37:45,132
+也就是我们说过的
 
 
 743
-00:35:05,456 --> 00:35:07,496
-The virtual memory
-itself works on pages,
+00:37:45,532 --> 00:37:47,734
+了解你的app的数据性能
 
 
 744
-00:35:07,496 --> 00:35:09,176
-which are small chunks of data.
+00:37:47,801 --> 00:37:49,269
+然后看如果你可以利用那些工具
 
 
 745
-00:35:09,426 --> 00:35:13,786
-If yours are even smaller,
-you will introduce problems
+00:37:49,336 --> 00:37:51,939
+来让系统为你管理内存
 
 
 746
-00:35:13,856 --> 00:35:16,036
-that overshadow what you are
-actually trying to solve.
+00:37:53,807 --> 00:37:56,310
+最后就是良好的表现需要权衡
 
 
 747
-00:35:16,726 --> 00:35:19,676
-Furthermore, from
-memory map files,
+00:37:56,610 --> 00:37:57,678
+你的app是有需求的
 
 
 748
-00:35:20,106 --> 00:35:22,716
-if you memory mapped a
-thousand icon files, say,
+00:37:57,878 --> 00:37:59,513
+apps在你旁边运行的有需求
 
 
 749
-00:35:22,716 --> 00:35:25,846
-there is actually a limit to the
-open files any process can have.
+00:37:59,580 --> 00:38:00,948
+系统也有局限
 
 
 750
-00:35:25,846 --> 00:35:27,456
-You can get yourself
-into trouble that way.
+00:38:01,982 --> 00:38:05,519
+辨别你的app如何可以适应环境
 
 
 751
-00:35:28,006 --> 00:35:29,216
-That's one of the main reasons
+00:38:06,086 --> 00:38:08,488
+用更约束的资源因为这是
 
 
 752
-00:35:29,216 --> 00:35:31,686
-in our examples we grouped
-the data into larger chunks
+00:38:08,555 --> 00:38:11,792
+改善所有人用户体验的关键
 
 
 753
-00:35:31,726 --> 00:35:35,326
-to make it more manageable
-for the VM system.
+00:38:12,593 --> 00:38:14,862
+因为我由一句话开始
+那么我就由一句话结束
 
 
 754
-00:35:35,466 --> 00:35:38,096
-You can also just misuse
-the virtual memory system.
+00:38:15,596 --> 00:38:16,663
+我在网上找到的这句话
 
 
 755
-00:35:38,156 --> 00:35:41,226
-Each purgeable data object
-you create creates a region
+00:38:16,730 --> 00:38:18,565
+据查尔斯·达尔文
 
 
 756
-00:35:41,226 --> 00:35:42,446
-in your virtual memory space.
+00:38:18,932 --> 00:38:21,602
+称不是最强
+或者最智慧的生存
 
 
 757
-00:35:42,816 --> 00:35:45,376
-If you create too many of
-these memory map files, too,
+00:38:21,935 --> 00:38:23,704
+是那些最会改变的生存
 
 
 758
-00:35:45,376 --> 00:35:47,156
-you can fragment
-your entire space.
+00:38:24,271 --> 00:38:26,173
+多任务处理和适应有关
 
 
 759
-00:35:47,156 --> 00:35:49,226
-You can similarly exhaust it.
+00:38:26,273 --> 00:38:29,376
+然后最能适应的apps将会
 
 
 760
-00:35:49,496 --> 00:35:51,826
-If you decide to memory map
-a file that is ten gigabytes,
+00:38:30,077 --> 00:38:32,312
+带来最佳的用户体验
 
 
 761
-00:35:51,826 --> 00:35:53,556
-you're going to run
-out of space entirely.
+00:38:34,248 --> 00:38:36,083
+获取更多的信息 我非常推荐你们去
 
 
 762
-00:35:54,866 --> 00:35:58,796
-Unfortunately, abusing the
-virtual memory system results
+00:38:36,149 --> 00:38:37,417
+看一看文件
 
 
 763
-00:35:58,796 --> 00:36:00,206
-in your process being
-terminated,
+00:38:37,484 --> 00:38:40,220
+这里有一个新的采取多任务的指南
+它很棒
 
 
 764
-00:36:00,246 --> 00:36:02,256
-which is what we are here to
-avoid in the first place, right?
+00:38:40,721 --> 00:38:42,823
+去论坛讨论有技术支持
 
 
 765
-00:36:02,256 --> 00:36:07,376
-In order to give the best
-multitasking experience
+00:38:43,390 --> 00:38:44,925
+如果你有任何问题
 
 
 766
-00:36:07,376 --> 00:36:10,246
-to the user, it is really
-important to understand the data
+00:38:44,992 --> 00:38:47,427
+找柯特卢·瑟特 联系他吧
 
 
 767
-00:36:10,246 --> 00:36:13,416
-and the characteristics of
-the data that your app uses.
+00:38:47,494 --> 00:38:49,630
+他也是一个
+SpringBoard的前任工程师
 
 
 768
-00:36:14,086 --> 00:36:16,836
-You must be able to
-differentiate nice-to-have data
+00:38:49,696 --> 00:38:51,331
+所以我相信他很愿意聆听你们的想法
 
 
 769
-00:36:17,186 --> 00:36:19,516
-from the essential data
-you need right now.
+00:38:54,468 --> 00:38:56,069
+我们关于这个有两个之前的讲座
 
 
 770
-00:36:20,246 --> 00:36:21,596
-Can your data be precomputed?
+00:38:56,136 --> 00:38:58,138
+我建议你们也去看它们
 
 
 771
-00:36:21,796 --> 00:36:23,536
-How expensive is
-it to re-create?
+00:38:58,205 --> 00:39:00,674
+接下来也有性能和GCD讲座
 
 
 772
-00:36:24,186 --> 00:36:25,396
-How frequently does it change?
+00:39:01,341 --> 00:39:02,643
+谢谢大家 今天的到来
 
 
 773
-00:36:26,016 --> 00:36:28,906
-Understanding this about the
-data you use can help you pick
-
-
-774
-00:36:28,906 --> 00:36:32,246
-the right tools to make your
-memory as adaptable as possible.
-
-
-775
-00:36:33,146 --> 00:36:36,996
-Together we can improve
-the adaptivity of our apps
-
-
-776
-00:36:37,046 --> 00:36:39,586
-and provide the best
-multitasking experience
-
-
-777
-00:36:39,586 --> 00:36:40,136
-for our users.
-
-
-778
-00:36:40,746 --> 00:36:43,956
-In the coming weeks, as
-you're update your apps
-
-
-779
-00:36:44,026 --> 00:36:45,636
-for multitasking in iOS 9,
-
-
-780
-00:36:45,756 --> 00:36:47,546
-I hope you keep these
-topics in mind.
-
-
-781
-00:36:48,486 --> 00:36:53,746
-First, using Instruments
-to identify and fix bugs.
-
-
-782
-00:36:54,266 --> 00:36:55,236
-This is the easy stuff.
-
-
-783
-00:36:55,236 --> 00:36:57,646
-Your leaks, inefficient
-data structures, algorithms,
-
-
-784
-00:36:57,856 --> 00:36:58,976
-abandoned memory, too.
-
-
-785
-00:36:59,336 --> 00:37:01,156
-Get that stuff fixed.
-
-
-786
-00:37:01,156 --> 00:37:03,396
-Second, prioritize
-your work appropriately
-
-
-787
-00:37:03,396 --> 00:37:04,656
-and don't block the main thread.
-
-
-788
-00:37:04,996 --> 00:37:06,906
-I don't know how many of
-you caught the first session
-
-
-789
-00:37:06,906 --> 00:37:09,376
-in this series, but the system
-may actually terminate you
-
-
-790
-00:37:09,376 --> 00:37:12,156
-for blocking the main
-thread for too long.
-
-
-791
-00:37:12,156 --> 00:37:13,256
-It is best to understand
-
-
-792
-00:37:13,256 --> 00:37:15,086
-where your work should
-go and put it there.
-
-
-793
-00:37:15,536 --> 00:37:18,686
-The third was identifying and
-managing your working set,
-
-
-794
-00:37:18,926 --> 00:37:21,606
-and be aware that this
-working set may change based
-
-
-795
-00:37:21,606 --> 00:37:23,636
-on the application's
-current executing context:
-
-
-796
-00:37:23,916 --> 00:37:26,816
-are you foreground, are you
-background, are you a PiP?
-
-
-797
-00:37:27,036 --> 00:37:28,286
-Understand where
-you are right now
-
-
-798
-00:37:28,286 --> 00:37:31,006
-because your working set
-is likely not the same.
-
-
-799
-00:37:31,576 --> 00:37:34,526
-The fourth is to use caches and
-response to memory warnings.
-
-
-800
-00:37:34,656 --> 00:37:39,216
-This is the basics for being
-a good multitasking citizen.
-
-
-801
-00:37:39,626 --> 00:37:40,446
-Please respond to them.
-
-
-802
-00:37:42,376 --> 00:37:44,126
-Next, leverage the
-virtual memory system,
-
-
-803
-00:37:44,126 --> 00:37:45,126
-which is what we talked about.
-
-
-804
-00:37:45,536 --> 00:37:47,756
-Understand the data
-characteristics of your app,
-
-
-805
-00:37:47,756 --> 00:37:49,276
-and see if you can
-leverage these tools
-
-
-806
-00:37:49,276 --> 00:37:52,476
-to let the system manage
-your memory for you.
-
-
-807
-00:37:53,536 --> 00:37:56,116
-The last is that great
-performance requires trade-offs.
-
-
-808
-00:37:56,606 --> 00:37:57,766
-Your apps have requirements.
-
-
-809
-00:37:57,886 --> 00:37:59,516
-The apps running next to
-you have requirements.
-
-
-810
-00:37:59,576 --> 00:38:00,826
-The system has limitations.
-
-
-811
-00:38:01,996 --> 00:38:05,516
-Identify ways your app can
-adapt to the environment
-
-
-812
-00:38:06,076 --> 00:38:08,486
-with more constrained
-resources as this is the key
-
-
-813
-00:38:08,486 --> 00:38:11,396
-to improving the user
-experience for everybody.
-
-
-814
-00:38:12,576 --> 00:38:14,846
-Because I started with a quote,
-I'm going to end with one.
-
-
-815
-00:38:15,586 --> 00:38:16,736
-I found this on the Internet.
-
-
-816
-00:38:16,736 --> 00:38:19,896
-Allegedly attributed to Charles
-Darwin: "It is not the strongest
-
-
-817
-00:38:20,186 --> 00:38:21,606
-or most intelligent who survive,
-
-
-818
-00:38:21,936 --> 00:38:23,606
-but those who can
-best manage change."
-
-
-819
-00:38:24,266 --> 00:38:27,716
-Multitasking is about
-adapting, and the apps
-
-
-820
-00:38:27,716 --> 00:38:30,466
-that best adapt are going
-
-
-821
-00:38:30,466 --> 00:38:32,146
-to provide the best
-user experience.
-
-
-822
-00:38:33,696 --> 00:38:36,336
-For more information I
-really encourage you to check
-
-
-823
-00:38:36,336 --> 00:38:37,636
-out the documentation.
-
-
-824
-00:38:37,636 --> 00:38:39,626
-There's a new Adopting
-Multitasking guide
-
-
-825
-00:38:39,626 --> 00:38:40,216
-that is great.
-
-
-826
-00:38:40,726 --> 00:38:42,826
-Technical support,
-come to the forums.
-
-
-827
-00:38:43,376 --> 00:38:44,756
-If you have any general
-questions,
-
-
-828
-00:38:44,976 --> 00:38:47,476
-there's Curt Rothert,
-contact him.
-
-
-829
-00:38:47,766 --> 00:38:49,616
-He's also an ex-SpringBoard
-engineer, by the way,
-
-
-830
-00:38:49,616 --> 00:38:50,896
-so I'm sure he would
-love to hear from you.
-
-
-831
-00:38:51,516 --> 00:38:53,966
-[Laughter]
-
-
-832
-00:38:54,466 --> 00:38:56,136
-We had two sessions
-earlier in this track.
-
-
-833
-00:38:56,136 --> 00:38:57,556
-I encourage you to watch them.
-
-
-834
-00:38:57,696 --> 00:39:00,486
-There are also Performance
-and GCD talks coming up.
-
-
-835
-00:39:01,336 --> 00:39:02,626
-Thank you, everybody,
-for coming out!
-
-
-836
-00:39:03,296 --> 00:39:04,706
-I can't wait to see your apps!
-
-
-837
-00:39:05,508 --> 00:39:07,508
-[Applause]
+00:39:03,277 --> 00:39:04,711
+我等不及要看你们的apps了
 

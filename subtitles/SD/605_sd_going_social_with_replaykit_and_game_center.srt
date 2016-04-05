@@ -1,4187 +1,3980 @@
 1
-00:00:25,516 --> 00:00:31,666
-[Applause]
+00:00:19,686 --> 00:00:25,959
+《社交游戏的最新内容》
 
 
 2
-00:00:32,165 --> 00:00:32,926
->> MEGAN GARDNER:
-Hey, everybody.
+00:00:32,165 --> 00:00:32,999
+大家好
 
 
 3
-00:00:33,206 --> 00:00:35,606
-Welcome, and thank you
-for coming to our session.
+00:00:33,200 --> 00:00:35,669
+欢迎 感谢大家
+来参加我们的讲座
 
 
 4
-00:00:35,926 --> 00:00:39,046
-My name is Megan Gardner, I'm a
-software engineer on the games
+00:00:35,936 --> 00:00:39,840
+我是梅根·加德纳
+是游戏和图像小组的软件工程师
 
 
 5
-00:00:39,046 --> 00:00:42,226
-and graphics team and later
-we will have my colleague,
+00:00:40,274 --> 00:00:43,043
+稍后会有请我的同事
+埃德温·艾斯坎达上台
 
 
 6
-00:00:42,226 --> 00:00:43,896
-Edwin Iskandar up.
+00:00:43,911 --> 00:00:48,815
+我们会谈谈ReplayKit
+和游戏中心的社交功能
 
 
 7
-00:00:43,896 --> 00:00:46,676
-We're going to be talking
-to you about going social
+00:00:50,117 --> 00:00:51,985
+今天准备要
+介绍几项内容
 
 
 8
-00:00:46,676 --> 00:00:48,696
-with ReplayKit and Game Center.
+00:00:52,085 --> 00:00:53,754
+首先是
+游戏中心的最新内容
 
 
 9
-00:00:49,466 --> 00:00:51,816
-So we have a few things
-on the agenda today.
+00:00:54,121 --> 00:00:55,322
+我们有两项新内容
 
 
 10
-00:00:52,056 --> 00:00:53,856
-First, what's new
-in Game Center.
+00:00:55,856 --> 00:00:57,491
+基本上是客玩家
 
 
 11
-00:00:54,126 --> 00:00:58,066
-We have two new things
-basically guest players as well
+00:00:57,558 --> 00:00:59,893
+和新的统一服务器环境
 
 
 12
-00:00:58,066 --> 00:00:59,926
-as our new unified
-server environment.
+00:01:00,527 --> 00:01:03,297
+埃德温会来给大家
+介绍ReplayKit
 
 
 13
-00:00:59,926 --> 00:01:03,306
-And then Edwin will get up and
-talk to you about ReplayKit
+00:01:03,730 --> 00:01:07,401
+这可以为游戏
+增添新的社交体验
 
 
 14
-00:01:03,686 --> 00:01:06,666
-which is a great new way to
-add a new social experience
+00:01:07,634 --> 00:01:11,605
+用户可以与他人
+分享自己的游戏体验
 
 
 15
-00:01:06,666 --> 00:01:09,006
-to your games and for
-your users to be able
+00:01:13,073 --> 00:01:15,008
+游戏中心的最新内容是什么呢？
 
 
 16
-00:01:09,006 --> 00:01:11,536
-to share those experiences
-with others.
+00:01:15,475 --> 00:01:16,310
+那么...
 
 
 17
-00:01:12,796 --> 00:01:14,886
-So what's new in Game Center?
+00:01:16,710 --> 00:01:17,578
+游戏中心是什么？
 
 
 18
-00:01:15,476 --> 00:01:17,566
-Well, what is Game Center?
+00:01:18,178 --> 00:01:19,279
+希望大家知道答案
 
 
 19
-00:01:18,156 --> 00:01:19,206
-Hopefully you know what it is,
+00:01:19,346 --> 00:01:20,581
+特别是你参加本次讲座
 
 
 20
-00:01:19,206 --> 00:01:20,436
-especially if you
-are in this session.
+00:01:20,647 --> 00:01:22,749
+这不是新内容
+不过以防万一 我解释一下
 
 
 21
-00:01:20,436 --> 00:01:22,756
-It's been around for a while,
-but just in case you don't,
+00:01:23,383 --> 00:01:25,953
+游戏中心是我们的API和app
 
 
 22
-00:01:23,376 --> 00:01:27,766
-Game Center is our API and app
-that allows you as developers
+00:01:26,053 --> 00:01:30,123
+可以让你作为开发人员
+为游戏添加社交体验
 
 
 23
-00:01:27,766 --> 00:01:30,116
-to add a social experience
-to your games.
+00:01:30,624 --> 00:01:33,160
+这可以让用户彼此成为朋友
 
 
 24
-00:01:30,576 --> 00:01:33,036
-This allows our users to be able
-to make friends with each other,
+00:01:33,527 --> 00:01:36,096
+便于开发人员设置排行榜
 
 
 25
-00:01:33,356 --> 00:01:36,126
-for you as developers to be
-able to set up leaderboards
+00:01:36,196 --> 00:01:38,265
+对于用户而言
+可以公开分数
 
 
 26
-00:01:36,126 --> 00:01:38,256
-for those users to be
-able to post scores to,
+00:01:38,465 --> 00:01:41,101
+这样可以和朋友
+以及他人来进行比较
 
 
 27
-00:01:38,476 --> 00:01:40,546
-that they can then compare
-against their friends as well
+00:01:41,668 --> 00:01:44,872
+对你而言
+可以确定用户所取得的成绩
 
 
 28
-00:01:40,546 --> 00:01:43,696
-as others, for you to be
-able to define achievements
+00:01:45,272 --> 00:01:49,009
+我们还支持你编写
+实时或回合多人游戏
 
 
 29
-00:01:43,696 --> 00:01:46,736
-that your users can achieve
-and we also support everything
+00:01:49,076 --> 00:01:50,677
+所需的一切内容
 
 
 30
-00:01:46,736 --> 00:01:49,086
-that you would need to be
-able to write a realtime
+00:01:50,978 --> 00:01:52,646
+同时不必设置自己的服务器
 
 
 31
-00:01:49,086 --> 00:01:51,476
-or turn-based multiplayer
-game without having
+00:01:53,380 --> 00:01:56,350
+我们还支持将多人元素加入
 
 
 32
-00:01:51,476 --> 00:01:52,656
-to set up your own servers.
+00:01:56,583 --> 00:01:57,818
+单人游戏中
 
 
 33
-00:01:53,316 --> 00:01:56,356
-And we also support challenges
-which add a multiplayer element
+00:01:59,186 --> 00:02:00,053
+还有什么新的呢？
 
 
 34
-00:01:56,596 --> 00:01:57,806
-to your single player game.
+00:02:00,821 --> 00:02:03,090
+首先 有客玩家
 
 
 35
-00:01:58,476 --> 00:01:59,736
-So, what's new?
+00:02:03,924 --> 00:02:06,460
+目前 在游戏中心
+我们有两个主要位置
 
 
 36
-00:02:00,506 --> 00:02:03,076
-First up, we have guest players.
+00:02:06,527 --> 00:02:07,694
+可以遇到玩家
 
 
 37
-00:02:03,936 --> 00:02:06,516
-Currently in Game Center
-we have two main places
+00:02:08,195 --> 00:02:10,062
+首先是GKLocalPlayer
 
 
 38
-00:02:06,516 --> 00:02:07,696
-that you'll run into players.
+00:02:10,564 --> 00:02:14,868
+每个设备上只有一个必须是
+认证的游戏中心用户便行
 
 
 39
-00:02:08,196 --> 00:02:10,045
-First is your GKLocalPlayer.
+00:02:15,769 --> 00:02:19,907
+你还作为GKLocalPlayer
+的朋友进入GKPlayer
 
 
 40
-00:02:10,566 --> 00:02:12,466
-You only have one of these
-per device and it has
+00:02:20,240 --> 00:02:24,278
+但更常见的情况是
+作为任何多人游戏的参与者
 
 
 41
-00:02:12,466 --> 00:02:14,876
-to be an authenticated
-Game Center user.
+00:02:24,344 --> 00:02:27,014
+无论是实时或是基于回合均可
 
 
 42
-00:02:15,766 --> 00:02:19,936
-You'll also run into GKPlayer
-as friends of that GKLocalPlayer
+00:02:27,848 --> 00:02:28,749
+不过对于这些玩家
 
 
 43
-00:02:20,246 --> 00:02:22,956
-but more commonly as
-participants in any sort
+00:02:28,815 --> 00:02:31,151
+每个设备只能有一个玩家
 
 
 44
-00:02:22,956 --> 00:02:24,796
-of multiplayer match
-whether or not
+00:02:31,818 --> 00:02:32,686
+现在不再是这样了
 
 
 45
-00:02:24,796 --> 00:02:27,026
-that is real time or turn-based.
+00:02:33,387 --> 00:02:34,621
+我们现在还有客玩家功能
 
 
 46
-00:02:27,526 --> 00:02:28,816
-However with these players,
+00:02:35,355 --> 00:02:36,456
+什么是客玩家？
 
 
 47
-00:02:28,816 --> 00:02:31,166
-you can only have one
-player per device.
+00:02:36,890 --> 00:02:39,726
+他们实际上是
+GKPlayer实例
 
 
 48
-00:02:31,766 --> 00:02:32,626
-Well, not anymore.
+00:02:39,993 --> 00:02:43,230
+使用方法和
+其他GKPlayer一样
 
 
 49
-00:02:33,396 --> 00:02:34,516
-Now we have guest players.
+00:02:43,764 --> 00:02:45,532
+这些不需要认证
 
 
 50
-00:02:35,096 --> 00:02:36,356
-So what are guest players?
+00:02:45,832 --> 00:02:48,602
+他们是由你
+提供识别符来生成
 
 
 51
-00:02:36,866 --> 00:02:39,686
-They actually are
-GKPlayer instances.
+00:02:48,669 --> 00:02:50,504
+然后我们会把
+GKPlayer给你
 
 
 52
-00:02:39,686 --> 00:02:43,106
-So you can use them just like
-you would any other GKPlayer.
+00:02:51,538 --> 00:02:54,308
+在任何多人游戏中
+他们都是一级参与者
 
 
 53
-00:02:43,756 --> 00:02:45,566
-They do not require
-authentication,
+00:02:54,508 --> 00:02:56,677
+因此
+你可以通过客玩家填充
 
 
 54
-00:02:45,606 --> 00:02:48,536
-they will be created by you
-vending us an identifier
+00:02:57,010 --> 00:02:58,512
+游戏中的其他插槽
 
 
 55
-00:02:48,536 --> 00:02:50,496
-and then we will give
-you back a GKPlayer.
+00:02:58,846 --> 00:03:02,850
+你需要至少
+一个认证的GKPlayer
 
 
 56
-00:02:51,166 --> 00:02:52,846
-They are first-class
-participants
+00:03:03,150 --> 00:03:05,686
+但是其他的内容
+均可是这些客玩家
 
 
 57
-00:02:52,846 --> 00:02:55,546
-in any multiplayer game so
-you can fill up the rest
+00:03:06,887 --> 00:03:08,488
+客玩家可以
+用来做什么呢？
 
 
 58
-00:02:55,546 --> 00:02:58,516
-of the slots in your game
-with those guest players.
+00:03:09,289 --> 00:03:10,824
+他们在通关和
+游戏方面都很棒
 
 
 59
-00:02:58,836 --> 00:03:02,716
-You do need to have at least
-one authenticated GKPlayer
+00:03:11,191 --> 00:03:13,460
+比如你想有个iPad游戏
 
 
 60
-00:03:03,166 --> 00:03:06,436
-but everything else can
-be those guest players.
+00:03:13,627 --> 00:03:15,362
+登录了一个玩家
 
 
 61
-00:03:06,856 --> 00:03:08,436
-What can you use
-guest players for?
+00:03:15,529 --> 00:03:17,164
+其他所有人都想要玩
 
 
 62
-00:03:09,286 --> 00:03:10,746
-They are great for
-pass and play.
+00:03:17,464 --> 00:03:19,900
+你可以用客玩家填充
+其余插槽
 
 
 63
-00:03:11,176 --> 00:03:13,356
-Say you want to be able
-to have an iPad game
+00:03:20,300 --> 00:03:23,170
+并可以在用户准备玩的
+iPad上
 
 
 64
-00:03:13,356 --> 00:03:15,366
-that you have one
-player logged into
+00:03:23,403 --> 00:03:25,005
+准备完全的本地游戏
 
 
 65
-00:03:15,516 --> 00:03:17,166
-and everybody else wants
-to be able to play.
+00:03:25,372 --> 00:03:28,809
+你可以将回合游戏的
+游戏逻辑完全按照
 
 
 66
-00:03:17,476 --> 00:03:18,806
-You can fill up the
-rest of those slots
+00:03:28,876 --> 00:03:30,210
+其他游戏中那般处理
 
 
 67
-00:03:18,806 --> 00:03:20,736
-with these guest
-players and be able
+00:03:30,277 --> 00:03:32,479
+可以传递消息
+可以传递回合
 
 
 68
-00:03:20,736 --> 00:03:23,156
-to have a completely
-local game on that iPad
+00:03:32,746 --> 00:03:34,882
+可以像其他
+回合游戏中那样
 
 
 69
-00:03:23,396 --> 00:03:25,006
-that your users will
-be able to play
+00:03:34,948 --> 00:03:36,917
+发送交换要求
 
 
 70
-00:03:25,356 --> 00:03:28,816
-and you can treat the game logic
-in that turn-base game exactly
+00:03:37,618 --> 00:03:40,654
+这也是插入AI
+玩家的不错的方法
 
 
 71
-00:03:28,816 --> 00:03:30,126
-as you would any other game.
+00:03:40,888 --> 00:03:44,625
+可以让你和其他方式
+一样 拥有相同的游戏逻辑
 
 
 72
-00:03:30,126 --> 00:03:32,476
-You can pass messages,
-you can pass the turn,
+00:03:44,892 --> 00:03:48,662
+而且还可以让用户可以在
+不同层级的AI上游戏
 
 
 73
-00:03:32,756 --> 00:03:34,906
-you can send exchanges
-just as you would
+00:03:48,862 --> 00:03:50,764
+这样就可以让他们
+更快地学习游戏
 
 
 74
-00:03:34,906 --> 00:03:36,806
-in any other turn-based game.
+00:03:52,165 --> 00:03:56,737
+我刚说过 有了客玩家
+你可以定义标识符
 
 
 75
-00:03:37,616 --> 00:03:40,666
-It's also a really great way to
-be able to plug in AI players,
+00:03:57,004 --> 00:04:01,141
+这个标识符必须在整个
+游戏环节都独一无二
 
 
 76
-00:03:40,876 --> 00:03:43,656
-which will allow you to be able
-to have the same game logic
+00:04:01,575 --> 00:04:03,377
+无论你最后
+用的是什么方法
 
 
 77
-00:03:43,656 --> 00:03:45,596
-as you would otherwise
-but also be able
+00:04:03,477 --> 00:04:07,314
+确保都不要与标识符
+发生任何冲突
 
 
 78
-00:03:45,596 --> 00:03:48,336
-to have your users be able to
-play against different levels
+00:04:07,381 --> 00:04:10,384
+如果在一个设备上
+有一个客玩家
 
 
 79
-00:03:48,336 --> 00:03:50,616
-of AI so they can learn how
-to up their game faster.
+00:04:10,450 --> 00:04:12,152
+在另一个设备上
+有另外的客玩家
 
 
 80
-00:03:51,606 --> 00:03:54,416
-So with guest players, as I
-said before, you are going
+00:04:12,419 --> 00:04:14,488
+要确保他们不会冲突
 
 
 81
-00:03:54,416 --> 00:03:58,456
-to be defining the identifier,
-and that identifier needs
+00:04:14,555 --> 00:04:17,291
+否则游戏逻辑
+可能就会有问题
 
 
 82
-00:03:58,456 --> 00:04:01,106
-to be unique across
-each game session.
+00:04:18,392 --> 00:04:22,029
+这些客玩家不会
+有积分或成绩
 
 
 83
-00:04:01,566 --> 00:04:03,266
-So whatever method
-you end up using,
+00:04:22,863 --> 00:04:25,499
+这也合情合理
+因为在服务器上不会公布这些
 
 
 84
-00:04:03,486 --> 00:04:04,956
-make sure that you are not going
+00:04:26,066 --> 00:04:27,334
+但是你需要对此了解
 
 
 85
-00:04:04,956 --> 00:04:07,356
-to be having any collisions
-on this identifier.
+00:04:29,570 --> 00:04:35,642
+有客玩家的环节
+只有在玩家的环节用的
 
 
 86
-00:04:07,356 --> 00:04:10,416
-If you have one guest
-player, on one device
+00:04:35,976 --> 00:04:39,279
+也是iOS 9时才会兼容
 
 
 87
-00:04:10,416 --> 00:04:13,156
-and another guest player on
-another device, just make sure
+00:04:39,746 --> 00:04:43,717
+这并不是将你的游戏
+限制在iOS 9
 
 
 88
-00:04:13,156 --> 00:04:14,546
-that those aren't
-going to collide,
+00:04:44,051 --> 00:04:48,422
+这只会限制有着
+客玩家的单独环节
 
 
 89
-00:04:14,546 --> 00:04:17,116
-otherwise your game logic is
-probably going to have problems.
+00:04:48,722 --> 00:04:52,125
+和其他使用iOS 9的
+用户相匹配
 
 
 90
-00:04:18,386 --> 00:04:22,466
-These guest players can't
-earn scores or achievements,
+00:04:52,593 --> 00:04:54,628
+我们想让它变得更容易些
 
 
 91
-00:04:22,866 --> 00:04:24,546
-which makes sense, there's
-nothing on the server
+00:04:54,862 --> 00:04:58,465
+我们不会在那些无法参加游戏的
+任何人之间进行自动匹 配 
 
 
 92
-00:04:24,546 --> 00:04:28,876
-to post them to, but
-you need to know that.
+00:04:58,765 --> 00:05:03,237
+如果你的一个用户向无法
+参与的某人
 
 
 93
-00:04:29,566 --> 00:04:35,626
-Sessions with guest players are
-only compatible with sessions
+00:05:03,804 --> 00:05:05,539
+发送多人游戏的邀请
 
 
 94
-00:04:35,966 --> 00:04:39,196
-with players that are
-also running iOS 9.
+00:05:05,606 --> 00:05:08,475
+我们会在服务器端
+代替他们自动拒绝
 
 
 95
-00:04:39,736 --> 00:04:43,706
-Now, this does not lock
-your game to iOS 9.
+00:05:08,842 --> 00:05:10,344
+这样你就不会遇到任何问题
 
 
 96
-00:04:44,036 --> 00:04:48,406
-This only locks those individual
-sessions with guest players
+00:05:10,544 --> 00:05:12,179
+不过
+你需要明白这一点
 
 
 97
-00:04:48,736 --> 00:04:52,046
-to other users that
-are running iOS 9.
+00:05:12,679 --> 00:05:14,715
+同样地
+这不会锁定你的游戏
 
 
 98
-00:04:52,586 --> 00:04:54,636
-We try to make this a
-little bit easier for you,
+00:05:15,082 --> 00:05:17,885
+在兼容性矩阵中规定的
+每项内容还依然奏效
 
 
 99
-00:04:54,876 --> 00:04:57,856
-we won't be automatching anyone
-that won't be able to join
+00:05:18,285 --> 00:05:21,054
+使用iOS更早版本
+运行你的游戏
 
 
 100
-00:04:57,856 --> 00:05:01,986
-that game and if one of your
-users does extend an invitation
+00:05:21,321 --> 00:05:22,155
+也依然适用
 
 
 101
-00:05:02,026 --> 00:05:05,606
-to multiplayer game to someone
-who wouldn't be able to join,
+00:05:22,356 --> 00:05:24,892
+这只是指那些
+个人可玩性环节
 
 
 102
-00:05:05,606 --> 00:05:07,716
-we will be auto declining
-that on the server side
+00:05:25,893 --> 00:05:27,060
+这就是客玩家
 
 
 103
-00:05:07,776 --> 00:05:10,346
-on their behalf so you
-shouldn't run into any issues
+00:05:27,294 --> 00:05:29,596
+我们真心希望这会让你创造
 
 
 104
-00:05:10,556 --> 00:05:12,186
-but it is something you
-need to be aware of.
+00:05:29,863 --> 00:05:33,333
+有趣的动态方式
+来加入多人游戏中
 
 
 105
-00:05:12,686 --> 00:05:14,706
-Again, this is not
-locking your game.
+00:05:33,567 --> 00:05:35,702
+我们非常兴奋地看到
+大家就要这么做了
 
 
 106
-00:05:15,066 --> 00:05:15,986
-Everything specified
+00:05:36,837 --> 00:05:40,140
+接下来 我们有了游戏中心
+Sandbox 环境
 
 
 107
-00:05:15,986 --> 00:05:17,896
-in the compatibility
-matrix will still work,
+00:05:41,308 --> 00:05:42,176
+Sandbox
 
 
 108
-00:05:18,286 --> 00:05:20,326
-anyone who is running on
-an older version of iOS
+00:05:42,809 --> 00:05:45,812
+是我们用来 
+生成单独的环境
 
 
 109
-00:05:20,446 --> 00:05:22,056
-with your game will still work.
+00:05:45,879 --> 00:05:48,582
+便于无需生产成品
+即可测试游戏
 
 
 110
-00:05:22,356 --> 00:05:24,936
-It's just those individual
-gameplay sessions.
+00:05:48,815 --> 00:05:50,150
+中心的功能 
 
 
 111
-00:05:25,536 --> 00:05:27,046
-That's guest players.
+00:05:51,151 --> 00:05:53,987
+但是我们有着...完全
+相同的服务器
 
 
 112
-00:05:27,296 --> 00:05:30,186
-We really hope that this is
-going to allow you to create new
+00:05:54,054 --> 00:05:55,389
+你必须有不同的账户
 
 
 113
-00:05:30,186 --> 00:05:33,316
-and interesting dynamic ways to
-add to your multiplayer games
+00:05:55,455 --> 00:05:58,358
+在两处有着
+完全相同的数据
 
 
 114
-00:05:33,316 --> 00:05:35,686
-and we are really excited to see
-what you're going to do with it.
+00:05:59,159 --> 00:06:00,460
+这非常棒
 
 
 115
-00:05:36,376 --> 00:05:40,146
-Next up, we have the Game
-Center Sandbox environment.
+00:06:00,961 --> 00:06:02,829
+但我们觉得Sandbox
+已经...
 
 
 116
-00:05:40,906 --> 00:05:45,826
-So Sandbox, we created to have
-a separate environment for you
+00:06:03,330 --> 00:06:04,531
+发挥作用
 
 
 117
-00:05:45,826 --> 00:05:48,566
-to be able to test out
-Game Center functionality
+00:06:04,998 --> 00:06:08,702
+现在我们要在制作中
+统一Sandbox
 
 
 118
-00:05:48,816 --> 00:05:50,136
-without being on production.
+00:06:09,903 --> 00:06:12,139
+我们仍然会有两套数据
 
 
 119
-00:05:50,636 --> 00:05:54,096
-But we had a completely
-duplicate server,
+00:06:12,339 --> 00:06:14,775
+但是都会在相同的
+服务器上运行
 
 
 120
-00:05:54,096 --> 00:05:55,416
-you had to have different
-accounts
+00:06:15,609 --> 00:06:18,212
+这会给我们带来许多好处
 
 
 121
-00:05:55,416 --> 00:05:58,096
-and all the exact same
-data in two places.
+00:06:18,478 --> 00:06:20,480
+这可以简化账户
 
 
 122
-00:05:58,096 --> 00:06:00,446
-And this was really great.
+00:06:20,714 --> 00:06:22,783
+你不再需要有
+单独的Sandbox账户  
 
 
 123
-00:06:00,906 --> 00:06:04,486
-But we feel that Sandbox
-has really done its purpose,
+00:06:22,850 --> 00:06:24,718
+你也不必担心维护问题
 
 
 124
-00:06:04,906 --> 00:06:08,516
-and now we are going to unify
-Sandbox with production.
+00:06:24,952 --> 00:06:28,856
+交友
+或处理 任何类似问题
 
 
 125
-00:06:09,366 --> 00:06:11,926
-So you will still
-have two sets of data
+00:06:29,857 --> 00:06:31,825
+这与TestFlight
+完全兼容
 
 
 126
-00:06:11,926 --> 00:06:14,716
-but it will all be
-running on the same server.
+00:06:31,892 --> 00:06:35,195
+这样你可以把游戏
+发送到TestFlight 
 
 
 127
-00:06:15,276 --> 00:06:18,776
-And this gives us a lot of
-really good benefits, one,
+00:06:35,429 --> 00:06:36,964
+便于测试方进行测试
 
 
 128
-00:06:18,776 --> 00:06:20,396
-this really simplifies
-your accounts.
+00:06:37,364 --> 00:06:39,533
+而无需担心
+设置Sandbox的问题
 
 
 129
-00:06:20,706 --> 00:06:22,836
-You no longer have to have
-a separate Sandbox account
+00:06:40,534 --> 00:06:42,436
+多玩家模式可以用于你在
 
 
 130
-00:06:22,836 --> 00:06:24,716
-that you're going to have to
-be worried about maintaining,
+00:06:42,903 --> 00:06:47,741
+服务器上公布的任何版本 
 
 
 131
-00:06:24,946 --> 00:06:30,086
-making friends with or dealing
-with in any way like that.
+00:06:48,242 --> 00:06:50,911
+而且是自动完成
+你不必做任何设置
 
 
 132
-00:06:30,086 --> 00:06:31,856
-This is really compatible
-with TestFlight
+00:06:50,978 --> 00:06:52,646
+在我们这边会打开开关
 
 
 133
-00:06:31,856 --> 00:06:35,476
-so you can send your game out
-on TestFlight for your testers
+00:06:54,014 --> 00:06:55,983
+需要注意这么几点
 
 
 134
-00:06:35,836 --> 00:06:38,236
-to be able to test with
-and not have to worry
+00:06:56,650 --> 00:06:59,219
+首先 你所工作的
+任何新游戏 
 
 
 135
-00:06:38,236 --> 00:06:39,536
-about them setting up Sandbox.
+00:06:59,286 --> 00:07:02,356
+都会在游戏中心的
+你的游戏名单中显示
 
 
 136
-00:06:40,446 --> 00:06:44,106
-Multiplayer will now
-work against any version
+00:07:02,856 --> 00:07:03,824
+正如大家所见
 
 
 137
-00:06:44,106 --> 00:06:49,316
-that you have published on that
-server and this is automatic,
+00:07:04,224 --> 00:07:06,793
+我和demo-liscious
+正在研究GK测试团队
 
 
 138
-00:06:49,316 --> 00:06:50,946
-you don't have to do
-anything to set this up,
+00:07:06,927 --> 00:07:08,996
+如果你是demo-liscious
+的朋友
 
 
 139
-00:06:50,976 --> 00:06:52,636
-we will be flipping
-the switch on our side.
+00:07:09,129 --> 00:07:12,232
+那么你可以在游戏中心app
+点击她的头像
 
 
 140
-00:06:53,956 --> 00:06:55,996
-There are a few things that
-you do need to be aware of.
+00:07:12,599 --> 00:07:15,502
+如果你点击她的游戏名单 
+你就可以上下翻看
 
 
 141
-00:06:56,476 --> 00:06:58,886
-First, any new game
-that you will be working
+00:07:15,569 --> 00:07:16,870
+看到她正在
+研究那个游戏
 
 
 142
-00:06:58,886 --> 00:07:02,326
-on will actually show up in
-your games list in Game Center.
+00:07:17,504 --> 00:07:20,440
+如果有个游戏
+你不希望别人知道
 
 
 143
-00:07:02,526 --> 00:07:03,836
-So as you can see here,
+00:07:20,507 --> 00:07:22,376
+我们建议你可以
+设置单独的账户
 
 
 144
-00:07:04,236 --> 00:07:06,706
-me and demo-liscious are
-working on GK tester.
+00:07:24,278 --> 00:07:26,246
+但这应该
+不是太大的问题
 
 
 145
-00:07:06,706 --> 00:07:10,146
-And if you were demo-liscious'
-friend, then you clicked
+00:07:28,182 --> 00:07:29,750
+在游戏运行时你所公布的...
 
 
 146
-00:07:10,146 --> 00:07:13,076
-on her profile in the Game
-Center app, if you clicked
+00:07:30,017 --> 00:07:31,051
+任何分数
 
 
 147
-00:07:13,076 --> 00:07:15,566
-on her games list, you would be
-able to scroll through and see
+00:07:31,351 --> 00:07:33,687
+都会被公布在同一排行榜
 
 
 148
-00:07:15,566 --> 00:07:16,876
-that she was working
-on that game.
+00:07:34,388 --> 00:07:39,493
+iOS 8用户仍需要在设置中
 
 
 149
-00:07:17,236 --> 00:07:19,216
-If there's a game
-you really don't want
+00:07:39,560 --> 00:07:41,828
+打开Sandbox开关
 
 
 150
-00:07:19,216 --> 00:07:21,566
-to let anyone know about,
-we do suggest that you set
+00:07:42,329 --> 00:07:44,631
+因为如果它们认为不该
+进入Sandbox环境 
 
 
 151
-00:07:21,566 --> 00:07:24,776
-up a separate account, however,
+00:07:44,998 --> 00:07:48,635
+我们会自动报错
 
 
 152
-00:07:24,776 --> 00:07:26,176
-that shouldn't be too
-much of a problem.
+00:07:48,702 --> 00:07:50,103
+Sandbox并不存在
 
 
 153
-00:07:26,706 --> 00:07:29,756
-Any scores that you post,
+00:07:50,504 --> 00:07:52,206
+所以它们并不会
+在Sandbox中 
 
 
 154
-00:07:30,006 --> 00:07:32,296
-while running your
-game will be posting
+00:07:52,272 --> 00:07:54,308
+但会看到部分相同的UI处理
 
 
 155
-00:07:32,356 --> 00:07:33,736
-to the same leaderboards.
+00:07:54,775 --> 00:07:59,680
+不过幸好 大家都可以从
+iOS 8升级到iOS 9
 
 
 156
-00:07:34,386 --> 00:07:39,516
-And iOS 8 users will still
-actually need to flip
+00:08:00,047 --> 00:08:01,615
+所以我们也建议
+你这么做
 
 
 157
-00:07:39,516 --> 00:07:41,816
-that Sandbox switch in settings
+00:08:04,051 --> 00:08:07,554
+我们来看这样做对于
+所有这些部分意味着什么
 
 
 158
-00:07:42,316 --> 00:07:45,426
-because we will be
-automatically errorring
+00:08:07,621 --> 00:08:08,555
+排行榜
 
 
 159
-00:07:45,426 --> 00:07:47,526
-out if they are not
-thinking that they are going
+00:08:09,256 --> 00:08:12,826
+所有版本都会在同一个
+排行榜
 
 
 160
-00:07:47,526 --> 00:07:48,686
-into that Sandbox environment.
+00:08:13,227 --> 00:08:15,896
+但是
+如果你更新游戏
 
 
 161
-00:07:48,686 --> 00:07:51,616
-Well, Sandbox doesn't exist
-so they won't actually be
+00:08:15,963 --> 00:08:18,065
+在其中还添加了
+新的排行榜
 
 
 162
-00:07:51,616 --> 00:07:54,296
-in Sandbox but they will see
-some of that same UI treatment.
+00:08:18,498 --> 00:08:22,536
+这些排行榜只有你或运行该版本
 
 
 163
-00:07:54,776 --> 00:07:59,696
-But fortunately, everyone on
-iOS 8 can upgrade to iOS 9,
+00:08:22,669 --> 00:08:24,571
+即游戏的更新版本的
 
 
 164
-00:08:00,056 --> 00:08:01,556
-so we just suggest that
-you do that instead.
+00:08:24,805 --> 00:08:26,406
+测试团队可见
 
 
 165
-00:08:02,096 --> 00:08:06,006
-So let's go over what this
-is exactly going to mean
+00:08:26,707 --> 00:08:28,675
+其他人则无法看到这些排行榜
 
 
 166
-00:08:06,006 --> 00:08:07,096
-for each one of these sections.
+00:08:29,109 --> 00:08:32,613
+而所有其他内容都会被公布在
+相同的制作排行榜上
 
 
 167
-00:08:07,606 --> 00:08:08,536
-So leaderboards.
+00:08:33,013 --> 00:08:35,616
+所幸的是 所有内容
+都是iTunes Connect
 
 
 168
-00:08:09,266 --> 00:08:11,256
-All of your versions
-will be posting
+00:08:35,682 --> 00:08:37,985
+这会让你在公布它们或
 
 
 169
-00:08:11,306 --> 00:08:12,856
-to the same leaderboards.
+00:08:38,251 --> 00:08:42,222
+你或测试团队调用任何分数
+结果却公布了错误结果
 
 
 170
-00:08:13,236 --> 00:08:15,896
-However, if you have
-an update to your game,
+00:08:42,556 --> 00:08:46,093
+或是你不希望
+影响排行榜的真实性
 
 
 171
-00:08:15,956 --> 00:08:18,056
-in which you've added
-new leaderboards,
+00:08:46,159 --> 00:08:47,261
+可以使用当前的工具清除
 
 
 172
-00:08:18,486 --> 00:08:22,526
-those leaderboards will only be
-viewable to you or your testers
+00:08:47,327 --> 00:08:49,963
+通过 iTunes Connect
+可以很轻松进行清除
 
 
 173
-00:08:22,666 --> 00:08:24,576
-who are running that version,
+00:08:51,131 --> 00:08:54,101
+对于多人游戏模式
+这是个非常大的好处
 
 
 174
-00:08:24,806 --> 00:08:26,416
-that updated version
-of your game.
+00:08:54,501 --> 00:08:57,571
+这让你可以测试
+在已经大量
 
 
 175
-00:08:26,716 --> 00:08:28,676
-No one else will be able
-to see those leaderboards,
+00:08:58,005 --> 00:09:02,943
+制作的游戏中
+你的多人游戏模式的升级
 
 
 176
-00:08:29,036 --> 00:08:30,956
-but everything else
-you will be posting
+00:09:03,243 --> 00:09:04,077
+可以进行测试 
 
 
 177
-00:08:30,956 --> 00:08:32,546
-to those same production
-leaderboards.
+00:09:04,378 --> 00:09:09,883
+但是在产前服务器和
+生产服务器之间并无壁垒
 
 
 178
-00:08:33,015 --> 00:08:35,666
-Fortunately, everything is
-iTunes Connect and that is going
+00:09:09,950 --> 00:09:11,418
+它们都是同样的服务器
 
 
 179
-00:08:35,666 --> 00:08:37,785
-to allow you to clear the
-leaderboards before you publish
+00:09:11,552 --> 00:09:13,987
+你可以轻松测试并确保对多人
 
 
 180
-00:08:37,785 --> 00:08:40,716
-them or to call any scores
-that you or your testers end
+00:09:14,054 --> 00:09:16,557
+游戏模式的任何升级 
 
 
 181
-00:08:40,716 --> 00:08:43,576
-up posting either
-erroneously or in a way
+00:09:16,623 --> 00:09:18,692
+都会有效地
+与任何现有内容相适应
 
 
 182
-00:08:43,576 --> 00:08:44,636
-that you don't really
-want to mess
+00:09:21,161 --> 00:09:22,663
+对于iTunes Connect
 
 
 183
-00:08:44,636 --> 00:08:46,016
-up the integrity of
-your leaderboards.
+00:09:22,729 --> 00:09:25,966
+你将保持两套
+完全不同的元数据
 
 
 184
-00:08:46,016 --> 00:08:47,256
-Those are easily clearable
+00:09:26,033 --> 00:09:28,268
+我们都将在服务器上维护
 
 
 185
-00:08:47,256 --> 00:08:50,966
-through iTunes Connect
-using your current tools.
+00:09:28,735 --> 00:09:31,138
+你将会有
+当前释放版本的数据
 
 
 186
-00:08:51,136 --> 00:08:54,116
-For multiplayer, this is
-a really huge benefit.
+00:09:31,371 --> 00:09:33,774
+以及未释放版本的数据
 
 
 187
-00:08:54,496 --> 00:08:58,866
-This is going to allow you to
-be able to test your updates
+00:09:34,641 --> 00:09:38,212
+你将获得哪些
+数据
 
 
 188
-00:08:58,866 --> 00:09:01,966
-to your multiplayer games
-against games that are already
+00:09:38,378 --> 00:09:40,380
+你或者用户或测试团队
 
 
 189
-00:09:01,966 --> 00:09:04,016
-out there in the
-wild in production.
+00:09:40,614 --> 00:09:43,417
+则要 取决于在设备上
+安装的app的
 
 
 190
-00:09:04,386 --> 00:09:08,446
-Because there's no barrier
-between the preproduction server
+00:09:43,517 --> 00:09:46,987
+CFBundleVersion
 
 
 191
-00:09:08,446 --> 00:09:09,926
-and the production server.
+00:09:47,688 --> 00:09:50,123
+如果设备的
+CFBundleVersion
 
 
 192
-00:09:09,926 --> 00:09:11,416
-They are the same server.
+00:09:50,524 --> 00:09:54,928
+胜过你将从App Store
+获取的松开捆绑版本
 
 
 193
-00:09:11,496 --> 00:09:13,806
-So you will be able to
-easily test and make sure
+00:09:55,195 --> 00:09:57,497
+你将会得到未释放数据
 
 
 194
-00:09:14,066 --> 00:09:15,466
-that any updates
-that you are making
+00:09:58,332 --> 00:10:01,468
+如果你的设备上的
+CFBundleVersion 
 
 
 195
-00:09:15,466 --> 00:09:17,416
-to your multiplayer
-games are going to work
+00:10:01,702 --> 00:10:06,073
+小于或等于
+你从 App Store下载的
 
 
 196
-00:09:17,416 --> 00:09:20,426
-with whatever is
-already out there.
+00:10:06,306 --> 00:10:09,343
+松开捆绑版本
+你将会得到当前释放的数据
 
 
 197
-00:09:21,216 --> 00:09:24,506
-For iTunes Connect, you will
-be maintaining two completely
+00:10:10,177 --> 00:10:11,845
+如果在App Store中没有
 
 
 198
-00:09:24,506 --> 00:09:25,546
-separate sets of metadata
+00:10:12,045 --> 00:10:13,747
+那你将获得未释放数据
 
 
 199
-00:09:25,546 --> 00:09:28,256
-that we will be maintaining
-on the server.
+00:10:13,814 --> 00:10:15,349
+这是存在的唯一数据
 
 
 200
-00:09:28,256 --> 00:09:31,146
-You will have your currently
-released version of your data,
+00:10:17,251 --> 00:10:18,418
+我们再来看一遍
 
 
 201
-00:09:31,376 --> 00:09:33,586
-as well as the unreleased
-version of your data.
+00:10:19,353 --> 00:10:24,157
+如果你和测试团队之一
+在运行游戏的...
 
 
 202
-00:09:34,636 --> 00:09:39,556
-So which set of data that
-you get, you or your users
+00:10:25,092 --> 00:10:26,393
+beta版本 
 
 
 203
-00:09:39,556 --> 00:09:43,416
-or your testers is going to
-depend on the CFBundleVersion
+00:10:26,760 --> 00:10:31,632
+那么游戏中心app中
+你的好友将可以看到这款游戏
 
 
 204
-00:09:43,516 --> 00:09:46,926
-of the app that you have
-installed on that device.
+00:10:32,199 --> 00:10:34,501
+你还可以玩其他的
+beta版本
 
 
 205
-00:09:47,686 --> 00:09:51,236
-So if the CFBundleVersion
-on your device is greater
+00:10:34,835 --> 00:10:36,170
+这是那里仅有的版本
 
 
 206
-00:09:51,236 --> 00:09:53,656
-than the release bundle
-version that you would get
+00:10:36,637 --> 00:10:38,338
+你将在beta排行榜上
+公布内容
 
 
 207
-00:09:53,876 --> 00:09:57,276
-from the App Store, you will
-be vended the unreleased data.
+00:10:38,405 --> 00:10:40,440
+现有的只有这些排行榜
 
 
 208
-00:09:58,326 --> 00:10:02,116
-If the CFBundleVersion that you
-have on your device is less than
+00:10:41,775 --> 00:10:46,113
+如果你和用户之一
+在运行游戏的发行版本
 
 
 209
-00:10:02,116 --> 00:10:05,276
-or equal to the release bundle
-version that you would download
+00:10:47,047 --> 00:10:48,448
+这是常见的情况
 
 
 210
-00:10:05,276 --> 00:10:08,586
-from the App Store, you will be
-vended the currently released
+00:10:48,649 --> 00:10:51,051
+你还可以在
+游戏中心看到游戏
 
 
 211
-00:10:08,676 --> 00:10:09,276
-set of data.
+00:10:51,118 --> 00:10:52,653
+是在游戏中心的
+好友名单的位置
 
 
 212
-00:10:09,886 --> 00:10:11,856
-If there isn't one
-on the App Store,
+00:10:52,853 --> 00:10:55,589
+如果是多人游戏
+你可以在兼容性矩阵
 
 
 213
-00:10:12,056 --> 00:10:13,806
-then you will just be
-getting the unreleased data.
+00:10:55,656 --> 00:10:59,927
+和iTunes Connect中
+指定的任何版本来玩
 
 
 214
-00:10:13,806 --> 00:10:15,986
-It's the only data that exists.
+00:11:00,227 --> 00:11:01,828
+其中包括游戏不一定...
 
 
 215
-00:10:17,016 --> 00:10:18,266
-So let's go over this again.
+00:11:02,196 --> 00:11:05,632
+知道的版本
 
 
 216
-00:10:18,266 --> 00:10:24,156
-If you or one of your testers
-is running a beta version
+00:11:05,699 --> 00:11:08,202
+因为兼容性矩阵是存储在
+服务器上
 
 
 217
-00:10:25,086 --> 00:10:29,396
-of your game, then that
-game will be viewable
+00:11:08,335 --> 00:11:09,903
+而服务器知道
+你会匹配
 
 
 218
-00:10:29,396 --> 00:10:31,536
-by your Game Center friends
-in the Game Center app.
+00:11:09,970 --> 00:11:11,338
+这些未释放的游戏
 
 
 219
-00:10:32,186 --> 00:10:34,486
-You will be able to play
-against any other beta version,
+00:11:12,239 --> 00:11:14,107
+正如你所期望的那样
+你会公布
 
 
 220
-00:10:34,836 --> 00:10:36,836
-that's the only versions
-out there.
+00:11:14,308 --> 00:11:15,242
+释放的排行榜
 
 
 221
-00:10:36,836 --> 00:10:38,406
-You'll be posting to
-the beta leaderboards,
+00:11:16,109 --> 00:11:18,679
+如果你和测试团队之一
 
 
 222
-00:10:38,406 --> 00:10:40,926
-again those are the only
-leaderboards that exist.
+00:11:18,912 --> 00:11:21,682
+在运行游戏尚未公布的 
+更新版本
 
 
 223
-00:10:41,476 --> 00:10:45,576
-If you or one of your users
-is running a released version
+00:11:22,249 --> 00:11:26,053
+游戏仍从游戏中心
+的游戏中心好友名单可见
 
 
 224
-00:10:45,576 --> 00:10:48,416
-of your game, this is
-kind of your normal case,
+00:11:26,787 --> 00:11:29,857
+你还可以玩其他的指定版本
 
 
 225
-00:10:48,486 --> 00:10:51,116
-you will be able to see
-the game in Game Center,
+00:11:29,923 --> 00:11:34,428
+无论是游戏的较早版本
+还是正在测试的游戏的新版本
 
 
 226
-00:10:51,116 --> 00:10:52,496
-on your Game Center's
-friends list.
+00:11:34,895 --> 00:11:38,165
+兼容性矩阵所指定的任何内容
+你都可以玩
 
 
 227
-00:10:52,856 --> 00:10:55,616
-You will be able to play,
-if it's a multiplayer game,
+00:11:38,932 --> 00:11:42,269
+然后如果排行榜   
+已经存在
 
 
 228
-00:10:55,616 --> 00:10:58,976
-against any version specified
-in the compatibility matrix
+00:11:44,638 --> 00:11:46,607
+你将公布释放排行榜
 
 
 229
-00:10:58,976 --> 00:11:01,826
-and iTunes Connect,
-including versions
+00:11:46,974 --> 00:11:49,810
+或者要公布未释放的排行榜
 
 
 230
-00:11:02,206 --> 00:11:05,916
-that your game would not
-necessarily know about because
+00:11:50,110 --> 00:11:52,379
+如果是该游戏和
+这些游戏的新排行榜的话
 
 
 231
-00:11:05,916 --> 00:11:08,186
-that compatibility matrix
-is stored on the server
+00:11:52,613 --> 00:11:55,315
+这些排行榜只能被系统中
 
 
 232
-00:11:08,326 --> 00:11:09,966
-and the server will
-know that you can match
+00:11:55,716 --> 00:12:00,521
+已有游戏版本的人们看到
 
 
 233
-00:11:09,966 --> 00:11:11,316
-against those unreleased games.
+00:12:02,322 --> 00:12:03,323
+这就是新增内容
 
 
 234
-00:11:12,226 --> 00:11:14,486
-You will be posting to
-released leaderboards just
+00:12:03,657 --> 00:12:06,426
+首先是我们希望为游戏
 
 
 235
-00:11:14,486 --> 00:11:15,146
-like you would expect.
+00:12:06,493 --> 00:12:08,896
+扩大多人
+游戏机会的客玩家
 
 
 236
-00:11:16,096 --> 00:11:19,776
-If you or one of your testers
-is running an updated version
+00:12:10,330 --> 00:12:13,200
+以及统一的服务器环境
 
 
 237
-00:11:19,776 --> 00:11:21,416
-of your game that has
-not been pubbished
+00:12:13,734 --> 00:12:16,170
+这其实很简单 是自动完成
 
 
 238
-00:11:21,416 --> 00:11:24,776
-yet that game will still
-be viewable in Game Center
+00:12:16,336 --> 00:12:18,305
+你无需进行任何设置
 
 
 239
-00:11:24,776 --> 00:11:28,626
-in your Game Center friends list
-and you will be able to play
+00:12:18,705 --> 00:12:20,741
+它会与TestFlight
+配合良好
 
 
 240
-00:11:28,626 --> 00:11:30,196
-against any specified
-version, whether
+00:12:20,807 --> 00:12:23,443
+我们觉得大家会有更好的方法
 
 
 241
-00:11:30,196 --> 00:11:32,736
-or not it is the older version
-of your game or the new version
+00:12:23,510 --> 00:12:25,746
+对游戏进行功能测试
 
 
 242
-00:11:32,736 --> 00:11:35,706
-of your game that you're
-testing, anything specified
+00:12:26,613 --> 00:12:27,748
+我觉得这一定会让大家
 
 
 243
-00:11:35,706 --> 00:11:38,166
-on the compatibility matrix, you
-will be able to play against.
+00:12:27,814 --> 00:12:29,516
+觉得生活轻松了许多
 
 
 244
-00:11:38,916 --> 00:11:42,156
-Then you will be posting
-to release leaderboards
+00:12:31,285 --> 00:12:32,886
+现在请埃德温上台
 
 
 245
-00:11:42,816 --> 00:11:48,276
-if the leaderboard already
-exists or you will be posting
+00:12:32,953 --> 00:12:35,956
+他会给大家讲讲最新框架
+重放工具
 
 
 246
-00:11:48,276 --> 00:11:51,556
-to an unreleased leaderboard
-if that is a new leaderboard
+00:12:41,161 --> 00:12:41,995
+好
 
 
 247
-00:11:51,556 --> 00:11:53,436
-for that game and those games --
+00:12:42,496 --> 00:12:43,330
+谢谢 梅根
 
 
 248
-00:11:53,436 --> 00:11:56,356
-those leaderboards will only
-be viewable by those people
+00:12:43,964 --> 00:12:45,799
+下午好 我是
+埃德温·艾斯坎达
 
 
 249
-00:11:56,356 --> 00:12:00,406
-who have that version of
-your game on their system.
+00:12:45,866 --> 00:12:48,602
+是Apple的图形和
+游戏团队的软件工程师
 
 
 250
-00:12:00,956 --> 00:12:03,216
-So that's what's new.
+00:12:49,102 --> 00:12:51,405
+我来和大家
+讲讲ReplayKit
 
 
 251
-00:12:03,626 --> 00:12:06,276
-First was guest players
-which we really hope is going
+00:12:52,573 --> 00:12:55,342
+在游戏领域发生了
+一些非常难忘的时刻
 
 
 252
-00:12:06,276 --> 00:12:08,286
-to expand the multiplayer
-opportunities that you have
+00:12:55,843 --> 00:12:57,678
+例如你终于在
+看似不可能的程度
 
 
 253
-00:12:08,286 --> 00:12:13,156
-for your game, as well as our
-new unified server environment
+00:12:57,811 --> 00:12:59,479
+实现了三颗星
 
 
 254
-00:12:13,746 --> 00:12:16,936
-which is really simple, it's
-automatic, there's nothing
+00:13:00,647 --> 00:13:02,382
+或是你终于打败了大老板
 
 
 255
-00:12:16,936 --> 00:12:18,306
-that you need to
-do to set this up.
+00:13:02,449 --> 00:13:04,051
+而自己毫发无损
 
 
 256
-00:12:18,466 --> 00:12:20,636
-It's going to work so much
-better with TestFlight,
+00:13:04,918 --> 00:13:06,787
+如果能够捕捉
+并分享这些时刻
 
 
 257
-00:12:20,636 --> 00:12:23,456
-which we feel will give you
-guys a better way to be able
+00:13:07,087 --> 00:13:08,021
+那该有多棒啊？
 
 
 258
-00:12:23,496 --> 00:12:25,756
-to get full functionality
-testing on your game.
+00:13:09,356 --> 00:13:10,891
+于是就有了
+ReplayKit
 
 
 259
-00:12:26,616 --> 00:12:27,766
-And I think that
-this is really going
+00:13:12,159 --> 00:13:14,561
+ReplayKit记录
+运行应用的
 
 
 260
-00:12:27,766 --> 00:12:29,516
-to just make your guys'
-life a lot easier.
+00:13:14,828 --> 00:13:15,929
+视频和音频部分
 
 
 261
-00:12:29,636 --> 00:12:33,886
-Now I will bring up Edwin
-and he will tell you
+00:13:17,064 --> 00:13:19,566
+它可以实现增加语音评论
 
 
 262
-00:12:33,886 --> 00:12:35,966
-about the new framework
-replay kit.
+00:13:19,867 --> 00:13:21,735
+这样可以令录音
+更具个人特点
 
 
 263
-00:12:36,516 --> 00:12:40,826
-[Applause]
+00:13:22,069 --> 00:13:23,871
+或可增添上下文
 
 
 264
-00:12:41,326 --> 00:12:41,746
->> EDWIN ISKANDAR: All right.
+00:13:25,372 --> 00:13:26,773
+还可以允许用户
+进行回放
 
 
 265
-00:12:42,506 --> 00:12:43,216
-Thank you, Megan.
+00:13:26,940 --> 00:13:28,742
+整理和修整录音
 
 
 266
-00:12:43,966 --> 00:12:45,866
-Good afternoon, I'm
-Edwin Iskandar.
+00:13:29,042 --> 00:13:29,877
+最后
 
 
 267
-00:12:45,866 --> 00:12:48,196
-I'm a software engineer on the
-graphics and games team here
+00:13:29,943 --> 00:13:32,246
+分享录音到他们所喜爱的
+社交网络和视频
 
 
 268
-00:12:48,196 --> 00:12:51,406
-at Apple and I'm here to
-talk to you about ReplayKit.
+00:13:33,080 --> 00:13:34,248
+目的地网站
 
 
 269
-00:12:52,586 --> 00:12:55,316
-So some truly memorable moments
-happen during gaming, right,
+00:13:35,949 --> 00:13:38,919
+ReplayKit会生成
+高质量的HD录音
 
 
 270
-00:12:55,826 --> 00:12:57,576
-like when you finally
-get those three stars
+00:13:39,553 --> 00:13:42,890
+在TV 网站和移动设备上
+播放效果都很好
 
 
 271
-00:12:57,806 --> 00:12:59,356
-in that seemingly
-impossible level.
+00:13:43,891 --> 00:13:45,626
+这样做效率极高
 
 
 272
-00:12:59,356 --> 00:13:02,516
-Or when you finally
-beat that last boss
+00:13:45,993 --> 00:13:47,427
+可实现性能影响较低
 
 
 273
-00:13:02,516 --> 00:13:04,036
-without losing a
-single life point.
+00:13:47,995 --> 00:13:49,730
+同时可以将功率使用降到最小
 
 
 274
-00:13:04,926 --> 00:13:06,776
-Wouldn't it be awesome
-if you could capture
+00:13:51,665 --> 00:13:54,168
+ReplayKit包括
+隐私保护功能
 
 
 275
-00:13:07,076 --> 00:13:08,026
-and share those moments?
+00:13:54,234 --> 00:13:55,502
+可以帮助保护用户隐私
 
 
 276
-00:13:09,346 --> 00:13:10,636
-So that's where ReplayKit
-comes in.
+00:13:55,869 --> 00:13:57,938
+在接下来的幻灯片中
+我们会详细介绍
 
 
 277
-00:13:12,166 --> 00:13:14,576
-ReplayKit records
-the audio and visuals
+00:13:59,606 --> 00:14:01,842
+在iOS 9 beta版 
+就有这一功能
 
 
 278
-00:13:14,826 --> 00:13:15,896
-of your running application.
+00:14:03,443 --> 00:14:05,946
+晚些时候到秋天
+当iOS 9上市 客户就可用到
 
 
 279
-00:13:17,066 --> 00:13:19,366
-It also allows you to use
-this to add voice commentary
+00:14:07,948 --> 00:14:11,084
+在所有A7和A8的设备中
+均可使用
 
 
 280
-00:13:19,366 --> 00:13:22,276
-and so they can make their
-recordings more personal or just
+00:14:13,620 --> 00:14:15,088
+和所有的Apple框架一样
 
 
 281
-00:13:22,366 --> 00:13:23,866
-to provide additional context.
+00:14:15,155 --> 00:14:17,724
+ReplayKit也很重视
+用户的隐私
 
 
 282
-00:13:24,406 --> 00:13:26,766
-It allows your users
-to play back,
+00:14:18,559 --> 00:14:20,327
+在ReplayKit
+开始录制之前
 
 
 283
-00:13:26,936 --> 00:13:28,746
-scrub and trim their recordings
+00:14:21,195 --> 00:14:22,930
+它需要用户提供许可
 
 
 284
-00:13:29,026 --> 00:13:30,986
-and finally share
-their recordings
+00:14:23,230 --> 00:14:24,965
+是通过用户同意
+弹窗来实现
 
 
 285
-00:13:30,986 --> 00:13:32,316
-to their favorite
-social networks
+00:14:26,834 --> 00:14:29,136
+ReplayKit还支持
+家长控制功能
 
 
 286
-00:13:33,096 --> 00:13:34,926
-and video destination sites.
+00:14:29,770 --> 00:14:32,306
+如果孩子会经常用设备 
 
 
 287
-00:13:35,956 --> 00:13:38,756
-ReplayKit produces
-high-quality HD recordings
+00:14:32,639 --> 00:14:35,642
+你可以通过设置在
+整个系统关闭ReplayKit功能
 
 
 288
-00:13:39,546 --> 00:13:42,886
-that will look great on TV's,
-websites and mobile devices.
+00:14:38,078 --> 00:14:41,615
+通过ReplayKit制作的
+所有录制都不包括系统UI
 
 
 289
-00:13:43,906 --> 00:13:45,476
-And it does this
-extremely efficiently
+00:14:41,682 --> 00:14:44,351
+这意味着
+在录制期间所发出的
 
 
 290
-00:13:45,476 --> 00:13:49,406
-with a low-performance
-impact while also minimizing
+00:14:44,585 --> 00:14:46,320
+任何个人通知
+都不会包括在内
 
 
 291
-00:13:50,266 --> 00:13:51,416
-power usage.
+00:14:46,920 --> 00:14:49,556
+游戏中的任何键盘
+输入也是如此
 
 
 292
-00:13:51,656 --> 00:13:54,116
-ReplayKit includes
-privacy safeguards
+00:14:51,825 --> 00:14:54,461
+最后 应用
+不会直接访问
 
 
 293
-00:13:54,306 --> 00:13:57,026
-that help protect our users and
-we'll talk a little bit more
+00:14:54,795 --> 00:14:55,629
+电影文件
 
 
 294
-00:13:57,026 --> 00:13:57,926
-about these in the next slide.
+00:14:55,896 --> 00:14:57,764
+只能通过ReplayKit的
 
 
 295
-00:13:58,526 --> 00:14:01,536
-And it's available
-today in the iOS 9 beta.
+00:14:58,232 --> 00:15:01,134
+预览UI和分享列表
+用户才能访问
 
 
 296
-00:14:02,406 --> 00:14:05,936
-And later in the fall, to
-customers when iOS 9 ships.
+00:15:03,003 --> 00:15:05,305
+好
+我们先通过架构来看
 
 
 297
-00:14:06,616 --> 00:14:10,926
-It's available in all
-A7 and A8-based devices.
+00:15:05,506 --> 00:15:07,074
+ReplayKit 
+如何发挥作用
 
 
 298
-00:14:11,496 --> 00:14:16,316
-Like all of Apple's frameworks
-ReplayKit takes the users
+00:15:08,775 --> 00:15:11,645
+这样应用
+就连接到ReplayKit框架
 
 
 299
-00:14:16,316 --> 00:14:17,716
-privacy very seriously.
-
-
-300
-00:14:18,556 --> 00:14:20,316
-So before ReplayKit
-can start recording,
-
-
-301
-00:14:21,196 --> 00:14:22,926
-it requires that the
-user give it permission,
-
-
-302
-00:14:23,246 --> 00:14:25,626
-and it does this via
-user consent prompt.
-
-
-303
-00:14:26,846 --> 00:14:29,076
-ReplayKit also supports
-parental controls
-
-
-304
-00:14:29,076 --> 00:14:32,746
-so if you have a device
-that's often used by a child,
-
-
-305
-00:14:32,746 --> 00:14:37,386
-you can disable ReplayKit
-systemwide via settings.
-
-
-306
-00:14:38,066 --> 00:14:40,736
-All recordings made via
-ReplayKit will exclude
-
-
-307
-00:14:40,736 --> 00:14:41,276
-system UI.
-
-
-308
-00:14:41,786 --> 00:14:44,356
-That means that any personal
-notifications that come through,
-
-
-309
-00:14:44,576 --> 00:14:47,396
-while recording, will
-be excluded as well
-
-
-310
-00:14:47,396 --> 00:14:49,396
-as any keyboard entry
-that happens in game.
-
-
-311
-00:14:51,636 --> 00:14:54,476
-And finally, applications
-don't have direct access
-
-
-312
-00:14:54,796 --> 00:14:55,606
-to the movie files.
-
-
-313
-00:14:55,896 --> 00:14:57,096
-These are only accessible
-
-
-314
-00:14:57,096 --> 00:15:01,126
-to the user via ReplayKit's
-preview UI and share sheet.
-
-
-315
-00:15:01,676 --> 00:15:05,246
-All right, so let's take a
-look at how ReplayKit works
-
-
-316
-00:15:05,586 --> 00:15:07,086
-by taking a look at
-its architecture.
-
-
-317
-00:15:07,686 --> 00:15:11,656
-So your application links
-to the ReplayKit framework
-
-
-318
-00:15:11,996 --> 00:15:15,456
-and it uses these two
-classes, RPScreenRecorder
-
-
-319
-00:15:15,676 --> 00:15:16,936
-which handles the
-recording tasks
-
-
-320
-00:15:17,626 --> 00:15:20,596
-and RPPreviewViewController
-which is responsible
-
-
-321
-00:15:20,596 --> 00:15:21,936
-for the preview UI
-and share sheet.
-
-
-322
-00:15:23,326 --> 00:15:27,226
-So RPScreenRecorder communicates
-with the replay demon
-
-
-323
-00:15:27,386 --> 00:15:29,186
-which is a separate process
-from your application.
-
-
-324
-00:15:30,196 --> 00:15:32,756
-The replay demon communicates
-with lower level video
-
-
-325
-00:15:32,756 --> 00:15:36,066
-and audio services which in turn
-communicate with the hardware
-
-
-326
-00:15:36,806 --> 00:15:39,956
-to capture the visuals and
-audio of your application,
-
-
-327
-00:15:40,006 --> 00:15:42,746
-as well as the audio data
-from the device microphone.
-
-
-328
-00:15:44,216 --> 00:15:48,816
-During capture, the replay
-demon will encode this data
-
-
-329
-00:15:48,816 --> 00:15:50,716
-in realtime and write
-it to a movie file.
-
-
-330
-00:15:51,026 --> 00:15:54,206
-It will write this movie file
-to a location only accessible
-
-
-331
-00:15:54,356 --> 00:15:56,316
-to ReplayKits internal services.
-
-
-332
-00:15:57,156 --> 00:16:01,446
-How does the user actually
-interact with that movie then?
-
-
-333
-00:16:01,666 --> 00:16:03,586
-Well, when you tell
+00:15:12,913 --> 00:15:15,449
+它会用到两个类
 RPScreenRecorder
 
 
+300
+00:15:15,682 --> 00:15:16,950
+来处理录制任务
+
+
+301
+00:15:17,618 --> 00:15:20,153
+RPPreviewViewController
+
+
+302
+00:15:20,220 --> 00:15:21,955
+负责预览UI和分享列表
+
+
+303
+00:15:23,257 --> 00:15:25,025
+RPScreenRecorder
+
+
+304
+00:15:25,659 --> 00:15:27,227
+会与中继精灵沟通
+
+
+305
+00:15:27,394 --> 00:15:29,196
+这是应用的单独过程
+
+
+306
+00:15:30,197 --> 00:15:33,767
+中继精灵与较低
+水平的视频和音频服务沟通
+
+
+307
+00:15:34,134 --> 00:15:36,136
+这些服务相继与
+
+
+308
+00:15:36,803 --> 00:15:40,040
+硬件沟通来捕获
+应用和视频和音频
+
+
+309
+00:15:40,507 --> 00:15:42,743
+并会从设备的麦克风
+获取音频数据
+
+
+310
+00:15:44,511 --> 00:15:45,612
+在捕获过程中
+
+
+311
+00:15:45,679 --> 00:15:49,483
+中继精灵
+会实时对数据进行编码
+
+
+312
+00:15:49,550 --> 00:15:50,717
+并把它写入电影文件
+
+
+313
+00:15:51,618 --> 00:15:54,288
+它写入电影文件的
+位置只能通过
+
+
+314
+00:15:54,354 --> 00:15:56,323
+ReplayKits内部服务访问
+
+
+315
+00:15:57,157 --> 00:16:00,060
+用户实际上是怎样
+和影片互动呢？
+
+
+316
+00:16:01,628 --> 00:16:03,830
+当你告知
+RPScreenRecorder
+
+
+317
+00:16:03,897 --> 00:16:07,534
+停止录制时 它会返回
+RPPreviewViewController
+
+
+318
+00:16:07,968 --> 00:16:08,969
+你就可以
+
+
+319
+00:16:09,369 --> 00:16:10,237
+把它显示出来
+
+
+320
+00:16:10,504 --> 00:16:12,806
+RPPreviewViewController
+
+
+321
+00:16:12,873 --> 00:16:14,241
+显示预览并分享可以访问
+
+
+322
+00:16:14,675 --> 00:16:16,176
+影片的扩展
+
+
+323
+00:16:17,411 --> 00:16:19,246
+而用户可以与之互动
+
+
+324
+00:16:19,913 --> 00:16:21,715
+来预览并分享影片
+
+
+325
+00:16:22,950 --> 00:16:25,352
+正如大家所见
+这是相当复杂的系统
+
+
+326
+00:16:25,419 --> 00:16:26,420
+有很多变动的部分
+
+
+327
+00:16:26,987 --> 00:16:28,589
+不过幸好
+对于开发人员而言
+
+
+328
+00:16:29,122 --> 00:16:31,124
+只是归结为这两类
+
+
+329
+00:16:31,458 --> 00:16:34,194
+RPScreenRecorder和
+RPPreviewViewController
+
+
+330
+00:16:34,428 --> 00:16:35,262
+很简单
+
+
+331
+00:16:37,297 --> 00:16:39,800
+好
+我们先仔细来看这些类
+
+
+332
+00:16:41,635 --> 00:16:44,204
+首先是
+RPScreenRecorder
+
+
+333
+00:16:44,538 --> 00:16:46,473
+同样 它负责
+开始 停止
+
+
 334
-00:16:03,586 --> 00:16:07,326
-to stop recording it vends back
-an RPPreViewViewController.
+00:16:46,540 --> 00:16:47,708
+丢弃录制结果
 
 
 335
-00:16:07,976 --> 00:16:10,876
-And you can simply present it,
+00:16:48,342 --> 00:16:51,111
+它还可以用于检查录制能力
 
 
 336
-00:16:10,876 --> 00:16:13,226
-and RPPreviewViewController
-hosts the preview
+00:16:51,845 --> 00:16:52,679
+它还可以用于
 
 
 337
-00:16:13,226 --> 00:16:16,096
-and share extension which
-does have access to the movie
+00:16:52,746 --> 00:16:54,515
+启动麦克风进行评注
 
 
 338
-00:16:17,406 --> 00:16:18,986
-and your users can
-interact with that
+00:16:55,549 --> 00:16:57,050
+RPScreenRecorder
 
 
 339
-00:16:19,916 --> 00:16:21,726
-to preview and share the movie.
+00:16:57,417 --> 00:16:58,685
+有委托 你可以 
 
 
 340
-00:16:22,936 --> 00:16:25,416
-As you can see, it's a pretty
-complicated system with a lot
+00:16:58,752 --> 00:16:59,653
+设置委托使其符合
 
 
 341
-00:16:25,416 --> 00:16:27,636
-of moving parts but thankfully
+00:16:59,720 --> 00:17:02,122
+RPScreenRecorder
+委托协议
 
 
 342
-00:16:27,636 --> 00:16:31,056
-for developers it really just
-boils down to these two classes.
+00:17:03,290 --> 00:17:06,260
+委托可以用来
+检查可用性的改变
 
 
 343
-00:16:31,526 --> 00:16:33,686
-RPScreenRecorder and
-RPPreviewViewController.
+00:17:07,227 --> 00:17:09,463
+例如由于出现错误
 
 
 344
-00:16:34,516 --> 00:16:34,946
-Pretty simple.
+00:17:09,530 --> 00:17:10,696
+录制会停止工作的情况
 
 
 345
-00:16:34,946 --> 00:16:41,596
-All right, so let's take a
-deeper look into these classes.
+00:17:12,799 --> 00:17:15,335
+在第二类中
+RPPreviewViewController
 
 
 346
-00:16:41,676 --> 00:16:44,216
-So first up, is
-RPScreenRecorder.
+00:17:15,402 --> 00:17:17,404
+同样 它负责
+预览录制 编辑
 
 
 347
-00:16:44,536 --> 00:16:46,516
-Again, it's responsible
-for starting, stopping
+00:17:17,471 --> 00:17:19,705
+剪辑以及最后
+分享影片
 
 
 348
-00:16:46,516 --> 00:16:47,556
-and discarding the recording.
+00:17:20,807 --> 00:17:23,676
+RPPreviewViewController
+也有有委托
 
 
 349
-00:16:48,086 --> 00:16:51,016
-It can also be used to check
-for the ability to record
+00:17:24,511 --> 00:17:25,712
+你可以设置委托使其符合
 
 
 350
-00:16:51,016 --> 00:16:52,756
-and it can also be used
+00:17:25,779 --> 00:17:28,214
+RPPreviewViewControllerDelegate
+协议
 
 
 351
-00:16:52,756 --> 00:16:54,386
-to enable the microphone
-for commentary.
+00:17:29,216 --> 00:17:32,019
+当用户进行
+预览和分享时
 
 
 352
-00:16:55,596 --> 00:16:58,676
-RPScreenRecorder has a
-delegate that you can set
+00:17:32,486 --> 00:17:34,154
+这可以用来
+取消视图控制器
 
 
 353
-00:16:58,736 --> 00:16:59,656
-that should conform
+00:17:36,123 --> 00:17:36,957
+就是这样
 
 
 354
-00:16:59,656 --> 00:17:02,116
-to the RPScreenRecorder
-delegate protocol.
+00:17:37,024 --> 00:17:39,226
+其实只有两类和两个协议
 
 
 355
-00:17:03,276 --> 00:17:05,236
-And this delegate can be
-used to check for changes
+00:17:39,293 --> 00:17:40,727
+这是个精简版框架
 
 
 356
-00:17:05,236 --> 00:17:09,695
-in availability, and also how a
-case is if recording stops due
+00:17:41,028 --> 00:17:43,497
+大家会看到
+用起来非常简单
 
 
 357
-00:17:09,695 --> 00:17:10,685
-to an error, for example.
+00:17:45,132 --> 00:17:47,201
+我们来看API具体怎么用
 
 
 358
-00:17:11,246 --> 00:17:14,935
-For the second class,
-RPPreviewViewController,
+00:17:47,467 --> 00:17:50,170
+我认为最好是
+举例说明
 
 
 359
-00:17:15,415 --> 00:17:17,465
-again it's responsible for
-previewing the recording,
+00:17:51,405 --> 00:17:52,940
+我们的例子是
 
 
 360
-00:17:17,465 --> 00:17:19,715
-editing and trimming and
-fially sharing the movie.
+00:17:53,207 --> 00:17:56,510
+样本代码团队生成的
+DemoBots游戏
 
 
 361
-00:17:20,796 --> 00:17:24,336
-RPPreviewViewController also
-has a delegate that you can set
+00:17:56,577 --> 00:17:58,011
+大家可能在其他
+讲座中见过它
 
 
 362
-00:17:24,606 --> 00:17:25,415
-that should conform
+00:17:58,712 --> 00:17:59,980
+不过万一你还不了解
 
 
 363
-00:17:25,415 --> 00:17:27,596
-to the
-RPPreviewViewControllerDelegate
+00:18:00,047 --> 00:18:01,915
+我来介绍一下 DemoBots
+的前提是
 
 
 364
-00:17:27,596 --> 00:17:28,586
-protocol.
+00:18:01,982 --> 00:18:05,252
+你有这个任务
+自动程序所在的电路板
 
 
 365
-00:17:29,216 --> 00:17:31,906
-That can be used to simply
-dismiss the view controller
+00:18:06,453 --> 00:18:09,056
+而且任务自动程序负责
+保持电路板的运转
 
 
 366
-00:17:32,486 --> 00:17:34,146
-when the user is done
-previewing and sharing.
+00:18:09,189 --> 00:18:11,458
+不过可惜的是
+所有的自动程序都有问题
 
 
 367
-00:17:34,756 --> 00:17:37,006
-That's literally it.
+00:18:12,092 --> 00:18:13,627
+你需要进行调试
 
 
 368
-00:17:37,006 --> 00:17:39,226
-There are actually only two
-classes and two protocols.
+00:18:14,595 --> 00:18:17,831
+DemoBots的每个层次
+都要用2-3分钟
 
 
 369
-00:17:39,226 --> 00:17:40,646
-It's a really compact framework
+00:18:17,998 --> 00:18:19,366
+这是个小游戏环节
 
 
 370
-00:17:41,136 --> 00:17:44,026
-and as you will see adoption
-is incredibly simple.
+00:18:20,567 --> 00:18:22,803
+可以在
+developer.Apple.com
 
 
 371
-00:17:44,796 --> 00:17:47,186
-So let's take a look
-at this API in action
+00:18:22,870 --> 00:18:23,704
+下载资源
 
 
 372
-00:17:47,416 --> 00:17:50,136
-and I think the best way to
-do that is to use an example.
+00:18:23,770 --> 00:18:24,638
+你必定要去看一下
 
 
 373
-00:17:51,426 --> 00:17:53,956
-So the example we are
-going to use is a game
+00:18:24,972 --> 00:18:27,441
+其中显示了很多
+Apple的最新游戏技术
 
 
 374
-00:17:53,956 --> 00:17:56,646
-that the sample code team
-created called DemoBots.
+00:18:27,741 --> 00:18:28,842
+这是个相当不错的样本
 
 
 375
-00:17:56,646 --> 00:17:58,006
-You have probably seen
-this in other sessions.
+00:18:30,677 --> 00:18:34,314
+我们选择DemoBots
+来展示ReplayKit 
 
 
 376
-00:17:58,706 --> 00:18:01,616
-Just in case you haven't,
-the premise of DemoBots is
+00:18:34,381 --> 00:18:35,983
+原因之一是
+场景流非常不错
 
 
 377
-00:18:01,616 --> 00:18:05,136
-that you have this circuit
-board where these task bots live
+00:18:36,049 --> 00:18:37,417
+这在iOS游戏中很常见
 
 
 378
-00:18:05,136 --> 00:18:07,736
-and the task bots
-are responsible
+00:18:38,118 --> 00:18:40,354
+一旦启动DemoBots
+你就会被视作主菜单
 
 
 379
-00:18:07,736 --> 00:18:08,946
-for keeping the circuit
-board running
+00:18:41,121 --> 00:18:42,022
+从主菜单
 
 
 380
-00:18:09,246 --> 00:18:11,366
-but unfortunately all
-the bots are buggy.
+00:18:42,489 --> 00:18:43,423
+可以启动游戏
 
 
 381
-00:18:12,106 --> 00:18:13,416
-It's your job to debug them.
+00:18:43,490 --> 00:18:44,825
+它会把你转到游戏关卡
 
 
 382
-00:18:13,416 --> 00:18:17,826
-So each level in DemoBots
-takes two to three minutes,
+00:18:46,059 --> 00:18:49,263
+在游戏关卡
+如果你成功或失败
 
 
 383
-00:18:17,986 --> 00:18:21,726
-so it's short gameplay sessions
-and you can download the source
+00:18:49,329 --> 00:18:51,431
+就会被转到
+关卡结束场景
 
 
 384
-00:18:21,726 --> 00:18:23,166
-at developer.Apple.com.
+00:18:51,965 --> 00:18:53,233
+从关卡结束场景
 
 
 385
-00:18:23,286 --> 00:18:24,286
-You should definitely
-check it out.
+00:18:54,034 --> 00:18:56,036
+你可以重玩这一关
+或进入下一关
 
 
 386
-00:18:24,956 --> 00:18:27,446
-It showcases a lot of Apple's
-new gaming technologies.
+00:18:57,171 --> 00:18:59,540
+那么我们现在
+了解到场景流是什么样子
 
 
 387
-00:18:27,736 --> 00:18:28,656
-It's a really great sample.
+00:18:59,706 --> 00:19:01,508
+我们来看
+ReplayKit怎样匹配
 
 
 388
-00:18:30,086 --> 00:18:33,036
-One of the reasons
-why we chose DemoBots
+00:19:02,609 --> 00:19:05,412
+因为我们知道DemoBots 
+有着小游戏环节
 
 
 389
-00:18:33,176 --> 00:18:36,036
-to showcase ReplayKit is it has
-this great scene flow that's
+00:19:05,746 --> 00:19:08,015
+我们可以选择
+自动录制策略
 
 
 390
-00:18:36,036 --> 00:18:37,416
-common to iOS games.
+00:19:08,615 --> 00:19:09,950
+我的意思是说
 
 
 391
-00:18:38,146 --> 00:18:40,366
-Once you launch DemoBots
-you're treated to a main menu.
+00:19:10,017 --> 00:19:12,252
+我们会告知ReplayKit
 
 
 392
-00:18:41,126 --> 00:18:43,216
-From the main menu,
-you can start a game
+00:19:12,319 --> 00:19:15,088
+在游戏关卡开始时
+立刻开始录制
 
 
 393
-00:18:43,216 --> 00:18:44,826
-and it transitions
-you to the game level.
+00:19:16,089 --> 00:19:17,658
+我们还想告知
+在游戏关卡结束时
 
 
 394
-00:18:45,816 --> 00:18:49,256
-The game level, if you succeed
-at the game level or fail at it,
+00:19:17,991 --> 00:19:18,859
+要停止录制
 
 
 395
-00:18:49,326 --> 00:18:51,346
-will transition to
-a level end scene
+00:19:20,827 --> 00:19:23,630
+我们想让用户
+可以预览和分享录制结果
 
 
 396
-00:18:51,976 --> 00:18:54,826
-and from the level end scene,
-you can either replay the level
+00:19:24,298 --> 00:19:26,834
+但是我们不想在录制结束时 
+立即这么做 对么？
 
 
 397
-00:18:54,826 --> 00:18:56,056
-or go to the next level.
+00:19:27,534 --> 00:19:29,403
+我们想在所有
+动作都消失后再这么做
 
 
 398
-00:18:57,156 --> 00:18:59,426
-So now that we know what
-the scene flow looks like,
+00:19:29,469 --> 00:19:31,505
+最理想的位置是
+在关卡结束场景
 
 
 399
-00:18:59,846 --> 00:19:02,416
-let's see how ReplayKit fits in.
+00:19:33,574 --> 00:19:34,775
+非常简单
 
 
 400
-00:19:02,616 --> 00:19:06,006
-Since we know that DemoBots has
-short game play sessions we will
+00:19:35,042 --> 00:19:36,343
+我们来走一遍
 
 
 401
-00:19:06,096 --> 00:19:07,866
-opt for an automatic
-recording strategy.
+00:19:37,377 --> 00:19:38,545
+首先是主菜单
 
 
 402
-00:19:07,866 --> 00:19:12,116
-And what I mean by that is
-that we want to tell ReplayKit
+00:19:39,546 --> 00:19:41,615
+因为我们在用
+自动录制策略
 
 
 403
-00:19:12,116 --> 00:19:15,406
-to start recording immediately
-when the game level starts
+00:19:41,849 --> 00:19:44,484
+我们想让用户
+关闭这个功能
 
 
 404
-00:19:16,076 --> 00:19:17,526
-and we want to tell
-it to stop recording
+00:19:44,551 --> 00:19:46,720
+如果他们不想
+自动录制每个关卡
 
 
 405
-00:19:18,006 --> 00:19:18,826
-when the game level ends.
+00:19:47,354 --> 00:19:50,924
+为此
+我们执行了顶部的自动录制按钮
 
 
 406
-00:19:18,826 --> 00:19:22,616
-We also want to allow
-the user to preview
+00:19:50,991 --> 00:19:53,427
+用户可以用来
+打开关闭这个行为
 
 
 407
-00:19:22,616 --> 00:19:24,786
-and share the recording
-but we don't want
+00:19:55,195 --> 00:19:56,797
+比如 用户打开了
 
 
 408
-00:19:24,786 --> 00:19:26,846
-to do this immediately after
-we stop recording, right?
+00:19:57,631 --> 00:20:00,033
+这个功能
+接着按下新游戏按钮
 
 
 409
-00:19:27,536 --> 00:19:29,436
-We want to do this when all
-the action has died down.
+00:20:00,467 --> 00:20:03,737
+在此刻 我们转到
+游戏实际所在的游戏关卡
 
 
 410
-00:19:29,476 --> 00:19:31,516
-A perfect place to do that
-is the level end scene.
+00:20:04,137 --> 00:20:06,139
+我们想告知ReplayKit
+开始录制
 
 
 411
-00:19:31,516 --> 00:19:32,146
-All right.
+00:20:06,940 --> 00:20:08,842
+我们来看
+代码中是什么样
 
 
 412
-00:19:33,276 --> 00:19:34,786
-Pretty straightforward.
+00:20:11,078 --> 00:20:14,047
+首先 我们需要
+RPScreenRecorder的实例
 
 
 413
-00:19:35,026 --> 00:19:36,346
-So let's step through this.
+00:20:14,715 --> 00:20:17,918
+在每个应用中都有
+RPScreenRecorder的分享实例
 
 
 414
-00:19:37,386 --> 00:19:38,556
-So first up is the main menu.
+00:20:18,118 --> 00:20:21,021
+可以通过类功能访问
+分享的录制工具
 
 
 415
-00:19:39,556 --> 00:19:41,606
-Since we are using that
-automatic recording strategy,
+00:20:21,755 --> 00:20:22,589
+相当简单
 
 
 416
-00:19:41,856 --> 00:19:44,556
-we also want to allow the
-the user to disable this
+00:20:23,790 --> 00:20:24,892
+开始录制
 
 
 417
-00:19:44,556 --> 00:19:46,736
-if they don't want to
-auto record each level
+00:20:25,192 --> 00:20:27,427
+通过在共享的实例中
+启动麦克风
 
 
 418
-00:19:47,346 --> 00:19:49,866
-and to do this we have
-implemented an auto record
+00:20:28,228 --> 00:20:29,329
+我们调用开始录制功能
 
 
 419
-00:19:49,866 --> 00:19:51,966
-button on the top right
-there that the user can use
+00:20:29,830 --> 00:20:32,999
+这里你可以明确
+是否要开启或关闭语音评论
 
 
 420
-00:19:51,966 --> 00:19:53,436
-to toggle this behavior
-on and off.
+00:20:34,067 --> 00:20:36,470
+你还会提供处理程序块
 
 
 421
-00:19:53,476 --> 00:19:58,146
-So let's say a user toggles
-this on and then presses
+00:20:37,404 --> 00:20:40,874
+该程序块提供了
+可选的NSError
 
 
 422
-00:19:58,146 --> 00:19:59,956
-on the new game button.
+00:20:41,808 --> 00:20:43,177
+如果在这里收到错误信息
 
 
 423
-00:20:00,476 --> 00:20:02,506
-At this point, we
-transition to the game level
+00:20:43,243 --> 00:20:44,444
+则应做相应处理
 
 
 424
-00:20:02,506 --> 00:20:04,536
-where the actual gameplay
-happens and we want
+00:20:44,945 --> 00:20:46,580
+本例中
+我们会暂停游戏
 
 
 425
-00:20:04,536 --> 00:20:06,136
-to tell ReplayKit
-to start recording.
+00:20:46,780 --> 00:20:48,215
+提示用户录制也会失败
 
 
 426
-00:20:06,956 --> 00:20:08,846
-Let's take a look at what
-that looks like in code.
+00:20:50,350 --> 00:20:52,519
+一旦启动麦克风开始录制
 
 
 427
-00:20:09,356 --> 00:20:13,896
-First things first, we need an
-instance of RPScreenRecorder.
+00:20:53,287 --> 00:20:56,723
+用户就会看到
+用户同意弹窗
 
 
 428
-00:20:14,826 --> 00:20:17,846
-So each application has a shared
-instance of RPScreenRecorder
+00:20:57,524 --> 00:20:59,660
+此刻
+用户会有三个选项
 
 
 429
-00:20:18,106 --> 00:20:21,036
-which can be accessed with the
-class function; shared recorder.
+00:21:00,060 --> 00:21:01,028
+他可以选择录制屏幕
 
 
 430
-00:20:21,756 --> 00:20:22,516
-Pretty straight forward.
+00:21:01,094 --> 00:21:03,497
+麦克风启动语音评论
 
 
 431
-00:20:23,576 --> 00:20:26,346
-To start recording, we
-call a start recording
+00:21:04,765 --> 00:21:06,233
+他们可以只录制屏幕
 
 
 432
-00:20:26,346 --> 00:20:29,156
-with microphone enabled
-on that shared instance,
+00:21:07,067 --> 00:21:09,703
+或不允许进行录制
 
 
 433
-00:20:29,846 --> 00:20:32,826
-and here you can specify if you
-want voice commentary on or off.
+00:21:11,171 --> 00:21:14,274
+因此每次用户启动麦克风
+开始录制时
 
 
 434
-00:20:34,066 --> 00:20:36,716
-You also supply a handle block,
+00:21:14,341 --> 00:21:16,310
+同意弹窗会调用
 
 
 435
-00:20:37,286 --> 00:20:40,816
-and that handle block is
-supplied an optional NSError.
+00:21:16,810 --> 00:21:18,812
+但是一旦用户已经接受
 
 
 436
-00:20:41,796 --> 00:20:43,116
-If you receive an error here,
+00:21:19,213 --> 00:21:21,014
+它就不会在接下来的
 
 
 437
-00:20:43,116 --> 00:20:44,456
-you should handle
-it appropriately.
+00:21:21,381 --> 00:21:22,249
+8分钟内再次出现
 
 
 438
-00:20:44,946 --> 00:20:46,526
-In our case we're just
-going to pause the game
+00:21:24,685 --> 00:21:27,354
+假设用户现在希望
+启动语音评论功能
 
 
 439
-00:20:46,596 --> 00:20:48,226
-and alert the user and
-that the recording failed.
+00:21:27,421 --> 00:21:28,589
+并要录制屏幕
 
 
 440
-00:20:48,226 --> 00:20:52,446
-Once you start the recording
-with microphone enables,
+00:21:29,323 --> 00:21:31,225
+所以他们会按下录制
+屏幕和麦克风按钮
 
 
 441
-00:20:53,276 --> 00:20:56,726
-the user is presented with
-this user consent prompt.
+00:21:33,227 --> 00:21:36,029
+好的 此刻
+ReplayKit开始录制
 
 
 442
-00:20:57,516 --> 00:20:59,476
-And the user at this
-point has three options.
+00:21:36,363 --> 00:21:38,065
+游戏开始
+用户开始打游戏
 
 
 443
-00:21:00,066 --> 00:21:02,226
-It can choose to record the
-screen and the microphone
+00:21:38,565 --> 00:21:40,200
+提供语音评论
+等种种
 
 
 444
-00:21:02,226 --> 00:21:03,506
-to enable voice commentary.
+00:21:42,769 --> 00:21:46,273
+他们会对这一具体关卡
+调试所有的任务自动程序
 
 
 445
-00:21:04,356 --> 00:21:06,236
-They can just record
-the screen only.
+00:21:46,507 --> 00:21:48,709
+此刻 他们打通的关卡
+我们希望转到
 
 
 446
-00:21:07,076 --> 00:21:09,506
-Or they can don't
-allow recording at all.
+00:21:48,775 --> 00:21:49,710
+关卡结束场景
 
 
 447
-00:21:10,226 --> 00:21:14,676
-So this user consent prompt will
-be displayed everytime you call
+00:21:50,344 --> 00:21:51,578
+在这么做之前
+我们想要告知
 
 
 448
-00:21:14,706 --> 00:21:16,176
-a start recording with
-microphone enabled,
+00:21:51,912 --> 00:21:53,680
+ReplayKit
+停止用代码录制 
 
 
 449
-00:21:16,796 --> 00:21:20,956
-but once the user has accepted
-it, it will not be shown again
+00:21:54,882 --> 00:21:58,886
+我们只想
+在共享的录制工具实例中
 
 
 450
-00:21:21,386 --> 00:21:22,156
-for another eight minutes.
+00:21:59,253 --> 00:22:00,721
+用处理程序
+停止录制
 
 
 451
-00:21:22,666 --> 00:21:27,386
-Let's say the user now wants
-to enable voice commenary
+00:22:02,723 --> 00:22:05,425
+然后处理程序阻止了
+应用的可选NSError
 
 
 452
-00:21:27,386 --> 00:21:28,586
-and also record the screen.
+00:22:05,993 --> 00:22:07,394
+和可选预览视图控制器
 
 
 453
-00:21:28,586 --> 00:21:31,246
-So they press on the record
-screen and microphone button.
+00:22:08,428 --> 00:22:11,031
+同样
+适度处理错误
 
 
 454
-00:21:31,796 --> 00:21:35,916
-Okay, at this point
-ReplayKit starts recording,
+00:22:11,465 --> 00:22:13,901
+对于预览视图控制器
+你有两个选项
 
 
 455
-00:21:36,376 --> 00:21:38,076
-the game starts and
-the user is playing,
+00:22:14,434 --> 00:22:15,936
+可以立即显示
 
 
 456
-00:21:38,556 --> 00:21:40,186
-providing voice commentary
-and whatnot.
+00:22:17,404 --> 00:22:19,306
+或是放在一边
+以后使用
 
 
 457
-00:21:40,796 --> 00:21:46,276
-And they debug all the task
-bots at that particular level.
+00:22:19,740 --> 00:22:22,442
+我们要先放在一旁
+因为还不想现在就显示
 
 
 458
-00:21:46,496 --> 00:21:48,766
-At that point, they beat the
-level and we want to transition
+00:22:24,444 --> 00:22:26,280
+ReplayKit已经停止录制
 
 
 459
-00:21:48,766 --> 00:21:49,706
-to that level end scene.
+00:22:26,346 --> 00:22:27,714
+现在我们转到关卡结束场景
 
 
 460
-00:21:50,356 --> 00:21:53,586
-Before we do that, we want to
-tell ReplayKit to stop recording
+00:22:28,382 --> 00:22:30,751
+这里我们想让用户
+预览和分享他们的影片
 
 
 461
-00:21:54,866 --> 00:21:58,816
-to do that in code, we simply
-call stop recording with handler
+00:22:31,618 --> 00:22:34,755
+我们执行播放录制按钮
+就在右上方
 
 
 462
-00:21:59,236 --> 00:22:02,516
-on that shared recorder
-instance and then
+00:22:36,323 --> 00:22:37,624
+用户轻轻点击
 
 
 463
-00:22:02,716 --> 00:22:05,416
-that handle block its
-applied an optional NSError
+00:22:41,528 --> 00:22:43,096
+我们想要显示预览UI
 
 
 464
-00:22:05,986 --> 00:22:07,386
-and optional preview
-view controller.
+00:22:43,163 --> 00:22:46,667
+用代码来实现 我们只需调用
+UIViewController
 
 
 465
-00:22:08,416 --> 00:22:10,956
-Again, handle that
-error appropriately.
+00:22:46,733 --> 00:22:48,101
+在呈现动画视图控制器时
 
 
 466
-00:22:11,466 --> 00:22:12,776
-And for the preview
-view controller,
+00:22:49,102 --> 00:22:50,904
+我们临时接入了
+预览视图控制器
 
 
 467
-00:22:12,776 --> 00:22:13,616
-you have a couple of options.
+00:22:50,971 --> 00:22:53,173
+这是我们之前
+作为参考的
 
 
 468
-00:22:13,686 --> 00:22:18,206
-You can either present it
-immediately or you can hang
+00:22:55,475 --> 00:22:57,778
+这就带入了
+重放工具的预览UI
 
 
 469
-00:22:18,206 --> 00:22:19,266
-on to it for later use.
+00:22:57,845 --> 00:22:59,580
+用户可以整理
 
 
 470
-00:22:19,576 --> 00:22:21,416
-So we are going to hang on
-to it because we don't want
+00:23:01,281 --> 00:23:02,115
+剪辑
 
 
 471
-00:22:21,586 --> 00:22:24,696
-to display it just yet.
+00:23:03,217 --> 00:23:04,651
+并最后分享
+到他们的录制结果
 
 
 472
-00:22:24,696 --> 00:22:26,786
-ReplayKit has stopped
-recording and now we transition
+00:23:05,619 --> 00:23:07,287
+使用ReplayKit的分享UI
 
 
 473
-00:22:26,786 --> 00:22:27,726
-to that level end scene.
+00:23:08,121 --> 00:23:10,691
+这样分享UI
+和UI分享预览控制器一起执行
 
 
 474
-00:22:28,376 --> 00:22:30,016
-And here we want to
-allow user to preview
+00:23:11,058 --> 00:23:14,428
+这样你甚至可以在app中
+编写自己的自定义分享扩展
 
 
 475
-00:22:30,016 --> 00:22:30,806
-and share their movie.
+00:23:15,329 --> 00:23:16,163
+这非常酷
 
 
 476
-00:22:31,646 --> 00:22:33,786
-We have implemented the
-play recording button
+00:23:17,564 --> 00:23:21,301
+假设用户想要
+在Facebook分享视频
 
 
 477
-00:22:33,786 --> 00:22:34,746
-that you see in the top right.
+00:23:21,435 --> 00:23:22,736
+点击Facebook按钮
 
 
 478
-00:22:35,906 --> 00:22:37,466
-The user taps on that.
+00:23:23,237 --> 00:23:24,771
+Facebook就会浮现出来
 
 
 479
-00:22:38,406 --> 00:22:43,636
-We want to present
-that preview UI.
+00:23:25,906 --> 00:23:28,509
+视频已经附上
+他们可以编写自定义的信息
 
 
 480
-00:22:43,636 --> 00:22:46,526
-To do that in code, we
-simply call UIViewController,
+00:23:28,575 --> 00:23:31,478
+随后只需按下发表
+就会在信息来源显示
 
 
 481
-00:22:46,526 --> 00:22:49,606
-as present view controller
-animated and we patch
+00:23:31,979 --> 00:23:33,547
+用户使用起来非常简便
 
 
 482
-00:22:49,606 --> 00:22:50,906
-in that preview view controller
+00:23:34,848 --> 00:23:35,849
+而且充满乐趣
 
 
 483
-00:22:50,976 --> 00:22:53,176
-that we held the
-reference to previously.
+00:23:38,452 --> 00:23:42,356
+现在视频已经发布到
+用于的Facebook信息来源
 
 
 484
-00:22:53,726 --> 00:22:57,346
-That brings up replay
-kit's preview UI
+00:23:42,689 --> 00:23:44,391
+他们可以分享和预览
 
 
 485
-00:22:57,346 --> 00:23:01,766
-where the user can
-scrub through, trim,
+00:23:44,558 --> 00:23:47,127
+现在他们想取消
+并丢弃预览UI
 
 
 486
-00:23:03,226 --> 00:23:04,596
-and finally share
-their recordings.
+00:23:47,828 --> 00:23:49,530
+记住
+我们显示了预览UI
 
 
 487
-00:23:05,626 --> 00:23:07,036
-Using ReplayKit's share UI.
+00:23:50,764 --> 00:23:52,399
+我们也负责丢弃它
 
 
 488
-00:23:07,036 --> 00:23:10,676
-So the share UI is implemented
-with UI share preview controller
+00:23:53,500 --> 00:23:54,801
+要处理丢弃功能
 
 
 489
-00:23:10,676 --> 00:23:14,026
-so you can even write your
-own custom sharing extensions
+00:23:56,203 --> 00:23:58,438
+只要设置预览
+视图控制器委托
 
 
 490
-00:23:14,026 --> 00:23:15,986
-in your app, which
-is pretty cool.
+00:23:59,673 --> 00:24:00,941
+该委托需要符合
 
 
 491
-00:23:17,576 --> 00:23:21,316
-So say the user wants to now
-share this video to Facebook.
+00:24:01,008 --> 00:24:03,710
+RPPreviewViewController
+委托协议
 
 
 492
-00:23:21,426 --> 00:23:24,926
-They tap on the Facebook button
-and the Facebook modal shows up,
+00:24:04,411 --> 00:24:06,647
+并应执行
+预览控制器
 
 
 493
-00:23:25,366 --> 00:23:28,086
-the video is already attached,
-they can write a custom message
+00:24:06,847 --> 00:24:08,982
+最后要提供
+预览视图控制器
 
 
 494
-00:23:28,086 --> 00:23:31,426
-and then simply press post and
-it will show up on their feed.
+00:24:09,449 --> 00:24:12,085
+你可以在预览视图
+控制器上调用
 
 
 495
-00:23:31,976 --> 00:23:35,796
-It's that simple for the user
-to use and also really fun.
+00:24:12,819 --> 00:24:13,954
+丢弃动画视图控制器即可
 
 
 496
-00:23:35,846 --> 00:23:36,466
-All right.
+00:24:16,723 --> 00:24:18,091
+基本是这样
 
 
 497
-00:23:38,076 --> 00:23:42,356
-So now the video is posted
-to the users Facebook feed,
+00:24:18,325 --> 00:24:20,260
+只要两行代码
 
 
 498
-00:23:42,356 --> 00:23:44,966
-and they are done sharing
-and previewing, now they want
+00:24:20,661 --> 00:24:22,062
+我们在DemoBots中
 
 
 499
-00:23:44,966 --> 00:23:46,826
-to cancel and dismiss
-this preview UI.
+00:24:22,129 --> 00:24:23,764
+有ReplayKit的基本执行
 
 
 500
-00:23:47,096 --> 00:23:49,276
-So remember, we presented
-the preview UI.
+00:24:23,830 --> 00:24:24,865
+这非常简单
 
 
 501
-00:23:50,586 --> 00:23:52,566
-So we are also responsible
-for dismissing it.
+00:24:25,132 --> 00:24:28,802
+总结一下 我们介绍了
+录制工具的分享实例
 
 
 502
-00:23:53,516 --> 00:23:54,666
-So to handle dismissal,
+00:24:29,469 --> 00:24:31,138
+如何停止和开启录制工具
 
 
 503
-00:23:56,206 --> 00:23:58,286
-we simply set preview
-view controllers delegate
+00:24:32,172 --> 00:24:34,575
+如果显示和取消预览UI
 
 
 504
-00:23:58,286 --> 00:24:01,076
-and that delegate should conform
+00:24:36,310 --> 00:24:38,212
+现在我们介绍了基本内容
 
 
 505
-00:24:01,076 --> 00:24:03,846
-to RPPreviewViewController
-delegate protocol
+00:24:38,545 --> 00:24:40,414
+我们接下来进入更高级的内容
 
 
 506
-00:24:04,406 --> 00:24:06,636
-and should implement
-preview controller did finish
+00:24:40,981 --> 00:24:43,217
+微调ReplayKit执行
 
 
 507
-00:24:06,836 --> 00:24:08,986
-with get supplied, a
-preview view controller
+00:24:45,385 --> 00:24:47,321
+首先要证实可用性
 
 
 508
-00:24:09,446 --> 00:24:12,096
-and you simply call dismiss
-view controller animated
+00:24:48,488 --> 00:24:51,558
+出于若干原因 ReplayKit 
+可以是可用
 
 
 509
-00:24:12,806 --> 00:24:13,966
-on that preview view controller.
+00:24:51,625 --> 00:24:52,459
+或是不可用
 
 
 510
-00:24:14,546 --> 00:24:18,506
-And that's basically it.
+00:24:53,760 --> 00:24:56,797
+ReplayKit使用的
+捕捉视频内容的技术
 
 
 511
-00:24:18,506 --> 00:24:22,066
-Just a couple lines of code,
-we have a basic implementation
+00:24:57,164 --> 00:24:58,599
+和AirPlay与TV相同
 
 
 512
-00:24:22,066 --> 00:24:24,656
-of ReplayKit in DemoBots,
-it's really that simple.
+00:24:59,132 --> 00:25:01,235
+不过
+它无法与这两种服务中的
 
 
 513
-00:24:25,126 --> 00:24:28,006
-So just to recap, we went over
-how to get a shared instance
+00:25:01,568 --> 00:25:02,936
+任何一种同时使用
 
 
 514
-00:24:28,006 --> 00:24:32,396
-of the recorder, how to stop
-and start the recorder and how
+00:25:04,538 --> 00:25:07,274
+正如我提到的
+A7和A8设备
 
 
 515
-00:24:32,426 --> 00:24:34,106
-to present and dismiss
-that preview UI.
+00:25:07,341 --> 00:25:09,142
+支持ReplayKit
 
 
 516
-00:24:34,106 --> 00:24:34,376
-All right.
+00:25:10,143 --> 00:25:12,813
+在更早的设备上
+ReplayKit不可用
 
 
 517
-00:24:34,376 --> 00:24:38,026
-Now that we have
-the basics down,
+00:25:14,314 --> 00:25:15,749
+要想检查可用性
 
 
 518
-00:24:38,586 --> 00:24:41,896
-let's go into some more advanced
-topics to really fine tune
+00:25:16,116 --> 00:25:20,220
+只需...查询可用属性和
+RPScreenRecorder即可
 
 
 519
-00:24:41,896 --> 00:24:43,156
-that ReplayKit implementation.
+00:25:21,855 --> 00:25:23,590
+如果不可用该怎么办？
 
 
 520
-00:24:44,456 --> 00:24:47,186
-So first up is verifying
-availability.
+00:25:23,891 --> 00:25:27,194
+只需把游戏或app中的
+录制UI丢弃就好
 
 
 521
-00:24:48,486 --> 00:24:51,576
-So ReplayKit may become
-available or may be unavailable
+00:25:29,062 --> 00:25:31,098
+因为可用性可以实时改变
 
 
 522
-00:24:51,616 --> 00:24:52,386
-for a number of reasons.
+00:25:32,499 --> 00:25:35,369
+你可以执行
+RPScreenRecorder
 
 
 523
-00:24:53,746 --> 00:24:56,506
-ReplayKit uses the same
-technologies as AirPlay and TV
+00:25:35,435 --> 00:25:37,204
+委托屏幕录制工具
+来改变可用性
 
 
 524
-00:24:56,506 --> 00:24:58,396
-out to capture its
-video content.
+00:25:37,437 --> 00:25:38,939
+来注意可用性方面的改变
 
 
 525
-00:24:59,136 --> 00:25:01,996
-So unfortunately, it cannot be
-used simultaneously with either
+00:25:41,108 --> 00:25:43,243
+给个小例子 
+还记得我们在DemoBots中的
 
 
 526
-00:25:01,996 --> 00:25:02,926
-of those two services.
+00:25:43,310 --> 00:25:44,478
+自动录制开关吗？
 
 
 527
-00:25:03,466 --> 00:25:06,876
-And as I mentioned before,
-ReplayKit is supported
+00:25:44,912 --> 00:25:46,813
+如果ReplayKits
+在设备上不可用 
 
 
 528
-00:25:06,876 --> 00:25:09,136
-on A7 and A8 based devices.
+00:25:46,880 --> 00:25:48,248
+我们不想显示那个开关 对吗？
 
 
 529
-00:25:10,146 --> 00:25:12,816
-Any older devices, ReplayKit
-will not be available.
+00:25:49,583 --> 00:25:53,020
+在RPScreenRecorder 
+询问可用属性
 
 
 530
-00:25:13,456 --> 00:25:15,596
-To check for availability,
+00:25:53,387 --> 00:25:56,290
+用它来驱动录制
+开关按钮的可见性
 
 
 531
-00:25:16,106 --> 00:25:20,146
-you simply query the available
-property and RPScreenRecorder.
+00:25:57,124 --> 00:25:57,958
+很简单
 
 
 532
-00:25:20,796 --> 00:25:23,596
-And what do you do if
-it's not available?
+00:25:59,426 --> 00:26:01,195
+接下来是丢弃录制结果
 
 
 533
-00:25:23,896 --> 00:25:26,146
-Well, you simply
-discard any recording UI
+00:26:02,529 --> 00:26:05,699
+因此ReplayKit 
+在新录制开始时 
 
 
 534
-00:25:26,276 --> 00:25:27,966
-in your game or app.
+00:26:05,766 --> 00:26:07,067
+会自动丢弃之前的录制
 
 
 535
-00:25:28,756 --> 00:25:30,556
-Since availability can
-change in realtime,
+00:26:08,068 --> 00:26:11,805
+当前
+每个应用每次只有一个录制
 
 
 536
-00:25:32,496 --> 00:25:35,586
-you can also implement
-RPScreenRecorder delegate screen
+00:26:13,040 --> 00:26:14,374
+但是在有些情况下
 
 
 537
-00:25:35,586 --> 00:25:37,716
-recorder to change the
-availability to listen
+00:26:14,441 --> 00:26:17,678
+用户不会再访问预览UI
 
 
 538
-00:25:37,716 --> 00:25:38,926
-for changes in availability.
+00:26:18,846 --> 00:26:20,314
+你可能想尽早丢弃它
 
 
 539
-00:25:39,456 --> 00:25:43,326
-Quick example, remember
-the auto record toggle
+00:26:20,781 --> 00:26:22,683
+在我们的DemoBots实例中
 
 
 540
-00:25:43,326 --> 00:25:44,676
-that we had in DemoBots?
+00:26:23,650 --> 00:26:26,720
+如果用户从关卡结束场景转换
 
 
 541
-00:25:44,926 --> 00:25:47,236
-If ReplayKits not even available
-on the device, we don't want
+00:26:27,020 --> 00:26:29,223
+要知道他们将无法再
+预览视频
 
 
 542
-00:25:47,236 --> 00:25:48,236
-to show that toggle, right?
+00:26:29,323 --> 00:26:30,490
+因此你应该把它丢弃掉
 
 
 543
-00:25:49,586 --> 00:25:53,746
-We query that available property
-in RPScreenRecorder and use
+00:26:31,458 --> 00:26:32,759
+用代码来实现
 
 
 544
-00:25:53,746 --> 00:25:56,166
-that to drive the visibility
-of the recording toggle button.
+00:26:33,160 --> 00:26:34,228
+在具体本例中
 
 
 545
-00:25:57,216 --> 00:26:01,126
-Simple. All right, next up
-is discarding the recording.
+00:26:34,561 --> 00:26:36,363
+我将转至
+下一个关卡的场景
 
 
 546
-00:26:02,536 --> 00:26:05,766
-So ReplayKit automatically
-discards the previous recording
+00:26:36,530 --> 00:26:37,798
+下一种方法
 
 
 547
-00:26:05,766 --> 00:26:06,886
-when a new recording starts.
+00:26:38,332 --> 00:26:40,734
+我们将用
+处理程序调用丢弃录制
 
 
 548
-00:26:08,076 --> 00:26:10,056
-So currently there can
-only be one recording
+00:26:42,236 --> 00:26:43,303
+一旦返回
 
 
 549
-00:26:10,126 --> 00:26:11,766
-at a time per application.
+00:26:43,704 --> 00:26:44,905
+我们就会
+转到下一个关卡
 
 
 550
-00:26:13,026 --> 00:26:14,696
-But there are cases
-where you know
+00:26:47,875 --> 00:26:49,409
+接下来是录制指示器
 
 
 551
-00:26:14,696 --> 00:26:17,366
-that the user no longer will
-have access to the preview UI.
+00:26:50,811 --> 00:26:52,446
+当ReplayKit进行录制时
 
 
 552
-00:26:18,656 --> 00:26:20,306
-So you probably want
-to discard it earlier.
+00:26:53,213 --> 00:26:55,849
+你可能会告知用户
+录制正在进行中
 
 
 553
-00:26:20,816 --> 00:26:25,526
-So in our example with DemoBots,
-if the user transitions
+00:26:56,517 --> 00:26:58,952
+以及语音评论
+是否打开或关闭
 
 
 554
-00:26:25,526 --> 00:26:27,616
-from the level end scene,
-you know they're not going
+00:27:00,487 --> 00:27:03,590
+为实现这点 
+你可以直接询问录制工具
 
 
 555
-00:26:27,616 --> 00:26:29,096
-to be able to preview
-the video anymore
+00:27:03,657 --> 00:27:06,293
+麦克风启动
+RPScreenRecorder的属性
 
 
 556
-00:26:29,326 --> 00:26:30,346
-so you should probably
-discard it.
+00:27:07,227 --> 00:27:09,863
+并使用这些值
+打开录制指示器
 
 
 557
-00:26:31,446 --> 00:26:34,236
-To do that in code, in
-our particular example,
+00:27:10,063 --> 00:27:11,231
+的可见性
 
 
 558
-00:26:34,576 --> 00:26:36,356
-and I will transition to
-the next level scene --
+00:27:12,266 --> 00:27:13,333
+同样是非常简单
 
 
 559
-00:26:36,546 --> 00:26:40,616
-next method, we simply call
-discard recording with handler
+00:27:15,569 --> 00:27:17,271
+接下来是排除UI
 
 
 560
-00:26:41,246 --> 00:26:44,856
-and once that returns, we
-transition to the next level.
+00:27:19,006 --> 00:27:21,008
+游戏中有些元素
 
 
 561
-00:26:45,386 --> 00:26:49,416
-Next up is recording indicators.
+00:27:21,508 --> 00:27:22,876
+对用户而言非常有用
 
 
 562
-00:26:50,896 --> 00:26:53,676
-So when ReplayKit is
-recording, you probably want
+00:27:24,077 --> 00:27:26,013
+<br/> 
+但是对观众来说很是无趣
 
 
 563
-00:26:53,676 --> 00:26:57,146
-to notify the user that
-recording is happening and also
+00:27:26,446 --> 00:27:28,615
+我们来介绍其中的一项
+录制指示器
 
 
 564
-00:26:57,346 --> 00:26:58,966
-if voice commentary
-is on or off.
+00:27:29,049 --> 00:27:30,350
+用户了解它非常重要
 
 
 565
-00:27:00,486 --> 00:27:03,576
-So to implement this, you can
-simply query the recording
+00:27:30,651 --> 00:27:32,386
+但是对观众来说就相当无用
 
 
 566
-00:27:03,576 --> 00:27:06,206
-and the microphone enable
-properties in RPScreenRecorder
+00:27:32,653 --> 00:27:35,088
+他们了解录制功能
+是打开状态
 
 
 567
-00:27:07,216 --> 00:27:09,836
-and use the values of those
-to toggle the visibility
+00:27:35,155 --> 00:27:37,224
+语音评论也已打开
+因为他们在观看视频 对吧？
 
 
 568
-00:27:10,066 --> 00:27:11,216
-of your recording indicators.
+00:27:39,526 --> 00:27:40,827
+所以你可能想
+排除这些功能
 
 
 569
-00:27:12,256 --> 00:27:13,246
-Again, pretty straightforward.
+00:27:41,361 --> 00:27:43,430
+还有两个例子是
+关于虚拟控制
 
 
 570
-00:27:13,866 --> 00:27:16,936
-So next up is excluding UI.
+00:27:43,697 --> 00:27:45,199
+暂停和菜单按钮
 
 
 571
-00:27:17,926 --> 00:27:22,326
-So there's certain elements in
-a game that are really useful
+00:27:45,799 --> 00:27:47,367
+这可能会扰乱录制过程
 
 
 572
-00:27:22,326 --> 00:27:25,056
-for users, but pretty
-uninteresting
+00:27:47,634 --> 00:27:49,169
+且对观众而言并不必要
 
 
 573
-00:27:25,056 --> 00:27:25,926
-to spectators, right?
+00:27:50,771 --> 00:27:52,673
+怎样从ReplayKit排除UI？
 
 
 574
-00:27:26,456 --> 00:27:27,676
-We just talked about
-one of those.
+00:27:55,075 --> 00:27:58,178
+ReplayKit只会记录
+应用的主UI窗口
 
 
 575
-00:27:27,676 --> 00:27:28,636
-Recording indicators.
+00:27:58,812 --> 00:28:00,681
+如果你想要排除任何UI
 
 
 576
-00:27:28,636 --> 00:27:31,576
-They are great for the user
-to know, but for a spectator,
+00:28:01,148 --> 00:28:02,015
+你只需...
 
 
 577
-00:27:31,666 --> 00:27:32,376
-they are pretty useless.
+00:28:02,816 --> 00:28:04,484
+创建UI窗口的新实例
 
 
 578
-00:27:32,666 --> 00:27:35,876
-They know that the recording
-is on and voice commentary is
+00:28:05,519 --> 00:28:07,654
+并把想要隐藏的任何元素
 
 
 579
-00:27:35,876 --> 00:27:37,216
-on because they are
-watching the video, right?
+00:28:08,121 --> 00:28:08,989
+放入新实例中即可
 
 
 580
-00:27:37,336 --> 00:27:40,666
-So you probably want
-to exclude those.
+00:28:11,058 --> 00:28:11,992
+这就可以排除UI
 
 
 581
-00:27:41,126 --> 00:27:43,296
-A couple more examples
-of virtual controls
+00:28:14,494 --> 00:28:16,663
+接下来是要选择
+何时开始录制
 
 
 582
-00:27:43,706 --> 00:27:44,946
-and pause and menu buttons.
+00:28:18,165 --> 00:28:19,933
+如果你还记得在DemoBots中
 
 
 583
-00:27:45,786 --> 00:27:47,356
-These may clutter
-up the recordings
+00:28:20,300 --> 00:28:21,668
+我们知道DemoBots
 
 
 584
-00:27:47,636 --> 00:27:49,156
-and not be necessary
-for spectators.
+00:28:22,069 --> 00:28:23,504
+有小游戏环节
 
 
 585
-00:27:49,496 --> 00:27:52,606
-How do you exclude UI
-from the ReplayKit?
+00:28:23,570 --> 00:28:24,838
+只有两三分钟长度
 
 
 586
-00:27:53,786 --> 00:27:58,186
-So ReplayKit only records your
-applications main UI window.
+00:28:26,073 --> 00:28:27,908
+我们会采取
+自动录制策略
 
 
 587
-00:27:58,746 --> 00:28:03,566
-If you want to exclude any UI,
-you simply create a new instance
+00:28:27,975 --> 00:28:30,077
+这样可以自动
+录制每个游戏关卡
 
 
 588
-00:28:03,566 --> 00:28:07,586
-of UI window and place any
-elements you want hidden
+00:28:31,678 --> 00:28:33,313
+但是部分游戏
+是不一样的 对吧？
 
 
 589
-00:28:08,116 --> 00:28:09,506
-in that new instance.
+00:28:34,581 --> 00:28:35,849
+例如 在RPG
 
 
 590
-00:28:10,756 --> 00:28:11,866
-That's excluding UI.
+00:28:36,250 --> 00:28:37,951
+游戏可玩性环节就会较长
 
 
 591
-00:28:12,586 --> 00:28:16,656
-Next up is choosing
-when to record.
+00:28:38,318 --> 00:28:40,254
+可能会有更长
+的有趣事件
 
 
 592
-00:28:17,326 --> 00:28:20,036
-So if you remember in DemoBots,
+00:28:40,621 --> 00:28:43,290
+但是没必要
+把整个环节都录制下来
 
 
 593
-00:28:20,316 --> 00:28:24,086
-we know that DemoBots has short
-game play sessions lasting only
+00:28:43,624 --> 00:28:45,993
+相反 应该让用户
+可按照自己意愿
 
 
 594
-00:28:24,086 --> 00:28:24,836
-two or three minutes.
+00:28:46,059 --> 00:28:47,261
+开始或停止录制
 
 
 595
-00:28:26,066 --> 00:28:27,956
-So we went for an
-automatic recording strategy
+00:28:48,595 --> 00:28:51,665
+为此 你只需搭建
+自己的录制控制功能
 
 
 596
-00:28:27,956 --> 00:28:30,066
-where we automatically
-record each game level.
+00:28:52,432 --> 00:28:53,967
+让用户可以实现这一点
 
 
 597
-00:28:30,666 --> 00:28:33,286
-But some games are
-different, right?
+00:28:56,036 --> 00:28:57,504
+同样每个游戏情况都不同
 
 
 598
-00:28:34,586 --> 00:28:37,816
-For example, in RPG, there's
-longer gameplay sessions,
+00:28:58,138 --> 00:29:01,441
+所以需要选择适合自己的
+具体游戏类型的情况
 
 
 599
-00:28:38,326 --> 00:28:40,256
-it might have more spread
-out interesting events,
+00:29:04,211 --> 00:29:07,147
+好的
+实际上最后也就是微调环节
 
 
 600
-00:28:40,636 --> 00:28:43,296
-but it really doesn't make sense
-to record the entire session.
+00:29:08,582 --> 00:29:10,551
+我们接下来讨论了如何
+证实可用性
 
 
 601
-00:28:43,626 --> 00:28:46,036
-Instead you should give the
-user the ability to start
+00:29:11,051 --> 00:29:12,386
+如何丢弃录制结果
 
 
 602
-00:28:46,036 --> 00:28:47,256
-and stop recording at will.
+00:29:12,853 --> 00:29:14,054
+如何显示指示器
 
 
 603
-00:28:48,596 --> 00:28:51,646
-To do this, you simply build
-your own recording controls
+00:29:14,621 --> 00:29:16,190
+如何排除任何UI
 
 
 604
-00:28:52,416 --> 00:28:55,836
-that allow users to do that.
+00:29:16,256 --> 00:29:18,759
+以及为游戏选择
+最佳的录制策略
 
 
 605
-00:28:56,046 --> 00:28:57,426
-Again, all games are different.
+00:29:22,162 --> 00:29:23,597
+现在我们来给大家
+看一段演示
 
 
 606
-00:28:58,136 --> 00:28:59,816
-So you should just
-choose what is appropriate
+00:29:24,531 --> 00:29:25,732
+在两周前
 
 
 607
-00:28:59,816 --> 00:29:02,086
-for your particular game type.
+00:29:26,200 --> 00:29:29,069
+我们邀请时空工作室来到
+库柏蒂诺
 
 
 608
-00:29:03,916 --> 00:29:06,256
-All right, so that actually
-concludes the fine tuning
+00:29:29,436 --> 00:29:30,637
+检查ReplayKit 
 
 
 609
-00:29:06,256 --> 00:29:07,016
-session as well.
+00:29:30,938 --> 00:29:32,039
+并试着将它用于...
 
 
 610
-00:29:07,016 --> 00:29:10,486
-So we went over how to
-verify availability,
+00:29:32,472 --> 00:29:34,208
+新游戏《冠军的召唤》
 
 
 611
-00:29:11,036 --> 00:29:13,956
-how to discard the recording,
-how to show the indicator,
+00:29:34,808 --> 00:29:36,577
+我想把讲台交给
+时空工作室的...
 
 
 612
-00:29:14,606 --> 00:29:17,776
-how to exclude any UI, and also
-choosing the best recording
+00:29:36,777 --> 00:29:37,711
+辛科·巴尼斯
 
 
 613
-00:29:17,776 --> 00:29:18,776
-strategy for your game.
+00:29:38,712 --> 00:29:41,081
+让他和大家分享自己的经验
 
 
 614
-00:29:19,396 --> 00:29:23,376
-Now, we would like
-to show you a demo.
+00:29:41,615 --> 00:29:42,449
+欢迎辛科
 
 
 615
-00:29:24,586 --> 00:29:28,116
-So a couple of weeks ago,
-we invited Spacetime Studios
+00:29:45,819 --> 00:29:46,653
+谢谢 埃德温
 
 
 616
-00:29:28,116 --> 00:29:31,906
-over to Cupertino to check out
-ReplayKit and try to adopt it
+00:29:47,387 --> 00:29:48,388
+我是辛科·巴尼斯
 
 
 617
-00:29:32,436 --> 00:29:34,196
-into the upcoming game,
-Call of Champions.
+00:29:48,722 --> 00:29:53,293
+2005年的时候 我和伙伴们
+成立了时空工作室
 
 
 618
-00:29:34,876 --> 00:29:37,436
-So I'd like to welcome
-up on stage Cinco Barnes
+00:29:53,827 --> 00:29:58,932
+我们是想制作硬核PC游戏
 
 
 619
-00:29:37,436 --> 00:29:41,026
-from Spacetime Studios to
-share his experiences with us.
+00:29:59,166 --> 00:30:05,973
+但是在2009年 因iOS和
+首台iPad这些都不再考虑
 
 
 620
-00:29:41,066 --> 00:29:41,946
-Please welcome Cinco.
+00:30:06,039 --> 00:30:07,774
+我们推出了
+《口袋传奇》游戏
 
 
 621
-00:29:42,516 --> 00:29:45,316
-[Applause]
+00:30:08,141 --> 00:30:10,244
+之后 我们就一直专注于
+iOS游戏平台
 
 
 622
-00:29:45,816 --> 00:29:46,556
->> CINCO BARNES: Thanks, Edwin.
+00:30:10,310 --> 00:30:12,179
+这一切都非常神奇
 
 
 623
-00:29:47,386 --> 00:29:48,396
-I'm Cinco Barnes.
+00:30:12,646 --> 00:30:15,983
+今天 我来和大家
+谈谈《冠军的召唤》
 
 
 624
-00:29:48,716 --> 00:29:53,296
-I founded Spacetime Studios
-with my partners back in 2005.
+00:30:16,049 --> 00:30:18,018
+以此作为ReplayKit的实例
 
 
 625
-00:29:53,816 --> 00:29:59,976
-Our purpose was to make
-hard core PC games but all
+00:30:18,085 --> 00:30:20,888
+我的确想和大家谈谈
+它怎样影响了游戏本身
 
 
 626
-00:29:59,976 --> 00:30:04,006
-of that went out of the
-window in 2009 with iOS
+00:30:21,154 --> 00:30:24,892
+但是更主要的是
+它如何搭建社区
 
 
 627
-00:30:04,006 --> 00:30:07,776
-and the first iPad and our
-release of Pocket Legends.
+00:30:24,958 --> 00:30:27,261
+特别是对我们来说
+游戏人员的社区 
 
 
 628
-00:30:08,126 --> 00:30:10,266
-Since then we have been
-dedicated to the iOS platform
+00:30:27,828 --> 00:30:29,496
+活跃的游戏人员
 
 
 629
-00:30:10,266 --> 00:30:12,166
-for gaming and it's
-been fantastic.
+00:30:29,897 --> 00:30:32,999
+我想给大家
+介绍一点我们的历史
 
 
 630
-00:30:12,646 --> 00:30:15,836
-Today I get to talk to you
-about Call of Champions
+00:30:33,300 --> 00:30:37,604
+时空工作室
+一直在致力于硬核游戏
 
 
 631
-00:30:15,836 --> 00:30:18,006
-as a case for ReplayKit.
+00:30:37,671 --> 00:30:43,277
+提取精华 并融入
+手机游戏风格中
 
 
 632
-00:30:18,006 --> 00:30:18,996
-I definitely want to talk to you
+00:30:43,677 --> 00:30:45,712
+通过这种方法
+我们在试图
 
 
 633
-00:30:18,996 --> 00:30:20,876
-about how it affects
-the game itself
+00:30:45,779 --> 00:30:49,383
+提供可以立刻访问的内容
+和具体战略丰富性的内容方面
 
 
 634
-00:30:21,166 --> 00:30:25,566
-but the big message is how this
-builds community, specifically
+00:30:49,683 --> 00:30:51,885
+找到了自己的强项
 
 
 635
-00:30:25,566 --> 00:30:28,646
-for us as a community
-of gamers, active gamers
+00:30:52,486 --> 00:30:55,822
+我们的下一个产品是
+《冠军的召唤》
 
 
 636
-00:30:28,646 --> 00:30:29,486
-into something like this.
+00:30:55,889 --> 00:30:59,359
+《冠军的召唤》是个
+手机打斗竞技场
 
 
 637
-00:30:29,896 --> 00:30:31,356
-I want to give you a
-little bit of history
+00:30:59,626 --> 00:31:01,929
+是个三对三的团队游戏
 
 
 638
-00:30:31,356 --> 00:30:33,016
-on who we are in some context.
+00:31:02,196 --> 00:31:05,332
+赛道机制是受到
+橄榄球的启发
 
 
 639
-00:30:33,316 --> 00:30:37,626
-Spacetime Studios has always
-endeavored to take core games,
+00:31:05,566 --> 00:31:07,868
+它是按照射手风格
+在中间开启
 
 
 640
-00:30:37,626 --> 00:30:43,286
-distill them and adapt them into
-our mobile gaming lifestyle.
+00:31:08,268 --> 00:31:12,206
+主要内容是
+挤入一个5分钟的
 
 
 641
-00:30:43,686 --> 00:30:46,366
-It's the way that we
-found our voice in trying
+00:31:12,272 --> 00:31:14,308
+混合武术打斗环节
 
 
 642
-00:30:46,366 --> 00:30:49,376
-to provide things that are
-both immediately accessible
+00:31:14,775 --> 00:31:18,145
+我们非常努力
+在这5分钟内
 
 
 643
-00:30:49,686 --> 00:30:51,886
-and things that are
-strategically rich.
+00:31:18,679 --> 00:31:22,115
+加入所有不同的选择
+和不同的策略
 
 
 644
-00:30:52,356 --> 00:30:55,686
-And our next product here
-is Call of Champions.
+00:31:22,182 --> 00:31:25,085
+我们知道观众
+定会喜欢这些
 
 
 645
-00:30:56,196 --> 00:30:59,296
-Call of Champions is
-a mobile battle arena.
+00:31:26,820 --> 00:31:30,924
+但是我们也知道
+受到此类游戏吸引的观众
 
 
 646
-00:30:59,636 --> 00:31:01,926
-It's a three-on-three team game,
+00:31:30,991 --> 00:31:33,393
+并不希望自己亲自来玩
 
 
 647
-00:31:02,206 --> 00:31:05,326
-its got a neat Rugby-inspired
-lane mechanic,
+00:31:33,961 --> 00:31:36,096
+他们喜欢观看游戏
 
 
 648
-00:31:05,576 --> 00:31:07,866
-it's got shooter style
-power ups in the middle.
+00:31:36,163 --> 00:31:37,798
+他们喜欢观看游戏现场
 
 
 649
-00:31:08,266 --> 00:31:12,276
-The main thing is it's squeezed
-into a five-minute segment
+00:31:37,865 --> 00:31:40,501
+我们所做的还包括
 
 
 650
-00:31:12,276 --> 00:31:15,086
-like a mixed martial arts fight.
+00:31:40,567 --> 00:31:42,069
+提供观看模式 
 
 
 651
-00:31:15,086 --> 00:31:19,166
-We worked really hard to load
-those five minutes with all
+00:31:42,135 --> 00:31:43,971
+以便在世界各地的
+任何角落都可以观看
 
 
 652
-00:31:19,166 --> 00:31:22,166
-of the different choices and
-all the different strategies
+00:31:44,271 --> 00:31:45,506
+游戏现场
 
 
 653
-00:31:22,166 --> 00:31:25,026
-that we know that our
-audience loves to play.
+00:31:45,806 --> 00:31:48,709
+通过游戏本身
+可以满足我们这方面的需求
 
 
 654
-00:31:25,026 --> 00:31:29,626
-But we also know that the
-audience that's attracted
+00:31:49,042 --> 00:31:53,347
+但是我们也知道
+人们喜欢录制并
 
 
 655
-00:31:29,626 --> 00:31:33,386
-to these kinds of games
-doesn't just enjoy playing them.
+00:31:53,413 --> 00:31:56,416
+分享游戏内容
+作为游戏社区
 
 
 656
-00:31:33,956 --> 00:31:36,176
-They love to watch them.
+00:31:56,617 --> 00:32:00,087
+创建的动力 
+这也是ReplayKit的用武之地
 
 
 657
-00:31:36,176 --> 00:31:37,946
-They love to watch live games.
+00:32:01,121 --> 00:32:04,291
+这里是我和大家
+分享的重播实例
 
 
 658
-00:31:37,946 --> 00:31:41,756
-One of the things that we did
-also was include a spectator
+00:32:04,892 --> 00:32:06,560
+作为此类游戏的设计方
 
 
 659
-00:31:41,756 --> 00:31:43,246
-mode for watching just that,
+00:32:06,627 --> 00:32:09,630
+我有着顶级的编程人员
 
 
 660
-00:31:43,246 --> 00:31:45,516
-live games anywhere
-around the world.
+00:32:09,696 --> 00:32:12,099
+能力远比我
+和合伙人高出许多
 
 
 661
-00:31:45,816 --> 00:31:48,696
-And on its own this
-satisfies our side of it.
+00:32:12,399 --> 00:32:15,435
+我很想来展示
+观看的相关功能
 
 
 662
-00:31:49,046 --> 00:31:53,386
-But then we also know how
-people would love to record
+00:32:15,502 --> 00:32:17,938
+在这个上下文中
+重播可以
 
 
 663
-00:31:53,386 --> 00:31:56,476
-and share this as part
-of the energy of creating
+00:32:18,005 --> 00:32:19,439
+让我实现这一点
 
 
 664
-00:31:56,616 --> 00:32:00,076
-that community of gamers and
-that's where ReplayKit comes in.
+00:32:19,840 --> 00:32:22,309
+这里有相当多的
+很酷的内容
 
 
 665
-00:32:01,126 --> 00:32:04,276
-Here's an example of a replay
-that I'm sharing with you.
+00:32:22,709 --> 00:32:26,213
+但是我添加的评论
+和在共享环境中的介绍
 
 
 666
-00:32:04,906 --> 00:32:06,566
-As a designer of
-a game like this,
+00:32:26,280 --> 00:32:30,117
+则是ReplayKit的功劳
 
 
 667
-00:32:06,616 --> 00:32:09,656
-I've got some top
-level programmers
+00:32:30,484 --> 00:32:36,523
+我是说 我们会看到
+这在《冠军的召唤》这类
 
 
 668
-00:32:09,706 --> 00:32:12,106
-that are beating the heck
-out of me and my partners
+00:32:36,957 --> 00:32:38,358
+游戏中发挥了极好的作用
 
 
 669
-00:32:12,406 --> 00:32:15,506
-and I really want to show
-off the features that we have
+00:32:38,425 --> 00:32:40,961
+我们认为在如今的富媒体市场中
 
 
 670
-00:32:15,506 --> 00:32:18,006
-in spectator and
-replays allows me to do
+00:32:41,028 --> 00:32:44,498
+对于积极发展社区的人来说
 
 
 671
-00:32:18,006 --> 00:32:19,426
-that here in this context.
+00:32:44,565 --> 00:32:47,601
+这都会很有帮助
 
 
 672
-00:32:19,826 --> 00:32:22,316
-There's tons of cool stuff
-going on inside of this
+00:32:48,502 --> 00:32:50,237
+这是很漂亮的一击
 
 
 673
-00:32:22,716 --> 00:32:26,286
-but the addition of my
-commentary and the presentation
+00:32:50,304 --> 00:32:52,739
+很有技术含量
+而且还是个很专业的玩家
 
 
 674
-00:32:26,286 --> 00:32:29,506
-of this in a shared environment
-is really what ReplayKit is
+00:32:53,440 --> 00:32:55,542
+朝他开火
+干掉了我的搭档
 
 
 675
-00:32:29,556 --> 00:32:30,086
-all about.
+00:32:55,776 --> 00:32:58,145
+在游戏的结尾部分
+捕捉到这些瞬间
 
 
 676
-00:32:30,086 --> 00:32:35,696
-I mean, we see how this works
-really well for a game like Call
+00:32:58,212 --> 00:33:00,714
+并与人分享
+这对我很重要
 
 
 677
-00:32:35,696 --> 00:32:39,706
-of Champions, but it's our
-position that it would work
+00:33:01,081 --> 00:33:03,517
+这也是所有这些的精髓所在
 
 
 678
-00:32:39,706 --> 00:32:44,346
-for anyone who is actively
-trying to foster a community
+00:33:05,485 --> 00:33:07,087
+当我想到ReplayKit时 
 
 
 679
-00:32:44,556 --> 00:32:47,586
-in today's media-rich market.
+00:33:07,154 --> 00:33:11,525
+在我看来 这是在
+介绍社区的有力手段
 
 
 680
-00:32:48,486 --> 00:32:50,096
-That's an excellent
-shot right there.
+00:33:11,725 --> 00:33:13,794
+并关注我们
+正在玩的游戏
 
 
 681
-00:32:50,096 --> 00:32:52,726
-A skill shot, by the way
-and a professional gamer,
+00:33:13,861 --> 00:33:16,997
+我们都在分享
+并把这类内容
 
 
 682
-00:32:53,436 --> 00:32:55,556
-killing my partner by
-setting him on fire.
+00:33:17,264 --> 00:33:19,633
+加入《冠军的召唤》
 
 
 683
-00:32:55,786 --> 00:32:58,206
-And capturing these moments
-and being able to share them
+00:33:19,700 --> 00:33:21,368
+这类游戏中是很简单的
 
 
 684
-00:32:58,206 --> 00:33:00,306
-from the tail end of a
-game that was important
+00:33:21,602 --> 00:33:24,805
+执行方面我们就
+用了一个人 里克
 
 
 685
-00:33:00,346 --> 00:33:03,526
-to me is exactly the
-spirit of all of this.
+00:33:25,005 --> 00:33:26,173
+他花了一天时间就做好了
 
 
 686
-00:33:04,076 --> 00:33:06,806
-So when I think about ReplayKit,
+00:33:26,240 --> 00:33:27,241
+无可否认
 
 
 687
-00:33:06,946 --> 00:33:11,516
-I see it as a crazy powerful
-means to address this community
+00:33:27,307 --> 00:33:29,142
+太精彩了！
 
 
 688
-00:33:11,726 --> 00:33:13,986
-and to embrace the fact
-that we are all playing,
+00:33:29,376 --> 00:33:31,278
+这就是
+我对它的评价
 
 
 689
-00:33:13,986 --> 00:33:17,006
-we are all sharing and being
-able to bring this stuff
+00:33:31,812 --> 00:33:32,913
+非常感谢大家
 
 
 690
-00:33:17,256 --> 00:33:22,006
-to a game like Call of Champions
-was really easy for us.
+00:33:32,980 --> 00:33:34,281
+埃德温 
+回到台上来吧
 
 
 691
-00:33:22,006 --> 00:33:24,686
-The implementation took us,
-well we have one guy, Rick,
+00:33:36,316 --> 00:33:37,150
+谢谢 辛科
 
 
 692
-00:33:24,686 --> 00:33:26,096
-and he did it in a day.
+00:33:37,251 --> 00:33:38,085
+非常棒
 
 
 693
-00:33:26,226 --> 00:33:27,226
-So no excuses.
+00:33:39,286 --> 00:33:41,355
+可惜的是
+本次讲座马上要结束了
 
 
 694
-00:33:27,226 --> 00:33:29,126
-It's spectacular!
+00:33:41,421 --> 00:33:42,723
+《社交游戏的最新内容》
 
 
 695
-00:33:29,376 --> 00:33:31,286
-That's what I have
-to say about it.
+00:33:42,990 --> 00:33:44,291
+总结一下
 
 
 696
-00:33:31,796 --> 00:33:32,996
-Thank you very much
-for your time.
+00:33:44,358 --> 00:33:46,960
+梅根
+介绍了游戏中心的改变
 
 
 697
-00:33:32,996 --> 00:33:33,976
-Edwin, I'm taking
-it back to you.
+00:33:47,427 --> 00:33:49,062
+例如
+加入了客玩家功能
 
 
 698
-00:33:34,171 --> 00:33:36,171
-[Applause]
+00:33:49,129 --> 00:33:51,598
+可以实现新玩家配置
+和游戏中心的多人游戏模式
 
 
 699
-00:33:36,326 --> 00:33:37,116
->> EDWIN ISKANDAR:
-Thank you, Cinco.
+00:33:52,432 --> 00:33:54,535
+她还介绍了怎样
+流线化开发过程
 
 
 700
-00:33:37,256 --> 00:33:39,576
-That was awesome.
+00:33:54,601 --> 00:33:56,637
+测试游戏中心的游戏
 
 
 701
-00:33:39,576 --> 00:33:41,366
-So unfortunately that
-concludes our session,
+00:33:56,737 --> 00:33:58,505
+这是通过统一服务器环境
 
 
 702
-00:33:41,366 --> 00:33:42,726
-what's new in social gaming.
+00:33:58,572 --> 00:34:00,307
+去除那个游戏中心Sandbox
 
 
 703
-00:33:42,996 --> 00:33:46,276
-Just to recap, Megan talked
-to us about the changes made
+00:34:01,408 --> 00:34:03,010
+我们还介绍了ReplayKit
 
 
 704
-00:33:46,276 --> 00:33:49,116
-at Game Center, like adding
-guest players which allow
+00:34:03,076 --> 00:34:05,012
+为游戏中增加社交功能的
+全新方法
 
 
 705
-00:33:49,116 --> 00:33:51,596
-for new player configuration
-and Game Center multiplayer.
+00:34:05,479 --> 00:34:08,715
+可以让你在运行应用的同时
+记录视频和音频
 
 
 706
-00:33:52,436 --> 00:33:54,546
-She also talked about how
-we streamline development,
+00:34:08,782 --> 00:34:09,850
+这样做非常高效
 
 
 707
-00:33:54,546 --> 00:33:56,536
-and testing of Game Center games
+00:34:09,949 --> 00:34:11,851
+同时还可以保护
+用户的隐私
 
 
 708
-00:33:56,726 --> 00:33:59,126
-by unifying the server
-environments and removing
+00:34:12,553 --> 00:34:15,054
+正如大家所见
+这是个高度精简的框架
 
 
 709
-00:33:59,126 --> 00:34:00,236
-that Game Center Sandbox.
+00:34:15,455 --> 00:34:17,090
+使用起来也非常简单
 
 
 710
-00:34:01,406 --> 00:34:04,266
-And we introduced ReplayKit,
-a whole new way to add social
+00:34:19,193 --> 00:34:20,027
+若想了解更多
 
 
 711
-00:34:04,266 --> 00:34:07,576
-into your games and it allows
-you to record audio and visuals
+00:34:20,092 --> 00:34:22,062
+可前往
+developer.Apple.com
 
 
 712
-00:34:07,576 --> 00:34:09,846
-in your running application
-and it does it efficiently
+00:34:22,129 --> 00:34:25,699
+并参考文档资料
+或联系我们的游戏技术
 
 
 713
-00:34:09,846 --> 00:34:11,696
-and it has privacy
-safeguards for the users.
+00:34:25,766 --> 00:34:27,234
+开发顾问阿兰·斯卡夫
 
 
 714
-00:34:12,545 --> 00:34:15,065
-As you have seen, it's an
-incredibly compact framework
+00:34:28,101 --> 00:34:30,404
+我希望大家尽快下载
+iOS 9数据
 
 
 715
-00:34:15,065 --> 00:34:17,085
-and has incredibly
-simple adoption.
+00:34:30,469 --> 00:34:31,605
+查看ReplayKit
 
 
 716
-00:34:18,846 --> 00:34:22,275
-For more information, go to
-developer.Apple.com and refer
+00:34:31,672 --> 00:34:33,340
+用于你的游戏中
+把它们带到实验室
 
 
 717
-00:34:22,275 --> 00:34:25,696
-to the documentation or
-contact Alan Schaffer our game
+00:34:33,841 --> 00:34:35,042
+给我们看看你做出了什么
 
 
 718
-00:34:25,696 --> 00:34:27,136
-technologies evangelist.
+00:34:35,909 --> 00:34:36,777
+就是这些内容
 
 
 719
-00:34:28,126 --> 00:34:31,585
-I urge you to download the iOS
-9 data, check out ReplayKit,
+00:34:36,844 --> 00:34:38,045
+感谢大家光临
 
 
 720
-00:34:31,676 --> 00:34:33,466
-get it into your games,
-bring them to the labs
+00:34:38,277 --> 00:34:41,281
+希望大家会喜欢
+在WWDC的体验
 
 
 721
-00:34:33,466 --> 00:34:35,755
-and show us what you've got.
-
-
-722
-00:34:35,896 --> 00:34:36,775
-That's it for me.
-
-
-723
-00:34:36,846 --> 00:34:38,045
-Thank you so much for attending.
-
-
-724
-00:34:38,045 --> 00:34:41,366
-I hope you enjoy the rest
-of your WWDC experience.
-
-
-725
-00:34:41,775 --> 00:34:41,976
-Thank you.
-
-
-726
-00:34:42,507 --> 00:34:44,507
-[Applause]
+00:34:41,681 --> 00:34:42,516
+谢谢
 

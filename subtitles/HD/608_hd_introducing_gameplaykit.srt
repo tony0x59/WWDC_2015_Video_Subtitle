@@ -1,6693 +1,4573 @@
 1
-00:00:32,095 --> 00:00:33,746
->> BRUNO SOMMER: Hello
-everyone and welcome.
+00:00:20,087 --> 00:00:25,926
+GameplayKit介绍
 
 
 2
-00:00:34,216 --> 00:00:36,006
-My name is Bruno Sommer,
+00:00:32,064 --> 00:00:33,767
+大家好 欢迎光临
 
 
 3
-00:00:36,006 --> 00:00:37,856
-I'm a game technologies
-engineer here at Apple.
+00:00:35,169 --> 00:00:37,871
+我的名字叫布鲁诺·萨默
+是Apple公司游戏技术工程师
 
 
 4
-00:00:38,226 --> 00:00:40,246
-And today I'm very
-excited to be able
+00:00:38,172 --> 00:00:39,573
+今天我非常高兴
 
 
 5
-00:00:40,246 --> 00:00:43,196
-to introduce you to GameplayKit.
+00:00:39,840 --> 00:00:43,210
+能为您介绍GameplayKit
 
 
 6
-00:00:43,876 --> 00:00:46,766
-Apple's first dedicated
-Gameplay framework.
+00:00:43,944 --> 00:00:46,880
+Apple公司第一个
+专用的游戏开发框架
 
 
 7
-00:00:47,756 --> 00:00:51,656
-We have a lot of solutions to
-the visual part of making game
+00:00:48,916 --> 00:00:52,486
+我们有多种解决方案
+可以处理制作游戏的视觉部分
 
 
 8
-00:00:51,696 --> 00:00:55,266
-on our platform things like
-SpriteKit, SceneKit and Metal.
+00:00:52,786 --> 00:00:55,722
+在像SpriteKit SceneKit
+和Metal的平台工具上
 
 
 9
-00:00:56,196 --> 00:00:58,196
-The gameplay is another
-really important part
+00:00:56,590 --> 00:00:59,426
+在游戏开发难题中
+游戏设置是另一个非常重要的部分
 
 
 10
-00:00:58,196 --> 00:00:59,426
-of that game development puzzle.
+00:01:01,028 --> 00:01:03,764
+事实证明 游戏设置方面存在难题
 
 
 11
-00:01:00,296 --> 00:01:03,756
-As it turns out, there is hard
-problems in the gameplay space,
+00:01:04,131 --> 00:01:07,301
+像AI 寻路算法和自主运动这些工具
 
 
 12
-00:01:04,105 --> 00:01:07,316
-things like AI, pathfinding,
-autonomous movement.
+00:01:08,969 --> 00:01:11,705
+我们坚信不应当故步自封
 
 
 13
-00:01:09,006 --> 00:01:09,866
-We firmly believe
+00:01:12,573 --> 00:01:16,009
+应当鼓励开发人员设计出更优秀的游戏
 
 
 14
-00:01:09,866 --> 00:01:11,856
-that experience shouldn't
-be a barrier
+00:01:17,678 --> 00:01:21,014
+我们希望你们能够
+更加专注为生活带来好点子
 
 
 15
-00:01:12,586 --> 00:01:16,016
-to prevent our developers making
-great and compelling games.
+00:01:21,548 --> 00:01:24,117
+我们将挑起重担在后端实现
 
 
 16
-00:01:17,196 --> 00:01:19,576
-So going forward we want
-you guys to be able to focus
+00:01:26,486 --> 00:01:29,389
+所以开始制作GameplayKit时
+我们的使命非常清晰
 
 
 17
-00:01:19,576 --> 00:01:21,026
-on bringing your
-cool ideas to life.
+00:01:30,123 --> 00:01:33,760
+我们想要设计一个具有游戏设置
+且简单功能强大的API解决方案
 
 
 18
-00:01:21,486 --> 00:01:22,436
-And we'll do the heavy lifting
+00:01:34,494 --> 00:01:39,933
+现在这就像普通的设计模式和架构
+因此我们开始先讲讲游戏语言
 
 
 19
-00:01:22,436 --> 00:01:25,496
-on the back end to
-make that happen.
+00:01:41,134 --> 00:01:45,973
+另外还有一些标准的游戏算法
+适用于多种多样的游戏类型
 
 
 20
-00:01:26,506 --> 00:01:27,416
-So our mission when we set
+00:01:47,441 --> 00:01:50,644
+并且对我们很重要的是
+这隔断图形和引擎的联系
 
 
 21
-00:01:27,416 --> 00:01:29,196
-out to make GameplayKit
-was very clear.
+00:01:50,744 --> 00:01:54,081
+因此虽然GameplayKit
+与很多我讲到的那些视觉框架分隔
 
 
 22
-00:01:29,906 --> 00:01:32,616
-We wanted to make a simple,
-yet powerful solution API
+00:01:54,681 --> 00:01:55,782
+它和其它框架运作得很好
 
 
 23
-00:01:32,726 --> 00:01:33,756
-of gameplay solutions.
+00:01:56,049 --> 00:01:59,653
+它和SpriteKit SceneKit Metal
+及更多的软件也运作得很好
 
 
 24
-00:01:33,756 --> 00:01:36,486
-Now this is things like
-common design patterns
+00:02:03,056 --> 00:02:06,693
+所以此时我们有GameplayKit
+和七个GameplayKit的重要特性
 
 
 25
-00:01:36,486 --> 00:01:39,086
-and architectures so we can
-all start speaking the same
+00:02:07,261 --> 00:02:11,298
+并且这些组件可以说说是非常好
+可用于构建你的游戏对象和游戏逻辑
 
 
 26
-00:01:39,086 --> 00:01:39,826
-gameplay language.
+00:02:12,499 --> 00:02:17,137
+状态机描述了我们游戏中的状态化
+和游戏对象的各种状态变化
 
 
 27
-00:01:40,646 --> 00:01:43,156
-And there's also a number of
-standard gameplay algorithms
+00:02:18,438 --> 00:02:23,510
+主体是自主运动的实体
+由现实行为和目标控制
 
 
 28
-00:01:43,226 --> 00:01:45,946
-that is applicable to a
-wide variety of game genres.
+00:02:24,745 --> 00:02:28,682
+路径找寻解决了导航图形生成
+和我们如何移动实体的问题
 
 
 29
-00:01:47,426 --> 00:01:49,526
-And it is also very important
-to us that this remains graphic
+00:02:29,082 --> 00:02:30,984
+在游戏世界的可通行区域中
 
 
 30
-00:01:49,526 --> 00:01:52,066
-and engine agnostic, so
-while GameplayKit is separate
+00:02:31,919 --> 00:02:33,520
+我们也有一个极好的
+MinMax AI解决方案
 
 
 31
-00:01:52,066 --> 00:01:54,096
-from a lot of those visual
-frameworks I talked about,
+00:02:33,587 --> 00:02:36,823
+它是非常好的解决方法
+让反对计算机控制者看到了希望
 
 
 32
-00:01:54,706 --> 00:01:55,836
-it plays really nicely
-with them.
+00:02:38,392 --> 00:02:42,362
+有许多游戏质量随机源
+和随机分布可以任意使用
 
 
 33
-00:01:56,066 --> 00:01:59,256
-It plays nice with SpriteKit,
-SceneKit, Metal, and more.
+00:02:42,863 --> 00:02:45,032
+最后我们有一个规则系统
+也是个很好的途径
 
 
 34
-00:01:59,316 --> 00:02:04,126
-So here we have GameplayKit
+00:02:45,098 --> 00:02:47,301
+对模拟谨慎和模糊逻辑很有用
 
 
 35
-00:02:04,176 --> 00:02:06,236
-and the seven major
-features that make it up.
+00:02:49,303 --> 00:02:53,607
+今天还涉及到很多
+让我们继续看看接着讲实体和组件
 
 
 36
-00:02:07,236 --> 00:02:09,226
-And these are components
-which are a really great way
+00:02:55,843 --> 00:02:57,845
+我想要提几个继承的经典问题
 
 
 37
-00:02:09,226 --> 00:02:11,176
-to structure your game
-objects and game logic.
+00:02:58,846 --> 00:03:01,215
+从普通游戏对象中得到的
 
 
 38
-00:02:12,536 --> 00:02:15,016
-State machines, which describe
-the statefulness in our games
+00:03:01,648 --> 00:03:05,919
+此时我们有一个塔防游戏
+带有简单的弹塔和弓箭手类
 
 
 39
-00:02:15,016 --> 00:02:17,136
-and the various state
-changes of our game objects.
+00:03:07,254 --> 00:03:08,922
+这有一些共享的功能
 
 
 40
-00:02:18,476 --> 00:02:20,946
-Agents, which are
-autonomously moving entities
+00:03:09,723 --> 00:03:13,293
+我们有射击 有移动
+还有被攻击的目标
 
 
 41
-00:02:20,946 --> 00:02:23,516
-that are controlled by
-realistic behaviors and goals.
+00:03:14,561 --> 00:03:15,629
+让我们以射击为例
 
 
 42
-00:02:24,776 --> 00:02:27,306
-Pathfinding, which deals with
-navigation graph generation
+00:03:15,963 --> 00:03:18,398
+我们想让塔和弓箭手都能够射击
 
 
 43
-00:02:27,356 --> 00:02:28,616
-and how we move our entities
+00:03:18,866 --> 00:03:20,200
+那么我们在哪放置射击功能呢
 
 
 44
-00:02:29,106 --> 00:02:30,856
-between the passable
-areas in our game world.
+00:03:21,668 --> 00:03:25,272
+一种选择可能是在塔和弓箭手类之间
+简单地复制并粘帖它
 
 
 45
-00:02:30,856 --> 00:02:33,586
-We also have a great
-MinMax AI solution
+00:03:25,906 --> 00:03:28,542
+但现在在我的分享功能代码中有两个点
 
 
 46
-00:02:33,586 --> 00:02:35,316
-which is a really
-great way to give life
+00:03:28,609 --> 00:03:30,544
+并且如果我想要更新这个功能
 
 
 47
-00:02:35,406 --> 00:02:36,936
-to our computer-controlled
-opponents.
+00:03:30,811 --> 00:03:32,412
+现在我也需要更新那两个点
 
 
 48
-00:02:37,836 --> 00:02:40,346
-There is a number of game
-quality random sources
+00:03:32,513 --> 00:03:35,883
+如果我只是更新一个
+那么会导致一些很奇怪的行为
 
 
 49
-00:02:40,346 --> 00:02:42,516
-and random distributions
-at your disposal.
+00:03:37,284 --> 00:03:40,287
+所以在我所描述的这种继承模型中
 
 
 50
-00:02:42,826 --> 00:02:44,916
-And last we have a rule system,
-which are a really great way
+00:03:40,687 --> 00:03:43,590
+我们的唯一正确的选择就是
+在树状图中把分享功能往更高的层级放
 
 
 51
-00:02:45,096 --> 00:02:47,296
-to model discreet
-and fuzzy logic.
+00:03:43,657 --> 00:03:44,691
+此时我们有个射击功能
 
 
 52
-00:02:48,346 --> 00:02:50,186
-There's a lot to cover today.
+00:03:44,758 --> 00:03:48,095
+可以将它置于游戏对象类
+或某些基于普通的类
 
 
 53
-00:02:50,326 --> 00:02:53,596
-Let's go ahead and jump right
-in with entities and components.
+00:03:49,296 --> 00:03:50,464
+现在这种方法的问题是
 
 
 54
-00:02:53,626 --> 00:02:59,816
-I want to pose sort of this
-classic problem with inheriting
+00:03:50,631 --> 00:03:53,634
+当我们在游戏中获得
+越来越多的共享功能
 
 
 55
-00:02:59,866 --> 00:03:01,216
-from common game objects.
+00:03:53,867 --> 00:03:56,270
+我们不得不将它移到越来越高的层次
 
 
 56
-00:03:01,636 --> 00:03:02,786
-Here we have a tower
-defense game
+00:03:56,703 --> 00:03:59,106
+并且我们的基础游戏对象
+变得根本不基础了
 
 
 57
-00:03:03,046 --> 00:03:05,916
-with a simple projectile
-tower and archer classes.
+00:03:59,706 --> 00:04:04,378
+他们变得很大 难以理解
+并且很难维护 协作
 
 
 58
-00:03:07,266 --> 00:03:08,906
-We have some shared
-functionality here.
+00:04:05,846 --> 00:04:09,349
+让我们看下怎么样
+用实体和组件解决这个问题
 
 
 59
-00:03:09,736 --> 00:03:11,806
-We have shooting,
-and we have moving,
+00:04:10,651 --> 00:04:13,921
+你看我们仍然有三个对象
+弹 塔 弓箭手
 
 
 60
-00:03:11,806 --> 00:03:13,296
-and we have being targeted.
+00:04:14,655 --> 00:04:18,158
+但现在取而代之的是有了功能
+在继承意义上
 
 
 61
-00:03:14,156 --> 00:03:15,636
-Let's take shooting for example.
+00:04:18,358 --> 00:04:21,394
+成为移动者 成为射手
+成为被击中者
 
 
 62
-00:03:15,976 --> 00:03:18,396
-We want towers and archers
-to both be able to shoot.
+00:04:22,095 --> 00:04:24,498
+它们反而有这些对象
+我们称之为组件
 
 
 63
-00:03:18,856 --> 00:03:20,116
-Where then do we put
-our shoot function?
+00:04:24,565 --> 00:04:27,000
+里面包含游戏逻辑的个别元素
 
 
 64
-00:03:21,656 --> 00:03:23,606
-One option might be to
-simply copy and paste it
+00:04:27,334 --> 00:04:29,770
+所以此时我们有移动组件
+可以解决移动问题
 
 
 65
-00:03:23,606 --> 00:03:25,286
-between the tower
-and archer classes,
+00:04:29,937 --> 00:04:31,672
+有射击组件可以解决射击问题
 
 
 66
-00:03:25,896 --> 00:03:28,526
-but now I have two spots in my
-code that share functionality,
+00:04:32,105 --> 00:04:34,274
+还有目标组件
+这表示可命中目标
 
 
 67
-00:03:28,616 --> 00:03:30,546
-and if I ever want to
-update that functionality,
+00:04:36,944 --> 00:04:40,280
+所以我们获得这些很好的小黑盒
+具有特定功能松散结构的盒子
 
 
 68
-00:03:30,826 --> 00:03:32,426
-there is now two spots
-where I need to update it.
+00:04:40,347 --> 00:04:43,150
+而不是与层次紧密结合的结构
 
 
 69
-00:03:32,526 --> 00:03:34,696
-And if I only update it in
-one I'm undoubtably going
+00:04:46,486 --> 00:04:48,655
+所以我们现在看见的实体
+和组件是的很好方法
 
 
 70
-00:03:34,696 --> 00:03:35,866
-to get some really
-weird behavior.
+00:04:48,722 --> 00:04:50,023
+可用于组织我们的游戏逻辑
 
 
 71
-00:03:36,776 --> 00:03:39,886
-So our only real option in
-this inheritance model I've
+00:04:51,325 --> 00:04:52,759
+举个例说他们很容易维护
 
 
 72
-00:03:39,886 --> 00:03:42,426
-described, is to move
-shared functionality higher
+00:04:52,826 --> 00:04:56,196
+因为他们是极好的黑盒子
+具有压缩功能
 
 
 73
-00:03:42,426 --> 00:03:42,866
-in the tree.
+00:04:56,330 --> 00:04:57,364
+他们倾向于更简单
 
 
 74
-00:03:43,356 --> 00:03:45,366
-So here we have a shoot
-function we might put it
+00:04:59,533 --> 00:05:01,969
+我们也可以让实体
+和组件进行良好的协作
 
 
 75
-00:03:45,596 --> 00:03:48,086
-in the game object class
-or some common-based class.
+00:05:02,135 --> 00:05:04,204
+现在我可以让一个开发人员
+在一个组件上操作
 
 
 76
-00:03:48,936 --> 00:03:51,466
-Now the problem with this
-approach is that as we get more
+00:05:04,471 --> 00:05:06,573
+另一个开发人员
+在另一个组件上操作
 
 
 77
-00:03:51,466 --> 00:03:54,236
-and more shared functionality
-in our games we're forced
+00:05:06,840 --> 00:05:10,344
+并且他们不一定需要知道
+这些组件间的具体细节
 
 
 78
-00:03:54,236 --> 00:03:56,256
-to move it higher and
-higher in the hierarchies.
+00:05:12,279 --> 00:05:14,281
+我可以随着复杂性的高低
+得到很好的缩放比例
 
 
 79
-00:03:56,716 --> 00:03:59,116
-And our basic game objects
-become anything but basic.
+00:05:14,348 --> 00:05:18,685
+我的意思是 在那个类和继承模型中
+我的层级越来越宽 越高
 
 
 80
-00:03:59,706 --> 00:04:02,926
-They become large and hard to
-understand, hard to maintain,
+00:05:18,752 --> 00:05:20,153
+随着我的游戏变得越复杂
 
 
 81
-00:04:03,346 --> 00:04:04,386
-and hard to collaborate on.
+00:05:20,554 --> 00:05:22,823
+有了实体和组件
+它只是在宽度中变得更宽
 
 
 82
-00:04:05,446 --> 00:04:08,446
-Let's take a look at how
-we solve this problem using
+00:05:23,490 --> 00:05:25,292
+而不再有其他变化
 
 
 83
-00:04:08,446 --> 00:04:09,366
-entities and components.
+00:05:25,659 --> 00:05:26,827
+真的是个好工具
 
 
 84
-00:04:10,656 --> 00:04:12,126
-You see here we still
-have our three objects:
+00:05:27,828 --> 00:05:29,396
+无论何时想在游戏中制作个新实体
 
 
 85
-00:04:12,126 --> 00:04:13,916
-projectile, tower, archer.
+00:05:29,463 --> 00:05:31,198
+我只要简单地看下可用的组件
 
 
 86
-00:04:14,656 --> 00:04:16,956
-But now instead of them
-having functionality
+00:05:31,598 --> 00:05:34,168
+选择合适的或执行新的组件
 
 
 87
-00:04:16,956 --> 00:04:20,346
-in an inheritance sense, being
-a mover, being a shooter,
+00:05:35,669 --> 00:05:38,972
+有了实体和组件
+我们可以轻易获取动态行为
 
 
 88
-00:04:20,346 --> 00:04:21,386
-or being targetable,
+00:05:39,673 --> 00:05:41,141
+让我们回想塔防例子
 
 
 89
-00:04:22,106 --> 00:04:24,576
-they instead have these
-objects we call components
+00:05:41,208 --> 00:05:45,412
+我想要实现施放魔咒使弓箭手固定不动
+这样他们不再移动
 
 
 90
-00:04:24,576 --> 00:04:26,996
-which encapsulate singular
-elements of our game logic,
+00:05:46,346 --> 00:05:49,917
+一种典型的方法可能是
+暂时删除它的移动组件
 
 
 91
-00:04:26,996 --> 00:04:29,776
-so here we have a MoveComponent
-that deals with moving,
+00:05:50,384 --> 00:05:52,019
+间接地告诉游戏剩下的部分
 
 
 92
-00:04:29,926 --> 00:04:33,016
-a ShootComponent that deals with
-shooting, and a TargetComponent,
+00:05:52,386 --> 00:05:53,520
+停止移动
 
 
 93
-00:04:33,206 --> 00:04:34,276
-what it means to be targetable.
+00:05:53,620 --> 00:05:57,991
+并且在这里还有其他的优势
+即不需要知道魔咒的细节
 
 
 94
-00:04:34,276 --> 00:04:39,016
-So we gain these really
-nice little black boxes
+00:05:59,826 --> 00:06:01,295
+那么让我们继续往下
+看一下类
 
 
 95
-00:04:39,016 --> 00:04:41,336
-of singular functionality,
-that are loosely rather
+00:06:02,129 --> 00:06:03,430
+此时我们有GKEntity
 
 
 96
-00:04:41,336 --> 00:04:43,156
-than tightly coupled
-with the hierarchy.
+00:06:03,797 --> 00:06:04,898
+这是基于实体的类
 
 
 97
-00:04:43,156 --> 00:04:48,706
-So we see now that entities
-and components are a great way
+00:06:04,965 --> 00:06:07,334
+这是个简单的组件集合
 
 
 98
-00:04:48,706 --> 00:04:50,026
-to organize our game logic.
+00:06:07,868 --> 00:06:10,871
+随着实体功能改变
 
 
 99
-00:04:51,336 --> 00:04:52,816
-For one, they're
-easy to maintain
+00:06:11,171 --> 00:06:13,407
+它可以动态增加和删除组件
 
 
 100
-00:04:52,816 --> 00:04:54,716
-because they're these
-nice black boxes
+00:06:14,241 --> 00:06:17,144
+同时也让我通过独特类的类型
+访问现有的组件
 
 
 101
-00:04:54,716 --> 00:04:57,276
-of incapsulated functionality;
-they tend to be simpler.
+00:06:18,378 --> 00:06:22,549
+当我在GKEntity上调用更新时
+自身拥有的组件将自动更新
 
 
 102
-00:04:58,696 --> 00:05:00,936
-We also have a really
-nice collaboration
+00:06:23,584 --> 00:06:27,888
+所以回想之前的例子 弹 塔 弓箭手
+都随着GKEntities而更新
 
 
 103
-00:05:00,936 --> 00:05:01,966
-with the entities
-and components.
+00:06:31,592 --> 00:06:33,160
+现在讲GKComponent类
 
 
 104
-00:05:02,126 --> 00:05:04,196
-Now I can have one developer
-work on one component
+00:06:33,227 --> 00:06:37,598
+现在当你要在游戏中添加功能时
+你可以把这编入子集
 
 
 105
-00:05:04,486 --> 00:05:06,586
-and another developer working
-on yet another component,
+00:06:37,664 --> 00:06:39,066
+并且有多种方法可以实现
 
 
 106
-00:05:06,856 --> 00:05:09,286
-and they don't necessarily need
-to know the intimate details
+00:06:39,967 --> 00:06:43,270
+你的组件属性成为那些组件的状态信息
 
 
 107
-00:05:09,436 --> 00:05:10,346
-between these components.
+00:06:43,904 --> 00:06:46,707
+所以你可以想象
+射击组件此时很可能有一个伤害属性
 
 
 108
-00:05:12,316 --> 00:05:14,336
-We also get nice
-scaling with complexity.
+00:06:46,940 --> 00:06:49,042
+描述了炮弹能造成多大的伤害
 
 
 109
-00:05:14,336 --> 00:05:15,636
-What I mean by that,
-in that class
+00:06:50,477 --> 00:06:53,046
+你也可以执行自定义选择器
+进行功能扩展
 
 
 110
-00:05:15,636 --> 00:05:18,746
-and inheritance model my
-hierarchy is grows wide and tall
+00:06:53,547 --> 00:06:55,782
+也可以告诉游戏的剩余部分
+如何与组件进行通讯
 
 
 111
-00:05:18,746 --> 00:05:20,146
-as my game gets more complex.
+00:06:56,783 --> 00:06:59,987
+同样举个例子 移动组件此时可能
+有能移动到某位置的功能
 
 
 112
-00:05:20,556 --> 00:05:22,816
-With entities and
-components it just grows wider
+00:07:00,187 --> 00:07:02,956
+你可以调用输入或调用游戏控制器代码
 
 
 113
-00:05:23,496 --> 00:05:25,286
-in that width is no
-longer a detriment.
+00:07:04,191 --> 00:07:07,327
+正如我之前所提到的
+组件是通过它实体更新实现自动更新
 
 
 114
-00:05:25,646 --> 00:05:26,826
-It's really a toolbox.
+00:07:07,394 --> 00:07:11,465
+并且你可以随意地在
+updateWithDeltaTime中执行时间逻辑
 
 
 115
-00:05:27,836 --> 00:05:29,876
-Any time I want to make a new
-entity in the game I simply look
+00:07:14,968 --> 00:07:19,840
+因此你需要更好地控制命令
+或控制组件的更新
 
 
 116
-00:05:29,876 --> 00:05:31,206
-at the components
-I have available,
+00:07:20,240 --> 00:07:22,543
+为此我们提供
+GKComponentSystem
 
 
 117
-00:05:31,606 --> 00:05:34,156
-choose the appropriate ones or
-perhaps implement a new one.
+00:07:23,143 --> 00:07:25,612
+这是不同实体的组件集合
 
 
 118
-00:05:34,206 --> 00:05:37,806
-And with entities and components
-we get really easy access
+00:07:25,879 --> 00:07:29,149
+但他们都是同类的类型
 
 
 119
-00:05:37,866 --> 00:05:38,986
-to dynamic behavior.
+00:07:29,616 --> 00:07:32,653
+并且在当更新命令对游戏内部
+起到重要作用的情况下调用
 
 
 120
-00:05:39,676 --> 00:05:41,206
-Let's think back to the
-tower defense example.
+00:07:33,086 --> 00:07:35,322
+在更新移动代码后
+我可能想要更新AI
 
 
 121
-00:05:41,206 --> 00:05:43,956
-Perhaps I want to implement a
-magic spell that roots archers
+00:07:35,389 --> 00:07:39,359
+因为我想让我的AI
+处理最新的位置信息
 
 
 122
-00:05:43,956 --> 00:05:45,416
-to the ground so they
-can no longer move.
+00:07:40,928 --> 00:07:45,599
+需要留意的是放置在组件系统中的组件
+不会随着实体更新而更新
 
 
 123
-00:05:46,346 --> 00:05:47,646
-One way to represent
-this might be
+00:07:45,832 --> 00:07:48,235
+而取决于在正确的时间
+调用组件系统更新
 
 
 124
-00:05:47,646 --> 00:05:49,916
-to simply temporarily
-remove it's MoveComponent.
+00:07:48,402 --> 00:07:50,571
+以便更新所有的实体
 
 
 125
-00:05:50,376 --> 00:05:52,016
-This implicitly tells
-the rest of my game
+00:07:51,538 --> 00:07:53,106
+所以再一次回想我们的例子
 
 
 126
-00:05:52,376 --> 00:05:53,526
-that it can no longer move.
+00:07:53,407 --> 00:07:57,811
+我们可能有一个移动系统
+能够移动游戏中的组件
 
 
 127
-00:05:53,606 --> 00:05:56,026
-And I get the added benefit of
-the rest of my game not needing
+00:07:58,312 --> 00:08:01,448
+并且我可以用来
+同步多种实体间的移动
 
 
 128
-00:05:56,026 --> 00:05:58,006
-to know the intimate
-details of magic spells.
+00:08:04,651 --> 00:08:08,455
+最后我有一个代码例子 看看如何使用
+GameplayKit的实体和组件
 
 
 129
-00:05:58,006 --> 00:06:01,286
-So let's go ahead and take
-a look at the classes.
+00:08:09,156 --> 00:08:11,091
+你看下此处的上方
+我将制作我的弓箭手实体
 
 
 130
-00:06:02,116 --> 00:06:03,336
-Here we have GKEntity.
+00:08:11,725 --> 00:08:14,428
+然后我将制作三个组件
+构成一个弓箭手移动组件
 
 
 131
-00:06:03,336 --> 00:06:04,956
-This is our entity base class,
+00:08:14,761 --> 00:08:17,531
+射击组件和目标组件
 
 
 132
-00:06:04,956 --> 00:06:07,336
-and it's really just a simple
-collection of components.
+00:08:17,831 --> 00:08:19,233
+并且给我的弓箭手增加这些组件
 
 
 133
-00:06:07,856 --> 00:06:10,886
-It has the functions to add and
-remove components dynamically,
+00:08:20,534 --> 00:08:23,971
+然后我将制作谈到的移动系统
+进入移动组件的类
 
 
 134
-00:06:11,176 --> 00:06:13,396
-as my entities functionality
-undoubtedly changes.
+00:08:24,037 --> 00:08:26,673
+指示这个组件系统只处理移动组件
 
 
 135
-00:06:14,256 --> 00:06:17,146
-Also let's me access existing
-components by unique class type.
+00:08:28,008 --> 00:08:30,310
+然后我将增加弓箭手的移动组件
+到移动系统
 
 
 136
-00:06:17,976 --> 00:06:20,186
-When I call update on
-my GKEntity it's going
+00:08:30,544 --> 00:08:34,280
+然后继续进行
+弓箭手和移动系统准备就绪可以使用了
 
 
 137
-00:06:20,186 --> 00:06:22,546
-to automatically update all
-of the components that it has.
+00:08:38,284 --> 00:08:39,586
+所以接下来是实体和组件
 
 
 138
-00:06:23,596 --> 00:06:25,876
-So thinking back to that
-example, projectile, tower,
+00:08:39,886 --> 00:08:41,655
+因此让我们转移到状态机
 
 
 139
-00:06:25,876 --> 00:06:27,896
-and archer would
-all be GKEntities.
+00:08:43,789 --> 00:08:45,092
+此时我将讲解其它例子
 
 
 140
-00:06:28,386 --> 00:06:33,056
-Here we have our
-GKComponent class.
+00:08:45,325 --> 00:08:47,895
+让我们想象一些游戏
+游戏中玩家被鬼魂追捕
 
 
 141
-00:06:33,216 --> 00:06:35,136
-Now you subclass this
-any time you want
+00:08:48,395 --> 00:08:52,099
+有时他获得力量加成
+然后追赶并击败鬼魂
 
 
 142
-00:06:35,136 --> 00:06:37,616
-to add those singular bits of
-functionality to your game.
+00:08:53,500 --> 00:08:57,037
+这有一个状态机的例子
+说明如何控制鬼魂的
 
 
 143
-00:06:37,656 --> 00:06:39,056
-And you do that in
-a number of ways.
+00:08:58,071 --> 00:09:00,841
+此时你看 我们有四个鬼魂状态
 
 
 144
-00:06:39,966 --> 00:06:42,356
-Properties on your components
-become state information
+00:09:01,241 --> 00:09:02,976
+当鬼魂追逐玩家时可以逃跑
 
 
 145
-00:06:42,396 --> 00:06:43,276
-about those components.
+00:09:03,777 --> 00:09:05,445
+当玩家追逐鬼魂时可以被追赶
 
 
 146
-00:06:43,276 --> 00:06:45,666
-So you can imagine the
-ShootComponent here would likely
+00:09:06,079 --> 00:09:08,582
+当鬼魂被抓住且被打败时可以被击败
 
 
 147
-00:06:45,666 --> 00:06:46,706
-have a damage property
+00:09:09,249 --> 00:09:13,220
+并且在击败后和复活前
+有时候可以复位
 
 
 148
-00:06:46,956 --> 00:06:49,046
-that describes how much
-damage it's projectiles do.
+00:09:14,621 --> 00:09:17,457
+现在重要的事情是
+请注意只有一部分状态转换是有效的
 
 
 149
-00:06:49,866 --> 00:06:51,836
-You also implement
-custom selectors
+00:09:18,292 --> 00:09:20,661
+你可以看到 我在追赶和逃跑之间转换
 
 
 150
-00:06:51,836 --> 00:06:54,556
-that extend functionally and
-tell the rest of your game how
+00:09:20,794 --> 00:09:22,729
+根据我刚才描述的这是合理的
 
 
 151
-00:06:54,556 --> 00:06:55,786
-to communicate with
-your component.
+00:09:22,963 --> 00:09:26,366
+有时候是鬼在追赶玩家
+有时候是玩家在追赶鬼
 
 
 152
-00:06:56,796 --> 00:06:59,036
-So the MoveComponent here for
-example would likely have a move
+00:09:27,534 --> 00:09:29,469
+当然只有在逃跑的时候会打败鬼
 
 
 153
-00:06:59,036 --> 00:07:01,396
-to position function that
-you would call from the input
+00:09:29,536 --> 00:09:33,640
+这是玩家可以真正打败鬼的唯一时刻
+当获得力量后就可以追赶鬼
 
 
 154
-00:07:01,796 --> 00:07:02,966
-or game controller code.
+00:09:34,675 --> 00:09:37,044
+然后复活再被打败
+这是同样的道理
 
 
 155
-00:07:03,856 --> 00:07:06,296
-As I mentioned before components
-are automatically updated
+00:09:37,344 --> 00:09:39,246
+在我们重生之后
+我们就开始追赶鬼
 
 
 156
-00:07:06,296 --> 00:07:09,116
-by their entity's update and
-you can optionally implement any
+00:09:39,313 --> 00:09:40,247
+这是我们的初始状态
 
 
 157
-00:07:09,116 --> 00:07:11,466
-time based logic in
-updateWithDeltaTime.
+00:09:40,314 --> 00:09:43,250
+当鬼重生之后
+它们就变回追赶玩家
 
 
 158
-00:07:14,236 --> 00:07:17,246
-So undoubtedly a need will arise
-where you need finer control
+00:09:46,053 --> 00:09:48,522
+因此为什么说状态机
+对游戏开发是如此重要
 
 
 159
-00:07:17,666 --> 00:07:19,826
-over the order or how
-your components update,
+00:09:49,323 --> 00:09:52,359
+对于很多游戏来说
+这是游戏设置元素的重要部分
 
 
 160
-00:07:19,826 --> 00:07:22,316
-and for that we're
-providing GKComponentSystem.
+00:09:53,160 --> 00:09:55,462
+许多常见的游戏设置
+元素都充满了状态
 
 
 161
-00:07:22,736 --> 00:07:24,606
-This is a collection
-of components
+00:09:55,529 --> 00:09:58,966
+例如动画制作AI UI 等级
 
 
 162
-00:07:24,606 --> 00:07:28,776
-from different entities, but
-they're all the same class type.
+00:10:00,434 --> 00:10:02,202
+想要在游戏中赋予让人物类角色以生命
 
 
 163
-00:07:28,936 --> 00:07:31,836
-And you use this when update
-order is somehow intrinsically
+00:10:02,269 --> 00:10:04,471
+毫无疑问地
+开发者必须对状态机非常熟悉
 
 
 164
-00:07:31,836 --> 00:07:32,646
-important to your game.
+00:10:04,905 --> 00:10:06,273
+我们通常有个IdleAnimation
 
 
 165
-00:07:33,076 --> 00:07:35,376
-Perhaps I want to update
-AI after my movement code
+00:10:06,340 --> 00:10:08,709
+和MoveAnimation
+及AttackAnimation
 
 
 166
-00:07:35,376 --> 00:07:37,056
-because I want my AI
-to deal with the most
+00:10:08,775 --> 00:10:10,344
+并在它们之间进行合理切换
 
 
 167
-00:07:37,056 --> 00:07:39,366
-up to date position
-information available.
+00:10:12,379 --> 00:10:15,148
+因此由于这种模式
+在我们的代码中是很普遍的
 
 
 168
-00:07:40,466 --> 00:07:42,686
-And it's important to note that
-the components that are placed
+00:10:15,816 --> 00:10:16,650
+我们会执行多次
 
 
 169
-00:07:42,686 --> 00:07:44,616
-in these component
-systems no longer update
+00:10:16,950 --> 00:10:22,022
+与部分样板文件一样
+采用个开关语句或者树状结构
 
 
 170
-00:07:44,616 --> 00:07:45,586
-with their entities update.
+00:10:23,557 --> 00:10:25,626
+是否有一些常见的方法
 
 
 171
-00:07:45,826 --> 00:07:48,246
-It is up to you to call the
-component systems update
+00:10:25,692 --> 00:10:28,662
+用于删除样板文件
+添加一些可维护性
 
 
 172
-00:07:48,416 --> 00:07:50,586
-at the correct time to
-update all these entities.
+00:10:29,062 --> 00:10:32,566
+让我们可以在整个游戏中
+从使用状态和状态机得益呢
 
 
 173
-00:07:51,416 --> 00:07:53,106
-So thinking back to
-our example again,
+00:10:33,700 --> 00:10:35,702
+这就是我们在
+GameplayKit里做的
 
 
 174
-00:07:53,416 --> 00:07:55,436
-we probably have a
-move system which would
+00:10:35,769 --> 00:10:36,870
+让我们来看看类
 
 
 175
-00:07:55,436 --> 00:07:57,816
-in turn have all the move
-components in my game,
+00:10:38,305 --> 00:10:39,773
+这里我们有
+GKStateMachine
 
 
 176
-00:07:58,326 --> 00:07:59,946
-and I can use that to
-synchronize the movement
+00:10:39,840 --> 00:10:42,009
+这是你的总体目标限定状态机
 
 
 177
-00:07:59,946 --> 00:08:01,446
-between my various entities.
+00:10:42,075 --> 00:10:45,946
+我的意思是说
+任何给定的状态均只有一个状态
 
 
 178
-00:08:02,046 --> 00:08:06,636
-So lastly we have a code
-example of what using entities
+00:10:46,647 --> 00:10:49,049
+它拥有所有的状态
 
 
 179
-00:08:06,636 --> 00:08:08,466
-and components in
-GameplayKit looks like.
+00:10:50,250 --> 00:10:54,521
+你可以调用状态机里的
+enterState进行状态转换
 
 
 180
-00:08:09,156 --> 00:08:10,926
-You see at the top here I'm
-going to make my archer entity,
+00:10:54,988 --> 00:10:59,560
+具体发生了什么呢
+如果转换是有效的 它会检查改变
 
 
 181
-00:08:10,926 --> 00:08:13,426
-and then I'm going to make
-the three components that make
+00:11:00,260 --> 00:11:02,663
+它调用许多状态目标的回调函数
 
 
 182
-00:08:13,426 --> 00:08:15,636
-up being an archer:
-the MoveComponent,
+00:11:02,729 --> 00:11:05,999
+退出状态 进入状态等
 
 
 183
-00:08:15,736 --> 00:08:17,536
-the ShootComponent, and
-the TargetComponent.
+00:11:06,200 --> 00:11:08,368
+并更新状态机里的现有状态
 
 
 184
-00:08:17,846 --> 00:08:19,056
-And add those to my archer.
+00:11:09,303 --> 00:11:11,939
+在那个鬼的例子中
+我们可能有个GhostStateMachine
 
 
 185
-00:08:20,266 --> 00:08:22,336
-Then I'm going to make that
-moveSystem we talked about,
+00:11:12,005 --> 00:11:14,208
+它将依次有四个状态
 
 
 186
-00:08:22,366 --> 00:08:24,026
-passing in the MoveComponent's
-class,
+00:11:17,578 --> 00:11:19,379
+这里我们有
+GKState抽象类
 
 
 187
-00:08:24,026 --> 00:08:26,686
-indicating this component system
-only deals with MoveComponents.
+00:11:20,514 --> 00:11:23,617
+然后调用回调函数
+执行状态基础逻辑
 
 
 188
-00:08:28,006 --> 00:08:29,556
-Then I'm going to add my
-archer's MoveComponent
+00:11:23,684 --> 00:11:25,786
+当你键入状态的时候
+我们给你一个进入回调函数
 
 
 189
-00:08:29,556 --> 00:08:31,546
-to that moveSystem
-and I'm good to go.
+00:11:26,019 --> 00:11:27,921
+当你离开状态时
+我们给你个退出回调函数
 
 
 190
-00:08:31,546 --> 00:08:34,265
-This archer and moveSystem
-are ready for use in my game.
+00:11:28,121 --> 00:11:30,691
+当状态机里是现有状态的时候
+我们给你一个更新回调函数
 
 
 191
-00:08:34,826 --> 00:08:39,596
-So that's entities
-and components.
+00:11:30,891 --> 00:11:34,428
+正如我之前所提
+它们会在何时的时间自动被状态机调用
 
 
 192
-00:08:39,596 --> 00:08:41,666
-So let's move on
-to state machines.
+00:11:35,762 --> 00:11:38,165
+你可以选择性地重写
+isValidNextState功能
 
 
 193
-00:08:41,836 --> 00:08:45,076
-I'm going to start with
-another example here.
+00:11:38,232 --> 00:11:41,735
+从而控制状态图边缘
+就是那些我说的有效转换
 
 
 194
-00:08:45,326 --> 00:08:47,546
-Let's imagine some game where
-the player is being chased
+00:11:42,436 --> 00:11:44,471
+现在通过默认值
+所有这些边缘都是有效的
 
 
 195
-00:08:47,546 --> 00:08:50,556
-by ghosts, and sometimes he gets
-to take a power-up and chase,
+00:11:44,538 --> 00:11:49,776
+但毫无疑问的是你想要调用
+状态的内部动态决定哪个转换是有效的
 
 
 196
-00:08:50,556 --> 00:08:52,096
-and maybe defeat
-the ghosts instead.
+00:11:51,144 --> 00:11:54,281
+我们讨论的四个鬼状态
+追赶 被打败 逃跑 重生
 
 
 197
-00:08:52,876 --> 00:08:55,826
-Here's an example of what
-a state machine to control
+00:11:54,581 --> 00:11:56,250
+全部会随着GKState被执行
 
 
 198
-00:08:55,826 --> 00:08:57,026
-that ghost might look like.
+00:11:58,886 --> 00:12:00,888
+因此我想要在这里通过一个例子
+结束这个问题
 
 
 199
-00:08:57,446 --> 00:08:59,816
-You see here we have
-the four states
+00:12:01,321 --> 00:12:04,024
+让我们执行刚刚讨论的
+GhostStateMachine
 
 
 200
-00:08:59,816 --> 00:09:00,836
-that a ghost can ever be in,
+00:12:04,191 --> 00:12:06,326
+一开始我要说说我的四个状态
 
 
 201
-00:09:01,246 --> 00:09:02,966
-chase for when the ghost
-is chasing the player,
+00:12:06,660 --> 00:12:09,062
+追赶 逃跑 被打败以及重生
 
 
 202
-00:09:03,766 --> 00:09:05,456
-flee for when the player
-is chasing the ghost,
+00:12:10,430 --> 00:12:12,966
+然后我将使我的状态机
+经历这四种状态
 
 
 203
-00:09:06,066 --> 00:09:08,566
-defeated for when the ghost
-gets caught and gets defeated,
+00:12:13,033 --> 00:12:15,269
+这四种状态是状态机里有的状态
 
 
 204
-00:09:09,236 --> 00:09:12,546
-and respawn sometime after the
-ghost is defeated before it
+00:12:16,637 --> 00:12:19,740
+然后我将继续并在例子中
+进入追赶的初始状态
 
 
 205
-00:09:12,546 --> 00:09:13,236
-comes back to life.
+00:12:20,040 --> 00:12:22,342
+我们开始这个状态机
+它已为我们的游戏做好了准备
 
 
 206
-00:09:13,376 --> 00:09:15,866
-Now it's important to
-note here that only some
+00:12:22,409 --> 00:12:24,444
+并且鬼将做我们希望它做的
 
 
 207
-00:09:15,866 --> 00:09:17,446
-of these state transitions
-are valid.
+00:12:28,048 --> 00:12:28,982
+这就是状态机
 
 
 208
-00:09:18,306 --> 00:09:20,806
-You see I move between chase
-and flee interchangeably here.
+00:12:29,983 --> 00:12:32,319
+让我们转向主体 目标和行为
 
 
 209
-00:09:20,806 --> 00:09:22,726
-This makes sense based on
-the game I just described,
+00:12:33,987 --> 00:12:35,789
+在我们开始之前先说一些概念
 
 
 210
-00:09:22,966 --> 00:09:24,416
-sometimes the ghost
-does the chasing
+00:12:37,591 --> 00:12:39,626
+我们说的主体 目标和行为
 
 
 211
-00:09:24,416 --> 00:09:26,356
-and sometimes the
-player does the chasing.
+00:12:39,893 --> 00:12:41,962
+都是真正的自主移动实体
 
 
 212
-00:09:27,166 --> 00:09:29,526
-And of course we only go
-to defeated from flee,
+00:12:42,563 --> 00:12:45,432
+由现实的行为和目标所控制
 
 
 213
-00:09:29,526 --> 00:09:31,456
-this is the only time that the
-player can actually defeat the
+00:12:45,799 --> 00:12:50,170
+它们受制于许多客观约束
+如掩码 加速度和惯性
 
 
 214
-00:09:31,456 --> 00:09:33,636
-ghost, when he has that power-up
-and is chasing the ghost.
+00:12:51,805 --> 00:12:57,044
+控制这些主体的行为反过来
+组成一定的目标并附上适当的权重
 
 
 215
-00:09:34,246 --> 00:09:37,056
-Then we go from respawn to
-defeated, this again makes sense
+00:12:57,277 --> 00:13:00,647
+从而在游戏中
+完成一些有意义的自主运动
 
 
 216
-00:09:37,356 --> 00:09:39,286
-and after we respawn
-we go right into chase.
+00:13:03,984 --> 00:13:06,253
+因此为什么主体
+在游戏发展中如此重要
 
 
 217
-00:09:39,316 --> 00:09:40,306
-This is our initial state.
+00:13:06,720 --> 00:13:10,657
+我想许多游戏
+都是以现实情况为出发点
 
 
 218
-00:09:40,306 --> 00:09:42,256
-After ghosts respawn,
-they go right back
+00:13:11,225 --> 00:13:13,026
+当我们的游戏实体呈直线运动
 
 
 219
-00:09:42,316 --> 00:09:43,266
-to chasing the player.
+00:13:13,293 --> 00:13:18,031
+然后再转弯后撞上环境障碍物
+这样看起来就不是很真实
 
 
 220
-00:09:43,866 --> 00:09:48,526
-So why are state machines so
-important in game development?
+00:13:19,132 --> 00:13:20,934
+现实世界的运动有诸如惯性
 
 
 221
-00:09:49,236 --> 00:09:50,996
-Well for a lot of games
-they're the backbone
+00:13:21,335 --> 00:13:22,636
+质量和加速度这类的因素
 
 
 222
-00:09:50,996 --> 00:09:52,346
-of many gameplay elements.
+00:13:23,136 --> 00:13:25,973
+这样它就可以准确地
+避开附近的障碍物和其它实体
 
 
 223
-00:09:53,176 --> 00:09:55,476
-A ton of our common gameplay
-elements are full of state,
+00:13:27,274 --> 00:13:30,344
+当实体知道如何从点A到点B
+它们通常跟随一条路径
 
 
 224
-00:09:55,516 --> 00:09:58,966
-things like animation,
-AI, UI, levels.
+00:13:30,410 --> 00:13:32,746
+并且路径通常是笔直的而非曲折的
 
 
 225
-00:10:00,436 --> 00:10:02,256
-Anyone who's tried to bring
-life to a humanoid character
+00:13:36,283 --> 00:13:38,619
+以上就是对主体系统的简单概述
 
 
 226
-00:10:02,256 --> 00:10:03,466
-in a game is undoubtedly
-familiar
+00:13:38,986 --> 00:13:41,722
+我们有主体类
+由一个行为控制
 
 
 227
-00:10:03,466 --> 00:10:04,456
-with the state machine
-on the right.
+00:13:42,055 --> 00:13:44,892
+也有一个指派
+让你可以回应 主体中的变化
 
 
 228
-00:10:04,926 --> 00:10:06,236
-We usually have an
-IdleAnimation,
+00:13:46,193 --> 00:13:51,198
+这些行为反过来组成一定的权重目标
+从而实现有意义的功能
 
 
 229
-00:10:06,326 --> 00:10:08,466
-and a MoveAnimation,
-and an AttackAnimation,
+00:13:51,999 --> 00:13:57,104
+你可以设置许多目标
+如寻找 拦截 避免障碍物及跟随路径
 
 
 230
-00:10:08,736 --> 00:10:10,336
-and move between them
-in meaningful ways.
+00:14:00,374 --> 00:14:01,842
+让我们继续看看类
 
 
 231
-00:10:10,886 --> 00:10:15,656
-So because this pattern is
-so pervasive in our code,
+00:14:02,609 --> 00:14:05,245
+GKAgent
+是一个简单的自主质点
 
 
 232
-00:10:15,806 --> 00:10:17,876
-we reimplemented it a lot, to
-what amounts to little more
+00:14:05,679 --> 00:14:07,080
+也是个
+GKComponent
 
 
 233
-00:10:17,876 --> 00:10:19,666
-than boilerplate, and
-this take the form
+00:14:07,247 --> 00:14:09,416
+和实体 组件系统配合得非常出色
 
 
 234
-00:10:19,666 --> 00:10:22,026
-of really big switch
-statements or if else trees.
+00:14:10,184 --> 00:14:13,854
+当你在GKAgent上调用更新
+它将应用当前行为
 
 
 235
-00:10:23,386 --> 00:10:25,676
-What if you could come up with
-some common implementation
+00:14:13,987 --> 00:14:17,624
+具体的是查看组成行为的目标
 
 
 236
-00:10:25,676 --> 00:10:28,836
-to remove that boilerplate, add
-a little bit of maintainability,
+00:14:18,592 --> 00:14:25,465
+然后计算权重及所有必须的加速变化
+从而达成目标
 
 
 237
-00:10:29,046 --> 00:10:31,156
-and give us the benefit of
-being able to reuse our states
+00:14:26,834 --> 00:14:28,602
+然后运用加速中的变化
 
 
 238
-00:10:31,276 --> 00:10:32,566
-and state machines
-throughout our game.
+00:14:29,169 --> 00:14:31,972
+改变主体速度和旋转位置
 
 
 239
-00:10:33,406 --> 00:10:34,926
-That's what we've
-done in GameplayKit.
+00:14:33,440 --> 00:14:36,043
+正如我说的 现在GKAgent受制
+于许多客观约束
 
 
 240
-00:10:35,736 --> 00:10:36,856
-So let's take a look
-at the classes.
+00:14:36,109 --> 00:14:39,646
+例如质量 反弹半径
+最大速度和最大加速度
 
 
 241
-00:10:37,966 --> 00:10:39,576
-Here we have GKStateMachine.
+00:14:40,514 --> 00:14:44,484
+很重要的是请注意
+这些单元式无标度且只适用于游戏世界
 
 
 242
-00:10:39,836 --> 00:10:42,106
-This is your general
-purpose finite state machine.
+00:14:45,252 --> 00:14:49,056
+因此你可以想象以公里为单位的游戏
+相对于英尺为单位的游戏
 
 
 243
-00:10:42,106 --> 00:10:43,856
-And what I mean by
-that is it's in one,
+00:14:49,656 --> 00:14:51,124
+二者将有非常大的差异
 
 
 244
-00:10:43,856 --> 00:10:45,676
-and only one state at any given.
+00:14:51,825 --> 00:14:54,161
+因此要确保游戏世界选择合适的数值
 
 
 245
-00:10:45,746 --> 00:10:49,946
-And it possesses all of the
-states that it can ever be in.
+00:14:56,797 --> 00:14:58,398
+这里我们有GKBehavior类
 
 
 246
-00:10:50,326 --> 00:10:52,386
-You call enterState
-on our state machines
+00:14:58,465 --> 00:15:01,068
+它是一个像字典一样的简单目标容器
 
 
 247
-00:10:52,446 --> 00:10:54,516
-to cause those state
-transitions I was talking about.
+00:15:01,768 --> 00:15:05,606
+它让你随着游戏
+动态修改行为
 
 
 248
-00:10:54,976 --> 00:10:56,796
-And what happens under
-the hood, is it checks
+00:15:06,039 --> 00:15:09,910
+你可以添加新的行为
+添加新的目标
 
 
 249
-00:10:56,796 --> 00:10:59,576
-if that transition is valid,
-and if so, makes that change.
+00:15:10,310 --> 00:15:13,447
+移动已有目标
+改变已有目标的重量
 
 
 250
-00:11:00,246 --> 00:11:02,746
-And it calls a number of call
-backs on the state objects.
+00:15:14,381 --> 00:15:16,383
+正如我之前提过的
+在主体设置了一个行为
 
 
 251
-00:11:02,746 --> 00:11:06,016
-We exit the state we were in, we
-enter the state we're going to,
+00:15:16,483 --> 00:15:17,484
+主体将很好地执行
 
 
 252
-00:11:06,206 --> 00:11:08,366
-and we update the current state
-that the state machine is in.
+00:15:17,584 --> 00:15:21,688
+下次你更新主体时
+它将正确遵循该行为
 
 
 253
-00:11:09,236 --> 00:11:10,856
-So in that ghost example
-we'd probably have
+00:15:23,156 --> 00:15:26,326
+举几个关于行为例子
+可能你想执行群集行为
 
 
 254
-00:11:10,856 --> 00:11:11,766
-a GhostStateMachine.
+00:15:26,693 --> 00:15:28,662
+以模仿现实世界中鸟类的群集
 
 
 255
-00:11:11,996 --> 00:11:14,206
-It would in turn have those four
-states we were talking about.
+00:15:29,296 --> 00:15:32,065
+我们可以通过合适权重
+将一个凝聚目标 一个分离目标
 
 
 256
-00:11:14,706 --> 00:11:19,486
-Here we have our
-GKState abstract class.
+00:15:32,366 --> 00:15:33,834
+和一个匹配目标结合在一起
 
 
 257
-00:11:20,016 --> 00:11:22,266
-And you implement
-your state based logic
+00:15:35,502 --> 00:15:38,872
+或者我可能正在做一个赛车游戏
+我想要做一个竞赛行为控制赛车
 
 
 258
-00:11:22,626 --> 00:11:23,616
-in a number of callbacks.
+00:15:39,606 --> 00:15:41,475
+这就像结合跟随路径那样简单
 
 
 259
-00:11:23,696 --> 00:11:25,776
-We give you an enter callback
-when the state is being entered,
+00:15:41,542 --> 00:15:43,410
+我想要我的赛车跟随赛道
 
 
 260
-00:11:26,016 --> 00:11:27,926
-an exit callback when
-we're leaving the state,
+00:15:44,011 --> 00:15:45,379
+避开其他主体目标
 
 
 261
-00:11:28,136 --> 00:11:29,996
-and an update callback when
-this is the current state
+00:15:45,612 --> 00:15:48,382
+我想要我的赛车避免和其他赛车相撞
 
 
 262
-00:11:29,996 --> 00:11:30,706
-in the state machine.
+00:15:51,218 --> 00:15:53,453
+这代码样本看起来像室行为代码的样子
 
 
 263
-00:11:30,886 --> 00:11:32,766
-As I mentioned before,
-they're automatically called
+00:15:54,221 --> 00:15:55,822
+看上面 我将创建寻找行为
 
 
 264
-00:11:32,766 --> 00:11:34,416
-by the state machine at
-the appropriate time.
+00:15:55,889 --> 00:15:58,058
+我想在我的环境里找一些敌方的主体
 
 
 265
-00:11:35,176 --> 00:11:37,956
-You can optionally override
-the isValidNextState function
+00:15:59,426 --> 00:16:02,162
+我将创建一个回避目标
+用来避开附近的障碍
 
 
 266
-00:11:38,256 --> 00:11:39,896
-to control the edges
-of your state graph,
+00:16:02,763 --> 00:16:07,100
+然后我将创建一个targetSpeed目标
+我想要我的主体加速并达到目标速度
 
 
 267
-00:11:39,896 --> 00:11:41,726
-those valid transitions
-I was talking about.
+00:16:08,502 --> 00:16:12,840
+然后用一套合适的权重
+让我的行为通过这三个目标
 
 
 268
-00:11:41,766 --> 00:11:44,236
-Now by default, all of
-these edges are valid
+00:16:13,307 --> 00:16:15,209
+你可以看到我把回避目标权重加到5
 
 
 269
-00:11:44,236 --> 00:11:46,696
-but undoubtedly you'll want
-to use the dynamic internals
+00:16:15,275 --> 00:16:18,111
+因为我真的不想让我的主体
+撞到附近的障碍
 
 
 270
-00:11:46,696 --> 00:11:49,766
-of your states to decide which
-of those transitions are valid.
+00:16:19,479 --> 00:16:20,547
+然后我将创建我的主体
 
 
 271
-00:11:50,936 --> 00:11:53,456
-So these four ghost states we
-talked about: chase, defeated,
+00:16:20,881 --> 00:16:22,950
+初始化 设置行为
 
 
 272
-00:11:53,456 --> 00:11:56,256
-flee, respawn would all be
-implemented as GKStates.
+00:16:23,450 --> 00:16:24,418
+主体已经准备好了
 
 
 273
-00:11:56,256 --> 00:12:00,126
-So I want to end
-on an example here.
+00:16:24,484 --> 00:16:28,288
+下次我更新主体时
+它将完全按照我的要求来做
 
 
 274
-00:12:01,316 --> 00:12:01,786
-Let's implement
+00:16:31,325 --> 00:16:32,860
+现在来讲讲主体指派
 
 
 275
-00:12:01,786 --> 00:12:03,486
-that GhostStateMachine
-we just talked about.
+00:16:33,694 --> 00:16:36,730
+在你需要使用基础指派模仿
 
 
 276
-00:12:03,936 --> 00:12:06,326
-At the top here I'm going to go
-ahead and make my four states:
+00:16:36,830 --> 00:16:39,266
+同步你的外观
+事物如图形 动画 物理时
 
 
 277
-00:12:06,676 --> 00:12:09,076
-chase, flee, defeated,
-and respawn.
+00:16:39,600 --> 00:16:41,602
+GKAgentDelegate
+就很有用了
 
 
 278
-00:12:10,006 --> 00:12:12,146
-Then I'm going to make
-my state machine passing
+00:16:42,503 --> 00:16:44,137
+我们提供两个回调函数对其进行操作
 
 
 279
-00:12:12,146 --> 00:12:13,906
-in those four states,
-those are the four states
+00:16:44,338 --> 00:16:47,741
+在主体更新前
+调用agentWillUpdate
 
 
 280
-00:12:13,906 --> 00:12:15,266
-that the state machine
-can ever be in.
+00:16:48,408 --> 00:16:50,878
+在设备更新后
+调用agentDidUpdate
 
 
 281
-00:12:16,256 --> 00:12:18,296
-Then I'm going to go ahead
-and enter the initial state
+00:16:52,012 --> 00:16:54,815
+在你的游戏中
+这或许就像是SpriteKit节点
 
 
 282
-00:12:18,416 --> 00:12:19,746
-which is chase in this example.
+00:16:55,215 --> 00:16:57,584
+或SceneKit节点 或渲染组件
 
 
 283
-00:12:20,036 --> 00:12:20,626
-We're good to go.
+00:16:59,987 --> 00:17:02,756
+我们来看看SpriteKit游戏中
+这个指派看起来像什么
 
 
 284
-00:12:20,626 --> 00:12:22,406
-This state machine is
-ready for use in our game,
+00:17:03,457 --> 00:17:06,292
+你可以看到这里有个自定义图形节点
+MyAgentSpriteNode
 
 
 285
-00:12:22,406 --> 00:12:28,086
-and that ghost is going to
-do exactly what we expect.
+00:17:06,627 --> 00:17:09,796
+我将继续操作
+并执行我刚说过的两个回调函数
 
 
 286
-00:12:28,086 --> 00:12:28,966
-So that's state machines,
+00:17:10,864 --> 00:17:13,901
+在agentWillUpdate中
+我将在循环里设置主体的位置
 
 
 287
-00:12:29,996 --> 00:12:32,196
-let's move on to agents,
-goals, and behaviors.
+00:17:13,967 --> 00:17:15,801
+它们的节点位置一样
 
 
 288
-00:12:32,196 --> 00:12:35,796
-So some concepts
-before we get started.
+00:17:15,969 --> 00:17:18,672
+我想让基础主体模仿和我的外观相匹配
 
 
 289
-00:12:36,846 --> 00:12:39,616
-What we call agents,
-goals, and behaviors,
+00:17:19,906 --> 00:17:21,108
+然后我将做一些更新
 
 
 290
-00:12:39,916 --> 00:12:43,326
-are really autonomously moving
-entities, they're controlled
+00:17:21,508 --> 00:17:23,743
+然后在agentDidUpdate中
+做的事情刚好相反
 
 
 291
-00:12:43,396 --> 00:12:45,436
-by realistic behaviors
-and goals.
+00:17:23,810 --> 00:17:25,878
+我将在循环中设置节点位置
 
 
 292
-00:12:45,816 --> 00:12:48,456
-They have a number of physical
-constraints, things like masks,
+00:17:26,213 --> 00:17:30,384
+它的位置和循环中主体的位置一样
+外观将和基本主体模拟相匹配
 
 
 293
-00:12:48,646 --> 00:12:50,166
-acceleration, and inertia.
+00:17:33,520 --> 00:17:34,821
+我将简要的为你展示一下
 
 
 294
-00:12:50,756 --> 00:12:53,856
-The behaviors that control
-these agents are in turn made
+00:17:35,455 --> 00:17:38,492
+主体运动的样子
+和你可以自行处理的一些目标
 
 
 295
-00:12:53,856 --> 00:12:56,046
-up of a number of
-goals, that you combine
+00:17:49,203 --> 00:17:53,307
+有个简单的SpriteKit情景
+我们用一个圆圈里的三角形来代表主体
 
 
 296
-00:12:56,046 --> 00:12:57,016
-with the appropriate weights,
+00:17:53,674 --> 00:17:55,209
+他们按照三角形的指向调整方向
 
 
 297
-00:12:57,306 --> 00:13:00,366
-to achieve some meaningful
-autonomous movement functionally
+00:17:56,176 --> 00:17:57,377
+这里我有一个座位目标
 
 
 298
-00:13:00,366 --> 00:13:03,826
-in your game.
+00:17:57,978 --> 00:18:00,714
+中间的主体会试图寻找鼠标的位置
 
 
 299
-00:13:04,016 --> 00:13:06,356
-So why are agents so
-important in game development?
+00:18:01,782 --> 00:18:03,784
+可以看到
+移动看起来很流畅自然
 
 
 300
-00:13:06,356 --> 00:13:08,156
-I think a lot of games benefit
+00:18:03,884 --> 00:18:08,021
+因为它是受真实物理约束
+比如质量 加速度和惯性
 
 
 301
-00:13:08,156 --> 00:13:10,626
-from really believable
-realistic movement.
+00:18:14,061 --> 00:18:15,963
+这里有个相反的事例 逃跑目标
 
 
 302
-00:13:11,246 --> 00:13:12,926
-When our game entities
-move in straight lines
+00:18:16,063 --> 00:18:19,032
+主体试图
+逃离鼠标的位置
 
 
 303
-00:13:13,306 --> 00:13:15,846
-and take turns instantly
-and bump into obstacles
+00:18:25,706 --> 00:18:27,140
+这是漫步行为的事例
 
 
 304
-00:13:15,976 --> 00:13:18,046
-in our environment, it
-doesn't look very real.
+00:18:27,708 --> 00:18:31,678
+我的主体正在环境里任意移动
+任意左转 右转
 
 
 305
-00:13:19,096 --> 00:13:20,936
-Movement in the real world
-has things like inertia,
+00:18:40,020 --> 00:18:41,922
+这是一个障碍回避目标事例
 
 
 306
-00:13:21,336 --> 00:13:22,546
-and mass, and acceleration.
+00:18:42,122 --> 00:18:44,191
+我的主体又在试图
+寻找鼠标的位置
 
 
 307
-00:13:23,106 --> 00:13:24,826
-And it correctly
-avoids nearby obstacles
+00:18:44,258 --> 00:18:46,693
+但我在情景里
+增加了一些循环障碍物
 
 
 308
-00:13:24,826 --> 00:13:25,946
-as well as other entities.
+00:18:47,060 --> 00:18:48,729
+主体的目标之一是回避障碍
 
 
 309
-00:13:27,156 --> 00:13:28,636
-And when entities know
-how to get from point A
+00:18:49,062 --> 00:18:53,500
+所以在他试图寻找鼠标位置时
+同时也在避免和障碍物相撞
 
 
 310
-00:13:28,746 --> 00:13:31,076
-to B they usually follow a
-path, and they usually do
+00:19:02,843 --> 00:19:04,278
+这是一个分离目标事例
 
 
 311
-00:13:31,076 --> 00:13:32,656
-so smoothly rather than rigidly.
+00:19:04,344 --> 00:19:07,080
+我有三个主体正在试图寻找鼠标位置
 
 
 312
-00:13:33,246 --> 00:13:37,696
-So here's an overview
-of what we're giving you
+00:19:07,347 --> 00:19:09,016
+但他们同时有一个分离目标
 
 
 313
-00:13:37,696 --> 00:13:38,606
-in our agent system.
+00:19:09,283 --> 00:19:11,752
+他们之间试图保持最小距离
 
 
 314
-00:13:38,976 --> 00:13:41,706
-We have our Agent class, it
-is controlled by a behavior
+00:19:12,586 --> 00:19:17,257
+这对游戏中编队飞行或各组保持在一起
+真的很有用
 
 
 315
-00:13:41,706 --> 00:13:43,876
-and it also has a delegate
-that let's you respond
+00:19:22,529 --> 00:19:24,131
+这里有个对齐目标事例
 
 
 316
-00:13:43,876 --> 00:13:44,896
-to changes in the agent.
+00:19:24,565 --> 00:19:27,534
+右边的主体试图
+与左边主体的标签相对齐
 
 
 317
-00:13:46,196 --> 00:13:48,656
-These behaviors are in turn
-made up of a number of goals
+00:19:29,369 --> 00:19:32,539
+这对于在游戏中同步单位
+真的很有用
 
 
 318
-00:13:48,656 --> 00:13:50,056
-that you combine with
-weights to achieve
+00:19:40,914 --> 00:19:42,449
+这里有一个群集目标事例
 
 
 319
-00:13:50,056 --> 00:13:51,206
-that meaningful functionality.
+00:19:43,584 --> 00:19:46,486
+领导主体是在场景里漫步的红色
 
 
 320
-00:13:51,996 --> 00:13:54,226
-You have a lot of goals at your
-disposal: things like seeking,
+00:19:47,521 --> 00:19:50,224
+但是在一个群集行为里
+同样还有一组蓝色主体
 
 
 321
-00:13:54,226 --> 00:13:57,116
-and intercepting, avoiding
-obstacles, and following paths.
+00:19:50,290 --> 00:19:52,826
+它们结合了一个凝聚目标
+一个分离目标 和一个阵营目标
 
 
 322
-00:13:57,586 --> 00:14:01,826
-Let's go ahead and take
-a look at the classes.
+00:19:53,026 --> 00:19:55,996
+形成了一个集体
+同时试图追逐领导实体
 
 
 323
-00:14:02,596 --> 00:14:05,236
-GKAgent is a simple
-autonomous point mass
+00:19:57,397 --> 00:20:00,133
+分离目标 维护他们之间的最小距离
 
 
 324
-00:14:05,686 --> 00:14:08,106
-and it's also a GKComponent
-so it plays really nice
+00:20:00,334 --> 00:20:03,470
+凝聚目标让它们
+以结合块的形式待在一起
 
 
 325
-00:14:08,106 --> 00:14:09,406
-with our entity and
-component systems.
+00:20:03,804 --> 00:20:07,074
+而对齐目标想让它们达到一个均等状态
 
 
 326
-00:14:09,806 --> 00:14:12,606
-And when you call update
-on GKAgent it's going
+00:20:11,178 --> 00:20:14,147
+最后是一个跟随路径的事例
 
 
 327
-00:14:12,606 --> 00:14:14,556
-to apply its current
-behavior and what that does
+00:20:14,615 --> 00:20:17,451
+我的主体正试图跟随简单的多线路径
 
 
 328
-00:14:14,556 --> 00:14:16,866
-under the hood it's going to
-look at the goals that make
+00:20:18,652 --> 00:20:21,555
+请注意它并不会突然转弯
 
 
 329
-00:14:16,866 --> 00:14:19,566
-up its behavior,
-and calculate along
+00:20:22,256 --> 00:20:25,859
+他正处于我们说过的真实物理约束下
+比如质量和加速度
 
 
 330
-00:14:19,566 --> 00:14:22,536
-with the weights some total
-change in acceleration necessary
+00:20:26,360 --> 00:20:30,898
+所以尽管基本路径是固定的
+但是主体会被迫以曲线的跟随目标
 
 
 331
-00:14:22,736 --> 00:14:25,456
-to simultaneously meet
-those goals as best it can.
+00:20:37,804 --> 00:20:39,673
+以上就是主体 目标 和行为
 
 
 332
-00:14:26,826 --> 00:14:28,596
-It then uses that
-change in acceleration
+00:20:49,516 --> 00:20:50,817
+我们现在继续来说说搜索路径
 
 
 333
-00:14:29,156 --> 00:14:31,986
-to change the agents velocity
-and position in rotation.
+00:20:53,187 --> 00:20:55,656
+我很确定
+在游戏开发中我们对此都很熟悉
 
 
 334
-00:14:33,426 --> 00:14:34,516
-Now GKAgent has a had lot
+00:20:56,256 --> 00:20:59,259
+在我的游戏世界里
+有一些实体想从A点移到B点
 
 
 335
-00:14:34,516 --> 00:14:36,526
-of those physical constraints I
-talked about, things like mass,
+00:20:59,593 --> 00:21:00,761
+但路径中有一个障碍
 
 
 336
-00:14:36,946 --> 00:14:39,646
-and A bounding radius, max
-speed, max acceleration.
+00:21:01,995 --> 00:21:05,999
+我不想这些实体穿过障碍
+我不想她碰到障碍
 
 
 337
-00:14:40,026 --> 00:14:42,716
-It is important to note that
-these units are dimensionless
+00:21:06,600 --> 00:21:09,870
+我想让她像人类一样
+准确地找到路径 绕过障碍
 
 
 338
-00:14:42,716 --> 00:14:44,476
-and very likely to be
-game world specific.
+00:21:11,171 --> 00:21:13,740
+我正在寻找的是这些东西
 
 
 339
-00:14:45,256 --> 00:14:47,636
-So you can imagine a game on
-the scale of kilometers is going
+00:21:13,874 --> 00:21:19,213
+我想让她找到障碍周围
+最短的路线 越过障碍 继续前往目标
 
 
 340
-00:14:47,636 --> 00:14:49,046
-to have vastly different
-numbers here
+00:21:21,215 --> 00:21:24,318
+我们调用游戏设置搜索路径
 
 
 341
-00:14:49,646 --> 00:14:51,136
-than a game that's
-on the scale of feet.
+00:21:25,686 --> 00:21:27,221
+开始之前 说一些概念
 
 
 342
-00:14:51,826 --> 00:14:53,256
-So make sure you choose
-the appropriate numbers
+00:21:28,288 --> 00:21:30,457
+导航图上的路径搜索操作
 
 
 343
-00:14:53,256 --> 00:14:54,166
-for your game world here.
+00:21:31,225 --> 00:21:35,863
+导航图是一个节点集合
+体现的是游戏世界里可通行的区域
 
 
 344
-00:14:54,166 --> 00:14:58,476
-Here we have our
-GKBehavior class.
+00:21:36,096 --> 00:21:38,432
+允许实体呆着以及移动的地方
 
 
 345
-00:14:58,476 --> 00:15:00,306
-And it's a simple
-dictionary-like container
+00:21:39,700 --> 00:21:44,771
+这些节点依次连接在一起
+体现在可通行区域是如何移动的
 
 
 346
-00:15:00,306 --> 00:15:01,146
-of those goals.
+00:21:45,639 --> 00:21:48,475
+这些连接可以是单向的
+也可以是双向的
 
 
 347
-00:15:01,766 --> 00:15:03,606
-It let's you dynamically
-modify the behavior
+00:21:49,610 --> 00:21:53,780
+在连接图中
+任何两个节点之间总是存在最佳路径
 
 
 348
-00:15:03,896 --> 00:15:06,486
-as your game undoubtedly
-changes, and you do this
+00:21:54,314 --> 00:21:56,850
+这是在路径搜索中
+我们通常会找到的路径
 
 
 349
-00:15:06,486 --> 00:15:09,926
-by adding new behaviors,
-adding new goals,
+00:21:58,986 --> 00:22:00,521
+我们继续来看看类
 
 
 350
-00:15:10,296 --> 00:15:11,416
-removing existing goals,
+00:22:01,989 --> 00:22:04,858
+我们有GKGraph
+这是抽象图基础类
 
 
 351
-00:15:11,566 --> 00:15:13,436
-and modifying the
-weights on existing goals.
+00:22:05,192 --> 00:22:09,663
+它仅是图节点的容器
+图节点是游戏世界里可通行区域的描述
 
 
 352
-00:15:14,106 --> 00:15:16,396
-As I mentioned before, you
-set a behavior on an agent
+00:22:10,797 --> 00:22:15,068
+在游戏世界有变动时
+它有个功能可用来增加以及移除节点
 
 
 353
-00:15:16,496 --> 00:15:17,486
-and that agent is good to go.
+00:22:15,769 --> 00:22:20,674
+它也可以让我将新节点连接到图上
+与我希望的现有的节点做恰当的连接
 
 
 354
-00:15:17,586 --> 00:15:19,056
-The next time you
-update that agent,
+00:22:22,075 --> 00:22:25,112
+当然我们也可以让
+你在节点和一个图之间寻找路径
 
 
 355
-00:15:19,056 --> 00:15:21,686
-it's going to correctly
-attempt to follow that behavior.
+00:22:26,113 --> 00:22:28,015
+我们提供两个专门化
 
 
 356
-00:15:22,596 --> 00:15:24,656
-So some examples of
-what behaviors might be,
+00:22:28,482 --> 00:22:31,952
+一个是GKGraph和网格配合使用
+一个是GKGraph和障碍配合使用
 
 
 357
-00:15:24,656 --> 00:15:26,316
-perhaps you want to
-implement a flocking behavior,
+00:22:32,252 --> 00:22:33,720
+我们现在来看下这两个东西
 
 
 358
-00:15:26,696 --> 00:15:28,666
-to simulate the flocking
-of birds in real life.
+00:22:36,156 --> 00:22:37,291
+GKGridGraph
 
 
 359
-00:15:29,296 --> 00:15:32,076
-We may combine a cohere, a
-separate, and an align goal
+00:22:37,357 --> 00:22:39,893
+这是GK图
+2D网格专用的
 
 
 360
-00:15:32,366 --> 00:15:34,406
-with the appropriate
-weights to achieve that.
+00:22:40,227 --> 00:22:43,830
+它所做的是自动创建所有节点
+用来代表格框
 
 
 361
-00:15:34,986 --> 00:15:36,996
-Or maybe I'm making a
-racing game and want
+00:22:44,565 --> 00:22:46,667
+既定的初始位置
+网格 宽度网格以及高度网格
 
 
 362
-00:15:36,996 --> 00:15:38,886
-to make a racing behavior
-to control my race cars.
+00:22:47,835 --> 00:22:51,004
+它将在网格节点间
+自动创建基本连接
 
 
 363
-00:15:39,396 --> 00:15:41,556
-This might be as simple as
-combining a follow path,
+00:22:51,371 --> 00:22:53,073
+同样在在对角线之间
+随意创建基本连接
 
 
 364
-00:15:41,556 --> 00:15:43,426
-I want my race car to
-follow the race track,
+00:22:53,640 --> 00:22:56,977
+它也有很简单的功能
+在你的游戏中
 
 
 365
-00:15:44,006 --> 00:15:46,376
-and an avoid other agents
-goal, I want my race car
+00:22:57,044 --> 00:23:00,514
+网格空间变得不可通行时
+可对其进行增加以及移除
 
 
 366
-00:15:46,376 --> 00:15:48,366
-to avoid colliding with
-the other race cars.
+00:23:03,016 --> 00:23:05,118
+接下来我们讲
+GKObstacleGraph
 
 
 367
-00:15:48,366 --> 00:15:53,066
-Here's a code example much
-what making these behaviors
+00:23:05,185 --> 00:23:09,423
+这是GK图
+游戏世界中 障碍周围路径搜索专用
 
 
 368
-00:15:53,066 --> 00:15:53,446
-looks like.
+00:23:09,690 --> 00:23:12,192
+障碍可以是任意的多边形
 
 
 369
-00:15:54,226 --> 00:15:55,876
-You see the top, I'm going
-to make a seek behavior,
+00:23:13,560 --> 00:23:18,699
+我们提供一些在游戏世界变化时
+不断地增加以及移除障碍的功能
 
 
 370
-00:15:55,876 --> 00:15:58,046
-I want to seek some enemy
-agent in my environment.
+00:23:19,233 --> 00:23:21,602
+它也可以让你不断地
+将新节点连接到图上
 
 
 371
-00:15:58,046 --> 00:16:00,516
-I'm going to make an avoid goal,
+00:23:21,668 --> 00:23:27,641
+对于为一个单位寻找路径而在图中插入
+一个开始以及结束节点来说很有用
 
 
 372
-00:16:00,516 --> 00:16:02,216
-I want to avoid nearby
-obstacles.
+00:23:28,976 --> 00:23:30,811
+我们通过一个缓冲区半径实现
 
 
 373
-00:16:02,656 --> 00:16:04,046
-Then I'm going to make
-a targetSpeed goal.
+00:23:30,878 --> 00:23:32,913
+这是障碍周围的安全地带
 
 
 374
-00:16:04,206 --> 00:16:07,646
-I want my agent to accelerate
-to and reach some target speed.
+00:23:33,146 --> 00:23:34,648
+这里我的实体是进不去的
 
 
 375
-00:16:08,236 --> 00:16:10,276
-Then I'm going to make
-my behavior passing
+00:23:34,815 --> 00:23:36,583
+它通常是由游戏来决定大小
 
 
 376
-00:16:10,276 --> 00:16:12,846
-in those three goals with an
-appropriate set of weights.
+00:23:36,850 --> 00:23:40,220
+与我想要做导航的实体边界框半径有关
 
 
 377
-00:16:13,306 --> 00:16:15,276
-You see here I'm weighting
-the avoid goal at a 5
+00:23:41,388 --> 00:23:44,291
+我们来说说
+这些障碍图是如何被创建的
 
 
 378
-00:16:15,276 --> 00:16:17,096
-because I definitely don't
-want my agent to collide
+00:23:45,058 --> 00:23:47,661
+这里是一个简单的情景
+有两个方形障碍
 
 
 379
-00:16:17,096 --> 00:16:18,126
-with nearby obstacles.
+00:23:48,395 --> 00:23:52,032
+左下角的一个实体
+想要到达右下角的桥上
 
 
 380
-00:16:19,056 --> 00:16:22,676
-Then I'm going to make my agent,
-initialize it, set the behavior
+00:23:52,766 --> 00:23:55,302
+我的实体受一些边界框半径约束
 
 
 381
-00:16:22,676 --> 00:16:24,436
-on it, and this agent
-is good to go.
+00:23:56,503 --> 00:24:00,307
+我们将它当做缓冲区半径
+人为增大障碍
 
 
 382
-00:16:24,496 --> 00:16:26,426
-The next time I call update
-on this agent it's going
+00:24:01,642 --> 00:24:06,513
+高级选项下
+障碍图将在网格节点间创建合适的连接
 
 
 383
-00:16:26,426 --> 00:16:28,356
-to correctly do what I expect.
+00:24:07,447 --> 00:24:11,818
+它将不会创建违反障碍空间性的连接
 
 
 384
-00:16:28,356 --> 00:16:32,856
-So let's talk a little
-about that agent delegate.
+00:24:12,219 --> 00:24:14,922
+从这里可以看到
+我们找到了最短的路径了
 
 
 385
-00:16:33,656 --> 00:16:36,746
-GKAgentDelegate is useful when
-you need to sync your visuals,
+00:24:15,122 --> 00:24:16,990
+它将不会和障碍相撞
 
 
 386
-00:16:36,836 --> 00:16:39,266
-things like graphics,
-animation, physics,
+00:24:22,663 --> 00:24:25,065
+这是最后示例的代码
 
 
 387
-00:16:39,616 --> 00:16:41,436
-with this underlying
-agent simulation.
+00:24:25,232 --> 00:24:26,500
+但这个示例中只有一个障碍
 
 
 388
-00:16:42,216 --> 00:16:43,866
-We give you two callbacks
-to do that.
+00:24:26,900 --> 00:24:30,671
+在顶端我将创建一个
+只有四个点的简单多边形障碍
 
 
 389
-00:16:44,346 --> 00:16:47,296
-agentWillUpdate, which is called
-before any updates are applied
+00:24:31,972 --> 00:24:35,843
+我将创建障碍图进入障碍
+以及一些缓冲区半径
 
 
 390
-00:16:47,296 --> 00:16:47,756
-to the agent.
+00:24:37,377 --> 00:24:38,879
+然后我将创建一个开始和结束节点
 
 
 391
-00:16:48,416 --> 00:16:49,676
-And agentDidUpdate,
-which is called
+00:24:39,179 --> 00:24:42,182
+一个是现在我的英雄所在地
+另一个是她想去的地方
 
 
 392
-00:16:49,676 --> 00:16:50,876
-after the updates are applied.
+00:24:43,750 --> 00:24:48,488
+我不断地将这些节点
+连接到我的障碍图上
 
 
 393
-00:16:51,676 --> 00:16:54,806
-In your game this might be
-things like a SpriteKit node,
+00:24:48,722 --> 00:24:53,427
+它将做的是将这些节点插到图中
+并再一次自动创建合理的连接
 
 
 394
-00:16:55,226 --> 00:16:57,576
-or a SceneKit node,
-or a render component.
+00:24:53,760 --> 00:24:57,097
+但它并不创建那些
+会违反障碍空间性的节点
 
 
 395
-00:16:58,086 --> 00:17:01,566
-Let's take a look at what
-this delegation looks
+00:24:58,832 --> 00:25:01,335
+最后我为开始和结束节点寻找一个路径
 
 
 396
-00:17:01,566 --> 00:17:02,766
-like in a SpriteKit game.
+00:25:01,435 --> 00:25:03,704
+我取回一个简单的
+图节点NSArray
 
 
 397
-00:17:03,486 --> 00:17:05,925
-You see here I have a custom
-sprite node MyAgentSpriteNode
+00:25:03,770 --> 00:25:06,974
+我可以用它来激活角色
 
 
 398
-00:17:06,326 --> 00:17:07,915
-and I'm going to go
-ahead and implement both
+00:25:10,744 --> 00:25:13,547
+GKGraphNode
+是图节点类的先进节点
 
 
 399
-00:17:07,915 --> 00:17:09,786
-of those callbacks
-that I talked about.
+00:25:13,914 --> 00:25:15,916
+毫无疑问
+你会想对其进行划分子类
 
 
 400
-00:17:10,516 --> 00:17:13,816
-In agentWillUpdate, I'll set the
-agent's position in rotation,
+00:25:15,983 --> 00:25:21,388
+在你执行高级或非空间操作
+或在需要精确控制路径搜索时
 
 
 401
-00:17:13,976 --> 00:17:15,796
-equal to my node's
-position in rotation,
+00:25:22,890 --> 00:25:24,491
+将非常好用
 
 
 402
-00:17:15,976 --> 00:17:18,685
-I want that underlying agent
-simulation to match my visuals.
+00:25:25,259 --> 00:25:27,628
+你可以设想一个拥有各种
+版图类型的战略游戏
 
 
 403
-00:17:19,915 --> 00:17:21,116
-Then we are going
-to do some updating.
+00:25:27,694 --> 00:25:29,096
+或许你想要一个森林版图类型
 
 
 404
-00:17:21,215 --> 00:17:23,715
-And then an agentDidUpdate,
-I'm going to do the inverse,
+00:25:29,563 --> 00:25:31,732
+可以向其他版图类型一样做双倍挪动
 
 
 405
-00:17:23,715 --> 00:17:25,866
-I'm going to set my node's
-position in rotation,
+00:25:32,099 --> 00:25:34,234
+我需要考虑路径搜索
 
 
 406
-00:17:26,205 --> 00:17:28,646
-equal to my agent's position in
-rotation, the visuals will match
+00:25:34,301 --> 00:25:36,870
+我不想它返回可见的最短路径
 
 
 407
-00:17:28,646 --> 00:17:30,376
-that underlying agent
-simulation again.
+00:25:37,137 --> 00:25:39,306
+我只想它在森林周围进行导航
 
 
 408
-00:17:30,906 --> 00:17:34,836
-Now I would like to
-give you a quick demo
+00:25:39,706 --> 00:25:42,943
+因为事实上
+在我的游戏世界里这是最短的路径
 
 
 409
-00:17:35,456 --> 00:17:37,676
-on what agent movement
-looks look and some
+00:25:44,344 --> 00:25:47,281
+在你想手动创建自己的图时
+GKGraphNode同样也很有用
 
 
 410
-00:17:37,746 --> 00:17:40,766
-of the goals you have
-at your disposal.
+00:25:47,381 --> 00:25:50,484
+你通过手动管理节点间的连接
+手动创建自己的图
 
 
 411
-00:17:49,066 --> 00:17:50,906
-So here I have a simple
-SpriteKit scene and we're going
+00:25:50,918 --> 00:25:54,021
+对于一些像抽象或非空间图的东西
+这真的是好东西
 
 
 412
-00:17:50,906 --> 00:17:53,296
-to represent the agents
-with a triangle in a circle.
+00:25:54,454 --> 00:25:59,593
+或许你想要你的游戏有个端口
+想要单位让这些端口为路径搜索负责
 
 
 413
-00:17:53,686 --> 00:17:55,196
-They're oriented where
-the triangle is pointing.
+00:26:00,127 --> 00:26:02,729
+尽管这些端口在空间上并不相连
 
 
 414
-00:17:56,186 --> 00:17:57,386
-Here I have a seat goal.
+00:26:04,331 --> 00:26:07,835
+Grid/GraphNode和使用
+障碍节点的GraphNode2D
 
 
 415
-00:17:57,846 --> 00:17:59,436
-The agent in the center
-is simply going to try
+00:26:07,901 --> 00:26:09,970
+正如你所看到的都很合适
 
 
 416
-00:17:59,436 --> 00:18:00,716
-to seek my mouse position.
+00:26:13,273 --> 00:26:14,808
+对于这个特性
+我真的很兴奋
 
 
 417
-00:18:01,776 --> 00:18:04,126
-Notice how fluid and realistic
-the movement looks, because he's
+00:26:14,875 --> 00:26:16,810
+我们和SpriteKit组
+配合做了一些工作
 
 
 418
-00:18:04,126 --> 00:18:06,586
-under those realistic physical
-constraints, things like mass,
+00:26:16,877 --> 00:26:19,346
+可让你从现有的
+SpriteKit Scenes中
 
 
 419
-00:18:06,586 --> 00:18:08,016
-and acceleration, and inertia.
+00:26:19,413 --> 00:26:21,281
+很容易地创建这些障碍图
 
 
 420
-00:18:13,796 --> 00:18:15,946
-Here we have an example of
-the inverse, a flee goal.
+00:26:21,782 --> 00:26:26,153
+你可以为这些类似节点边界
+节点实体和节点材质的东西创建障碍图
 
 
 421
-00:18:16,066 --> 00:18:17,816
-The agent is going to
-instead attempt to run away
+00:26:27,221 --> 00:26:28,922
+这个意思是说只要极少的代码
 
 
 422
-00:18:17,816 --> 00:18:19,036
-from the mouse position.
+00:26:28,989 --> 00:26:32,192
+你就可以获得一个现有的SpriteKit场景
+创建一个障碍图
 
 
 423
-00:18:25,416 --> 00:18:27,156
-Here is an example
-of a wander behavior.
+00:26:32,559 --> 00:26:34,394
+并动地在其周围路径搜索
 
 
 424
-00:18:27,716 --> 00:18:29,186
-My agent is just going
-to randomly wander
+00:26:35,996 --> 00:26:37,931
+现在我们为你稍微展示一下
 
 
 425
-00:18:29,186 --> 00:18:33,886
-about the environment making
-random left and right turns.
+00:26:38,699 --> 00:26:40,567
+我们用SpriteKit来搜索路径
 
 
 426
-00:18:39,296 --> 00:18:41,906
-Here we have an example of
-an obstacle avoidance goal.
+00:26:52,246 --> 00:26:54,314
+这里有一个我们讲过的塔防游戏
 
 
 427
-00:18:42,136 --> 00:18:43,356
-Once again my agent
-is going to attempt
+00:26:54,548 --> 00:26:56,416
+我们将它作为
+SpriteKit场景来执行
 
 
 428
-00:18:43,356 --> 00:18:44,456
-to seek the mouse position
+00:26:57,684 --> 00:27:00,787
+我在左边创建实体
+它们想移到右边的桥上
 
 
 429
-00:18:44,456 --> 00:18:46,696
-but I have added a couple
-circle obstacles to my scene,
+00:27:01,522 --> 00:27:02,823
+因为这是个塔防游戏
 
 
 430
-00:18:47,066 --> 00:18:48,716
-and he has an obstacle
-avoidance goal on him.
+00:27:02,890 --> 00:27:07,794
+我将在右边放置一些塔
+而这占用了它们现在的路径
 
 
 431
-00:18:49,066 --> 00:18:51,246
-So while he's still trying
-to seek the mouse position,
+00:27:07,928 --> 00:27:08,896
+我们继续 放置一个
 
 
 432
-00:18:51,246 --> 00:18:53,506
-he's also going to avoid
-colliding with the obstacles.
+00:27:10,264 --> 00:27:12,432
+你将看到它们在它的周围
+正确地搜索路径
 
 
 433
-00:19:02,236 --> 00:19:04,396
-Here I have an example
-of a separation goal.
+00:27:12,499 --> 00:27:14,668
+那是因为我们正在用刚讲过的
+SpriteKit集成
 
 
 434
-00:19:04,396 --> 00:19:06,126
-I have three agents that
-are once again going to try
+00:27:14,735 --> 00:27:17,271
+自动地从节点创建一个障碍
 
 
 435
-00:19:06,126 --> 00:19:07,086
-to seek the mouse position.
+00:27:17,971 --> 00:27:19,873
+更基本的
+GKObstacleGraph
 
 
 436
-00:19:07,316 --> 00:19:09,006
-But they also have a
-separation goal on them.
+00:27:20,040 --> 00:27:20,941
+以及更新我们的路径
 
 
 437
-00:19:09,286 --> 00:19:11,296
-They're going to try to
-maintain some minimum separation
+00:27:21,508 --> 00:27:23,677
+我们转向调试程序
+迅速的将塔移开
 
 
 438
-00:19:11,296 --> 00:19:11,746
-between them.
+00:27:24,444 --> 00:27:27,247
+你可以看到从开始
+和结束节点间的简单路径
 
 
 439
-00:19:11,746 --> 00:19:14,946
-And this is really useful for
-things like formation flying
+00:27:28,015 --> 00:27:29,583
+当我在这里插入一个障碍时
 
 
 440
-00:19:14,946 --> 00:19:22,316
-or keeping groups of units
-together in your game.
+00:27:30,184 --> 00:27:32,719
+我们重新计算了基本的
+GKObstacleGraph
 
 
 441
-00:19:22,516 --> 00:19:24,136
-Here I have an example
-of an alignment goal.
+00:27:33,020 --> 00:27:35,722
+这就允许我们的实体
+在障碍周围找一条新路径
 
 
 442
-00:19:24,446 --> 00:19:25,886
-The agent on the right
-is simply going to try
+00:27:36,790 --> 00:27:38,091
+我们继续增加一些东西
 
 
 443
-00:19:25,886 --> 00:19:28,166
-to match the heading of
-the agent on the left.
+00:27:41,662 --> 00:27:45,666
+因为有那个SpriteKit集成
+每次我们增加或移除障碍时
 
 
 444
-00:19:29,076 --> 00:19:30,556
-This is really useful for things
+00:27:46,133 --> 00:27:48,902
+基本GKObstacleGraph
+总能进行更新
 
 
 445
-00:19:30,556 --> 00:19:32,546
-like synchronizing
-units in your game.
+00:27:53,607 --> 00:27:55,609
+以上就是使用
+SpriteKit的路径搜索
 
 
 446
-00:19:40,276 --> 00:19:42,586
-Here I have an example
-of a flocking goal.
+00:28:04,852 --> 00:28:06,920
+现在有请我的同事萝丝·德克斯特
 
 
 447
-00:19:43,316 --> 00:19:45,556
-Here we have our leader agent
-in the red which is just going
+00:28:07,087 --> 00:28:09,223
+为我们讲讲MinMax AI
 
 
 448
-00:19:45,556 --> 00:19:46,486
-to wander about the scene.
+00:28:09,690 --> 00:28:10,524
+萝丝
 
 
 449
-00:19:47,016 --> 00:19:49,176
-But I also have a group
-of these blue agents
+00:28:16,430 --> 00:28:17,264
+谢谢你 布鲁诺
 
 
 450
-00:19:49,176 --> 00:19:50,276
-under a flocking behavior.
+00:28:19,967 --> 00:28:24,771
+布鲁诺刚讲的很多特性
+可以用来创建AI
 
 
 451
-00:19:50,276 --> 00:19:52,826
-They are combining a cohere,
-a separate, and an align goal
+00:28:25,739 --> 00:28:28,509
+但它们更多的是在你的游戏中
+给于实体生命
 
 
 452
-00:19:53,036 --> 00:19:54,946
-to stay in a blob,
-while also trying
+00:28:29,376 --> 00:28:34,181
+许多游戏也需要同等的AI对手
+用人类玩家同样的规则来玩整个游戏
 
 
 453
-00:19:54,946 --> 00:19:56,676
-to chase that leader entity.
+00:28:34,248 --> 00:28:38,352
+这对于有些游戏来说是很关键的
+如象棋 西洋棋 一字棋等等
 
 
 454
-00:19:57,046 --> 00:19:59,196
-So the separate goal is
-maintaining some minimum
+00:28:39,086 --> 00:28:40,821
+所以我们想为你提供解决方案
 
 
 455
-00:19:59,196 --> 00:20:00,136
-separation between them,
+00:28:42,122 --> 00:28:45,225
+我们选择实现经典
+AI解决方案MinMax
 
 
 456
-00:20:00,336 --> 00:20:03,456
-the cohere goal makes them stay
-together in a cohesive mass,
+00:28:45,292 --> 00:28:47,194
+将它当做GameplayKit
+关键部分
 
 
 457
-00:20:03,456 --> 00:20:05,086
-and the alignment
-goal wants them
+00:28:47,294 --> 00:28:50,130
+MinMax会查看
+所有适合玩家的移动
 
 
 458
-00:20:05,086 --> 00:20:07,076
-to reach an average heading.
+00:28:50,397 --> 00:28:55,936
+然后它根据每个移动及每个移动
+能产生的所有排列建立一个决策图标
 
 
 459
-00:20:10,796 --> 00:20:14,146
-Last thing I have an example
-of a follow path behavior here.
+00:28:56,837 --> 00:29:00,374
+当你请求一个移动
+它就搜索决策图标最大化潜在收获
 
 
 460
-00:20:14,146 --> 00:20:16,706
-I have a simple polyline
-path and my agent is going
+00:29:00,641 --> 00:29:04,878
+同时最小化潜在损失
 
 
 461
-00:20:16,706 --> 00:20:18,286
-to attempt to follow it.
+00:29:05,379 --> 00:29:06,847
+在这个一字棋事例中
 
 
 462
-00:20:18,286 --> 00:20:20,326
-Now I want you to notice
-that he doesn't take the
+00:29:07,281 --> 00:29:12,219
+AI为X玩家选择了右边的一步
+因为是在最好的情况下 结果是胜利
 
 
 463
-00:20:20,576 --> 00:20:21,556
-corners sharply.
+00:29:12,486 --> 00:29:14,454
+在最差的情况下 结果是平局
 
 
 464
-00:20:22,256 --> 00:20:24,076
-He's under those realistic
-physical constraints we talked
+00:29:14,821 --> 00:29:17,224
+其他两个布则会导致失败
 
 
 465
-00:20:24,076 --> 00:20:25,856
-about, things like
-mass and acceleration.
+00:29:19,960 --> 00:29:23,497
+MinMax AI给你
+控制对手的能力
 
 
 466
-00:20:26,136 --> 00:20:27,426
-So he's forced to follow it
+00:29:23,730 --> 00:29:27,601
+当人类玩家陷入困局时
+它也可以为人类玩家提供建议
 
 
 467
-00:20:27,426 --> 00:20:30,266
-in a smooth manner even though
-the underlying path itself
+00:29:27,868 --> 00:29:31,071
+这对于游戏来说非常好
+甚至都不需要其他的AI请求
 
 
 468
-00:20:30,396 --> 00:20:30,906
-is rigid.
+00:29:32,272 --> 00:29:33,774
+它尤其适合以转弯类的游戏
 
 
 469
-00:20:36,836 --> 00:20:39,666
-So that's agents,
-goals, and behaviors.
+00:29:33,841 --> 00:29:38,846
+但也同样适合对于需要玩家
+操作的不连续移动的游戏
 
 
 470
-00:20:40,516 --> 00:20:48,816
-[ Applause ]
+00:29:40,180 --> 00:29:46,787
+但你也可以通过改变对未来的预测程度
+调整AI的难度
 
 
 471
-00:20:49,316 --> 00:20:50,696
-Let's go ahead and
-move on to pathfinding.
+00:29:47,421 --> 00:29:48,889
+事先预测10步
 
 
 472
-00:20:51,346 --> 00:20:54,216
-Now I'm sure we're familiar
+00:29:48,956 --> 00:29:52,359
+当然要比事先
+只预测2 3步要来的更有效
 
 
 473
-00:20:54,216 --> 00:20:55,656
-with this problem
-in game development.
+00:29:52,993 --> 00:29:57,531
+此外你可以随意指挥它
+任意挑选最不适宜的一步
 
 
 474
-00:20:55,726 --> 00:20:58,266
-I have some entity in my
-game world that wants to get
+00:29:57,598 --> 00:29:59,266
+给它一些类似人类的错误
 
 
 475
-00:20:58,266 --> 00:21:00,766
-from point A to B, but there
-is an obstacle in my way.
+00:30:00,834 --> 00:30:02,369
+我们来看看它如何整合到游戏之中
 
 
 476
-00:21:01,826 --> 00:21:03,836
-I don't want the entity to
-move through the obstacle.
+00:30:03,337 --> 00:30:06,807
+MinMax非常棒的地方是
+你不需要知道游戏的任何细节
 
 
 477
-00:21:03,836 --> 00:21:05,986
-I don't want her to
-bump into the obstacle.
+00:30:06,907 --> 00:30:10,511
+你不需要告诉它你的规则
+它也不需要知道该如何执行
 
 
 478
-00:21:05,986 --> 00:21:08,036
-I want her to correctly
-find a path
+00:30:11,078 --> 00:30:12,312
+所有的这些都是抽象的
 
 
 479
-00:21:08,036 --> 00:21:09,856
-around the obstacle
-like a human would.
+00:30:12,446 --> 00:30:15,349
+你所需做的只是提供游戏中的玩家清单
 
 
 480
-00:21:11,166 --> 00:21:13,756
-What I'm looking for here
-is something like this:
+00:30:15,883 --> 00:30:17,117
+他们可能会走的步
 
 
 481
-00:21:13,886 --> 00:21:15,796
-I want her to correctly
-find the shortest way
+00:30:17,718 --> 00:30:21,922
+每个玩家的分数
+用来显示他们目前位置的相对强弱
 
 
 482
-00:21:15,796 --> 00:21:17,776
-around the obstacle,
-clear the obstacle,
+00:30:23,257 --> 00:30:27,661
+当你向AI请求一步
+它会考虑所有这些数据 创建决策图标
 
 
 483
-00:21:18,146 --> 00:21:19,216
-and continue on to my goal.
+00:30:27,794 --> 00:30:30,030
+返回一个最佳策略供你使用
 
 
 484
-00:21:19,766 --> 00:21:24,316
-This is the realm of problems
-we call in gameplay pathfinding.
+00:30:33,667 --> 00:30:34,568
+我们来看看类
 
 
 485
-00:21:25,196 --> 00:21:29,256
-Now some concepts before we get
-started, pathfinding operates
+00:30:34,835 --> 00:30:38,572
+有三个所需的关键协议
+以便与MinMax AI配合使用
 
 
 486
-00:21:29,256 --> 00:21:30,466
-on a navigation graph.
+00:30:38,805 --> 00:30:40,507
+第一个是GKGameModel
 
 
 487
-00:21:30,976 --> 00:21:33,516
-In this navigation graph,
-it is a collection of nodes
+00:30:40,841 --> 00:30:42,876
+指的是对目前游戏状态进行抽象
 
 
 488
-00:21:33,516 --> 00:21:35,876
-that describe the passable
-areas in your game world.
+00:30:44,811 --> 00:30:51,685
+比如你在创建一个象棋游戏
+执行该类的较佳的是板类
 
 
 489
-00:21:36,086 --> 00:21:39,396
-The places where my entities
-are allowed to be and move.
+00:30:51,952 --> 00:30:55,822
+因为它追踪板上所有的位置
+以及目前在玩的所有块
 
 
 490
-00:21:39,686 --> 00:21:41,696
-These nodes are in turn
-joined by connections
+00:30:56,557 --> 00:30:57,858
+正如我在前面的幻灯片提到的
 
 
 491
-00:21:41,696 --> 00:21:44,776
-to describe how my entities move
-between these passable areas.
+00:30:58,158 --> 00:31:01,962
+所需做的是提供游戏中活跃的玩家清单
 
 
 492
-00:21:45,226 --> 00:21:47,316
-And these connections
-can be single directional
+00:31:02,229 --> 00:31:05,265
+目前的玩家
+每个玩家的分数
 
 
 493
-00:21:47,556 --> 00:21:51,426
-or bidirectional, and there is
-always exists an optimal path
+00:31:05,499 --> 00:31:08,468
+然后是每个玩家可能会下的每一步
 
 
 494
-00:21:51,486 --> 00:21:53,776
-between any two nodes
-in a connected graph.
+00:31:09,503 --> 00:31:11,538
+同样也需要一个应用这些步的方法
 
 
 495
-00:21:53,866 --> 00:21:55,686
-And this is usually
-the path we're looking
+00:31:11,972 --> 00:31:14,374
+AI用这个方法创建出决策图标
 
 
 496
-00:21:55,686 --> 00:21:56,846
-for in pathfinding.
+00:31:14,441 --> 00:31:17,644
+在它已经被AI选中后
+你也可以用它来应用每一步
 
 
 497
-00:21:56,846 --> 00:22:00,536
-So let's go ahead and take
-a look at the classes.
+00:31:18,178 --> 00:31:21,215
+当采用该步后
+它将改变目前游戏状态
 
 
 498
-00:22:01,076 --> 00:22:04,866
-Here we have GKGraph, which is
-our abstract graph base class,
+00:31:21,448 --> 00:31:23,784
+可能改变玩家目前的行动
 
 
 499
-00:22:05,206 --> 00:22:07,866
-it's quite simply a container of
-graph nodes, those descriptions
+00:31:24,218 --> 00:31:25,786
+每个玩家的分数
 
 
 500
-00:22:07,866 --> 00:22:09,666
-of the passable areas
-in my game world.
+00:31:25,919 --> 00:31:26,954
+以及适合他们的下一步
 
 
 501
-00:22:10,236 --> 00:22:13,336
-It has the functions necessary
-to add and remove nodes
+00:31:28,455 --> 00:31:30,591
+接下来的协议是
+GKGameModelUpdate
 
 
 502
-00:22:13,336 --> 00:22:15,066
-as the game world
-undoubtedly changes,
+00:31:30,657 --> 00:31:32,526
+这是游戏里的动作抽象
 
 
 503
-00:22:15,486 --> 00:22:17,756
-and it also lets me connect
-new nodes to the graph,
+00:31:33,260 --> 00:31:37,364
+它应该有你为游戏模型
+应用每一步的全部数据
 
 
 504
-00:22:17,756 --> 00:22:19,106
-making the appropriate
-connections
+00:31:38,031 --> 00:31:41,201
+正如我们所说的
+MinMax用它创建决策图标
 
 
 505
-00:22:19,106 --> 00:22:20,676
-to existing nodes
-I would expect.
+00:31:41,268 --> 00:31:44,137
+在它被选中后
+你可以用它来做出下一步行动
 
 
 506
-00:22:21,746 --> 00:22:23,596
-Add of course we also
-let you find paths
-
-
-507
-00:22:23,656 --> 00:22:25,126
-between nodes and a graph.
-
-
-508
-00:22:25,816 --> 00:22:28,016
-And we're offering you
-guy's two specializations,
-
-
-509
-00:22:28,486 --> 00:22:30,816
-a GKGraph that works
-with grids, and a GKGraph
-
-
-510
-00:22:30,816 --> 00:22:31,816
-that works with obstacles.
-
-
-511
-00:22:31,816 --> 00:22:33,676
-Let's talk a little bit
-more about those now.
-
-
-512
-00:22:34,216 --> 00:22:35,986
-All right.
-
-
-513
-00:22:36,196 --> 00:22:37,306
-GKGridGraph.
-
-
-514
-00:22:37,346 --> 00:22:39,886
-This is our GK graph that's
-specialized for a 2D grid.
-
-
-515
-00:22:40,236 --> 00:22:41,116
-And what this does,
-is it's going
-
-
-516
-00:22:41,116 --> 00:22:43,836
-to automatically create all
-the nodes to represent a grid
-
-
-517
-00:22:44,356 --> 00:22:46,676
-of some given start position
-and width and height.
-
-
-518
-00:22:46,936 --> 00:22:50,086
-It's going to automatically
-make the cardinal connections
-
-
-519
-00:22:50,086 --> 00:22:50,996
-between the grid nodes
-
-
-520
-00:22:51,356 --> 00:22:52,916
-and optionally the
-diagonal ones as well.
-
-
-521
-00:22:52,916 --> 00:22:55,866
-And it also has easy
-functions available to add
-
-
-522
-00:22:55,866 --> 00:22:59,096
-and remove grid spaces as they
-undoubtedly become impassable
-
-
-523
-00:22:59,096 --> 00:23:03,026
-and passable again in your game.
-
-
-524
-00:23:03,246 --> 00:23:05,186
-Next we have our
-GKObstacleGraph.
-
-
-525
-00:23:05,186 --> 00:23:07,976
-This is a GK graph that's
-specialized for pathfinding
-
-
-526
-00:23:07,976 --> 00:23:09,436
-around obstacles
-in your game world.
-
-
-527
-00:23:09,436 --> 00:23:12,186
-And these obstacles can
-be any arbitrary polygon.
-
-
-528
-00:23:12,186 --> 00:23:15,786
-Now we give you the functions
-necessary to dynamically add
-
-
-529
-00:23:15,786 --> 00:23:17,366
-and remove obstacles
-as your game world,
-
-
-530
-00:23:17,366 --> 00:23:18,696
-again, undoubtedly changes.
-
-
-531
-00:23:18,836 --> 00:23:21,666
-It also lets you dynamically
-connect new nodes to the graph
-
-
-532
-00:23:21,666 --> 00:23:24,656
-and this is really useful for
-stuff like inserting a start
-
-
-533
-00:23:24,656 --> 00:23:27,636
-and an end node in my graph
-to find a path for a unit.
-
-
-534
-00:23:27,636 --> 00:23:30,906
-Now we do this by what we're
-calling a buffer radius,
-
-
-535
-00:23:30,906 --> 00:23:32,916
-this is a safety zone
-around obstacles,
-
-
-536
-00:23:33,136 --> 00:23:34,646
-where my entities are
-not allowed to go,
-
-
-537
-00:23:34,646 --> 00:23:37,286
-and it's often a
-game-dependent size relating
-
-
-538
-00:23:37,286 --> 00:23:39,046
-to the bounding radius
-of the entities
-
-
-539
-00:23:39,046 --> 00:23:40,206
-that I want to do
-the navigating.
-
-
-540
-00:23:41,256 --> 00:23:42,236
-So let's talk a little more
-
-
-541
-00:23:42,236 --> 00:23:44,306
-about how these obstacle
-graphs are generated.
-
-
-542
-00:23:44,886 --> 00:23:47,656
-So here I have a simple scene
-with two square obstacles,
-
-
-543
-00:23:48,166 --> 00:23:50,406
-an entity on the lower
-left that wants to get
-
-
-544
-00:23:50,476 --> 00:23:52,026
-to that bridge on
-the lower right.
-
-
-545
-00:23:52,496 --> 00:23:56,766
-My entity is bounded by some
-bounding radius, and we're going
-
-
-546
-00:23:56,766 --> 00:23:58,216
-to use that as our buffer radius
-
-
-547
-00:23:58,246 --> 00:24:00,296
-to artificially make
-our obstacles larger.
-
-
-548
-00:24:01,656 --> 00:24:04,186
-Then under the hood the
-obstacle graph is going
-
-
-549
-00:24:04,186 --> 00:24:05,876
-to make the appropriate
-connections between all
-
-
-550
-00:24:05,876 --> 00:24:07,826
-of our grid nodes,
-and it's going
-
-
-551
-00:24:07,826 --> 00:24:09,176
-to correctly not make the ones
-
-
-552
-00:24:09,176 --> 00:24:11,806
-that would violate the
-spatiality of our obstacles.
-
-
-553
-00:24:12,056 --> 00:24:13,556
-So you see here that we found
-
-
-554
-00:24:13,556 --> 00:24:14,916
-that shortest path
-we were looking for.
-
-
-555
-00:24:15,116 --> 00:24:16,986
-It doesn't collide with
-any of my obstacles.
-
-
-556
-00:24:22,336 --> 00:24:25,066
-Here is a code example
-of that last example,
-
-
-557
-00:24:25,066 --> 00:24:26,626
-but with just a single obstacle.
-
-
-558
-00:24:26,886 --> 00:24:27,696
-Here at the top I'm going
-
-
-559
-00:24:27,696 --> 00:24:30,676
-to make a simple square polygon
-obstacle; it's just four points.
-
-
-560
-00:24:31,646 --> 00:24:33,466
-Then I'm going to make
-our obstacle graph,
-
-
-561
-00:24:33,536 --> 00:24:35,856
-passing in our obstacle
-and some buffer radius.
-
-
-562
-00:24:37,366 --> 00:24:38,866
-Then, I'm going to make
-a start and end node.
-
-
-563
-00:24:39,176 --> 00:24:41,256
-One for where my hero
-currently is and one
-
-
-564
-00:24:41,256 --> 00:24:42,166
-for where she wants to go.
-
-
-565
-00:24:42,166 --> 00:24:45,506
-Then I'm going to
-dynamically connect those nodes
-
-
-566
-00:24:45,506 --> 00:24:48,476
-to my obstacle graph using the
-obstacles that it possesses.
-
-
-567
-00:24:48,476 --> 00:24:50,396
-And what it's going to do is
-it's going to insert those nodes
-
-
-568
-00:24:50,396 --> 00:24:52,436
-into the graph and again
-automatically make the
-
-
-569
-00:24:52,436 --> 00:24:54,676
-connections that make
-sense, and not make the ones
-
-
-570
-00:24:54,676 --> 00:24:57,096
-that would violate the
-spatiality of my obstacles.
-
-
-571
-00:24:57,176 --> 00:25:00,806
-Then at the end here I'm going
-to find a path for my start
-
-
-572
-00:25:00,806 --> 00:25:03,756
-and end node and I get back a
-simple NSArray of graph nodes,
-
-
-573
-00:25:03,756 --> 00:25:10,406
-which I can then use to
-animate my character.
-
-
-574
-00:25:10,746 --> 00:25:13,546
-Some advance nodes on our graph
-node class which is GKGraphNode,
-
-
-575
-00:25:13,926 --> 00:25:16,306
-undoubtedly some need will arise
-where you want to subclass this.
-
-
-576
-00:25:16,306 --> 00:25:19,306
-And this is really useful for
-implementing stuff like advanced
-
-
-577
-00:25:19,306 --> 00:25:20,726
-or non-spatial costs or for
-
-
-578
-00:25:20,726 --> 00:25:24,506
-when you need more clear
-control over the pathfinding.
-
-
-579
-00:25:24,986 --> 00:25:26,386
-You can imagine a strategy game
-
-
-580
-00:25:26,386 --> 00:25:27,696
-that has a variety
-of terrain types.
-
-
-581
-00:25:27,696 --> 00:25:29,106
-Perhaps you want a
-forest terrain type
-
-
-582
-00:25:29,576 --> 00:25:31,716
-to take double the move over
-as my other terrain types.
-
-
-583
-00:25:31,956 --> 00:25:34,286
-I correctly want pathfinding
-to take this into account.
-
-
-584
-00:25:34,286 --> 00:25:36,866
-I don't want it to return
-the visually shortest path.
-
-
-585
-00:25:36,866 --> 00:25:39,306
-I correctly want it to
-navigate around the forest.
-
-
-586
-00:25:39,306 --> 00:25:41,136
-Because that is actually
-the shortest path
-
-
-587
-00:25:41,416 --> 00:25:42,936
-in my game world's terms.
-
-
-588
-00:25:43,876 --> 00:25:45,836
-GKGraphNode is also
-useful when you want
-
-
-589
-00:25:45,836 --> 00:25:48,306
-to manually make your own
-graphs, and you do this
-
-
-590
-00:25:48,306 --> 00:25:50,486
-by manually managing the
-connections between nodes.
-
-
-591
-00:25:50,846 --> 00:25:52,886
-This is really good for
-things like abstract
-
-
-592
-00:25:52,886 --> 00:25:54,036
-or non-spatial graphs.
-
-
-593
-00:25:54,456 --> 00:25:56,706
-Perhaps you want your game to
-have portals and your units
-
-
-594
-00:25:56,706 --> 00:25:58,366
-to correctly take those
-portals into account
-
-
-595
-00:25:58,366 --> 00:25:59,586
-for pathfinding purposes,
-
-
-596
-00:26:00,166 --> 00:26:02,686
-even though those portals aren't
-spatially connected in anyway.
-
-
-597
-00:26:03,656 --> 00:26:06,836
-And our Grid/GraphNode and
-GraphNode2D which is used
-
-
-598
-00:26:06,836 --> 00:26:08,586
-with our obstacle node
-are also available
-
-
-599
-00:26:08,586 --> 00:26:09,966
-for subclass as you see fit.
-
-
-600
-00:26:12,996 --> 00:26:14,906
-This is a feature I'm
-really excited about.
-
-
-601
-00:26:14,906 --> 00:26:17,336
-We have done some work with
-the SpriteKit team to allow you
-
-
-602
-00:26:17,336 --> 00:26:19,206
-to easily generate
-these obstacle graphs
-
-
-603
-00:26:19,456 --> 00:26:21,276
-from your existing
-SpriteKit Scenes.
-
-
-604
-00:26:21,776 --> 00:26:23,726
-And you can do this for
-things like node bounds,
-
-
-605
-00:26:24,046 --> 00:26:26,166
-node physics bodies,
-and nodes textures.
-
-
-606
-00:26:27,096 --> 00:26:28,726
-So what this means is
-with very few lines
-
-
-607
-00:26:28,726 --> 00:26:30,536
-of code you can take an
-existing SpriteKit scene
-
-
-608
-00:26:30,736 --> 00:26:32,046
-and generate an obstacle graph
-
-
-609
-00:26:32,526 --> 00:26:34,986
-and automatically
-pathfind around it.
-
-
-610
-00:26:35,696 --> 00:26:37,916
-Now I would like to give
-you a small demo of this.
-
-
-611
-00:26:38,726 --> 00:26:40,426
-Let's explore pathfinding
-with SpriteKit.
-
-
-612
-00:26:52,296 --> 00:26:54,036
-Here I have the tower
-defense game we have talked
-
-
-613
-00:26:54,036 --> 00:26:56,686
-about implemented as
-a SpriteKit scene.
-
-
-614
-00:26:57,346 --> 00:26:59,856
-I'm generating entities on
-the left and they want to move
-
-
-615
-00:26:59,856 --> 00:27:00,786
-to the bridge on the right.
-
-
-616
-00:27:01,246 --> 00:27:03,716
-But because this is a tower
-defense game I'm undoubtedly
-
-
-617
-00:27:03,716 --> 00:27:05,686
-going to place some
-towers right,
-
-
-618
-00:27:05,726 --> 00:27:07,766
-that violate their current path.
-
-
-619
-00:27:07,766 --> 00:27:08,896
-So let's go ahead and place one.
-
-
-620
-00:27:09,866 --> 00:27:12,206
-And you'll notice they
-correctly pathfind around it.
-
-
-621
-00:27:12,206 --> 00:27:14,056
-That's because we're using
-the SpriteKit integration,
-
-
-622
-00:27:14,056 --> 00:27:14,726
-that we just talked about,
-
-
-623
-00:27:14,726 --> 00:27:17,256
-to automatically generate
-an obstacle from that node,
-
-
-624
-00:27:17,966 --> 00:27:19,776
-update the underlying
-GKObstacleGraph,
-
-
-625
-00:27:20,046 --> 00:27:20,796
-and update our path.
-
-
-626
-00:27:20,926 --> 00:27:24,286
-So let me turn a debugger, let
-me remove this tower real quick.
-
-
-627
-00:27:24,446 --> 00:27:26,176
-You see we just start with
-our simple path, right,
-
-
-628
-00:27:26,176 --> 00:27:27,236
-between start and end node.
-
-
-629
-00:27:28,006 --> 00:27:29,586
-But as I insert an
-obstacle in here,
-
-
-630
-00:27:30,186 --> 00:27:32,666
-we recalculate the
-underlining GKObstacleGraph.
-
-
-631
-00:27:32,666 --> 00:27:33,926
-And this allows our entities
-
-
-632
-00:27:33,926 --> 00:27:35,736
-to find a new path
-around that obstacle.
-
-
-633
-00:27:35,736 --> 00:27:38,096
-So let's go ahead
-and add a few more.
-
-
-634
-00:27:38,726 --> 00:27:44,516
-And because of that SpriteKit
-integration, every time we add
-
-
-635
-00:27:44,516 --> 00:27:45,656
-or remove an obstacle,
-
-
-636
-00:27:46,146 --> 00:27:48,916
-we can keep that underlying
-GKObstacleGraph updated.
-
-
-637
-00:27:53,296 --> 00:27:55,846
-So that's pathfinding
-with SpriteKit.
-
-
-638
-00:27:56,516 --> 00:28:04,546
-[ Applause ]
-
-
-639
-00:28:05,046 --> 00:28:06,766
-Now I would like to call
-my colleague Ross Dexter
-
-
-640
-00:28:06,766 --> 00:28:09,226
-up to tell you a little
-about our MinMax AI.
-
-
-641
-00:28:09,696 --> 00:28:09,966
-Ross.
-
-
-642
-00:28:11,516 --> 00:28:15,806
-[ Applause ]
-
-
-643
-00:28:16,306 --> 00:28:16,966
->> ROSS DEXTER: Thanks, Bruno.
-
-
-644
-00:28:19,976 --> 00:28:22,166
-So many of the features
-that Bruno spoke
-
-
-645
-00:28:22,166 --> 00:28:26,136
-about earlier can be used to
-create AI, but they're more
-
-
-646
-00:28:26,136 --> 00:28:28,496
-about giving life to
-entities within your game.
-
-
-647
-00:28:29,376 --> 00:28:31,256
-Many games also need
-equal AI opponents
-
-
-648
-00:28:31,256 --> 00:28:34,246
-that can play the entire game by
-the same rules as human players.
-
-
-649
-00:28:34,246 --> 00:28:36,636
-And this is critical for
-games like Chess, Checkers,
-
-
-650
-00:28:36,826 --> 00:28:38,336
-Tic-Tac-Toe, and so on.
-
-
-651
-00:28:38,866 --> 00:28:40,816
-So we wanted to provide
-you a solution for this.
-
-
-652
-00:28:42,136 --> 00:28:45,226
-And so we've chosen to implement
-a classic AI solution, MinMax,
-
-
-653
-00:28:45,226 --> 00:28:46,676
-as a key part of GameplayKit.
-
-
-654
-00:28:47,146 --> 00:28:50,116
-MinMax works by looking at all
-the moves available to a player,
-
-
-655
-00:28:50,406 --> 00:28:51,896
-and then it builds
-out a decision tree,
-
-
-656
-00:28:52,226 --> 00:28:54,976
-from each of those moves and all
-the permutations that can arise
-
-
-657
-00:28:54,976 --> 00:28:56,806
-from each of those moves.
-
-
-658
-00:28:56,846 --> 00:28:59,286
-When you request a move
-from it, it searches this,
-
-
-659
-00:28:59,286 --> 00:29:01,276
-the decision tree,
-looking for a move
-
-
-660
-00:29:01,276 --> 00:29:04,866
-that maximizes potential gain
-while minimizing potential loss.
-
-
-661
-00:29:05,306 --> 00:29:08,796
-This Tic-Tac-Toe example
-here, the AI selects the move
-
-
-662
-00:29:08,796 --> 00:29:10,116
-on the right for the X player
-
-
-663
-00:29:10,186 --> 00:29:12,226
-because in the best case
-it results in a win,
-
-
-664
-00:29:12,496 --> 00:29:14,456
-or in the worst case, it
-only results in a draw,
-
-
-665
-00:29:14,836 --> 00:29:19,976
-the other two moves
-both lead to losses.
-
-
-666
-00:29:19,976 --> 00:29:21,726
-So MinMax AI gives
-you the ability
-
-
-667
-00:29:22,036 --> 00:29:23,506
-to add AI controlled
-opponents to your games,
-
-
-668
-00:29:23,616 --> 00:29:26,896
-but it can also be used to
-suggest a move for human players
-
-
-669
-00:29:26,896 --> 00:29:28,886
-when they get stuck, and it's
-going to be great for games
-
-
-670
-00:29:28,886 --> 00:29:31,066
-that even don't have any
-other AI requirements.
-
-
-671
-00:29:31,576 --> 00:29:34,666
-It's best suited for turn
-based games, but it can be made
-
-
-672
-00:29:34,666 --> 00:29:36,976
-to work with any game
-where you have a set
-
-
-673
-00:29:36,976 --> 00:29:38,846
-of discrete moves available
-for players to make.
-
-
-674
-00:29:39,086 --> 00:29:43,756
-You can easily adjust
-the difficulty of the AI
-
-
-675
-00:29:44,026 --> 00:29:46,796
-by varying how far out
-into the future it looks.
-
-
-676
-00:29:47,406 --> 00:29:48,966
-Looking 10 moves
-in advance results
-
-
-677
-00:29:48,966 --> 00:29:52,346
-in much more effective play than
-looking ahead only 2 or 3 moves.
-
-
-678
-00:29:52,936 --> 00:29:55,336
-Additionally you can
-optionally direct it
-
-
-679
-00:29:55,336 --> 00:29:57,546
-to randomly select
-suboptimum moves
-
-
-680
-00:29:57,596 --> 00:29:59,266
-to give it an element
-of human error.
-
-
-681
-00:30:00,556 --> 00:30:02,356
-So let's look at how this
-integrates with your game.
-
-
-682
-00:30:03,066 --> 00:30:05,886
-The great thing about MinMax is
-that it doesn't need to know any
-
-
-683
-00:30:05,886 --> 00:30:06,806
-of the details of your game.
-
-
-684
-00:30:06,906 --> 00:30:08,986
-You don't need to teach it
-your rules and it doesn't need
-
-
-685
-00:30:08,986 --> 00:30:10,496
-to know how it's implemented.
-
-
-686
-00:30:10,776 --> 00:30:12,326
-This is all abstracted away.
-
-
-687
-00:30:12,436 --> 00:30:15,346
-All you have to do is provide
-a list of players in the game,
-
-
-688
-00:30:15,886 --> 00:30:17,116
-the possible moves
-they can make,
-
-
-689
-00:30:17,716 --> 00:30:20,656
-and a score for each player that
-indicates the relative strength
-
-
-690
-00:30:20,936 --> 00:30:21,916
-of their current position.
-
-
-691
-00:30:22,996 --> 00:30:25,906
-When you request a move from
-the AI, it takes all this data
-
-
-692
-00:30:25,906 --> 00:30:27,676
-into account and it
-builds a decision tree,
-
-
-693
-00:30:27,796 --> 00:30:30,036
-and returns the optimal
-move for you to use.
-
-
-694
-00:30:30,036 --> 00:30:34,566
-Let's look at the classes.
-
-
-695
-00:30:34,816 --> 00:30:36,256
-There are three key protocols
-that you're going to need
-
-
-696
-00:30:36,256 --> 00:30:38,336
-to implement to work
-with the MinMax AI.
-
-
-697
-00:30:38,336 --> 00:30:40,516
-And the first of
-these is GKGameModel,
-
-
-698
-00:30:40,856 --> 00:30:42,876
-and it's an abstract of
-the current game state.
-
-
-699
-00:30:44,336 --> 00:30:48,396
-If you're creating a Chess game
-for example, a good candidate
-
-
-700
-00:30:48,396 --> 00:30:50,936
-to implement this class would
-be on, say, the board class
-
-
-701
-00:30:50,936 --> 00:30:54,426
-because it tracks all of the
-positions on the board as well
-
-
-702
-00:30:54,426 --> 00:30:55,806
-as all the pieces that
-are currently in play.
-
-
-703
-00:30:56,416 --> 00:30:58,646
-As I mentioned on the
-previous slide, all this needs
-
-
-704
-00:30:58,646 --> 00:31:01,486
-to do is provide a list of
-the players that are active
-
-
-705
-00:31:01,486 --> 00:31:04,526
-in the game, the current
-player, scores for each
-
-
-706
-00:31:04,526 --> 00:31:07,146
-of those players, and then
-the possible moves that each
-
-
-707
-00:31:07,146 --> 00:31:08,456
-of those players can make.
-
-
-708
-00:31:08,456 --> 00:31:11,546
-It also needs to have a method
-for applying those moves
-
-
-709
-00:31:11,956 --> 00:31:14,456
-and this is used by the AI to
-build out its decision tree,
-
-
-710
-00:31:14,456 --> 00:31:16,456
-and can be used by
-you to apply a move
-
-
-711
-00:31:16,456 --> 00:31:17,646
-after it's been selected
-by the AI.
-
-
-712
-00:31:18,076 --> 00:31:19,536
-And when this move is applied,
-
-
-713
-00:31:19,566 --> 00:31:21,206
-it will change the
-current game state,
-
-
-714
-00:31:21,456 --> 00:31:23,786
-possibly changing the
-current act of the player,
-
-
-715
-00:31:23,996 --> 00:31:25,786
-scores for each of those
-players, and the moves
-
-
-716
-00:31:25,906 --> 00:31:26,876
-that are available to them.
-
-
-717
-00:31:28,296 --> 00:31:30,486
-The next protocol is
-GKGameModelUpdate,
-
-
-718
-00:31:30,656 --> 00:31:32,516
-this is an abstract of
-a move within your game.
-
-
-719
-00:31:32,996 --> 00:31:35,196
-It should have all
-of the data you need
-
-
-720
-00:31:35,276 --> 00:31:37,376
-to apply a move to
-your game model.
-
-
-721
-00:31:37,996 --> 00:31:40,436
-As we have said, it is
-used by MinMax to build
-
-
-722
-00:31:40,436 --> 00:31:43,256
-out the decision tree, and can
-be used by you to apply a move
-
-
-723
-00:31:43,256 --> 00:31:44,146
-after it's been selected.
-
-
-724
-00:31:45,186 --> 00:31:47,216
-Finally we have
+00:31:45,272 --> 00:31:47,374
+最后是
 GKGameModelPlayer
 
 
-725
-00:31:47,616 --> 00:31:50,356
-which is an abstract of a player
-of the game, and it's used
+507
+00:31:47,608 --> 00:31:49,443
+是游戏玩家抽象
 
 
-726
-00:31:50,356 --> 00:31:53,186
-by the AI to differentiate
-moves from one another.
+508
+00:31:49,910 --> 00:31:53,180
+AI用它来区分不同玩家的行动
 
 
-727
-00:31:53,186 --> 00:31:57,376
-Now we get to the AI itself,
+509
+00:31:56,316 --> 00:31:59,720
+现在来说说AI
+它属于GKMinMaxStrategist类
 
 
-728
-00:31:57,376 --> 00:31:59,716
-it's within the class
-GKMinMaxStrategist,
+510
+00:32:00,120 --> 00:32:01,955
+在GKGameModel上运作
 
 
-729
-00:32:00,116 --> 00:32:01,946
-and it operates on
-a GKGameModel.
+511
+00:32:02,155 --> 00:32:04,558
+在你创建
+MinMaxStrategist示例后
 
 
-730
-00:32:02,146 --> 00:32:04,566
-So after you create an
-instance the MinMaxStrategist,
+512
+00:32:04,625 --> 00:32:06,527
+你将把它连接到
+gameModel属性中
 
 
-731
-00:32:04,616 --> 00:32:06,336
-you're going to hook it up
-on the gameModel property.
+513
+00:32:07,995 --> 00:32:12,799
+当你从AI请求下一步时
+maxLookAheadDepth就是能进行预测
 
 
-732
-00:32:07,696 --> 00:32:10,466
-maxLookAheadDepth is how
-far into the future it looks
+514
+00:32:13,734 --> 00:32:17,871
+正如我们前面提到的
+较高的数字比较低的数字更有效
 
 
-733
-00:32:10,466 --> 00:32:11,936
-when you request a
-move from the AI.
+515
+00:32:18,338 --> 00:32:19,806
+开始使用之前
+这是你所需要做的
 
 
-734
-00:32:12,106 --> 00:32:15,656
-And as we mentioned earlier
-higher numbers result
+516
+00:32:20,107 --> 00:32:23,744
+当你调用bestMoveForPlayer时
+AI将创建它的决策图标
 
 
-735
-00:32:15,916 --> 00:32:17,856
-in more effective play
-than lower numbers.
+517
+00:32:24,244 --> 00:32:28,549
+按照从优到劣的顺序列出所有适合的步
+然后返回最优的步
 
 
-736
-00:32:18,326 --> 00:32:19,716
-And that's all you need
-to do to start using it.
+518
+00:32:29,249 --> 00:32:31,118
+这可能会出现在这些情况中
 
 
-737
-00:32:20,126 --> 00:32:22,926
-When you call bestMoveForPlayer,
-the AI will build
+519
+00:32:31,185 --> 00:32:33,153
+你有不止一个有利的步
+需要由AI作出决定
 
 
-738
-00:32:22,926 --> 00:32:25,956
-out its decision tree, rank all
-the available moves in order
+520
+00:32:33,587 --> 00:32:37,624
+以及这些情况中
+你可以直接指挥AI随机打破连接
 
 
-739
-00:32:25,956 --> 00:32:28,546
-from best to worse, and then
-return the optimal move.
+521
+00:32:38,692 --> 00:32:41,662
+若你想调用randomMoveForPlayer
+它就会出现
 
 
-740
-00:32:29,146 --> 00:32:31,196
-There may arise cases where
-you'll have more than one move
+522
+00:32:42,095 --> 00:32:44,031
+你有10个适合玩家的移动
 
 
-741
-00:32:31,196 --> 00:32:33,036
-that is equally advantageous
-for the AI to make,
+523
+00:32:44,765 --> 00:32:48,335
+但你只想从3个最佳移动中
+随机挑选出一个
 
 
-742
-00:32:33,576 --> 00:32:36,426
-and in those cases
-you can direct the AI
+524
+00:32:48,669 --> 00:32:52,573
+它将按照你的要求操作
+从3个最佳中随机挑选出一个
 
 
-743
-00:32:36,546 --> 00:32:37,626
-to randomly break ties.
+525
+00:32:53,140 --> 00:32:54,875
+而选出的这个可能是次优的
 
 
-744
-00:32:38,486 --> 00:32:40,316
-And that sort of thing
-comes in use if you want
+526
+00:32:54,942 --> 00:32:58,145
+如果你想要让AI看起来
+更人性化 会犯错误
 
 
-745
-00:32:40,316 --> 00:32:41,646
-to call randomMoveForPlayer.
+527
+00:32:58,212 --> 00:32:59,646
+这或许就是最令人满意的结果了
 
 
-746
-00:32:42,086 --> 00:32:45,696
-Say you have 10 moves available
-for a player, but you only want
+528
+00:33:01,215 --> 00:33:03,984
+bestMoveForPlayer
+和randomMoveForPlayer
 
 
-747
-00:32:45,696 --> 00:32:49,086
-to select a random one from
-the 3 best moves, it will take
+529
+00:33:04,051 --> 00:33:05,319
+都返回GKGameModelUpdate
 
 
-748
-00:32:49,086 --> 00:32:52,576
-that sorting and randomly choose
-one of those 3 best moves.
+530
+00:33:05,385 --> 00:33:09,823
+你可以将GKGameModelUpdate
+应用到GKGameModel以创建一个移动
 
 
-749
-00:32:53,156 --> 00:32:54,886
-One of those moves may be
-suboptimal unfortunately,
+531
+00:33:11,725 --> 00:33:13,193
+这是个简单的代码样本
 
 
-750
-00:32:54,886 --> 00:32:56,466
-but that may be desirable
-if you are trying
+532
+00:33:13,594 --> 00:33:15,796
+我正在创建象棋游戏模型
 
 
-751
-00:32:56,466 --> 00:32:58,206
-to make your AI appear
-more human
+533
+00:33:16,129 --> 00:33:17,397
+不幸的是
 
 
-752
-00:32:58,206 --> 00:32:59,586
-and have a chance
-of making an error.
+534
+00:33:17,764 --> 00:33:21,702
+审查你将如何执行游戏模型细节
+不在这个会话范围里
 
 
-753
-00:33:00,166 --> 00:33:02,256
-And both bestMoveForPlayer
+535
+00:33:21,768 --> 00:33:23,670
+但我们有很棒的样本代码
 
 
-754
-00:33:02,256 --> 00:33:05,396
-and randomMoveForPlayer
-return a GKGameModelUpdate
+536
+00:33:23,971 --> 00:33:26,573
+你可以用来展示将如何做这些事
 
 
-755
-00:33:05,396 --> 00:33:06,686
-which you can then use to apply
+537
+00:33:27,241 --> 00:33:28,442
+我们创建象棋模型
 
 
-756
-00:33:07,106 --> 00:33:10,086
-to your GKGameModel
-to make a move.
+538
+00:33:28,842 --> 00:33:31,912
+然后创建MinMax AI
 
 
-757
-00:33:11,256 --> 00:33:13,186
-So here is a quick code sample.
+539
+00:33:32,112 --> 00:33:35,382
+通过在gameModel属性上
+设置游戏模型将它联系起来
 
 
-758
-00:33:13,596 --> 00:33:15,796
-Here we're creating
-a Chess game model.
+540
+00:33:36,450 --> 00:33:38,452
+我们为
+LookAheadDepth选择6
 
 
-759
-00:33:16,126 --> 00:33:19,196
-And unfortunately going over the
-details of how you might want
+541
+00:33:38,752 --> 00:33:41,488
+当你创建决策图标时
+你将提前看到6个转弯
 
 
-760
-00:33:19,196 --> 00:33:21,166
-to implement your game
-model are beyond the scope
+542
+00:33:42,222 --> 00:33:43,123
+这就是我们所需做的
 
 
-761
-00:33:21,166 --> 00:33:23,686
-of this session, but we do have
-excellent sample code available
+543
+00:33:43,657 --> 00:33:46,560
+我们调用当前活跃玩家的
+bestMoveForPlayer
 
 
-762
-00:33:23,976 --> 00:33:25,686
-that you can look at to
-show how you might want
+544
+00:33:46,660 --> 00:33:50,130
+它将利用所给信息
+为玩家找出最优移动
 
 
-763
-00:33:25,686 --> 00:33:26,566
-to go about doing this.
+545
+00:33:50,797 --> 00:33:53,367
+你可以在游戏中应用那个移动
+用它来创建移动
 
 
-764
-00:33:26,886 --> 00:33:28,446
-So we create our Chess model,
+546
+00:33:56,036 --> 00:33:57,137
+我们来看一个简单的演示
 
 
-765
-00:33:28,846 --> 00:33:31,636
-and then we create
-our MinMax AI,
+547
+00:34:12,652 --> 00:34:15,856
+有一个只有两个玩家的简单游戏
+黑色和白色
 
 
-766
-00:33:31,636 --> 00:33:34,496
-and hook it up by
-setting the game model
+548
+00:34:15,922 --> 00:34:19,860
+它们在棋盘上尽可能的收集
+和它们同颜色的块
 
 
-767
-00:33:34,496 --> 00:33:35,396
-on the gameModel property.
+549
+00:34:20,494 --> 00:34:26,199
+当它们在棋盘上放置块时
 
 
-768
-00:33:36,216 --> 00:33:38,226
-We then choose our
-LookAheadDepth to 6,
+550
+00:34:26,300 --> 00:34:28,936
+它们将反转两块之间的属于对手的块
+使之变成属于己方颜色
 
 
-769
-00:33:38,746 --> 00:33:40,426
-so we're going to look
-ahead 6 turns in advance
+551
+00:34:30,304 --> 00:34:33,407
+我们有两个AI控制的玩家
 
 
-770
-00:33:40,426 --> 00:33:41,476
-when we build our decision tree.
+552
+00:34:33,706 --> 00:34:35,943
+黑色玩家可提前预测5个移动
 
 
-771
-00:33:42,216 --> 00:33:43,116
-That's all we need to do.
+553
+00:34:36,009 --> 00:34:38,579
+而白色玩家
+只能提前预测3个移动
 
 
-772
-00:33:43,656 --> 00:33:46,416
-Now we call bestMoveForPlayer
-with a currently active player
+554
+00:34:38,946 --> 00:34:43,583
+在游戏过程中使得黑色玩家
+可以很容易的打败白色玩家
 
 
-773
-00:33:46,656 --> 00:33:49,086
-and it will find the
-optimal move for that player
+555
+00:34:44,650 --> 00:34:47,855
+这里你可以看到
+有双方玩家的分数
 
 
-774
-00:33:49,166 --> 00:33:50,116
-with the given information.
+556
+00:34:47,955 --> 00:34:49,156
+这个很简单
 
 
-775
-00:33:50,786 --> 00:33:53,296
-You can then apply that move to
-the game model to make the move.
+557
+00:34:49,422 --> 00:34:53,627
+我们来看一下玩家在棋盘上拥有的块
+减去对手在棋盘上的块
 
 
-776
-00:33:53,296 --> 00:33:56,866
-So let's look at a quick demo.
+558
+00:34:54,061 --> 00:34:58,565
+再通权重码进行调整
+就得到分数了
 
 
-777
-00:34:13,076 --> 00:34:15,005
-So here we have a simple game
-where there are two players,
+559
+00:34:59,066 --> 00:35:01,301
+这里你可以看到
+黑色玩家很容易就打败了白色玩家
 
 
-778
-00:34:15,326 --> 00:34:17,565
-black and white, and they're
-trying to get as many pieces
+560
+00:35:01,668 --> 00:35:06,073
+我们来详细看下分数
 
 
-779
-00:34:17,815 --> 00:34:19,856
-of their color on the
-board as they can.
+561
+00:35:07,007 --> 00:35:08,108
+看这里
 
 
-780
-00:34:20,505 --> 00:34:25,136
-When they place a piece on the
-board they will flip any colors
+562
+00:35:09,376 --> 00:35:11,879
+在中间的块
+他们的权重是1
 
 
-781
-00:34:25,136 --> 00:34:27,576
-of the opponent's pieces
-to their color that lie
+563
+00:35:12,112 --> 00:35:14,414
+棋盘边缘位置
+权重略高
 
 
-782
-00:34:27,576 --> 00:34:28,835
-between their own pieces.
+564
+00:35:14,481 --> 00:35:16,216
+在角落的权重就更高了
 
 
-783
-00:34:29,386 --> 00:34:33,416
-So here we have both
-players controlled by the AI,
+565
+00:35:16,483 --> 00:35:19,052
+因为对于玩家来说
+这些位置更有利
 
 
-784
-00:34:33,696 --> 00:34:36,025
-the black player is looking
-ahead five moves in advance,
+566
+00:35:19,286 --> 00:35:24,658
+我们通过改变这些位置如何影响分数
+来指挥AI选择这些地方
 
 
-785
-00:34:36,025 --> 00:34:38,565
-while the white player is only
-looking ahead three moves.
+567
+00:35:26,660 --> 00:35:29,196
+我来互换一下这些人的预测
 
 
-786
-00:34:38,946 --> 00:34:42,606
-This allows the black player to
-easily defeat the white player
+568
+00:35:29,263 --> 00:35:31,632
+白色将会预测4步
+取代先前的预测3步
 
 
-787
-00:34:42,696 --> 00:34:43,596
-as it goes through the game.
+569
+00:35:32,332 --> 00:35:38,138
+尽管只是小变动
+这也会让AI更有效率
 
 
-788
-00:34:43,726 --> 00:34:47,856
-You can see here we have
-a score for each player.
+570
+00:35:38,205 --> 00:35:40,507
+事实上
+游戏中白色AI略占上风
 
 
-789
-00:34:47,966 --> 00:34:51,866
-This is simply we take a look at
-how many pieces the player has
+571
+00:35:41,108 --> 00:35:44,745
+但是黑色AI将牺牲短期利益
+换取长期胜利
 
 
-790
-00:34:51,866 --> 00:34:55,456
-on the board minus the number of
-pieces that their opponent has
+572
+00:35:45,112 --> 00:35:47,314
+这样最后就可以战胜白色
 
 
-791
-00:34:55,456 --> 00:34:57,436
-on the board, adjusted
-with some weights,
+573
+00:35:53,620 --> 00:35:54,821
+以上就是MinMax AI
 
 
-792
-00:34:57,436 --> 00:34:58,556
-and that gives us our score.
+574
+00:36:03,197 --> 00:36:05,098
+现在让我们来讨论随机源
 
 
-793
-00:34:58,556 --> 00:35:01,286
-So you see here the black player
-easily defeats the white player.
+575
+00:36:06,133 --> 00:36:07,935
+起初这个话题可能看起来不必要
 
 
-794
-00:35:01,676 --> 00:35:06,076
-So let's look closer
-at the score here.
+576
+00:36:08,001 --> 00:36:10,771
+因为我们已经有了随机函数
+为什么我们不能仅仅使用它就好呢
 
 
-795
-00:35:06,996 --> 00:35:10,546
-We see here that we have all
-of the pieces in the center,
+577
+00:36:11,572 --> 00:36:12,973
+好的 随机函数给我们随机序号
 
 
-796
-00:35:10,546 --> 00:35:11,886
-they're weighted at 1.
+578
+00:36:13,040 --> 00:36:15,209
+但是游戏有独特的随机序号需求
 
 
-797
-00:35:12,116 --> 00:35:14,426
-The position on the edge of
-the board are weighted higher,
+579
+00:36:15,275 --> 00:36:18,178
+随机函数可能无法给我们想要的一切
 
 
-798
-00:35:14,426 --> 00:35:16,226
-the corners are weighted
-even higher.
+580
+00:36:19,279 --> 00:36:22,716
+首先每个系统中由随机函数生成的序号
+可能是不相同的
 
 
-799
-00:35:16,476 --> 00:35:18,106
-That's because these
-positions are more advantageous
+581
+00:36:22,783 --> 00:36:26,320
+不能保证不同的计算机平台产生的
+结果是相同的
 
 
-800
-00:35:18,106 --> 00:35:20,456
-for the players, and
-so we direct the AI
+582
+00:36:27,154 --> 00:36:28,956
+这对网络游戏来说
+会是一个大问题
 
 
-801
-00:35:20,566 --> 00:35:21,546
-to favor these places
+583
+00:36:29,022 --> 00:36:33,560
+因为我们不能依靠任何一方
+以相同顺序生成的数据集合
 
 
-802
-00:35:21,546 --> 00:35:24,666
-by changing how those
-places effect the scores.
+584
+00:36:33,627 --> 00:36:35,028
+否则为了使两方是数据同步
 
 
-803
-00:35:26,216 --> 00:35:29,256
-So let's change-up the
-look ahead on these guys.
+585
+00:36:35,295 --> 00:36:36,463
+我们不得不浪费关键带宽
 
 
-804
-00:35:29,256 --> 00:35:31,636
-We'll make white look
-ahead 4 instead of just 3.
+586
+00:36:37,231 --> 00:36:39,166
+因此我们需要平台独立性和确定性
 
 
-805
-00:35:32,346 --> 00:35:35,246
-And even just this small
-change will allow the AI
+587
+00:36:40,200 --> 00:36:43,170
+无论我们什么调用随机函数
+都取自单一来源
 
 
-806
-00:35:35,656 --> 00:35:37,616
-to play more effectively
-and in fact in the middle
+588
+00:36:43,704 --> 00:36:46,473
+如果我对AI代码中的随机函数
+有一串请求
 
 
-807
-00:35:37,616 --> 00:35:40,516
-of the game it looks like the
-white AI has the upper hand,
+589
+00:36:46,840 --> 00:36:48,842
+然后我在我的物理代码中添加一项请求
 
 
-808
-00:35:40,516 --> 00:35:43,536
-but the black AI is able
-to trade a short-term game
+590
+00:36:49,209 --> 00:36:54,281
+物理代码中的这个请求就会影响
+在我的AI代码中生成的数字
 
 
-809
-00:35:43,686 --> 00:35:44,736
-for a long-term victory,
+591
+00:36:54,448 --> 00:36:55,616
+这可能会导致意外行为
 
 
-810
-00:35:45,106 --> 00:35:47,946
-and is able to overcome
-white in the end.
+592
+00:36:55,916 --> 00:36:58,485
+我们真正想做的事情是
+可以把这两个系统分开
 
 
-811
-00:35:54,096 --> 00:35:54,736
-That's MinMax AI.
+593
+00:36:58,819 --> 00:37:03,657
+这样两个系统分别生成的数字
+就不会互相影响
 
 
-812
-00:35:56,516 --> 00:36:02,696
-[ Applause ]
+594
+00:37:04,424 --> 00:37:08,295
+我们不仅想要控制生成的数字范围
 
 
-813
-00:36:03,196 --> 00:36:05,086
->> ROSS DEXTER: So now let's
-talk about random sources.
+595
+00:37:08,529 --> 00:37:11,131
+而且还要控制这些数字
+在该范围内是如何分布的
 
 
-814
-00:36:06,136 --> 00:36:07,986
-And at first this topic
-may seem unnecessary,
+596
+00:37:11,331 --> 00:37:12,766
+这就是随机源的由来
 
 
-815
-00:36:07,986 --> 00:36:09,656
-because we already have rand.
+597
+00:37:14,401 --> 00:37:17,504
+我们为你提供一系列
+具有确定性的游戏优质随机源
 
 
-816
-00:36:09,656 --> 00:36:10,636
-Why shouldn't we just use that?
+598
+00:37:17,938 --> 00:37:20,874
+因此当你有同样的种子时
+你就可以获取相同顺序号
 
 
-817
-00:36:11,556 --> 00:36:13,046
-Well rand gives us
-random numbers
+599
+00:37:20,941 --> 00:37:22,009
+无论你在什么平台上
 
 
-818
-00:36:13,046 --> 00:36:15,266
-but games have unique
-random number needs,
+600
+00:37:22,576 --> 00:37:25,179
+它们是可序列化的
+因此它们可以为你保存游戏数据
 
 
-819
-00:36:15,266 --> 00:36:18,186
-and rand may not give
-us everything we want.
+601
+00:37:25,412 --> 00:37:27,314
+这对阻止欺骗程序是非常实用的
 
 
-820
-00:36:19,046 --> 00:36:20,066
-First of all the numbers
+602
+00:37:28,448 --> 00:37:30,450
+人们用行业标准算法执行
 
 
-821
-00:36:20,066 --> 00:36:23,536
-that rand generates may not be
-the same from system to system.
+603
+00:37:30,517 --> 00:37:34,221
+众所周知这些行业标准算法
+具有可靠性和卓越的随机性
 
 
-822
-00:36:23,536 --> 00:36:25,246
-You're not guaranteed
-to have the same results
+604
+00:37:35,255 --> 00:37:38,058
+此外我们为你提供一套随机分布杠杆
 
 
-823
-00:36:25,346 --> 00:36:26,326
-on different platforms.
+605
+00:37:38,492 --> 00:37:43,497
+这使你可以在给定的范围内
+控制序号的分布
 
 
-824
-00:36:26,766 --> 00:36:29,036
-And that can be a big
-problem for networking games,
+606
+00:37:43,864 --> 00:37:47,134
+我们有一个真随机
+它的每个值都有同等的发生可能
 
 
-825
-00:36:29,036 --> 00:36:31,296
-because if we can't rely on
-the numbers on either side
+607
+00:37:47,601 --> 00:37:53,307
+高斯通过平均值
+分布中它的值以钟形曲线分布
 
 
-826
-00:36:31,296 --> 00:36:32,636
-of the collection
-to be generated
+608
+00:37:53,807 --> 00:37:56,577
+而非边缘值以及反聚类
+或恰当的随机分布
 
 
-827
-00:36:32,636 --> 00:36:35,026
-in the same sequence we have
-to waste critical bandwidth
+609
+00:37:56,810 --> 00:37:58,512
+这样有助于消除运行的数据
 
 
-828
-00:36:35,286 --> 00:36:36,456
-in syncing those two sides up.
+610
+00:37:59,146 --> 00:38:01,014
+最后我们有NSArray排列
 
 
-829
-00:36:37,216 --> 00:36:39,156
-So we want platform-independent
-determinism.
+611
+00:38:01,348 --> 00:38:04,184
+对洗牌这类事情是超级实用的
 
 
-830
-00:36:40,016 --> 00:36:41,486
-Also whenever we make a call
+612
+00:38:05,285 --> 00:38:06,153
+让我们来看看类
 
 
-831
-00:36:41,486 --> 00:36:43,186
-to rand we're drawing
-from a single source.
+613
+00:38:06,753 --> 00:38:09,556
+GKRandomSource
+是随机源的基础类
 
 
-832
-00:36:43,706 --> 00:36:46,476
-So if I have a bunch of
-calls to rand in my AI code,
+614
+00:38:09,823 --> 00:38:13,360
+采用NSSecureCoding
+和NSCopying以便被安全地序列化
 
 
-833
-00:36:46,526 --> 00:36:48,826
-and then I add a new
-call in my physics code,
+615
+00:38:15,095 --> 00:38:17,631
+同样的种子保证了确定性
 
 
-834
-00:36:49,206 --> 00:36:51,096
-that call in the physics
-code will affect the numbers
+616
+00:38:17,798 --> 00:38:18,932
+无论你在哪个平台上
 
 
-835
-00:36:51,096 --> 00:36:54,276
-that are being generated in
-my AI code, which could result
+617
+00:38:18,999 --> 00:38:22,302
+因此如果你想要同样的顺序号
+你可以依靠它生成
 
 
-836
-00:36:54,456 --> 00:36:55,606
-in unexpected behavior.
+618
+00:38:23,036 --> 00:38:27,274
+如果没有种子
+可以从安全的系统源获取一个
 
 
-837
-00:36:55,886 --> 00:36:56,906
-What we really want
-to do is be able
+619
+00:38:28,108 --> 00:38:30,143
+我们继续说说共享随机
 
 
-838
-00:36:56,906 --> 00:36:58,476
-to separate those
-two systems apart,
+620
+00:38:30,210 --> 00:38:32,546
+它是系统隐含的
+共享随机源
 
 
-839
-00:36:58,806 --> 00:37:01,346
-so that the numbers generated
-in one system have no effect
+621
+00:38:32,913 --> 00:38:36,183
+它不具有确定性
+但是很多例子说明它值得拥有
 
 
-840
-00:37:01,526 --> 00:37:03,646
-on the numbers generated
-in a different system.
+622
+00:38:36,483 --> 00:38:40,554
+例如你在洗牌的时候
+你希望每个结果都是唯一的
 
 
-841
-00:37:04,316 --> 00:37:07,366
-And also we may not want
-control over just the range
+623
+00:38:42,322 --> 00:38:45,392
+让我们看看
+我们为你提供的AI随机源运算法
 
 
-842
-00:37:07,366 --> 00:37:08,286
-of numbers we're generating
+624
+00:38:45,692 --> 00:38:46,560
+我们有ARC4
 
 
-843
-00:37:08,526 --> 00:37:11,146
-but also how those numbers are
-distributed across that range.
+625
+00:38:46,960 --> 00:38:51,398
+它低消耗并具有卓越的随机性
+并且它即将成为你的Goldielocks随机源
 
 
-844
-00:37:11,146 --> 00:37:13,436
-And this is where
-random sources comes in.
+626
+00:38:51,798 --> 00:38:55,169
+我们有线性
+意味它比ARC4更低消耗
 
 
-845
-00:37:14,076 --> 00:37:16,536
-So we're offering you a set
-of game quality random sources
+627
+00:38:55,435 --> 00:39:00,274
+但它的随机性并不那么好
+你可能会更频繁地看见重复的顺序号
 
 
-846
-00:37:16,536 --> 00:37:18,896
-that are deterministic, so
-when you have the same seed,
+628
+00:39:00,774 --> 00:39:04,211
+最后我们有马特赛特旋转演算法
+高质量但占用大量内存
 
 
-847
-00:37:18,896 --> 00:37:20,406
-you will always get
-the same sequence
+629
+00:39:04,845 --> 00:39:06,580
+可以发现没有一个适合密码系统
 
 
-848
-00:37:20,406 --> 00:37:21,996
-of numbers no matter
-what platform you're on.
+630
+00:39:06,647 --> 00:39:09,583
+但Apple提供其它单独的
+API来满足这些需求
 
 
-849
-00:37:22,416 --> 00:37:24,336
-They are also serializable
-so they can be saved
+631
+00:39:11,919 --> 00:39:13,320
+现在我们开始讨论随机分布
 
 
-850
-00:37:24,336 --> 00:37:25,046
-out with your game data.
+632
+00:39:13,387 --> 00:39:17,891
+在基础类中GKRandomDistribution
+执行一个纯粹的随机分布
 
 
-851
-00:37:25,046 --> 00:37:27,306
-And this can be really useful
-in helping to prevent cheating.
+633
+00:39:18,192 --> 00:39:23,163
+意味着每个在最低值和最高值之间的值
+都有同等的发生可能性
 
 
-852
-00:37:27,586 --> 00:37:30,076
-And they're also implemented
-using industry-standard
+634
+00:39:23,897 --> 00:39:25,866
+你可以通过操纵nextInt
 
 
-853
-00:37:30,076 --> 00:37:31,686
-algorithms that are
-known to be reliable,
+635
+00:39:26,200 --> 00:39:28,068
+nextUniform
+及rextBool来获取数值
 
 
-854
-00:37:32,296 --> 00:37:34,236
-and have excellent
-random characteristics.
+636
+00:39:29,102 --> 00:39:34,675
+我们也提供一套骰子默认构造函数
+用于创建6面 20面和自定义骰子
 
 
-855
-00:37:34,906 --> 00:37:37,356
-In addition we offer you a
-set of random distributions
-
-
-856
-00:37:37,356 --> 00:37:39,106
-to leverage, and these allow you
-
-
-857
-00:37:39,106 --> 00:37:42,016
-to control how your
-numbers are distributed
-
-
-858
-00:37:42,016 --> 00:37:43,506
-across the given range.
-
-
-859
-00:37:43,506 --> 00:37:46,596
-We have a true random where
-every value is equally likely
-
-
-860
-00:37:46,596 --> 00:37:49,886
-to occur, Gaussian distribution
-where values are weighted
-
-
-861
-00:37:49,886 --> 00:37:52,426
-on a bell curve with values
-toward the mean more likely
-
-
-862
-00:37:52,426 --> 00:37:55,106
-than those on the fringes,
-and also anti-clustering
-
-
-863
-00:37:55,106 --> 00:37:56,566
-or fair random distribution
-
-
-864
-00:37:56,806 --> 00:37:58,506
-which helps eliminate
-runs of numbers.
-
-
-865
-00:37:59,146 --> 00:38:02,246
-And finally we have NSArray
-shuffling, which is super useful
-
-
-866
-00:38:02,246 --> 00:38:04,196
-for doing things like
-shuffling a deck of cards.
-
-
-867
-00:38:04,196 --> 00:38:06,166
-So let's look at the classes.
-
-
-868
-00:38:06,566 --> 00:38:09,556
-GKRandomSource is the base
-class for random sources.
-
-
-869
-00:38:09,816 --> 00:38:11,776
-And it adopts NSSecureCoding
-and NSCopying
-
-
-870
-00:38:11,776 --> 00:38:13,226
-so it can be securely
-serialized.
-
-
-871
-00:38:14,816 --> 00:38:17,636
-Determinism is guaranteed
-with the same seed,
-
-
-872
-00:38:17,786 --> 00:38:18,996
-no matter what platform
-you're on,
-
-
-873
-00:38:18,996 --> 00:38:21,476
-so if you want the same sequence
-of numbers, you can always rely
-
-
-874
-00:38:21,476 --> 00:38:22,306
-on it to be generated.
-
-
-875
-00:38:23,066 --> 00:38:26,046
-If no seed is given,
-one is drawn
-
-
-876
-00:38:26,046 --> 00:38:27,276
-from a secure system source.
-
-
-877
-00:38:28,066 --> 00:38:31,786
-Go on to sharedRandom, which is
-the system's underlying shared
-
-
-878
-00:38:31,786 --> 00:38:33,976
-random source, and this
-is not deterministic
-
-
-879
-00:38:33,976 --> 00:38:36,176
-but there are cases in
-which this may be desirable,
-
-
-880
-00:38:36,526 --> 00:38:38,656
-such as when you're
-shuffling a deck of cards
-
-
-881
-00:38:38,696 --> 00:38:40,466
-and you want every
-result to be unique.
-
-
-882
-00:38:40,946 --> 00:38:44,546
-Let's go over the AI random
-source algorithms we have
-
-
-883
-00:38:44,656 --> 00:38:45,376
-available for you.
-
-
-884
-00:38:45,716 --> 00:38:48,156
-We have ARC4, which
-has very low overhead
-
-
-885
-00:38:48,156 --> 00:38:49,856
-and excellent random
-characteristics and is going
-
-
-886
-00:38:49,856 --> 00:38:51,386
-to be your Goldilocks
-random source,
-
-
-887
-00:38:51,386 --> 00:38:54,036
-we have Linear Congruential
-which has even lower overhead
-
-
-888
-00:38:54,036 --> 00:38:57,396
-than ARC4, but it's random
-characteristics are not quite
-
-
-889
-00:38:57,396 --> 00:38:59,346
-as good, and you may see
-some more frequently repeated
-
-
-890
-00:38:59,346 --> 00:39:02,006
-sequences of numbers, finally
-we have the Mersenne Twister,
-
-
-891
-00:39:02,296 --> 00:39:04,056
-which is high quality
-but memory intensive.
-
-
-892
-00:39:04,636 --> 00:39:06,626
-Note that none of these are
-suitable for cryptography
-
-
-893
-00:39:06,626 --> 00:39:09,316
-but Apple offers other separate
-APIs to meet these needs.
-
-
-894
-00:39:10,006 --> 00:39:13,966
-Now we get to our random
-distributions, in the base class
-
-
-895
-00:39:13,966 --> 00:39:15,726
-for this, it is
-GKRandomDistribution
-
-
-896
-00:39:15,726 --> 00:39:17,896
-which is implements a
-pure random distribution,
-
-
-897
-00:39:18,226 --> 00:39:21,666
-meaning every value between
-lowest value and highest value,
-
-
-898
-00:39:21,966 --> 00:39:23,166
-are equally likely to occur.
-
-
-899
-00:39:23,906 --> 00:39:25,676
-You can get numbers
-by calling nextInt,
-
-
-900
-00:39:26,236 --> 00:39:27,306
-nextUniform, and nextBool.
-
-
-901
-00:39:27,306 --> 00:39:31,406
-We also offer a set of dice
-convenience constructors
-
-
-902
-00:39:31,406 --> 00:39:35,696
-to create 6 sided, 20
-sided, and custom sided die.
-
-
-903
-00:39:37,296 --> 00:39:39,656
-Then we have
+637
+00:39:37,544 --> 00:39:39,279
+然后我们有
 GKGaussianDistribution
 
 
-904
-00:39:39,656 --> 00:39:42,936
-which implements a bell
-curve Gaussian distribution.
+638
+00:39:39,346 --> 00:39:42,950
+来执行钟形曲线高斯分布
 
 
-905
-00:39:43,926 --> 00:39:46,146
-The values are biased
-towards the mean value
+639
+00:39:44,218 --> 00:39:49,590
+这些值偏向于均值
+而距离均值较远的值是不太可能发生
 
 
-906
-00:39:46,546 --> 00:39:49,306
-and the values farther away
-from the mean are less likely
+640
+00:39:49,656 --> 00:39:51,525
+这就是在样板分布里所发生的一切情况
 
 
-907
-00:39:49,306 --> 00:39:50,216
-to occur, and that's
-what happened
+641
+00:39:52,226 --> 00:39:55,662
+我们已经生成了一个由1到5之间
+数字组成的15位顺序号
 
 
-908
-00:39:50,216 --> 00:39:51,526
-in our sample distribution here.
+642
+00:39:55,896 --> 00:39:59,933
+我们可以看到均值3发生的可能性
+远远大于其他任意数
 
 
-909
-00:39:52,216 --> 00:39:55,656
-We have generated a sequence
-of 15 numbers between 1 and 5,
+643
+00:40:01,602 --> 00:40:04,304
+事实上和其它任何数字一样
+它发生两次以上
 
 
-910
-00:39:55,656 --> 00:39:58,396
-and we see that the mean value
-of 3 occurs far more frequently
+644
+00:40:04,371 --> 00:40:06,039
+边缘数1和5
 
 
-911
-00:39:58,796 --> 00:39:59,946
-than any of the other numbers.
+645
+00:40:06,306 --> 00:40:07,641
+每个只发生一次
 
 
-912
-00:40:00,476 --> 00:40:03,016
-In fact it occurs
-more than twice
+646
+00:40:08,375 --> 00:40:11,378
+可以发现在一个
+标准高斯分布中它是无限的
 
 
-913
-00:40:03,016 --> 00:40:04,386
-as frequently as
-any other number.
+647
+00:40:11,745 --> 00:40:13,680
+但它不被随机源需要
 
 
-914
-00:40:04,386 --> 00:40:06,026
-With 1 and 5, the
-values on the fringes,
+648
+00:40:13,847 --> 00:40:18,085
+因此我们操纵每个均值
+三个标准差之外的每个值
 
 
-915
-00:40:06,306 --> 00:40:07,646
-only occurring a
-single time each.
+649
+00:40:20,687 --> 00:40:21,688
+接下来我们看看
 
 
-916
-00:40:08,176 --> 00:40:11,386
-Note that in a standard Gaussian
-distribution, is unbounded
+650
+00:40:21,788 --> 00:40:25,826
+在GKShuffledDistribution类中
+执行反聚类分布
 
 
-917
-00:40:11,756 --> 00:40:13,526
-but that's undesirable
-for a random source,
+651
+00:40:26,260 --> 00:40:31,265
+这是随机分布
+有助于减少或消除运行的数字
 
 
-918
-00:40:13,846 --> 00:40:16,026
-so we call every value outside
+652
+00:40:31,498 --> 00:40:32,633
+但它随着时间是随机的
 
 
-919
-00:40:16,276 --> 00:40:18,076
-of a three standard
-deviations of the mean.
+653
+00:40:33,267 --> 00:40:35,636
+你运用
+uniformDistance来控制这些
 
 
-920
-00:40:18,566 --> 00:40:24,006
-Next we have our anti-clustering
-distribution implemented
+654
+00:40:36,103 --> 00:40:40,007
+在0.0
+所有数字都有同等的发生概率
 
 
-921
-00:40:24,006 --> 00:40:25,816
-in the class
-GKShuffledDistribution.
+655
+00:40:40,274 --> 00:40:44,778
+这是无法从一个随机分布中
+真随机源中区分的
 
 
-922
-00:40:26,056 --> 00:40:29,756
-This is our fair random
-distribution, which helps reduce
+656
+00:40:45,646 --> 00:40:47,281
+在1.0
+所有值都是不同的
 
 
-923
-00:40:29,756 --> 00:40:32,636
-or eliminate runs of numbers,
-but it's random over time.
+657
+00:40:47,347 --> 00:40:50,884
+在你开始看到任何重复值之前
+它会遍及范围内的每个值
 
 
-924
-00:40:33,276 --> 00:40:35,526
-And you control this by
-using the uniformDistance.
+658
+00:40:51,952 --> 00:40:53,954
+这就是在我们的分布中的情况
 
 
-925
-00:40:36,096 --> 00:40:40,016
-At 0.0, all numbers are
-equally likely to occur,
+659
+00:40:54,021 --> 00:40:56,757
+再重复一下 我们生成了
+由1-5之间的数字组成的15为数值
 
 
-926
-00:40:40,266 --> 00:40:43,026
-and this is indistinguishable
-from a true random source,
+660
+00:40:57,124 --> 00:41:02,296
+在我们开始发现任何重复值之前
+我们会命中每一个数值
 
 
-927
-00:40:43,936 --> 00:40:44,776
-our random distribution.
+661
+00:41:03,330 --> 00:41:06,500
+实际上每个数值都生成了三次
 
 
-928
-00:40:45,656 --> 00:40:47,796
-At 1.0, all values are
-different and it will run
+662
+00:41:09,069 --> 00:41:10,470
+让我们来看一个简单的代码例子
 
 
-929
-00:40:47,796 --> 00:40:49,506
-through every value in
-the range before you start
+663
+00:41:11,905 --> 00:41:14,708
+我们可以很容易地创建一个
+6面骰子随机源
 
 
-930
-00:40:49,506 --> 00:40:50,876
-to see any repeated values.
+664
+00:41:14,775 --> 00:41:18,245
+你仅需运用默认构建函数
+GKRandomDistribution然后摇动骰子
 
 
-931
-00:40:51,936 --> 00:40:52,806
-That's what we have here.
+665
+00:41:18,712 --> 00:41:22,449
+如同调用nextInt一样简单
 
 
-932
-00:40:52,806 --> 00:40:54,026
-In our distribution here.
+666
+00:41:24,418 --> 00:41:26,587
+类似的
+创建一个20面骰子也很容易
 
 
-933
-00:40:54,026 --> 00:40:56,706
-Once again we're generating
-15 numbers between 1 and 5
+667
+00:41:30,290 --> 00:41:33,393
+创建自定义骰子也同样简单
 
 
-934
-00:40:57,126 --> 00:40:59,466
-and you can see that
-we're hitting every number
+668
+00:41:33,493 --> 00:41:35,095
+我们正创建一个256面骰子
 
 
-935
-00:40:59,466 --> 00:41:02,296
-in the range before we start
-to see any repeated values.
+669
+00:41:35,162 --> 00:41:37,664
+如果你试着在现实世界中掷这样的骰子
+情况将完全不一样
 
 
-936
-00:41:02,666 --> 00:41:06,496
-And in fact every value is
-generated exactly three times.
+670
+00:41:39,900 --> 00:41:44,238
+前面的三个例子
+都运用真随机分布执行
 
 
-937
-00:41:06,496 --> 00:41:10,486
-So let's go over the
-simple code examples.
+671
+00:41:44,304 --> 00:41:46,573
+但你可以使用我们提供给你的任何分布
 
 
-938
-00:41:11,786 --> 00:41:14,846
-It's very easy to create a
-6 sided die random source,
+672
+00:41:46,974 --> 00:41:49,877
+我们正使用高斯分布
 
 
-939
-00:41:14,846 --> 00:41:16,336
-you just use the
-connivence constructor
+673
+00:41:50,110 --> 00:41:52,246
+创建了一个20面骰子
+因此它的均值大约是11
 
 
-940
-00:41:16,646 --> 00:41:20,346
-GKRandomDistribution,
-and rolling the dye is
+674
+00:41:52,613 --> 00:41:55,115
+因此当你转骰子的时候
+你最有可能得到一个约值
 
 
-941
-00:41:20,346 --> 00:41:22,446
-as easy as calling nextInt.
+675
+00:41:57,251 --> 00:42:01,588
+在这里我们创建一个20面骰子
+使用洗牌分布
 
 
-942
-00:41:23,116 --> 00:41:30,116
-It's similarly easy to
-create a 20 sided die.
+676
+00:42:02,689 --> 00:42:07,995
+在默认情况下
+统一的洗牌分布距离是1.0
 
 
-943
-00:41:30,296 --> 00:41:33,386
-And creating custom
-die is also quite easy.
+677
+00:42:08,228 --> 00:42:09,363
+因此当我们转动的时候
 
 
-944
-00:41:33,486 --> 00:41:35,146
-Here we're creating
-a 256 sided die
+678
+00:42:09,696 --> 00:42:13,200
+在我们看见任何重复值之前
+我们将击中范围内的每个值
 
 
-945
-00:41:35,146 --> 00:41:36,256
-which would be pretty
-awkward if you tried
+679
+00:42:13,400 --> 00:42:15,135
+我们第一次转的时候可能得到了5
 
 
-946
-00:41:36,256 --> 00:41:37,136
-to roll it in the real world.
+680
+00:42:15,569 --> 00:42:18,705
+然后我们知道下一次我们转动它的时候
+我们一定不会再转到5
 
 
-947
-00:41:37,716 --> 00:41:43,026
-The previous three examples were
-all implemented using a true
+681
+00:42:18,939 --> 00:42:21,575
+直到我们转出范围内的其他所有值
 
 
-948
-00:41:43,026 --> 00:41:45,586
-random distribution, but you
-can use any of the distributions
+682
+00:42:23,710 --> 00:42:26,413
+最后我们有数组洗牌
 
 
-949
-00:41:45,586 --> 00:41:46,586
-that we have available to you.
+683
+00:42:27,047 --> 00:42:30,484
+我们运用早前在GKRandomSource
+提到过的共享随机源
 
 
-950
-00:41:46,966 --> 00:41:48,626
-Here we're creating
-a 20 sided die
+684
+00:42:30,551 --> 00:42:32,586
+它让我们获得系统隐含的随机源
 
 
-951
-00:41:48,626 --> 00:41:51,556
-with a Gaussian distribution, so
-it's weighted to the mean value,
+685
+00:42:32,953 --> 00:42:34,788
+它不具有确定性
 
 
-952
-00:41:51,556 --> 00:41:54,246
-around 11, so when you roll
-it, you're most likely to come
+686
+00:42:35,222 --> 00:42:37,858
+但在这个情况下是有利的
 
 
-953
-00:41:54,246 --> 00:41:55,116
-up with a number around there.
+687
+00:42:38,192 --> 00:42:41,461
+我们希望每一个卡铲都是唯一的
 
 
-954
-00:41:55,656 --> 00:41:59,416
-And here we're creating
-a die, a 20 sided die
+688
+00:42:42,296 --> 00:42:45,899
+你可以看到让随机源
+成为你游戏的一部分是很容易的
 
 
-955
-00:41:59,876 --> 00:42:01,576
-with our shuffle distribution,
+689
+00:42:46,333 --> 00:42:48,402
+仅仅是几行代码就可以实现
 
 
-956
-00:42:02,706 --> 00:42:04,786
-and by default the
-uniform distance
+690
+00:42:49,369 --> 00:42:50,437
+这就是随机源
 
 
-957
-00:42:04,786 --> 00:42:08,046
-on our shuffle distribution
-is 1.0.
+691
+00:42:51,705 --> 00:42:54,908
+现在我想邀请桥什·伯格斯
+和我们谈谈规则系统
 
 
-958
-00:42:08,236 --> 00:42:10,946
-So when we roll this one,
-we're going to hit every value
+692
+00:43:01,615 --> 00:43:02,482
+谢谢 罗斯
 
 
-959
-00:42:10,946 --> 00:42:13,196
-in the range before we start
-to see any repeated values.
+693
+00:43:07,054 --> 00:43:08,121
+你们好 我是桥什
 
 
-960
-00:42:13,416 --> 00:42:15,136
-The first time we roll
-it, we might get 5,
+694
+00:43:08,755 --> 00:43:13,961
+我一直和布鲁诺和诺斯并肩工作
+进行GameplayKit收尾工作
 
 
-961
-00:42:15,566 --> 00:42:17,616
-then we know the next time we
-roll it, we definitely not going
+695
+00:43:15,863 --> 00:43:18,398
+我在这里讲讲这些系统中的
+一个规则系统
 
 
-962
-00:42:17,616 --> 00:42:19,606
-to get that number
-again, until we run
+696
+00:43:19,666 --> 00:43:23,871
+在我开始降解规则系统之前
+我想要说说游戏总有的一些常见要素
 
 
-963
-00:42:19,606 --> 00:42:21,576
-through every other
-value in the range.
+697
+00:43:24,938 --> 00:43:26,707
+游戏往往由三个元素组成
 
 
-964
-00:42:23,706 --> 00:42:26,416
-And finally, here we
-have array shuffling,
+698
+00:43:27,641 --> 00:43:32,713
+这像是名词之类的东西
+位置 速度 生命值
 
 
-965
-00:42:27,036 --> 00:42:29,496
-we're using the shared random
-source we mentioned earlier
+699
+00:43:33,413 --> 00:43:34,448
+已经穿上身的装备
 
 
-966
-00:42:29,496 --> 00:42:31,396
-on GKRandomSource,
-which gives us access
+700
+00:43:36,049 --> 00:43:38,018
+第二是类似动词的东西
 
 
-967
-00:42:31,426 --> 00:42:33,496
-to the system's underlying
-random source,
+701
+00:43:38,819 --> 00:43:42,923
+这些玩家可执行的动作
+例如跑 跳
 
 
-968
-00:42:33,496 --> 00:42:34,786
-which is not deterministic,
+702
+00:43:43,757 --> 00:43:47,127
+使用一件物品
+或者如果你在一辆车上 加速
 
 
-969
-00:42:35,226 --> 00:42:37,866
-but in this case
-that's advantageous.
+703
+00:43:48,662 --> 00:43:50,564
+最后是规则
 
 
-970
-00:42:38,206 --> 00:42:41,466
-We want every instance of the
-card shoveling to be unique.
+704
+00:43:51,632 --> 00:43:55,736
+规则是极其重要的
+因为要界定名词和动词是如何相互作用
 
 
-971
-00:42:42,286 --> 00:42:43,896
-And you can see how easy it is
+705
+00:43:57,171 --> 00:44:00,641
+规则给你的游戏添加了质感
+绝好的游戏有绝好的规则
 
 
-972
-00:42:44,216 --> 00:42:45,896
-to make random sources
-a part of your game.
+706
+00:44:02,276 --> 00:44:03,510
+让我们来看一个例子规则
 
 
-973
-00:42:46,336 --> 00:42:48,306
-It's only a couple lines of
-code and you can get going.
+707
+00:44:07,047 --> 00:44:08,048
+在这里我们有一项规则
 
 
-974
-00:42:48,306 --> 00:42:50,396
-And that's random sources.
+708
+00:44:08,215 --> 00:44:11,685
+司机可以用来决定什么时候刹车
+什么时候加速
 
 
-975
-00:42:51,696 --> 00:42:53,946
-So now I would like to invite
-Joshua Boggs up here to talk
+709
+00:44:13,353 --> 00:44:14,988
+运用距离的输入属性
 
 
-976
-00:42:53,946 --> 00:42:54,916
-about our rule systems.
+710
+00:44:15,689 --> 00:44:17,558
+玩家要么将减速 要么将加速
 
 
-977
-00:42:55,516 --> 00:43:02,076
-[ Applause ]
+711
+00:44:18,926 --> 00:44:20,160
+在这个例子中我们可以看到
 
 
-978
-00:43:02,576 --> 00:43:02,996
->> JOSHUA BOGGS: Thanks, Ross.
+712
+00:44:20,394 --> 00:44:22,896
+如果距离小于5 他们将刹车
 
 
-979
-00:43:07,046 --> 00:43:08,106
-Hi. I'm Josh.
+713
+00:44:23,096 --> 00:44:24,665
+当大于或等于的时候 他们将加速
 
 
-980
-00:43:08,326 --> 00:43:10,266
-I have been working
-alongside Bruno
+714
+00:44:26,667 --> 00:44:29,102
+这个逻辑很不错
+但这里有一个不易察觉的问题
 
 
-981
-00:43:10,266 --> 00:43:11,656
-and Ross while they've
-been putting
+715
+00:44:30,037 --> 00:44:33,774
+在距离为5左右
+我们的动作非常不稳定
 
 
-982
-00:43:11,656 --> 00:43:13,956
-on the finishing
-touches to GameplayKit.
+716
+00:44:34,174 --> 00:44:38,779
+因为汽车将在刹车
+和加速之间不断徘徊
 
 
-983
-00:43:14,166 --> 00:43:18,386
-I'm here to talk about one of
-those systems, the rule systems.
+717
+00:44:41,215 --> 00:44:42,983
+这将使我们的动作非常不稳定
 
 
-984
-00:43:18,866 --> 00:43:21,996
-So before I go into the rule
-systems, I just want to go
+718
+00:44:43,317 --> 00:44:46,653
+因此想要更多自然的动作
+我们需要一些更加真实的东西
 
 
-985
-00:43:21,996 --> 00:43:24,196
-over some common ingredients
-that games tend to have.
+719
+00:44:50,757 --> 00:44:52,292
+运用一个更加模糊的解决方法
 
 
-986
-00:43:24,946 --> 00:43:28,156
-Games tend to consistent of
-three elements, it is things
+720
+00:44:53,327 --> 00:44:58,232
+我们输出的情况而不是立即执行动作
 
 
-987
-00:43:28,156 --> 00:43:32,726
-like your nouns: position,
-speed, player health,
+721
+00:44:58,765 --> 00:45:01,268
+我们在这里输出了两种情况 近和远
 
 
-988
-00:43:33,406 --> 00:43:34,456
-equipment they may be holding.
+722
+00:45:01,635 --> 00:45:02,703
+两者都是基于距离的
 
 
-989
-00:43:36,056 --> 00:43:39,616
-Secondly, you've got things
-like verbs: these are actions
+723
+00:45:03,570 --> 00:45:05,539
+重要的事情是
 
 
-990
-00:43:39,616 --> 00:43:42,936
-that the player can perform,
-things like run, jump,
+724
+00:45:07,374 --> 00:45:09,676
+现在你既可以是远也可以是近
 
 
-991
-00:43:43,746 --> 00:43:47,116
-using an item, or if you're
-in a car, accelerating.
+725
+00:45:10,210 --> 00:45:11,745
+与其执行一个或另外一个
 
 
-992
-00:43:47,596 --> 00:43:49,476
-Lastly, the rules.
+726
+00:45:12,212 --> 00:45:14,982
+这让我们把两者融合在一起
+获得更加自然的动作
 
 
-993
-00:43:49,966 --> 00:43:52,826
-Rules are incredibly important
+727
+00:45:15,716 --> 00:45:20,454
+这对之前的例子尤为重要
+现在当距离在5左右
 
 
-994
-00:43:52,826 --> 00:43:55,746
-because they define how your
-nouns and verbs interact.
+728
+00:45:21,054 --> 00:45:23,924
+我们可以更加自然地加速
 
 
-995
-00:43:57,166 --> 00:43:59,256
-Rules give flavor and
-texture to your gam,
+729
+00:45:28,529 --> 00:45:30,063
+这就是规则系统的动机作用
 
 
-996
-00:43:59,256 --> 00:44:00,656
-and great games have
-great rules.
+730
+00:45:30,931 --> 00:45:32,432
+事实是可以划分等级的
 
 
-997
-00:44:00,656 --> 00:44:03,526
-So let's have a look
-at an example rule.
+731
+00:45:32,633 --> 00:45:35,469
+这允许我们用模糊的逻辑
+执行更加复杂的演算
 
 
-998
-00:44:03,526 --> 00:44:10,346
-Here we have a rule that
-a driver may use to decide
+732
+00:45:37,437 --> 00:45:39,206
+模糊逻辑处理近似值
 
 
-999
-00:44:10,346 --> 00:44:11,676
-when to brake and
-when to accelerate.
+733
+00:45:41,608 --> 00:45:44,444
+它也允许我们把
+我们做什么和我们如何做分开
 
 
-1000
-00:44:13,366 --> 00:44:14,376
-Using an input property
+734
+00:45:45,479 --> 00:45:47,014
+而不是马上执行动作
 
 
-1001
-00:44:14,376 --> 00:44:17,556
-of distance the player will
-either slow down or speed up.
+735
+00:45:47,080 --> 00:45:51,585
+我们只是说明关于世界的情况
+然后基于这些情况采取推迟操作
 
 
-1002
-00:44:17,556 --> 00:44:22,136
-We can see in this example that
-if the distance is less than 5,
+736
+00:45:52,853 --> 00:45:54,254
+让我们来看看这些类的其中之一
 
 
-1003
-00:44:22,136 --> 00:44:23,726
-they're going to brake,
-when it's greater than
+737
+00:45:56,557 --> 00:45:57,691
+这里我们有GKRule
 
 
-1004
-00:44:23,726 --> 00:44:24,676
-or equal they'll accelerate.
+738
+00:45:59,126 --> 00:46:02,129
+GKRule包含
+一个布尔预测和一个动作
 
 
-1005
-00:44:26,656 --> 00:44:29,326
-This is fine logic, but
-there is a subtle problem.
+739
+00:46:03,830 --> 00:46:09,770
+预测与事实和系统状态相匹配
+如果预测为真 将触发动作
 
 
-1006
-00:44:29,756 --> 00:44:33,926
-In the distances around 5, we're
-going to get very jerky movement
+740
+00:46:10,871 --> 00:46:15,442
+动作则如断言事实那样简单
+也可以如复杂块一样复杂
 
 
-1007
-00:44:34,176 --> 00:44:36,956
-because the car is going
-to continue to oscillate
+741
+00:46:17,211 --> 00:46:19,413
+重要的是现在可以运用
 
 
-1008
-00:44:37,496 --> 00:44:38,766
-between braking and
-accelerating.
+742
+00:46:21,081 --> 00:46:23,750
+NSPredicate序列化方法
+进行序列化
 
 
-1009
-00:44:39,356 --> 00:44:42,976
-This is going to give
-us very jerky movement.
+743
+00:46:28,288 --> 00:46:31,925
+重要的事情是记住
+规则系统提供近似值答案
 
 
-1010
-00:44:43,306 --> 00:44:46,336
-So for more natural movement
-we need something a little
+744
+00:46:32,626 --> 00:46:34,761
+回答类似前面的车有多远这样的问题
 
 
-1011
-00:44:46,406 --> 00:44:47,246
-more approximate.
+745
+00:46:35,762 --> 00:46:37,297
+在第一个例子中
 
 
-1012
-00:44:49,496 --> 00:44:55,426
-Using a more fuzzy solution
-we output facts about what
+746
+00:46:37,764 --> 00:46:40,534
+我们可以相当自信认为
+我们还很远
 
 
-1013
-00:44:55,426 --> 00:44:58,216
-to do rather than perform
-the actions immediately,
+747
+00:46:41,368 --> 00:46:43,403
+在其他两个例子中
+事情有点模糊
 
 
-1014
-00:44:58,766 --> 00:45:01,266
-we've output two facts
-here, closeness and farness,
+748
+00:46:44,071 --> 00:46:47,541
+我们在做出答案后
+真实情况是介于两者之间的
 
 
-1015
-00:45:01,676 --> 00:45:02,666
-both based on distance.
+749
+00:46:50,110 --> 00:46:52,679
+让我们来看看管理这些规则的系统
 
 
-1016
-00:45:03,586 --> 00:45:09,676
-The important thing is you
-can now be both close and far.
+750
+00:46:56,083 --> 00:46:58,252
+这里我们有其它类
+GKRuleSystem
 
 
-1017
-00:45:09,676 --> 00:45:11,746
-So rather than perform
-one or the other,
+751
+00:46:59,786 --> 00:47:02,356
+它是规则和事实的有序集合
 
 
-1018
-00:45:12,196 --> 00:45:13,756
-this lets us blend
-the two together
+752
+00:47:03,924 --> 00:47:07,594
+如要陈述世界事实
+只需要进行调用即可
 
 
-1019
-00:45:13,756 --> 00:45:14,976
-to get a more natural movement.
+753
+00:47:08,462 --> 00:47:09,897
+这将在序列中运行规则
 
 
-1020
-00:45:15,706 --> 00:45:18,996
-This is especially important
-around the previous example.
+754
+00:47:10,464 --> 00:47:14,134
+这些规则将使用一个状态字典作为输入
 
 
-1021
-00:45:18,996 --> 00:45:19,806
-Now when the distance is
+755
+00:47:14,468 --> 00:47:16,770
+然后基于此插入事实
 
 
-1022
-00:45:19,806 --> 00:45:23,926
-around 5 we'll get much
-more natural acceleration.
+756
+00:47:17,804 --> 00:47:19,640
+事实将输入到事实序列
 
 
-1023
-00:45:23,926 --> 00:45:30,056
-This is the motivation
-behind rule systems.
+757
+00:47:20,807 --> 00:47:23,310
+重要的是要了解陈述事实后
 
 
-1024
-00:45:30,916 --> 00:45:32,416
-Facts can be grades of true.
+758
+00:47:24,311 --> 00:47:27,514
+评价将返回到开端
+然后继续评价
 
 
-1025
-00:45:32,416 --> 00:45:34,786
-This allows us to perform
-more complex reasoning
+759
+00:47:28,582 --> 00:47:30,350
+这是因为当你明确一个事实的时候
 
 
-1026
-00:45:34,786 --> 00:45:35,466
-with fuzzy logic.
+760
+00:47:30,717 --> 00:47:32,352
+它可能会影响其它规则的运行
 
 
-1027
-00:45:37,426 --> 00:45:39,206
-Fuzzy logic deals
-with approximations.
+761
+00:47:34,788 --> 00:47:39,927
+这可以确保当评价结束的时候
+你可以有最简明和精确的游戏视图
 
 
-1028
-00:45:39,936 --> 00:45:43,456
-It also allows us to
-separate what we do
+762
+00:47:41,662 --> 00:47:42,696
+如要重新开始
 
 
-1029
-00:45:43,656 --> 00:45:44,456
-from how we should do it,
+763
+00:47:42,763 --> 00:47:45,632
+比如在一个更新循环末尾或计时器上
 
 
-1030
-00:45:44,456 --> 00:45:48,136
-rather than performing actions
-immediately, we just state facts
+764
+00:47:46,033 --> 00:47:46,934
+只需调用重置
 
 
-1031
-00:45:48,136 --> 00:45:50,996
-about the world, and then take
-deferred actions later based off
+765
+00:47:47,434 --> 00:47:50,704
+这样你就可以重复评价
 
 
-1032
-00:45:50,996 --> 00:45:51,576
-of those facts.
+766
+00:47:54,241 --> 00:47:55,409
+让我们看一个代码例子
 
 
-1033
-00:45:52,846 --> 00:45:54,236
-So let's take a look at
-one of those classes.
+767
+00:47:56,910 --> 00:47:59,546
+在开始的时候
+我们初始化规则系统
 
 
-1034
-00:45:56,576 --> 00:45:57,536
-Here we have GKRule.
+768
+00:48:00,347 --> 00:48:04,451
+然后我们获取状态
+并明确基于此的两个事实
 
 
-1035
-00:45:59,116 --> 00:46:02,136
-GKRule consists of a Boolean
-predicate and an action.
+769
+00:48:06,653 --> 00:48:09,423
+稍后在游戏代码中
 
 
-1036
-00:46:03,626 --> 00:46:06,566
-The predicate matches
-against facts and the state
+770
+00:48:09,823 --> 00:48:13,160
+我们抓取这两种等级并求出两者之和
 
 
-1037
-00:46:06,566 --> 00:46:09,766
-in the system and only fires its
-action if the predicate is true.
+771
+00:48:13,660 --> 00:48:15,929
+来获取关于我们可以加速多少
+的模糊近似值
 
 
-1038
-00:46:10,876 --> 00:46:12,956
-Actions could be as
-simple as asserting a fact,
+772
+00:48:16,430 --> 00:48:17,664
+然后填入游戏代码中
 
 
-1039
-00:46:12,956 --> 00:46:15,446
-or as complicated as you'd
-like with a complex block.
+773
+00:48:22,135 --> 00:48:24,071
+看看我们正在做的一个小例子
 
 
-1040
-00:46:17,226 --> 00:46:22,126
-Importantly they can now be
-serializable using NSPredicate
+774
+00:48:43,557 --> 00:48:46,627
+我们在高速公路上开车
 
 
-1041
-00:46:22,206 --> 00:46:24,536
-serialization methods.
+775
+00:48:48,061 --> 00:48:51,865
+汽车在十字路口使用一套规则
+而在高速公路上使用一套不同的规则
 
 
-1042
-00:46:27,536 --> 00:46:29,226
-The important thing
-to remember is
+776
+00:48:53,166 --> 00:48:56,803
+高速公路上使用的规则是基于
+与前方车辆的距离
 
 
-1043
-00:46:29,226 --> 00:46:32,546
-that rule systems provide
-approximations to answers.
+777
+00:48:56,870 --> 00:48:58,872
+决定它们要加速多少或减速多少
 
 
-1044
-00:46:32,686 --> 00:46:34,776
-Things like how close am
-I to the car in front?
+778
+00:48:59,973 --> 00:49:01,375
+它们明确世界的两个事实
 
 
-1045
-00:46:34,776 --> 00:46:37,106
-In the first example
-we can kind of say
+779
+00:49:01,975 --> 00:49:04,611
+分别是距离和相对速度
 
 
-1046
-00:46:37,106 --> 00:46:38,816
-that with a fairly high grade
+780
+00:49:05,979 --> 00:49:10,150
+车辆在十字路口使用另一套规则
+明确谁有通行权的事实
 
 
-1047
-00:46:38,816 --> 00:46:40,836
-of confidence, that
-we're quite far.
+781
+00:49:13,120 --> 00:49:15,422
+现在综合在一起的话
 
 
-1048
-00:46:41,216 --> 00:46:44,316
-Where with the other two,
-things are a little more fuzzy,
+782
+00:49:16,223 --> 00:49:20,561
+我们获得非常复杂的仿真世界
 
 
-1049
-00:46:44,316 --> 00:46:45,136
-answers that we're after,
+783
+00:49:21,728 --> 00:49:23,263
+这就是规则系统的力量
 
 
-1050
-00:46:45,136 --> 00:46:47,546
-things like somewhere
-in between, closer.
+784
+00:49:37,778 --> 00:49:40,147
+所以在我运用规则系统
+作一些最佳实践之前
 
 
-1051
-00:46:48,106 --> 00:46:52,696
-Let's have a look at the system
-that manages these rules.
+785
+00:49:40,914 --> 00:49:43,550
+很重要的是请记住
+GKRuleSystem是孤立的
 
 
-1052
-00:46:52,696 --> 00:46:57,106
-Here we have the other
-class, GKRuleSystem.
+786
+00:49:44,284 --> 00:49:46,787
+你必须使用状态字典
+作为游戏世界的快照
 
 
-1053
-00:46:57,306 --> 00:47:02,986
-GKRuleSystem is an ordered
-collection of rules and facts.
+787
+00:49:48,322 --> 00:49:52,392
+你同样必须要运用许多简单规则
+并明确许多关于游戏世界的事实
 
 
-1054
-00:47:03,636 --> 00:47:07,586
-To assert facts about the world,
-simply call evaluate on it.
+788
+00:49:52,693 --> 00:49:54,561
+作为对抗大型复杂规则以及少数事实
 
 
-1055
-00:47:08,496 --> 00:47:11,496
-This will to run through
-the rules in the array
+789
+00:49:56,463 --> 00:49:58,532
+同样重要的是
+请注意事实是一些近似值
 
 
-1056
-00:47:11,496 --> 00:47:14,136
-and those rules will use a
-state dictionary as input
+790
+00:49:58,599 --> 00:50:00,701
+如何使用它们取决于你
 
 
-1057
-00:47:14,136 --> 00:47:16,776
-and insert facts later
-based off of that.
+791
+00:50:01,635 --> 00:50:03,504
+事实的等级是系统的置信度
 
 
-1058
-00:47:17,806 --> 00:47:21,586
-The facts will be held in the
-facts array and it's important
+792
+00:50:04,004 --> 00:50:07,908
+这允许我们使用模糊逻辑
+来完成更复杂的推理
 
 
-1059
-00:47:21,586 --> 00:47:24,396
-to know that whenever a fact
-is asserted the evaluate will
+793
+00:50:11,411 --> 00:50:14,147
+那样 我想把这交回给我的同事布鲁诺
 
 
-1060
-00:47:24,396 --> 00:47:26,086
-actually go back
-to the beginning,
+794
+00:50:20,487 --> 00:50:21,321
+谢谢 乔什
 
 
-1061
-00:47:26,386 --> 00:47:27,506
-and continue evaluating.
+795
+00:50:24,057 --> 00:50:25,425
+这就是GameplayKit
 
 
-1062
-00:47:28,596 --> 00:47:30,646
-This is because when
-you assert a fact,
+796
+00:50:25,826 --> 00:50:28,629
+今天我们讲了
+GameplayKit里的七个主要系统
 
 
-1063
-00:47:30,726 --> 00:47:32,346
-this may affect the
-way other rules work.
+797
+00:50:29,162 --> 00:50:32,232
+实体和组件是构建
+游戏逻辑的好方法
 
 
-1064
-00:47:34,776 --> 00:47:37,326
-This ensures that when evaluate
-is finished you know you have
+798
+00:50:33,066 --> 00:50:37,471
+状态机处理游戏中的状态性
+及我们的目标经历的各种各样状态变化
 
 
-1065
-00:47:37,476 --> 00:47:41,456
-the most concise and
-accurate view of the game.
+799
+00:50:39,139 --> 00:50:44,077
+主体即自主移动的实体
+由真实行为和目标控制
 
 
-1066
-00:47:41,676 --> 00:47:44,916
-To start over again, like maybe
-at the end of an update loop
+800
+00:50:45,379 --> 00:50:49,383
+路径搜索 处理导航图的生成
+以及找到我们游戏世界中的路径
 
 
-1067
-00:47:45,036 --> 00:47:48,716
-or on a timer, simply call reset
-and will clear up old facts
+801
+00:50:50,751 --> 00:50:52,719
+我们也讨论了MinMax AI解决方法
 
 
-1068
-00:47:48,776 --> 00:47:50,706
-so that you can repeat
-the evaluation.
+802
+00:50:53,020 --> 00:50:55,255
+它让计算机控制的对手
+表现出生命力
 
 
-1069
-00:47:50,706 --> 00:47:55,396
-Let's have a look
-at the code example.
+803
+00:50:56,256 --> 00:51:01,061
+同样可以提供给你许多
+随机源和分布
 
 
-1070
-00:47:56,926 --> 00:47:59,666
-Here in the beginning, we
-initialize our rule system,
+804
+00:51:01,862 --> 00:51:06,834
+最后我们讨论了规则系统
+是用于描述谨慎和模糊逻辑的绝好方法
 
 
-1071
-00:47:59,936 --> 00:48:02,286
-and then later we
-access the state
+805
+00:51:08,302 --> 00:51:10,370
+我们很期待发布GameplayKit
 
 
-1072
-00:48:02,846 --> 00:48:06,416
-and assert two facts
-based off this.
+806
+00:51:10,437 --> 00:51:12,406
+我们迫不及待地想看到你们会如何使用
 
 
-1073
-00:48:06,646 --> 00:48:09,416
-Later in the game
-code, excuse me.
+807
+00:51:15,943 --> 00:51:17,444
+一些很好的代码例子本周发布了
 
 
-1074
-00:48:09,826 --> 00:48:12,556
-We then grab these two
-grades and sum them together
+808
+00:51:17,511 --> 00:51:20,247
+如果你想了解更多东西
+你一定要看看
 
 
-1075
-00:48:12,556 --> 00:48:14,616
-to get a sort of
-fuzzy approximation
+809
+00:51:20,714 --> 00:51:24,818
+Demobot是一个SpriteKit游戏
+涵盖了GameplayKit各种API
 
 
-1076
-00:48:14,616 --> 00:48:15,916
-about how much we
-should accelerate,
+810
+00:51:25,152 --> 00:51:28,055
+FourInARow是
+实操MinMax AI的绝佳示例
 
 
-1077
-00:48:16,426 --> 00:48:17,676
-and feed this in our game code.
+811
+00:51:28,255 --> 00:51:32,025
+AgentsCatalog表现
+主体行为和目标的好例子
 
 
-1078
-00:48:17,676 --> 00:48:24,056
-So let's take a look at
-little example we have going.
+812
+00:51:32,226 --> 00:51:34,228
+因此如果你想学习
+一定要看看
 
 
-1079
-00:48:44,046 --> 00:48:46,626
-Here we've got cars
-driving along the freeway.
+813
+00:51:36,630 --> 00:51:40,100
+同样还有一些环节
+如果你想要了解更多相关技术
 
 
-1080
-00:48:48,066 --> 00:48:50,246
-The cars in the intersections
-are using one set of rules,
+814
+00:51:40,167 --> 00:51:43,604
+例如SpriteKit ReplayKit
+Game Center SceneKit
 
 
-1081
-00:48:50,246 --> 00:48:52,296
-and the cars on the freeway
-are using a different set.
+815
+00:51:44,104 --> 00:51:46,173
+今天午饭之后
+有一个DemoBots的深入研究
 
 
-1082
-00:48:52,866 --> 00:48:55,906
-The ones on the freeway are
-deciding how much they should
+816
+00:51:46,240 --> 00:51:47,508
+就是我说到的那个例子
 
 
-1083
-00:48:55,906 --> 00:48:57,956
-slow down or speed up
-based off the distance
+817
+00:51:47,708 --> 00:51:50,844
+如果你想了解更多关于
+GameplayKit或SpriteKit的资料
 
 
-1084
-00:48:57,956 --> 00:48:58,856
-of the car in front.
+818
+00:51:51,111 --> 00:51:51,945
+就一定要来看看
 
 
-1085
-00:48:59,966 --> 00:49:01,366
-They're asserting two
-facts about the world.
+819
+00:51:53,947 --> 00:51:56,884
+我们有实验室
+欢迎来游戏控制器实验室
 
 
-1086
-00:49:01,986 --> 00:49:04,596
-These are things like
-distance, relative speed.
+820
+00:51:57,184 --> 00:51:59,686
+今天午饭之后同样
+有个关于GameplayKit实验
 
 
-1087
-00:49:05,986 --> 00:49:07,926
-The cars in the intersection are
-using a different set of rules
+821
+00:51:59,753 --> 00:52:03,924
+大家可以来会面成员 发问
+讨论任何关于代码的问题
 
 
-1088
-00:49:07,966 --> 00:49:11,456
-and asserting facts on
-who has the right of way.
+822
+00:52:05,926 --> 00:52:09,162
+如果你需要更多信息
+请登录伟大的开发者网站
 
 
-1089
-00:49:13,126 --> 00:49:19,756
-Putting them altogether we can
-get very complex simulations
+823
+00:52:09,897 --> 00:52:13,834
+有任何一般询问
+联系我们的游戏技术专员艾伦·沙菲尔
 
 
-1090
-00:49:19,756 --> 00:49:20,596
-about the world.
-
-
-1091
-00:49:20,596 --> 00:49:23,256
-This is a power of rule systems.
-
-
-1092
-00:49:38,046 --> 00:49:39,256
-So before I go just
-some best practices
-
-
-1093
-00:49:39,256 --> 00:49:40,136
-on using the rule systems.
-
-
-1094
-00:49:40,186 --> 00:49:43,536
-It is important to remember
-that GKRuleSystem is isolated.
-
-
-1095
-00:49:43,536 --> 00:49:45,636
-You should be using
-the state dictionary
-
-
-1096
-00:49:45,636 --> 00:49:46,786
-as a snapshot of the game world.
-
-
-1097
-00:49:48,326 --> 00:49:50,956
-You should also use many simple
-rules and assert many facts
-
-
-1098
-00:49:50,956 --> 00:49:52,156
-about the game world as opposed
-
-
-1099
-00:49:52,156 --> 00:49:54,566
-to large complex
-rules and fewer facts.
-
-
-1100
-00:49:55,256 --> 00:49:58,596
-It is also important to note
-that facts are approximations
-
-
-1101
-00:49:58,596 --> 00:50:00,716
-and it is up to you to decide
-how you should use them.
-
-
-1102
-00:50:01,626 --> 00:50:03,496
-The grade of a fact is the
-system's confidence in it,
-
-
-1103
-00:50:04,016 --> 00:50:06,216
-and this allows us
-to use fuzzy logic
-
-
-1104
-00:50:06,216 --> 00:50:07,896
-to achieve more complex
-reasoning.
-
-
-1105
-00:50:08,996 --> 00:50:12,386
-With that, I would
-like to hand it back
-
-
-1106
-00:50:12,386 --> 00:50:14,256
-to my colleague Bruno
-to finish up.
-
-
-1107
-00:50:15,516 --> 00:50:20,006
-[ Applause ]
-
-
-1108
-00:50:20,506 --> 00:50:21,026
->> BRUNO SOMMER: Thanks, Josh.
-
-
-1109
-00:50:24,086 --> 00:50:25,056
-So that's GameplayKit.
-
-
-1110
-00:50:25,656 --> 00:50:28,626
-Today we talked about the seven
-major systems in GameplayKit,
-
-
-1111
-00:50:29,166 --> 00:50:31,016
-entities and components
-which are a really great way
-
-
-1112
-00:50:31,016 --> 00:50:32,226
-to structure your game logic.
-
-
-1113
-00:50:32,766 --> 00:50:35,366
-State machines which deal with
-the statefulness in our games
-
-
-1114
-00:50:35,366 --> 00:50:37,466
-and the various state changes
-that our objects undergo.
-
-
-1115
-00:50:37,986 --> 00:50:41,696
-Agents, which are our
-autonomously moving entities
-
-
-1116
-00:50:41,696 --> 00:50:44,076
-controlled by realistic
-behaviors and goals.
-
-
-1117
-00:50:45,306 --> 00:50:47,646
-Pathfinding, which deals with
-navigation graph generation
-
-
-1118
-00:50:47,796 --> 00:50:49,336
-and finding paths
-within our game world.
-
-
-1119
-00:50:50,496 --> 00:50:52,896
-We also talked about our
-great MinMax AI solution,
-
-
-1120
-00:50:53,056 --> 00:50:53,846
-which helps you give life
-
-
-1121
-00:50:53,846 --> 00:50:55,216
-to your computer
-controlled opponents.
-
-
-1122
-00:50:56,226 --> 00:51:00,116
-Also the slew of great random
-sources and distributions
-
-
-1123
-00:51:00,246 --> 00:51:01,596
-that are available to you.
-
-
-1124
-00:51:01,896 --> 00:51:04,146
-Lastly we talked about rule
-systems which are a great way
-
-
-1125
-00:51:04,396 --> 00:51:06,766
-to describe discreet
-and fuzzy logic.
-
-
-1126
-00:51:08,046 --> 00:51:10,396
-We really are excited to finally
-get GameplayKit in your hands
-
-
-1127
-00:51:10,476 --> 00:51:13,006
-and can't wait to see
-what you make with it.
-
-
-1128
-00:51:15,636 --> 00:51:17,396
-Some great code samples
-dropped this week,
-
-
-1129
-00:51:17,526 --> 00:51:18,866
-you should definitely
-check it out if you want
-
-
-1130
-00:51:18,866 --> 00:51:20,236
-to learn a little more.
-
-
-1131
-00:51:20,746 --> 00:51:23,376
-DemoBots is a SpriteKit
-game covers a wide variety
-
-
-1132
-00:51:23,376 --> 00:51:26,686
-of the GameplayKit API,
-FourInARow is a good example
-
-
-1133
-00:51:26,686 --> 00:51:28,036
-of MinMax AI in action,
-
-
-1134
-00:51:28,276 --> 00:51:30,256
-and AgentsCatalog is
-a really good example
-
-
-1135
-00:51:30,256 --> 00:51:32,866
-of the agent's behaviors and
-goals, so definitely check
-
-
-1136
-00:51:32,866 --> 00:51:35,436
-that out if you want
-to learn a little more.
-
-
-1137
-00:51:36,056 --> 00:51:38,396
-There is also some sessions
-coming up if you want to find
-
-
-1138
-00:51:38,396 --> 00:51:40,766
-out a little more about our
-related technologies, SpriteKit,
-
-
-1139
-00:51:40,966 --> 00:51:43,306
-ReplayKit, Game Center,
-SceneKit.
-
-
-1140
-00:51:43,786 --> 00:51:46,246
-After lunch today we have
-a deeper dive into DemoBots
-
-
-1141
-00:51:46,246 --> 00:51:48,406
-which is that sample I talked
-about, so definitely check
-
-
-1142
-00:51:48,406 --> 00:51:49,946
-that out if you want to
-learn a little bit more
-
-
-1143
-00:51:50,086 --> 00:51:51,866
-about GameplayKit or SpriteKit.
-
-
-1144
-00:51:52,976 --> 00:51:55,266
-There is also some
-great labs coming up,
-
-
-1145
-00:51:55,586 --> 00:51:56,846
-check out the Game
-Controllers lab.
-
-
-1146
-00:51:57,096 --> 00:51:59,216
-There is also a GameplayKit
-lab today after lunch,
-
-
-1147
-00:51:59,786 --> 00:52:01,726
-meet the team, ask questions,
-
-
-1148
-00:52:01,946 --> 00:52:03,946
-talk about any problems you
-might have with the code.
-
-
-1149
-00:52:04,596 --> 00:52:08,026
-If you need anymore information,
-we direct you to check
-
-
-1150
-00:52:08,026 --> 00:52:09,146
-out our great developer site
-
-
-1151
-00:52:09,856 --> 00:52:12,056
-and for any general inquiries
-contact Allan Schaffer,
-
-
-1152
-00:52:12,056 --> 00:52:13,796
-our Game Technologies
-Evangelist.
-
-
-1153
-00:52:14,256 --> 00:52:15,956
-Thank you.
-
-
-1154
-00:52:16,106 --> 00:52:17,776
-Have a really great
-rest of your conference.
-
-
-1155
-00:52:19,516 --> 00:52:31,040
-[ Applause ]
+824
+00:52:15,569 --> 00:52:17,871
+谢谢
+会议中间请休息片刻
 

@@ -1,4094 +1,3547 @@
 1
-00:00:24,141 --> 00:00:26,141
-[Applause]
+00:00:19,520 --> 00:00:24,324
+HomeKit的新内容
 
 
 2
-00:00:26,266 --> 00:00:26,636
->> ANUSH NADATHUR: Thank you.
+00:00:26,293 --> 00:00:27,261
+谢谢
 
 
 3
-00:00:30,486 --> 00:00:31,136
-Hello, everybody.
+00:00:30,597 --> 00:00:31,832
+大家好 下午好
 
 
 4
-00:00:31,136 --> 00:00:31,746
-Good afternoon.
+00:00:32,332 --> 00:00:33,166
+欢迎
 
 
 5
-00:00:32,336 --> 00:00:34,346
-Welcome. Thanks for coming.
+00:00:33,667 --> 00:00:34,601
+感谢你们的到来
 
 
 6
-00:00:35,886 --> 00:00:37,156
-My name is Anush Nadathur
+00:00:35,903 --> 00:00:37,437
+我叫Anush Nadathur
 
 
 7
-00:00:37,156 --> 00:00:39,656
-and I'm a software
-engineer on HomeKit.
+00:00:37,905 --> 00:00:39,773
+来自智能家居 是一名软件工程师
 
 
 8
-00:00:40,956 --> 00:00:43,746
-Today, my colleague Naveen
-and I are going to talk
+00:00:40,941 --> 00:00:43,877
+今天我和我的同事Naveen
+要和大家聊一聊
 
 
 9
-00:00:43,746 --> 00:00:45,916
-about what's new in
-HomeKit for iOS 9.
+00:00:43,944 --> 00:00:46,113
+iOS 9版中智能家居的新功能
 
 
 10
-00:00:46,566 --> 00:00:50,916
-Now for the past few years
-we have seen a proliferation
+00:00:47,814 --> 00:00:50,784
+在过去几年间 我们已经目睹了
 
 
 11
-00:00:50,916 --> 00:00:53,216
-of home devices in the market.
+00:00:50,851 --> 00:00:53,220
+家居设备市场的增长
 
 
 12
-00:00:54,336 --> 00:00:57,486
-What this gives you is
-a tremendous opportunity
+00:00:54,321 --> 00:00:57,491
+这为我们提供了一个巨大的机会
 
 
 13
-00:00:58,016 --> 00:01:01,676
-to influence the experience
-people have when interacting
+00:00:58,025 --> 00:01:02,763
+来影响人们在使用这些设备时的体验
 
 
 14
-00:01:01,676 --> 00:01:05,036
-with these devices in the
-comfort of their own home.
+00:01:02,829 --> 00:01:04,498
+使他们的家居生活更加舒适
 
 
 15
-00:01:06,786 --> 00:01:11,496
-Apple introduced HomeKit in iOS
-8 so that we can work together
+00:01:07,067 --> 00:01:11,839
+Apple在iOS8引入了智能家居
+我们可以共同努力借助它
 
 
 16
-00:01:12,486 --> 00:01:15,376
-to bring home automation
-to a much wider audience
+00:01:12,539 --> 00:01:16,143
+让更多的人体验家庭自动化并为客户
 
 
 17
-00:01:15,376 --> 00:01:20,246
-than in the past, and to deliver
-a consistent user experience
+00:01:17,644 --> 00:01:21,081
+提供一致的用户体验
 
 
 18
-00:01:20,246 --> 00:01:21,086
-for our customers.
+00:01:22,749 --> 00:01:24,585
+去年我们成功地举行了一次讲座
 
 
 19
-00:01:21,596 --> 00:01:26,856
-We had a great session last
-year, but for those of you
+00:01:25,385 --> 00:01:29,523
+如果您没有参加
+我们现在可以简要地回顾一下
 
 
 20
-00:01:26,856 --> 00:01:30,126
-who may have not seen
-it, here's a brief recap.
+00:01:32,626 --> 00:01:36,730
+智能家居提供一个通用协议
 
 
 21
-00:01:32,316 --> 00:01:36,796
-HomeKit provides
-a common protocol
+00:01:36,797 --> 00:01:40,000
+让所有由它控制的设备都能够运行并
 
 
 22
-00:01:36,796 --> 00:01:39,986
-that all HomeKit-enabled
-accesses implement
+00:01:40,400 --> 00:01:42,002
+与iOS交互访问
 
 
 23
-00:01:40,396 --> 00:01:41,996
-and interact with iOS.
+00:01:43,070 --> 00:01:47,341
+在这个协议中 我们定义了许多
 
 
 24
-00:01:43,076 --> 00:01:46,606
-On this protocol, we
-have defined profiles
+00:01:47,908 --> 00:01:50,077
+常用的家居配件
 
 
 25
-00:01:46,696 --> 00:01:50,076
-that describe many of the
-commonly used accessories.
+00:01:52,212 --> 00:01:54,414
+但是 这个协议也有一定的灵活性
 
 
 26
-00:01:50,466 --> 00:01:54,286
-However, we also
-made it flexible
+00:01:54,481 --> 00:01:59,887
+让你可以以概要文件自定义配件功能
 
 
 27
-00:01:54,496 --> 00:01:58,916
-so that you can define profiles
-that define custom features
+00:02:00,554 --> 00:02:02,356
+同时实现智能家居的功能
 
 
 28
-00:01:59,006 --> 00:02:02,176
-of your accessory and
-still be HomeKit-enabled.
+00:02:05,325 --> 00:02:07,561
+智能家居的主要功能之一是
 
 
 29
-00:02:02,326 --> 00:02:07,616
-One of the key features
-in HomeKit is
+00:02:07,628 --> 00:02:10,597
+提供一个覆盖所有智能家居应用程序
 
 
 30
-00:02:07,616 --> 00:02:10,656
-to provide a common
-view of the home
+00:02:10,663 --> 00:02:12,533
+共同视图
 
 
 31
-00:02:10,656 --> 00:02:12,536
-across all HomeKit applications.
+00:02:13,133 --> 00:02:16,870
+也就是说
+用过app A又切换到app B
 
 
 32
-00:02:13,146 --> 00:02:16,866
-So what that means is if you
-use app A and switch to app B,
+00:02:17,204 --> 00:02:18,672
+这两者可以获取相同的家居数据
 
 
 33
-00:02:17,206 --> 00:02:18,456
-both get the same home data.
+00:02:19,273 --> 00:02:21,341
+这一点对我们的客户来说至关重要
 
 
 34
-00:02:19,276 --> 00:02:21,396
-This is critical
-for our customers
+00:02:21,408 --> 00:02:23,610
+因为这样可以提供一致的用户体验
 
 
 35
-00:02:21,396 --> 00:02:23,666
-because that delivers the
-consistent user experience
+00:02:23,677 --> 00:02:25,612
+这正是我们所追求的
 
 
 36
-00:02:23,666 --> 00:02:25,806
-that we want them to have.
+00:02:26,880 --> 00:02:30,984
+如果你的配件执行
+Apple的一个概要文件
 
 
 37
-00:02:26,576 --> 00:02:30,716
-If your accessory implements one
-of the Apple-defined profiles,
+00:02:31,518 --> 00:02:33,487
+就可以直接用上Siri
 
 
 38
-00:02:31,526 --> 00:02:35,276
-Siri works right out of the box.
+00:02:35,455 --> 00:02:40,460
+是的 iOS的智能家居框架
 
 
 39
-00:02:35,446 --> 00:02:40,476
-Yeah. And the HomeKit framework
+00:02:40,594 --> 00:02:43,363
+提供了一个自然的家居模式
 
 
 40
-00:02:40,606 --> 00:02:43,356
-on iOS models a home
-very naturally.
+00:02:44,131 --> 00:02:48,802
+所以我们有描述房间区域的对象
 
 
 41
-00:02:44,126 --> 00:02:48,856
-So we have objects which
-describe rooms, zones,
+00:02:48,869 --> 00:02:51,138
+这种对象是房间的集合体 当然
 
 
 42
-00:02:48,856 --> 00:02:51,206
-which are a collection
-of rooms, and of course,
+00:02:51,205 --> 00:02:52,573
+也是你能控制的端口的集合
 
 
 43
-00:02:51,206 --> 00:02:52,576
-accesses that you can control.
+00:02:54,474 --> 00:02:57,778
+如果客户的数据不安全 失去私密性
 
 
 44
-00:02:54,156 --> 00:02:57,766
-Now, none of this would
-matter to our customers
+00:02:58,011 --> 00:03:00,781
+以上这些就都失去了意义
 
 
 45
-00:02:58,016 --> 00:03:00,766
-if their data is not
-private or secure.
+00:03:01,615 --> 00:03:06,753
+智能家居从设计之初
+就充分考虑了私密性和安全性
 
 
 46
-00:03:01,626 --> 00:03:05,806
-HomeKit was designed
-with privacy and security
+00:03:07,721 --> 00:03:10,324
+iOS和智能家居配件之间的
 
 
 47
-00:03:05,806 --> 00:03:06,696
-from the very beginning.
+00:03:10,390 --> 00:03:13,193
+所有交流都是点对点加密的
 
 
 48
-00:03:07,656 --> 00:03:10,066
-All communication between iOS
+00:03:13,927 --> 00:03:17,364
+而且我们从不使用跨越不同会话的密钥
 
 
 49
-00:03:10,376 --> 00:03:13,206
-and the HomeKit accessories
-is end-to-end encrypted,
+00:03:17,464 --> 00:03:21,735
+所以即使你有密钥 也不能用它来
 
 
 50
-00:03:13,916 --> 00:03:17,376
-and we never use keys
-across different sessions.
+00:03:21,802 --> 00:03:23,670
+获取过去或将来的数据
 
 
 51
-00:03:17,456 --> 00:03:21,816
-So when you have a key, that key
-cannot be used to dig up data
+00:03:25,305 --> 00:03:28,876
+所有家庭设备上的数据都是以
 
 
 52
-00:03:21,816 --> 00:03:23,686
-in the past or in the future.
+00:03:28,942 --> 00:03:30,210
+当地设备上的密钥加密
 
 
 53
-00:03:24,306 --> 00:03:28,956
-And all home data is encrypted
-on the device using keys
+00:03:30,577 --> 00:03:32,913
+所以你的数据是完全私有的 安全的
 
 
 54
-00:03:28,956 --> 00:03:30,196
-that are local to that device.
+00:03:34,815 --> 00:03:36,817
+这是iOS 8版中智能家居的情况
 
 
 55
-00:03:30,586 --> 00:03:33,136
-So your data is completely
-private and secure.
+00:03:37,351 --> 00:03:39,486
+接下来要讲的是我们有什么新的进展
 
 
 56
-00:03:34,416 --> 00:03:36,816
-So that's HomeKit in iOS 8.
+00:03:41,255 --> 00:03:45,893
+我会介绍iOS9 
+版智能家居的功能和优化
 
 
 57
-00:03:37,346 --> 00:03:39,496
-So let's talk about what we
-have in store for you today.
+00:03:46,426 --> 00:03:48,161
+Naveen会介绍
 
 
 58
-00:03:40,156 --> 00:03:44,886
-I'm going to go over features
-and enhancements for HomeKit
+00:03:48,362 --> 00:03:51,231
+配件空间的更新情况
 
 
 59
-00:03:44,886 --> 00:03:48,956
-in iOS 9, and Naveen
-will go over updates
+00:03:53,500 --> 00:03:54,635
+现在让我们言归正传
 
 
 60
-00:03:48,956 --> 00:03:51,246
-in our accessories space.
+00:03:58,839 --> 00:04:01,842
+iOS 9版的
+智能家居有一些非常棒的功能
 
 
 61
-00:03:53,176 --> 00:03:55,586
-So let's get right to it.
+00:04:02,643 --> 00:04:08,849
+我们还根据去年
+从开发者那里的反馈进行了几处优化
 
 
 62
-00:03:58,496 --> 00:04:01,856
-We've got some great
-features for HomeKit in iOS 9,
+00:04:09,550 --> 00:04:11,151
+所以让反馈来得更猛烈些吧
 
 
 63
-00:04:02,656 --> 00:04:06,516
-but we have also added
-enhancements based on feedback
+00:04:11,351 --> 00:04:12,219
+我们欢迎之至
 
 
 64
-00:04:06,656 --> 00:04:08,846
-that we have received from
-developers in the past year.
+00:04:13,787 --> 00:04:17,024
+我们从一项看似很小
 
 
 65
-00:04:09,536 --> 00:04:11,156
-So please keep those
-feedback coming.
+00:04:18,024 --> 00:04:20,494
+但是对你的日常生活
+有巨大促进作用的改变开始
 
 
 66
-00:04:11,336 --> 00:04:13,586
-We absolutely love them.
+00:04:22,362 --> 00:04:25,232
+例如卧室里有一盏灯
 
 
 67
-00:04:13,806 --> 00:04:16,896
-So let's begin with a
-small change that we made
+00:04:26,233 --> 00:04:28,635
+我们把它移到客厅
 
 
 68
-00:04:18,026 --> 00:04:20,486
-but has a tremendous impact
-on your daily development.
+00:04:29,570 --> 00:04:33,040
+在iOS 8版里
 
 
 69
-00:04:20,966 --> 00:04:25,216
-Let's take an example
-of a light in a bedroom
+00:04:33,674 --> 00:04:36,376
+我们会把这种变化通知你的app
 
 
 70
-00:04:26,226 --> 00:04:28,626
-and we move it to
-the living room.
+00:04:37,177 --> 00:04:40,547
+由家庭经理进行家居更新委托回调
 
 
 71
-00:04:29,556 --> 00:04:33,036
-In iOS 8, if your app
-comes to the foreground,
+00:04:41,315 --> 00:04:43,851
+现在的版本不仅告诉你家里发生了变化
 
 
 72
-00:04:33,686 --> 00:04:35,386
-we would have notified your app
+00:04:43,951 --> 00:04:46,820
+还为你提供一组新的对象 可利用他们
 
 
 73
-00:04:35,386 --> 00:04:39,366
-of this change using home
-manager did update homes
+00:04:46,887 --> 00:04:49,723
+弄清楚家里究竟有什么变化
 
 
 74
-00:04:39,646 --> 00:04:40,446
-delegate callback.
+00:04:51,191 --> 00:04:56,930
+我们一直力求更好
+所以在iOS 9中智能家居将
 
 
 75
-00:04:41,316 --> 00:04:43,866
-Now, this tells you
-something has changed
+00:04:56,997 --> 00:04:59,833
+保留你原有的对象只对有变化的性能
 
 
 76
-00:04:43,956 --> 00:04:46,896
-but also gives you a new set of
-objects that now you have to use
+00:04:59,900 --> 00:05:01,034
+进行更新
 
 
 77
-00:04:46,896 --> 00:04:49,916
-and figure out what exactly
-has changed in your home.
+00:05:02,836 --> 00:05:04,071
+谢谢
 
 
 78
-00:04:51,176 --> 00:04:56,986
-We thought we should do better,
-so in iOS 9, HomeKit is going
+00:05:06,507 --> 00:05:08,809
+也就是说在我们的例子中
 
 
 79
-00:04:56,986 --> 00:04:59,886
-to maintain your objects
-and only update properties
+00:05:09,309 --> 00:05:10,878
+你只会收到一个委托回调
 
 
 80
-00:04:59,886 --> 00:05:01,046
-that have actually changed.
+00:05:10,944 --> 00:05:13,280
+内容是家居环境有更新
 
 
 81
-00:05:01,706 --> 00:05:03,196
-[Applause] Thank you.
+00:05:14,147 --> 00:05:15,916
+我觉得这会简化你的代码库
 
 
 82
-00:05:06,516 --> 00:05:09,566
-So what that means is, in
-our example, you're going
+00:05:15,983 --> 00:05:18,352
+使你可以关注你的app的功能
 
 
 83
-00:05:09,566 --> 00:05:10,746
-to get a single delegate
-callback:
+00:05:19,319 --> 00:05:22,589
+这并不是我们增加的唯一的一处优化
 
 
 84
-00:05:10,946 --> 00:05:12,666
-home did update room
-[unintelligible].
+00:05:22,756 --> 00:05:25,359
+下面我们用一个例子说说另一处优化
 
 
 85
-00:05:12,716 --> 00:05:15,856
-I think this is going to
-simplify your code base
+00:05:26,860 --> 00:05:30,831
+假设我有一个客厅 
+我还有一张客厅的照片
 
 
 86
-00:05:15,966 --> 00:05:18,356
-and let you focus on your
-features for your app.
+00:05:31,365 --> 00:05:33,200
+我想把这张照片用在我的app里
 
 
 87
-00:05:19,316 --> 00:05:22,436
-That's not the only
-enhancement that we have added.
+00:05:33,433 --> 00:05:36,203
+这就是说你要能够关联
 
 
 88
-00:05:22,746 --> 00:05:25,346
-Let's talk about another
-one using an example.
+00:05:36,270 --> 00:05:39,806
+并找到一个代表房间的智能家居组件
 
 
 89
-00:05:26,266 --> 00:05:29,836
-Let's say I have a living
-room, and I have a photo
+00:05:39,873 --> 00:05:41,642
+这个组件在app改版时依然有效
 
 
 90
-00:05:29,836 --> 00:05:32,676
-of the living room that I
-want to show in the app.
+00:05:43,310 --> 00:05:48,549
+现在 智能家居中的房间
+是以一个HMRoom类别代表
 
 
 91
-00:05:33,436 --> 00:05:35,946
-So what that means is you
-need to be able to associate
+00:05:49,349 --> 00:05:53,387
+它有名字的属性名字不是一成不变的
 
 
 92
-00:05:35,946 --> 00:05:39,876
-and find a HomeKit
-object representing a room
+00:05:53,820 --> 00:05:55,822
+所以任何智能家居
+app都可以对其进行更改
 
 
 93
-00:05:39,876 --> 00:05:43,036
-across relaunches of your app.
+00:05:56,957 --> 00:05:59,760
+要解决我们的问题 
+我们需要更具持久性的东西
 
 
 94
-00:05:43,306 --> 00:05:47,536
-Now, a room in HomeKit
-is represented using a
+00:06:00,827 --> 00:06:04,565
+所以在iOS 9中我们
+在智能家居所有的相关类别中
 
 
 95
-00:05:47,536 --> 00:05:48,486
-HMRoom class.
+00:06:04,898 --> 00:06:07,701
+引入了持久识别符
 
 
 96
-00:05:49,346 --> 00:05:53,386
-This has a name property,
-and names are not immutable.
+00:06:11,939 --> 00:06:13,006
+谢谢
 
 
 97
-00:05:53,826 --> 00:05:55,806
-So any HomeKit app
-can change this.
+00:06:13,407 --> 00:06:15,909
+所以在这些类别中 你就会有个独有的
 
 
 98
-00:05:56,966 --> 00:05:59,776
-To solve our problem, we need
-something more persistent.
+00:06:15,976 --> 00:06:18,378
+持久识别符属性
 
 
 99
-00:06:00,536 --> 00:06:04,566
-So in iOS 9, we are introducing
-persistent identifiers
+00:06:19,146 --> 00:06:22,983
+这些应用只此一家 现在你可以用其
 
 
 100
-00:06:04,896 --> 00:06:07,716
-across all relevant
-HomeKit classes.
+00:06:23,050 --> 00:06:27,754
+应用它关联你的app中的数据 
 
 
 101
-00:06:08,516 --> 00:06:11,436
-[Applause]
+00:06:28,255 --> 00:06:29,890
+将它与智能家居组件关联
 
 
 102
-00:06:11,936 --> 00:06:12,336
-Thank you.
+00:06:32,759 --> 00:06:36,630
+接下来我想聊聊iOS8种的用户管理
 
 
 103
-00:06:13,416 --> 00:06:15,976
-So you are going to have a
-unique identifier property
+00:06:37,764 --> 00:06:41,702
+在iOS8中你的app
+有以下三个应用程序界面
 
 
 104
-00:06:15,976 --> 00:06:18,116
-on these classes.
+00:06:42,102 --> 00:06:46,373
+让用户管理家中的人
+可以添加用户移除用户
 
 
 105
-00:06:18,986 --> 00:06:22,936
-These are unique applications,
-and now you can use this
+00:06:46,440 --> 00:06:48,408
+列出家中所有的用户
 
 
 106
-00:06:23,056 --> 00:06:28,016
-to associate context data
-in your app and apply that
+00:06:49,042 --> 00:06:51,912
+在iOS 9中我们不再开发这种功能
 
 
 107
-00:06:28,256 --> 00:06:29,956
-and associate that with
-the HomeKit object.
+00:06:52,479 --> 00:06:57,985
+而代以一个更简洁的界面
+用一个完成处理程序管理用户
 
 
 108
-00:06:29,956 --> 00:06:36,506
-Next I want to talk about
-user management in iOS 8.
+00:06:58,819 --> 00:07:02,222
+这个应用程序界面
+可以用一个完整的视图控制器
 
 
 109
-00:06:37,776 --> 00:06:43,356
-Your app had the following three
-APIs to let users manage people
+00:07:02,456 --> 00:07:06,159
+让用户管理家中所有人
 
 
 110
-00:06:43,356 --> 00:06:46,426
-in their homes so they can
-add users, remove users,
+00:07:08,562 --> 00:07:11,965
+开发者需要把
+这个新应用程序界面搬到iOS 9里
 
 
 111
-00:06:46,426 --> 00:06:48,406
-and list users in their homes.
+00:07:12,366 --> 00:07:15,836
+这样我们的客户就可以获得更丰富的
 
 
 112
-00:06:49,056 --> 00:06:53,946
-In iOS 9, we are deprecating
-these and replacing it
+00:07:16,370 --> 00:07:17,404
+家庭共享体验
 
 
 113
-00:06:53,946 --> 00:06:57,976
-with a much simpler API, manage
-users with completion handler.
+00:07:20,007 --> 00:07:22,976
+我还要谈谈一个与此有关的话题
 
 
 114
-00:06:58,826 --> 00:07:03,266
-So this API presents a full
-view controller that is going
+00:07:24,311 --> 00:07:27,080
+当其他用户与你共用一个智能家居
 
 
 115
-00:07:03,266 --> 00:07:06,176
-to let users manage
-people in their homes.
+00:07:27,681 --> 00:07:30,551
+他们能够控制家里其他配件
 
 
 116
-00:07:08,216 --> 00:07:11,976
-Developers need to move
-to this new API in iOS 9
+00:07:31,151 --> 00:07:33,287
+但是他们不能更改任何设置
 
 
 117
-00:07:12,356 --> 00:07:15,826
-so that our customers can
-get a much richer experience
+00:07:34,888 --> 00:07:39,993
+要获得良好用户体验你的app需要有
 
 
 118
-00:07:16,376 --> 00:07:17,466
-with respect to home sharing.
+00:07:40,060 --> 00:07:41,828
+只与该用户相关的功能
 
 
 119
-00:07:17,466 --> 00:07:22,986
-I want to stay on a related
-topic, user capabilities.
+00:07:42,996 --> 00:07:44,565
+要实现这一点你现在需要
 
 
 120
-00:07:24,316 --> 00:07:27,066
-When you share your
-home with a user,
+00:07:44,631 --> 00:07:46,633
+了解该用户的权限级别
 
 
 121
-00:07:27,696 --> 00:07:30,546
-they can control the
-accessories in the home,
+00:07:46,700 --> 00:07:49,303
+所以 例如如果他们不是管理员
 
 
 122
-00:07:30,546 --> 00:07:33,286
-but they cannot make any
-configuration changes.
+00:07:50,237 --> 00:07:53,006
+你就不能让他们编辑房间名称
 
 
 123
-00:07:34,876 --> 00:07:40,066
-For a good user experience, your
-app needs to show capabilities
+00:07:54,508 --> 00:07:57,144
+我们接下来会展示程序界面
+你就明白我所描述的情况了
 
 
 124
-00:07:40,066 --> 00:07:41,816
-that are only relevant
-to that user.
+00:07:58,245 --> 00:08:02,316
+我们要在HMHome增加一个新属性
 
 
 125
-00:07:43,006 --> 00:07:44,616
-To achieve this, you now need
+00:08:02,883 --> 00:08:07,287
+当前用户代表当前在设备上登录的用户
 
 
 126
-00:07:44,616 --> 00:07:46,716
-to know the privilege
-level of that user.
+00:08:08,789 --> 00:08:12,693
+你可以利用这个属性
+并使用HMHome上的一个新功能
 
 
 127
-00:07:46,716 --> 00:07:49,316
-So, for example, if they
-are not an administrator,
+00:08:13,460 --> 00:08:15,229
+家庭用户的访问控制
 
 
 128
-00:07:50,226 --> 00:07:53,086
-you should not let them
-edit the name of a room.
+00:08:15,963 --> 00:08:19,499
+又回到了HMHome的访问控制对象
 
 
 129
-00:07:53,086 --> 00:07:56,806
-So we are going to give you
-APIs to let you figure this out.
+00:08:20,267 --> 00:08:23,470
+这个对象封装了该用户的所有权限
 
 
 130
-00:07:58,246 --> 00:08:02,156
-So on HMHome, we are adding
-a new property, current user.
+00:08:24,471 --> 00:08:25,772
+我们具体解释一下
 
 
 131
-00:08:02,886 --> 00:08:07,276
-That represents the currently
-signed-in user on that device.
+00:08:26,840 --> 00:08:29,710
+它有管理性能 如果你是这家的管理员
 
 
 132
-00:08:07,856 --> 00:08:12,706
-You can use this and pass along
-to a new method on HMHome,
+00:08:30,310 --> 00:08:31,612
+就可以设定管理属性
 
 
 133
-00:08:13,476 --> 00:08:15,236
-home access control for user.
+00:08:32,011 --> 00:08:34,948
+现在能更新你apps并利用这一性能
 
 
 134
-00:08:15,956 --> 00:08:19,486
-That returns a HMHome
-access control object,
+00:08:35,349 --> 00:08:37,851
+与该用户共享相关功能
 
 
 135
-00:08:20,266 --> 00:08:23,456
-which encapsulates the
-privileges of that user.
+00:08:40,486 --> 00:08:46,894
+让我们说一说
+iOS 8版里一个伟大功能 场景
 
 
 136
-00:08:24,456 --> 00:08:25,786
-Let's see what this
-class looks like.
+00:08:47,728 --> 00:08:51,798
+现在场景使我们的客户可以
 
 
 137
-00:08:26,836 --> 00:08:29,706
-It has an administrative
-property that will be set
+00:08:52,132 --> 00:08:53,767
+用一个简单的命令控制多个访问
 
 
 138
-00:08:30,306 --> 00:08:31,596
-if you are the administrator
-of the home.
+00:08:54,268 --> 00:08:57,437
+所以我可以设置一个夜晚场景
+仅用一个单独的命令
 
 
 139
-00:08:32,025 --> 00:08:34,936
-So now you can update your
-apps and use this property
+00:08:57,738 --> 00:09:01,875
+关掉所有的灯 
+启动家里的安全措施把温度调节到
 
 
 140
-00:08:35,346 --> 00:08:37,856
-and share only relevant
-features for that user.
+00:09:01,942 --> 00:09:05,012
+适宜的水平 只用一个操作
 
 
 141
-00:08:38,326 --> 00:08:46,706
-Moving on, let's talk about a
-great feature in iOS 8, scenes.
+00:09:05,812 --> 00:09:07,281
+这是一个非常强大的功能
 
 
 142
-00:08:47,716 --> 00:08:52,876
-Now scenes allow our customers
-to control multiple accesses
+00:09:07,881 --> 00:09:11,518
+在iOS 9里我们希望客户
+更多地使用这项功能
 
 
 143
-00:08:52,876 --> 00:08:53,776
-with a single command.
+00:09:11,952 --> 00:09:15,489
+要做到这一点 
+我们正在引入预定义场景
 
 
 144
-00:08:54,256 --> 00:08:58,636
-So I can have a good night
-scene where it switches out all
+00:09:16,823 --> 00:09:20,761
+大多数人每天都会做四件事
 
 
 145
-00:08:58,636 --> 00:09:01,936
-of the lights, secures my
-home, and sets the temperature
+00:09:21,895 --> 00:09:26,433
+它们就是起床 离开家 回家
 
 
 146
-00:09:01,936 --> 00:09:05,016
-down to a comfortable level
-with a single command.
+00:09:27,067 --> 00:09:28,302
+和上床睡觉
 
 
 147
-00:09:05,826 --> 00:09:07,266
-This is a very powerful feature.
+00:09:29,603 --> 00:09:32,806
+现在 你明白这四个预定义场景是什么
 
 
 148
-00:09:07,886 --> 00:09:11,576
-In iOS 9 we want our customers
-to use this even more.
+00:09:32,873 --> 00:09:34,308
+你可以给他们设定具体内容
 
 
 149
-00:09:11,936 --> 00:09:15,476
-To help this, we are
-introducing predefined scenes.
+00:09:35,275 --> 00:09:38,312
+这样在你的app里你就可以提出建议
 
 
 150
-00:09:16,816 --> 00:09:18,566
-There are four common events
+00:09:38,712 --> 00:09:42,916
+可以用有实际意义的动作
 
 
 151
-00:09:18,626 --> 00:09:20,696
-that most people
-experience every day.
+00:09:43,150 --> 00:09:44,318
+设置这四个预定义场景
 
 
 152
-00:09:20,696 --> 00:09:26,316
-They are getting up, you
-leave home, you return home,
+00:09:45,552 --> 00:09:48,121
+为了让客户有良好的体验
 
 
 153
-00:09:27,076 --> 00:09:29,426
-and then you go to bed.
+00:09:48,622 --> 00:09:50,657
+预定义场景是不能删除的
 
 
 154
-00:09:29,606 --> 00:09:32,786
-Now that you know what these
-four predefined scenes mean,
+00:09:52,159 --> 00:09:54,061
+我们来看一下应用程序界面
 
 
 155
-00:09:32,786 --> 00:09:34,156
-you can apply context to them.
+00:09:55,629 --> 00:10:00,434
+智能家居的每个场景都是由一个
+HM行动组对象表示的
 
 
 156
-00:09:35,276 --> 00:09:37,976
-So in your app, you can
-actually make suggestions
+00:10:01,702 --> 00:10:04,404
+我们已经增加了一个新的属性
+操作设定类型
 
 
 157
-00:09:38,726 --> 00:09:42,706
-to let customers configure
-these four predefined scenes
+00:10:04,505 --> 00:10:08,842
+用来描述你在app里
+设置的场景
 
 
 158
-00:09:43,156 --> 00:09:44,316
-with meaningful actions.
+00:10:10,444 --> 00:10:15,916
+我们有四个常数分别对应
+之前谈到的四个预定义场景
 
 
 159
-00:09:45,566 --> 00:09:47,956
-And to have a good
-experience for our customers,
+00:10:16,950 --> 00:10:19,620
+我们还另有一个类型 由用户定义
 
 
 160
-00:09:48,616 --> 00:09:51,956
-predefined scenes cannot
-be deleted from a home.
+00:10:19,887 --> 00:10:23,223
+这个场景由你的app自行创建 设置
 
 
 161
-00:09:52,156 --> 00:09:55,446
-Let's walk through the APIs.
+00:10:24,925 --> 00:10:28,562
+在家居环境中 怎样进入预定义场景？
 
 
 162
-00:09:55,636 --> 00:09:59,576
-A scene in HomeKit is
-represented using a HM action
+00:10:29,530 --> 00:10:35,302
+在HMHome类别里
+这些场景是作为操作设定属性自动植入
 
 
 163
-00:09:59,576 --> 00:10:00,446
-set object.
+00:10:37,137 --> 00:10:39,540
+我们还有一个快捷界面
 
 
 164
-00:10:01,686 --> 00:10:04,266
-We have added a new
-property, action set type,
+00:10:39,973 --> 00:10:41,975
+内置行动类型组
 
 
 165
-00:10:04,516 --> 00:10:06,606
-that describes the kind of scene
+00:10:42,476 --> 00:10:44,111
+这个界面采用操作设定类型
 
 
 166
-00:10:06,606 --> 00:10:08,856
-that you are working
-with in your app.
+00:10:45,245 --> 00:10:47,514
+并返回一组对应
 
 
 167
-00:10:10,436 --> 00:10:12,996
-We have four constants
-that correspond
+00:10:47,681 --> 00:10:51,985
+一个预定义场景的HM操作设定对象
 
 
 168
-00:10:12,996 --> 00:10:15,866
-to the four predefined scenes
-I talked about earlier.
+00:10:54,988 --> 00:10:56,757
+程序界面就是这样 但是我们还想要
 
 
 169
-00:10:16,956 --> 00:10:19,676
-We also have a fifth type,
-the user defined type,
+00:10:56,823 --> 00:10:59,826
+使这些场景更便于客户操作
 
 
 170
-00:10:19,676 --> 00:10:24,816
-and this is set on the
-scene that your app creates.
+00:11:01,195 --> 00:11:06,967
+所以在iOS 9里Siri 
+与这些场景配合得更好
 
 
 171
-00:10:24,936 --> 00:10:28,556
-How do I access these
-predefined scenes in a home?
+00:11:08,435 --> 00:11:11,672
+现在Siri可以识别所有场景名称
 
 
 172
-00:10:29,516 --> 00:10:31,996
-They are automatically
-populated for you as part
+00:11:11,872 --> 00:11:14,508
+只要说出场景名称
 
 
 173
-00:10:31,996 --> 00:10:35,316
-of the action set property
-on an HMHome class.
+00:11:14,608 --> 00:11:16,243
+就可以对其进行操作
 
 
 174
-00:10:35,816 --> 00:10:39,076
-But we also have
-a convenience API,
+00:11:16,310 --> 00:11:19,246
+这是客户使用场景的非常好的方式
 
 
 175
-00:10:39,966 --> 00:10:41,966
-built-in action set of type.
+00:11:23,050 --> 00:11:26,887
+现在我们要讲的是如何给你的家居
 
 
 176
-00:10:42,466 --> 00:10:44,096
-That takes the action set type
+00:11:27,221 --> 00:11:29,356
+增加配件
 
 
 177
-00:10:45,246 --> 00:10:50,846
-and returns a HM action set
-object that corresponds to one
+00:11:32,059 --> 00:11:35,329
+假设我有两个出自同一生产商家居配件
 
 
 178
-00:10:50,846 --> 00:10:51,906
-of your predefined scenes.
+00:11:35,395 --> 00:11:37,965
+可以用生产商的名字和型号作为
 
 
 179
-00:10:51,906 --> 00:10:56,286
-So that's the APIs, but we want
+00:11:38,031 --> 00:11:40,467
+配件名称的一部分
 
 
 180
-00:10:56,286 --> 00:10:59,816
-to make scenes even much
-easier for our customers.
+00:11:40,968 --> 00:11:43,070
+当我将这个配件添加到家居设置中时
 
 
 181
-00:11:01,196 --> 00:11:08,246
-So now Siri works even
-better with scenes in iOS 9.
+00:11:43,437 --> 00:11:45,472
+我可以随时查看 
+配件的包装 确保
 
 
 182
-00:11:08,446 --> 00:11:11,406
-Siri now recognizes
-the names of all scenes
+00:11:46,106 --> 00:11:48,141
+添加正确的设备
 
 
 183
-00:11:11,886 --> 00:11:13,786
-and simply speaking the name
+00:11:49,676 --> 00:11:52,479
+但是对我们的客户来说
+更好的用户体验是
 
 
 184
-00:11:13,786 --> 00:11:15,926
-of the scene will
-actually execute it.
+00:11:52,646 --> 00:11:54,715
+通过给出某种指示
 
 
 185
-00:11:16,316 --> 00:11:19,096
-This is a great way for our
-customers to use scenes.
+00:11:54,781 --> 00:11:57,084
+来提供更多的配件信息
 
 
 186
-00:11:19,246 --> 00:11:26,436
-Now let's talk about
-the experience
+00:11:58,252 --> 00:12:01,288
+比如说我们可以给它们视觉线索
 
 
 187
-00:11:27,226 --> 00:11:29,526
-of adding an accessory
-to your home.
+00:12:02,122 --> 00:12:04,558
+显示一个能说明
 
 
 188
-00:11:29,786 --> 00:11:34,956
-Let's say I have two accessories
-from the same manufacturer,
+00:12:04,625 --> 00:12:09,897
+正在添加的配件类型的图标
+这样的体验就更好
 
 
 189
-00:11:35,386 --> 00:11:38,016
-and they can have the name
-of the manufacturer as part
+00:12:10,531 --> 00:12:11,665
+要获得这种功能
 
 
 190
-00:11:38,016 --> 00:11:40,336
-of the accessory's name
-and a model number,
+00:12:11,865 --> 00:12:14,902
+我们正在向iOS 9添加配件类别
 
 
 191
-00:11:40,336 --> 00:11:44,146
-and when I add this accessory
-to the home, I can always look
+00:12:16,236 --> 00:12:21,241
+在安装配件时
+你的app就可以获取这种信息
 
 
 192
-00:11:44,146 --> 00:11:45,286
-up the packaging and figuring
+00:12:21,675 --> 00:12:24,378
+所以你在浏览并找到这些配件时
 
 
 193
-00:11:45,286 --> 00:11:48,146
-out I am adding the
-right device to my home.
+00:12:24,611 --> 00:12:26,213
+就能获取这些信息
 
 
 194
-00:11:49,666 --> 00:11:52,756
-But a better user experience
-for our customers is
+00:12:27,314 --> 00:12:31,285
+它指定该配件的主要类别
 
 
 195
-00:11:52,756 --> 00:11:54,796
-to give some kind of indication
+00:12:33,453 --> 00:12:36,990
+-现在看看这个功能的界面
+我们正在引入一个新的类别
 
 
 196
-00:11:54,796 --> 00:11:57,086
-that provides more
-information about the accessory.
+00:12:37,457 --> 00:12:39,026
+HM配件类型
 
 
 197
-00:11:58,256 --> 00:12:01,296
-Let's say, for example, we
-can give them visual clues,
+00:12:41,228 --> 00:12:45,065
+它有一个属性类别类型
+可以给出关于该类别的
 
 
 198
-00:12:02,136 --> 00:12:05,046
-present an icon that
-tells them the type
+00:12:45,132 --> 00:12:47,100
+更多信息 所以在我们的例子中
 
 
 199
-00:12:05,046 --> 00:12:09,906
-of accessory they are adding
-is a much better experience.
+00:12:47,601 --> 00:12:49,336
+你会找到灯泡类别类型
 
 
 200
-00:12:10,516 --> 00:12:11,656
-To attain this feature,
+00:12:50,270 --> 00:12:51,705
+风扇类别类型
 
 
 201
-00:12:11,876 --> 00:12:14,916
-we are adding accessory
-categories in iOS 9.
+00:12:53,173 --> 00:12:56,710
+进入这个类别要用到HM配件
 
 
 202
-00:12:16,226 --> 00:12:17,786
-This information is available
+00:12:56,777 --> 00:12:58,712
+类别属性
 
 
 203
-00:12:17,786 --> 00:12:21,246
-to your app during
-setup of that accessory.
+00:12:59,012 --> 00:13:01,448
+这个属性在浏览这些配件时就可以找到
 
 
 204
-00:12:21,676 --> 00:12:24,226
-So when you browse and you
-are finding these accessories,
+00:13:02,049 --> 00:13:06,053
+我们建议客户在初次安装时
 
 
 205
-00:12:24,226 --> 00:12:25,806
-it is already available for you.
+00:13:06,119 --> 00:13:08,589
+就使用这个新功能优化用户体验
 
 
 206
-00:12:27,316 --> 00:12:31,286
-And it specifies the primary
-category of that accessory.
+00:13:17,064 --> 00:13:20,667
+现在我们开始讲一下HomeKit
+和Apple Watch(苹果表)
 
 
 207
-00:12:33,116 --> 00:12:36,916
-Moving on to the APIs for this,
-we are introducing a new class,
+00:13:23,303 --> 00:13:27,975
+是的 正如我们周一所讲的内容
 
 
 208
-00:12:37,446 --> 00:12:39,036
-HM accessory category.
+00:13:28,809 --> 00:13:31,044
+目前HomeKit
+适用在 Watch OS系统中
 
 
 209
-00:12:39,606 --> 00:12:45,116
-This has a property category
-type that gives more information
+00:13:31,812 --> 00:13:33,747
+好啦
+这意味着你现在可以出门跑步去啦
 
 
 210
-00:12:45,116 --> 00:12:47,086
-about that category,
-so, in our example,
+00:13:33,814 --> 00:13:37,284
+没有iPhone
+如果你有苹果手表回来
 
 
 211
-00:12:47,606 --> 00:12:49,346
-you will have category
-type light bulb
+00:13:37,351 --> 00:13:38,919
+你就能够
 
 
 212
-00:12:50,266 --> 00:12:53,046
-and category type fan.
+00:13:38,986 --> 00:13:40,454
+打开房门 回到室内
 
 
 213
-00:12:53,176 --> 00:12:56,766
-And the way you access this
-category is use the category
+00:13:41,121 --> 00:13:42,589
+这样很酷么
 
 
 214
-00:12:56,766 --> 00:12:58,726
-property on an HM accessory.
+00:13:48,095 --> 00:13:52,499
+在您的iOS系统的设备上保存着
+你们家庭所有的数据可以镜像储存
 
 
 215
-00:12:59,006 --> 00:13:01,456
-So this is available when you
-browse for these accessories.
+00:13:52,833 --> 00:13:55,836
+到手表中
+你就能够在你的手机上进行编辑啦
 
 
 216
-00:13:02,056 --> 00:13:06,086
-So we recommend that you use
-this new feature and enhance
+00:13:55,903 --> 00:13:58,005
+以及这些数据会
+与您的手表数据产生同步变化
 
 
 217
-00:13:06,116 --> 00:13:07,936
-that user experience
-for our customers during
+00:14:00,574 --> 00:14:05,312
+您能够从手表上看到你的家内情况
+控制家里的设备附件
 
 
 218
-00:13:07,936 --> 00:13:08,906
-first-time setup.
+00:14:05,512 --> 00:14:07,314
+以及在所有屏幕上进行操作
 
 
 219
-00:13:08,906 --> 00:13:20,216
-Now let's talk about
-HomeKit and the Apple Watch.
+00:14:08,482 --> 00:14:11,552
+我们不能等待看到你将会
 
 
 220
-00:13:21,161 --> 00:13:23,161
-[Applause]
+00:14:11,618 --> 00:14:13,287
+为我们的客户提供创新性体验
 
 
 221
-00:13:23,306 --> 00:13:28,036
-Yeah. As announced
-in Monday's keynote,
+00:14:13,654 --> 00:14:15,189
+安装有HomeKit的苹果手表
 
 
 222
-00:13:28,816 --> 00:13:31,036
-HomeKit is now available
-on Watch OS.
+00:14:18,058 --> 00:14:23,764
+最后
+我想谈论一下OS 9系统新典型特征
 
 
 223
-00:13:31,816 --> 00:13:33,816
-Now, this means you can
-now go out for a run
+00:14:25,432 --> 00:14:26,533
+以及我本人对此真心高兴
 
 
 224
-00:13:33,816 --> 00:13:37,346
-without your iPhone, come back,
-and if you have your watch
+00:14:26,600 --> 00:14:28,001
+因为我在此投入了大量的时间
 
 
 225
-00:13:37,346 --> 00:13:38,996
-with you, you will be able
+00:14:31,305 --> 00:14:33,273
+我们开始讲一下触发器
 
 
 226
-00:13:38,996 --> 00:13:40,466
-to unlock your door
-and get back in.
+00:14:34,575 --> 00:14:38,278
+在iOS 8系统之中
+我们设置了一个定时触发器
 
 
 227
-00:13:41,106 --> 00:13:42,716
-How cool is that?
+00:14:38,345 --> 00:14:41,748
+以便让你们通过操作屏幕调整某天时间
 
 
 228
-00:13:43,516 --> 00:13:47,606
-[Applause]
+00:14:41,815 --> 00:14:47,721
+我能够设置一个
+每天下午7点执行动作的夜晚屏幕
 
 
 229
-00:13:48,106 --> 00:13:52,486
-All your home data is
-mirrored from your iOS device
+00:14:48,956 --> 00:14:50,924
+如果我们这样做后 但是会发生什么呢
 
 
 230
-00:13:52,836 --> 00:13:55,756
-onto the watch, so you can
-make changes on your phone
+00:14:52,593 --> 00:14:55,195
+我回到家中 不能够打开大门
 
 
 231
-00:13:55,916 --> 00:14:00,416
-and they will automatically
-synch to the watch.
+00:14:55,963 --> 00:14:57,164
+现在就发生一个事件
 
 
 232
-00:14:00,586 --> 00:14:05,086
-You can view homes from the
-watch, control your accessories,
+00:14:59,199 --> 00:15:01,301
+让我们假设现在时间是下午6点钟之前
 
 
 233
-00:14:05,496 --> 00:14:07,126
-and execute all your scenes.
+00:15:01,568 --> 00:15:04,071
+在紧挨着大门安装了一个动作传感器
 
 
 234
-00:14:08,476 --> 00:14:11,616
-We cannot wait to see the
-creative experience you are
+00:15:04,805 --> 00:15:06,473
+检测到动作指令 动作传感器会被激活
 
 
 235
-00:14:11,616 --> 00:14:13,296
-going to deliver
-to our customers
+00:15:07,574 --> 00:15:09,543
+如果设置了我已经到达家门口的屏幕
 
 
 236
-00:14:13,666 --> 00:14:15,196
-with HomeKit on the Apple Watch.
+00:15:09,877 --> 00:15:11,812
+我希望自动地执行上述动作
 
 
 237
-00:14:15,596 --> 00:14:23,776
-Finally, I want to talk
-about a new feature in iOS 9,
+00:15:12,179 --> 00:15:14,414
+你家大门将会打开 欢迎您回家
 
 
 238
-00:14:24,426 --> 00:14:26,586
-and I am really excited about it
+00:15:15,182 --> 00:15:17,451
+我很高兴地告诉您们 
+使用iOS 9系统
 
 
 239
-00:14:26,586 --> 00:14:27,986
-because I spent a
-lot of time on it.
+00:15:18,252 --> 00:15:19,620
+运用事件触发器
 
 
 240
-00:14:31,296 --> 00:14:33,146
-[Laughter] Let's
-talk about triggers.
+00:15:21,488 --> 00:15:24,725
+一个或者多个事件激活一个触发器
 
 
 241
-00:14:34,166 --> 00:14:38,216
-Now, in iOS 8, we
-have timer triggers,
+00:15:25,659 --> 00:15:27,594
+让我们探讨我们支持哪些种类的事件
 
 
 242
-00:14:38,246 --> 00:14:41,776
-so that lets you execute scenes
-that specify time of the day.
+00:15:27,661 --> 00:15:31,198
+设置了一些与设备附件状态对应的事件
 
 
 243
-00:14:41,826 --> 00:14:47,776
-I can have an evening scene that
-executes at 7 p.m. every day.
+00:15:31,265 --> 00:15:34,635
+这将会对应于我们家的大门打开状态
 
 
 244
-00:14:48,966 --> 00:14:52,386
-But what if I could do
-something like this.
+00:15:35,536 --> 00:15:38,138
+以及设置了基于geofence事件
 
 
 245
-00:14:52,596 --> 00:14:55,186
-I return home, I
-unlock my front door,
+00:15:38,472 --> 00:15:40,307
+因此你能够设置事件
 
 
 246
-00:14:55,966 --> 00:14:56,956
-now that generates an event.
+00:15:40,374 --> 00:15:42,776
+对应着我离开家和达到家里的时间
 
 
 247
-00:14:57,606 --> 00:15:00,536
-Let's say it's before 6 p.m.
+00:15:43,810 --> 00:15:48,315
+让我们仔细检查这些内容
+然后我们把这些编入API之中
 
 
 248
-00:15:01,466 --> 00:15:03,286
-and I have a motion
-sensor that's right next
+00:15:50,817 --> 00:15:53,687
+针对某一设备附件所处的状态
+我们将新建新的归类
 
 
 249
-00:15:03,286 --> 00:15:03,906
-to my front door.
+00:15:53,787 --> 00:15:55,422
+HM典型事件
 
 
 250
-00:15:04,796 --> 00:15:06,476
-That gets activated
-and detects motion.
+00:15:56,857 --> 00:15:58,559
+以及带领给你们所想要的典型特征
 
 
 251
-00:15:07,196 --> 00:15:09,176
-If I have an arrive home scene,
+00:15:58,625 --> 00:16:02,596
+成为该事件的源和触发值
 
 
 252
-00:15:09,596 --> 00:15:11,556
-I want that to be
-automatically executed.
+00:16:02,663 --> 00:16:04,765
+当那种典型特征满足你所设定的值
 
 
 253
-00:15:11,986 --> 00:15:14,226
-And your home is ready
-and welcoming you.
+00:16:04,965 --> 00:16:06,967
+事件将会自动为你开启
 
 
 254
-00:15:15,166 --> 00:15:16,456
-I'm happy to say
-you can now do this
+00:16:09,436 --> 00:16:14,808
+针对基于定位的事件
+我们将会设置HM定位事件类
 
 
 255
-00:15:16,456 --> 00:15:21,826
-in iOS 9 with event triggers.
+00:16:14,908 --> 00:16:16,109
+来讨论CLRegion
 
 
 256
-00:15:22,466 --> 00:15:24,466
-One or more events
-activate a trigger.
+00:16:16,510 --> 00:16:21,081
+当满足一定要求
+你们能够对CLRegion设定配置
 
 
 257
-00:15:25,646 --> 00:15:27,426
-Let's talk about what
-kind of events we support.
+00:16:21,582 --> 00:16:24,151
+HM定位事件类将会自动开始
 
 
 258
-00:15:27,676 --> 00:15:31,276
-We have events corresponding
-to the state of an accessory,
+00:16:25,285 --> 00:16:29,756
+让我们回顾一下我们大门被打开的例子
 
 
 259
-00:15:31,276 --> 00:15:34,626
-so this would correspond to
-our front door unlocking.
+00:16:29,857 --> 00:16:31,925
+以及把这件事作为一个典型特征事件
 
 
 260
-00:15:35,526 --> 00:15:38,126
-And we also have
-geofence-based events.
+00:16:32,726 --> 00:16:34,027
+下面是你操作的方法
 
 
 261
-00:15:38,486 --> 00:15:40,896
-So you can generate
-events corresponding
+00:16:35,863 --> 00:16:38,565
+生成一个HM典型特征事件类
 
 
 262
-00:15:40,896 --> 00:15:42,646
-to when I leave home
-or arrive home.
+00:16:39,032 --> 00:16:42,135
+设置大门的当前状态典型特征
 
 
 263
-00:15:43,826 --> 00:15:50,626
-Let's go through these and how
-we represent them in the APIs.
+00:16:42,202 --> 00:16:44,071
+作为一个你希望设置的典型特征
 
 
 264
-00:15:50,816 --> 00:15:53,476
-For the state of an
-accessory, we have a new class,
+00:16:44,538 --> 00:16:48,041
+以及设置一个触发值
+只是设置大门开启状态的参数
 
 
 265
-00:15:53,776 --> 00:15:55,426
-HM characteristic event,
+00:16:48,509 --> 00:16:51,345
+现在事件将会触发
 
 
 266
-00:15:56,466 --> 00:15:58,626
-and that takes the
-characteristic you want
+00:16:51,411 --> 00:16:54,248
+一旦大门打开
+当一部分事件触发器事件将会开启
 
 
 267
-00:15:58,626 --> 00:16:02,466
-to be the source of that event
-and a trigger value that,
+00:16:56,517 --> 00:16:58,051
+我曾谈到条件
 
 
 268
-00:16:02,646 --> 00:16:04,556
-when that characteristic
-meets that value,
+00:16:58,752 --> 00:17:03,724
+在特定触发器的屏幕得到执行的条件
 
 
 269
-00:16:04,966 --> 00:16:07,356
-that event will automatically
-be fired for you.
+00:17:04,391 --> 00:17:07,461
+我们支持三类条件：基于时间
 
 
 270
-00:16:09,126 --> 00:16:14,796
-For location-based events, we
-have a HM location event class
+00:17:08,028 --> 00:17:11,498
+能够有相应部分对应于下午6点之前
 
 
 271
-00:16:14,906 --> 00:16:16,116
-that takes a CLRegion.
+00:17:12,398 --> 00:17:14,667
+我们同样会支持设备附件的所处的状态
 
 
 272
-00:16:16,516 --> 00:16:21,066
-You can configure the CLRegion,
-and when that criteria is met,
+00:17:14,734 --> 00:17:17,371
+这将由我们的动作传感器检测到动作
 
 
 273
-00:16:21,596 --> 00:16:24,136
-the HM location event class
-will automatically fire.
+00:17:18,070 --> 00:17:20,840
+最后我同样设置一天之内的重要事件
 
 
 274
-00:16:24,806 --> 00:16:29,556
-Let's walk through an example
-of our front door being unlocked
+00:17:21,441 --> 00:17:22,542
+就像日出和日落
 
 
 275
-00:16:29,856 --> 00:16:31,716
-and capture that as a
-characteristic event.
+00:17:24,344 --> 00:17:28,080
+仔细检查其中的每一项
+和领会如何在API生成它们
 
 
 276
-00:16:32,726 --> 00:16:34,366
-Here's how you do it.
+00:17:29,750 --> 00:17:33,086
+条件按照提示进行预设
 
 
 277
-00:16:35,536 --> 00:16:38,236
-Create a HM characteristic
-event class,
+00:17:33,187 --> 00:17:34,955
+在API中NS提示
 
 
 278
-00:16:39,036 --> 00:16:42,196
-give it the front door
-current state characteristic
+00:17:35,756 --> 00:17:39,193
+以及我们对所有这些设置了便捷措施
 
 
 279
-00:16:42,196 --> 00:16:43,866
-as a characteristic that
-you want to capture.
+00:17:39,259 --> 00:17:40,961
+你不必对此担心
 
 
 280
-00:16:44,536 --> 00:16:48,046
-And for the trigger value,
-just specify door state open.
+00:17:41,228 --> 00:17:43,964
+生成这些非常简单
 
 
 281
-00:16:48,516 --> 00:16:51,406
-Now this event would
-be fired when it's part
+00:17:44,097 --> 00:17:49,169
+在HMEventTrigger类 
+我们进行类方法提示
 
 
 282
-00:16:51,406 --> 00:16:54,236
-of an event trigger as soon
-as your front door unlocks.
+00:17:49,269 --> 00:17:52,940
+在部件之中预设时间到点
+之前对触发器产生触发进行评估
 
 
 283
-00:16:54,786 --> 00:16:57,636
-I talked about conditions.
+00:17:53,373 --> 00:17:55,709
+那样会安装
+一个你能够设置的NS预设时间部件
 
 
 284
-00:16:58,756 --> 00:17:03,576
-Conditions get execution of
-a scene in a given trigger.
+00:17:55,976 --> 00:17:57,911
+例如你能够使用这些
 
 
 285
-00:17:04,406 --> 00:17:07,336
-We support three types of
-conditions: time-based,
+00:17:58,879 --> 00:18:01,048
+生成一个下午6点钟之前的条件
 
 
 286
-00:17:08,026 --> 00:17:10,306
-so I can have something
-corresponding
+00:18:01,982 --> 00:18:04,585
+设置有一个设置有后预设时间后部件
 
 
 287
-00:17:10,306 --> 00:17:14,526
-to before 6 p.m. We also support
-the state of an accessory.
+00:18:05,219 --> 00:18:07,855
+我们同样设置有第三个用来做出提示
 
 
 288
-00:17:14,726 --> 00:17:17,386
-This would be our motion
-sensor detecting motion.
+00:18:07,921 --> 00:18:11,592
+预设时间组件的评估触发器产生触发
 
 
 289
-00:17:18,086 --> 00:17:20,836
-Finally, we also have
-significant events in a day,
+00:18:12,192 --> 00:18:13,293
+这种功能非常有用
 
 
 290
-00:17:21,425 --> 00:17:22,536
-like sunrise and sunset.
+00:18:13,360 --> 00:18:14,995
+你能够使用这种功能生成条件
 
 
 291
-00:17:23,066 --> 00:17:25,626
-Let's go through
-each one of these
+00:18:15,062 --> 00:18:18,365
+为某特定日期 例如 设置为星期天
 
 
 292
-00:17:25,626 --> 00:17:29,536
-and see how we create
-them in the APIs.
+00:18:20,801 --> 00:18:24,004
+让我们仔细查看一下例子
+生成我们想要的条件
 
 
 293
-00:17:29,756 --> 00:17:33,086
-Conditions are represented
-as predicates,
+00:18:24,071 --> 00:18:29,076
+设置为下午6点钟之前
+首先我们生成一个NS预设时间部件
 
 
 294
-00:17:33,196 --> 00:17:34,946
-NS predicates, in the APIs.
+00:18:29,309 --> 00:18:34,381
+以及设置小时特性为下午6点钟 其次
 
 
 295
-00:17:35,696 --> 00:17:39,116
-And we have convenience
-measures for all of these.
+00:18:34,848 --> 00:18:37,885
+我们只是使用Ns预设时间部件 
+并且一直保留
 
 
 296
-00:17:39,266 --> 00:17:40,966
-You don't have to
-worry about them.
+00:18:37,951 --> 00:18:39,853
+到方便的API提示
 
 
 297
-00:17:41,216 --> 00:17:43,976
-It's very simple to create them.
+00:18:39,920 --> 00:18:43,624
+在预设时间部件
+发生动作对触发器进行评估
 
 
 298
-00:17:44,086 --> 00:17:49,166
-On an HMEventTrigger, class, we
-have a class method predicate
+00:18:43,991 --> 00:18:46,326
+以及这将会给你一个NS提示
 
 
 299
-00:17:49,256 --> 00:17:52,946
-for evaluating trigger occurring
-before date with components.
+00:18:46,393 --> 00:18:51,932
+对应于下午6点钟之前
+其次设备附件所处的状态
 
 
 300
-00:17:53,366 --> 00:17:55,706
-That takes an NS dates component
-that you can configure.
+00:18:54,134 --> 00:18:58,472
+同样在HMEventTrigger
+类上设置了一个方便的API
 
 
 301
-00:17:55,986 --> 00:17:57,896
-And you can use this,
-for example,
+00:18:58,872 --> 00:19:03,610
+也就是说
+提示对典型特征触发器进行评估
 
 
 302
-00:17:58,886 --> 00:18:01,056
-to create the before
-6 p.m. condition.
+00:19:04,011 --> 00:19:07,147
+考虑到这些典型特征和所需要的匹配值
 
 
 303
-00:18:01,966 --> 00:18:04,586
-We have one for after
-date with components.
+00:19:07,214 --> 00:19:10,651
+满足这些将会进行评估的条件
 
 
 304
-00:18:05,206 --> 00:18:07,926
-We also have the third
-one, which is predicate
+00:19:11,852 --> 00:19:13,420
+因此对于我们的动作传感器
 
 
 305
-00:18:07,926 --> 00:18:11,606
-for evaluating trigger occurring
-on date with components.
+00:19:13,887 --> 00:19:16,790
+在此你将如何生成一个条件
 
 
 306
-00:18:12,196 --> 00:18:13,206
-This is really useful.
+00:19:17,224 --> 00:19:19,126
+对应于检测动作
 
 
 307
-00:18:13,356 --> 00:18:15,046
-You can use this to
-create a condition
+00:19:20,761 --> 00:19:22,362
+只是称方便为API
 
 
 308
-00:18:15,046 --> 00:18:18,046
-for a specific day --
-for example, Sundays.
+00:19:22,429 --> 00:19:26,333
+设置了大门传感器
+典型特征作为一个典型特征源
 
 
 309
-00:18:18,046 --> 00:18:24,076
-Let's walk through an example
-of creating our condition
+00:19:26,400 --> 00:19:28,502
+以及设定了匹配值
 
 
 310
-00:18:24,076 --> 00:18:28,906
-for before 6 p.m. First, we
-create an NS dates component
+00:19:28,769 --> 00:19:29,937
+并设置为正确值
 
 
 311
-00:18:29,316 --> 00:18:34,386
-and set the hour
-property to 6 p.m. Next,
+00:19:30,037 --> 00:19:31,972
+这将意味着动作已经被检测到
 
 
 312
-00:18:34,836 --> 00:18:37,966
-we just use that NS dates
-component and pass it along
+00:19:32,306 --> 00:19:33,607
+它就这么简单
 
 
 313
-00:18:37,966 --> 00:18:39,936
-to a convenience API predicate
+00:19:35,108 --> 00:19:37,444
+最后一天之中最为重要的事件
 
 
 314
-00:18:39,936 --> 00:18:43,626
-for evaluating trigger occurring
-before date with components,
+00:19:37,845 --> 00:19:39,947
+我们对此设置了两个方便的API:
 
 
 315
-00:18:43,996 --> 00:18:46,406
-and that's going to give you
-an NS predicate corresponding
+00:19:41,582 --> 00:19:44,785
+在重要事件发生之前提示评价触发器
 
 
 316
-00:18:46,406 --> 00:18:51,946
-to before 6 p.m. Next,
-the state of an accessory.
+00:19:44,852 --> 00:19:47,654
+这样采取可供选择的补偿参数
 
 
 317
-00:18:52,726 --> 00:18:58,486
-So we also have a convenience
-API on the HMEventTrigger class,
+00:19:47,721 --> 00:19:49,156
+补偿参数属于NS的预约部件
 
 
 318
-00:18:58,876 --> 00:19:03,616
-namely predicate for evaluating
-trigger with characteristic,
+00:19:50,190 --> 00:19:52,793
+以及其次的是你们可以查猜测到
 
 
 319
-00:19:04,026 --> 00:19:07,216
-that takes a characteristic
-and a matching value that needs
+00:19:52,860 --> 00:19:55,529
+在重要事件发生
+之后提示对触发开关进行评估
 
 
 320
-00:19:07,216 --> 00:19:10,926
-to be met for that condition
-to be evaluated through.
+00:19:57,397 --> 00:19:59,066
+我们设置了两个常数
 
 
 321
-00:19:11,856 --> 00:19:13,156
-So for our motion sensor,
+00:19:59,132 --> 00:20:01,301
+对重要事件进行界定：日出与日落
 
 
 322
-00:19:13,876 --> 00:19:16,796
-here's how you would create
-a condition corresponding it
+00:20:02,402 --> 00:20:05,272
+让我们仔细检查一下例子的条件
 
 
 323
-00:19:17,236 --> 00:19:19,116
-to being detecting motion.
+00:20:06,273 --> 00:20:09,510
+为将会对应于事件触发器
 
 
 324
-00:19:19,616 --> 00:19:21,896
-Just call the convenience API,
+00:20:09,576 --> 00:20:12,880
+设置在日落三十分钟之前
 
 
 325
-00:19:22,226 --> 00:19:26,396
-specify the front door sensor
-characteristic as a source
+00:20:13,914 --> 00:20:15,148
+我们将会如何进行操作呢?
 
 
 326
-00:19:26,396 --> 00:19:28,486
-of the characteristic, and
-for the matching value,
+00:20:15,449 --> 00:20:18,218
+首先你们生成一个NS预设时间组件
 
 
 327
-00:19:28,776 --> 00:19:29,726
-set it to true.
+00:20:18,552 --> 00:20:20,888
+以及设置分钟数为负三十
 
 
 328
-00:19:30,036 --> 00:19:31,966
-This would mean motion
-has been detected.
+00:20:22,422 --> 00:20:24,992
+那么现在只是使用我们的方便API
 
 
 329
-00:19:32,306 --> 00:19:34,946
-It's as simple as that.
+00:20:25,058 --> 00:20:29,263
+在重要事件发生之前提示进行评估
 
 
 330
-00:19:35,106 --> 00:19:37,386
-Finally, significant
-events in the day.
+00:20:29,997 --> 00:20:32,165
+设置日落为重要事件
 
 
 331
-00:19:37,856 --> 00:19:39,956
-We have two convenience
-APIs for this:
+00:20:32,566 --> 00:20:34,835
+以及设置个像上面步骤生成的补偿参数
 
 
 332
-00:19:41,576 --> 00:19:44,866
-predicate for evaluating trigger
-occurring before significant
+00:20:35,736 --> 00:20:39,706
+通过这样方式
+就能够在屏幕上对大门进行执行
 
 
 333
-00:19:44,866 --> 00:19:47,726
-event, that takes an optional
-applying offset parameter,
+00:20:40,274 --> 00:20:43,443
+如果事件在下午五点半之后触发
 
 
 334
-00:19:47,726 --> 00:19:49,166
-which is an NS dates component.
+00:20:44,311 --> 00:20:47,681
+只要在下午五点半之前触发
+它将会在屏幕上进行操作
 
 
 335
-00:19:49,656 --> 00:19:52,846
-And the second one, as you
-guessed it, is predicate
+00:20:49,049 --> 00:20:54,288
+将能够触发我们设置的事件触发开关
 
 
 336
-00:19:52,846 --> 00:19:56,126
-for evaluating trigger occurring
-after significant event.
+00:20:55,155 --> 00:20:56,490
+以及随后我们会得到条件
 
 
 337
-00:19:57,136 --> 00:19:58,956
-We have two constants defined
+00:20:56,557 --> 00:20:58,091
+我们如何将这些联系在一起呢？
 
 
 338
-00:19:59,116 --> 00:20:02,596
-for significant events:
-sunrise and sunset.
+00:20:58,992 --> 00:21:01,495
+当你生成
+HMEventTrigger类
 
 
 339
-00:20:02,596 --> 00:20:07,746
-Let's walk through an
-example for condition
+00:21:01,995 --> 00:21:04,231
+以及方法因此而得名
 
 
 340
-00:20:07,746 --> 00:20:10,126
-for our event trigger
-that would correspond
+00:21:05,532 --> 00:21:08,702
+你们能够设置
+一个或者多个事件来激发触发器
 
 
 341
-00:20:10,126 --> 00:20:12,896
-to 30 minutes before sunset.
+00:21:09,369 --> 00:21:11,338
+一旦触发器激活
 
 
 342
-00:20:13,906 --> 00:20:14,946
-How do we go about doing that?
+00:21:11,405 --> 00:21:13,473
+我们对相应的条件进行评估
 
 
 343
-00:20:15,456 --> 00:20:18,226
-You first create an
-NS dates component
+00:21:13,707 --> 00:21:16,844
+条件可以选择
+如果你没有设置条件
 
 
 344
-00:20:18,566 --> 00:20:22,276
-and specify the minute
-to negative 30.
+00:21:18,245 --> 00:21:20,147
+他就是我们假设其为正确的
 
 
 345
-00:20:22,406 --> 00:20:24,596
-And now, just use
-our convenience API,
+00:21:20,347 --> 00:21:24,685
+以及我们将一直
+在事件触发器相关的屏幕上操作
 
 
 346
-00:20:25,056 --> 00:20:28,876
-predicate for evaluating trigger
-occurring before significant
+00:21:25,185 --> 00:21:28,522
+一旦任何一个事件被激活
 
 
 347
-00:20:28,876 --> 00:20:32,046
-event, give it sunset as
-the significant event,
+00:21:29,923 --> 00:21:34,161
+现在我们
+对先前谈及到的整个例子进行仔细检查
 
 
 348
-00:20:32,556 --> 00:20:35,106
-and give the offset that
-we just created above.
+00:21:35,395 --> 00:21:38,832
+已经生成一个典型特征事件 对应于
 
 
 349
-00:20:35,736 --> 00:20:39,706
-With this, we can now
-gate execution of a scene
+00:21:39,066 --> 00:21:40,667
+大门被锁
 
 
 350
-00:20:40,276 --> 00:20:45,326
-if that event fires
-after 5:30 p.m. As long
+00:21:41,301 --> 00:21:43,804
+我们生成两个条件
+其中一个是下午6点钟之前
 
 
 351
-00:20:45,326 --> 00:20:47,686
-as it's before 5:30 p.m., it
-will always execute that scene.
+00:21:44,505 --> 00:21:46,840
+和动作传感器检测到动作
 
 
 352
-00:20:49,036 --> 00:20:54,166
-So now we have events that
-can trigger our event trigger,
+00:21:47,841 --> 00:21:50,844
+如何把他们联系在一起
+和产生我们的事件触发器呢?
 
 
 353
-00:20:54,166 --> 00:20:56,376
-and then we have conditions.
+00:21:51,512 --> 00:21:54,114
+第一件事是
+你需要做的是生成一个复合提示
 
 
 354
-00:20:56,556 --> 00:20:57,496
-How do we tie it all together?
+00:21:54,181 --> 00:21:56,617
+因为我们需要我们的所有两个条件
 
 
 355
-00:20:58,996 --> 00:21:01,486
-That's when you create
-an HMEventTrigger class,
+00:21:57,451 --> 00:21:59,753
+到此截止和进行评估
 
 
 356
-00:21:02,006 --> 00:21:04,226
-and the method takes the name.
+00:21:59,820 --> 00:22:02,789
+两个条件必须正确才能在的屏幕上执行
 
 
 357
-00:21:05,526 --> 00:21:09,716
-You can give one or more
-events that activate a trigger.
+00:22:03,824 --> 00:22:06,960
+为此只需要使用NS复合提示和提示
 
 
 358
-00:21:09,716 --> 00:21:11,396
-Once a trigger is activated,
+00:22:07,027 --> 00:22:09,863
+和使用次一级提示
+进行提示以及设置了两个次一次提示
 
 
 359
-00:21:11,396 --> 00:21:13,476
-we evaluate the corresponding
-condition.
+00:22:09,930 --> 00:22:11,098
+如我们之前一样进行生成
 
 
 360
-00:21:13,716 --> 00:21:16,836
-The condition is optional, so if
-you don't specify a condition,
+00:22:12,032 --> 00:22:16,270
+接着生成一个事件触发器的目标
+并且给以命名
 
 
 361
-00:21:18,246 --> 00:21:19,986
-it just means we
-assume it to be true,
+00:22:16,336 --> 00:22:20,707
+到家之后和正对事件
+能够激活这个触发器
 
 
 362
-00:21:19,986 --> 00:21:23,556
-and we will always execute the
-corresponding scene associated
+00:22:20,774 --> 00:22:22,910
+只是设置了某一个元素的区间
 
 
 363
-00:21:23,556 --> 00:21:28,536
-with that event trigger if any
-one of your events activates.
+00:22:22,976 --> 00:22:26,513
+就是大门的典型特征
 
 
 364
-00:21:29,946 --> 00:21:32,476
-Now let's walk through
-a completer example
+00:22:26,580 --> 00:22:27,414
+对应到被锁住
 
 
 365
-00:21:32,476 --> 00:21:34,156
-that I talked about earlier.
+00:22:29,516 --> 00:22:31,985
+最后我们只是需要
 
 
 366
-00:21:35,386 --> 00:21:38,616
-We have created a characteristic
-event corresponding
+00:22:32,519 --> 00:22:34,788
+联系到到家预设的屏幕
 
 
 367
-00:21:38,616 --> 00:21:40,246
-to the front door being locked.
+00:22:34,855 --> 00:22:36,190
+到这个事件触发器
 
 
 368
-00:21:41,286 --> 00:21:43,796
-We created our two conditions,
-which is before 6 p.m.
+00:22:36,456 --> 00:22:40,928
+在我们家中使用我们方便的API
+内置式动作设置设置到家一项
 
 
 369
-00:21:44,496 --> 00:21:46,836
-and the motion sensor
-detecting motion.
+00:22:41,361 --> 00:22:45,232
+现在回到预设值的屏幕
 
 
 370
-00:21:47,836 --> 00:21:50,456
-How do we tie it all together
-and create our event trigger?
+00:22:45,299 --> 00:22:50,170
+对应于到家添加到事件触发器
 
 
 371
-00:21:50,456 --> 00:21:54,116
-First thing you need to do is
-create a compound predicate
+00:22:50,571 --> 00:22:51,638
+它就这么简单
 
 
 372
-00:21:54,196 --> 00:21:56,626
-because we want both
-our conditions
+00:22:52,506 --> 00:22:56,043
+现在
+我刚才谈到的这个例子进行一次演示
 
 
 373
-00:21:57,456 --> 00:21:59,826
-to be ended and evaluated.
+00:22:56,877 --> 00:22:57,911
+如何使用我们设置的
 
 
 374
-00:21:59,826 --> 00:22:02,786
-Both have to be true for
-us to execute our scene.
+00:22:57,978 --> 00:23:00,647
+HomeKitAccessory 
+Simulator
 
 
 375
-00:22:03,736 --> 00:22:07,016
-For that, just use NS compound
-predicate and predicate
+00:23:00,714 --> 00:23:03,250
+设置HomeKit目录举例的app
 
 
 376
-00:22:07,016 --> 00:22:09,916
-with subpredicates, and
-specify the two subpredicates
+00:23:05,319 --> 00:23:07,221
+这早已在Swift中重新编写了程序
 
 
 377
-00:22:09,916 --> 00:22:10,886
-that we just created earlier.
+00:23:15,929 --> 00:23:16,763
+我们设置了
 
 
 378
-00:22:12,046 --> 00:22:16,346
-Next, create an event trigger
-object, give it a name,
+00:23:16,830 --> 00:23:19,333
+HomeKitAccessory 
+Simulator
 
 
 379
-00:22:16,346 --> 00:22:20,736
-arrived home, and for the events
-that can activate this trigger,
+00:23:19,733 --> 00:23:23,403
+这模拟了HomeKit曾经应用过
+的辅助程序通过开发人员
 
 
 380
-00:22:20,776 --> 00:22:22,896
-just specify an area
-of one element,
+00:23:23,937 --> 00:23:25,772
+开发了HomeKit的应用程序
 
 
 381
-00:22:22,976 --> 00:22:26,576
-which is a front door
-characteristic that corresponds
+00:23:25,973 --> 00:23:30,143
+以及到这里
+我们设置了HomeKit例子app
 
 
 382
-00:22:26,576 --> 00:22:27,416
-with it being unlocked.
+00:23:30,744 --> 00:23:33,914
+就是你们所知道的
+你们能够使用的app
 
 
 383
-00:22:27,766 --> 00:22:30,176
-Finally, we just need
+00:23:33,981 --> 00:23:35,716
+进入所有的HomeKit API
 
 
 384
-00:22:30,656 --> 00:22:34,586
-to associate the arrive
-home predefined scene
+00:23:36,083 --> 00:23:38,018
+我想向你们演示事件触发器
 
 
 385
-00:22:34,976 --> 00:22:35,776
-to this event trigger.
+00:23:38,819 --> 00:23:44,157
+你们能够看出
+我有一个门锁和动作传感器
 
 
 386
-00:22:36,456 --> 00:22:40,386
-Use our convenience API on
-our home, built-in action set
+00:23:44,591 --> 00:23:46,793
+以及在其后面安装有灯光的连接装置
 
 
 387
-00:22:40,386 --> 00:22:44,396
-of type, give it the
-home arrival type
+00:23:46,860 --> 00:23:48,295
+安放在它的后面
 
 
 388
-00:22:44,696 --> 00:22:46,876
-that now returns your
-predefined scene corresponding
+00:23:48,962 --> 00:23:52,032
+以及我们在我们家项下加载了我的附件
 
 
 389
-00:22:46,876 --> 00:22:50,176
-to arrived home, just add
-that to the event trigger.
+00:23:57,104 --> 00:24:01,842
+因此让我们下翻页至app屏幕部分
 
 
 390
-00:22:50,576 --> 00:22:52,376
-It's as simple as that.
+00:24:01,909 --> 00:24:05,979
+以及我们在这个
+app的两个预设屏幕中进行了设置
 
 
 391
-00:22:52,506 --> 00:22:55,756
-Now I'd like to show a demo
-of this example I just talked
+00:24:06,713 --> 00:24:09,750
+我设置了“再见 我的家”
+对应着离开房屋 
 
 
 392
-00:22:55,756 --> 00:23:00,126
-about using our HomeKit
-Accessory Simulator
+00:24:10,884 --> 00:24:12,452
+让我们看一下是什么样子呢
 
 
 393
-00:23:00,196 --> 00:23:03,846
-and our HomeKit catalog
-sample app,
+00:24:12,619 --> 00:24:16,156
+也就是将光线设置为黑色
 
 
 394
-00:23:04,996 --> 00:23:08,146
-which has been completely
-rewritten in Swift.
+00:24:16,223 --> 00:24:18,458
+所有灯光的电源被切断
 
 
 395
-00:23:09,516 --> 00:23:15,116
-[Applause]
+00:24:19,226 --> 00:24:21,995
+我继续进行 点击取消键
+因为不想 对此做出改变
 
 
 396
-00:23:15,616 --> 00:23:16,086
-There you go.
+00:24:22,062 --> 00:24:27,334
+让我们继续“您好房屋”与回家对应
 
 
 397
-00:23:16,086 --> 00:23:19,196
-So over here we have our
-HomeKit Accessory Simulator.
+00:24:27,534 --> 00:24:28,769
+让我们看一下它像什么
 
 
 398
-00:23:19,746 --> 00:23:22,366
-This simulates HomeKit
-accessories that are used
+00:24:29,803 --> 00:24:35,242
+现在打开灯光 开启收录机灯光
 
 
 399
-00:23:22,366 --> 00:23:25,766
-by our developers to develop
-their HomeKit applications.
+00:24:35,309 --> 00:24:37,377
+为绿色 后打开厨房灯光为蓝色
 
 
 400
-00:23:26,026 --> 00:23:29,616
-And over here we have our
-HomeKit sample app that,
+00:24:39,246 --> 00:24:41,048
+让我们试图看一下两个屏幕
 
 
 401
-00:23:30,536 --> 00:23:33,436
-you know, that you can use --
+00:24:41,114 --> 00:24:42,716
+处于动作状态 观察所发生的情况
 
 
 402
-00:23:33,436 --> 00:23:35,706
-that accesses all
-our HomeKit APIs.
+00:24:43,984 --> 00:24:45,919
+因此当我操作“再见 房屋”
 
 
 403
-00:23:36,096 --> 00:23:38,006
-I want to show you a
-demo of event triggers.
+00:24:46,220 --> 00:24:48,055
+关掉两种灯光
 
 
 404
-00:23:38,826 --> 00:23:44,146
-Now, you can see that I have
-a door lock, a motion sensor,
+00:24:49,990 --> 00:24:53,060
+以及当我操作
+“你好 房屋”这对应于
 
 
 405
-00:23:44,236 --> 00:23:46,846
-and a bridge with
-two lights behind it
+00:24:53,126 --> 00:24:54,528
+我回到家中 这样就会
 
 
 406
-00:23:46,876 --> 00:23:48,346
-in the HomeKit Accessory
-Simulator.
+00:24:54,595 --> 00:24:56,463
+在连接装置之后打开两种灯光
 
 
 407
-00:23:48,346 --> 00:23:52,696
-And I have added my
-accessories to my home.
+00:24:58,565 --> 00:25:00,434
+现在让我们模拟离开房屋的情况
 
 
 408
-00:23:56,716 --> 00:24:01,826
-So let's go down to the
-scenes section of the app,
+00:25:00,701 --> 00:25:02,603
+以及现在生成我们的事件触发器
 
 
 409
-00:24:01,906 --> 00:24:05,846
-and I have configured two of the
-predefined scenes in this app.
+00:25:05,973 --> 00:25:08,308
+我将继续往下进入app的触发器章节
 
 
 410
-00:24:06,716 --> 00:24:09,736
-I have the "bye, house," that
-corresponds to leaving home.
+00:25:09,209 --> 00:25:10,711
+和选择增加触发器
 
 
 411
-00:24:10,886 --> 00:24:11,976
-Let's see what that looks like.
+00:25:11,111 --> 00:25:12,946
+你将面临着三种选择
 
 
 412
-00:24:12,626 --> 00:24:15,616
-That sets the light to black
+00:25:13,013 --> 00:25:16,283
+以我们自己为例子 大门被打开
 
 
 413
-00:24:15,616 --> 00:24:18,466
-and switches off all
-the power on our lights.
+00:25:16,483 --> 00:25:18,118
+这就是我们的触发器的源
 
 
 414
-00:24:18,746 --> 00:24:20,766
-I am going to go ahead and hit
-cancel because I don't want
+00:25:18,852 --> 00:25:20,654
+对应于典型特征 因此我将继续向下
 
 
 415
-00:24:20,766 --> 00:24:23,956
-to make changes on this, and
-let's go down to the "hi,
+00:25:20,721 --> 00:25:22,022
+和选择典型特征
 
 
 416
-00:24:23,956 --> 00:24:27,056
-house," that corresponds
-to arriving home,
+00:25:24,458 --> 00:25:26,326
+我现在给他命名
 
 
 417
-00:24:27,526 --> 00:24:28,776
-and let's see what
-that looks like.
+00:25:31,899 --> 00:25:33,767
+因此这就是我自身事件的触发器的命名
 
 
 418
-00:24:29,806 --> 00:24:35,176
-Now, that sets the lights to
-on and sets my stereo light
+00:25:34,134 --> 00:25:35,135
+以及现在我们继续往下
 
 
 419
-00:24:35,296 --> 00:24:37,376
-to green and the
-kitchen light to blue.
+00:25:35,202 --> 00:25:37,571
+和选择典型特征对应于
 
 
 420
-00:24:37,866 --> 00:24:41,126
-Let's try to see
-these two scenes
+00:25:37,638 --> 00:25:39,273
+大门被锁住
 
 
 421
-00:24:41,126 --> 00:24:42,716
-in action and see what happens.
+00:25:39,339 --> 00:25:42,676
+继续往下进入
+典型特征事件app典型特征事件
 
 
 422
-00:24:43,986 --> 00:24:45,576
-So when I execute
-the "bye, house,"
+00:25:43,510 --> 00:25:44,645
+不好意思
 
 
 423
-00:24:46,236 --> 00:24:48,066
-it switches off the two lights.
+00:25:44,745 --> 00:25:46,513
+因而增加典型特征项
 
 
 424
-00:24:48,576 --> 00:24:53,136
-And when I execute the "hi,
-house," which corresponds
+00:25:46,580 --> 00:25:52,319
+以及现在
+继续往下探讨大门被锁和选择继续操作
 
 
 425
-00:24:53,136 --> 00:24:54,586
-to arriving home, that switches
+00:25:52,653 --> 00:25:54,755
+这将会对应着大门被打开
 
 
 426
-00:24:54,586 --> 00:24:56,456
-on the two lights
-behind the bridge.
+00:25:55,756 --> 00:25:58,725
+我将返回和敲击完成
 
 
 427
-00:24:58,236 --> 00:25:00,016
-Now, let's simulate leaving home
+00:26:00,394 --> 00:26:03,430
+因此 现在我已经完成大门被打开
 
 
 428
-00:25:00,686 --> 00:25:02,616
-and now create our
-event trigger.
+00:26:03,497 --> 00:26:04,498
+作为我的触发器的源
 
 
 429
-00:25:03,036 --> 00:25:07,966
-I am going to go down to the
-trigger section of the app
+00:26:05,199 --> 00:26:07,000
+紧接着 让我们添加我们的两个条件
 
 
 430
-00:25:09,206 --> 00:25:10,336
-and select add trigger.
+00:26:07,901 --> 00:26:09,670
+为此 让我们继续往下进入条件部分
 
 
 431
-00:25:10,396 --> 00:25:12,766
-You are presented
-with three options.
+00:26:10,637 --> 00:26:13,941
+添加条件以及因为在下午6点钟前使用
 
 
 432
-00:25:13,006 --> 00:25:16,276
-For our example, it's the
-front door being unlocked,
+00:26:14,007 --> 00:26:14,975
+意味着 这就是时间
 
 
 433
-00:25:16,486 --> 00:25:18,116
-which is the source
-of our trigger.
+00:26:19,012 --> 00:26:22,516
+进入时间部分 我们面临两种选择
 
 
 434
-00:25:18,836 --> 00:25:20,736
-That corresponds to a
-characteristic, so I am going
+00:26:22,583 --> 00:26:24,484
+添加基于时间的条件
 
 
 435
-00:25:20,736 --> 00:25:22,086
-to go ahead and select
-characteristic.
+00:26:24,551 --> 00:26:27,120
+当然其中一个 最为重要的事件日出
 
 
 436
-00:25:22,086 --> 00:25:25,526
-I am going to give
-it a name now.
+00:26:27,187 --> 00:26:30,858
+和日落 但是将采用下午6点钟为例
 
 
 437
-00:25:31,576 --> 00:25:33,436
-So this is the name
-of my event trigger.
+00:26:33,927 --> 00:26:35,596
+我想要选择之前时间
 
 
 438
-00:25:34,146 --> 00:25:35,206
-And now let's go ahead
+00:26:36,697 --> 00:26:38,298
+我将继续进行 点击保存键
 
 
 439
-00:25:35,206 --> 00:25:37,636
-and select the characteristic
-corresponding
+00:26:38,999 --> 00:26:41,034
+现在我捕捉第一个条件
 
 
 440
-00:25:37,636 --> 00:25:39,346
-to the front door
-being unlocked.
+00:26:41,735 --> 00:26:43,003
+让我们完成第二个条件
 
 
 441
-00:25:39,346 --> 00:25:42,266
-So let's go down to the
-characteristics event
+00:26:43,070 --> 00:26:45,239
+它是动作传感器检测到动作
 
 
 442
-00:25:43,506 --> 00:25:44,636
-of the app.
+00:26:48,175 --> 00:26:49,576
+继续添加第二个条件
 
 
 443
-00:25:44,746 --> 00:25:46,576
-So add a characteristic.
+00:26:49,643 --> 00:26:51,245
+现在我将继续选择典型特征
 
 
 444
-00:25:46,576 --> 00:25:52,326
-And now go down to the front
-lock and select unsecured.
+00:26:51,311 --> 00:26:54,381
+因为这是一个附件 意味着我很需要
 
 
 445
-00:25:52,656 --> 00:25:54,566
-This will correspond to
-the door being unlocked.
+00:26:54,448 --> 00:26:57,017
+抓住典型特征 作为那个条件的源
 
 
 446
-00:25:54,566 --> 00:26:00,176
-I am going to go
-back and hit done.
+00:27:00,454 --> 00:27:02,990
+选择条件 查找传感器
 
 
 447
-00:26:00,396 --> 00:26:03,486
-So now I have captured my
-front door being unlocked
+00:27:04,024 --> 00:27:07,127
+和设置将会被检测到的动作
 
 
 448
-00:26:03,486 --> 00:26:04,486
-as a source of my trigger.
+00:27:09,062 --> 00:27:10,964
+我们返回和点击完成
 
 
 449
-00:26:05,186 --> 00:26:07,006
-Next, let's add our
-two conditions.
+00:27:12,065 --> 00:27:16,570
+打开这些我自己的事件触发器 
+给它命名给它提供我的事件源
 
 
 450
-00:26:07,916 --> 00:26:09,676
-For that, let's go down
-to the conditions section,
+00:27:17,371 --> 00:27:18,572
+规定我的两个条件
 
 
 451
-00:26:09,976 --> 00:26:14,016
-add condition, and since we
-are going to use before 6 p.m.,
+00:27:18,639 --> 00:27:19,706
+两个都得满足
 
 
 452
-00:26:14,016 --> 00:26:14,976
-that would mean it's time.
+00:27:20,274 --> 00:27:23,477
+我将他们两个联系在一起
+我只是需要将回家的屏幕与此相联系
 
 
 453
-00:26:15,706 --> 00:26:22,576
-Go to the time section,
-and we have two ways
+00:27:25,846 --> 00:27:27,414
+让我们继续往下进入屏幕部分
 
 
 454
-00:26:22,576 --> 00:26:24,546
-to add time-based conditions.
+00:27:27,814 --> 00:27:29,449
+之时选择“你好 房屋”
 
 
 455
-00:26:24,546 --> 00:26:27,196
-One is, of course, the
-significant events, sunrise
+00:27:31,585 --> 00:27:33,320
+继续 点击完成
 
 
 456
-00:26:27,196 --> 00:26:30,866
-and sunset, but I am just going
-to use 6 p.m. at my example.
+00:27:33,453 --> 00:27:35,622
+现在保存整个事件触发器
 
 
 457
-00:26:31,006 --> 00:26:34,866
-And I want to select before.
+00:27:37,090 --> 00:27:38,959
+观察处于动作状态中的事件触发器
 
 
 458
-00:26:34,866 --> 00:26:37,946
-I am going to go
-ahead and hit save.
+00:27:39,893 --> 00:27:41,228
+为此 首先我们将要继续往下
 
 
 459
-00:26:38,996 --> 00:26:41,036
-Now I have captured
-my first condition.
+00:27:41,295 --> 00:27:43,397
+和打开我的大门
+和可以观察一下所发生的情况
 
 
 460
-00:26:41,796 --> 00:26:43,056
-Now let's do the
-second condition,
+00:27:46,133 --> 00:27:48,702
+这里我有一个想法 显示大门的状态
 
 
 461
-00:26:43,056 --> 00:26:45,236
-which is the motion
-sensor detecting motion.
+00:27:48,769 --> 00:27:50,504
+及动作传感器 是更为容易的
 
 
 462
-00:26:45,436 --> 00:26:49,436
-Go add my second condition.
+00:27:50,571 --> 00:27:52,206
+看到连接设备的后面所发生的事情
 
 
 463
-00:26:49,436 --> 00:26:51,046
-Now I am going to
-select characteristic
+00:27:53,874 --> 00:27:55,642
+如果点击不安全 它将对应于
 
 
 464
-00:26:51,326 --> 00:26:54,446
-because this is an accessory,
-which would mean I need
+00:27:55,709 --> 00:27:57,077
+打开大门 啥事都没发生 
 
 
 465
-00:26:54,446 --> 00:26:57,016
-to capture a characteristic
-as a source of that condition.
+00:27:57,144 --> 00:27:58,212
+那为什么会是那样呢？
 
 
 466
-00:26:57,376 --> 00:27:02,616
-Select condition,
-find my sensor,
+00:27:59,313 --> 00:28:02,249
+大门打开 以便引起事件被激活
 
 
 467
-00:27:04,016 --> 00:27:07,006
-and set motion to be detected.
+00:28:03,350 --> 00:28:06,119
+时间设置在下午6点钟之前
+因此我的条件之一会得到满足
 
 
 468
-00:27:07,076 --> 00:27:10,526
-I am going to go
-back and hit done.
+00:28:06,320 --> 00:28:09,623
+但是第二个条件得不到满足
+因为你们能够看得到
 
 
 469
-00:27:12,066 --> 00:27:12,416
-So there you go.
+00:28:10,023 --> 00:28:11,592
+动作检测被设置为：无需监测
 
 
 470
-00:27:12,416 --> 00:27:15,496
-I have my event trigger, given
-it a name, given it the source
+00:28:14,595 --> 00:28:15,796
+所以这正如希望的那样工作
 
 
 471
-00:27:15,496 --> 00:27:18,636
-of my event, specified
-my two conditions
+00:28:15,863 --> 00:28:18,031
+我希望本屏幕指令不会被执行
 
 
 472
-00:27:18,636 --> 00:27:19,626
-that both need to be met.
+00:28:18,332 --> 00:28:21,301
+现在让我们继续往下
+接近大门以及设置动作
 
 
 473
-00:27:20,276 --> 00:27:21,096
-I tie it all together,
+00:28:21,869 --> 00:28:23,604
+开始检测和观察什么情况发生
 
 
 474
-00:27:21,096 --> 00:27:23,466
-I just need to associate my
-arrive home scene to this.
+00:28:24,938 --> 00:28:27,341
+我将继续往前和打开大门
 
 
 475
-00:27:23,976 --> 00:27:27,186
-Let's go down to
-the scene section
+00:28:28,342 --> 00:28:29,309
+你可以进门啦
 
 
 476
-00:27:27,716 --> 00:27:29,336
-and just select "hi, house."
+00:28:30,143 --> 00:28:33,514
+这样就可以打开开关
+开启照明以及执行我到家的屏幕 
 
 
 477
-00:27:29,916 --> 00:27:32,986
-And go ahead, hit done.
+00:28:34,014 --> 00:28:34,948
+这样不是很酷吗?
 
 
 478
-00:27:33,466 --> 00:27:35,416
-Now that saves the
-entire event trigger.
+00:28:35,015 --> 00:28:38,952
+这是一个可怕的特征
+但是我每天都得从事这种工作
 
 
 479
-00:27:35,416 --> 00:27:38,686
-Now, let's see this
-event trigger in action.
+00:28:45,425 --> 00:28:49,096
+但这项工作真正令人激动的是
 
 
 480
-00:27:39,886 --> 00:27:41,306
-For that, first I
-am going to go ahead
+00:28:49,630 --> 00:28:51,832
+当我看到那个灯一直亮着时 
+它给你的正是
 
 
 481
-00:27:41,306 --> 00:27:43,196
-and unlock my door
-and see what happens.
+00:28:51,965 --> 00:28:54,368
+你知道那种幸福的感觉
 
 
 482
-00:27:43,786 --> 00:27:48,766
-I have a view over here
-that shows the door state
+00:28:57,871 --> 00:29:01,708
+对于你们
+这些使用过配件模拟器的人来说
 
 
 483
-00:27:48,766 --> 00:27:50,576
-and the motion sensor so
-that it's easier for you
+00:29:03,710 --> 00:29:05,312
+你看到这里有一个运动传感器
 
 
 484
-00:27:50,576 --> 00:27:52,266
-to see what happens
-behind the bridge.
+00:29:05,412 --> 00:29:07,414
+这在iOS 9中是新的功能
 
 
 485
-00:27:52,266 --> 00:27:55,696
-If I hit unsecured,
-which corresponds
+00:29:08,048 --> 00:29:10,784
+我们增加了新的配件类型
 
 
 486
-00:27:55,696 --> 00:27:57,146
-to opening the door,
-nothing happened.
+00:29:11,585 --> 00:29:14,888
+要了解这个新配件以及为配件类型
 
 
 487
-00:27:57,146 --> 00:27:58,216
-And why is that?
+00:29:14,955 --> 00:29:17,991
+增加的新功能
+我想有请Naveen来为我们作介绍
 
 
 488
-00:27:59,326 --> 00:28:02,156
-The door opens, so that causes
-the event to be activated.
+00:29:38,212 --> 00:29:42,216
+谢谢 大家下午好
 
 
 489
-00:28:02,156 --> 00:28:05,976
-It is before 6 p.m. So one
-of my conditions was met,
+00:29:42,416 --> 00:29:44,685
+我是Naveen 
+Kommareddi 我来介绍
 
 
 490
-00:28:05,976 --> 00:28:09,336
-but the second condition was
-not met because, as you can see,
+00:29:45,252 --> 00:29:48,989
+有关HomeKit
+配件在iOS 9中的更多功能
 
 
 491
-00:28:10,026 --> 00:28:11,586
-motion detected is set to no.
+00:29:49,590 --> 00:29:52,759
+首先介绍蓝牙低功耗
 
 
 492
-00:28:12,186 --> 00:28:15,876
-So this is working as expected.
+00:29:53,727 --> 00:29:59,132
+HomeKit配件和
+新配件类型的远程访问 新功能
 
 
 493
-00:28:15,876 --> 00:28:17,776
-I don't expect my
-scene to be executed.
+00:29:59,733 --> 00:30:02,202
+以及增强功能
 
 
 494
-00:28:18,346 --> 00:28:21,316
-Now let's go ahead and close
-the door and set the motion
+00:30:03,070 --> 00:30:05,839
+让我们先看一下如何实现远程访问
 
 
 495
-00:28:21,856 --> 00:28:23,246
-to detected and see
-what happens.
+00:30:06,940 --> 00:30:11,345
+通过远程访问
+你可以 控制你的配件
 
 
 496
-00:28:23,276 --> 00:28:27,476
-I am going to go ahead
-and unlock the door.
+00:30:11,411 --> 00:30:12,746
+即便你离开了你的房子
 
 
 497
-00:28:28,356 --> 00:28:28,876
-There you go.
+00:30:14,047 --> 00:30:16,416
+好 让我们举一个例子
 
 
 498
-00:28:30,156 --> 00:28:33,526
-That switched on the lights and
-executed my arrive home scene.
+00:30:16,483 --> 00:30:18,318
+房子里
+恒温器安装有HomeKit配件
 
 
 499
-00:28:34,016 --> 00:28:34,956
-How cool is that?
+00:30:18,819 --> 00:30:20,554
+你可以安全地连接它
 
 
 500
-00:28:35,006 --> 00:28:38,976
-This is an awesome feature,
-and I work on this every day.
+00:30:21,922 --> 00:30:24,224
+但如果你离开了你的房子怎么办？
 
 
 501
-00:28:39,016 --> 00:28:41,016
-[Laughter]
+00:30:24,625 --> 00:30:26,460
+你如何控制这个恒温器？
 
 
 502
-00:28:41,016 --> 00:28:45,000
-[Applause]
+00:30:26,527 --> 00:30:28,562
+假设你准备回家了
+但你如何在回家之前
 
 
 503
-00:28:45,436 --> 00:28:48,766
-But what is really
-exciting to see this work,
+00:30:28,629 --> 00:30:30,464
+就把温度设置好呢？
 
 
 504
-00:28:48,766 --> 00:28:51,596
-when I see that light goes
-on, it just gives you,
+00:30:31,031 --> 00:30:32,232
+你怎样才能安全地连接呢？
 
 
 505
-00:28:51,976 --> 00:28:53,846
-you know, that happy feeling.
+00:30:33,300 --> 00:30:35,435
+没错 iOS 8支持远程访问
 
 
 506
-00:28:54,516 --> 00:28:57,036
-[Laughter]
+00:30:36,036 --> 00:30:39,473
+只要有一台第三代的苹果电视就可以
 
 
 507
-00:28:57,536 --> 00:29:01,716
-For those of you who have
-used the Accessory Simulator,
+00:30:40,140 --> 00:30:43,677
+所有你需要做的
+就是使用同一个苹果ID进行登录
 
 
 508
-00:29:01,926 --> 00:29:04,826
-you see there's a motion sensor.
+00:30:43,877 --> 00:30:46,613
+即你在iOS设备上使用的ID
 
 
 509
-00:29:05,396 --> 00:29:07,416
-This is new in iOS 9.
+00:30:46,914 --> 00:30:51,218
+而且你必须能安全地访问你的配件
 
 
 510
-00:29:08,036 --> 00:29:10,786
-We have added new
-categories of accessories.
+00:30:52,452 --> 00:30:55,622
+现在这很不错
+但如果你没有苹果电视怎么办？
 
 
 511
-00:29:11,586 --> 00:29:14,966
-To talk about this and
-new features we have added
+00:30:56,356 --> 00:31:00,327
+因为我们知道并不是每一个
+我们的客户都可能有一台苹果电视
 
 
 512
-00:29:14,966 --> 00:29:18,126
-for our accessory classes,
-I'd like to invite Naveen.
+00:31:05,165 --> 00:31:09,469
+所以我很高兴地宣布在iOS 9中
 
 
 513
-00:29:19,516 --> 00:29:25,516
-[Applause]
+00:31:10,437 --> 00:31:13,273
+我们支持HomeKit配件协议
 
 
 514
-00:29:26,016 --> 00:29:37,000
-[ Background Sounds ]
+00:31:13,340 --> 00:31:14,942
+HAP和iCloud
 
 
 515
-00:29:38,196 --> 00:29:38,746
->> NAVEEN KOMMAREDDI:
-Thank you, Anush.
+00:31:20,047 --> 00:31:20,948
+谢谢大家
 
 
 516
-00:29:41,096 --> 00:29:42,076
-Good afternoon, everybody.
+00:31:21,548 --> 00:31:23,884
+是的 这真令人兴奋不已
+这意味着
 
 
 517
-00:29:42,426 --> 00:29:44,356
-I am Naveen Kommareddi,
-and I am here to present
+00:31:24,751 --> 00:31:27,521
+你现在可以控制你的配件
 
 
 518
-00:29:44,356 --> 00:29:48,976
-to you even more features in
-iOS 9 for HomeKit accessories.
+00:31:27,588 --> 00:31:30,157
+而且无论你在什么地方
+你都可以从它们那里得到通知
 
 
 519
-00:29:49,576 --> 00:29:56,686
-Starting with remote access and
-new features and enhancements
+00:31:30,524 --> 00:31:32,226
+即使你没有苹果电视
 
 
 520
-00:29:56,686 --> 00:29:59,136
-for Bluetooth Low Energy
-HomeKit accessories
+00:31:33,327 --> 00:31:35,095
+让我们暂停一下
+想想这到底意味着什么
 
 
 521
-00:29:59,746 --> 00:30:02,196
-and new accessory categories.
+00:31:35,829 --> 00:31:37,464
+对于配件制造商
 
 
 522
-00:30:03,066 --> 00:30:05,836
-So let's get started
-with remote access.
+00:31:38,131 --> 00:31:43,403
+他们想为他们的
+配件提供安全的远程访问功能
 
 
 523
-00:30:06,926 --> 00:30:09,476
-With remote access,
-you'd be able
+00:31:43,704 --> 00:31:45,772
+你知道 这是一个很难解决的问题
 
 
 524
-00:30:09,476 --> 00:30:11,746
-to control your accessories even
+00:31:47,040 --> 00:31:51,144
+我们构建并配置了
+一个专门的iCloud服务
 
 
 525
-00:30:11,746 --> 00:30:12,736
-when you are away
-from your house.
+00:31:51,545 --> 00:31:55,582
+以安全地在iOS设备
+和配件之间传递HAP消息
 
 
 526
-00:30:14,056 --> 00:30:16,716
-So let's take an example
-of a thermostat that works
+00:31:55,983 --> 00:31:58,952
+我们按比例构建了基础设施
 
 
 527
-00:30:16,716 --> 00:30:18,036
-with HomeKit here in your house.
+00:31:59,019 --> 00:32:03,056
+通过运行
+服务来处理数以亿计的HAP消息
 
 
 528
-00:30:18,816 --> 00:30:20,456
-You would be able to
-securely connect to it.
+00:32:05,459 --> 00:32:08,228
+我们想的是：怎样才能做得更好？
 
 
 529
-00:30:20,646 --> 00:30:24,116
-But what if you are
-away from your house?
+00:32:09,763 --> 00:32:13,867
+因此要使用这种服务 配件制造商
 
 
 530
-00:30:24,626 --> 00:30:26,446
-How do you control
-this thermostat?
+00:32:13,934 --> 00:32:18,071
+以及我们所有的
+客户现在都可以免费地得到它
 
 
 531
-00:30:26,446 --> 00:30:28,616
-Say you want to come home,
-but you want to set it
+00:32:22,276 --> 00:32:23,377
+好的 非常感谢
 
 
 532
-00:30:28,616 --> 00:30:30,456
-to the temperature even
-before you come home?
+00:32:25,579 --> 00:32:28,549
+但最重要的是 私密性和安全性
 
 
 533
-00:30:31,016 --> 00:30:32,216
-How do you do that securely?
+00:32:28,982 --> 00:32:33,787
+即iOS设备和配件之间端至端连接
 
 
 534
-00:30:32,766 --> 00:30:35,366
-Well, in iOS 8, remote
-access is supported
+00:32:34,221 --> 00:32:39,426
+必须拥有安全的HAP
+而且隐私得到保证
 
 
 535
-00:30:35,556 --> 00:30:39,406
-if you have an Apple
-TV third generation.
+00:32:39,860 --> 00:32:43,931
+即使是苹果公司也无法看到通信内容
 
 
 536
-00:30:40,136 --> 00:30:43,676
-All you need to do is sign
-in with the same Apple ID
+00:32:44,631 --> 00:32:46,200
+这是非常重要的
 
 
 537
-00:30:43,886 --> 00:30:46,606
-as the one you used
-on your iOS device,
+00:32:48,468 --> 00:32:52,539
+现在随着
+HAP支持iCloud和苹果电视
 
 
 538
-00:30:46,926 --> 00:30:51,206
-and you'd have secure
-access to your accessories.
+00:32:52,739 --> 00:32:55,709
+我们的客户
+现在可以更方便地随时访问
 
 
 539
-00:30:52,436 --> 00:30:55,616
-Now, this is great, but what
-if you don't have an Apple TV?
+00:32:56,009 --> 00:32:57,010
+他们的配件
 
 
 540
-00:30:56,366 --> 00:30:58,416
-Because we know that
-not every one
+00:32:58,612 --> 00:33:02,683
+远程访问就讲到这儿
+下面我接着讲蓝牙低功耗配件
 
 
 541
-00:30:58,416 --> 00:31:03,006
-of our customers may
-have an Apple TV.
+00:33:04,985 --> 00:33:07,754
+我们正在与多个合作伙伴一起合作
 
 
 542
-00:31:05,156 --> 00:31:09,476
-[Laughter] So in iOS 9, I
-am very excited to announce
+00:33:07,855 --> 00:33:10,357
+以研发更多安装有HomeKit的
 
 
 543
-00:31:10,446 --> 00:31:13,356
-that we support HomeKit
-accessory protocol,
+00:33:10,591 --> 00:33:11,658
+低功耗蓝牙配件
 
 
 544
-00:31:13,356 --> 00:31:14,936
-HAP, over iCloud.
+00:33:12,593 --> 00:33:15,028
+让我们举一个蓝牙门锁的例子
 
 
 545
-00:31:15,516 --> 00:31:19,546
-[Applause]
+00:33:16,530 --> 00:33:21,969
+假设处在这个
+蓝牙低功耗配件的接收范围之内
 
 
 546
-00:31:20,046 --> 00:31:20,306
-Thank you.
+00:33:22,035 --> 00:33:24,104
+比方说一个门锁
+在20至30英尺范围之内
 
 
 547
-00:31:21,536 --> 00:31:22,526
-Yes, it is really exciting
+00:33:24,404 --> 00:33:27,374
+你可以安全地连接和控制它
 
 
 548
-00:31:22,526 --> 00:31:27,576
-because what this means is you
-can now control your accessories
+00:33:29,009 --> 00:33:30,644
+如果你的距离很远
 
 
 549
-00:31:27,576 --> 00:31:30,156
-and get notifications from
-them no matter where you are,
+00:33:30,911 --> 00:33:33,180
+比如在你的房子
+或后院的某个角落怎么办？
 
 
 550
-00:31:30,246 --> 00:31:32,226
-and even if you don't
-have an Apple TV.
+00:33:33,714 --> 00:33:36,683
+你将如何安全地
+连接到这个配件并控制它？
 
 
 551
-00:31:33,316 --> 00:31:35,086
-Let's pause to think
-what this really means.
+00:33:38,318 --> 00:33:43,590
+要是有种装置或功能
+把这两个端点连接在一起不是非常棒？
 
 
 552
-00:31:35,816 --> 00:31:38,516
-To accessory manufacturers
-who have thought
+00:33:44,558 --> 00:33:47,461
+在iOS 9中
+你完全可以做得到这一点
 
 
 553
-00:31:38,516 --> 00:31:42,446
-about providing secure
-and remote access
+00:33:47,528 --> 00:33:49,263
+即通过HAP安全隧道技术
 
 
 554
-00:31:42,446 --> 00:31:45,786
-to their accessories, you know
-it's a hard problem to solve.
+00:33:51,198 --> 00:33:55,769
+HAP安全隧道技术
+可以使中间设备连接至
 
 
 555
-00:31:47,036 --> 00:31:50,916
-We built and deployed a
-dedicated iCloud service
+00:33:56,904 --> 00:34:02,376
+蓝牙低功耗配件并将其公开为
 
 
 556
-00:31:51,556 --> 00:31:55,576
-to securely relay HAP
-messages between iOS devices
+00:34:02,442 --> 00:34:08,982
+通过Wi-Fi连接iOS设备神器
 
 
 557
-00:31:55,966 --> 00:31:58,976
-and accessories, and we
-scaled the infrastructure
+00:34:09,850 --> 00:34:13,420
+有了一种HomeKit配件的设备
 
 
 558
-00:31:58,976 --> 00:32:05,376
-that runs the service to handle
-billions of HAP messages.
+00:34:14,454 --> 00:34:19,193
+它采用HAP安全隧道
+技术为你提供范围扩展功能
 
 
 559
-00:32:05,466 --> 00:32:08,216
-And we thought: How can
-we make this better?
+00:34:22,062 --> 00:34:25,766
+而这个范围扩展装置更强的功能是
 
 
 560
-00:32:09,776 --> 00:32:13,896
-So to use this service,
-the accessory manufacturers
+00:34:25,831 --> 00:34:28,835
+还能够通过远程访问连接到蓝牙配件
 
 
 561
-00:32:13,946 --> 00:32:18,056
-and all our customers
-will now get it for free.
+00:34:28,902 --> 00:34:30,070
+以及任何其它的蓝牙配件
 
 
 562
-00:32:20,151 --> 00:32:22,151
-[Applause]
+00:34:30,137 --> 00:34:31,672
+只要它们都安装了HomeKit
 
 
 563
-00:32:22,286 --> 00:32:23,376
-Well, thanks.
+00:34:32,572 --> 00:34:37,543
+这意味着你不仅可以连接你的配件
 
 
 564
-00:32:25,296 --> 00:32:28,536
-But most importantly,
-privacy and security.
+00:34:37,610 --> 00:34:39,012
+无论它们在你房子的什么地方
 
 
 565
-00:32:28,996 --> 00:32:33,796
-The end-to-end connections
-between iOS devices
+00:34:39,446 --> 00:34:42,549
+而且无论你是在家里还是外出
+你都可以连接到它们
 
 
 566
-00:32:34,206 --> 00:32:39,416
-and accessories are HAP secure,
-and privacy is maintained.
+00:34:44,318 --> 00:34:46,620
+我们达到了保证隐私和安全的目的
 
 
 567
-00:32:39,856 --> 00:32:43,946
-Even Apple can't see the
-content of the communication.
+00:34:47,487 --> 00:34:48,822
+通过中间设备实现端到端连接
 
 
 568
-00:32:44,646 --> 00:32:46,586
-This is extremely important.
+00:34:48,889 --> 00:34:51,891
+HAP也是安全的
 
 
 569
-00:32:48,176 --> 00:32:52,536
-Now, with HAP support
-over iCloud and Apple TV,
+00:34:52,793 --> 00:34:54,161
+而且隐私得到了维护
 
 
 570
-00:32:52,746 --> 00:32:55,696
-our customers will now
-have more ubiquitous access
+00:34:54,862 --> 00:34:56,897
+因为这个中间设备 
+也就是范围扩展装置
 
 
 571
-00:32:56,026 --> 00:32:56,996
-to their accessories.
+00:34:57,364 --> 00:34:59,800
+无法看到通信内容
 
 
 572
-00:32:57,476 --> 00:33:02,686
-Now, moving on from remote
-access to Bluetooth Low Energy.
+00:35:01,902 --> 00:35:03,270
+我们并没有就此止步
 
 
 573
-00:33:03,306 --> 00:33:07,766
-So we are working with
-several of our partners
+00:35:03,437 --> 00:35:05,939
+我们加入了更多的增强功能
 
 
 574
-00:33:07,866 --> 00:33:10,166
-to bring more Bluetooth
-Low Energy accessories
+00:35:06,406 --> 00:35:08,308
+首先介绍一下通知功能
 
 
 575
-00:33:10,246 --> 00:33:11,656
-that that work with HomeKit.
+00:35:10,544 --> 00:35:13,213
+你的蓝牙低功耗配件现在完全支持
 
 
 576
-00:33:12,606 --> 00:33:15,026
-Let's say a Bluetooth door lock.
+00:35:13,313 --> 00:35:14,615
+通知功能
 
 
 577
-00:33:16,526 --> 00:33:21,976
-Now, if you are within Bluetooth
-LE range within this accessory,
+00:35:15,649 --> 00:35:17,251
+无论它们在什么连接状态下
 
 
 578
-00:33:22,036 --> 00:33:24,096
-let's say a door lock,
-say 20 to 30 feet,
+00:35:17,918 --> 00:35:19,820
+因此无论是断开或连接
 
 
 579
-00:33:24,406 --> 00:33:27,786
-you can securely connect
-to it and control it.
+00:35:19,887 --> 00:35:23,490
+它们都可以发送
+HAP通知到你的iOS设备上
 
 
 580
-00:33:28,676 --> 00:33:31,526
-But what if you are far
-away, like in the corner
+00:35:23,957 --> 00:35:25,158
+这真的很有用
 
 
 581
-00:33:31,526 --> 00:33:32,786
-of your house or
-in the backyard?
+00:35:26,126 --> 00:35:28,629
+我们还增加了对元数据的支持
 
 
 582
-00:33:33,716 --> 00:33:36,686
-How do you securely connect to
-this accessory and control it?
+00:35:29,429 --> 00:35:33,634
+自定义特征可以将自己完整地描述
 
 
 583
-00:33:37,116 --> 00:33:41,246
-Wouldn't it be great to have
-a mechanism or a feature
+00:35:34,134 --> 00:35:35,903
+到HomeKit应用程序上
 
 
 584
-00:33:41,246 --> 00:33:43,686
-that would connect these
-two endpoints together?
+00:35:37,704 --> 00:35:40,707
+我们增加了对多种传输的支持
 
 
 585
-00:33:44,566 --> 00:33:46,716
-Well, in iOS 9, you
-can do exactly
+00:35:41,575 --> 00:35:45,379
+有了这个功能
+你的HomeKit配件现在可以
 
 
 586
-00:33:46,716 --> 00:33:49,246
-that with HAP secure tunneling.
+00:35:45,846 --> 00:35:50,083
+通过IP或蓝牙低功耗配件同时工作
 
 
 587
-00:33:49,886 --> 00:33:57,776
-HAP secure tunneling enables an
-intermediate device to associate
+00:35:50,717 --> 00:35:53,787
+而且iOS设备将能够识别出
 
 
 588
-00:33:57,776 --> 00:34:04,296
-over Bluetooth Low Energy
-and expose it as an artifact
+00:35:54,087 --> 00:35:55,722
+这是同一个配件
 
 
 589
-00:34:04,296 --> 00:34:08,976
-over Wi-Fi to an iOS device.
+00:35:55,789 --> 00:35:59,626
+不论这个配件是
+采用何种传输与iOS设备进行通信
 
 
 590
-00:34:09,856 --> 00:34:13,436
-Now you have a device that
-is a HomeKit accessory
+00:36:00,794 --> 00:36:02,196
+这真是一个引人关注的功能
 
 
 591
-00:34:14,466 --> 00:34:19,186
-that provides range extension
-with HAP secure tunnelling.
+00:36:05,098 --> 00:36:08,702
+让我们继续介绍最后一个话题
 
 
 592
-00:34:20,666 --> 00:34:25,846
-So what's even better is this
-range extender will also be able
+00:36:09,269 --> 00:36:11,071
+也就是配件类型
 
 
 593
-00:34:25,846 --> 00:34:28,916
-to provide remote access
-to this Bluetooth accessory
+00:36:11,972 --> 00:36:16,643
+在去年的iOS 8中
+我们增加了支持多种配件的功能
 
 
 594
-00:34:28,916 --> 00:34:30,146
-and any other Bluetooth
-accessory
+00:36:17,411 --> 00:36:21,014
+这在你的房子里最常见
+比如你的灯、
 
 
 595
-00:34:30,146 --> 00:34:31,056
-that works with HomeKit.
+00:36:21,081 --> 00:36:24,251
+风扇、开关、插头、车库门等等
 
 
 596
-00:34:32,556 --> 00:34:37,596
-What this means is not only can
-you reach your accessories no
+00:36:25,586 --> 00:36:27,187
+现在增加对配件类型的原生支持
 
 
 597
-00:34:37,596 --> 00:34:39,085
-matter where they
-are in the house,
+00:36:27,254 --> 00:36:30,891
+这在iOS中是一个渐进的过程
 
 
 598
-00:34:39,085 --> 00:34:44,136
-but you can also reach them
-wherever you are, home or away.
+00:36:31,692 --> 00:36:34,628
+而且在iOS 9中
+我们增加了支持更多的设备
 
 
 599
-00:34:44,315 --> 00:34:46,616
-Ultimately, privacy
-and security.
+00:36:35,162 --> 00:36:41,168
+就可以在你的房子里连接更多的配件
 
 
 600
-00:34:47,476 --> 00:34:48,666
-The end-to-end connection
+00:36:44,238 --> 00:36:46,139
+我们以窗帘为例
 
 
 601
-00:34:48,876 --> 00:34:51,896
-through this intermediate
-device is still HAP secure,
+00:36:46,206 --> 00:36:52,846
+你现在可以使用iOS控制
+遮阳篷、百叶窗以及电动门窗
 
 
 602
-00:34:52,396 --> 00:34:54,176
-and privacy is maintained
+00:36:54,414 --> 00:36:56,550
+报警系统也是一个新的配件类别
 
 
 603
-00:34:54,856 --> 00:34:56,896
-because this intermediate
-device, the range extender,
+00:36:56,817 --> 00:36:59,353
+对于这种类型的配件 
+有多家制造商...
 
 
 604
-00:34:57,376 --> 00:34:59,806
-cannot see the content
-of the communication.
+00:36:59,820 --> 00:37:02,756
+包括报警系统和
+安全系统供应商都要求iOS能提供
 
 
 605
-00:35:00,316 --> 00:35:02,696
-We didn't stop there.
+00:37:02,890 --> 00:37:04,525
+原生支持 我们满足了他们的要求
 
 
 606
-00:35:03,436 --> 00:35:05,716
-We added several
-more enhancements,
+00:37:04,925 --> 00:37:08,795
+但我们也发现
+报警系统虽然确实可以做到非常复杂
 
 
 607
-00:35:06,396 --> 00:35:08,316
-starting with notifications.
+00:37:09,162 --> 00:37:13,100
+带有很多功能
+但我们所做的只是选取关键的
 
 
 608
-00:35:08,856 --> 00:35:13,216
-Your Bluetooth Low Energy
-accessories now have full
+00:37:13,166 --> 00:37:16,336
+并在报警系统服务中最常用的功能
 
 
 609
-00:35:13,316 --> 00:35:14,606
-support for notifications,
+00:37:16,803 --> 00:37:18,672
+现在 作为配件制造商
 
 
 610
-00:35:15,646 --> 00:35:17,246
-regardless of the
-state of connectivity.
+00:37:19,473 --> 00:37:23,544
+可以通过自定义特征增加更多的功能
+这当然没问题
 
 
 611
-00:35:17,916 --> 00:35:19,896
-So whether they are
-disconnected or connected,
+00:37:25,279 --> 00:37:28,949
+由于报警系统通常与传感器相连接
 
 
 612
-00:35:19,896 --> 00:35:23,336
-they can send HAP notifications
-to your iOS devices.
+00:37:29,316 --> 00:37:32,186
+增加了支持多种传感器类型的功能：
 
 
 613
-00:35:23,956 --> 00:35:24,656
-Really useful.
+00:37:32,920 --> 00:37:36,023
+运动、空气质量、烟雾是其中几种 
 
 
 614
-00:35:26,116 --> 00:35:27,956
-We also added support
-for metadata.
+00:37:37,524 --> 00:37:38,892
+但最后同样重要的是...
 
 
 615
-00:35:29,436 --> 00:35:33,626
-This way, custom characteristics
-can describe themselves fully
+00:37:38,959 --> 00:37:40,961
+这是一种
+让我感到非常兴奋的配件类型...
 
 
 616
-00:35:34,136 --> 00:35:35,766
-to HomeKit applications.
+00:37:41,528 --> 00:37:43,030
+可编程开关
 
 
 617
-00:35:36,416 --> 00:35:40,706
-And finally, we added support
-for multiple transports.
+00:37:44,264 --> 00:37:47,835
+可编程开关是HomeKit设备
 
 
 618
-00:35:41,566 --> 00:35:46,566
-With this, you can now have a
-HomeKit accessory that can work
+00:37:48,168 --> 00:37:50,804
+其主要目的是生成事件
 
 
 619
-00:35:46,566 --> 00:35:50,086
-over IP or Bluetooth
-LE simultaneously,
+00:37:52,639 --> 00:37:56,677
+iOS使得这个配件引人注目
 
 
 620
-00:35:50,706 --> 00:35:53,796
-and the iOS device will
-be able to recognize
+00:37:56,977 --> 00:37:58,111
+为了更好地了解这个配件
 
 
 621
-00:35:54,076 --> 00:35:57,626
-that it's the same accessory
-regardless of the transport
+00:37:58,245 --> 00:37:59,813
+让我给大家举一个例子
 
 
 622
-00:35:57,626 --> 00:36:00,616
-that the accessory uses
-to communicate with it.
+00:38:01,615 --> 00:38:04,484
+假设现在到了睡觉时间
+你躺在你的床上
 
 
 623
-00:36:00,796 --> 00:36:02,006
-Really a compelling feature.
+00:38:05,385 --> 00:38:07,921
+你关闭了你的电子设备
+它们正在房子里的某个地方充电
 
 
 624
-00:36:02,566 --> 00:36:08,696
-Now, let's move on to the last
-topic of our presentation,
+00:38:08,856 --> 00:38:11,425
+但你不知道你的房子是否是安全的
 
 
 625
-00:36:09,256 --> 00:36:11,086
-which is accessory categories.
+00:38:11,892 --> 00:38:14,294
+你的灯在房子的
+远处角落里可能已经关闭了电源
 
 
 626
-00:36:11,976 --> 00:36:16,646
-Last year with iOS 8, we added
-support for several accessories
+00:38:15,362 --> 00:38:16,663
+但你担心没有关灯
 
 
 627
-00:36:17,406 --> 00:36:21,016
-that are most commonly found in
-your house, like your lights,
+00:38:16,997 --> 00:38:19,433
+你有了这个可编程开关
 
 
 628
-00:36:21,066 --> 00:36:24,236
-fans, switches, plugs,
-garage doors, et cetera.
+00:38:20,367 --> 00:38:22,369
+整个开关只有一个简单的按钮
 
 
 629
-00:36:25,586 --> 00:36:27,256
-Now, adding native support
+00:38:22,803 --> 00:38:24,104
+现在你按下这个按钮
 
 
 630
-00:36:27,256 --> 00:36:30,896
-for accessory categories is an
-evolutionary process in iOS,
+00:38:24,872 --> 00:38:26,106
+它就会生成一个事件
 
 
 631
-00:36:31,696 --> 00:36:38,016
-and in iOS 9, we added
-support for more devices in iOS
+00:38:26,540 --> 00:38:29,776
+大家现在都知道
+我们的iOS 9支持事件触发
 
 
 632
-00:36:38,016 --> 00:36:42,816
-so that you can connect more
-accessories in your house.
+00:38:30,711 --> 00:38:36,683
+因此我们的用户
+可以将这个事件映射到一个触发器
 
 
 633
-00:36:44,246 --> 00:36:46,196
-Starting with window coverings.
+00:38:37,684 --> 00:38:41,421
+以执行这个神奇的预定义的晚安模式
 
 
 634
-00:36:46,196 --> 00:36:49,186
-You can now use iOS to
-control your awnings, blinds,
+00:38:42,623 --> 00:38:44,925
+现在有了iOS 
+无论开关在哪里 无论手机在哪里
 
 
 635
-00:36:49,186 --> 00:36:52,746
-and shades, and motorized
-doors and windows.
+00:38:45,125 --> 00:38:47,594
+它都会连接到这个触发器
+并魔法般地执行所有的事件
 
 
 636
-00:36:54,056 --> 00:36:56,536
-Alarm systems are
-also a new category.
+00:38:48,061 --> 00:38:49,496
+功能强大但操作简单
 
 
 637
-00:36:56,816 --> 00:36:59,406
-Now, this is a category
-that several --
+00:38:51,398 --> 00:38:56,069
+可编程开关和所有的其他新配件类型
 
 
 638
-00:36:59,406 --> 00:37:02,216
-and alarm system and security
-system providers have asked
+00:38:56,336 --> 00:38:58,405
+正如Anush所说都可以在
 
 
 639
-00:37:02,886 --> 00:37:04,526
-for native support, and
-which listened to them.
+00:38:58,472 --> 00:39:01,108
+我们的HomeKit
+配件模拟器升级版本中用得到
 
 
 640
-00:37:04,936 --> 00:37:08,786
-But we also found that alarm
-systems can be really complex
+00:39:02,676 --> 00:39:05,012
+作为开发者 你们可以开发
 
 
 641
-00:37:09,146 --> 00:37:13,156
-with a lot of features, but what
-we did is to distill the key
+00:39:05,145 --> 00:39:06,713
+支持这些新配件类型的app
 
 
 642
-00:37:13,156 --> 00:37:16,346
-and the most used features
-in an alarm system service.
+00:39:07,915 --> 00:39:09,816
+HomeKit配件模拟器是
 
 
 643
-00:37:16,796 --> 00:37:20,216
-Now, you as an accessory
-manufacturer will be able
+00:39:09,950 --> 00:39:12,352
+你们作为开发者和配件制造商
 
 
 644
-00:37:20,216 --> 00:37:23,556
-to add more features using
-custom characteristics,
+00:39:12,920 --> 00:39:14,821
+可使用的多个工具中的一个
 
 
 645
-00:37:24,086 --> 00:37:25,176
-of course.
+00:39:15,956 --> 00:39:18,292
+我们还有HomeKit配件测试仪
 
 
 646
-00:37:25,276 --> 00:37:28,956
-Alarm systems typically work
-hand in hand with sensors,
+00:39:18,692 --> 00:39:22,663
+它也可以通过升级后而用于支持
 
 
 647
-00:37:29,326 --> 00:37:33,506
-so we added support for several
-sensor categories: motion,
+00:39:23,163 --> 00:39:24,631
+我们今天所讲的许多新功能
 
 
 648
-00:37:33,506 --> 00:37:37,426
-air quality, and smoke
-being just a few of them.
+00:39:25,432 --> 00:39:28,669
+现在让我花一分钟时间谈谈
+HomeKit配件测试仪也叫HAT
 
 
 649
-00:37:37,516 --> 00:37:38,946
-And last but not least --
+00:39:29,536 --> 00:39:31,972
+我们强烈要求你们 作为配件制造商
 
 
 650
-00:37:38,946 --> 00:37:40,636
-and this is a category I
-am very excited about --
+00:39:32,439 --> 00:39:36,510
+你们需要在整个
+开发周期里以独占的方式使用HAT
 
 
 651
-00:37:41,536 --> 00:37:43,026
-is programmable switches.
+00:39:36,910 --> 00:39:40,881
+因为通过这种方式
+你将确保你的配件兼容于
 
 
 652
-00:37:43,796 --> 00:37:48,716
-A programmable switch is a
-HomeKit device whose main
+00:39:41,315 --> 00:39:46,587
+HomeKit规范并且确保
 
 
 653
-00:37:48,716 --> 00:37:52,826
-purpose is to generate events.
+00:39:46,653 --> 00:39:50,624
+你的配件可以
+在过去和未来的iOS版本上工作
 
 
 654
-00:37:52,826 --> 00:37:56,616
-iOS makes this accessory
-compelling.
+00:39:51,258 --> 00:39:53,560
+HAT还可提供调试信息
 
 
 655
-00:37:56,976 --> 00:37:58,126
-So to understand this better,
+00:39:54,061 --> 00:39:56,763
+这在使用iOS时可能无法提供给你
 
 
 656
-00:37:58,256 --> 00:37:59,696
-let me walk you through
-an example.
+00:39:57,431 --> 00:40:01,201
+但最重要的原因是
+我们可以在苹果手机上使用HAT
 
 
 657
-00:37:59,696 --> 00:38:04,486
-So let's say it's bedtime,
-and you're in your bed,
+00:40:01,368 --> 00:40:03,003
+来验证的你的配件
 
 
 658
-00:38:05,396 --> 00:38:07,926
-you stow away your
-electronics, charging somewhere,
+00:40:04,838 --> 00:40:07,274
+HAT也是
 
 
 659
-00:38:08,866 --> 00:38:11,416
-but you don't know if
-your house is secure.
+00:40:07,674 --> 00:40:12,312
+专门提供给
+苹果MFi计划成员的工具之一
 
 
 660
-00:38:11,896 --> 00:38:14,296
-Your lights are probably off in
-some far corner of the house.
+00:40:13,280 --> 00:40:15,449
+如果你已经是这个计划的一名会员
 
 
 661
-00:38:15,356 --> 00:38:16,136
-But fret not.
+00:40:16,049 --> 00:40:19,353
+能够在将来通过MFi门户网站
 
 
 662
-00:38:17,006 --> 00:38:20,706
-You have this programmable
-switch, nothing
+00:40:19,620 --> 00:40:21,955
+得到更新的规范和工具
 
 
 663
-00:38:20,706 --> 00:38:22,156
-but a simple switch
-with a button.
+00:40:23,323 --> 00:40:25,359
+如果你不是MFi计划的会员
 
 
 664
-00:38:22,156 --> 00:38:24,306
-Now, you press the button.
+00:40:26,293 --> 00:40:29,830
+在制造一个HomeKit配件
+那么你需要通过注册成为一名会员
 
 
 665
-00:38:24,886 --> 00:38:25,886
-It generates an event.
+00:40:30,063 --> 00:40:33,200
+这样你就能够下载规范和工具
 
 
 666
-00:38:26,526 --> 00:38:29,786
-And you know now in iOS 9
-we support event triggers.
+00:40:33,700 --> 00:40:35,469
+在这里我们为你提供了一个链接
 
 
 667
-00:38:30,716 --> 00:38:36,676
-So our users will be able to
-map this event to a trigger,
+00:40:37,938 --> 00:40:42,109
+总地来说
+今天你们学到了许多新的功能
 
 
 668
-00:38:37,696 --> 00:38:40,556
-which will execute this
-beautiful predefined good
+00:40:42,176 --> 00:40:45,812
+比如HomeKit、
+苹果手表、事件触发器、
 
 
 669
-00:38:40,556 --> 00:38:41,136
-night scene.
+00:40:46,046 --> 00:40:48,882
+远程访问新方法 以及
 
 
 670
-00:38:42,616 --> 00:38:44,846
-Now, iOS, wherever it is,
-wherever the phone is,
+00:40:48,949 --> 00:40:50,551
+蓝牙低功耗配件的几个新功能
 
 
 671
-00:38:44,926 --> 00:38:47,476
-it will get this trigger and
-execute all of it magically.
+00:40:51,385 --> 00:40:54,121
+我们的苹果员工
+对所有这些功能真地感到很兴奋
 
 
 672
-00:38:48,056 --> 00:38:49,226
-Powerful but simple.
+00:40:54,388 --> 00:40:57,391
+我们迫不及待地想
+看看你们将如何利用这些功能
 
 
 673
-00:38:49,786 --> 00:38:55,456
-Now, programmable switch and
-all the other new accessory
+00:40:58,458 --> 00:41:01,762
+如果你们还有其他问题
+有关HomeKit的任何问题
 
 
 674
-00:38:55,456 --> 00:38:58,476
-categories are available,
-as Anush mentioned,
+00:41:02,663 --> 00:41:04,531
+你们可以从我们这里得到更多的信息
 
 
 675
-00:38:58,476 --> 00:39:01,096
-in our updated version of the
-HomeKit Accessory Simulator,
-
-
-676
-00:39:01,276 --> 00:39:05,226
-so that you, as developers,
-can develop apps
-
-
-677
-00:39:05,296 --> 00:39:06,716
-to support these new categories.
-
-
-678
-00:39:07,916 --> 00:39:10,336
-The HomeKit Accessory
-Simulator is one
-
-
-679
-00:39:10,336 --> 00:39:13,606
-of the several tools
-available to you as developers
-
-
-680
-00:39:13,606 --> 00:39:14,836
-and accessory manufacturers.
-
-
-681
-00:39:15,956 --> 00:39:18,276
-We also have HomeKit
-Accessory Tester,
-
-
-682
-00:39:18,686 --> 00:39:22,626
-which is also being updated to
-support many of the new features
-
-
-683
-00:39:23,156 --> 00:39:24,226
-that we talked about today.
-
-
-684
-00:39:24,896 --> 00:39:29,246
-Now let me talk a minute about
-HomeKit Accessory Tester, HAT.
-
-
-685
-00:39:29,546 --> 00:39:31,986
-We urge you, as accessory
-manufacturers,
-
-
-686
-00:39:32,436 --> 00:39:36,526
-to exclusively use HAT all
-through your development cycle
-
-
-687
-00:39:36,926 --> 00:39:40,896
-because this way you will ensure
-that your accessory is compliant
-
-
-688
-00:39:41,306 --> 00:39:46,656
-to HomeKit specifications
-and also ensure
-
-
-689
-00:39:46,656 --> 00:39:50,626
-that your accessories work with
-past and future versions of iOS.
-
-
-690
-00:39:51,246 --> 00:39:53,566
-Now, HAT also provides
-the debug information
-
-
-691
-00:39:54,056 --> 00:39:56,756
-that may not be available
-to you when you use iOS,
-
-
-692
-00:39:57,416 --> 00:40:01,206
-but the most important reason
-is that we use HAT at Apple
-
-
-693
-00:40:01,366 --> 00:40:03,006
-to certify your accessories.
-
-
-694
-00:40:03,506 --> 00:40:07,286
-Now, HAT is also
-one of the tools
-
-
-695
-00:40:07,676 --> 00:40:12,296
-that is exclusively available to
-members of Apple's MFi program.
-
-
-696
-00:40:13,296 --> 00:40:15,436
-Now, if you are already
-a member of this program,
-
-
-697
-00:40:16,046 --> 00:40:19,346
-then you'd be able to get
-updated specs and tools
-
-
-698
-00:40:19,626 --> 00:40:21,836
-in the near future
-at the MFi portal.
-
-
-699
-00:40:23,316 --> 00:40:25,346
-If you are not a member
-of the MFi program
-
-
-700
-00:40:26,296 --> 00:40:29,836
-and you are making a HomeKit
-accessory, you need to enroll
-
-
-701
-00:40:30,086 --> 00:40:30,936
-so that you would be able
-
-
-702
-00:40:30,936 --> 00:40:33,206
-to download the specifications
-and tools.
-
-
-703
-00:40:33,686 --> 00:40:35,476
-And here is a link
-to get you started.
-
-
-704
-00:40:37,596 --> 00:40:42,166
-Now, in summary, today you
-learned about many new features,
-
-
-705
-00:40:42,166 --> 00:40:45,606
-like HomeKit and Apple
-Watch, event triggers,
-
-
-706
-00:40:46,036 --> 00:40:48,936
-a new way of remote
-access, and several features
-
-
-707
-00:40:48,936 --> 00:40:50,546
-for Bluetooth Low
-Energy accessories.
-
-
-708
-00:40:51,386 --> 00:40:54,126
-We at Apple are really excited
-about all these features,
-
-
-709
-00:40:54,396 --> 00:40:57,406
-and we can't wait to see what
-you are going to do with them.
-
-
-710
-00:40:58,446 --> 00:41:01,676
-If you have any more questions,
-any questions on HomeKit,
-
-
-711
-00:41:02,676 --> 00:41:04,546
-here's where you can get
-more information from.
-
-
-712
-00:41:05,686 --> 00:41:07,766
-Thank you very much for
-attending our session.
-
-
-713
-00:41:08,516 --> 00:41:12,500
-[Applause]
+00:41:05,966 --> 00:41:07,868
+非常感谢大家的聆听
 

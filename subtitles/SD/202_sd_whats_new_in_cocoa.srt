@@ -1,4749 +1,4749 @@
 1
-00:00:23,306 --> 00:00:24,016
->> ALI OZER: Good afternoon.
+00:00:20,087 --> 00:00:23,223
+Cocoa最新内容
 
 
 2
-00:00:24,306 --> 00:00:25,946
-Welcome to What's New in Cocoa.
+00:00:23,290 --> 00:00:23,957
+下午好
 
 
 3
-00:00:30,546 --> 00:00:31,696
-My name is Ali Ozer.
+00:00:24,358 --> 00:00:26,059
+欢迎参加《Cocoa最新内容》讲座
 
 
 4
-00:00:32,326 --> 00:00:36,266
-I'll be talking to you about
-what's new in Cocoa this year.
+00:00:30,464 --> 00:00:31,832
+我是阿里•厄泽尔
 
 
 5
-00:00:36,656 --> 00:00:39,796
-Three areas: Swiftificaiton,
-AppKit, and Foundation.
+00:00:32,299 --> 00:00:36,370
+我是来介绍
+今年Cocoa新增了什么内容
 
 
 6
-00:00:41,016 --> 00:00:43,826
-We have a lot of
-material, so let's dive in.
+00:00:36,570 --> 00:00:37,337
+主要在三方面：
 
 
 7
-00:00:44,516 --> 00:00:48,606
-Swiftification refers to the
-API enhancements we have done
+00:00:37,404 --> 00:00:40,707
+Swiftificaiton
+AppKit和Foundation
 
 
 8
-00:00:48,606 --> 00:00:52,946
-across our frameworks
-in support of Swift.
+00:00:40,908 --> 00:00:43,243
+我们有许多学习内容
+大家一起来深入研究吧
 
 
 9
-00:00:53,176 --> 00:00:56,606
-The changes also improve our
-Objective-C APIs as well.
+00:00:45,179 --> 00:00:48,549
+Swiftification 是指
+刚完成的API增强版
 
 
 10
-00:00:57,156 --> 00:01:00,566
-As you know, Swift
-provides features
+00:00:48,615 --> 00:00:52,853
+在多个框架之间
+支持Swift语言
 
 
 11
-00:01:00,566 --> 00:01:02,426
-to express APIs more precisely.
+00:00:53,153 --> 00:00:56,590
+这些改进同时完善了
+Objective-C API功能
 
 
 12
-00:01:02,836 --> 00:01:05,366
-For instance, you can
-indicate this is an array.
+00:00:58,692 --> 00:01:00,494
+要知道 Swift语言
+的功能是
 
 
 13
-00:01:05,366 --> 00:01:07,216
-The Subviews property
-is an array
+00:01:00,561 --> 00:01:02,429
+更准确表达API特性
 
 
 14
-00:01:07,216 --> 00:01:09,186
-of NSView, not just an array.
+00:01:02,829 --> 00:01:05,299
+例如可以
+声明这是个数组
 
 
 15
-00:01:09,866 --> 00:01:12,036
-You can indicate that a
-method such as System Font
+00:01:05,364 --> 00:01:07,134
+子视图属性
+是NSView数组
 
 
 16
-00:01:12,036 --> 00:01:15,156
-Of Size returns an NSFont
-and will never return nil.
+00:01:07,201 --> 00:01:09,169
+但不仅仅是个数组
 
 
 17
-00:01:16,096 --> 00:01:18,246
-In methods such as
-Image For Resource,
+00:01:09,736 --> 00:01:12,472
+还可以声明System Font
+Of Size方法
 
 
 18
-00:01:18,246 --> 00:01:20,996
-an NSBundle may return
-nil because it is declared
+00:01:12,539 --> 00:01:15,309
+返回到NSFont
+而且永远不会返回空
 
 
 19
-00:01:20,996 --> 00:01:22,246
-as an optional NSImage.
+00:01:16,043 --> 00:01:18,345
+例如在Image For
+Resource方法中　
 
 
 20
-00:01:24,256 --> 00:01:27,096
-We enable these features
-in Objective-C as well
+00:01:18,412 --> 00:01:20,914
+NSBundle可以返回零值空
+因为它被声明
 
 
 21
-00:01:27,096 --> 00:01:28,466
-with nullability in generics.
+00:01:20,981 --> 00:01:22,249
+作为可选的NSImage
 
 
 22
-00:01:28,926 --> 00:01:31,506
-So I'm going to talk about
-these two areas briefly,
+00:01:24,518 --> 00:01:27,020
+我们在Objective-C
+启动这些功能
 
 
 23
-00:01:31,766 --> 00:01:33,946
-and then also a few
-other changes we made
+00:01:27,087 --> 00:01:28,455
+具备通用列的为空性
 
 
 24
-00:01:34,186 --> 00:01:38,466
-to make our Objective-C
-and Swift APIs better.
+00:01:28,922 --> 00:01:31,491
+我会简要介绍
+这两方面内容
 
 
 25
-00:01:38,666 --> 00:01:41,386
-We applied these in APIs
-of many our frameworks,
+00:01:31,758 --> 00:01:33,961
+接着再做
+几处调整
 
 
 26
-00:01:41,386 --> 00:01:44,606
-not just AppKit and Foundation.
+00:01:34,194 --> 00:01:37,231
+让我们的Objective-C和
+Swift API效果更好
 
 
 27
-00:01:45,086 --> 00:01:48,096
-By doing this we not only do
-better exposure of the APIs
+00:01:38,565 --> 00:01:41,335
+我们将这些用于
+许多框架的API中
 
 
 28
-00:01:48,096 --> 00:01:51,906
-in Swift but also
-make the APIs clearer
+00:01:41,401 --> 00:01:44,605
+不仅是AppKit
+和Foundation
 
 
 29
-00:01:52,096 --> 00:01:54,176
-and also provide compile
-time type-checking
+00:01:45,072 --> 00:01:48,041
+这样不仅可以更好地
+接触到Swift语言中的API
 
 
 30
-00:01:54,176 --> 00:01:57,506
-which is very important,
-of course.
+00:01:48,108 --> 00:01:51,912
+而且会让
+API更为清晰
 
 
 31
-00:01:57,656 --> 00:02:00,896
-Nullability is whether
-values can or cannot be nil.
+00:01:52,112 --> 00:01:54,114
+还能提供编译时间
+类型检查功能
 
 
 32
-00:02:01,516 --> 00:02:06,146
-If you use Swift with
-X v10 or iOS 8 SDKs,
+00:01:54,181 --> 00:01:55,649
+这一点当然
+很重要
 
 
 33
-00:02:06,146 --> 00:02:09,985
-you know the Swift APIs already
-have the proper nullability
+00:01:57,551 --> 00:02:00,888
+为空性是指
+值能否为零
 
 
 34
-00:02:09,985 --> 00:02:11,446
-and optional declarations
-on them.
+00:02:02,890 --> 00:02:06,093
+若是使用Swift语言
+X v10或iOS 8 SDK
 
 
 35
-00:02:11,706 --> 00:02:15,186
-We have managed that with
-handcrafted side data,
+00:02:06,159 --> 00:02:09,930
+大家已经了解Swift API
+具有适当的为空性
 
 
 36
-00:02:15,226 --> 00:02:15,916
-side files.
+00:02:09,997 --> 00:02:11,431
+和可选的声明
+内容
 
 
 37
-00:02:16,436 --> 00:02:19,886
-In X v11 and iOS 9, we bring
-this ability to Objective-C,
+00:02:11,698 --> 00:02:15,169
+我们已经管理过
+手工端数据
 
 
 38
-00:02:20,086 --> 00:02:22,766
-and we have several new keywords
-we've added to Objective-C.
+00:02:15,235 --> 00:02:16,370
+以及端文件这方面的内容
 
 
 39
-00:02:23,446 --> 00:02:27,666
-Nonnull indicates never nil,
-Nullable indicates can be nil,
+00:02:16,436 --> 00:02:19,773
+在X v11和iOS 9中我们将这
+种能力赋予了Objective-C
 
 
 40
-00:02:28,166 --> 00:02:31,726
-Null Resettable indicates that
-a property can be set to nil
+00:02:20,040 --> 00:02:23,010
+并有了若干新的关键词这些都加在了O
+bjective-C上
 
 
 41
-00:02:31,726 --> 00:02:33,176
-but won't ever return nil.
+00:02:23,443 --> 00:02:27,681
+非零表示永远不为零值
+可为零表示可以为零值
 
 
 42
-00:02:33,316 --> 00:02:36,036
-We'll have an example
-in a second.
+00:02:28,182 --> 00:02:31,652
+可重置零表示
+属性可以设为零值
 
 
 43
-00:02:36,036 --> 00:02:38,706
-Last and least, we
-have Null Unspecified,
+00:02:31,718 --> 00:02:33,187
+不过不会返回归零值
 
 
 44
-00:02:38,706 --> 00:02:39,836
-meaning not specified.
+00:02:33,320 --> 00:02:35,956
+马上会给出
+一个例子
 
 
 45
-00:02:40,186 --> 00:02:43,146
-This is used for
-deprecated stuff or stuff
+00:02:36,023 --> 00:02:38,625
+最后一项也很重要就
+是Null Unspecified
 
 
 46
-00:02:43,146 --> 00:02:47,636
-that has not yet been audited.
+00:02:38,692 --> 00:02:39,826
+也就是未指定的意思
 
 
 47
-00:02:47,686 --> 00:02:51,306
-Since nonnull is the
-majority of cases in our API,
+00:02:40,194 --> 00:02:43,063
+这个用于
+不支持的内容
 
 
 48
-00:02:51,556 --> 00:02:53,256
-we also have these
-two declarations:
+00:02:43,130 --> 00:02:45,065
+或未经审查的内容
 
 
 49
-00:02:53,256 --> 00:02:54,866
-Assume Nonnull Begin and End,
+00:02:47,434 --> 00:02:51,471
+由于API大部分
+是非零值的状态
 
 
 50
-00:02:54,866 --> 00:02:56,556
-which we wrap our
-header files with.
+00:02:51,538 --> 00:02:52,906
+我们还有这样
+两种声明：
 
 
 51
-00:02:57,056 --> 00:02:59,506
-With this, the nonnull
-declarations are no
+00:02:52,973 --> 00:02:55,475
+Assume Nonnull
+Begin and End
 
 
 52
-00:02:59,506 --> 00:03:00,216
-longer needed.
+00:02:55,542 --> 00:02:57,377
+假设首尾为零
+中间即为我们的页眉文件
 
 
 53
-00:03:00,696 --> 00:03:03,206
-Nonnull is unnecessary
+00:02:57,444 --> 00:02:59,446
+这样 非零值声明
+就没有必要
 
 
 54
-00:03:03,206 --> 00:03:05,066
-and we have the other
-declarators on our APIs.
+00:02:59,513 --> 00:03:00,547
+继续存在了
 
 
 55
-00:03:05,066 --> 00:03:08,026
-We recommend you use
-these in your header files
+00:03:00,614 --> 00:03:03,150
+非零就没必要了
 
 
 56
-00:03:08,266 --> 00:03:10,586
-if you have a lot of
-header files of your own.
+00:03:03,217 --> 00:03:05,419
+我们在API上
+还有另外的声明
 
 
 57
-00:03:11,656 --> 00:03:15,256
-Let's look at some examples
-of how these affect our APIs.
+00:03:05,752 --> 00:03:08,188
+我们建议你在页眉文件中
+这样使用
 
 
 58
-00:03:15,756 --> 00:03:18,276
-You can see the Color
-property on NSColorWell.
+00:03:08,255 --> 00:03:10,090
+如果你有很多
+自己的页眉文件
 
 
 59
-00:03:18,696 --> 00:03:22,096
-We have not put any declaration
-on it, which means it is nonnull
+00:03:11,992 --> 00:03:15,262
+来看部分实例
+看看这会怎样影响API
 
 
 60
-00:03:22,506 --> 00:03:25,566
-and comes across in Swift
-as a non-optional value.
+00:03:15,762 --> 00:03:18,265
+你会看到
+NSColorWell的颜色属性
 
 
 61
-00:03:25,616 --> 00:03:26,496
-The Color property.
+00:03:18,699 --> 00:03:22,102
+我们没有发布任何声明
+那它就该是非零值
 
 
 62
-00:03:27,056 --> 00:03:29,336
-The Image property of
-NSImageView, on the other hand,
+00:03:22,503 --> 00:03:25,539
+在Swift语言中
+作为非可选值
 
 
 63
-00:03:29,336 --> 00:03:33,806
-is nullable which means that
-it can be set to nil and comes
+00:03:25,606 --> 00:03:26,507
+色彩属性
 
 
 64
-00:03:33,806 --> 00:03:36,376
-across in Swift as
-an optional value.
+00:03:27,040 --> 00:03:29,276
+另外一方面
+NSImageView的图像属性
 
 
 65
-00:03:36,796 --> 00:03:39,636
-And finally the Font property
-of NSMenu is declarated
+00:03:29,343 --> 00:03:33,747
+是可以为零值
+也就是说可以设为零值
 
 
 66
-00:03:39,636 --> 00:03:42,616
-as null resettable,
-and this comes
+00:03:33,814 --> 00:03:36,383
+在Swift语言中
+可以作为可选值
 
 
 67
-00:03:42,616 --> 00:03:44,236
-as implicitly unwrapped
-optional.
+00:03:36,783 --> 00:03:39,553
+最后声明的是
+NSMenu的字体属性
 
 
 68
-00:03:44,956 --> 00:03:48,176
-In this case what this means is
-we can set this value to nil,
+00:03:39,620 --> 00:03:42,556
+是可重置零
+这就会成为
 
 
 69
-00:03:48,176 --> 00:03:49,706
-but it will never return nil.
+00:03:42,623 --> 00:03:44,224
+隐式解析
+可选值
 
 
 70
-00:03:50,236 --> 00:03:53,706
-What NSMenu does is if you ever
-set it to nil, it goes back
+00:03:44,925 --> 00:03:48,095
+在本例中 这说明
+我们可以将值设为零
 
 
 71
-00:03:53,756 --> 00:03:56,776
-to the default font that it
-would have had for the system.
+00:03:48,595 --> 00:03:50,030
+不过它永远不会返回零值归零
 
 
 72
-00:03:56,816 --> 00:03:58,666
-So it never will return nil.
+00:03:50,230 --> 00:03:53,700
+如果从来都不把它设为零
+那么NSMenu就会
 
 
 73
-00:04:00,176 --> 00:04:03,016
-With nullability, you may
-see some build time warnings.
+00:03:53,767 --> 00:03:56,737
+恢复系统已有的
+默认字体
 
 
 74
-00:04:03,756 --> 00:04:04,866
-Let me show you an example.
+00:03:56,803 --> 00:03:58,672
+因此 永远不会返回零值归零
 
 
 75
-00:04:05,186 --> 00:04:07,926
-If you have code like this that
-was setting the Color property
+00:04:00,407 --> 00:04:03,010
+存在为空性 你可能会看到
+一些建造时间警告
 
 
 76
-00:04:07,926 --> 00:04:11,156
-of a ColorWell to nil,
-the compiler will now warn
+00:04:03,744 --> 00:04:04,878
+我来给大家看一个例子
 
 
 77
-00:04:11,456 --> 00:04:13,156
-because we declared
-this to be nonnull.
+00:04:05,179 --> 00:04:07,848
+如果你有这样的代码
+设置颜色属性
 
 
 78
-00:04:13,726 --> 00:04:16,856
-This is a good thing because it
-turns out if you had the code
+00:04:07,915 --> 00:04:11,151
+ColorWell为零
+编译器现在就会给出警告
 
 
 79
-00:04:16,856 --> 00:04:19,546
-and it was being run, it
-would have raised a parameter
+00:04:11,451 --> 00:04:13,153
+因为我们做过声明
+这个值是非零
 
 
 80
-00:04:19,546 --> 00:04:20,456
-assertion anyway.
+00:04:13,720 --> 00:04:16,790
+这非常好 因为就会成为
+如果你有这个代码
 
 
 81
-00:04:20,866 --> 00:04:22,926
-This is kind of things that
-now you'll get warnings
+00:04:16,857 --> 00:04:19,493
+并且经过运行
+就应该提出一个
 
 
 82
-00:04:22,926 --> 00:04:23,906
-about from the compiler.
+00:04:19,560 --> 00:04:20,459
+参数断言才对
 
 
 83
-00:04:23,906 --> 00:04:24,446
-That's great.
+00:04:20,861 --> 00:04:22,863
+这种情况下
+你会收到有关
 
 
 84
-00:04:26,106 --> 00:04:31,146
-As you probably know, in general
-nil is not a valid object value
+00:04:22,930 --> 00:04:23,830
+编译器的警告
 
 
 85
-00:04:31,146 --> 00:04:32,796
-in our APIs.
+00:04:23,897 --> 00:04:24,565
+非常好
 
 
 86
-00:04:32,796 --> 00:04:36,146
-NSString, NSArray, NSDictionary,
-et cetera have easy
+00:04:25,999 --> 00:04:31,071
+你也许知道 一般而言
+在我们的API中
 
 
 87
-00:04:36,146 --> 00:04:40,916
-to express empty values
-and APIs that accept
+00:04:31,138 --> 00:04:32,306
+零不是有效目标值
 
 
 88
-00:04:40,916 --> 00:04:44,016
-or return nils should
-document what nil means
+00:04:32,506 --> 00:04:36,076
+NSString NSArray
+NSDictionary等等很容易
 
 
 89
-00:04:44,016 --> 00:04:45,206
-as an exceptional case.
+00:04:36,143 --> 00:04:40,848
+表达空值
+接受或归零的API
 
 
 90
-00:04:45,576 --> 00:04:47,736
-I'll give you several
-examples from our APIs.
+00:04:40,914 --> 00:04:43,951
+应该把零作为
+特殊情况
 
 
 91
-00:04:48,326 --> 00:04:51,476
-If you set the background color
-of an NSTextView object to nil,
+00:04:44,017 --> 00:04:45,219
+记录下来
 
 
 92
-00:04:51,616 --> 00:04:53,126
-it means don't draw
-the background.
+00:04:45,586 --> 00:04:47,721
+我从API中给出
+几个例子来
 
 
 93
-00:04:53,936 --> 00:04:55,486
-A nil locale in many of our APIs
+00:04:48,322 --> 00:04:51,491
+如果将NSTextView目标
+背景色设为零
 
 
 94
-00:04:55,486 --> 00:04:58,696
-that take locale
-means nonlocalized.
+00:04:51,625 --> 00:04:53,126
+表示不得有
+背景颜色
 
 
 95
-00:04:58,696 --> 00:04:59,976
-So you can specify a locale,
+00:04:53,927 --> 00:04:55,429
+在许多API的零区域设置
 
 
 96
-00:04:59,976 --> 00:05:02,696
-but if you specify nil
-it means nonlocalized.
+00:04:55,495 --> 00:04:58,632
+都表示
+未经区域设置处理
 
 
 97
-00:05:03,286 --> 00:05:07,336
-Let's talk about generics.
+00:04:58,699 --> 00:04:59,900
+因此 可以确定一个区域设置
 
 
 98
-00:05:08,666 --> 00:05:12,366
-Generics as you have
-heard is lightweight type
+00:04:59,967 --> 00:05:02,703
+但是如果确定为零
+则表示未经区域设置处理
 
 
 99
-00:05:12,366 --> 00:05:16,326
-parameterization that we
-added to Objective-C and great
+00:05:05,272 --> 00:05:07,341
+再来谈谈泛型
 
 
 100
-00:05:16,646 --> 00:05:19,726
-for specifying types of
-elements in collections.
+00:05:08,542 --> 00:05:12,312
+泛型正如听上去那样
+是个轻量级的
 
 
 101
-00:05:21,076 --> 00:05:23,116
-Here is an example
-of NSSearchField.
+00:05:12,379 --> 00:05:16,316
+参数化类型我们将之加到Object
+ive-C上
 
 
 102
-00:05:23,486 --> 00:05:24,916
-The Recent Search property
+00:05:16,383 --> 00:05:19,720
+这对具体元素种类集合
+效果很好
 
 
 103
-00:05:24,916 --> 00:05:28,456
-of NSSearchField is
-declared like this in X v10.
+00:05:20,687 --> 00:05:23,123
+这里是个NSSearchField
+方面的例子
 
 
 104
-00:05:28,456 --> 00:05:31,666
-The name Recent Searches
-is not superclear.
+00:05:23,190 --> 00:05:26,059
+NSSearchField的
+Recent Search属性
 
 
 105
-00:05:31,666 --> 00:05:33,126
-What does this contain?
+00:05:26,126 --> 00:05:27,794
+是这样声明的
+X v10
 
 
 106
-00:05:33,126 --> 00:05:34,716
-Strings? URLs?
+00:05:27,861 --> 00:05:31,598
+Recent Searches这一
+名称并不十分清晰
 
 
 107
-00:05:34,716 --> 00:05:35,916
-Some search objects?
+00:05:31,665 --> 00:05:33,066
+其中包括什么内容？
 
 
 108
-00:05:36,386 --> 00:05:39,926
-In X v11 SDK, we
-can clarify this.
+00:05:33,133 --> 00:05:34,635
+字符串？URL?
 
 
 109
-00:05:39,976 --> 00:05:41,996
-It is an array of NSString.
+00:05:34,701 --> 00:05:35,903
+搜索目标是什么？
 
 
 110
-00:05:42,376 --> 00:05:45,516
-And the Swift declaration goes
-from an array of any object
+00:05:36,370 --> 00:05:39,907
+通过X v11 SDK
+我们可以进行澄清
 
 
 111
-00:05:45,766 --> 00:05:47,266
-to an array of string as well.
+00:05:39,973 --> 00:05:42,009
+这里是NSString数组
 
 
 112
-00:05:47,836 --> 00:05:53,196
-The way we have done this, we
-have taken NSArray in Foundation
+00:05:42,376 --> 00:05:45,512
+Swift声明就是
+从任何目标数组
 
 
 113
-00:05:53,516 --> 00:05:56,256
-and added the Object Type
-parameter to it, like so.
+00:05:45,779 --> 00:05:47,281
+到任何字符串数组
 
 
 114
-00:05:56,256 --> 00:05:59,406
-We have applied this object
-type to all of the APIs,
+00:05:49,650 --> 00:05:53,187
+我们采取的方法就是从Foundat
+ion中取得NSArray
 
 
 115
-00:05:59,886 --> 00:06:02,826
-appropriate APIs, which
-used to take or return ID,
+00:05:53,520 --> 00:05:56,190
+在加上Object Type数据
+等等之类
 
 
 116
-00:06:02,826 --> 00:06:06,146
-such as object at index,
-contains object, and so on.
+00:05:56,256 --> 00:05:59,393
+我们把这个目标类型适用于
+所有API
 
 
 117
-00:06:06,536 --> 00:06:09,916
-There is many other APIs
-this applies to in NSArray.
+00:05:59,893 --> 00:06:02,763
+适当的API
+以往都是获取或恢复ID
 
 
 118
-00:06:10,236 --> 00:06:13,866
-With this, the code we
-had with Recent Searches,
+00:06:02,829 --> 00:06:06,133
+诸如索引目标
+包括目标等等
 
 
 119
-00:06:14,486 --> 00:06:15,806
-let's say you had
-a code like this,
+00:06:06,533 --> 00:06:09,903
+还有许多其他的API
+这都适用于NSArray
 
 
 120
-00:06:16,266 --> 00:06:19,006
-Recent Searches contains
-object, some URL,
+00:06:10,237 --> 00:06:13,874
+有了这样的代码
+连同Recent Searches
 
 
 121
-00:06:19,936 --> 00:06:21,196
-we are passing in NSURL.
+00:06:14,474 --> 00:06:15,809
+可以说你是有
+这样的代码
 
 
 122
-00:06:21,476 --> 00:06:24,536
-The compiler now will warn
-you that you're passing URL
+00:06:16,276 --> 00:06:19,012
+Recent Searches包括
+目标 部分URL
 
 
 123
-00:06:25,126 --> 00:06:27,336
-into a method that expects
-an array of strings.
+00:06:19,947 --> 00:06:21,181
+我们在传递NSURL
 
 
 124
-00:06:27,676 --> 00:06:30,246
-The great thing here is this
-code would have never failed
+00:06:21,481 --> 00:06:24,551
+编译器现在就会给出警告
+你在传递URL
 
 
 125
-00:06:30,246 --> 00:06:32,696
-or crashed because that
-URL never would have been
+00:06:25,118 --> 00:06:27,321
+这种方式可能会出现
+字符串数组
 
 
 126
-00:06:32,696 --> 00:06:33,316
-found before.
+00:06:27,688 --> 00:06:30,190
+这里非常棒的是
+这个代码永远不会出问题
 
 
 127
-00:06:33,386 --> 00:06:36,496
-The compiler is telling you of
-a potential bug in the code.
+00:06:30,257 --> 00:06:32,626
+或是出现崩溃
+因为URL从来不会
 
 
 128
-00:06:38,166 --> 00:06:40,926
-We have added generic support in
-Foundation not only to NSArray
+00:06:32,693 --> 00:06:33,861
+在之前被发现
 
 
 129
-00:06:40,926 --> 00:06:43,996
-but to all the other collections
-as well, including NSEnumerator,
+00:06:33,927 --> 00:06:36,496
+编译器在告诉你
+编码中存在潜在的bug
 
 
 130
-00:06:43,996 --> 00:06:48,106
-which strictly speaking is not
-even a collection, of course.
+00:06:36,563 --> 00:06:39,233
+我们在Foundation中增加了
+泛型支持
 
 
 131
-00:06:48,556 --> 00:06:50,486
-You can apply this to
-non-collections as well.
+00:06:39,299 --> 00:06:40,868
+不仅是对NSArray
 
 
 132
-00:06:51,066 --> 00:06:55,266
-Now with generics you can use
-them as well, you can use them
+00:06:40,934 --> 00:06:43,937
+而是对所有其他集合
+NSEnumerator也包括在内
 
 
 133
-00:06:55,316 --> 00:06:57,446
-in variable declarations
-in your own classes.
+00:06:44,004 --> 00:06:48,108
+严格来讲 当然
+甚至不止是集合
 
 
 134
-00:06:57,886 --> 00:07:00,876
-If you are taking the result of
-Recent Searches and assigning it
+00:06:48,542 --> 00:06:50,477
+将之适用于
+非集合也同样可行
 
 
 135
-00:07:00,936 --> 00:07:04,716
-to a property of your own,
-you can go ahead and declarate
+00:06:51,078 --> 00:06:55,249
+现在连同泛型一起
+也可以通过不同的声明
 
 
 136
-00:07:04,766 --> 00:07:07,866
-that to be NSArray of NSString,
-and that will allow the type
+00:06:55,315 --> 00:06:57,451
+使用这些
+按照自己的分类
 
 
 137
-00:07:07,946 --> 00:07:09,536
-to propagate through
-your own code.
+00:06:57,885 --> 00:07:00,854
+如果你拿到Recent
+Searches的结果 并将之
 
 
 138
-00:07:10,656 --> 00:07:12,116
-You can declarate your
-own properties in APIs.
+00:07:00,921 --> 00:07:04,691
+赋予自己的属性
+那就可以继续 并且声明
 
 
 139
-00:07:12,116 --> 00:07:14,476
-Here is an array of files.
+00:07:04,758 --> 00:07:07,861
+这是NSArray of
+NSString 可以将该类型
 
 
 140
-00:07:14,476 --> 00:07:15,306
-What are they?
+00:07:07,961 --> 00:07:09,530
+通过自己的代码
+进行传播
 
 
 141
-00:07:15,306 --> 00:07:16,396
-Strings or URLs?
+00:07:10,664 --> 00:07:12,065
+你可以声明
+自己的API属性
 
 
 142
-00:07:16,906 --> 00:07:17,946
-You can be clear.
+00:07:12,132 --> 00:07:14,401
+这里是文件NSS数组
 
 
 143
-00:07:17,946 --> 00:07:21,346
-You can apply generics to
-your custom collections
+00:07:14,468 --> 00:07:15,235
+是什么？
 
 
 144
-00:07:21,346 --> 00:07:23,686
-if you have any or even
-to your custom categories
+00:07:15,302 --> 00:07:16,403
+字符串还是URL?
 
 
 145
-00:07:23,686 --> 00:07:24,816
-on foundation collections.
+00:07:16,904 --> 00:07:17,938
+可以更明确些
 
 
 146
-00:07:25,536 --> 00:07:28,216
-For instance, here is
-a category on NSArray.
+00:07:18,605 --> 00:07:21,275
+将通用列适用于
+自定义集合
 
 
 147
-00:07:29,076 --> 00:07:32,296
-You can go in and add it, just
-right there in your own code.
+00:07:21,341 --> 00:07:23,610
+如果有任何这样的集合
+甚至是在基础集合中
 
 
 148
-00:07:32,296 --> 00:07:34,736
-These generics work
-with categories as well.
+00:07:23,677 --> 00:07:24,811
+有你的自定义类别
 
 
 149
-00:07:35,346 --> 00:07:43,166
-Now kindof is another feature
-we have added to Objective-C.
+00:07:25,546 --> 00:07:28,215
+例如
+NSArray的类别
 
 
 150
-00:07:43,636 --> 00:07:46,216
-Let's give you motivation
-as to why we need this.
+00:07:29,082 --> 00:07:32,219
+你可以直接进入添加
+就在自己的代码中即可
 
 
 151
-00:07:46,656 --> 00:07:48,316
-Here's what the subviews
-declaration looked
+00:07:32,286 --> 00:07:34,721
+这些泛型通用列
+也同样适用于类别
 
 
 152
-00:07:48,316 --> 00:07:49,026
-like in X v10.
+00:07:37,991 --> 00:07:43,163
+现在又有一个功能
+加在了Objective-C上
 
 
 153
-00:07:49,896 --> 00:07:54,766
-Here is what we did our first
-attempt in applying generics.
+00:07:43,630 --> 00:07:46,200
+我们来讲解一下
+为什么需要这么做
 
 
 154
-00:07:55,456 --> 00:07:58,136
-Subviews was changed
-to NSArray of NSView.
+00:07:46,667 --> 00:07:48,235
+这就是子视图
+声明在
 
 
 155
-00:07:58,806 --> 00:08:02,546
-Then we had code like this,
-where we assign an element
+00:07:48,302 --> 00:07:49,837
+X v10中的模样
 
 
 156
-00:08:02,546 --> 00:08:04,116
-out of this array into NSButton.
+00:07:49,903 --> 00:07:54,775
+这是我们第一次尝试
+应用泛型
 
 
 157
-00:08:04,966 --> 00:08:07,206
-Turns out that this
-concerns the compiler,
+00:07:55,442 --> 00:07:58,145
+子视图改变为
+NSArray of NSView
 
 
 158
-00:08:07,746 --> 00:08:10,986
-the compiler is always looking
-out for us, always concerned.
+00:07:58,812 --> 00:08:02,482
+那么代码就是这样
+即把数组之外的元素
 
 
 159
-00:08:11,456 --> 00:08:12,476
-It generates a warning.
+00:08:02,549 --> 00:08:04,117
+赋值给NSButton
 
 
 160
-00:08:12,946 --> 00:08:15,606
-Why? Because we're assigning
-something that's explicitly
+00:08:04,952 --> 00:08:07,221
+这就轮到编译器
+着急了
 
 
 161
-00:08:15,606 --> 00:08:18,626
-declared to be an NSView
-to a subclass of NSView,
+00:08:07,754 --> 00:08:10,991
+编译器总是替我们担心
+很是操心
 
 
 162
-00:08:18,816 --> 00:08:20,816
-and the compiler is
-right in being concerned.
+00:08:11,458 --> 00:08:12,492
+它会发出警告
 
 
 163
-00:08:21,326 --> 00:08:23,736
-However, this is a kind
-of code we use a lot,
+00:08:12,960 --> 00:08:15,562
+为什么？因为我们在把外明显
+声明属于NSView的内容
 
 
 164
-00:08:23,736 --> 00:08:25,046
-and it is often valid.
+00:08:15,629 --> 00:08:18,632
+赋值给了
+NSView的子类
 
 
 165
-00:08:25,636 --> 00:08:28,586
-So we added this kindof keyword
-and changed the declaration
+00:08:18,832 --> 00:08:20,801
+难怪编辑器会
+有所担心了
 
 
 166
-00:08:28,846 --> 00:08:33,486
-of the subviews property to
-be NSArray of kindof NSViews.
+00:08:21,335 --> 00:08:23,670
+但是这类代码
+我们使用得很多
 
 
 167
-00:08:33,916 --> 00:08:35,145
-What this says is --
+00:08:23,737 --> 00:08:25,038
+而且还常常有效
 
 
 168
-00:08:36,515 --> 00:08:39,655
-[Applause]
+00:08:25,639 --> 00:08:28,575
+因此 添加了这类关键字
+并且将
 
 
 169
-00:08:40,155 --> 00:08:40,895
->> ALI OZER: Thank you.
+00:08:28,842 --> 00:08:33,480
+子视图属性的声明改为这类NSArr
+ay of NSViews的
 
 
 170
-00:08:41,606 --> 00:08:45,976
-Thank you for overlooking
-the under bars there!
+00:08:33,914 --> 00:08:35,148
+得出的就是...
 
 
 171
-00:08:45,976 --> 00:08:48,096
-What this says, it is okay
-for the caller to be able
+00:08:39,886 --> 00:08:40,554
+谢谢
 
 
 172
-00:08:48,096 --> 00:08:50,826
-to access the elements
-of the array as instances
+00:08:41,621 --> 00:08:44,858
+...感谢大家没注意
+这边栏目下的内容
 
 
 173
-00:08:50,826 --> 00:08:54,086
-of the specified class or
-instances of a subclass as well.
+00:08:45,626 --> 00:08:48,028
+这是说 调用者
+可以访问
 
 
 174
-00:08:54,826 --> 00:08:56,946
-So this is now -- this works.
+00:08:48,095 --> 00:08:50,764
+数组元素
+如具体类的例子
 
 
 175
-00:08:57,616 --> 00:09:02,826
-Note that kindof is a compile
-time facility like most
+00:08:50,831 --> 00:08:54,101
+或者是说
+子类的例子也可
 
 
 176
-00:09:02,826 --> 00:09:04,206
-of the things I have
-talked about here.
+00:08:54,835 --> 00:08:56,937
+现在来看 效果可以
 
 
 177
-00:09:04,676 --> 00:09:07,356
-There is no runtime
-code changes,
+00:08:57,604 --> 00:09:02,042
+注意
+这类编译时功能
 
 
 178
-00:09:08,396 --> 00:09:11,196
-there is no runtime check
-for the type, for instance.
+00:09:02,109 --> 00:09:04,211
+和我在这里谈到的
+大多数其他内容一样
 
 
 179
-00:09:11,586 --> 00:09:14,066
-There are cases where we
-want the caller to think
+00:09:04,678 --> 00:09:07,347
+并没有改变
+运行时间代码
 
 
 180
-00:09:14,066 --> 00:09:16,936
-about what the elements
-are before accessing them.
+00:09:08,382 --> 00:09:11,185
+例如 并未检查
+运行时间类型
 
 
 181
-00:09:17,396 --> 00:09:20,526
-So we're going to use
-these sparingly in our APIs
+00:09:11,585 --> 00:09:13,987
+有些时候 我们希望
+调用者可以考虑一下
 
 
 182
-00:09:20,526 --> 00:09:22,166
-and we recommend
-you do the same.
+00:09:14,054 --> 00:09:16,924
+元素的情况
+再去访问它们
 
 
 183
-00:09:22,396 --> 00:09:24,466
-They should be used when
-it is safe for the caller
+00:09:17,391 --> 00:09:20,460
+我们将在API中
+做少量使用
 
 
 184
-00:09:24,466 --> 00:09:25,566
-to make that assumption.
+00:09:20,527 --> 00:09:22,162
+并推荐大家
+也这么做
 
 
 185
-00:09:25,896 --> 00:09:27,486
-If you want the caller
-to think twice
+00:09:22,396 --> 00:09:24,398
+当调用者可以安全使用时
+它们就应该能用了
 
 
 186
-00:09:27,486 --> 00:09:29,816
-or maybe do some runtime
-query, don't use the kindof.
+00:09:24,464 --> 00:09:25,566
+假设一下
 
 
 187
-00:09:30,236 --> 00:09:32,346
-An example is this
-Representations method
+00:09:25,899 --> 00:09:27,434
+如果你希望调用者
+审慎行事
 
 
 188
-00:09:32,346 --> 00:09:33,136
-on NSImage.
+00:09:27,501 --> 00:09:29,803
+或是进行运行时间查询
+那就别这么用
 
 
 189
-00:09:33,866 --> 00:09:35,886
-It returns an array
-of NSImage reps,
+00:09:30,237 --> 00:09:31,872
+举例来说
+NSImage的
 
 
 190
-00:09:36,066 --> 00:09:40,086
-which are often subclassed,
-almost always subclassed.
+00:09:31,939 --> 00:09:33,974
+Representations法
+就是这样
 
 
 191
-00:09:40,536 --> 00:09:42,136
-However, we have
-not used kindof here
+00:09:34,041 --> 00:09:35,876
+它返还成NSImage
+数组表示法
 
 
 192
-00:09:42,136 --> 00:09:44,626
-because the kindof
-representations you get back
+00:09:36,076 --> 00:09:40,080
+它经常会被细分成子类
+而且几乎总是如此
 
 
 193
-00:09:45,096 --> 00:09:47,686
-isn't always predictable
-and it might, in fact,
+00:09:40,547 --> 00:09:42,082
+不过我们不会
+在这里用到这类
 
 
 194
-00:09:47,686 --> 00:09:50,406
-change during the runtime
-of an application or in fact
+00:09:42,149 --> 00:09:44,618
+因为这类表示法
+并非总是能够
 
 
 195
-00:09:50,406 --> 00:09:52,216
-between releases of the OS.
+00:09:44,918 --> 00:09:47,621
+具有可预见性
+实际上
 
 
 196
-00:09:52,216 --> 00:09:54,576
-It is better for the
-caller to be more alert here
+00:09:47,688 --> 00:09:50,324
+可能会在应用运行时间内
+在OS发布期间
 
 
 197
-00:09:54,576 --> 00:09:55,866
-and do some runtime checks.
+00:09:50,390 --> 00:09:52,159
+发生改变
 
 
 198
-00:09:56,386 --> 00:10:01,026
-Let me talk about
-error handling.
+00:09:52,226 --> 00:09:54,494
+最好是让调用者
+在这里多加小心
 
 
 199
-00:10:01,026 --> 00:10:03,906
-As you heard yesterday, Swift
-2 brings an amazing error
+00:09:54,561 --> 00:09:55,863
+进行运行时间检查
 
 
 200
-00:10:03,906 --> 00:10:06,326
-handling facility.
+00:09:59,166 --> 00:10:00,968
+我们在来谈谈
+错误处理
 
 
 201
-00:10:08,226 --> 00:10:11,336
-What that means is for a method
-like this on NSData write
+00:10:01,034 --> 00:10:03,837
+昨天大家听到了
+Swift 2具备神奇的
 
 
 202
-00:10:11,436 --> 00:10:15,426
-to URL options error, it now
-looks like this in Swift.
+00:10:03,904 --> 00:10:06,340
+错误处理功能
 
 
 203
-00:10:15,426 --> 00:10:18,206
-The Boolean return value goes
-away, it is now implicit.
+00:10:08,242 --> 00:10:11,345
+对于这种在NSData上
+写入URL选项的错误方法
 
 
 204
-00:10:18,566 --> 00:10:21,426
-And the error, the by
-reference NSError parameter,
+00:10:11,445 --> 00:10:15,349
+具体意思就是
+在Swift里的样子
 
 
 205
-00:10:21,726 --> 00:10:24,516
-also goes away because it is
-captured in the throw statement.
+00:10:15,415 --> 00:10:18,218
+Boolean回归值不见了
+现在非常明显
 
 
 206
-00:10:24,946 --> 00:10:28,486
-Here is a kindof code you
-write to deal with this.
+00:10:18,552 --> 00:10:21,421
+错误可以参考
+NSError参数
 
 
 207
-00:10:28,486 --> 00:10:30,066
-As you can see in
-the catch phrase,
+00:10:21,722 --> 00:10:24,525
+也不见了 因为是被
+抛出语句所捕捉
 
 
 208
-00:10:30,066 --> 00:10:32,986
-you can capture the error,
-it is either available
+00:10:24,958 --> 00:10:27,861
+这类代码
+就是需要处理的
 
 
 209
-00:10:32,986 --> 00:10:34,886
-for you automatically
-or you can declare it.
+00:10:28,495 --> 00:10:29,997
+正如你可以在
+捕捉语句中所见
 
 
 210
-00:10:34,886 --> 00:10:36,816
-And you can declare
-different catch statements,
+00:10:30,063 --> 00:10:32,933
+可以捕捉到错误
+如果是可以自动
 
 
 211
-00:10:36,816 --> 00:10:37,576
-of course, as well.
+00:10:32,999 --> 00:10:34,835
+被捕获
+或是由你来发出声明
 
 
 212
-00:10:38,066 --> 00:10:40,536
-It is great, straightforward.
+00:10:34,902 --> 00:10:36,737
+你可以声明不同的
+捕捉语句
 
 
 213
-00:10:40,536 --> 00:10:41,876
-Now, one thing.
+00:10:36,803 --> 00:10:38,005
+这也完全可以
 
 
 214
-00:10:42,056 --> 00:10:45,206
-Note that despite the
-terminology here, throw, try,
+00:10:38,071 --> 00:10:39,806
+非常好 直截了当
 
 
 215
-00:10:45,206 --> 00:10:47,516
-catch, et cetera, these
-are not exceptions
+00:10:39,873 --> 00:10:41,875
+现在还有一点
 
 
 216
-00:10:47,516 --> 00:10:48,606
-in the Objective-C sense.
+00:10:42,042 --> 00:10:45,145
+注意这里的所有术语
+抛出 异常捕捉
 
 
 217
-00:10:48,996 --> 00:10:50,606
-We're not raising
-exceptions here.
+00:10:45,212 --> 00:10:47,447
+等等 无外乎
+就是这些
 
 
 218
-00:10:50,606 --> 00:10:53,796
-We're actually returning
-errors and unwinding properly
+00:10:47,514 --> 00:10:48,916
+对Objective-C而言
 
 
 219
-00:10:53,796 --> 00:10:58,116
-through the stack just like, you
-know, what we do with NSErrors.
+00:10:48,982 --> 00:10:50,551
+我们也不会
+特殊对待
 
 
 220
-00:10:58,816 --> 00:11:01,356
-In fact, NSError
-guidelines apply
+00:10:50,617 --> 00:10:53,720
+我们实际是在返回错误
+通过这样的堆栈
 
 
 221
-00:11:01,446 --> 00:11:03,696
-to the Swift error handling.
+00:10:53,787 --> 00:10:58,125
+妥善解决问题
+就这么处理NSErrors
 
 
 222
-00:11:03,806 --> 00:11:08,056
-Use NSErrors and Swift error
-handling for runtime errors,
+00:10:58,825 --> 00:11:01,361
+实际上 NSError指南
+还适用于
 
 
 223
-00:11:08,056 --> 00:11:10,656
-errors that you expect to
-present to the user or handle
+00:11:01,461 --> 00:11:03,697
+Swift错误处理
 
 
 224
-00:11:10,656 --> 00:11:12,996
-at runtime, such as file
-not found and so forth.
+00:11:03,797 --> 00:11:08,001
+使用NSErrors和Swift
+错误处理应对运行时间问题
 
 
 225
-00:11:12,996 --> 00:11:16,576
-We continue to use
-exceptions or Swift assertions
+00:11:08,068 --> 00:11:10,604
+准备给用户展示的错误
+或是需要处理
 
 
 226
-00:11:16,576 --> 00:11:20,266
-for programming errors such
-as array index out of bounds.
+00:11:10,671 --> 00:11:12,940
+运行时间 如文件未能找到
+等等
 
 
 227
-00:11:20,406 --> 00:11:22,736
-The last category, of
-course, are the kind of errors
+00:11:13,006 --> 00:11:16,510
+我们继续使用例外
+或Swift断言
 
 
 228
-00:11:22,736 --> 00:11:26,176
-that are not expected
-to be captured.
+00:11:16,577 --> 00:11:19,513
+处理编程问题
+如界外索引数组
 
 
 229
-00:11:26,176 --> 00:11:28,386
-One more Swiftification
-item is naming cleanup.
+00:11:20,314 --> 00:11:22,683
+当然最后一类
+错误是
 
 
 230
-00:11:29,186 --> 00:11:32,406
-As you might be away, we
-still have a lot of enum names
+00:11:22,749 --> 00:11:24,751
+不可能被
+捕捉到的
 
 
 231
-00:11:32,406 --> 00:11:35,896
-from a long time ago where
-we use a common suffix rather
+00:11:25,752 --> 00:11:28,388
+还有一个Swiftificatio
+n项叫做清理
 
 
 232
-00:11:35,896 --> 00:11:38,566
-than common prefix, and we have
-renamed them in some cases,
+00:11:29,189 --> 00:11:32,326
+你们可能是该走了
+我们还有许多名称可以列举
 
 
 233
-00:11:38,566 --> 00:11:40,576
-not all, to have
-a common prefix,
+00:11:32,392 --> 00:11:35,829
+从很久以前开始
+我们用公共后缀
 
 
 234
-00:11:40,576 --> 00:11:41,766
-which means that they come
+00:11:35,896 --> 00:11:38,498
+而不是公共前缀
+在部分情况中
 
 
 235
-00:11:41,766 --> 00:11:43,416
-across in Swift with
-a better name.
+00:11:38,565 --> 00:11:40,501
+我们做了修改 不是全部
+有了公共前缀
 
 
 236
-00:11:43,416 --> 00:11:45,466
-Instead of dot left
-text alignment it comes
+00:11:40,567 --> 00:11:41,702
+也就是说
 
 
 237
-00:11:45,466 --> 00:11:46,616
-across as dot.left.
+00:11:41,768 --> 00:11:43,370
+在Swift语言中
+会有更好的名称
 
 
 238
-00:11:46,976 --> 00:11:48,476
-There are many more
-examples of this.
+00:11:43,437 --> 00:11:45,405
+不是按照点左边文本对齐
+而是改成了
 
 
 239
-00:11:49,066 --> 00:11:51,446
-Note that in many cases we
-haven't actually deprecated the
+00:11:45,472 --> 00:11:46,807
+dot.left格式
 
 
 240
-00:11:51,446 --> 00:11:54,496
-old names, so your sources
-will continue to compile,
+00:11:46,874 --> 00:11:48,475
+这样的例子
+还有许多
 
 
 241
-00:11:54,496 --> 00:11:56,896
-but you can switch to the new
-names as you rewrite your code.
+00:11:48,709 --> 00:11:51,378
+注意很多情况下
+我们实际上不支持
 
 
 242
-00:11:57,386 --> 00:12:01,646
-And there is many more of these.
+00:11:51,445 --> 00:11:54,414
+旧名称 因此你的源文件
+将会继续编译
 
 
 243
-00:12:01,676 --> 00:12:03,146
-With that, let's
-switch to AppKit.
+00:11:54,481 --> 00:11:56,884
+但是可以改为新名称
+重写编码即可
 
 
 244
-00:12:04,576 --> 00:12:06,246
-There are many AppKit
-topics I would love
+00:11:59,019 --> 00:12:00,621
+这类还有很多
 
 
 245
-00:12:06,246 --> 00:12:09,356
-to talk about, I'll
-talk about some.
+00:12:01,021 --> 00:12:03,156
+这样我们就可以
+来谈AppKit
 
 
 246
-00:12:09,826 --> 00:12:13,666
-One note here: from this point
-on i'm going to show APIs
+00:12:04,291 --> 00:12:06,193
+有许多AppKit方面的话题
+我都很喜欢
 
 
 247
-00:12:13,666 --> 00:12:16,426
-and code samples
-mostly in Swift.
+00:12:06,260 --> 00:12:08,028
+来聊聊
+先来谈一部分
 
 
 248
-00:12:16,596 --> 00:12:18,626
-Even if you're not
-comfortable yet in Swift,
+00:12:08,095 --> 00:12:13,600
+说明一点：从这里
+我会更多通过Swift
 
 
 249
-00:12:19,086 --> 00:12:21,476
-don't worry because no
-code I show will be all
+00:12:13,667 --> 00:12:15,602
+介绍API
+和代码样本
 
 
 250
-00:12:21,476 --> 00:12:22,256
-that complicated.
+00:12:16,203 --> 00:12:18,639
+如果你对Swift
+还不是很习惯
 
 
 251
-00:12:22,736 --> 00:12:23,916
-After all, I'm just a manager.
+00:12:19,072 --> 00:12:21,408
+也不必担心
+因为我提到的代码
 
 
 252
-00:12:24,476 --> 00:12:25,506
-It is important to note --
+00:12:21,475 --> 00:12:22,643
+不会那么难
 
 
 253
-00:12:26,016 --> 00:12:27,126
-[Laughter]
+00:12:22,743 --> 00:12:23,911
+毕竟 我不过是个经理
 
 
 254
-00:12:27,126 --> 00:12:27,766
->> ALI OZER: It is
-important to note
+00:12:24,478 --> 00:12:25,612
+需要注意的是...
 
 
 255
-00:12:27,766 --> 00:12:29,806
-that these APIs are
-all available
+00:12:26,180 --> 00:12:27,314
+这一点非常重要
 
 
 256
-00:12:29,806 --> 00:12:31,226
-in Objective-C and Swift.
+00:12:27,381 --> 00:12:31,451
+这些API在Objective-C
+和Swift中均可得到
 
 
 257
-00:12:31,536 --> 00:12:33,256
-So we're not showing you
-anything that works only
+00:12:31,552 --> 00:12:33,253
+那么 我们就不是只给
+大家展示仅适用于
 
 
 258
-00:12:33,256 --> 00:12:34,426
-for Objective-C or Swift.
+00:12:33,320 --> 00:12:35,322
+Objective-C或Swift
+的东西
 
 
 259
-00:12:34,426 --> 00:12:37,086
-It is available for whatever
-language you're using.
+00:12:35,389 --> 00:12:37,090
+无论是使用哪种语言
+均可以适用
 
 
 260
-00:12:37,616 --> 00:12:43,686
-As you know, the new Force
-Touch trackpad brings pressure
+00:12:38,492 --> 00:12:43,630
+要知道 新的Force Touch
+触摸板使用压力感应的同时
 
 
 261
-00:12:43,686 --> 00:12:46,716
-sensitivity as well
-as haptic feedback.
+00:12:43,697 --> 00:12:46,700
+也用到了
+触觉反馈
 
 
 262
-00:12:46,806 --> 00:12:49,696
-opening up interesting
-possibilities for applications.
+00:12:46,800 --> 00:12:49,636
+这就为更多有趣应用
+带来了可能
 
 
 263
-00:12:49,696 --> 00:12:53,486
-Let's look at some use cases.
+00:12:49,703 --> 00:12:51,471
+来看部分实例
 
 
 264
-00:12:53,486 --> 00:12:56,956
-Here, for instance, by applying
-Force Click on some text,
+00:12:53,006 --> 00:12:56,877
+例如这里在部分文字上使用Force
+Click
 
 
 265
-00:12:56,956 --> 00:12:59,796
-you can do lookup or you
-can automatically create a
+00:12:56,944 --> 00:12:59,713
+可以实现查找
+或是自动生成
 
 
 266
-00:12:59,796 --> 00:13:00,426
-calendar event.
+00:12:59,780 --> 00:13:00,881
+日历活动
 
 
 267
-00:13:01,626 --> 00:13:03,686
-In this case, by
-applying a pressure
+00:13:01,615 --> 00:13:03,617
+这种情况下
+通过按压
 
 
 268
-00:13:03,686 --> 00:13:05,816
-to the fast-forward button,
-you can cause the movie
+00:13:03,684 --> 00:13:05,752
+快进按钮
+就可以让影片
 
 
 269
-00:13:05,816 --> 00:13:07,936
-to fast-forward even faster.
+00:13:05,819 --> 00:13:07,354
+快进速度加快
 
 
 270
-00:13:08,496 --> 00:13:13,006
-Here you can apply pressure
-to draw thin or thick strokes
+00:13:08,488 --> 00:13:12,993
+这里通过划细线或粗线
+进行点压
 
 
 271
-00:13:13,246 --> 00:13:16,446
-when you're signing your name
-or doing drawing in markup.
+00:13:13,260 --> 00:13:16,029
+就可以签上自己的名字
+或是在标记中写写画画
 
 
 272
-00:13:17,336 --> 00:13:20,996
-Finally, in this case, as you
-move objects around in a program
+00:13:17,331 --> 00:13:20,934
+最后 在这种情况下
+把目标移到程序
 
 
 273
-00:13:20,996 --> 00:13:23,936
-like Xcode's Interface
-Builder or in a drawing program
+00:13:21,001 --> 00:13:23,937
+比如Xcode的界面
+把开发程序或绘图程序
 
 
 274
-00:13:24,316 --> 00:13:27,576
-as objects go into alignment
-you will get haptic feedback.
+00:13:24,304 --> 00:13:27,574
+作为对齐目标
+就会得到触感反馈
 
 
 275
-00:13:28,306 --> 00:13:32,666
-Now some of the Force Touch APIs
-made an appearance in X v10.3,
+00:13:29,243 --> 00:13:32,613
+现在还有部分Force Touch
+API在 X v10.3中出现
 
 
 276
-00:13:32,666 --> 00:13:34,796
-some of you may have seen those.
+00:13:32,679 --> 00:13:34,781
+有人可能见过
 
 
 277
-00:13:35,146 --> 00:13:37,376
-First, we have accelerator
-controls APIs.
+00:13:35,148 --> 00:13:37,384
+首先 用加速器
+控制API
 
 
 278
-00:13:38,246 --> 00:13:40,956
-These APIs interpret variable
-pressure and are useful
+00:13:38,252 --> 00:13:40,888
+这些API诠释不同压力
+可以用于创建
 
 
 279
-00:13:40,956 --> 00:13:43,746
-for creating the likes of
-the fast-forward buttons
+00:13:40,954 --> 00:13:43,557
+类似快进按钮
+或是在
 
 
 280
-00:13:43,746 --> 00:13:45,746
-or zoom buttons in an
-application like Maps.
+00:13:43,624 --> 00:13:45,025
+类似地图应用中
+生成放大按钮
 
 
 281
-00:13:46,146 --> 00:13:48,476
-You can set accelerator
-controls on NSButton
+00:13:45,092 --> 00:13:48,629
+还可以在NSButton上在NS
+SegmentedControl里
 
 
 282
-00:13:48,476 --> 00:13:49,616
-in NSSegmentedControl.
+00:13:48,695 --> 00:13:50,063
+设置加速器控制
 
 
 283
-00:13:50,236 --> 00:13:51,726
-If you want to do more
-sophisticated things
+00:13:50,230 --> 00:13:51,665
+如果希望再
+玩的高深一些
 
 
 284
-00:13:51,726 --> 00:13:55,266
-with pressure, we give you
-an event, a new event type
+00:13:51,732 --> 00:13:55,235
+我们可以提供一个事件
+新的压力事件类型
 
 
 285
-00:13:55,316 --> 00:13:57,716
-for pressure with the
-corresponding methods
+00:13:55,302 --> 00:13:57,704
+与 NSResponder
+和手势识别等
 
 
 286
-00:13:57,956 --> 00:14:00,276
-on NSResponder and
-gesture recognizer as well,
+00:13:57,971 --> 00:13:59,706
+对应方式相匹配
+也同样可行
 
 
 287
-00:14:00,376 --> 00:14:01,656
-Pressure Change With event.
+00:13:59,773 --> 00:14:01,842
+通过事件实现
+Pressure Change
 
 
 288
-00:14:01,656 --> 00:14:03,406
-You can interpreter
-pressure events yourself.
+00:14:01,909 --> 00:14:03,410
+可以自己来诠释
+压力事件
 
 
 289
-00:14:04,376 --> 00:14:08,286
-In X v11, we introduced
-several new classes.
+00:14:04,378 --> 00:14:08,215
+在X v11当中
+我们引入了诸多新类型
 
 
 290
-00:14:08,286 --> 00:14:10,106
-One is pressure configuration
-class.
+00:14:08,282 --> 00:14:10,117
+一个是压力配置
+分类
 
 
 291
-00:14:10,526 --> 00:14:12,526
-You set the pressure
-configuration of a view
+00:14:10,517 --> 00:14:12,452
+你来设置压力配置
+通过视图
 
 
 292
-00:14:12,526 --> 00:14:13,746
-or gesture recognizer
+00:14:12,519 --> 00:14:13,754
+或手势识别
 
 
 293
-00:14:14,026 --> 00:14:16,406
-to indicate how the
-trackpad should react.
+00:14:14,021 --> 00:14:16,390
+表明触摸板
+该如何反应
 
 
 294
-00:14:16,916 --> 00:14:18,976
-In general, the haptic
-feedback provided
+00:14:16,924 --> 00:14:18,926
+一般来说
+为用户提供的触感反馈
 
 
 295
-00:14:18,976 --> 00:14:20,296
-to the user will be dependent
+00:14:18,992 --> 00:14:20,227
+将取决于
 
 
 296
-00:14:20,296 --> 00:14:22,466
-on the pressure configuration
-you specified.
+00:14:20,294 --> 00:14:22,462
+所确定的
+压力配置
 
 
 297
-00:14:22,976 --> 00:14:26,106
-We have two other classes,
-haptic feedback manager
+00:14:22,963 --> 00:14:26,033
+还有另外两个分类
+触感反馈管理器
 
 
 298
-00:14:26,106 --> 00:14:28,416
-and alignment feedback
-filter, allowing you
+00:14:26,099 --> 00:14:28,335
+和对齐反馈过滤器
+允许你对此类
 
 
 299
-00:14:28,416 --> 00:14:34,896
-to customize the kind of haptic
-feedback you give to the user.
+00:14:28,402 --> 00:14:31,038
+提供给用户的触感反馈
+进行定制化处理
 
 
 300
-00:14:34,896 --> 00:14:38,356
-Many of you may have
-used spring loading.
+00:14:34,074 --> 00:14:38,345
+很多人可能都用过
+弹簧载荷
 
 
 301
-00:14:38,736 --> 00:14:42,026
-That's when you start a
-drag, and when you hover
+00:14:38,745 --> 00:14:41,949
+就是说拖动一下
+并且在目标附近
 
 
 302
-00:14:42,026 --> 00:14:44,656
-over a destination the
-destination opens up for you.
+00:14:42,015 --> 00:14:44,651
+围绕时 目标会
+向你开放
 
 
 303
-00:14:44,816 --> 00:14:46,226
-You probably use this in Finder.
+00:14:44,818 --> 00:14:46,220
+在Finder中可以这么使用
 
 
 304
-00:14:46,686 --> 00:14:48,876
-With Force Click, we now have it
+00:14:46,687 --> 00:14:47,988
+通过Force Click
 
 
 305
-00:14:48,936 --> 00:14:52,706
-such that you can also do
-spring loading immediately just
+00:14:48,055 --> 00:14:51,124
+可以肯定的是
+只需用力点击目标
 
 
 306
-00:14:52,706 --> 00:14:54,346
-by force clicking
-on the destination.
+00:14:51,191 --> 00:14:54,361
+弹簧载荷就会
+立即启动
 
 
 307
-00:14:55,136 --> 00:14:59,536
-We have a new API for making
-spring loading even easier.
+00:14:55,128 --> 00:14:59,466
+我们还有新的API
+让弹簧载荷更加便捷
 
 
 308
-00:14:59,536 --> 00:15:02,776
-This is just a simple Boolean
-property, spring loaded
+00:14:59,533 --> 00:15:02,703
+就是个简单的Boolean属性
+NSButton和
 
 
 309
-00:15:02,776 --> 00:15:04,916
-on NSButton and
-NSSegmentedControl,
+00:15:02,769 --> 00:15:05,372
+NSSegmentedContro
+l就启用了弹簧载荷
 
 
 310
-00:15:05,286 --> 00:15:08,416
-and the action will be sent
-on hover or on Force Click.
+00:15:05,439 --> 00:15:08,408
+可以感知附近的动作或是Force
+Click给出的指示
 
 
 311
-00:15:08,606 --> 00:15:09,586
-Very straightforward.
+00:15:08,475 --> 00:15:09,576
+非常直观
 
 
 312
-00:15:09,936 --> 00:15:15,326
-If this doesn't quite meet your
-needs, we have a new protocol,
+00:15:09,943 --> 00:15:14,381
+如果这并不能完全满足需求
+我们还有新的协议
 
 
 313
-00:15:15,426 --> 00:15:17,336
-NSSpringLoadingDestination,
-which allows you
+00:15:14,448 --> 00:15:17,651
+NSSpringLoadingDe
+stination通过它即可
 
 
 314
-00:15:17,336 --> 00:15:19,526
-to do spring loading on
-arbitrary destinations.
+00:15:17,718 --> 00:15:19,520
+在任意目标上
+实现弹簧载荷
 
 
 315
-00:15:20,036 --> 00:15:24,086
-For example, the Finder example
-would be appropriate for this.
+00:15:20,020 --> 00:15:22,322
+例如 Finder的那个例子
+就很适合这里
 
 
 316
-00:15:24,276 --> 00:15:26,906
-Swipe to delete, you're
-familiar with this,
+00:15:24,291 --> 00:15:26,827
+手指滑动即可删除
+大家对这都很熟悉
 
 
 317
-00:15:26,906 --> 00:15:29,656
-you saw it yesterday
-likely in the keynote
+00:15:26,894 --> 00:15:29,663
+昨天在主旨演讲中
+就见过类似的东西
 
 
 318
-00:15:29,956 --> 00:15:33,316
-and you may be familiar with
-it from iOS, you can swipe left
+00:15:29,963 --> 00:15:33,233
+iOS里这种东西也很常见
+可以在桌面视图
 
 
 319
-00:15:33,316 --> 00:15:37,956
-or right in a table view such
-as the messages list in Mail
+00:15:33,300 --> 00:15:37,971
+例如邮箱信息上
+左右滑动
 
 
 320
-00:15:38,026 --> 00:15:40,936
-to mark messages as unread,
-or delete them, and so on.
+00:15:38,038 --> 00:15:40,908
+标识信息是否读过
+或是否删除等等
 
 
 321
-00:15:41,236 --> 00:15:43,246
-We now have API for
-this also in El Capitan.
+00:15:40,974 --> 00:15:43,477
+我们现在也有这样的API
+也是在EI Capitan中
 
 
 322
-00:15:43,826 --> 00:15:44,816
-It is a delegate method
+00:15:43,544 --> 00:15:45,312
+是NSTableView的委托方式
 
 
 323
-00:15:44,876 --> 00:15:47,056
-on NSTableView, Row
-Actions for Row.
+00:15:45,379 --> 00:15:47,047
+Row Action是
+用于Row
 
 
 324
-00:15:47,556 --> 00:15:50,686
-You simply return an array
-of NSTableView row action,
+00:15:47,548 --> 00:15:50,684
+只需返回到
+NSTableView行处理数组
 
 
 325
-00:15:51,066 --> 00:15:56,796
-and these instances of the class
-simply declares how the items,
+00:15:51,051 --> 00:15:55,422
+本类的例子
+只是声明这些项和行
 
 
 326
-00:15:56,856 --> 00:15:59,266
-the row should be drawn
-and what should happen
+00:15:55,489 --> 00:15:59,193
+应该怎样拖动
+当用户选择
 
 
 327
-00:15:59,266 --> 00:16:01,656
-when the user selects that
-action via this block,
+00:15:59,259 --> 00:16:01,662
+当用户选择通过
+代码块处理时
 
 
 328
-00:16:01,746 --> 00:16:04,486
-this handler block at the end.
+00:16:01,762 --> 00:16:02,696
+最后是代码块
 
 
 329
-00:16:04,486 --> 00:16:05,836
-I sort of breezed
-through the topics.
+00:16:04,498 --> 00:16:05,832
+这些话题
+简单讲一下即可
 
 
 330
-00:16:06,236 --> 00:16:09,026
-There is a talk, Adopting
-New Rrackpad Features,
+00:16:06,233 --> 00:16:08,969
+有个讲座
+《采用触控板新功能》
 
 
 331
-00:16:09,026 --> 00:16:11,826
-Thursday morning at 10:00
-a.m. that you can catch
+00:16:09,036 --> 00:16:11,772
+是周四上午十点
+其中会介绍
 
 
 332
-00:16:11,826 --> 00:16:14,406
-that will give you more
-detail on these topics.
+00:16:11,839 --> 00:16:14,408
+这类话题的
+更多详细内容
 
 
 333
-00:16:15,586 --> 00:16:18,176
-Full screen, you heard
-about this yesterday.
+00:16:15,576 --> 00:16:18,178
+全屏部分
+昨天已经介绍过了
 
 
 334
-00:16:18,306 --> 00:16:21,626
-Full screen enables you to
-remove distractions and focus
+00:16:18,312 --> 00:16:21,548
+全屏可以将分散注意
+的因素去除 便于集中精力
 
 
 335
-00:16:21,626 --> 00:16:24,216
-on one task, as you
-can see here.
+00:16:21,615 --> 00:16:24,218
+处理单项任务
+就像现在这样
 
 
 336
-00:16:24,486 --> 00:16:28,986
-Now with split view full screen,
-you can focus on one task
+00:16:24,484 --> 00:16:28,956
+通过在全屏分割视图
+可以关注一个任务
 
 
 337
-00:16:29,036 --> 00:16:30,786
-but possibily bring
-in another window.
+00:16:29,022 --> 00:16:30,791
+但可以打开
+其他窗口
 
 
 338
-00:16:30,866 --> 00:16:34,026
-For instance, here you are using
-Xcode and you brought up Safari
+00:16:30,858 --> 00:16:33,961
+例如 你在使用
+Xcode 再启用Safari
 
 
 339
-00:16:34,026 --> 00:16:36,686
-to look at some documentation
-or some forums.
+00:16:34,027 --> 00:16:36,697
+查询部分文档
+或其他论坛
 
 
 340
-00:16:36,996 --> 00:16:38,976
-You can imagine bringing
-up messages next to Xcode
+00:16:36,997 --> 00:16:38,899
+可以想象
+把信息放到Xcode旁边
 
 
 341
-00:16:38,976 --> 00:16:42,036
-because you want to chat
-with a buddy about a piece
+00:16:38,966 --> 00:16:41,969
+因为你想和
+一个朋友聊聊
 
 
 342
-00:16:42,036 --> 00:16:42,816
-of code you're writing.
+00:16:42,035 --> 00:16:43,070
+正在编的代码
 
 
 343
-00:16:43,696 --> 00:16:45,986
-This is called tiling, when
-the windows are brought
+00:16:43,704 --> 00:16:45,973
+这叫做叠加
+窗口放在
 
 
 344
-00:16:46,526 --> 00:16:47,536
-into split view.
+00:16:46,540 --> 00:16:47,541
+分割视图中
 
 
 345
-00:16:48,656 --> 00:16:51,436
-Tiling is automatic
-for many windows.
+00:16:48,642 --> 00:16:51,445
+叠加自动会用于
+多个窗口的情况
 
 
 346
-00:16:52,866 --> 00:16:55,156
-Resizable windows are
-automatically eligible
+00:16:52,880 --> 00:16:55,682
+叠加可以自动适用于
+可调整窗口的情况
 
 
 347
-00:16:55,156 --> 00:16:55,736
-for tiling.
+00:16:55,749 --> 00:16:56,984
+也就是说 你的应用
 
 
 348
-00:16:55,736 --> 00:16:57,056
-This means your applications,
+00:16:57,050 --> 00:16:58,318
+应用中
+的窗口
 
 
 349
-00:16:57,056 --> 00:16:58,386
-the windows in your
-applications,
+00:16:58,385 --> 00:17:01,355
+将自动在全屏状态
+彼此叠加
 
 
 350
-00:16:58,386 --> 00:17:01,416
-will automatically be candidates
-for being tiled in full screen
+00:17:01,421 --> 00:17:02,789
+你这边无需
+做任何调整
 
 
 351
-00:17:01,416 --> 00:17:02,776
-without any changes
-on your part.
+00:17:03,156 --> 00:17:05,392
+无论是窗口是
+可以全屏还是不可
 
 
 352
-00:17:03,146 --> 00:17:05,386
-Whether they're full
-screen-capable or not already.
+00:17:06,093 --> 00:17:09,162
+不过有个API
+可以选择出入叠加状态
 
 
 353
-00:17:06,086 --> 00:17:09,146
-However, there is API for opting
-windows in and out of tiling,
+00:17:09,262 --> 00:17:12,065
+这是NSWindow的
+NSWindow集合行为
 
 
 354
-00:17:09,246 --> 00:17:12,146
-and it's part of this NSWindow
-collection behavior options
+00:17:12,132 --> 00:17:13,200
+选项的一部分
 
 
 355
-00:17:12,146 --> 00:17:12,896
-on NSWindow.
+00:17:13,700 --> 00:17:15,602
+例如 你有个
+不可调整的窗口
 
 
 356
-00:17:13,715 --> 00:17:15,675
-For instance, you may
-have a nonresizable window
+00:17:15,669 --> 00:17:17,237
+而你以为是可以
+进行叠加
 
 
 357
-00:17:15,675 --> 00:17:17,226
-that you think should
-be tillable.
+00:17:17,704 --> 00:17:19,973
+可以使用
+Allowd Tiling选项
 
 
 358
-00:17:17,695 --> 00:17:19,976
-You can use the Allowd
-Tiling option.
+00:17:20,140 --> 00:17:22,075
+若你有一个非社交窗口
 
 
 359
-00:17:20,126 --> 00:17:22,156
-Or you have an antisocial window
+00:17:22,142 --> 00:17:23,277
+而且不希望
+被叠加
 
 
 360
-00:17:22,156 --> 00:17:23,586
-that just doesn't
-want to be tiled.
+00:17:23,343 --> 00:17:25,579
+可是设置
+Disallows Tiling
 
 
 361
-00:17:23,695 --> 00:17:25,236
-You can set Disallows Tiling.
+00:17:25,646 --> 00:17:28,248
+我不清楚那个例子
+不过它就在那里
 
 
 362
-00:17:25,415 --> 00:17:28,236
-I don't know an example
-of that, but it is there.
+00:17:28,649 --> 00:17:31,685
+这些是全屏的
+主要设置
 
 
 363
-00:17:28,636 --> 00:17:31,756
-These joined full
-screen primary settings
+00:17:31,752 --> 00:17:34,221
+这些已经在
+X v7中都有
 
 
 364
-00:17:31,756 --> 00:17:34,226
-that we had here
-already in X v7.
+00:17:34,288 --> 00:17:37,024
+很重要的是
+要注意全屏主要是这样
 
 
 365
-00:17:34,286 --> 00:17:37,086
-It is important to note that the
-full-screen primary is the way
+00:17:37,090 --> 00:17:41,361
+需要确定
+需要全屏的窗口
 
 
 366
-00:17:37,086 --> 00:17:41,356
-that you specify a window
-should go into full screen.
+00:17:41,728 --> 00:17:44,097
+注意还有许多
+选择性加入
 
 
 367
-00:17:41,726 --> 00:17:44,106
-Note that this is still
-very much an opt-in setting
+00:17:44,698 --> 00:17:47,668
+因为你需要了解窗口
+在全屏的整个
 
 
 368
-00:17:44,706 --> 00:17:47,666
-because we want you to think
-about how your windows behave
+00:17:47,801 --> 00:17:50,003
+屏幕空间
+如何反应
 
 
 369
-00:17:47,806 --> 00:17:50,006
-in the vast screen
-space of full screen,
+00:17:50,337 --> 00:17:53,073
+还有一个可选择
+功能可以考虑
 
 
 370
-00:17:50,346 --> 00:17:53,146
-so that is still an opt-in
-thing where you think
+00:17:53,140 --> 00:17:55,142
+怎样让你的窗口
+在全屏工作
 
 
 371
-00:17:53,146 --> 00:17:55,216
-about how your window
-should act in full screen.
+00:17:55,209 --> 00:17:56,743
+这一项仍可以选择
 
 
 372
-00:17:55,216 --> 00:17:59,306
-That one you still opt into.
+00:18:00,247 --> 00:18:03,116
+当然也可以在Xcode
+属性检查器中设置
 
 
 373
-00:18:00,246 --> 00:18:03,186
-You can also set these of course
-in Xcode's attributes inspector
+00:18:03,183 --> 00:18:04,785
+当然可以是设置
 
 
 374
-00:18:03,186 --> 00:18:04,866
-as well, both the tiling
+00:18:04,852 --> 00:18:06,687
+叠加或窗口是否
+该全屏之类
 
 
 375
-00:18:04,866 --> 00:18:07,916
-and whether a window
-becomes full screen or not.
+00:18:06,753 --> 00:18:10,190
+我说过 很多窗口都
+可以自动叠加
 
 
 376
-00:18:07,916 --> 00:18:10,206
-I said that tiling is
-automatic for many windows,
+00:18:10,490 --> 00:18:12,159
+不过AppKit可以查看
 
 
 377
-00:18:10,486 --> 00:18:12,216
-but AppKit does check to see,
+00:18:12,226 --> 00:18:14,795
+确定窗口是否可以
+在同一个屏幕共存
 
 
 378
-00:18:12,216 --> 00:18:14,806
-make sure that windows can
-coexist in the same screen.
+00:18:15,195 --> 00:18:16,964
+设想你的屏幕
+相对较小
 
 
 379
-00:18:15,186 --> 00:18:17,016
-Imagine you have a
-relatively small screen
+00:18:17,030 --> 00:18:20,801
+还有两个很大的窗口
+你希望能把它们叠加
 
 
 380
-00:18:17,016 --> 00:18:20,786
-and two fairly large windows,
-when you try to tile them,
+00:18:20,868 --> 00:18:22,970
+如果窗口无法
+缩小到足够小
 
 
 381
-00:18:20,856 --> 00:18:23,036
-if the windows cannot
-be resized small enough,
+00:18:23,036 --> 00:18:24,838
+AppKit将无法
+实现叠加窗口
 
 
 382
-00:18:23,036 --> 00:18:24,906
-AppKit will not allow
-them to be tiled.
+00:18:24,905 --> 00:18:29,176
+我希望你想想
+怎样让窗口足够小
 
 
 383
-00:18:24,906 --> 00:18:29,236
-I want you to think about how
-your windows can resize small
+00:18:29,243 --> 00:18:31,812
+如何才能灵活
+处理使其
 
 
 384
-00:18:29,236 --> 00:18:31,876
-enough, how they can be
-flexible enough to fit
+00:18:31,879 --> 00:18:35,582
+能在更小的空间
+叠加分割视图
 
 
 385
-00:18:31,876 --> 00:18:35,576
-into the smaller area
-of tiled split view.
+00:18:36,149 --> 00:18:38,218
+为实现这一点
+我们有一些API
 
 
 386
-00:18:36,146 --> 00:18:39,086
-To help achieve this,
-we have some APIs.
+00:18:39,253 --> 00:18:41,855
+例如 分割视图项
+现在是侧边栏的动作
 
 
 387
-00:18:39,256 --> 00:18:41,846
-For instance, split view item
-now has sidebar behavior,
+00:18:42,155 --> 00:18:44,725
+侧边栏变小
+并消失
 
 
 388
-00:18:42,146 --> 00:18:44,766
-where the sidebar gets
-smaller and collapses
+00:18:44,791 --> 00:18:47,127
+这样就可以
+实现重叠
 
 
 389
-00:18:44,806 --> 00:18:47,136
-and can be brought
-back up as an overlay,
+00:18:47,561 --> 00:18:48,996
+也可以有适当的震动
 
 
 390
-00:18:47,576 --> 00:18:48,986
-and also has proper vibrancy.
+00:18:49,830 --> 00:18:53,233
+NSStackView可以自动
+查出隐藏的视图
 
 
 391
-00:18:49,816 --> 00:18:53,296
-NSStackView automatic detaching
-of hidden views allows you
+00:18:53,300 --> 00:18:56,036
+帮你创建类似
+NSToolbar的体验
 
 
 392
-00:18:53,296 --> 00:18:56,106
-to create NSToolbar-like
-experiences
+00:18:56,103 --> 00:18:58,338
+适用于定制化视图
+可以把
 
 
 393
-00:18:56,106 --> 00:18:58,396
-for your custom views
-where the items,
+00:18:58,405 --> 00:19:00,207
+拖到边缘的项
 
 
 394
-00:18:58,396 --> 00:19:00,216
-as they're dropped off the edge,
+00:19:00,340 --> 00:19:04,444
+放入菜单
+诸如此类 还有许多
 
 
 395
-00:19:00,346 --> 00:19:03,096
-can be put into a
-menu, and so on.
+00:19:04,678 --> 00:19:05,679
+你可以去听听
 
 
 396
-00:19:03,646 --> 00:19:04,446
-And many more.
+00:19:05,746 --> 00:19:07,814
+《改善全屏视窗体验》
+的讲座
 
 
 397
-00:19:04,666 --> 00:19:05,746
-You can hear about these
+00:19:07,881 --> 00:19:09,082
+时间是周四下午
 
 
 398
-00:19:05,746 --> 00:19:07,876
-in Improving the
-Full-Screen Window Experience,
+00:19:11,885 --> 00:19:14,555
+要知道Auto Layout
+也很重要
 
 
 399
-00:19:07,876 --> 00:19:09,066
-which is Thursday afternoon.
+00:19:14,621 --> 00:19:16,690
+我们做了部分
+重要调整
 
 
 400
-00:19:11,246 --> 00:19:14,626
-Auto Layout, as you know,
-this is very important,
+00:19:16,757 --> 00:19:19,626
+极大提高了
+Auto Layout的表现
 
 
 401
-00:19:14,626 --> 00:19:16,756
-we have made some
-significant changes,
+00:19:19,960 --> 00:19:21,161
+首先是堆栈视图
 
 
 402
-00:19:16,756 --> 00:19:19,616
-significant improvements
-in Auto Layout as well.
+00:19:21,595 --> 00:19:25,265
+堆栈视图是个
+很重要的分类
 
 
 403
-00:19:19,946 --> 00:19:21,166
-First is stack view.
+00:19:25,532 --> 00:19:28,302
+在满足Auto Layout需求时
+应该首先想到这个
 
 
 404
-00:19:22,416 --> 00:19:25,276
-Stack view is a very
-important class.
+00:19:28,368 --> 00:19:29,970
+如果你可以了解
+堆栈视图中
 
 
 405
-00:19:25,536 --> 00:19:28,356
-It should be the first-stop
-shop for your Auto Layout needs.
+00:19:30,037 --> 00:19:31,104
+可以做什么
 
 
 406
-00:19:28,356 --> 00:19:30,026
-If you can get done what
-you have to get done
+00:19:31,171 --> 00:19:33,140
+而不是直接使用
+种种约束会好得多
 
 
 407
-00:19:30,026 --> 00:19:31,176
-within a stack view rather
+00:19:33,507 --> 00:19:36,410
+这是很大程度上的抽象
+非常强大
 
 
 408
-00:19:31,176 --> 00:19:33,206
-than using constraints
-directly, do it.
+00:19:36,844 --> 00:19:39,813
+关于堆栈视图的好消息是
+在iOS上也可以使用
 
 
 409
-00:19:33,206 --> 00:19:36,406
-It is a high level of
-abstraction, very powerful.
+00:19:39,880 --> 00:19:43,116
+因为UI堆栈视图
+和在API的效果不相上下
 
 
 410
-00:19:36,856 --> 00:19:39,896
-First good news about stack view
-is it is now on iOS as well,
+00:19:43,183 --> 00:19:46,119
+这和我们一直以来的努力
+相一致
 
 
 411
-00:19:39,896 --> 00:19:43,196
-as UI stack view, with
-equal pretty much APIs.
+00:19:46,186 --> 00:19:49,056
+即在不同平台间
+实现奇偶校验效果
 
 
 412
-00:19:43,196 --> 00:19:46,196
-This goes along with
-our constant attempt
+00:19:49,122 --> 00:19:50,457
+这就是具体的
+一个实例
 
 
 413
-00:19:46,196 --> 00:19:49,096
-of bringing parity
-between our platforms,
+00:19:50,858 --> 00:19:52,759
+第二 现在这方面
+比以往做得更好
 
 
 414
-00:19:49,136 --> 00:19:50,456
-and this is one of
-those examples.
+00:19:52,826 --> 00:19:55,495
+我已经说过
+有个分离功能
 
 
 415
-00:19:50,846 --> 00:19:52,796
-Secondly, it is now
-even better than ever.
+00:19:55,929 --> 00:19:58,031
+还有几个
+新视图分布选项
 
 
 416
-00:19:52,836 --> 00:19:55,486
-I already mentioned the
-detaching functionality.
+00:19:58,098 --> 00:19:59,600
+具备这个属性
+叫做分布
 
 
 417
-00:19:55,936 --> 00:19:58,086
-There is also new options
-for view distribution
+00:20:01,201 --> 00:20:03,203
+这里有一个值
+是重力区
 
 
 418
-00:19:58,086 --> 00:19:59,596
-with this property
-called distribution.
+00:20:03,270 --> 00:20:07,441
+在介绍X v9的第一天起
+大家就见过
 
 
 419
-00:20:01,206 --> 00:20:03,276
-One value in here
-is gravity areas,
+00:20:07,508 --> 00:20:09,309
+堆栈视图的选项
 
 
 420
-00:20:03,276 --> 00:20:07,426
-which is the option you had
-in stack view from day one
+00:20:09,376 --> 00:20:11,245
+我们已经加上其他设置
 
 
 421
-00:20:07,516 --> 00:20:09,386
-when we introduced it in X v9.
+00:20:11,311 --> 00:20:12,613
+这些就不必
+继续解释了
 
 
 422
-00:20:09,386 --> 00:20:11,296
-We have added other settings,
+00:20:13,046 --> 00:20:14,548
+给大家看一个短视频
 
 
 423
-00:20:11,296 --> 00:20:12,606
-and rather than explaining
-these,
+00:20:15,582 --> 00:20:18,452
+有6个堆栈视图
+构成这些设置
 
 
 424
-00:20:12,836 --> 00:20:14,556
-I will show you a quick video.
+00:20:18,519 --> 00:20:20,954
+我重新调整窗口
+稍大一些
 
 
 425
-00:20:14,556 --> 00:20:18,476
-There are six stack views here
-configured with these settings.
+00:20:21,021 --> 00:20:22,523
+小一些 再大些
 
 
 426
-00:20:18,516 --> 00:20:21,036
-I will resize the
-window, larger,
+00:20:22,723 --> 00:20:25,292
+你们看 还是有些
+强大的功能的
 
 
 427
-00:20:21,036 --> 00:20:22,526
-smaller, back larger again.
+00:20:25,359 --> 00:20:27,861
+比如设定等大
+等距这些
 
 
 428
-00:20:22,726 --> 00:20:25,286
-As you can see, you get
-some powerful functionality,
+00:20:27,928 --> 00:20:31,231
+等等 希望能够
+满足你们的需要
 
 
 429
-00:20:25,346 --> 00:20:27,926
-such as ability to have
-equal sizes, equal spacing,
+00:20:31,431 --> 00:20:34,334
+堆栈视图可以
+任意放置
 
 
 430
-00:20:27,926 --> 00:20:30,666
-and so on that hopefully
-will fit your needs.
+00:20:34,401 --> 00:20:36,336
+方便设置布局
 
 
 431
-00:20:30,666 --> 00:20:34,346
-The stack views can be
-nested in arbitrary ways
+00:20:36,937 --> 00:20:40,140
+NSLayoutAnchor是个新
+类别可以提供
 
 
 432
-00:20:34,416 --> 00:20:36,346
-to give you powerful layouts.
+00:20:40,374 --> 00:20:42,643
+边或尺寸的
+精确表示法
 
 
 433
-00:20:36,946 --> 00:20:40,146
-NSLayoutAnchor is a new
-class providing a concise
+00:20:43,043 --> 00:20:44,311
+比如 你有
+两个视图
 
 
 434
-00:20:40,366 --> 00:20:42,636
-representation of an
-edge or dimension.
+00:20:44,378 --> 00:20:45,712
+打算创建
+二者间的约束
 
 
 435
-00:20:43,046 --> 00:20:44,376
-Let's say you have
-two views and you want
+00:20:46,313 --> 00:20:47,881
+这就是必须
+编写的代码
 
 
 436
-00:20:44,376 --> 00:20:45,696
-to create a constraint
-between them.
+00:20:48,549 --> 00:20:51,919
+有着布局锚点
+可以编写这个代码
 
 
 437
-00:20:46,326 --> 00:20:47,866
-This is code that you would
-have had to have write.
+00:20:52,519 --> 00:20:55,355
+注意 这两项
+基本上是布局锚点
 
 
 438
-00:20:48,546 --> 00:20:51,926
-With layout anchors, here is
-the code that you can write.
+00:20:55,422 --> 00:20:58,292
+是指那些
+视图的边缘
 
 
 439
-00:20:52,506 --> 00:20:55,426
-Note that these two items here
-are basically layout anchors
+00:20:58,659 --> 00:21:00,694
+结果不仅更短
+更好看
 
 
 440
-00:20:55,426 --> 00:20:58,286
-referring to those
-edges of those views,
+00:21:00,761 --> 00:21:03,964
+而且还提供了
+更多编辑时间类型检查
 
 
 441
-00:20:58,666 --> 00:21:00,776
-and this is not only
-shorter, sweeter,
+00:21:04,031 --> 00:21:04,698
+非常好
 
 
 442
-00:21:00,776 --> 00:21:04,026
-it is also giving you more
-compile time type-checking.
+00:21:10,270 --> 00:21:13,040
+NSLayout Guide 是又一个新分类
 
 
 443
-00:21:04,026 --> 00:21:04,476
-It is great.
+00:21:13,674 --> 00:21:15,809
+如果你在做
+这类事情
 
 
 444
-00:21:05,516 --> 00:21:10,076
-[Applause]
+00:21:15,876 --> 00:21:20,514
+创建虚拟视图
+实现视图间
 
 
 445
-00:21:10,576 --> 00:21:12,836
->> ALI OZER: NSLayoutGuide
-is another new class.
+00:21:20,581 --> 00:21:24,051
+等距效果 那么
+可以试试创建布局指南
 
 
 446
-00:21:12,836 --> 00:21:15,826
-If you ever find yourself
-doing this sort of stuff,
+00:21:24,117 --> 00:21:27,187
+这是个轻量级对象
+占据了视图的位置
 
 
 447
-00:21:15,886 --> 00:21:20,596
-creating dummy views to do
-things like equal spacing
+00:21:27,254 --> 00:21:29,756
+不过其实它的量级更轻
+可以参与
 
 
 448
-00:21:20,596 --> 00:21:24,126
-between views, you can now
-instead create layout guides.
+00:21:29,823 --> 00:21:31,792
+Auto Layout
+而不会生成视图
 
 
 449
-00:21:24,126 --> 00:21:27,256
-It's a lightweight object that
-takes the place of a view,
+00:21:33,293 --> 00:21:35,863
+我们已经了解过
+集合视图
 
 
 450
-00:21:27,256 --> 00:21:29,826
-but it is much lighter
-weight so it can participate
+00:21:36,296 --> 00:21:39,666
+要知道 UICollection
+View 也有过几个
 
 
 451
-00:21:29,826 --> 00:21:31,806
-in Auto Layout without
-creating views.
+00:21:39,766 --> 00:21:41,368
+版本了
 
 
 452
-00:21:33,306 --> 00:21:35,846
-Collection view has been
-with us for a while.
+00:21:41,802 --> 00:21:44,371
+有着X v11 我们将
+NSCollectionView
 
 
 453
-00:21:36,306 --> 00:21:39,666
-As you know, UICollectionView
-was also introduced a few
+00:21:44,438 --> 00:21:47,608
+iOS版本进行奇偶校验
+都是保持重要功能
 
 
 454
-00:21:39,766 --> 00:21:41,356
-releases ago.
+00:21:47,674 --> 00:21:50,210
+用于桌面 例如
+拖拽和批量选择
 
 
 455
-00:21:41,786 --> 00:21:44,426
-With X v11, we brought
-NSCollectionView to parity
+00:21:50,811 --> 00:21:53,347
+现在是新的集合视图中
+部分功能
 
 
 456
-00:21:44,426 --> 00:21:47,686
-with the iOS version while still
-maintaining important features
+00:21:53,814 --> 00:21:56,283
+有些功能如
+异构项
 
 
 457
-00:21:47,686 --> 00:21:50,226
-for the desktop, such as drag
-and drop and bulk selection.
+00:21:56,350 --> 00:21:58,385
+选择性分组
+可定制布局
 
 
 458
-00:21:50,816 --> 00:21:53,356
-So here are some of the features
-in the new collection view.
+00:21:58,852 --> 00:22:01,622
+我来给大家看个短视频
+是样本应用
 
 
 459
-00:21:53,816 --> 00:21:56,346
-Features such as
-heterogeneous items,
+00:22:02,055 --> 00:22:03,490
+会有很多图像
+显示出来
 
 
 460
-00:21:56,346 --> 00:21:58,386
-optional grouping,
-customizable layout.
+00:22:03,557 --> 00:22:08,328
+我首先依照页眉和页脚
+进行分组 会用到
 
 
 461
-00:21:58,846 --> 00:22:01,696
-Let me show you a quick video
-of a sample application here.
+00:22:08,395 --> 00:22:10,497
+部分定制布局
+是本款app所提供
 
 
 462
-00:22:01,696 --> 00:22:03,556
-There is a bunch of
-images being displayed.
+00:22:11,665 --> 00:22:14,935
+来看app的实际应用
+了解具体功能
 
 
 463
-00:22:03,556 --> 00:22:08,396
-I will first group by group with
-headers and footers and use some
+00:22:15,002 --> 00:22:17,204
+以及如何用于自己的应用中
+《集合视图最新内容》
 
 
 464
-00:22:08,396 --> 00:22:10,506
-of the custom layouts
-provided by the app.
+00:22:17,271 --> 00:22:20,207
+周四下午4:30
+会有介绍
 
 
 465
-00:22:11,726 --> 00:22:15,006
-You see this app in action and
-learn about the features and how
+00:22:22,442 --> 00:22:23,877
+在文本方面
+我们的改动很多
 
 
 466
-00:22:15,006 --> 00:22:17,206
-to apply them in your own
-applications in What's New
+00:22:24,178 --> 00:22:25,946
+首先是新的系统UI字体
 
 
 467
-00:22:17,206 --> 00:22:20,216
-in Collection View, that's
-Thursday afternoon at 4:30.
+00:22:27,514 --> 00:22:30,384
+新系统的字体
+是这样San Francisco
 
 
 468
-00:22:22,436 --> 00:22:23,876
-We have some great
-changes in text.
+00:22:30,450 --> 00:22:35,122
+要知道　这和iOS和watchOS
+上的字体一样
 
 
 469
-00:22:24,166 --> 00:22:25,936
-First is the new system UI font.
+00:22:35,822 --> 00:22:39,092
+字体是自动
+提供应用的
 
 
 470
-00:22:26,246 --> 00:22:30,456
-Here is what the new system
-font looks like, San Francisco.
+00:22:39,159 --> 00:22:41,895
+在 El Capitan的
+X v11 运行你的应用
 
 
 471
-00:22:30,456 --> 00:22:35,136
-As you know, it is the same
-font on iOS and watchOS as well.
+00:22:41,962 --> 00:22:42,930
+就会得到这个字体
 
 
 472
-00:22:35,826 --> 00:22:39,156
-This font is automatic
-for applications.
+00:22:42,996 --> 00:22:44,765
+不过可能
+你做了什么
 
 
 473
-00:22:39,156 --> 00:22:41,976
-When you run your application
-in X v11 on El Capitan,
+00:22:44,831 --> 00:22:45,966
+阻止了这项功能
 
 
 474
-00:22:41,976 --> 00:22:42,926
-you will get this font.
+00:22:46,033 --> 00:22:49,570
+如果看到这个字体
+这是在X v10中推出的
 
 
 475
-00:22:43,006 --> 00:22:44,816
-But it's possible that
-you are doing something
+00:22:49,736 --> 00:22:53,540
+还有些内容在继续
+检查一下是否是你所需
 
 
 476
-00:22:44,816 --> 00:22:45,516
-that prevents this.
+00:22:53,607 --> 00:22:56,343
+确保你是在使用San
+Francisco这种字体
 
 
 477
-00:22:46,026 --> 00:22:49,586
-If you see this font, it
-was introduced in X v10,
+00:22:56,443 --> 00:23:00,280
+如果在用这种字体
+我们是在X v0当中推出
 
 
 478
-00:22:49,806 --> 00:22:53,596
-there is something going on,
-check it to see what you need
+00:23:00,347 --> 00:23:02,516
+还会有更多内容继续
 
 
 479
-00:22:53,596 --> 00:22:55,786
-to do to make sure you're
-using San Francisco.
+00:23:02,983 --> 00:23:05,886
+最后 如果你在
+使用这款字体...
 
 
 480
-00:22:56,446 --> 00:23:00,356
-If you're using this font, this
-is one we introduced in X v0,
+00:23:08,088 --> 00:23:09,690
+...那么会有很多工作要做
 
 
 481
-00:23:00,356 --> 00:23:02,506
-more of that is going on.
+00:23:09,756 --> 00:23:10,624
+稍等一下
 
 
 482
-00:23:02,976 --> 00:23:05,896
-Finally, if you're
-using this font --
+00:23:11,491 --> 00:23:13,827
+这就是我们不再
+使用的Mac OS 9字体
 
 
 483
-00:23:06,066 --> 00:23:08,066
-[Laughter]
+00:23:16,163 --> 00:23:18,332
+这是在API可以使用的
+NSFont字体
 
 
 484
-00:23:08,116 --> 00:23:09,566
->> ALI OZER: You have
-a lot of work to do.
+00:23:18,398 --> 00:23:20,734
+确保自己用的是
+最新版本的系统字体
 
 
 485
-00:23:09,806 --> 00:23:10,396
-Hang in there.
+00:23:21,134 --> 00:23:22,769
+还有系统字体大小等等
 
 
 486
-00:23:11,496 --> 00:23:13,826
-This was the font we
-stopped using in Mac OS 9.
+00:23:22,836 --> 00:23:25,873
+这些字体
+这些API
 
 
 487
-00:23:13,826 --> 00:23:18,386
-Here are the APIs in
-NSFont that you can use
+00:23:25,939 --> 00:23:27,274
+我们用了很久
 
 
 488
-00:23:18,386 --> 00:23:20,736
-to make sure you're using
-the latest system font,
+00:23:28,742 --> 00:23:32,212
+可以通过Xcode属性检查器
+设置系统字体
 
 
 489
-00:23:21,126 --> 00:23:22,846
-system font of size and so on.
+00:23:32,713 --> 00:23:34,748
+非常简单
+会有弹出窗口
 
 
 490
-00:23:22,846 --> 00:23:25,926
-These fonts, these
-APIs, they have been
+00:23:34,815 --> 00:23:36,683
+选择适当的
+系统字体
 
 
 491
-00:23:25,926 --> 00:23:27,096
-with us for a long time.
+00:23:36,750 --> 00:23:37,885
+用于自己的应用
 
 
 492
-00:23:27,676 --> 00:23:32,196
-You can set the system fonts via
-the Xcode attributes inspector.
+00:23:39,453 --> 00:23:41,922
+我们还有一款新API
+可用于不同粗细的系统字体
 
 
 493
-00:23:32,726 --> 00:23:34,776
-Fairly straightforward
-There is a pop-up,
+00:23:42,489 --> 00:23:45,959
+如果设计师让你
+使用不同粗细字体
 
 
 494
-00:23:34,826 --> 00:23:36,766
-you choose the appropriate
-system font
+00:23:46,426 --> 00:23:49,062
+现在就可以用这个
+API调整系统字体
 
 
 495
-00:23:36,766 --> 00:23:37,646
-for your application.
+00:23:49,263 --> 00:23:51,331
+系统字体大小和粗细
 
 
 496
-00:23:39,456 --> 00:23:41,916
-We do have new API for a system
-font at different weights.
+00:23:52,032 --> 00:23:54,635
+有预设的9种
+不同粗细
 
 
 497
-00:23:42,476 --> 00:23:45,956
-If your designers are asking
-you to use different weights,
+00:23:54,701 --> 00:23:56,403
+我只给大家看
+其中三种
 
 
 498
-00:23:46,416 --> 00:23:49,056
-you can now do that with a
-system font with this API,
+00:23:56,603 --> 00:23:58,038
+从超细
+到黑体都有
 
 
 499
-00:23:49,266 --> 00:23:51,346
-system font of size and weight.
+00:23:58,472 --> 00:24:00,574
+常规设置是
+系统字体大小
 
 
 500
-00:23:52,016 --> 00:23:54,656
-There is nine different
-weights predefined,
+00:24:00,641 --> 00:24:02,109
+默认值
 
 
 501
-00:23:54,706 --> 00:23:56,406
-I'm showing you only
-three of them,
+00:24:02,676 --> 00:24:06,914
+我们还有一款API
+单距系统字体大小粗细
 
 
 502
-00:23:56,616 --> 00:23:58,026
-ranging from ultralight
-to black.
+00:24:07,481 --> 00:24:08,949
+我给大家看看
+为什么这东西有用
 
 
 503
-00:23:58,476 --> 00:24:00,626
-The regular setting is
-what you get by default
+00:24:09,983 --> 00:24:14,221
+如果调用应用中的
+字体大小API
 
 
 504
-00:24:00,626 --> 00:24:01,806
-for system font of size.
+00:24:14,288 --> 00:24:16,590
+链接是X v11 SDK
 
 
 505
-00:24:02,676 --> 00:24:06,916
-We have another API, mono space
-system font of size weight.
+00:24:16,657 --> 00:24:19,092
+在写几个数字
+就是这个效果
 
 
 506
-00:24:07,496 --> 00:24:08,936
-Let me show you why
-you need this.
+00:24:19,626 --> 00:24:24,031
+对字体很敏感的眼睛
+估计一下子就会感到不同
 
 
 507
-00:24:09,996 --> 00:24:14,286
-If you call the system font
-of size API in an application
+00:24:24,131 --> 00:24:26,433
+这些数字
+不是定距
 
 
 508
-00:24:14,286 --> 00:24:16,646
-that is linked against X v11 SDK
+00:24:26,500 --> 00:24:27,467
+宽度都不同
 
 
 509
-00:24:16,646 --> 00:24:19,096
-and you draw some digits,
-here is what you see.
+00:24:28,068 --> 00:24:31,004
+这就很奇怪了
+因为传统的系统字体
 
 
 510
-00:24:19,616 --> 00:24:24,036
-Those of you with eagle eyes
-for fonts may note, wow,
+00:24:31,071 --> 00:24:33,473
+一般都是
+等宽数字
 
 
 511
-00:24:24,126 --> 00:24:26,516
-those digits are
-not fixed pitched,
+00:24:33,941 --> 00:24:39,413
+要确保表格数字
+都要井井有条
 
 
 512
-00:24:26,516 --> 00:24:27,476
-they're different widths.
+00:24:39,479 --> 00:24:43,250
+或是UI文本中数字变化时
+不会拧成一团
 
 
 513
-00:24:28,066 --> 00:24:31,076
-This is shocking because
-traditionally system fonts have
+00:24:43,317 --> 00:24:44,685
+因为数字是不断变化的
 
 
 514
-00:24:31,076 --> 00:24:33,476
-always had digits that
-are the same width.
+00:24:45,519 --> 00:24:47,154
+不过现在 如果你的app
 
 
 515
-00:24:33,946 --> 00:24:39,466
-That's to make sure that tabular
-data appears organized or UIs
+00:24:47,221 --> 00:24:50,624
+连在 X v11上就会
+得到这样的系统字体
 
 
 516
-00:24:39,466 --> 00:24:43,306
-with changing numbers
-in text doesn't jiggle
+00:24:50,858 --> 00:24:53,260
+如果必须
+要定距字体
 
 
 517
-00:24:43,306 --> 00:24:44,676
-as the numbers are changing.
+00:24:53,360 --> 00:24:56,830
+那么在使用这个
+API时 就要放弃
 
 
 518
-00:24:45,526 --> 00:24:47,236
-But now, if your app is linked
+00:24:56,897 --> 00:24:59,266
+等宽数字
 
 
 519
-00:24:47,236 --> 00:24:50,636
-against X v11 you will get this
-system font with the fonts.
+00:24:59,733 --> 00:25:02,769
+从活版印刷角度来看
+效果不理想 不过问题解决了
 
 
 520
-00:24:50,846 --> 00:24:53,246
-If you have to have
-fixed pitched fonts,
+00:25:03,203 --> 00:25:05,506
+效果很是不同
 
 
 521
-00:24:53,366 --> 00:24:56,816
-that's when you use this
-API, this will give up digits
+00:25:05,772 --> 00:25:08,809
+现在是按比例
+也是固定宽度了
 
 
 522
-00:24:56,896 --> 00:24:59,266
-that are equal widths.
+00:25:09,009 --> 00:25:10,077
+这就是给大家的工具
 
 
 523
-00:24:59,746 --> 00:25:02,776
-Typographically not as pleasing,
-but it will get the job done.
+00:25:10,711 --> 00:25:13,747
+大家还可以听到
+更多API方面的内容
 
 
 524
-00:25:03,216 --> 00:25:05,496
-The changes are drastic.
+00:25:13,814 --> 00:25:15,349
+《最新系统字体介绍》
 
 
 525
-00:25:05,776 --> 00:25:08,796
-Here is the proportional, and
-here is the fixed widths ones.
+00:25:15,415 --> 00:25:17,284
+讲座时间 周五下午
+2:30
 
 
 526
-00:25:09,006 --> 00:25:10,086
-It is a tool for you.
+00:25:19,186 --> 00:25:23,123
+我也提到了新款API
+在科技系统有新款API
 
 
 527
-00:25:10,716 --> 00:25:13,826
-You can hear more about
-this and more about the APIs
+00:25:23,490 --> 00:25:26,927
+可以实现新功能以及对TextKit
+和iOS进行奇偶校验
 
 
 528
-00:25:13,826 --> 00:25:15,416
-in Introducing New System Fonts,
+00:25:27,427 --> 00:25:28,495
+这里还有很多项
 
 
 529
-00:25:15,416 --> 00:25:18,856
-which is Friday afternoon
-at 2:30.
+00:25:28,562 --> 00:25:30,731
+我只介绍其中
+两三种
 
 
 530
-00:25:19,196 --> 00:25:23,136
-I also mentioned new APIs, there
-is new APIs in the tech system.
+00:25:31,131 --> 00:25:32,533
+首先是路径排除
 
 
 531
-00:25:23,476 --> 00:25:26,916
-These bring new functionality
-and parity with TextKit and iOS,
+00:25:33,133 --> 00:25:36,203
+这种功能可以
+很容易安排路径
 
 
 532
-00:25:27,426 --> 00:25:28,556
-there is a lot of items here.
+00:25:36,270 --> 00:25:38,739
+在目标周围
+摆好文字 就像这蝴蝶
 
 
 533
-00:25:28,556 --> 00:25:30,736
-I'm just going to cover
-two, three of them.
+00:25:38,805 --> 00:25:41,475
+非常简单
 
 
 534
-00:25:31,136 --> 00:25:32,526
-First is exclusion paths.
+00:25:42,209 --> 00:25:44,845
+还有一个是文本域的
+两个属性：最大线条数
 
 
 535
-00:25:33,126 --> 00:25:36,276
-This is the ability to
-easily put paths so you can
+00:25:44,912 --> 00:25:48,115
+特别适用于
+Auto Layout
 
 
 536
-00:25:36,276 --> 00:25:38,736
-to wrap text around objects
-such as this butterfly,
+00:25:48,515 --> 00:25:51,018
+或是允许
+默认缩紧截断
 
 
 537
-00:25:38,796 --> 00:25:41,476
-it is straightforward.
+00:25:52,019 --> 00:25:55,389
+这可以确定文字域
 
 
 538
-00:25:42,196 --> 00:25:44,926
-Another one is two properties
-on text field: maximum number
+00:25:55,455 --> 00:25:59,726
+内容是否应该缩紧
+然后再真正将之截断
 
 
 539
-00:25:44,926 --> 00:25:48,116
-of lines, which is great
-especially with Auto Layout,
+00:25:59,793 --> 00:26:02,496
+以前有过控制方法
+但是现在是
 
 
 540
-00:25:48,526 --> 00:25:53,976
-or allows default tightening
-for truncation, which allows you
+00:26:02,563 --> 00:26:04,164
+使用Boolean属性控制
 
 
 541
-00:25:53,976 --> 00:25:55,466
-to specify if the contents
+00:26:05,232 --> 00:26:07,634
+还有很多调整变化
+以及部分亮点
 
 
 542
-00:25:55,466 --> 00:25:59,016
-of the text field should be
-tightened before it actually
+00:26:10,270 --> 00:26:11,772
+那么关于AppKit部分
 
 
 543
-00:25:59,016 --> 00:25:59,716
-gets truncated.
+00:26:11,839 --> 00:26:14,641
+最后讲一点
+视觉原子性
 
 
 544
-00:25:59,786 --> 00:26:02,546
-There was a way to control this,
-before but now it is controlled
+00:26:15,275 --> 00:26:17,611
+大家可能会奇怪
+视觉原子性是什么
 
 
 545
-00:26:02,546 --> 00:26:03,766
-with this one Boolean property.
+00:26:18,278 --> 00:26:19,279
+是山吗？
 
 
 546
-00:26:05,226 --> 00:26:07,646
-There are many more changes,
-these are some highlights.
+00:26:19,713 --> 00:26:21,481
+这和Half Dome
+有什么关系?
 
 
 547
-00:26:07,646 --> 00:26:11,836
-So last thing I want to talk
+00:26:21,582 --> 00:26:25,018
+我给大家看个短片
+解释我所说的
 
 
 548
-00:26:11,836 --> 00:26:14,656
-about in the AppKit
-section is visual atomicity.
+00:26:25,085 --> 00:26:28,422
+视觉原子性或
+缺乏视觉原子性是什么意思
 
 
 549
-00:26:15,276 --> 00:26:17,676
-You may wonder, what
-is visual atomicity?
+00:26:28,755 --> 00:26:30,557
+两次看到
+打开面板
 
 
 550
-00:26:18,386 --> 00:26:19,106
-A mountain?
+00:26:31,391 --> 00:26:33,093
+第一次没问题 还可以
 
 
 551
-00:26:19,106 --> 00:26:22,316
-What does it have to
-do with Half Dome?
+00:26:33,760 --> 00:26:35,429
+第二次 你们自己想
 
 
 552
-00:26:22,346 --> 00:26:25,096
-I'll show you a short clip
-demonstrating what I mean
+00:26:39,766 --> 00:26:44,938
+除非你们什么都看不到
+否则都明白我的意思
 
 
 553
-00:26:25,096 --> 00:26:28,426
-by visual atomicity or
-lack of visual atomicity.
+00:26:45,205 --> 00:26:46,740
+我给大家慢动作播放
 
 
 554
-00:26:28,746 --> 00:26:30,566
-You see the Open
-panel come up twice.
+00:26:47,241 --> 00:26:50,344
+阴影部分面板
+面板其他部分
 
 
 555
-00:26:31,406 --> 00:26:33,086
-First time, okay, not great.
+00:26:50,677 --> 00:26:53,780
+这就是打开面板
+是在约塞米蒂
 
 
 556
-00:26:33,776 --> 00:26:41,276
-Second time, judge for yourself.
+00:26:54,548 --> 00:26:57,084
+打开面板很粗糙
+因为是多项进程
 
 
 557
-00:26:42,526 --> 00:26:44,936
-Unless you blinked, you
-saw what I'm talking about.
+00:26:57,150 --> 00:27:00,120
+在带动
+不过这不是借口
 
 
 558
-00:26:45,206 --> 00:26:46,726
-Let's show you in slow motion.
+00:27:00,454 --> 00:27:03,257
+这样的UI让用户
+感觉仿佛是一次
 
 
 559
-00:26:47,226 --> 00:26:49,466
-Shadow. Parts of the panel.
+00:27:03,323 --> 00:27:05,926
+走一步 一次走一帧
+不应该是
 
 
 560
-00:26:49,566 --> 00:26:50,356
-Rest of the panel.
+00:27:05,993 --> 00:27:08,862
+这样的视觉
+步骤的
 
 
 561
-00:26:50,796 --> 00:26:53,796
-This is the Open panel
-running in Yosemite.
+00:27:09,563 --> 00:27:11,164
+这就是我所说的
+视觉原子性的意思
 
 
 562
-00:26:54,686 --> 00:26:57,136
-Open panel is a rough
-case because it is drawn
+00:27:11,231 --> 00:27:14,434
+需要的时候
+一步到位
 
 
 563
-00:26:57,136 --> 00:27:00,136
-by multiple processes,
-but that's not an excuse.
+00:27:15,269 --> 00:27:18,805
+你们当中视窗 视图
 
 
 564
-00:27:00,456 --> 00:27:03,316
-A UI like this should
-appear to the user as coming
+00:27:19,072 --> 00:27:21,575
+还有Core Animation
+层次都很清晰
 
 
 565
-00:27:03,316 --> 00:27:05,976
-up in one step, one
-frame, it shouldn't go
+00:27:21,642 --> 00:27:24,111
+要知道实现
+视觉原子性并非
 
 
 566
-00:27:05,976 --> 00:27:08,876
-through a few visual
-steps like that.
+00:27:24,178 --> 00:27:25,078
+都那么简单
 
 
 567
-00:27:09,576 --> 00:27:11,236
-That's what we mean
-by visual atomicity,
+00:27:26,547 --> 00:27:28,715
+这些是API
+大家不用仔细
 
 
 568
-00:27:11,236 --> 00:27:14,436
-achieving that one
-single-step drawing when needed.
+00:27:28,782 --> 00:27:30,217
+看明细
+这不是考试
 
 
 569
-00:27:15,256 --> 00:27:18,796
-Those of you who had to
-[undecipherable] windows, views,
+00:27:30,684 --> 00:27:32,886
+这些就是完成这项任务
+所需要的API
 
 
 570
-00:27:19,086 --> 00:27:21,626
-also Core Animation
-layers explicitly,
+00:27:32,953 --> 00:27:35,556
+但是不一定要一起
+工作才行
 
 
 571
-00:27:21,626 --> 00:27:24,176
-you know that achieving
-visual atomicity is not always
+00:27:35,923 --> 00:27:37,824
+在X v11中我们解决了问题
 
 
 572
-00:27:24,176 --> 00:27:25,076
-that straightforward.
+00:27:38,258 --> 00:27:41,562
+所以可以用
+NSAnimationContex
 
 
 573
-00:27:26,546 --> 00:27:28,766
-There are a number of APIs,
-you don't have to read
+00:27:41,628 --> 00:27:42,963
+实现视觉原子性
 
 
 574
-00:27:28,766 --> 00:27:30,216
-through the list,
-there is no quiz.
+00:27:44,097 --> 00:27:47,000
+可以调用Begin Group
+ing或End Grouping
 
 
 575
-00:27:30,676 --> 00:27:32,896
-There are a number of
-APIs that do the job,
+00:27:47,067 --> 00:27:47,801
+或类似功能
 
 
 576
-00:27:32,956 --> 00:27:36,366
-but they don't necessarily
-work well together.
+00:27:47,868 --> 00:27:50,470
+运行Animation Group
+周围是一系列
 
 
 577
-00:27:36,366 --> 00:27:41,636
-In X v11, we fixed it up so that
-you can achieve visual atomicity
+00:27:50,838 --> 00:27:53,507
+你在做的独立画作
+就像这里这样
 
 
 578
-00:27:41,636 --> 00:27:42,966
-with NSAnimationContext.
+00:27:53,574 --> 00:27:55,442
+这就可以实现
+视觉原子性
 
 
 579
-00:27:44,786 --> 00:27:47,856
-You can call Begin Grouping or
-End Grouping or its equivalent,
+00:27:55,509 --> 00:27:57,778
+除此之外
 
 
 580
-00:27:47,856 --> 00:27:50,146
-Run Animation Group,
-around a bunch
+00:27:58,011 --> 00:28:00,614
+我们不鼓励使用Disable
+Screen Updates
 
 
 581
-00:27:50,146 --> 00:27:53,506
-of independent drawing you're
-doing, such as you see here.
+00:28:00,681 --> 00:28:02,716
+和Enable Screen
+Updates
 
 
 582
-00:27:53,566 --> 00:27:56,946
-This should give you
-visual atomicity.
+00:28:02,783 --> 00:28:05,352
+以及Disable Screen
+until Flush
 
 
 583
-00:27:56,946 --> 00:28:00,876
-Beyond this, we discourage the
-use of Disable Screen Updates
+00:28:05,419 --> 00:28:07,754
+并非是不支持
+只是不再推荐使用
 
 
 584
-00:28:00,876 --> 00:28:01,946
-and Enable Screen Updates
+00:28:07,821 --> 00:28:09,156
+应该没必要
 
 
 585
-00:28:01,946 --> 00:28:04,046
-and Disable Screen
-Updates until Flush.
+00:28:11,124 --> 00:28:15,362
+这样 我们可以继续
+介绍Foundation
 
 
 586
-00:28:04,486 --> 00:28:07,506
-They're not deprecated, but
-they are not recommended anymore
+00:28:15,996 --> 00:28:18,298
+关于Foundation
+可以讲的也很多
 
 
 587
-00:28:07,816 --> 00:28:12,956
-and should not be necessary.
+00:28:19,700 --> 00:28:20,868
+首先是管理撤销
 
 
 588
-00:28:12,956 --> 00:28:15,376
-With that, we can
-move on to Foundation.
+00:28:21,835 --> 00:28:25,572
+用过Swift中管理撤销的
+都知道管理撤销
 
 
 589
-00:28:15,996 --> 00:28:18,286
-There is a lot of things to talk
-about in Foundation as well.
+00:28:25,639 --> 00:28:28,509
+API在Swift中
+并不太好用
 
 
 590
-00:28:19,696 --> 00:28:20,876
-First one is undo manager.
+00:28:29,209 --> 00:28:30,677
+API是这个样子
 
 
 591
-00:28:21,846 --> 00:28:25,636
-Those of you who used undo
-manager from Swift know
+00:28:30,978 --> 00:28:34,448
+第一个有个选择器
+部分情况才会管用
 
 
 592
-00:28:25,636 --> 00:28:28,506
-that undo manager APIs is
-not a perfect fit in Swift.
+00:28:34,515 --> 00:28:36,149
+第二个是有
+指示
 
 
 593
-00:28:29,216 --> 00:28:30,666
-This is what the APIs look like.
+00:28:36,550 --> 00:28:39,653
+NSIndication in
+Objective-C当然相当棒
 
 
 594
-00:28:30,966 --> 00:28:34,506
-The first has a selector, and
-it only works in some cases.
+00:28:39,887 --> 00:28:42,990
+还是Swift里面那些
+花哨的种类 它不太清楚
 
 
 595
-00:28:34,506 --> 00:28:36,166
-The second one has
-an indication.
+00:28:43,590 --> 00:28:45,959
+所以我们加上了
+基于代码块的撤销
 
 
 596
-00:28:36,546 --> 00:28:39,646
-NSIndication in Objective-C
-is of course awesome,
+00:28:46,927 --> 00:28:48,829
+这就是在
+Objective-C中的样子
 
 
 597
-00:28:39,886 --> 00:28:42,976
-but it doesn't know about all
-of the fancier types in Swift.
+00:28:48,896 --> 00:28:50,097
+在Swift中
+是这个样子
 
 
 598
-00:28:43,576 --> 00:28:45,966
-So we're adding block-based
-undo.
+00:28:50,964 --> 00:28:52,633
+你们看
+这有个目标论证
 
 
 599
-00:28:46,926 --> 00:28:48,666
-This is how it looks
-in Objective-C,
+00:28:52,900 --> 00:28:55,135
+也是个代码块
+基本上就是执行
 
 
 600
-00:28:48,666 --> 00:28:50,086
-and this is how it
-looks in Swift.
+00:28:55,202 --> 00:28:57,938
+刚做过的
+撤销应用
 
 
 601
-00:28:50,586 --> 00:28:52,626
-As you will see, there
-is a target argument
+00:28:59,139 --> 00:29:01,808
+目标方式的不同论证
+大家不用
 
 
 602
-00:28:52,916 --> 00:28:55,196
-and also a block, which
-is basically the code
+00:29:01,875 --> 00:29:03,443
+去参考
+代码块的目标
 
 
 603
-00:28:55,196 --> 00:28:57,946
-to be executed to undo
-the action you just did.
+00:29:03,510 --> 00:29:05,245
+以避免循环保留
 
 
 604
-00:28:59,126 --> 00:29:01,836
-Separate argument for the
-target means you don't have
+00:29:05,712 --> 00:29:07,414
+在Swift声明中
+也用到泛型类型
 
 
 605
-00:29:01,886 --> 00:29:03,526
-to reference the
-target in the block,
+00:29:07,481 --> 00:29:09,616
+我会告诉大家
+具体是怎么工作的
 
 
 606
-00:29:03,526 --> 00:29:05,236
-which avoids retain cycles.
+00:29:10,284 --> 00:29:11,251
+这是个例子
 
 
 607
-00:29:05,706 --> 00:29:07,486
-And there is also a
-use of generic type
+00:29:11,552 --> 00:29:13,654
+我们有个类别
+名为Colorful Shape
 
 
 608
-00:29:07,486 --> 00:29:09,616
-in the Swift declaration, and
-I'll tell you how it works.
+00:29:13,720 --> 00:29:15,355
+还有个属性名为Color
 
 
 609
-00:29:10,296 --> 00:29:11,286
-Here is an example.
+00:29:17,090 --> 00:29:20,060
+我们为这个属性
+加上Did Set属性观察器
 
 
 610
-00:29:11,626 --> 00:29:13,146
-You have a class
-named Colorful Shape,
+00:29:20,427 --> 00:29:22,529
+这不过是可以实现撤销的
+多种方式之一
 
 
 611
-00:29:13,726 --> 00:29:15,346
-it's got a property named Color,
+00:29:22,596 --> 00:29:24,865
+还可以通过其他方式撤销
+不过我们是通过
 
 
 612
-00:29:17,106 --> 00:29:20,066
-we add a Did Set property
-observer to this property.
+00:29:24,932 --> 00:29:25,999
+Did Set属性完成
 
 
 613
-00:29:20,426 --> 00:29:23,376
-This is just one of the ways
-you can do undo, you can undo
+00:29:26,466 --> 00:29:28,635
+这里是调用
+目标注册撤销
 
 
 614
-00:29:23,376 --> 00:29:24,926
-in other ways as well,
-but here we're doing it
+00:29:29,369 --> 00:29:32,272
+这里是实际上执行
+撤销应用的代码
 
 
 615
-00:29:24,926 --> 00:29:26,066
-in the Did Set property.
+00:29:32,339 --> 00:29:33,607
+针对我刚做过的事情
 
 
 616
-00:29:26,066 --> 00:29:28,626
-This is the call to
-register undo with target,
+00:29:35,042 --> 00:29:38,645
+注意这里多亏对目标的
+注册撤销中用了泛型
 
 
 617
-00:29:29,386 --> 00:29:32,756
-and here is actually the code to
-be executed to undo the action
+00:29:38,712 --> 00:29:41,481
+这些都发挥了作用
 
 
 618
-00:29:32,826 --> 00:29:33,616
-that I might be doing.
+00:29:41,548 --> 00:29:43,617
+目标被自动识别
+为是彩色形状
 
 
 619
-00:29:34,476 --> 00:29:38,696
-Note that thanks to the use of
-generics in the register undo
+00:29:43,684 --> 00:29:46,253
+这要归功于
+注册撤销栏的
 
 
 620
-00:29:38,696 --> 00:29:41,496
-at target, this all works
+00:29:46,320 --> 00:29:48,055
+自参考
 
 
 621
-00:29:41,546 --> 00:29:43,676
-and the target is
-automatically recognized
+00:29:48,121 --> 00:29:50,524
+你不必将目标转化为
+彩色形状
 
 
 622
-00:29:43,676 --> 00:29:46,316
-as a colorful shape thanks to
-the reference to self there
+00:29:53,026 --> 00:29:55,162
+NSCoder现在就可以处理错误
 
 
 623
-00:29:46,316 --> 00:29:48,136
-in the register undo column.
+00:29:55,495 --> 00:29:58,699
+用过NSCoders的人们比如NS
+KeyedArchiver之类
 
 
 624
-00:29:48,136 --> 00:29:52,066
-You don't have to cast the
-target to colorful shape.
+00:29:58,765 --> 00:30:01,802
+要知道并没有对这些东西的
+错误论证
 
 
 625
-00:29:53,036 --> 00:29:55,156
-NSCoder now has error handling.
+00:30:02,569 --> 00:30:04,638
+我们已经添加了外显
+错误处理
 
 
 626
-00:29:55,656 --> 00:29:58,756
-Those of you who have used
-NSCoders like NSKeyedArchiver
+00:30:05,405 --> 00:30:07,908
+这类方式包括Decode
+Object for Key
 
 
 627
-00:29:58,756 --> 00:30:02,946
-or so on, you know there is no
-error arguments to those things.
+00:30:07,975 --> 00:30:10,711
+Decode Object of
+Classes for Key
 
 
 628
-00:30:02,946 --> 00:30:04,646
-We have added explicit
-error handling.
+00:30:10,777 --> 00:30:11,612
+都有不同版本
 
 
 629
-00:30:05,406 --> 00:30:08,456
-Methods such as these, Decode
-Object for Key and Decode Object
+00:30:11,678 --> 00:30:13,981
+都可以在实际中返还错误
+将错误抛入Swift当中
 
 
 630
-00:30:08,726 --> 00:30:11,186
-of Classes for Key,
-now have versions
+00:30:14,114 --> 00:30:15,916
+这些叫做
+Decode Top Level
 
 
 631
-00:30:11,186 --> 00:30:13,836
-that actually return errors,
-throw errors in Swift.
+00:30:15,983 --> 00:30:17,184
+Object for Key
 
 
 632
-00:30:14,276 --> 00:30:16,476
-They're named Decode
-Top Level Object for Key
+00:30:17,251 --> 00:30:18,952
+以及Decode Top
+Level
 
 
 633
-00:30:16,476 --> 00:30:18,486
-and Decode Top Level
-Object of Classes for Key.
+00:30:19,019 --> 00:30:21,154
+Object of
+Classes for Key
 
 
 634
-00:30:18,886 --> 00:30:21,876
-Note that they have
-throws declaration,
+00:30:21,221 --> 00:30:23,290
+注意它们抛出声明表示了
+它们在返回还错误
 
 
 635
-00:30:21,876 --> 00:30:23,296
-which means that
-they return an error.
+00:30:23,624 --> 00:30:25,926
+还要注意它们
+返回了可选目标
 
 
 636
-00:30:23,636 --> 00:30:25,976
-And note that they
-return an optional object
+00:30:25,993 --> 00:30:28,996
+因为空返回
+实际上是有效返回
 
 
 637
-00:30:26,006 --> 00:30:29,056
-because a nil return is actually
-a valid return out of these,
+00:30:29,062 --> 00:30:32,032
+这表明对象
+并不在档案中
 
 
 638
-00:30:29,056 --> 00:30:31,396
-it just indicates that the
-object was not in the archive.
+00:30:32,999 --> 00:30:33,934
+注意这些名为
 
 
 639
-00:30:33,216 --> 00:30:36,176
-Note that these are named
-Decode Top Level Object for Key,
+00:30:34,001 --> 00:30:36,603
+Decode Top Level
+Object for Key
 
 
 640
-00:30:36,176 --> 00:30:39,356
-and we intend for this to
-be used at the top levels
+00:30:36,670 --> 00:30:39,273
+我们有意在
+未归档的
 
 
 641
-00:30:39,356 --> 00:30:41,216
-when you're unarchiving
-your root objects.
+00:30:39,339 --> 00:30:41,208
+根对象中
+将其放在顶层
 
 
 642
-00:30:41,496 --> 00:30:44,366
-We don't intend these to be
-called in your implementations
+00:30:41,508 --> 00:30:44,311
+我们不想在你实施代码期间
 
 
 643
-00:30:44,366 --> 00:30:45,276
-of [unintelligible] coder.
+00:30:44,378 --> 00:30:45,279
+调用这些
 
 
 644
-00:30:46,726 --> 00:30:48,666
-Also note that these are not
-the only the two methods we have
+00:30:46,713 --> 00:30:48,615
+请注意 这里
+只有两种方式
 
 
 645
-00:30:48,666 --> 00:30:51,026
-here; we have another two or
-three to go along with all
+00:30:48,682 --> 00:30:50,951
+我们还有两三种
+方式可以适用
 
 
 646
-00:30:51,026 --> 00:30:55,526
-of the decode object type
-methods we have currently.
+00:30:51,018 --> 00:30:53,921
+所有的解码对象
+类型方式
 
 
 647
-00:30:56,176 --> 00:30:59,666
-NSError now has a value
-provider, let me model this.
+00:30:56,190 --> 00:30:59,660
+现在由NSError提供值
+我们以此为模型
 
 
 648
-00:31:00,256 --> 00:31:04,486
-This is a simple way you may
-be creating an NSError object.
+00:31:00,260 --> 00:31:04,431
+通过这种简单的方式
+可以生成NSError对象
 
 
 649
-00:31:04,486 --> 00:31:06,696
-It's pretty simple,
-straightforward, however,
+00:31:04,498 --> 00:31:06,633
+相当简单
+直接 不过
 
 
 650
-00:31:06,696 --> 00:31:08,226
-note that it's not
-user presentable.
+00:31:06,700 --> 00:31:08,235
+注意 它不可向
+用户呈现
 
 
 651
-00:31:08,576 --> 00:31:10,506
-If this were ever to
-be shown to the user,
+00:31:08,569 --> 00:31:10,437
+如果用户
+见过了
 
 
 652
-00:31:10,506 --> 00:31:11,596
-this is what they'll see.
+00:31:10,504 --> 00:31:11,605
+那就是这个样子
 
 
 653
-00:31:12,176 --> 00:31:16,286
-Not good. This is really what
-you would like them to see
+00:31:12,172 --> 00:31:16,210
+不太好你们其实是想给
+他们看看
 
 
 654
-00:31:16,286 --> 00:31:17,966
-if this was ever
-presented to the user.
+00:31:16,276 --> 00:31:17,978
+是否曾给
+用户见过
 
 
 655
-00:31:18,246 --> 00:31:20,466
-Even if you don't ever present
-this to the user, you know,
+00:31:18,245 --> 00:31:20,414
+即便不给用户提供
+要知道
 
 
 656
-00:31:20,466 --> 00:31:22,576
-in the debugger something like
-this would be helpful too,
+00:31:20,480 --> 00:31:22,516
+除错器中 有这类东西
+也会很有帮助
 
 
 657
-00:31:22,576 --> 00:31:24,326
-as opposed to getting error 42.
+00:31:22,583 --> 00:31:24,618
+与得到42号错误相反
 
 
 658
-00:31:25,266 --> 00:31:28,366
-So the code that you write
-for this looks like this.
+00:31:25,252 --> 00:31:28,355
+因此编写的代码
+是类似这样
 
 
 659
-00:31:29,386 --> 00:31:33,536
-So you specify the values for
-various keys, and if you want it
+00:31:29,389 --> 00:31:33,460
+因此要明确各个键的值
+如果想要给用户
 
 
 660
-00:31:33,536 --> 00:31:36,246
-to be user presentable you
-would also localize them.
+00:31:33,527 --> 00:31:36,230
+出示 需要对之
+进行本地化
 
 
 661
-00:31:36,856 --> 00:31:38,396
-So you know, it is
-a bunch of code,
+00:31:36,864 --> 00:31:38,398
+因此这是
+一大堆代码
 
 
 662
-00:31:38,926 --> 00:31:40,996
-you can create methods
-here forever.
+00:31:38,932 --> 00:31:41,001
+你就可以永远地
+创建方式
 
 
 663
-00:31:41,186 --> 00:31:44,206
-The code isn't the problem,
-writing code, it is our job,
+00:31:41,201 --> 00:31:44,137
+代码不是问题
+编写代码是我们的工作
 
 
 664
-00:31:44,206 --> 00:31:46,296
-right, we're paid for it,
-that's not the problem.
+00:31:44,204 --> 00:31:46,306
+对 我们就是靠这个挣钱的
+不过这不是问题
 
 
 665
-00:31:46,616 --> 00:31:48,896
-The problem is that all this
-is happening at the time
+00:31:46,607 --> 00:31:48,842
+问题是所有这些
+都是发生在
 
 
 666
-00:31:48,896 --> 00:31:51,956
-that errors are being
-created even if the consumer
+00:31:48,909 --> 00:31:51,879
+出现错误的时候
+即使错误的消费端
 
 
 667
-00:31:51,956 --> 00:31:53,746
-of the error does
-nothing with the error.
+00:31:51,945 --> 00:31:53,680
+和错误没有任何关系
+也是如此
 
 
 668
-00:31:53,746 --> 00:31:55,806
-So it is, performance-wise,
-wasteful.
+00:31:53,747 --> 00:31:55,816
+因此从性能考虑
+这是浪费
 
 
 669
-00:31:56,436 --> 00:31:58,796
-So we've added this
-ability to create
+00:31:56,450 --> 00:31:58,719
+因此我们加入了
+这种功能
 
 
 670
-00:31:58,796 --> 00:32:01,076
-and return desired
-values on demand.
+00:31:58,785 --> 00:32:01,088
+可以按需创建
+并返回所需值
 
 
 671
-00:32:02,296 --> 00:32:05,646
-We have this method, set
-user info value provider
+00:32:02,289 --> 00:32:05,592
+我们有这个方式
+为域名提供方的
 
 
 672
-00:32:05,646 --> 00:32:07,236
-for domain provider.
+00:32:05,659 --> 00:32:07,227
+用户信息值提供方进行设置
 
 
 673
-00:32:07,476 --> 00:32:11,186
-You basically specify a
-domain you created for NSError
+00:32:07,461 --> 00:32:11,131
+你基本上在应用中
+为NSError
 
 
 674
-00:32:11,186 --> 00:32:13,966
-in your application and provide
-a provider, which is a block
+00:32:11,198 --> 00:32:13,901
+明确域名
+并提供提供方
 
 
 675
-00:32:13,966 --> 00:32:17,206
-that returns values
-for any keys missing
+00:32:13,967 --> 00:32:17,137
+即可以将在用户信息字典中
+丢失的任何键值
 
 
 676
-00:32:17,206 --> 00:32:18,296
-in the user info dictionary.
+00:32:17,204 --> 00:32:18,238
+返回的代码块
 
 
 677
-00:32:18,296 --> 00:32:20,256
-So it will be invoked
-on demand lazily.
+00:32:18,305 --> 00:32:20,240
+因此 会按需
+惰性生成
 
 
 678
-00:32:20,586 --> 00:32:24,206
-You can go back to using this
-nice, shortened piece of code
+00:32:20,574 --> 00:32:24,144
+你可以回去使用这个
+漂亮的短小代码
 
 
 679
-00:32:24,206 --> 00:32:28,086
-for generating errors, and
-the user information will be
+00:32:24,211 --> 00:32:26,013
+来生成错误
+用户信息
 
 
 680
-00:32:29,036 --> 00:32:31,036
-filled dynamically.
+00:32:26,079 --> 00:32:27,548
+会动态填写
 
 
 681
-00:32:31,096 --> 00:32:32,806
-You may be familiar
-with NSProgress.
+00:32:30,751 --> 00:32:32,819
+你也许熟悉
+NSProgress
 
 
 682
-00:32:32,966 --> 00:32:35,276
-It is an object for
-reporting progress
+00:32:32,953 --> 00:32:35,222
+这是报告
+进度的对象
 
 
 683
-00:32:35,276 --> 00:32:36,716
-and it has a great feature
+00:32:35,289 --> 00:32:36,657
+还有个不错的功能
 
 
 684
-00:32:36,716 --> 00:32:41,736
-where it will implicitly compose
-progress from across a hierarchy
+00:32:36,723 --> 00:32:41,662
+将在多个操作类型层次中
+隐形记录进度
 
 
 685
-00:32:41,736 --> 00:32:43,616
-of operations and
-it will present
+00:32:41,728 --> 00:32:43,564
+并且它会
+作为单独数字
 
 
 686
-00:32:43,616 --> 00:32:45,656
-that to the user as
-one single number.
+00:32:43,630 --> 00:32:45,666
+呈现
+给用户
 
 
 687
-00:32:46,126 --> 00:32:47,976
-It is pretty good,
-but it is implicit.
+00:32:46,133 --> 00:32:47,968
+相当不错
+但是这是隐形的
 
 
 688
-00:32:48,676 --> 00:32:52,196
-As being implicit,
-it has some issues
+00:32:48,669 --> 00:32:52,139
+作为隐形
+你可能会
 
 
 689
-00:32:52,196 --> 00:32:53,196
-that you may have run into.
+00:32:52,206 --> 00:32:53,207
+遇到一些问题
 
 
 690
-00:32:53,546 --> 00:32:55,616
-We're introducing
-an explicit mode
+00:32:53,540 --> 00:32:55,542
+我们介绍
+管理进度报告的
 
 
 691
-00:32:55,616 --> 00:32:57,106
-for managing progress reporting.
+00:32:55,609 --> 00:32:57,110
+线性模式
 
 
 692
-00:32:57,766 --> 00:33:00,436
-This has two pieces:
-one is APIs to add
+00:32:57,778 --> 00:33:00,380
+包括两部分
+一个是直接向
 
 
 693
-00:33:00,436 --> 00:33:03,456
-and remove child progress
-objects directly to a hierarchy
+00:33:00,447 --> 00:33:03,383
+操作类型层次
+添加并去除子进度对象
 
 
 694
-00:33:03,456 --> 00:33:06,486
-of progress objects and
-the second is this protocol
+00:33:03,450 --> 00:33:06,420
+第二个就是这个协议
 
 
 695
-00:33:06,486 --> 00:33:09,426
-which lets you declare the
-progress on an object directly.
+00:33:06,486 --> 00:33:09,423
+可以让你
+直接声明对象进度
 
 
 696
-00:33:09,866 --> 00:33:12,086
-For instance, if you have
-a subclass of NSOperation,
+00:33:09,857 --> 00:33:12,025
+例如 如有
+NSOperation子类
 
 
 697
-00:33:12,086 --> 00:33:16,466
-which does some one-shot
-operation, you know, it starts
+00:33:12,092 --> 00:33:16,396
+这可以实现部分一步操作
+要知道 它会开始和结束
 
 
 698
-00:33:16,466 --> 00:33:19,526
-and ends, it is a good candidate
-for this progress property.
+00:33:16,463 --> 00:33:19,533
+是这个进度属性
+不错的候选
 
 
 699
-00:33:19,846 --> 00:33:23,266
-It allows it to opt in to
-explicit progress reporting.
+00:33:19,833 --> 00:33:23,270
+可以实现选择
+外显进度报告
 
 
 700
-00:33:24,426 --> 00:33:27,056
-NSProgress now also has
-the ability to resume.
+00:33:24,438 --> 00:33:27,040
+NSProgress也可以
+从头开始
 
 
 701
-00:33:27,436 --> 00:33:30,476
-It had the ability to pause,
-we have added the second part.
+00:33:27,441 --> 00:33:30,477
+以前是可以停顿
+我们有加入第二部分
 
 
 702
-00:33:32,066 --> 00:33:34,876
-NSNotificationCenter
-now has the ability
+00:33:32,079 --> 00:33:34,815
+NSNotification
+Center现在可以
 
 
 703
-00:33:34,876 --> 00:33:37,466
-to automatically unregister
-the allocated observers.
+00:33:34,882 --> 00:33:37,451
+自动解除注册
+分配的观察
 
 
 704
-00:33:39,516 --> 00:33:43,176
-[Applause]
+00:33:43,657 --> 00:33:45,559
+这就是你们必须
+把自己加成
 
 
 705
-00:33:43,676 --> 00:33:45,056
->> ALI OZER: Here is the kind
-of code you would have had
+00:33:45,959 --> 00:33:47,394
+观察者需要
+编写的内容
 
 
 706
-00:33:45,056 --> 00:33:47,476
-to have write to add
-yourself as an observer,
+00:33:47,461 --> 00:33:48,328
+这是需要把自己
 
 
 707
-00:33:47,476 --> 00:33:48,406
-and here is the code you write
+00:33:48,395 --> 00:33:49,863
+作为观察者删除
+所需编写的代码
 
 
 708
-00:33:48,406 --> 00:33:49,686
-to remove yourself
-as an observer.
+00:33:49,930 --> 00:33:51,465
+如果想把自己
+作为观察者删除
 
 
 709
-00:33:49,946 --> 00:33:51,546
-You can call this
-code if you want
+00:33:51,532 --> 00:33:53,367
+作为观察者删除
+所需编写的代码
 
 
 710
-00:33:51,546 --> 00:33:53,356
-to remove yourself
-as an observer.
+00:33:53,867 --> 00:33:57,271
+如果不然 你会被自动
+取消注册
 
 
 711
-00:33:53,876 --> 00:33:57,286
-If you don't, and freed, you'll
-automatically be unregistered.
+00:33:57,404 --> 00:33:59,540
+相当棒
+这样很好
 
 
 712
-00:33:57,356 --> 00:33:59,316
-That's pretty great.
+00:34:01,408 --> 00:34:05,879
+这个类别名称 就是
+Toby 昨天在
 
 
 713
-00:34:01,406 --> 00:34:05,966
-So here is the class whose name
-Toby did not dare say yesterday
+00:34:05,946 --> 00:34:07,481
+联盟会议上不敢提到的
 
 
 714
-00:34:05,966 --> 00:34:09,576
-in the State of the Union,
-NSFirstNameComponentsFormatter.
+00:34:07,714 --> 00:34:09,683
+NSFirstNameComponentsFormatter
 
 
 715
-00:34:09,996 --> 00:34:13,106
-The rule is, if it is not
-long enough to be wrapped
+00:34:10,016 --> 00:34:13,053
+规则是 如果它没有
+长到可以在
 
 
 716
-00:34:13,106 --> 00:34:15,085
-on a slide title,
-it is not too long.
+00:34:13,120 --> 00:34:15,022
+幻灯片标题上封装起来
+那它并不算太长
 
 
 717
-00:34:15,246 --> 00:34:17,306
-So,
-NSFirstNameComponentsFomatter.
+00:34:15,222 --> 00:34:18,025
+那么NSFirstName
+ComponentsFomatter
 
 
 718
-00:34:18,146 --> 00:34:20,666
-It allows proper localized
-formatting of names.
+00:34:18,091 --> 00:34:20,661
+它可以让名称的格式
+得以恰当本地化
 
 
 719
-00:34:20,936 --> 00:34:23,616
-This joins other
-formatters we have added
+00:34:20,928 --> 00:34:23,563
+它又和其他
+我们过去几年加入的格式器
 
 
 720
-00:34:23,616 --> 00:34:26,656
-over the last few years such
-as date components formatter,
+00:34:23,630 --> 00:34:26,667
+联合了起来 比如
+日期部件格式器
 
 
 721
-00:34:27,045 --> 00:34:29,356
-byte count formatter,
-length formatter, and so on.
+00:34:27,034 --> 00:34:29,369
+字节数格式器
+长度格式器等等
 
 
 722
-00:34:30,606 --> 00:34:34,196
-It also provides styles for
-a number of different forms.
+00:34:30,603 --> 00:34:34,208
+它还为几种不同形式
+提供了样式
 
 
 723
-00:34:34,346 --> 00:34:35,815
-Let me give you a quick example.
+00:34:34,341 --> 00:34:35,809
+让我举一个简单的例子
 
 
 724
-00:34:36,306 --> 00:34:39,666
-You create a person named
-Components Object, it has parts
+00:34:36,310 --> 00:34:39,612
+假设你创建了一个基于人名的
+实体组件 它有名称的
 
 
 725
-00:34:39,666 --> 00:34:42,295
-of name, you specify the
-parts of name you have,
+00:34:39,679 --> 00:34:42,282
+几部分 你指定
+你有的名称部分
 
 
 726
-00:34:42,466 --> 00:34:44,976
-there is many more, let's say
-here we're specifying three
+00:34:42,482 --> 00:34:45,252
+但是还剩很多 比如说
+在这里 我们指定其中三个
 
 
 727
-00:34:44,976 --> 00:34:45,235
-of them.
+00:34:46,719 --> 00:34:49,322
+然后 你在格式器中创建
+一个人名 然后把它
 
 
 728
-00:34:46,726 --> 00:34:49,376
-Then you create a person in
-componenst formatter and ask
+00:34:49,389 --> 00:34:50,591
+格式化
 
 
 729
-00:34:49,376 --> 00:34:50,606
-for it to be formatted.
+00:34:51,190 --> 00:34:54,161
+取决于你
+你给的样式
 
 
 730
-00:34:51,196 --> 00:34:54,226
-Depending on the kind
-of style that you give,
+00:34:54,228 --> 00:34:56,396
+你会得到不同形式的
+名称 如长的
 
 
 731
-00:34:54,226 --> 00:34:56,436
-you get different forms
-of the name, like long,
+00:34:56,463 --> 00:34:58,298
+默认的、短的等等
 
 
 732
-00:34:56,466 --> 00:34:58,286
-default, short, and so on.
+00:34:58,699 --> 00:35:01,802
+请注意 如果你需要短的
+但在其它语言中
 
 
 733
-00:34:58,696 --> 00:35:01,856
-Note that if you ask for short,
-but in some other language,
+00:35:01,869 --> 00:35:05,506
+你可能会得到一个形式完全不同的
+名称 这个具体取决于
 
 
 734
-00:35:01,856 --> 00:35:05,576
-you may get a totally different
-form of the name depending
+00:35:05,572 --> 00:35:07,374
+这种语言的
+本地化规则
 
 
 735
-00:35:05,576 --> 00:35:07,426
-on rules of localization
-for that language.
+00:35:07,441 --> 00:35:09,076
+不要对你会从
+这种API得到的
 
 
 736
-00:35:07,426 --> 00:35:09,146
-Don't make assumptions
-about the kind
+00:35:09,142 --> 00:35:11,345
+名称的类别
+做出假设
 
 
 737
-00:35:09,146 --> 00:35:11,126
-of names you will get
-back from this API.
+00:35:11,912 --> 00:35:14,181
+这个 API 的目的
+主要的目的之一就是
 
 
 738
-00:35:11,916 --> 00:35:14,256
-The purpose of this API,
-one of the main purposes is
+00:35:14,248 --> 00:35:16,216
+让你从编写全球通用
 
 
 739
-00:35:14,256 --> 00:35:16,276
-to isolate you from complexities
+00:35:16,283 --> 00:35:18,352
+应用的复杂工作中
+解放出来
 
 
 740
-00:35:16,276 --> 00:35:18,336
-of writing world-ready
-applications.
+00:35:19,319 --> 00:35:22,456
+NSString 有新的 API
+其可以帮助你编写全球通用
 
 
 741
-00:35:19,316 --> 00:35:22,516
-NSString has new APIs to
-help you write world-ready
+00:35:22,523 --> 00:35:24,191
+国际化的
+应用
 
 
 742
-00:35:22,516 --> 00:35:24,196
-internationalizable
-applications.
+00:35:24,625 --> 00:35:27,494
+这将促进
+有条件的引用
 
 
 743
-00:35:24,636 --> 00:35:27,486
-There is facility for
-conditional quotation,
+00:35:27,761 --> 00:35:31,565
+不论其是否为技术词语
+其应由引用包围
 
 
 744
-00:35:27,776 --> 00:35:31,556
-whether a technical term, for
-instance, should be surrounded
+00:35:31,832 --> 00:35:34,401
+而其规则会根据
+语言不同而变化
 
 
 745
-00:35:31,816 --> 00:35:34,406
-by quotes, for which rules
-change in different languages.
+00:35:34,768 --> 00:35:37,571
+更为简单的本地化情况
+用于变更和搜索的 API
 
 
 746
-00:35:34,766 --> 00:35:37,236
-Simpler localized case
-changing and searching APIs,
+00:35:38,105 --> 00:35:41,241
+音译API它们之前
+都在 CFString 中
 
 
 747
-00:35:38,106 --> 00:35:41,306
-transliteration APIs, which
-previously were in CFString,
+00:35:41,308 --> 00:35:44,244
+现在它们在 NSString 中
+也能更好地协助
 
 
 748
-00:35:41,306 --> 00:35:44,296
-now they're in NSString,
-and also facilities
+00:35:44,311 --> 00:35:47,281
+自适应字符串
+和用户界面表达
 
 
 749
-00:35:44,296 --> 00:35:47,276
-for adaptive strings
-for UI presentation.
+00:35:47,614 --> 00:35:51,351
+在你的字符串文件中
+你可以提供多个形式
 
 
 750
-00:35:47,606 --> 00:35:51,406
-You can provide multiple forms,
-multiple lengths of the string
+00:35:51,418 --> 00:35:54,655
+多种长度
+并根据你在
 
 
 751
-00:35:51,406 --> 00:35:54,716
-in your strings files and have
-the right one chosen depending
+00:35:54,721 --> 00:35:57,357
+你在用户界面上所剩
+空间多少来选择合适的
 
 
 752
-00:35:54,716 --> 00:35:58,026
-on how much space you have
-in your UI to display it.
+00:35:58,125 --> 00:36:00,928
+你会在国际化新特性讲座中
+了解到关于名称部件格式器
 
 
 753
-00:35:58,136 --> 00:36:00,936
-You can hear about the person
-name components formatter
+00:36:01,295 --> 00:36:03,764
+和所有这些协助方法
+的具体信息
 
 
 754
-00:36:01,286 --> 00:36:03,836
-and all of these facilities
-and more in What's New
+00:36:03,830 --> 00:36:06,366
+当然还有更多内容
+它在星期五上午9点开始
 
 
 755
-00:36:03,836 --> 00:36:05,736
-in Internationalization,
-which is Friday morning
+00:36:08,268 --> 00:36:10,003
+我再谈谈
+关于热状况的情况
 
 
 756
-00:36:05,736 --> 00:36:10,066
-at 9:00 a.m. Let me talk
-about thermal state.
+00:36:10,070 --> 00:36:15,075
+这些 API 是在 X
+v10.3 中引入的 也是我们
 
 
 757
-00:36:10,066 --> 00:36:15,156
-These are APIs introduced in X
-v10.3, which was the same time
+00:36:15,142 --> 00:36:18,078
+动感新 MacBook 出来之刻
+当然 你们也知道
 
 
 758
-00:36:15,156 --> 00:36:18,146
-as our sexy new MacBook
-which, of course,
+00:36:18,145 --> 00:36:20,280
+没有多少人真的喜欢
+这个新东西
 
 
 759
-00:36:18,146 --> 00:36:20,286
-as you may know doesn't
-have any fans
+00:36:20,380 --> 00:36:23,550
+而事实上它是
+一个很好的 API 案例研究
 
 
 760
-00:36:20,396 --> 00:36:23,256
-and in fact is a good
-case study for this API.
+00:36:23,884 --> 00:36:27,654
+请注意 虽然此 API
+和新 MacBook 同时引入
 
 
 761
-00:36:23,896 --> 00:36:27,646
-Note that although this API was
-introduced at the same time,
+00:36:27,721 --> 00:36:30,757
+它也适用于我们的其它机器
 
 
 762
-00:36:27,866 --> 00:36:30,816
-it works on our other machines
+00:36:30,824 --> 00:36:32,326
+而且通常都是
+可用并能正常运作的
 
 
 763
-00:36:30,816 --> 00:36:32,396
-and is generally
-available and functional.
+00:36:32,392 --> 00:36:33,927
+它不仅仅适用于
+MacBook
 
 
 764
-00:36:32,396 --> 00:36:33,936
-It's not just for
-the MacBook only.
+00:36:34,795 --> 00:36:37,831
+此 API 使用
+属性捕获
 
 
 765
-00:36:34,806 --> 00:36:37,896
-This API is captured
-with a property,
+00:36:37,898 --> 00:36:40,400
+一种在 NSProcessInfo
+上的热状况属性
 
 
 766
-00:36:37,896 --> 00:36:40,026
-a thermal state property
-on NSProcessInfo.
+00:36:40,467 --> 00:36:43,203
+它有四个值：象征性
+普通、 严重 、极其严重
 
 
 767
-00:36:40,456 --> 00:36:43,196
-It has four values: nominal,
-fair, serious, critical.
+00:36:43,570 --> 00:36:46,840
+每当值更改时
+你都会收到通知
 
 
 768
-00:36:43,586 --> 00:36:46,836
-There is a notification you can
-get whenever the value changes.
+00:36:48,509 --> 00:36:51,411
+如果值为严重
+那么风扇是以
 
 
 769
-00:36:48,496 --> 00:36:51,476
-Note that serious, that's
-when the fans are going
+00:36:51,478 --> 00:36:53,780
+最高速度运作
+当然 这是假设你的电脑有风扇
 
 
 770
-00:36:51,476 --> 00:36:53,796
-at maximum speed if
-your machine had fans,
+00:36:54,248 --> 00:36:56,884
+你可以想象如果你没有风扇
+那会发生什么事情
 
 
 771
-00:36:54,246 --> 00:36:56,876
-imagine what's happening
-if you don't have fans.
+00:36:57,184 --> 00:36:59,520
+严重通常是要
+你采取某些行动的时候
 
 
 772
-00:36:57,196 --> 00:36:59,586
-Serious is typically when
-you want to take some action.
+00:36:59,586 --> 00:37:02,389
+例如 你可能
+在做自定义的动画
 
 
 773
-00:36:59,586 --> 00:37:02,376
-For instance, let's say
-you're doing custom animation
+00:37:03,390 --> 00:37:05,225
+而且帧数达到 60 FIPS
+这时你要考虑
 
 
 774
-00:37:03,386 --> 00:37:05,306
-at 60 FIPS, this a time to think
+00:37:05,292 --> 00:37:07,361
+减少你的帧数到
+30 FIPS
 
 
 775
-00:37:05,306 --> 00:37:07,346
-about reducing your
-animation to 30 FIPS.
+00:37:07,861 --> 00:37:10,497
+这就是 NSScrollView
+会自动为你做的事情
 
 
 776
-00:37:07,846 --> 00:37:11,056
-That's what NSScrollView
-will do for you automatically
+00:37:10,564 --> 00:37:13,433
+这样一来 你就不必担心有关
+NSScrollView 的情况
 
 
 777
-00:37:11,056 --> 00:37:12,856
-so you don't have to worry
-about NSScrollView case.
+00:37:13,500 --> 00:37:16,069
+假设你正在应用程序中
+使用高解析度的材质
 
 
 778
-00:37:13,196 --> 00:37:15,156
-Let's say you're using
-high-quality textures
+00:37:16,136 --> 00:37:18,105
+而且你收到一个
+严重的热状态的提示
 
 
 779
-00:37:15,156 --> 00:37:17,696
-in the application and you
-get a serious thermal state,
+00:37:18,172 --> 00:37:21,108
+也许你需要
+使用低解析度的材质
 
 
 780
-00:37:18,176 --> 00:37:21,116
-time to drop to maybe
-lower-quality textures.
+00:37:22,176 --> 00:37:25,245
+此款 API 在
+你需要它时很有帮助 但
 
 
 781
-00:37:22,166 --> 00:37:25,296
-This API is great for cases when
-you need it, but it is important
+00:37:25,312 --> 00:37:28,649
+但要注意 此款 API 是
+反应性的 并不是主动的
 
 
 782
-00:37:25,296 --> 00:37:28,726
-to note that this API is
-reactive and not proactive.
+00:37:29,183 --> 00:37:31,985
+此 API 让
+系统提示你 告诉你
 
 
 783
-00:37:28,726 --> 00:37:32,046
-It is the kind of API where the
-system calls you to tell you
+00:37:32,052 --> 00:37:35,088
+目前的困难 然后你需要
+采取行动 当然
 
 
 784
-00:37:32,046 --> 00:37:35,146
-of trouble and you have to
-take action, and, of course,
+00:37:35,155 --> 00:37:36,890
+你采取的行动
+不能反而
 
 
 785
-00:37:35,146 --> 00:37:36,966
-the action you take
-is not adding more
+00:37:36,957 --> 00:37:38,058
+增加对系统的负载
 
 
 786
-00:37:36,966 --> 00:37:38,056
-to the load on the system.
+00:37:38,692 --> 00:37:40,894
+我们有很多其它
+主动 API
 
 
 787
-00:37:38,696 --> 00:37:40,956
-We have a lot of other
-APIs which are proactive
+00:37:40,961 --> 00:37:43,664
+我们已在
+最新的讲座中介绍
 
 
 788
-00:37:40,956 --> 00:37:43,666
-that we have introduced
-over the last few releases.
+00:37:44,398 --> 00:37:46,900
+这些类型的 API
+会告诉系统
 
 
 789
-00:37:44,386 --> 00:37:46,976
-These are the kind of APIs
-where you tell the system
+00:37:46,967 --> 00:37:51,705
+你在做什么 然后
+系统会基于你
 
 
 790
-00:37:46,976 --> 00:37:51,756
-about what you're doing, and the
-system optimizes your activities
+00:37:51,772 --> 00:37:55,676
+目前的操作
+优化你的活动和任务
 
 
 791
-00:37:51,756 --> 00:37:55,666
-and tasks based on whatever
-happens to be going on.
+00:37:56,043 --> 00:37:58,045
+例如 计时器
+公差
 
 
 792
-00:37:56,046 --> 00:37:58,046
-For instance, tolerance
-on timers,
+00:37:58,412 --> 00:38:01,582
+处理信息活动
+API 并
 
 
 793
-00:37:58,396 --> 00:38:01,936
-process info activity
-APIs, doing downloads
+00:38:01,648 --> 00:38:03,784
+使用 NSURLSession
+在后台进行下载
 
 
 794
-00:38:01,936 --> 00:38:03,786
-in the background
-with NSURLSession,
+00:38:03,851 --> 00:38:06,520
+设置服务质量 等等
 
 
 795
-00:38:03,846 --> 00:38:06,526
-setting quality service, so on.
+00:38:07,487 --> 00:38:10,757
+这些 API 不仅可以允许
+高效操作
 
 
 796
-00:38:07,476 --> 00:38:10,826
-These APIs allow not only
-energy efficient behavior,
+00:38:10,824 --> 00:38:13,093
+但它们还能够
+引导合适的热行为
 
 
 797
-00:38:10,826 --> 00:38:13,156
-but they also enable
-proper thermal behavior.
+00:38:13,160 --> 00:38:17,497
+它们可以带来更长的电池
+使用寿命 并让你的系统冷却
 
 
 798
-00:38:13,156 --> 00:38:17,496
-They enable longer battery
-life and make your system coo,
+00:38:17,865 --> 00:38:19,833
+无论是表面上的降温
+还是内部降温
 
 
 799
-00:38:17,856 --> 00:38:19,826
-figuratively and
-literally as well.
+00:38:22,135 --> 00:38:26,340
+最后 我简单地提及下 Core
+Data因为讲座剩下时间不多了
 
 
 800
-00:38:22,386 --> 00:38:26,326
-Last, core data, quick mention
-here since I'm short on time.
+00:38:26,707 --> 00:38:29,076
+Core Data
+中有很多强大功能唯一约束
 
 
 801
-00:38:26,696 --> 00:38:29,136
-A lot of great features in
-core data, unique constraints
+00:38:29,142 --> 00:38:31,812
+批量删除
+和其他 API 增强功能
 
 
 802
-00:38:29,136 --> 00:38:31,796
-and batch deletion and many
-other API enhancements,
+00:38:32,045 --> 00:38:33,113
+这就是我要说的
 
 
 803
-00:38:32,046 --> 00:38:33,106
-that's all I'll say.
+00:38:34,181 --> 00:38:35,682
+当然 这不算一个
+新特性讲座 如果
 
 
 804
-00:38:34,176 --> 00:38:35,746
-Of course, it wouldn't
-be a what's new talk
+00:38:35,749 --> 00:38:38,118
+如果我没有提到很多
+新事物
 
 
 805
-00:38:35,746 --> 00:38:38,106
-if I don't leave a lot
-of things on the floor.
+00:38:38,452 --> 00:38:40,587
+这些都是许多其他
+我没时间提到的主题
 
 
 806
-00:38:38,436 --> 00:38:40,646
-These are many other topics
-I just didn't get around to,
+00:38:40,654 --> 00:38:42,756
+你应该可以在
+发布说明中阅读到
 
 
 807
-00:38:40,646 --> 00:38:42,746
-you can read about them
-hopefully in the release notes.
+00:38:43,190 --> 00:38:45,659
+它甚至没有包括
+令人惊讶的新技术
 
 
 808
-00:38:43,176 --> 00:38:45,656
-This is not even including
-amazing new technologies
+00:38:45,726 --> 00:38:48,095
+比如 Metal 或者
+GameplayKit
 
 
 809
-00:38:45,716 --> 00:38:48,086
-such as Metal or
-GameplayKit as well.
+00:38:50,397 --> 00:38:53,300
+总的来说 我们有很多
+泛型通用 API 改进
 
 
 810
-00:38:48,686 --> 00:38:53,366
-In summary, we have a lot
-of general API improvements
+00:38:53,367 --> 00:38:55,569
+在 Swiftification
+各个层面上都有
 
 
 811
-00:38:53,366 --> 00:38:55,246
-across the board
-for Swiftification.
+00:38:55,636 --> 00:38:57,971
+此外 我们有很多
+强大的功能和增强功能
 
 
 812
-00:38:55,246 --> 00:38:57,956
-In addition, we have a lot of
-great features and enhancements.
+00:38:58,672 --> 00:39:03,410
+看看这些材料 想想如何
+采用它们
 
 
 813
-00:38:58,666 --> 00:39:03,466
-Look at the material, think
-about how to adopt them,
+00:39:03,477 --> 00:39:06,113
+如果你有任何问题
+就来我们的实验室来讨论吧
 
 
 814
-00:39:03,466 --> 00:39:07,266
-and come see us at the labs
-if you have any questions.
+00:39:07,748 --> 00:39:10,384
+最后 我
+再总结下要点
 
 
 815
-00:39:07,736 --> 00:39:10,426
-For more information,
-here are the pointers.
+00:39:10,617 --> 00:39:12,553
+AppKit和Foundation
+发布
 
 
 816
-00:39:10,806 --> 00:39:13,006
-The AppKit and Foundation
-release notes are available
+00:39:12,619 --> 00:39:13,554
+说明已经可以从
 
 
 817
-00:39:13,006 --> 00:39:16,176
-at developer.apple.com.osx.
+00:39:13,620 --> 00:39:16,223
+developer.apple.
+com.osx上获取
 
 
 818
-00:39:16,236 --> 00:39:19,516
-The release notes are for the
-seed, so it's a good source.
+00:39:16,290 --> 00:39:19,526
+发布说明是为了抛砖引玉
+所以它是一个很好的来源
 
 
 819
-00:39:20,086 --> 00:39:21,506
-Thank you for joining me today.
+00:39:20,093 --> 00:39:21,428
+感谢你们今天到场
 
 
 820
-00:39:21,506 --> 00:39:22,856
-Have a great rest
-of the conference.
-
-
-821
-00:39:23,516 --> 00:39:28,500
-[Applause]
+00:39:21,495 --> 00:39:22,863
+会议后
+好好休息吧
 

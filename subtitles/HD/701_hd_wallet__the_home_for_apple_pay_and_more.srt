@@ -1,3601 +1,3683 @@
 1
-00:00:27,366 --> 00:00:28,536
->> DANVIN RUANGCHAN: All
-right, good morning, everyone,
+00:00:20,954 --> 00:00:25,959
+《Wallet—苹果付款与
+更多功能的所在地》
 
 
 2
-00:00:28,866 --> 00:00:31,476
-and welcome to session 701.
+00:00:27,327 --> 00:00:28,795
+好的 大家早上好
 
 
 3
-00:00:31,746 --> 00:00:34,646
-My name is Danvin, and I'm
-really excited to be here today
+00:00:28,862 --> 00:00:31,532
+欢迎来到第701讲座环节
 
 
 4
-00:00:34,646 --> 00:00:36,876
-to talk to you guys
-about Wallet,
+00:00:31,798 --> 00:00:32,665
+我叫达文
 
 
 5
-00:00:37,596 --> 00:00:40,136
-the app formerly
-known as Passbook.
+00:00:32,933 --> 00:00:34,501
+我非常高兴在这里
 
 
 6
-00:00:40,606 --> 00:00:41,016
-All right.
+00:00:34,635 --> 00:00:37,204
+跟大家谈谈"Wallet"
 
 
 7
-00:00:41,016 --> 00:00:44,856
-With a new name, we
-also have a new logo!
+00:00:37,604 --> 00:00:40,140
+就是之前被称为
+"通行证"的app
 
 
 8
-00:00:45,676 --> 00:00:48,996
-And you may have seen our
-icon if you installed iOS 9,
+00:00:40,607 --> 00:00:42,009
+有了新名字
 
 
 9
-00:00:49,226 --> 00:00:54,136
-this is now our new icon, but
-beauty is more than skin deep.
+00:00:42,176 --> 00:00:44,745
+我们也换了新logo
 
 
 10
-00:00:54,606 --> 00:00:57,156
-We have been working on a
-lot of features for Wallet
+00:00:45,812 --> 00:00:47,281
+如果你安装了iOS 9你也许
 
 
 11
-00:00:57,156 --> 00:00:58,306
-over the past few years.
+00:00:47,681 --> 00:00:49,016
+已经见到我们的图标了
 
 
 12
-00:00:58,586 --> 00:01:00,836
-We will talk about a
-few of those today.
+00:00:49,216 --> 00:00:50,784
+这就是我们的新图标
 
 
 13
-00:01:01,236 --> 00:01:03,506
-So let's take a look at
-our agenda and take a look
+00:00:51,952 --> 00:00:54,154
+但是美丽不仅在于外表
 
 
 14
-00:01:03,506 --> 00:01:05,206
-at what we will be
-talking about today.
+00:00:54,788 --> 00:00:57,391
+过去几年
+我们一直在为Wallet
 
 
 15
-00:01:05,786 --> 00:01:08,166
-First we're going to take a
-glance at what we've been up to
+00:00:57,457 --> 00:00:58,358
+开发新的特性
 
 
 16
-00:01:08,906 --> 00:01:11,676
-and then a quick history lesson
+00:00:58,592 --> 00:01:00,827
+今天我们会谈到几个那样的特性
 
 
 17
-00:01:11,836 --> 00:01:13,976
-and review all of
-Wallet's features.
+00:01:01,161 --> 00:01:02,362
+让我们看看今天的安排
 
 
 18
-00:01:14,186 --> 00:01:16,086
-We will talk about
-what is a Pass.
+00:01:03,197 --> 00:01:05,199
+和今天要谈论的内容
 
 
 19
-00:01:17,066 --> 00:01:19,586
-We will talk about PassKit,
-our framework inside iOS
+00:01:05,999 --> 00:01:08,168
+首先 我们看一下
+我们一直在做的事情
 
 
 20
-00:01:19,586 --> 00:01:24,356
-and we're going to talk about
-Apple Pay and then there's more!
+00:01:08,936 --> 00:01:11,672
+之后
+简要回顾一下历史
 
 
 21
-00:01:24,606 --> 00:01:25,276
-So stick around.
+00:01:12,005 --> 00:01:13,974
+关于Wallet所有特性的回顾
 
 
 22
-00:01:25,276 --> 00:01:27,316
-We have a lot of content
-to talk about today.
+00:01:14,541 --> 00:01:16,610
+我们会讲到什么是通行证
 
 
 23
-00:01:27,946 --> 00:01:28,996
-So what have we been up to?
+00:01:17,077 --> 00:01:19,913
+我们会谈谈iOS内的
+PassKit框架
 
 
 24
-00:01:29,646 --> 00:01:32,126
-Well, Apple Pay is
-what we have been up to
+00:01:20,314 --> 00:01:21,748
+我们还要谈谈苹果支付
 
 
 25
-00:01:32,386 --> 00:01:34,906
-and Apple Pay was
-introduced last fall,
+00:01:22,349 --> 00:01:24,351
+和...其他内容
 
 
 26
-00:01:35,366 --> 00:01:37,566
-and the responses
-have been great!
+00:01:24,484 --> 00:01:25,319
+所以别走开
 
 
 27
-00:01:38,236 --> 00:01:40,426
-Consumers have loved
-its ease of use.
+00:01:25,385 --> 00:01:27,321
+今天要谈的内容非常丰富
 
 
 28
-00:01:40,746 --> 00:01:43,726
-And merchants have loved
-its higher conversion rates.
+00:01:27,855 --> 00:01:29,289
+那么我们一直在做些什么呢？
 
 
 29
-00:01:44,876 --> 00:01:48,276
-And now with Apple Pay we have
-now enabled contactless payments
+00:01:29,556 --> 00:01:32,025
+苹果支付就是我们一直在做的工作
 
 
 30
-00:01:48,626 --> 00:01:50,526
-on our phones, our watches.
+00:01:32,392 --> 00:01:34,828
+苹果支付是去年秋天推出的
 
 
 31
-00:01:50,766 --> 00:01:52,006
-We even released an API
+00:01:35,362 --> 00:01:36,630
+反应...
 
 
 32
-00:01:52,006 --> 00:01:56,946
-so you can take Apple Pay
-inside your apps as well.
+00:01:37,030 --> 00:01:37,865
+非常好！
 
 
 33
-00:01:58,226 --> 00:02:00,646
-But to understand the
-essence of Wallet,
+00:01:38,232 --> 00:01:40,534
+消费者们喜欢它的简单易用
 
 
 34
-00:02:00,756 --> 00:02:04,826
-to understand what we are about,
-we need to take a look back.
+00:01:40,734 --> 00:01:43,737
+商户们喜欢它的高转化率
 
 
 35
-00:02:05,396 --> 00:02:08,906
-Take a look back and
-see how we got here.
+00:01:45,205 --> 00:01:48,275
+现在有了苹果支付
+就能完成无接触付款
 
 
 36
-00:02:09,936 --> 00:02:12,346
-Does this ring a bell?
+00:01:48,642 --> 00:01:50,511
+无论是在我们的手机上
+还是在手表上
 
 
 37
-00:02:12,346 --> 00:02:13,656
-Does this look familiar
-to anyone.
+00:01:50,777 --> 00:01:52,446
+我们甚至发布了一个API
 
 
 38
-00:02:13,656 --> 00:02:15,836
-Does anyone have a wallet
-that looks like this?
+00:01:52,513 --> 00:01:56,950
+所以你可以在你的app中
+安装苹果支付
 
 
 39
-00:02:17,296 --> 00:02:18,526
-I'm sure someone out there
+00:01:58,218 --> 00:02:00,888
+为了更好地理解Wallet的实质
 
 
 40
-00:02:18,526 --> 00:02:19,876
-who has a wallet
-that looks like this.
+00:02:01,088 --> 00:02:02,556
+理解我们为什么开发它
 
 
 41
-00:02:19,876 --> 00:02:21,966
-This is a real problem.
+00:02:02,756 --> 00:02:04,758
+我们要回顾一下
 
 
 42
-00:02:22,406 --> 00:02:25,606
-We stick our gift cards in here,
-our debit cards and credit cards
+00:02:05,392 --> 00:02:06,360
+回顾我们过去的足迹
 
 
 43
-00:02:25,606 --> 00:02:28,626
-and our coupons and
-then when we try
+00:02:06,493 --> 00:02:08,428
+了解我们如何来到这里
 
 
 44
-00:02:28,626 --> 00:02:31,316
-to find something,
-we can't find it.
+00:02:10,163 --> 00:02:10,997
+这...
 
 
 45
-00:02:32,726 --> 00:02:36,196
-The overstuffed wallet
-is a real problem.
+00:02:11,698 --> 00:02:12,833
+是不是似曾相识？
 
 
 46
-00:02:36,756 --> 00:02:39,206
-And we are trying to solve
-that problem with Wallet.
+00:02:12,900 --> 00:02:13,734
+是不是眼熟？
 
 
 47
-00:02:40,036 --> 00:02:41,846
-We do so with passes.
+00:02:14,067 --> 00:02:15,969
+是不是谁有这样的Wallet？
 
 
 48
-00:02:41,846 --> 00:02:45,176
-We have beautiful
-passes inside Wallet.
+00:02:17,304 --> 00:02:18,138
+我敢肯定观众中
 
 
 49
-00:02:45,376 --> 00:02:50,716
-We have passes for coupons, for
-event tickets for store cards,
+00:02:18,205 --> 00:02:20,073
+有人的Wallet是像这样的！
 
 
 50
-00:02:51,186 --> 00:02:53,016
-and even for boarding
-passes as well.
+00:02:20,407 --> 00:02:21,708
+这就是真正的问题所在
 
 
 51
-00:02:53,716 --> 00:02:56,106
-But all the things that
-these passes have in common,
+00:02:22,409 --> 00:02:23,977
+我们把礼品卡放在这里
 
 
 52
-00:02:56,416 --> 00:03:00,646
-is that they all allow us to
-take action in the real world.
+00:02:24,044 --> 00:02:26,079
+借记卡和信用卡放这里
 
 
 53
-00:03:01,216 --> 00:03:05,426
-And now, with Apple Pay,
-we have your credit cards
+00:02:26,280 --> 00:02:27,247
+还有优惠券
 
 
 54
-00:03:05,766 --> 00:03:08,386
-and debit cards inside
-Wallet as well.
+00:02:27,981 --> 00:02:29,550
+然后当我们想要找东西时
 
 
 55
-00:03:08,386 --> 00:03:10,116
-But we went beyond that.
+00:02:30,250 --> 00:02:31,385
+我们却找不到
 
 
 56
-00:03:10,116 --> 00:03:12,196
-We want to solve the problem
-where we can't find the thing
+00:02:32,619 --> 00:02:34,054
+Wallet里塞的东西太多
 
 
 57
-00:03:12,196 --> 00:03:13,806
-at the right place at the
-right time so we built
+00:02:34,254 --> 00:02:36,056
+这真的是个问题
 
 
 58
-00:03:13,806 --> 00:03:17,076
-in relevancy inside
-our passes as well.
+00:02:36,757 --> 00:02:39,193
+我们在试图用
+Wallet解决这个问题
 
 
 59
-00:03:17,076 --> 00:03:17,946
-And they look like this.
+00:02:40,027 --> 00:02:42,262
+我们是用通行证实现的
 
 
 60
-00:03:17,946 --> 00:03:19,416
-If you come to the airport,
+00:02:43,363 --> 00:02:45,165
+在Wallet中有好看的通行证
 
 
 61
-00:03:19,716 --> 00:03:21,786
-your boarding pass is right
-there waiting for you.
+00:02:45,599 --> 00:02:46,633
+我们有通行证
 
 
 62
-00:03:22,316 --> 00:03:24,636
-All I do is swipe
-on the lock screen
+00:02:46,900 --> 00:02:47,768
+优惠券
 
 
 63
-00:03:24,886 --> 00:03:27,636
-and my boarding pass
-is ready to use.
+00:02:48,268 --> 00:02:49,236
+有活动门票
 
 
 64
-00:03:28,456 --> 00:03:29,816
-It's so great!
+00:02:49,803 --> 00:02:50,904
+有商家卡
 
 
 65
-00:03:29,816 --> 00:03:32,736
-It's that great surprise in the
-light factor that this brings.
+00:02:51,171 --> 00:02:53,006
+甚至有登机牌
 
 
 66
-00:03:32,956 --> 00:03:37,246
-But let's take a
-look at these passes.
+00:02:53,707 --> 00:02:56,109
+但所有这些通行证的
+共同点就是
 
 
 67
-00:03:37,366 --> 00:03:39,996
-In essence, these passes
-contain information.
+00:02:56,410 --> 00:03:00,647
+它们让我们能够
+将其用于现实世界中
 
 
 68
-00:03:40,536 --> 00:03:43,766
-On the top left-hand corner
-you will see there's a logo.
+00:03:01,215 --> 00:03:02,049
+现在
 
 
 69
-00:03:44,286 --> 00:03:47,876
-It clearly states the entity
-that this pass belongs to.
+00:03:03,150 --> 00:03:05,519
+有了苹果支付
+我们的信用卡
 
 
 70
-00:03:48,016 --> 00:03:49,236
-In this particular
-case we are looking
+00:03:05,786 --> 00:03:08,322
+借记卡也都可以放在Wallet里
 
 
 71
-00:03:49,236 --> 00:03:50,526
-at a United boarding pass.
+00:03:09,022 --> 00:03:10,057
+不仅如此
 
 
 72
-00:03:51,606 --> 00:03:54,306
-So their logo is
-predominantly up there
+00:03:10,123 --> 00:03:11,925
+我们想要解决无法
+在合适的地点
 
 
 73
-00:03:54,306 --> 00:03:55,566
-in the top left-hand corner.
+00:03:11,992 --> 00:03:13,594
+合适的时间找到东西这一问题
 
 
 74
-00:03:56,746 --> 00:03:59,386
-We put our important
-information in our header field.
+00:03:13,660 --> 00:03:14,595
+所以我们在
 
 
 75
-00:04:00,546 --> 00:04:02,716
-In this case, our gate
-information is present there.
+00:03:15,295 --> 00:03:16,997
+所有通行证内部建立了关联性
 
 
 76
-00:04:03,176 --> 00:04:05,826
-Our users will know exactly
-what gate they need to go to,
+00:03:17,064 --> 00:03:17,931
+看起来就是这样子
 
 
 77
-00:04:06,216 --> 00:04:07,816
-when boarding time arrives.
+00:03:17,998 --> 00:03:19,399
+如果你到了机场
 
 
 78
-00:04:08,356 --> 00:04:12,646
-We put our important information
-down in our primary fields.
+00:03:19,700 --> 00:03:21,802
+你的登机牌就在那里等你
 
 
 79
-00:04:13,606 --> 00:04:17,005
-And this particular case, we
-have a flight that takes off
+00:03:22,302 --> 00:03:24,638
+我要做的就是
+把锁定的手机屏幕划开
 
 
 80
-00:04:17,005 --> 00:04:20,046
-from Newark and arrives
-in Stockholm.
+00:03:24,872 --> 00:03:25,939
+然后我的登机牌...
 
 
 81
-00:04:21,875 --> 00:04:25,326
-We also have auxiliary and
-secondary fields and this is
+00:03:26,306 --> 00:03:27,774
+就能...用了
 
 
 82
-00:04:25,326 --> 00:04:28,466
-where we put our nice go to
-know pieces of information,
+00:03:28,509 --> 00:03:29,743
+太棒了！
 
 
 83
-00:04:28,466 --> 00:04:30,196
-things like the seat number.
+00:03:29,810 --> 00:03:32,846
+这真的是带来了莫大的惊喜
 
 
 84
-00:04:30,726 --> 00:04:34,806
-And, of course, we
-have our bar code.
+00:03:33,580 --> 00:03:34,882
+让我们看看这些通行证
 
 
 85
-00:04:34,806 --> 00:04:36,296
-And this is that link.
+00:03:37,351 --> 00:03:39,987
+从根本上讲
+这些通行证包含信息
 
 
 86
-00:04:36,686 --> 00:04:39,826
-It's the message that connects
-the users to your system,
+00:03:41,555 --> 00:03:43,790
+在左上角你会看到一个logo
 
 
 87
-00:04:39,826 --> 00:04:42,526
-to be able to take action in the
-real world, and in this case,
+00:03:44,291 --> 00:03:47,861
+清楚表明这个通行证
+属于哪个实体
 
 
 88
-00:04:42,526 --> 00:04:46,786
-this boarding pass will allow
-the user to board a flight.
+00:03:48,028 --> 00:03:49,096
+现在我们专门来看一下
 
 
 89
-00:04:46,786 --> 00:04:50,646
-And we can flip this
-to the back.
+00:03:49,162 --> 00:03:50,797
+美国联合航空公司的登机牌
 
 
 90
-00:04:51,016 --> 00:04:53,396
-We call this the
-back of the pass.
+00:03:51,532 --> 00:03:52,633
+他们的logo...
 
 
 91
-00:04:53,486 --> 00:04:54,346
-And you'll notice right away
+00:03:52,833 --> 00:03:54,668
+就在上方的显著位置
 
 
 92
-00:04:54,346 --> 00:04:58,066
-on the very top you can
-associate an app with this pass,
+00:03:54,735 --> 00:03:55,569
+在左上角
 
 
 93
-00:04:58,626 --> 00:05:02,926
-and appropriately we have the
-United Airlines app associated
+00:03:56,737 --> 00:03:59,439
+我们把重要的信息都放在标头栏
 
 
 94
-00:05:02,926 --> 00:05:03,556
-with this pass.
+00:04:00,541 --> 00:04:02,709
+就像登机口信息就在这里
 
 
 95
-00:05:04,376 --> 00:05:06,326
-There are two options
-for users here as well.
+00:04:03,177 --> 00:04:05,812
+用户将会清楚地知道
+在他们的登机时间
 
 
 96
-00:05:06,506 --> 00:05:08,666
-To be able to automatically
-update this pass,
+00:04:06,213 --> 00:04:07,915
+他们该去哪个登机口
 
 
 97
-00:05:08,706 --> 00:05:10,256
-that's very important
-we're going touch
+00:04:08,782 --> 00:04:10,717
+再往下的主要区域
 
 
 98
-00:05:10,256 --> 00:05:12,956
-on that a little bit later in
-our presentation to be able
+00:04:10,951 --> 00:04:12,819
+是我们的其他重要信息
 
 
 99
-00:05:12,956 --> 00:05:16,286
-to update these passes to
-keep information up to date.
+00:04:13,620 --> 00:04:15,589
+就这个例子而言
+我们的航班
 
 
 100
-00:05:17,186 --> 00:05:20,006
-We can also turn on and
-off relevancy on and off
+00:04:16,423 --> 00:04:17,624
+从纽瓦克起飞
 
 
 101
-00:05:20,006 --> 00:05:21,226
-on the back of the pass as well.
+00:04:18,392 --> 00:04:20,060
+终点是斯德哥尔摩
 
 
 102
-00:05:21,226 --> 00:05:24,246
-That's the option there,
-Suggest Pass on Lock Screen.
+00:04:22,196 --> 00:04:24,765
+还有辅助和次要区域
 
 
 103
-00:05:24,586 --> 00:05:26,526
-And along with that, on
-the back of the pass,
+00:04:24,998 --> 00:04:28,402
+那里有我们最好知道的
+其他信息
 
 
 104
-00:05:26,526 --> 00:05:29,066
-with he have some other nice
-to know pieces of information,
+00:04:28,468 --> 00:04:30,204
+比如说座位号
 
 
 105
-00:05:29,126 --> 00:05:34,386
-things like terms can go
-open the back of the pass.
+00:04:31,839 --> 00:04:33,540
+当然了我们有...
 
 
 106
-00:05:34,386 --> 00:05:35,546
-What makes a pass a pass?
+00:04:34,208 --> 00:04:35,075
+条形码
 
 
 107
-00:05:36,236 --> 00:05:40,586
-Let's take a look at this
-beautiful MLB event ticket.
+00:04:35,142 --> 00:04:36,276
+这就是那个链接
 
 
 108
-00:05:41,756 --> 00:05:45,426
-The pass is made from
-a pass.json file.
+00:04:36,677 --> 00:04:39,746
+它所含的信息
+把用户链接到您的系统
 
 
 109
-00:05:45,426 --> 00:05:47,046
-The contents and the layout
+00:04:39,813 --> 00:04:41,782
+以便在现实世界中完成操作
+在刚才的例子中
 
 
 110
-00:05:47,046 --> 00:05:49,136
-of this pass is defined
-in that file.
+00:04:41,915 --> 00:04:46,887
+登机牌帮助我们的用户登机
 
 
 111
-00:05:49,136 --> 00:05:52,296
-And it just your standard JSON
-file with keys and values.
+00:04:48,755 --> 00:04:50,791
+我们把它翻到背面
 
 
 112
-00:05:52,816 --> 00:05:55,566
-In this case the keys and
-values determine the content
+00:04:51,024 --> 00:04:52,893
+通行证的背面
 
 
 113
-00:05:55,716 --> 00:05:57,676
-and the styling and the
-layout of this pass.
+00:04:53,493 --> 00:04:54,361
+你马上会注意到
 
 
 114
-00:05:59,456 --> 00:06:02,666
-And this MLB pass also has
-some really beautiful images.
+00:04:54,428 --> 00:04:58,298
+在最顶端 
+您可以把某个app与通行证关联
 
 
 115
-00:06:02,666 --> 00:06:06,536
-We have a logo that's an image
-on the top left-hand corner
+00:04:58,632 --> 00:04:59,466
+准确无误地
 
 
 116
-00:06:07,456 --> 00:06:09,656
-and we have a strip image
-that spans that pass.
+00:05:00,000 --> 00:05:01,535
+我们让
+联合航空公司的app
 
 
 117
-00:06:09,656 --> 00:06:11,476
-It really makes that
-pass come to life.
+00:05:02,302 --> 00:05:03,737
+与这个登机牌进行关联
 
 
 118
-00:06:11,916 --> 00:06:14,306
-And when we package
-all of these things
+00:05:04,371 --> 00:05:06,139
+这里也有两个用户选项
 
 
 119
-00:06:14,306 --> 00:06:18,236
-up together we get what
-is called a PKPass file.
+00:05:06,473 --> 00:05:08,675
+能自动升级这个登机牌
 
 
 120
-00:06:19,506 --> 00:06:21,516
-And the file hierarchy
-looks something like this.
+00:05:08,742 --> 00:05:09,576
+这很重要
 
 
 121
-00:06:22,226 --> 00:06:25,106
-Your PKPass file will
-contain the pass.json
+00:05:09,643 --> 00:05:12,646
+我们在稍后的讲解中会谈到这点
 
 
 122
-00:06:25,256 --> 00:06:28,596
-and those images we talked
-about and there are a couple
+00:05:12,713 --> 00:05:16,450
+能够升级这些登机牌
+就是保持信息的更新
 
 
 123
-00:06:28,596 --> 00:06:30,396
-of other files in there
-I want to point out.
+00:05:17,184 --> 00:05:19,786
+我们也能够在登机牌背面
 
 
 124
-00:06:31,306 --> 00:06:33,406
-First of all, there are
-localized strings in here.
+00:05:19,953 --> 00:05:21,154
+开启关闭关联
 
 
 125
-00:06:33,946 --> 00:06:35,636
-Yes, passes can be localized,
+00:05:21,221 --> 00:05:24,258
+这就是选项按钮
+"在锁屏上提示登机牌"
 
 
 126
-00:06:35,636 --> 00:06:37,296
-I will encourage
-you guys to do so.
+00:05:24,658 --> 00:05:26,493
+除此之外 在登机牌背面
 
 
 127
-00:06:37,826 --> 00:06:40,866
-You'll also notice
-on the bottom,
+00:05:26,560 --> 00:05:29,062
+还含有其他一些需要了解的信息
 
 
 128
-00:06:41,296 --> 00:06:43,546
-the manifest file
-and a signature file.
+00:05:29,129 --> 00:05:32,633
+比如说条款之类的东西
+也可以出现在登机牌背面
 
 
 129
-00:06:44,686 --> 00:06:46,626
-Our passes are cryptographically
-signed
+00:05:33,834 --> 00:05:36,803
+那么是什么让通行证
+成为通行证？
 
 
 130
-00:06:46,746 --> 00:06:49,056
-so that their authenticity
-can be verified
+00:05:37,304 --> 00:05:40,407
+让我们看看这个漂亮的美国职业
+棒球大联盟(MLB)赛事门票
 
 
 131
-00:06:49,496 --> 00:06:52,616
-and that the users know that the
-pass came from a known entity.
+00:05:42,042 --> 00:05:45,479
+这个通行证由一个
+pass.json file生成
 
 
 132
-00:06:53,126 --> 00:06:54,636
-This is great.
+00:05:45,546 --> 00:05:47,381
+它的内容和版面
 
 
 133
-00:06:55,036 --> 00:06:56,766
-So now with a PK pass file
+00:05:47,447 --> 00:05:49,149
+由这个文件定义的
 
 
 134
-00:06:56,766 --> 00:06:58,606
-and this is now just
-a generic pass file.
+00:05:49,216 --> 00:05:52,419
+它就是您的标准JSON文件
+含有各种键和值
 
 
 135
-00:06:58,606 --> 00:06:59,666
-How do we make this unique?
+00:05:52,819 --> 00:05:55,556
+在本例中
+键和值决定通行证的
 
 
 136
-00:06:59,666 --> 00:07:01,636
-How do we make this your pass?
+00:05:55,789 --> 00:05:58,125
+内容
+风格和版面
 
 
 137
-00:07:02,416 --> 00:07:04,746
-Well we use three
-different values to be able
+00:05:59,459 --> 00:06:02,896
+这个MLB通行证
+有些的确漂亮的图片
 
 
 138
-00:07:04,746 --> 00:07:06,946
-to determine the
-uniqueness of your pass.
+00:06:03,797 --> 00:06:06,533
+我们在左上角有个logo图片
 
 
 139
-00:07:08,486 --> 00:07:10,886
-The first one is
-the teamIdentifier
+00:06:07,467 --> 00:06:09,703
+我们有个横跨通行证左右两侧的
+长条形图片
 
 
 140
-00:07:10,886 --> 00:07:14,016
-and this is just a 10 character
-string that you can find
+00:06:09,770 --> 00:06:11,572
+它让整个通行证生动起来
 
 
 141
-00:07:14,016 --> 00:07:16,986
-in the developer portal and
-we use this to entitle apps
+00:06:13,140 --> 00:06:14,408
+当我们把所有这些打包
 
 
 142
-00:07:17,866 --> 00:07:20,726
-to gain access via
-PassKit, our framework.
+00:06:14,474 --> 00:06:18,245
+我们就得到了被称为
+PKPass的文件
 
 
 143
-00:07:21,236 --> 00:07:25,616
-The second value we use
-is a passTypeIdentifier.
+00:06:19,513 --> 00:06:21,748
+文件的层次结构就是这样
 
 
 144
-00:07:25,976 --> 00:07:29,296
-And now this defines the class
-or the category of passes
+00:06:22,516 --> 00:06:25,118
+你的PKPass文件包含
+pass.json
 
 
 145
-00:07:29,396 --> 00:07:31,966
-that this particular pass is.
+00:06:25,752 --> 00:06:27,321
+和刚才讲过的图片
 
 
 146
-00:07:31,966 --> 00:07:34,446
-You register for this in the
-developer portal as well.
+00:06:27,855 --> 00:06:30,490
+以及另外几个我要讲到的文件
 
 
 147
-00:07:34,846 --> 00:07:37,896
-We also use this value
-to group passes together.
+00:06:31,291 --> 00:06:33,393
+首先 这里包含本地化字符串
 
 
 148
-00:07:38,726 --> 00:07:42,226
-And lastly, we have
-the pass serialNumber.
+00:06:33,961 --> 00:06:35,529
+是的 通行证能被本地化
 
 
 149
-00:07:43,216 --> 00:07:45,556
-And now, this is unique
-for every single pass.
+00:06:35,596 --> 00:06:37,397
+我建议你们这么做
 
 
 150
-00:07:45,796 --> 00:07:48,346
-And it's completely chosen
-by you, and opaque to us.
+00:06:38,832 --> 00:06:39,867
+你还会在底部注意到
 
 
 151
-00:07:49,566 --> 00:07:52,116
-Now, when we combine this
-value, the serialNumber
+00:06:40,067 --> 00:06:43,704
+清单文件和签名文件
 
 
 152
-00:07:52,586 --> 00:07:53,986
-with a passTypeIdentifier,
+00:06:44,738 --> 00:06:46,640
+我们的通行证签名加密的
 
 
 153
-00:07:54,686 --> 00:07:58,806
-we get our guaranteed global
-uniqueness for your pass.
+00:06:46,740 --> 00:06:49,042
+这样它的真实性才能被验证
 
 
 154
-00:07:59,596 --> 00:08:03,006
-Along with all of these
-values, the pass.json is also
+00:06:49,510 --> 00:06:52,713
+用户们也能知道
+通行证来自于一个已知实体
 
 
 155
-00:08:03,006 --> 00:08:05,106
-where you declare
-your pass' relevancy.
+00:06:54,047 --> 00:06:54,882
+这很不错
 
 
 156
-00:08:05,566 --> 00:08:06,866
-Let's take a look
-at relevancy now.
+00:06:54,982 --> 00:06:56,683
+所以现在有了PK通行证文件
 
 
 157
-00:08:08,036 --> 00:08:11,456
-Relevancy can be determined
-by three different categories.
+00:06:56,750 --> 00:06:58,385
+到这里它只是个
+普通的通行证文件
 
 
 158
-00:08:12,116 --> 00:08:14,196
-You can use date.
+00:06:58,452 --> 00:06:59,753
+我们如何把它变成独一无二？
 
 
 159
-00:08:14,196 --> 00:08:16,306
-You can use location.
+00:06:59,820 --> 00:07:02,122
+成为你的通行证呢？
 
 
 160
-00:08:17,116 --> 00:08:18,576
-And you can use beacons.
+00:07:02,422 --> 00:07:04,091
+我们使用三个不同的值
 
 
 161
-00:08:18,896 --> 00:08:22,276
-And it's the combination
-of these categories
+00:07:04,358 --> 00:07:07,361
+确保你的通行证是独一无二的
 
 
 162
-00:08:22,466 --> 00:08:25,276
-that make these passes
-really, really powerful.
+00:07:08,495 --> 00:07:10,998
+第一个是团队标识符
 
 
 163
-00:08:25,276 --> 00:08:28,786
-So let's take a look at
-how we implement relevancy
+00:07:11,064 --> 00:07:13,100
+这是有10个字母的字符串
 
 
 164
-00:08:28,926 --> 00:08:30,856
-on our pass.json.
+00:07:13,400 --> 00:07:15,169
+在开发者门户网站里能够找到
 
 
 165
-00:08:31,266 --> 00:08:32,086
-We have a few keys.
+00:07:15,536 --> 00:07:17,471
+我们用它来让app
 
 
 166
-00:08:32,885 --> 00:08:33,535
-First of all, we're going
+00:07:17,871 --> 00:07:20,741
+通过PassKit即我们的架构
+获得访问授权
 
 
 167
-00:08:33,535 --> 00:08:35,616
-to take a look at
-the locations key.
+00:07:22,543 --> 00:07:25,612
+我们使用的第二值是
+passTypeIdentifier
 
 
 168
-00:08:36,006 --> 00:08:38,226
-That takes an array
-of dictionaries
+00:07:25,979 --> 00:07:29,316
+现在
+它可以对通行证进行分类
 
 
 169
-00:08:38,596 --> 00:08:43,135
-and that dictionary will contain
-in it a latitude, a longitude
+00:07:29,383 --> 00:07:30,951
+确定它是哪类通行证
 
 
 170
-00:08:43,256 --> 00:08:44,726
-and an optional relevantText.
+00:07:31,485 --> 00:07:34,221
+你也需在开发者
+门户网站进行注册
 
 
 171
-00:08:45,066 --> 00:08:47,176
-This relevant text will
-then appear when your users
+00:07:34,855 --> 00:07:38,025
+我们也用它对通行证进行归类
 
 
 172
-00:08:47,266 --> 00:08:48,986
-in that locate or
-near that location.
+00:07:39,059 --> 00:07:42,329
+最后
+我们有通行证序列号
 
 
 173
-00:08:49,476 --> 00:08:52,606
-So it's good to declare
-those to be able to clarify
+00:07:43,230 --> 00:07:45,732
+每个通行证的序列号都是唯一的
 
 
 174
-00:08:52,606 --> 00:08:56,716
-to your user exactly why
-that's shown to the user.
+00:07:45,799 --> 00:07:48,569
+完全由你个人自行选择
+我们无法获晓
 
 
 175
-00:08:57,566 --> 00:08:59,416
-And then we have
-the relevantDate,
+00:07:49,570 --> 00:07:52,105
+现在我们把这个值
+即序列号
 
 
 176
-00:09:00,236 --> 00:09:03,666
-and that's just your standard
-W3C format, relevantDate,
+00:07:52,573 --> 00:07:53,974
+和通行证类型标识结合起来
 
 
 177
-00:09:04,436 --> 00:09:06,466
-and then we have our beacons.
+00:07:54,675 --> 00:07:58,212
+就能确保你的通行证
+在世界上是独一无二的
 
 
 178
-00:09:07,136 --> 00:09:10,156
-The beacons key is an array.
+00:07:59,913 --> 00:08:02,883
+和所有这些值一道
+您也通过pass.json
 
 
 179
-00:09:10,896 --> 00:09:12,496
-Inside that array
-are dictionaries,
+00:08:02,950 --> 00:08:05,252
+声明您的通行证的关联性
 
 
 180
-00:09:13,226 --> 00:09:16,736
-the proximityUUID will
-uniquely identify your beacon.
+00:08:05,552 --> 00:08:06,954
+我们现在就看看关联性
 
 
 181
-00:09:17,306 --> 00:09:18,836
-Again, we have that relevantText
+00:08:07,955 --> 00:08:08,922
+关联性...
 
 
 182
-00:09:18,836 --> 00:09:20,816
-and the optional name
-field here as well.
+00:08:09,356 --> 00:08:11,625
+有三个层面
 
 
 183
-00:09:21,296 --> 00:09:22,726
-Again, it's when you combine all
+00:08:13,393 --> 00:08:14,595
+你可以使用日期
 
 
 184
-00:09:22,726 --> 00:09:24,516
-of these relevancy
-categories together is
+00:08:15,295 --> 00:08:16,430
+可以用位置
 
 
 185
-00:09:24,856 --> 00:09:28,336
-when you make your passes
-really, really powerful.
+00:08:17,130 --> 00:08:18,732
+还可以用信标
 
 
 186
-00:09:28,336 --> 00:09:30,086
-And it's a great surprise
-in the live feature
+00:08:18,899 --> 00:08:22,269
+是三者的结合
 
 
 187
-00:09:30,086 --> 00:09:31,356
-for your users as well.
+00:08:22,469 --> 00:08:25,272
+使得通行证变得
+真真正正的强大
 
 
 188
-00:09:31,966 --> 00:09:35,406
-Passes are only interesting to
-the user when the information
+00:08:26,773 --> 00:08:28,876
+下面我们看一下
+我们如何在pass.json
 
 
 189
-00:09:35,406 --> 00:09:37,276
-on them is up to date.
+00:08:28,942 --> 00:08:30,844
+实施关联性
 
 
 190
-00:09:37,586 --> 00:09:39,816
-So how do we keep our
-passes up to date?
+00:08:31,278 --> 00:08:32,279
+我们有几个键
 
 
 191
-00:09:39,816 --> 00:09:42,976
-Now, I'm going to give
-a very high level glance
+00:08:32,846 --> 00:08:35,616
+首先我们来看位置键
 
 
 192
-00:09:42,976 --> 00:09:45,176
-at how this works,
-and I'm going to refer
+00:08:36,015 --> 00:08:37,017
+这需要...
 
 
 193
-00:09:45,176 --> 00:09:48,796
-to a WWDC talk we
-gave back in 2012
+00:08:37,384 --> 00:08:38,352
+字典阵列
 
 
 194
-00:09:49,006 --> 00:09:50,926
-that goes really
-in-depth into this topic.
+00:08:38,652 --> 00:08:43,123
+字典内含一对经纬度坐标
 
 
 195
-00:09:51,376 --> 00:09:52,446
-Let's take a look at this now.
+00:08:43,390 --> 00:08:44,858
+和一个可选的关联性文本
 
 
 196
-00:09:54,576 --> 00:09:57,756
-So your server will implement
-the Apple Push Service.
+00:08:45,058 --> 00:08:47,160
+当你的用户
+位于或接近那个位置时
 
 
 197
-00:09:57,756 --> 00:10:01,766
-And we utilize the Apple Push
-Service to start a pass' update.
+00:08:47,261 --> 00:08:48,996
+这个关联性文本会出现
 
 
 198
-00:10:03,046 --> 00:10:05,866
-We get pass down, a
-passTypeIdentifier.
+00:08:49,463 --> 00:08:51,932
+因此
+向用户声明...
 
 
 199
-00:10:05,906 --> 00:10:08,476
-That's what we talked about
-a couple of slides earlier.
+00:08:52,232 --> 00:08:53,901
+能够向用户阐明
 
 
 200
-00:10:09,646 --> 00:10:12,656
-With that passTypeIdentifier,
-we then look at your pass.json
+00:08:53,967 --> 00:08:56,770
+为何展示那个内容
+是有帮助的
 
 
 201
-00:10:12,996 --> 00:10:15,716
-and look for the webService key.
+00:08:57,571 --> 00:08:59,740
+我们还有关联日期
 
 
 202
-00:10:16,746 --> 00:10:19,726
-That webService key will
-contain a URL that we can hit
+00:09:00,374 --> 00:09:03,810
+而那正是您使用的标准的
+W3C格式relevantDate
 
 
 203
-00:10:20,356 --> 00:10:21,886
-and ask for updated passes.
+00:09:04,545 --> 00:09:06,613
+然后 我们有信标
 
 
 204
-00:10:22,456 --> 00:10:26,026
-And then we get brand new
-.pkpass files with updates
+00:09:08,081 --> 00:09:09,116
+信标键...
 
 
 205
-00:10:26,026 --> 00:10:29,836
-on them sent down to our devices
-and we update the user's pass.
+00:09:09,583 --> 00:09:10,417
+是一个阵列
 
 
 206
-00:10:30,826 --> 00:10:33,146
-Now that's a very high level
-view of how this works.
+00:09:10,884 --> 00:09:12,619
+在这个阵列中是字典
 
 
 207
-00:10:33,596 --> 00:10:37,366
-I would highly recommend going
-back to that WWDC talk from 2012
+00:09:13,220 --> 00:09:16,823
+proximityUUID
+能确认你的信标的唯一性
 
 
 208
-00:10:37,836 --> 00:10:41,996
-and dig into how to implement
-a web service for your passes.
+00:09:17,291 --> 00:09:19,159
+这里又再次出现了关联文本
 
 
 209
-00:10:42,876 --> 00:10:44,156
-Okay. This is great.
+00:09:19,226 --> 00:09:20,928
+还有可选的姓名字段
 
 
 210
-00:10:44,156 --> 00:10:47,136
-Now, let's take a look at how
-we can programmatically get
+00:09:21,228 --> 00:09:22,396
+再强调一遍
+当你把所有
 
 
 211
-00:10:47,136 --> 00:10:47,966
-to these passes.
+00:09:22,462 --> 00:09:24,531
+这些关联分类组合在一起
 
 
 212
-00:10:48,516 --> 00:10:50,406
-We do have PassKit
-after all inside iOS.
+00:09:24,865 --> 00:09:28,268
+你的通行证就能变得
+真真正正的强大
 
 
 213
-00:10:50,406 --> 00:10:51,916
-Let's see how we use it.
+00:09:28,335 --> 00:09:30,003
+这些已经在发挥功效的特性
 
 
 214
-00:10:52,276 --> 00:10:54,776
-The main class that
-we're going to be using
+00:09:30,070 --> 00:09:31,438
+对您的用户也是莫大的惊喜
 
 
 215
-00:10:54,776 --> 00:10:57,836
-in PassKit is PKPassLibrary.
+00:09:32,472 --> 00:09:34,608
+用户对通行证感兴趣的前提
 
 
 216
-00:10:57,836 --> 00:10:59,246
-This is your link.
+00:09:34,675 --> 00:09:37,277
+是他们的信息是最新的
 
 
 217
-00:10:59,716 --> 00:11:02,296
-This is what you are
-going to use to be able
+00:09:37,578 --> 00:09:39,746
+那么如何让我们的通行证
+保持最新状态？
 
 
 218
-00:11:02,296 --> 00:11:03,906
-to query your user's passes,
+00:09:39,813 --> 00:09:42,883
+现在我将从一个非常高的
+层面上来看一下
 
 
 219
-00:11:04,956 --> 00:11:07,276
-and access to it is
-gated by entitlements.
+00:09:42,950 --> 00:09:43,917
+它是如何工作的
 
 
 220
-00:11:07,756 --> 00:11:09,256
-We talked about that
-a little bit earlier,
+00:09:44,218 --> 00:09:45,519
+而且我将参考回顾一个
 
 
 221
-00:11:09,736 --> 00:11:11,606
-using your passTypeIdentifier.
+00:09:45,586 --> 00:09:48,789
+我们在2012年的
+WWDC上的讲座 
 
 
 222
-00:11:12,816 --> 00:11:15,636
-Let's take a look at some of the
-methods inside PKPassLibrary.
+00:09:49,022 --> 00:09:50,924
+那个讲座深入探讨了这一话题
 
 
 223
-00:11:17,356 --> 00:11:20,356
-First we have a function
-that asks,
+00:09:51,291 --> 00:09:52,526
+现在就让我们观看这段讲座
 
 
 224
-00:11:20,996 --> 00:11:23,376
-is the PassLibrary
-available on this device.
+00:09:54,895 --> 00:09:57,698
+因此你的服务器将实施
+苹果推送服务
 
 
 225
-00:11:23,376 --> 00:11:25,456
-This is a very good
-question to ask.
+00:09:57,764 --> 00:09:59,533
+我们就是利用苹果推送服务
 
 
 226
-00:11:26,616 --> 00:11:32,296
-When we get a positive answer
-back, you can then get passes.
+00:09:59,600 --> 00:10:01,768
+来启动通行证更新
 
 
 227
-00:11:32,296 --> 00:11:35,046
-When you call passes, you will
-get back an array of PKPass.
+00:10:02,970 --> 00:10:06,206
+我们向下传递通行证类型标识
 
 
 228
-00:11:35,306 --> 00:11:39,376
-And these are all the passes
-that you are entitled to see.
+00:10:06,340 --> 00:10:08,475
+刚刚前面几个幻灯片讲到过
 
 
 229
-00:11:40,656 --> 00:11:42,936
-You can also find a
-particular, a specific pass
+00:10:09,643 --> 00:10:12,713
+有了通行证类型标识 我们就
+可以查看你的pass.json
 
 
 230
-00:11:42,936 --> 00:11:43,486
-that you are looking
+00:10:13,146 --> 00:10:15,716
+寻找网络服务密钥
 
 
 231
-00:11:43,486 --> 00:11:45,766
-for by calling
-passWithPassTypeIdentifier,
+00:10:16,750 --> 00:10:18,785
+这个密钥中将包含一个URL
 
 
 232
-00:11:46,196 --> 00:11:49,776
-serialNumber, passing
-it the identifier string
+00:10:19,086 --> 00:10:19,920
+利用它我们就能
 
 
 233
-00:11:49,826 --> 00:11:50,916
-and the serial number string.
+00:10:20,354 --> 00:10:21,989
+请求更新通行证
 
 
 234
-00:11:50,916 --> 00:11:52,886
-That will get you the exact
-pass that you are looking for.
+00:10:22,456 --> 00:10:26,326
+然后我们就能让带有所有
+更新内容的全新 pkpass文件
 
 
 235
-00:11:53,386 --> 00:11:56,256
-We also have another
-one called passesOfType,
+00:10:26,393 --> 00:10:30,030
+向下传递到我们的设备
+之后我们就更新用户通行证
 
 
 236
-00:11:57,086 --> 00:11:58,086
-passing a PKPassType.
+00:10:30,898 --> 00:10:33,300
+那就是站在一个很高的层面上看
+它是如何工作的
 
 
 237
-00:11:58,086 --> 00:12:00,036
-And you may wonder what are
-all the different pass types?
+00:10:33,600 --> 00:10:37,371
+我强烈推荐大家回去看看
+那个2012年的WWDC讲座
 
 
 238
-00:12:00,036 --> 00:12:02,816
-Well here they are
-there's Barcode,
+00:10:37,838 --> 00:10:42,109
+探究如何为通行证实施网络服务
 
 
 239
-00:12:03,346 --> 00:12:05,216
-there's Payment and there's Any.
+00:10:43,544 --> 00:10:46,947
+非常好 现在让我们看看
+如何以编程方式
 
 
 240
-00:12:06,476 --> 00:12:08,546
-So you may ask yourself, Danvin,
+00:10:47,014 --> 00:10:48,015
+获取这些通行证
 
 
 241
-00:12:08,546 --> 00:12:10,086
-why would you want
-to get passes?
+00:10:48,515 --> 00:10:50,851
+我们确实在iOS操作系统内
+内置了PassKit
 
 
 242
-00:12:10,086 --> 00:12:11,606
-Why do you want to see
-your user's passes.
+00:10:50,984 --> 00:10:52,119
+我们看怎么用这个工具包
 
 
 243
-00:12:11,606 --> 00:12:14,056
-Well as a developer
-you may want to know --
+00:10:53,020 --> 00:10:54,855
+我们在PassKit中
+使用较多的类是
 
 
 244
-00:12:14,056 --> 00:12:18,396
-any of your passes that your
-users already have on the system
+00:10:54,922 --> 00:10:59,259
+是工具包里的PK通行证库
+(PKPassLibrary)
 
 
 245
-00:12:18,396 --> 00:12:20,976
-so you don't duplicate
-things again.
+00:10:59,693 --> 00:11:01,161
+这是为您提供的链接
 
 
 246
-00:12:20,976 --> 00:12:23,516
-For payment passes, we're
-going talk about earlier,
+00:11:01,228 --> 00:11:04,131
+你用它能够查询你用户的通行证
 
 
 247
-00:12:23,516 --> 00:12:26,516
-banks and other merchants
-may want to be able
+00:11:05,032 --> 00:11:07,401
+而对它的访问
+则需要授权
 
 
 248
-00:12:26,516 --> 00:12:30,386
-to activate payment passes
-from your users' pass library.
+00:11:07,768 --> 00:11:09,203
+我们在前面一点讲到过
 
 
 249
-00:12:30,386 --> 00:12:32,866
-We will get into that when we
-get into the Apple Pay section.
+00:11:09,469 --> 00:11:12,005
+是通过使用你的通行证类型标识
 
 
 250
-00:12:33,676 --> 00:12:36,246
-Now we have our passes
-together, they're beautiful,
+00:11:12,806 --> 00:11:15,909
+下面来看一下
+PKPassLibrary的一些使用方法
 
 
 251
-00:12:36,246 --> 00:12:38,296
-they're relevant, they're up
-to date, how do we get them
+00:11:17,611 --> 00:11:20,581
+首先我们有个函数
+它询问：
 
 
 252
-00:12:38,296 --> 00:12:39,546
-in the hands of our users.
+00:11:20,881 --> 00:11:24,251
+在这台设备上是否有通行证库可用
 
 
 253
-00:12:40,806 --> 00:12:45,316
-Well the PKPass file is pretty
-portable, so you can host them
+00:11:24,318 --> 00:11:25,385
+这是个很必要的问题
 
 
 254
-00:12:45,316 --> 00:12:48,206
-on a website, you can
-email them to your users,
+00:11:26,720 --> 00:11:28,922
+如果答案是有
+我们就能得到...
 
 
 255
-00:12:48,206 --> 00:12:50,746
-you can even include
-them inside your apps.
+00:11:30,157 --> 00:11:30,991
+通行证
 
 
 256
-00:12:52,326 --> 00:12:54,916
-And I want to point one
-neat little feature,
+00:11:32,359 --> 00:11:35,863
+当你调用通行证时
+你会取回一个PK Pass阵列
 
 
 257
-00:12:55,116 --> 00:12:56,636
-we give special treatment
+00:11:36,496 --> 00:11:39,366
+这些是你被授权看到的
+所有通行证
 
 
 258
-00:12:56,636 --> 00:12:59,876
-to PKPass files inside
-our iOS apps like Mail.
+00:11:40,667 --> 00:11:42,870
+你也会找到一个你正在寻找的
 
 
 259
-00:13:00,426 --> 00:13:03,426
-When we receive a PKPass file
+00:11:42,936 --> 00:11:43,904
+特别的 具体的通行证
 
 
 260
-00:13:03,796 --> 00:13:07,176
-in our email Mail will give
-it some special treatment
+00:11:43,971 --> 00:11:46,740
+方法是通过调用
+passWithPassTypeIdentifier
 
 
 261
-00:13:07,176 --> 00:13:11,106
-with this action button and you
-can see exactly what PKPass file
+00:11:47,207 --> 00:11:49,743
+传递标识后加字符串
 
 
 262
-00:13:11,106 --> 00:13:13,186
-is in that email.
+00:11:49,810 --> 00:11:50,811
+序列号后加字符串
 
 
 263
-00:13:13,536 --> 00:13:17,446
-And if you host this on a
-website or put this on an app,
+00:11:50,878 --> 00:11:53,046
+这样你就能得到
+你想要找的通行证了
 
 
 264
-00:13:17,446 --> 00:13:19,116
-we even have a banner for you,
+00:11:53,447 --> 00:11:56,450
+我们还有另一个
+passesOfType
 
 
 265
-00:13:19,116 --> 00:13:22,866
-you can include inside your
-sites and on your apps.
+00:11:56,950 --> 00:11:58,151
+用来传递PK通行证类型
 
 
 266
-00:13:23,716 --> 00:13:25,556
-But you may be telling
-me, Danvin,
+00:11:58,218 --> 00:12:00,420
+你可能会想知道
+都有哪些不同类型的通行证？
 
 
 267
-00:13:25,556 --> 00:13:27,426
-you know that says Passbook.
+00:12:00,821 --> 00:12:01,655
+它们分为...
 
 
 268
-00:13:28,156 --> 00:13:29,826
-I know. I know this
-says Passbook.
+00:12:02,022 --> 00:12:02,856
+条形码
 
 
 269
-00:13:29,826 --> 00:13:33,746
-This is a good little
-transition for me to talk about.
+00:12:03,357 --> 00:12:04,191
+支付
 
 
 270
-00:13:33,826 --> 00:13:35,206
-We are in the middle
-of a transition.
+00:12:04,691 --> 00:12:05,526
+和任意类型
 
 
 271
-00:13:35,416 --> 00:13:37,486
-We are moving from
-Passbook to Wallet.
+00:12:06,560 --> 00:12:07,995
+你也许还会问
 
 
 272
-00:13:37,996 --> 00:13:40,886
-And for now, in the public, we
-are still known as Passbook.
+00:12:08,161 --> 00:12:10,030
+达文
+为什么要获取通行证？
 
 
 273
-00:13:41,026 --> 00:13:41,916
-So be aware of that.
+00:12:10,097 --> 00:12:11,765
+为什么要看用户的通行证？
 
 
 274
-00:13:42,516 --> 00:13:45,316
-But please stay tuned as
-we get closer and closer
+00:12:12,199 --> 00:12:14,134
+作为开发者你应该知道
 
 
 275
-00:13:45,316 --> 00:13:50,056
-to iOS 9's release, we will keep
-you up to date on this topic.
+00:12:14,201 --> 00:12:18,372
+你用户系统上已安装的所有通行证
 
 
 276
-00:13:50,116 --> 00:13:52,706
-I'm really glad we got
-to talk about that.
+00:12:18,672 --> 00:12:20,007
+那样你就不用再重做一遍了
 
 
 277
-00:13:53,506 --> 00:13:57,326
-But let's say we want to add
-these passes programmatically,
+00:12:20,674 --> 00:12:23,510
+对于支付通行证
+我们前面讲到了
 
 
 278
-00:13:57,386 --> 00:13:58,196
-how would you do that?
+00:12:23,577 --> 00:12:25,712
+银行和其他商户要能够激活
 
 
 279
-00:13:58,956 --> 00:14:00,376
-Well, PKPassLibrary does that.
+00:12:26,146 --> 00:12:30,317
+你用户通行证库里的支付通行证
 
 
 280
-00:14:01,076 --> 00:14:03,846
-We have a function in
-there called addPasses.
+00:12:30,384 --> 00:12:33,053
+我们进到苹果支付部分内容后
+将对其进行深入探讨
 
 
 281
-00:14:05,086 --> 00:14:06,676
-That's right, multiple passes.
+00:12:33,654 --> 00:12:35,789
+现在我们把所有通行证汇集在一起
 
 
 282
-00:14:06,716 --> 00:14:07,756
-Why would you want to do this?
+00:12:35,856 --> 00:12:36,957
+他们设计美观
+相互关联
 
 
 283
-00:14:07,756 --> 00:14:12,926
-Well, consider a flight with
-multiple segments and you want
+00:12:37,024 --> 00:12:38,125
+实时更新
+我们如何能够
 
 
 284
-00:14:12,926 --> 00:14:16,036
-to be able to ingest all
-the passes all at once.
+00:12:38,192 --> 00:12:39,726
+让它们进入我们的用户手中呢？
 
 
 285
-00:14:16,826 --> 00:14:18,016
-This is a great way to do that.
+00:12:40,827 --> 00:12:43,363
+PKPass文件非常的便携
 
 
 286
-00:14:18,016 --> 00:14:20,906
-So addPasses
-withCompletionHandler will alert
+00:12:44,531 --> 00:12:46,166
+你可以从网址上下载
 
 
 287
-00:14:20,906 --> 00:14:23,986
-the user with a small
-and very subtle dialog
+00:12:46,633 --> 00:12:48,202
+用电子邮件发送给你的用户
 
 
 288
-00:14:24,066 --> 00:14:26,236
-to add these passes
-into their library.
+00:12:48,502 --> 00:12:50,904
+你甚至可以把它装进你的apps
 
 
 289
-00:14:26,286 --> 00:14:29,816
-Please make sure before you call
-this that you already denoted
+00:12:52,339 --> 00:12:54,908
+我还要指出它的一个小功能 
 
 
 290
-00:14:29,816 --> 00:14:33,506
-to the user that they
-are about to add a pass.
+00:12:55,209 --> 00:12:57,144
+让我们专门看一下
 
 
 291
-00:14:33,706 --> 00:14:36,516
-We do have one more way to add
-passes into the pass library
+00:12:57,211 --> 00:12:59,880
+iOS apps里的PKPass
+文档 比如邮件
 
 
 292
-00:14:36,516 --> 00:14:39,706
-and that's using
-PKAddPassesViewController.
+00:13:01,515 --> 00:13:04,551
+当我们用电子邮件
+接收了一个PKPass文档
 
 
 293
-00:14:40,606 --> 00:14:43,056
-you may have seen this before if
-you have added passes to Mail.
+00:13:04,885 --> 00:13:06,987
+Mail会对它进行特殊的处理
 
 
 294
-00:14:43,456 --> 00:14:46,316
-It looks something like
-this, you tap on a pass,
+00:13:07,054 --> 00:13:10,691
+点击这个按钮你就能获悉
+在这封电子邮件里
 
 
 295
-00:14:47,426 --> 00:14:49,116
-they call
-PKAddPassesViewController
+00:13:10,757 --> 00:13:12,626
+是什么PKPass文档
 
 
 296
-00:14:49,186 --> 00:14:51,776
-and we get this nice beautiful
-view controller fully rendered
+00:13:13,527 --> 00:13:17,397
+如果你在某个网站上托管它
+或把它装进某个app
 
 
 297
-00:14:51,776 --> 00:14:55,456
-out with an action up top
-for the user to choose.
+00:13:17,464 --> 00:13:19,066
+我们甚至为您提供一个横幅广告
 
 
 298
-00:14:56,486 --> 00:14:57,096
-How does this work.
+00:13:19,132 --> 00:13:22,302
+你可以把它加入网站
+或装在你的app上
 
 
 299
-00:14:57,496 --> 00:14:59,996
-PKAddPassesViewerController
-has a function
+00:13:24,004 --> 00:13:24,838
+但你会告诉说：
 
 
 300
-00:15:00,096 --> 00:15:02,216
-that checks can you add
-passes to this device?
+00:13:24,905 --> 00:13:27,441
+达文
+你知道你是在讲Passbook吧
 
 
 301
-00:15:03,156 --> 00:15:05,396
-And then like before, you
-can add a single pass,
+00:13:28,141 --> 00:13:30,010
+是的 我知道
+这是在说Passbook
 
 
 302
-00:15:06,896 --> 00:15:07,746
-or multiple passes.
+00:13:30,077 --> 00:13:32,579
+这个是我正在谈的
+一个不错的小过渡
 
 
 303
-00:15:08,156 --> 00:15:09,376
-So you knit one of these guys
+00:13:33,814 --> 00:13:35,249
+我们正处于过渡期
 
 
 304
-00:15:09,486 --> 00:15:12,076
-and then you just show this
-view controller and we take care
+00:13:35,682 --> 00:13:37,718
+我们正要从Passbook
+过渡到Wallet
 
 
 305
-00:15:12,076 --> 00:15:13,466
-of rendering that pass for you.
+00:13:37,985 --> 00:13:40,888
+目前 在公共场合
+我们还叫Passbook
 
 
 306
-00:15:14,626 --> 00:15:17,166
-Great. Now we can add passes.
+00:13:40,954 --> 00:13:42,022
+所以请记住这一点
 
 
 307
-00:15:17,166 --> 00:15:18,936
-We can keep them updated.
+00:13:42,856 --> 00:13:45,325
+但请随时关注
+随着离我们发布iOS 9的
 
 
 308
-00:15:18,936 --> 00:15:19,896
-We can keep them relevant.
+00:13:45,392 --> 00:13:47,094
+时间越来越近
 
 
 309
-00:15:21,186 --> 00:15:23,196
-But how do we keep
-these passes engaging?
+00:13:47,160 --> 00:13:50,063
+我们会让大家第一时间知晓
 
 
 310
-00:15:23,486 --> 00:15:23,826
-All right.
+00:13:51,164 --> 00:13:52,699
+很高兴能谈到这些
 
 
 311
-00:15:23,826 --> 00:15:25,376
-We want our users
-to keep coming back
+00:13:53,500 --> 00:13:57,304
+但我们要说必须以编程方式
+添加这些通行证
 
 
 312
-00:15:25,376 --> 00:15:26,796
-and take a look at our passes.
+00:13:57,371 --> 00:13:58,238
+你要怎么来做呢？
 
 
 313
-00:15:27,346 --> 00:15:30,486
-So I have a few tips for you
-to keep our passes engaging.
+00:13:58,872 --> 00:14:00,607
+是的PKPassLibrary
+能够做到
 
 
 314
-00:15:31,376 --> 00:15:33,816
-As I mentioned before
-relevancy is a big deal.
+00:14:01,074 --> 00:14:04,344
+我们有个函数叫
+addPasses
 
 
 315
-00:15:33,886 --> 00:15:36,486
-Relevancy will give that
-big surprise in the life,
+00:14:05,078 --> 00:14:06,647
+对了
+多个通行证
 
 
 316
-00:15:36,926 --> 00:15:38,846
-kind of feel for the users.
+00:14:06,713 --> 00:14:07,981
+为什么要这样做？
 
 
 317
-00:15:40,176 --> 00:15:41,486
-You want to keep
-our passes updated.
+00:14:08,482 --> 00:14:09,316
+设想一下...
 
 
 318
-00:15:41,486 --> 00:15:43,366
-For example, this pass,
-this boarding pass,
+00:14:09,683 --> 00:14:12,219
+就像一个航班分为几段
 
 
 319
-00:15:44,106 --> 00:15:48,066
-it's useless unless we have
-the latest gate information.
+00:14:12,452 --> 00:14:16,256
+而你想要一次处理所有通行证
 
 
 320
-00:15:49,386 --> 00:15:53,546
-Users want to come back and
-keep looking at your passes.
+00:14:16,823 --> 00:14:17,958
+这是个很好的方法
 
 
 321
-00:15:53,696 --> 00:15:54,586
-Images are great.
+00:14:18,025 --> 00:14:22,029
+所以addPasses
+withCompletionHandler
 
 
 322
-00:15:55,116 --> 00:15:56,656
-For example, this MLB
-pass that we looked
+00:14:22,362 --> 00:14:24,064
+会用非常简短巧妙的对话
+提醒用户
 
 
 323
-00:15:56,656 --> 00:16:00,136
-at has this strip image that
-spans the entirety of the pass.
+00:14:24,131 --> 00:14:26,233
+向库中添加这些通行证
 
 
 324
-00:16:00,916 --> 00:16:03,196
-It really brings life
-and also brings clarity
+00:14:26,300 --> 00:14:28,535
+有一点你要确定
+在调用前你已告知用户
 
 
 325
-00:16:03,196 --> 00:16:05,836
-as to what this pass is
-actually for and what it does.
+00:14:28,735 --> 00:14:32,206
+他们正在添加通行证
 
 
 326
-00:16:06,516 --> 00:16:07,636
-This is called a strip image.
+00:14:33,707 --> 00:14:36,510
+当然我们还有另一种方式
+添加通行证入库
 
 
 327
-00:16:07,806 --> 00:16:09,556
-You notice that there's no
-extra information there.
+00:14:37,110 --> 00:14:39,813
+即使用
+PKAddPassesViewController
 
 
 328
-00:16:09,556 --> 00:16:10,766
-It's just for context.
+00:14:40,514 --> 00:14:43,283
+若你曾在Mail里加过通行证
+那么你可能见过这个命令
 
 
 329
-00:16:10,766 --> 00:16:11,486
-It's beautiful!
+00:14:43,450 --> 00:14:44,751
+它看上去和这个类似
 
 
 330
-00:16:12,396 --> 00:16:15,216
-And lastly, I want to
-talk about formatting.
+00:14:45,519 --> 00:14:46,553
+您点击一个通行证
 
 
 331
-00:16:16,676 --> 00:16:18,456
-Formatting is tricky.
+00:14:47,321 --> 00:14:49,990
+它们会调用
+PKAddPassesViewController
 
 
 332
-00:16:19,056 --> 00:16:20,276
-But we take care
-of this for you.
+00:14:50,057 --> 00:14:52,259
+就会出现一个已经过充分渲染的
+漂亮的视图控件
 
 
 333
-00:16:20,516 --> 00:16:22,346
-And now we know we
-have different devices
+00:14:52,326 --> 00:14:55,462
+并在顶部提供了
+用户可以选择的动作
 
 
 334
-00:16:22,346 --> 00:16:23,476
-with different screen sizes.
+00:14:56,396 --> 00:14:57,264
+这是如何工作的？
 
 
 335
-00:16:23,476 --> 00:16:27,496
-And so what I recommend is you
-take a look at our HI guidelines
+00:14:57,397 --> 00:15:00,100
+PKAddPassesViewerController
+有个功能
 
 
 336
-00:16:27,686 --> 00:16:30,986
-on the website follow them
-and we will do our very best
+00:15:00,167 --> 00:15:02,269
+它向你核实：
+你要添加通行证到此设备吗？
 
 
 337
-00:16:30,986 --> 00:16:35,686
-to make your passes look really
-great on all of our devices.
+00:15:03,170 --> 00:15:05,639
+那么和以前一样
+你可添加一个
 
 
 338
-00:16:37,016 --> 00:16:39,366
-Great. These passes have
-been really, really useful.
+00:15:06,907 --> 00:15:07,875
+或多个通行证
 
 
 339
-00:16:39,366 --> 00:16:41,436
-They really let us take
-action in the real world.
+00:15:08,141 --> 00:15:09,376
+因此
+你选择其中的一个
 
 
 340
-00:16:42,376 --> 00:16:45,096
-But they are not as slick
-as what that experience
+00:15:09,476 --> 00:15:11,645
+展示这个视图控件
+然后我们就负责
 
 
 341
-00:16:45,096 --> 00:16:46,116
-with Apple Pay is yet.
+00:15:11,712 --> 00:15:13,480
+为您执行那个通行证
 
 
 342
-00:16:47,186 --> 00:16:49,576
-So how do we make that
-experience a lot better?
+00:15:14,481 --> 00:15:15,315
+很棒
 
 
 343
-00:16:50,126 --> 00:16:52,586
-Well, let's talk about
-where we go from here.
+00:15:15,382 --> 00:15:17,985
+现在我们可以添加通行证
 
 
 344
-00:16:53,126 --> 00:16:55,956
-Let me give you a scenario.
+00:15:18,051 --> 00:15:18,919
+更新它们
 
 
 345
-00:16:57,116 --> 00:16:58,356
-So the other day, I go
+00:15:18,986 --> 00:15:20,187
+我们可以保持它们的关联性
 
 
 346
-00:16:58,356 --> 00:17:01,886
-to my local neighborhood grocery
-store, and I pick up my things
+00:15:21,121 --> 00:15:23,323
+但是怎么能让这些通行证
+具有持续的吸引力呢？
 
 
 347
-00:17:02,106 --> 00:17:03,116
-and I'm ready to check out.
+00:15:23,624 --> 00:15:25,325
+我们希望用户不断地回访
 
 
 348
-00:17:03,526 --> 00:17:05,376
-Great, they take Apple Pay.
+00:15:25,392 --> 00:15:26,793
+关注我们的通行证
 
 
 349
-00:17:05,516 --> 00:17:08,526
-As I head to the terminal, the
-clerk is ringing up my things
+00:15:27,361 --> 00:15:30,497
+这儿有几个小窍门
+让您维持通行证的吸引力
 
 
 350
-00:17:08,526 --> 00:17:11,336
-and I get my phone ready
-to pay with Apple Pay.
+00:15:31,365 --> 00:15:33,800
+就像我之前讲的
+关联是件大事
 
 
 351
-00:17:12,816 --> 00:17:13,116
-All right.
+00:15:33,901 --> 00:15:36,470
+关联能在生活中带来巨大的惊喜
 
 
 352
-00:17:13,996 --> 00:17:16,396
-They are done ringing up my
-things and I bring my phone
+00:15:37,037 --> 00:15:38,939
+你要为用户着想
 
 
 353
-00:17:16,396 --> 00:17:17,156
-to the terminal and...
+00:15:40,174 --> 00:15:41,408
+你应该让通行证实时升级
 
 
 354
-00:17:17,246 --> 00:17:19,316
-do you have a loyalty
-pass with us?
+00:15:41,475 --> 00:15:43,377
+比如说
+这个登机通行证
 
 
 355
-00:17:20,606 --> 00:17:21,906
-I think I do.
+00:15:44,111 --> 00:15:48,081
+如果没有最新的登机口信息
+它就毫无用处
 
 
 356
-00:17:21,906 --> 00:17:25,935
-The clerk is really -- really
-adamant about this loyalty card.
+00:15:49,383 --> 00:15:52,386
+用户们要不断回来
+查看你的通行证
 
 
 357
-00:17:26,185 --> 00:17:28,306
-I think it's in that
-big fat wallet of mine.
+00:15:53,687 --> 00:15:54,755
+图像很管用
 
 
 358
-00:17:28,306 --> 00:17:30,426
-Oh, I can't find it right now.
+00:15:55,122 --> 00:15:56,823
+看这个
+这个MLB通行证
 
 
 359
-00:17:30,426 --> 00:17:31,376
-I know it's on my phone number.
+00:15:56,890 --> 00:16:00,394
+这个长条形图片横跨整个通行证
 
 
 360
-00:17:31,376 --> 00:17:32,756
-It's got to be registered
-with my phone number.
+00:16:00,928 --> 00:16:01,895
+感觉生动明了
 
 
 361
-00:17:32,806 --> 00:17:34,686
-I blurt my phone
-number to the clerk.
+00:16:02,095 --> 00:16:05,999
+让人一下子明白这个通行证的
+目的和用途
 
 
 362
-00:17:35,976 --> 00:17:38,136
-Nope. It's not registered
-with that phone number.
+00:16:06,500 --> 00:16:07,634
+这是个长条形图片
 
 
 363
-00:17:38,536 --> 00:17:41,776
-I'm frustrated and the
-line is two or three deep.
+00:16:07,801 --> 00:16:09,436
+你注意到
+这里并没有其他多余信息
 
 
 364
-00:17:42,016 --> 00:17:44,016
-I just blurt out my
-mom's phone number
+00:16:09,503 --> 00:16:10,871
+就只是环境的信息
 
 
 365
-00:17:44,016 --> 00:17:45,876
-because I know my mom
-has one of these things.
+00:16:10,938 --> 00:16:11,772
+非常美观！
 
 
 366
-00:17:46,346 --> 00:17:47,436
-Great. That works!
+00:16:12,840 --> 00:16:15,108
+最后我要讲讲格式
 
 
 367
-00:17:47,956 --> 00:17:49,086
-And I now can Apple Pay
+00:16:16,677 --> 00:16:18,445
+格式有点棘手
 
 
 368
-00:17:49,126 --> 00:17:51,486
-and I grab my things
-and I'm out the door.
+00:16:19,046 --> 00:16:20,280
+但让我们帮你处理
 
 
 369
-00:17:52,206 --> 00:17:54,496
-So a lot of bad things
-happen there.
+00:16:20,514 --> 00:16:22,282
+现在我们知道有不同的设备
 
 
 370
-00:17:55,646 --> 00:17:57,986
-For me as a consumer,
-I just want to pay.
+00:16:22,349 --> 00:16:23,717
+屏幕的尺寸不同
 
 
 371
-00:17:58,956 --> 00:18:00,946
-I want to get my
-things and be done.
+00:16:23,984 --> 00:16:24,985
+我建议...
 
 
 372
-00:18:00,946 --> 00:18:05,456
-For the merchant, they just
-got the completely wrong
+00:16:25,719 --> 00:16:27,621
+你参考我们网站上的 
+《人机界面指南》
 
 
 373
-00:18:05,456 --> 00:18:06,296
-loyalty information.
+00:16:27,688 --> 00:16:30,924
+按照指示操作
+然后我们就能尽量
 
 
 374
-00:18:06,296 --> 00:18:08,476
-They got my mom's loyalty
-information, not mine.
+00:16:30,991 --> 00:16:35,896
+让您的通行证
+适用我们的所有设备
 
 
 375
-00:18:09,016 --> 00:18:11,086
-So we want to make this better.
+00:16:37,030 --> 00:16:39,299
+很棒
+这些通行证真的好用
 
 
 376
-00:18:12,156 --> 00:18:14,626
-And that's why we are
-introducing passes
+00:16:39,366 --> 00:16:41,435
+它们真的让我们
+将其用于现实生活中
 
 
 377
-00:18:14,626 --> 00:18:16,326
-that work with Apple Pay.
+00:16:42,369 --> 00:16:44,571
+但真正用起来还是比不上
 
 
 378
-00:18:16,786 --> 00:18:21,846
-Passes that work with Apple
-Pay transmit your loyalty
+00:16:44,638 --> 00:16:46,173
+苹果支付那样顺手
 
 
 379
-00:18:21,846 --> 00:18:25,786
-information, contactlessly along
-with your Apple Pay transaction.
+00:16:47,140 --> 00:16:49,576
+我们如何大幅改进那种体验呢？
 
 
 380
-00:18:27,316 --> 00:18:30,646
-We use the Value Added
-Services Protocol
+00:16:50,110 --> 00:16:52,579
+好了 现在我们就来谈谈
+从这里开始我们会走向何方
 
 
 381
-00:18:30,686 --> 00:18:33,076
-and we have been working with
-major terminal manufacturers
+00:16:54,948 --> 00:16:56,049
+让我给您设想一个情景
 
 
 382
-00:18:33,356 --> 00:18:35,456
-for the adoption of
-this new protocol.
+00:16:57,384 --> 00:17:00,687
+有一天我来到我小区内的杂货店
 
 
 383
-00:18:36,536 --> 00:18:38,846
-So now, my scenario
-looks more like this.
+00:17:00,954 --> 00:17:01,989
+拿上要买的东西
 
 
 384
-00:18:40,096 --> 00:18:43,036
-I go to my friendly
-neighborhood Walgreens.
+00:17:02,122 --> 00:17:03,123
+准备结账
 
 
 385
-00:18:44,636 --> 00:18:48,506
-They take Apple Pay, great,
-I use the new iOS feature
+00:17:03,524 --> 00:17:05,392
+太好了
+他们支持苹果支付
 
 
 386
-00:18:48,586 --> 00:18:52,206
-and double tap on my home
-button and I can prearm my card.
+00:17:05,526 --> 00:17:06,894
+我走向款台
 
 
 387
-00:18:52,206 --> 00:18:54,896
-I can get my card ready before
-I even head up to the terminal.
+00:17:07,227 --> 00:17:08,795
+收银员扫描我买的商品
 
 
 388
-00:18:54,936 --> 00:18:58,736
-Great. My card is ready and I
-head up to pay for my things.
+00:17:08,929 --> 00:17:11,330
+我准备好手机
+用苹果支付结账
 
 
 389
-00:18:59,866 --> 00:19:01,726
-When I put my phone
-on the terminal,
+00:17:12,733 --> 00:17:13,567
+好
 
 
 390
-00:19:02,826 --> 00:19:05,616
-my Walgreen's loyalty
-information is transmitted
+00:17:14,001 --> 00:17:15,169
+他们扫描完了我的商品
 
 
 391
-00:19:05,616 --> 00:19:08,116
-contactlessly, along with
-my Apple Pay information,
+00:17:15,402 --> 00:17:17,204
+我把我的手机
+靠近销售终端...
 
 
 392
-00:19:08,396 --> 00:19:09,986
-all in one tap.
+00:17:17,804 --> 00:17:19,573
+您有我们的会员通行证吗？
 
 
 393
-00:19:11,366 --> 00:19:11,776
-That's it!
+00:17:20,607 --> 00:17:21,909
+我想我是有的
 
 
 394
-00:19:12,946 --> 00:19:15,356
-I give a friendly
-smile and a thank you
+00:17:21,974 --> 00:17:25,612
+收银员坚持要看会员卡
 
 
 395
-00:19:15,356 --> 00:19:17,316
-to the clerk and
-I'm out the door.
+00:17:25,679 --> 00:17:28,182
+我想它是在我那个鼓鼓的
+钱包里面
 
 
 396
-00:19:17,876 --> 00:19:20,106
-That is great!
+00:17:28,248 --> 00:17:30,384
+但我现在就是找不到它
 
 
 397
-00:19:21,176 --> 00:19:24,056
-That makes the process
-a lot more smooth.
+00:17:30,450 --> 00:17:31,418
+我觉得它应该是
 
 
 398
-00:19:24,976 --> 00:19:25,736
-So how do we do this?
+00:17:31,485 --> 00:17:32,753
+是用我手机号注册的
 
 
 399
-00:19:25,736 --> 00:19:29,556
-How do we add this
-feature into your passes?
+00:17:32,819 --> 00:17:34,688
+我把手机号报给收银员
 
 
 400
-00:19:30,246 --> 00:19:31,046
-We have a new key.
+00:17:35,889 --> 00:17:36,723
+不对
 
 
 401
-00:19:31,416 --> 00:19:32,756
-It's pass.json.
+00:17:36,890 --> 00:17:38,125
+不是用那个电话号码注册的
 
 
 402
-00:19:33,516 --> 00:19:40,126
-It's nfc. Nfc is a a
-dictionary that takes a message.
+00:17:38,525 --> 00:17:41,628
+我泄气了 后面的队伍
+已经有二三米远了
 
 
 403
-00:19:40,126 --> 00:19:43,256
-Just kind of like a bar code,
-this is the loyalty information
+00:17:41,695 --> 00:17:44,031
+我又报出我妈妈的手机号
 
 
 404
-00:19:43,256 --> 00:19:44,886
-or anything that
-links this user,
+00:17:44,097 --> 00:17:45,866
+因为我知道我妈妈
+会有这种会员通行证
 
 
 405
-00:19:44,886 --> 00:19:46,766
-this identity to your system.
+00:17:46,333 --> 00:17:47,501
+好极了 行！
 
 
 406
-00:19:47,496 --> 00:19:50,156
-We have an optional
-encryptionPublicKey.
+00:17:47,968 --> 00:17:49,102
+我终于能用苹果支付了
 
 
 407
-00:19:50,686 --> 00:19:53,236
-And this guarantees
-authenticity,
+00:17:49,469 --> 00:17:51,605
+拿上我的东西出店门
 
 
 408
-00:19:53,236 --> 00:19:55,806
-this is something
-handshake yourself
+00:17:53,273 --> 00:17:54,708
+不顺的事情一件又一件
+是吧
 
 
 409
-00:19:56,036 --> 00:19:58,726
-between merchant
-and your terminal.
+00:17:55,642 --> 00:17:57,978
+作为消费者
+我只求顺利支付
 
 
 410
-00:19:59,716 --> 00:20:03,656
-So this is how you
-implement passes that work
+00:17:58,946 --> 00:18:01,048
+迅速结账走人
 
 
 411
-00:20:03,656 --> 00:20:05,786
-with Apple Pay on your passes.
+00:18:01,982 --> 00:18:02,983
+*对于商户
 
 
 412
-00:20:05,786 --> 00:20:08,066
-And now if you are a
-merchant or a terminal maker
+00:18:03,550 --> 00:18:06,153
+他们得到是完全错误的会员信息
 
 
 413
-00:20:08,066 --> 00:20:10,946
-and you are interested by
-this, please come see us.
+00:18:06,220 --> 00:18:08,589
+他们掌握的是我妈妈的会员信息
+而不是我的
 
 
 414
-00:20:11,536 --> 00:20:13,816
-Our developer relations
-team will be here this week
+00:18:10,023 --> 00:18:11,124
+我们要对此加以改进
 
 
 415
-00:20:13,816 --> 00:20:14,816
-and you can contact them.
+00:18:12,159 --> 00:18:13,527
+这就是为什么我们要推出
 
 
 416
-00:20:14,816 --> 00:20:17,856
-I will give you the contact
-information after this talk.
+00:18:14,161 --> 00:18:16,330
+与苹果支付相匹配的通行证
 
 
 417
-00:20:18,176 --> 00:20:19,736
-And let them know
-you are interested
+00:18:17,898 --> 00:18:19,499
+通行证与苹果支付结合
 
 
 418
-00:20:19,736 --> 00:20:24,076
-and we will get you started with
-passes that work with Apple Pay.
+00:18:20,501 --> 00:18:22,436
+传递你的会员信息
 
 
 419
-00:20:24,956 --> 00:20:27,926
-Speaking of Apple Pay,
-Apple Pay has been great,
+00:18:22,503 --> 00:18:25,906
+通过苹果支付完成无接触式付款
 
 
 420
-00:20:28,146 --> 00:20:29,016
-like I mentioned before.
+00:18:27,608 --> 00:18:30,644
+我们遵循增值业务协议
 
 
 421
-00:20:29,066 --> 00:20:32,796
-We have now enabled contactless
-payment on our phones,
+00:18:30,711 --> 00:18:33,080
+一直致力于与
+主要的收银机厂商合作
 
 
 422
-00:20:32,866 --> 00:20:37,076
-on our watches, and even
-we have enabled APIs
+00:18:33,347 --> 00:18:35,449
+促进采用这种新的协议
 
 
 423
-00:20:37,076 --> 00:20:39,756
-so you can take Apple
-Pay inside your apps.
+00:18:36,550 --> 00:18:39,086
+现在再看一下刚才的场景
 
 
 424
-00:20:41,216 --> 00:20:44,136
-And Apple Pay is great because
-there's a seamless payment
+00:18:40,087 --> 00:18:43,190
+我来到好客的小区便利店
+Walgreens
 
 
 425
-00:20:44,136 --> 00:20:45,946
-experience for your users.
+00:18:44,625 --> 00:18:46,159
+他们支持苹果支付
+太好了
 
 
 426
-00:20:46,286 --> 00:20:48,036
-And merchants are seeing
-higher conversion rates
+00:18:46,727 --> 00:18:48,529
+我使用苹果支付 
+我使用iOS新特性
 
 
 427
-00:20:48,356 --> 00:20:52,116
-across the board so we
-want to encourage our users
+00:18:48,595 --> 00:18:51,064
+双击主页按钮
+激活我的卡片
 
 
 428
-00:20:52,116 --> 00:20:54,986
-to add Apple Pay cards
-into their devices.
+00:18:51,265 --> 00:18:54,868
+在我到款台前
+我的卡已经准备完毕
 
 
 429
-00:20:55,826 --> 00:20:56,576
-How do we do that?
+00:18:54,935 --> 00:18:56,170
+太棒了
+卡已备好
 
 
 430
-00:20:56,576 --> 00:20:58,966
-We are giving you a couple
-of APIs to enable this.
+00:18:56,603 --> 00:18:58,972
+我马上就能支付
 
 
 431
-00:21:00,046 --> 00:21:01,196
-There's two.
+00:18:59,873 --> 00:19:01,742
+我把手机放到收银机上
 
 
 432
-00:21:01,946 --> 00:21:05,946
-The first one will take your
-users directly to our Wallet app
+00:19:02,809 --> 00:19:04,511
+我的Walgreen会员信息
 
 
 433
-00:21:05,946 --> 00:21:06,886
-and start setup from there.
+00:19:04,778 --> 00:19:06,246
+被无接触式传输
 
 
 434
-00:21:08,036 --> 00:21:09,756
-And a second one,
-that allows you to set
+00:19:06,313 --> 00:19:08,115
+还有支付信息
 
 
 435
-00:21:09,756 --> 00:21:11,976
-up these cards from
-within your app.
+00:19:08,382 --> 00:19:10,117
+轻击即可完成
 
 
 436
-00:21:13,056 --> 00:21:14,116
-Let's take a look
-at that first one.
+00:19:11,251 --> 00:19:12,085
+就这么简单！
 
 
 437
-00:21:15,566 --> 00:21:19,056
-It's in PKPassLibrary
-and it's very simple.
+00:19:12,886 --> 00:19:15,889
+我笑着对收银员说了声：谢谢！
 
 
 438
-00:21:20,606 --> 00:21:23,086
-We call openPaymentSetup.
+00:19:16,490 --> 00:19:17,324
+然后出门
 
 
 439
-00:21:23,086 --> 00:21:25,206
-And that will take your
-user directly into Wallet,
+00:19:19,459 --> 00:19:20,294
+实在太棒了！
 
 
 440
-00:21:25,476 --> 00:21:27,216
-and start the setup flow.
+00:19:21,161 --> 00:19:24,064
+那让整个过程顺畅多了
 
 
 441
-00:21:27,626 --> 00:21:29,546
-And now with our new
-features in iOS 9,
+00:19:24,898 --> 00:19:25,766
+这是怎么做到的？
 
 
 442
-00:21:29,726 --> 00:21:32,546
-your users can go really
-easily back into your app
+00:19:25,832 --> 00:19:29,703
+我们怎么把这个特性
+加入到您的通行证？
 
 
 443
-00:21:32,746 --> 00:21:34,556
-and we leave a little bread
-crumb for them to tap on
+00:19:30,237 --> 00:19:31,071
+我们有个新方法
 
 
 444
-00:21:34,556 --> 00:21:37,336
-and go back into your
-app and do continue
+00:19:31,371 --> 00:19:32,739
+就是pass.json
 
 
 445
-00:21:37,336 --> 00:21:38,406
-to do whatever they were doing.
+00:19:33,507 --> 00:19:35,275
+确切是说是nfc
 
 
 446
-00:21:38,656 --> 00:21:39,496
-Hopefully shopping.
+00:19:36,643 --> 00:19:40,147
+Nfc是个接受信息的字典
 
 
 447
-00:21:40,446 --> 00:21:45,846
-And if you are a bank or if you
-are a merchant with a store card
+00:19:40,714 --> 00:19:43,217
+有点像条形码
+这是将此用户身份
 
 
 448
-00:21:45,846 --> 00:21:47,056
-or a private label card,
+00:19:43,283 --> 00:19:44,852
+与您的系统连接的会员信息
 
 
 449
-00:21:47,056 --> 00:21:49,586
-you want to have this
-happen inside your own app,
+00:19:44,918 --> 00:19:46,753
+或任何相关信息
 
 
 450
-00:21:50,356 --> 00:21:51,656
-we have an API for that as well.
+00:19:47,487 --> 00:19:50,224
+我们有可选的
+encryptionPublicKey
 
 
 451
-00:21:52,426 --> 00:21:53,756
-It's actually a view controller,
+00:19:51,725 --> 00:19:53,927
+这能确保这个通行证的真实性
 
 
 452
-00:21:54,266 --> 00:21:56,926
-it's
-PKAddPaymentPassViewController.
+00:19:54,094 --> 00:19:55,796
+这有点像您自己作为商户
 
 
 453
-00:21:57,876 --> 00:22:01,256
-And of course we need to check
-whether this particular device
+00:19:56,029 --> 00:19:57,664
+和您的收银机...
 
 
 454
-00:22:01,356 --> 00:22:03,426
-can add a payment pass or not.
+00:19:58,198 --> 00:19:59,032
+进行握手
 
 
 455
-00:22:04,316 --> 00:22:08,476
-When we find out it can, we set
-one of these up, we can knit it
+00:19:59,833 --> 00:20:01,969
+那么 这就是你如何...
 
 
 456
-00:22:08,476 --> 00:22:12,186
-with a requestConfiguration
-and we pass into it a delegate.
+00:20:02,970 --> 00:20:04,404
+把与苹果支付结合的通行证
 
 
 457
-00:22:13,356 --> 00:22:16,006
-Now this delegate that you
-implement inside your app,
+00:20:04,805 --> 00:20:06,073
+整合到你的通行证中
 
 
 458
-00:22:16,706 --> 00:22:19,316
-will form together using
-those pieces of information,
+00:20:06,139 --> 00:20:08,008
+如果你是商户或收银机厂商
 
 
 459
-00:22:19,316 --> 00:22:24,666
-like the nonceSignature, will
-form up a AddPaymentPassRequest.
+00:20:08,075 --> 00:20:09,343
+对此感兴趣
 
 
 460
-00:22:25,546 --> 00:22:27,616
-We can really dig into
-this for a long time.
+00:20:10,177 --> 00:20:11,144
+请联系我们
 
 
 461
-00:22:27,616 --> 00:22:29,536
-I really don't have time
-in this particular session
+00:20:11,545 --> 00:20:13,747
+我们的开发者关系团队
+本周都在这里
 
 
 462
-00:22:29,536 --> 00:22:30,246
-to dig into this.
+00:20:13,814 --> 00:20:15,249
+你可以和他们联系
 
 
 463
-00:22:30,616 --> 00:22:32,346
-So please refer to
-your documentation
+00:20:15,315 --> 00:20:17,851
+讲座后我会给出联系方式
 
 
 464
-00:22:32,346 --> 00:22:35,796
-if you have any questions
-about how to use this class.
+00:20:18,185 --> 00:20:19,853
+如果您感兴趣
+请告知他们
 
 
 465
-00:22:36,706 --> 00:22:39,006
-And this class will be entitled.
+00:20:19,920 --> 00:20:23,557
+我们会着手为你进行
+苹果支付与通行证的整合工作
 
 
 466
-00:22:39,086 --> 00:22:40,686
-So please let us know
-as well if you want
+00:20:25,259 --> 00:20:26,360
+说到苹果支付
 
 
 467
-00:22:40,686 --> 00:22:44,626
-to use this inside your app.
+00:20:26,960 --> 00:20:27,928
+它真的非常棒
 
 
 468
-00:22:44,706 --> 00:22:48,956
-Another necessary step that
-our users might need to take
+00:20:28,161 --> 00:20:29,129
+就像我刚刚说过的
 
 
 469
-00:22:48,956 --> 00:22:53,206
-when they are adding a payment
-pass inside Apple Pay is a
+00:20:29,596 --> 00:20:33,767
+我们现在已经实现了在手机上
+手表上的无接触式支付
 
 
 470
-00:22:53,496 --> 00:22:56,086
-payment pass verification
-or second factor auth
+00:20:34,334 --> 00:20:37,004
+甚至也支持API
 
 
 471
-00:22:56,086 --> 00:22:57,686
-as some people know it.
+00:20:37,070 --> 00:20:39,907
+所以你可以把苹果支付
+整合入您的app内
 
 
 472
-00:22:57,976 --> 00:23:03,876
-And along with the typical flow,
-like using SMS or a phone call
+00:20:41,241 --> 00:20:42,543
+苹果支付确实很棒
 
 
 473
-00:23:03,876 --> 00:23:07,306
-or email, another option
-we offer is using an app.
+00:20:43,076 --> 00:20:45,846
+因为它能为您的用户
+带来无缝支付体验
 
 
 474
-00:23:08,256 --> 00:23:10,126
-We see here Capital
-One using their app
+00:20:46,313 --> 00:20:49,049
+商户将全面获得更高的转化率
 
 
 475
-00:23:10,216 --> 00:23:12,806
-to verify their user's identity.
+00:20:49,950 --> 00:20:52,019
+所以我们鼓励我们的用户
 
 
 476
-00:23:13,626 --> 00:23:14,286
-How do we do this?
+00:20:52,252 --> 00:20:55,088
+在他们的设备上
+添加苹果支付卡
 
 
 477
-00:23:15,346 --> 00:23:17,906
-Well, we give you guys a
-couple of APIs to be able
+00:20:55,722 --> 00:20:56,557
+具体做法呢？
 
 
 478
-00:23:17,906 --> 00:23:22,616
-to allow this inside
-of your apps.
+00:20:56,623 --> 00:20:59,226
+我们将提供给你们
+所需的API来完成
 
 
 479
-00:23:22,836 --> 00:23:24,486
-It's also in PKPassLibrary.
+00:21:00,060 --> 00:21:00,894
+有两种方式
 
 
 480
-00:23:25,706 --> 00:23:27,846
-You check first, is
-there a payment pass
+00:21:01,962 --> 00:21:05,299
+第一种是直接将您的用户
+引导入我们的Wallet app
 
 
 481
-00:23:27,846 --> 00:23:28,916
-activation available?
+00:21:05,933 --> 00:21:07,000
+并且从那里开始安装
 
 
 482
-00:23:30,376 --> 00:23:33,616
-Remember when we
-were pulling PKPasses
+00:21:08,035 --> 00:21:10,337
+第二种是在您自己的app里
 
 
 483
-00:23:33,806 --> 00:23:35,196
-out of the user's library?
+00:21:10,537 --> 00:21:12,172
+设置这些卡片
 
 
 484
-00:23:35,196 --> 00:23:36,786
-Well this is where it's useful.
+00:21:13,040 --> 00:21:14,107
+先看第一种
 
 
 485
-00:23:37,266 --> 00:23:42,796
-You can pass into this call,
-that PKPaymentPass and pass
+00:21:15,576 --> 00:21:17,177
+进入PKPassLibrary
 
 
 486
-00:23:42,796 --> 00:23:44,946
-into it some activation data
+00:21:17,444 --> 00:21:19,146
+操作非常简单
 
 
 487
-00:23:45,736 --> 00:23:47,366
-and you'll get a
-completion back whether
+00:21:20,814 --> 00:21:22,916
+我们调用
+ openPaymentSetup
 
 
 488
-00:23:47,366 --> 00:23:49,486
-that activation was
-successful or not.
+00:21:23,083 --> 00:21:25,219
+那将让用户直接进入Wallet
 
 
 489
-00:23:50,646 --> 00:23:55,106
-That's how you can implement
-verification inside your apps.
+00:21:25,485 --> 00:21:27,020
+启动安装流程
 
 
 490
-00:23:56,326 --> 00:23:58,416
-So our phones have been
-really, really popular
+00:21:27,588 --> 00:21:29,556
+而现在
+有了iOS 9的新特性
 
 
 491
-00:23:58,666 --> 00:24:00,426
-and there's awesome and really,
+00:21:29,723 --> 00:21:32,726
+你的用户可以轻松地
+返回到你的app
 
 
 492
-00:24:00,426 --> 00:24:01,696
-really great accessories
-out there.
+00:21:32,860 --> 00:21:35,796
+我们给他们留了一点面包屑导航
+让他们点击
 
 
 493
-00:24:02,786 --> 00:24:05,996
-Some of them emit a field and
-we want to be good players
+00:21:35,963 --> 00:21:37,364
+这样他们就会返回到你的app
 
 
 494
-00:24:06,446 --> 00:24:07,366
-with those accessories.
+00:21:37,431 --> 00:21:38,732
+并继续做他们之前在做的事情
 
 
 495
-00:24:07,366 --> 00:24:09,446
-We are announcing with iOS 9,
+00:21:38,799 --> 00:21:39,633
+希望是购物
 
 
 496
-00:24:09,846 --> 00:24:12,516
-a contactless interface
-suppression API.
+00:21:42,269 --> 00:21:45,772
+如果你是一家银行
+或是推出了赊购卡
 
 
 497
-00:24:14,146 --> 00:24:17,486
-What this will do is temporarily
-disable the user interface.
+00:21:45,839 --> 00:21:47,307
+或自有品牌信用卡的商户
 
 
 498
-00:24:18,036 --> 00:24:19,786
-It's the sheet of
-passes that you see
+00:21:47,374 --> 00:21:49,576
+你当然希望这种事情
+在您自己的app里发生
 
 
 499
-00:24:20,956 --> 00:24:23,156
-and this will require
-a user's permission.
+00:21:50,344 --> 00:21:51,645
+我们也有相应的API
 
 
 500
-00:24:23,686 --> 00:24:25,886
-Let's take a look
-at how we do this.
+00:21:52,713 --> 00:21:53,847
+那其实是视图控件
 
 
 501
-00:24:26,596 --> 00:24:29,456
-It's in that PKPassLibrary
-again.
+00:21:54,147 --> 00:21:57,417
+就是
+PKAddPaymentPassViewController
 
 
 502
-00:24:30,446 --> 00:24:33,276
-PKPassLibrary has a
-new function called
+00:21:57,885 --> 00:22:01,255
+当然你需要确定这个特定设备
 
 
 503
-00:24:33,596 --> 00:24:38,286
-requestAutomaticPassPresentation
-SuppressionWithResponseHandler.
+00:22:01,355 --> 00:22:02,923
+是否能够添加支付通行证
 
 
 504
-00:24:38,846 --> 00:24:39,446
-It's a mouthful!
+00:22:04,558 --> 00:22:06,660
+如果能
+我们就设置这样的一个通行证
 
 
 505
-00:24:40,146 --> 00:24:44,776
-And what you will get
-back is a response result
+00:22:06,927 --> 00:22:10,030
+我们可以将其写入
+requestConfiguration
 
 
 506
-00:24:44,776 --> 00:24:46,636
-of what the user
-decides, whether
+00:22:10,564 --> 00:22:12,232
+并将其传入委托语句
 
 
 507
-00:24:46,636 --> 00:24:50,806
-or not they will allow
-suppression inside your app.
+00:22:13,367 --> 00:22:16,003
+这个您在自己的app中
+执行的授权语句
 
 
 508
-00:24:50,806 --> 00:24:52,246
-You also get back
-a request token.
+00:22:16,703 --> 00:22:19,273
+将把那些信息片段组合在一起
 
 
 509
-00:24:52,246 --> 00:24:54,866
-Then you can use that request
-token for this next call
+00:22:19,339 --> 00:22:21,408
+如nonceSignature
+会组成
 
 
 510
-00:24:55,406 --> 00:24:57,506
-to endAutomaticPassPresentation.
+00:22:22,276 --> 00:22:24,778
+AddPaymentPassRequest
 
 
 511
-00:24:57,986 --> 00:24:59,676
-Pass into it, that requestToken,
+00:22:25,546 --> 00:22:27,347
+这个真的深究起来
+要讲很长时间
 
 
 512
-00:25:00,736 --> 00:25:04,026
-and the payment UI will
-appear again inside your app.
+00:22:27,414 --> 00:22:28,849
+今天这节专题讲座上
+我没有时间
 
 
 513
-00:25:04,476 --> 00:25:07,896
-You can also check whether
-automaticPassPresentation
+00:22:28,916 --> 00:22:30,250
+对此进行深入探讨
 
 
 514
-00:25:07,936 --> 00:25:09,336
-Suppression is already occurring
+00:22:30,617 --> 00:22:33,487
+所以如果关于如何使用这个类
+你有任何问题
 
 
 515
-00:25:09,466 --> 00:25:11,176
-by using this function
-right here.
+00:22:33,554 --> 00:22:36,190
+请大家自己查看文稿
 
 
 516
-00:25:11,796 --> 00:25:13,956
-As I mentioned before,
-it is temporary.
+00:22:36,690 --> 00:22:38,992
+这个类将是大家有权查看的
 
 
 517
-00:25:13,956 --> 00:25:16,016
-So if your app is suspended,
+00:22:39,092 --> 00:22:41,128
+那么 如果您愿意
+在你的app中使用这个类
 
 
 518
-00:25:16,646 --> 00:25:19,146
-the payment pass UI will
-appear again for the user
+00:22:41,195 --> 00:22:42,396
+也请告诉我们
 
 
 519
-00:25:19,266 --> 00:25:22,046
-or if it's been 24 hours
-after your last requests,
+00:22:43,397 --> 00:22:48,902
+当把支付通行证
+加入苹果支付时
 
 
 520
-00:25:22,386 --> 00:25:25,106
-you will need to re-request
-your user's permission again.
+00:22:48,969 --> 00:22:51,071
+用户们可能还需执行的
+另外一个必要步骤是
 
 
 521
-00:25:25,646 --> 00:25:28,696
-These classes and these
-calls are entitled.
+00:22:51,138 --> 00:22:53,307
+需要进行支付通行证验证
 
 
 522
-00:25:28,696 --> 00:25:32,056
-So please let us know if
-you would like to use them.
+00:22:53,507 --> 00:22:55,108
+或
+“第二因素验证”
 
 
 523
-00:25:32,196 --> 00:25:37,286
-Along with Apple Pay, last fall
-we also introduced Apple Watch.
+00:22:55,175 --> 00:22:57,044
+有些人知道这个
 
 
 524
-00:25:37,806 --> 00:25:42,376
-And now I'm really happy to
-announce that in watchOS 2,
+00:22:57,978 --> 00:23:00,514
+在使用普通流量的同时
 
 
 525
-00:25:42,376 --> 00:25:47,036
-we are bringing full PassKit
-support to Apple Watch.
+00:23:00,814 --> 00:23:03,851
+比如使用SMS或通过打电话
 
 
 526
-00:25:47,476 --> 00:25:52,396
-And this is really great because
-now on Apple Watch, you can add,
+00:23:03,917 --> 00:23:07,621
+或电子邮件
+你还可以选择使用app
 
 
 527
-00:25:53,086 --> 00:25:56,166
-you can remove, you can query
-passes just like up doing
+00:23:08,255 --> 00:23:10,691
+大家看Capital One
+如何利用他们的app
 
 
 528
-00:25:57,026 --> 00:25:59,846
-on our phones previously.
+00:23:10,757 --> 00:23:12,793
+验证用户的身份
 
 
 529
-00:26:01,176 --> 00:26:03,846
-So full PassKit support
-is coming to Apple Watch
+00:23:13,627 --> 00:23:14,494
+我们要如何做呢？
 
 
 530
-00:26:04,576 --> 00:26:08,076
-and watchOS 2, there's
-another thing I want to talk
+00:23:15,362 --> 00:23:17,264
+我们给你们几个API
 
 
 531
-00:26:08,076 --> 00:26:10,686
-about in regards to Apple Watch
-and that's the screen size.
+00:23:17,331 --> 00:23:20,234
+帮助在您的app里完成验证
 
 
 532
-00:26:11,876 --> 00:26:15,706
-Working with a lot smaller real
-estate space on Apple Watch,
+00:23:22,836 --> 00:23:24,705
+它也在
+PKPassLibrary中
 
 
 533
-00:26:15,706 --> 00:26:16,846
-and I want to point this out,
+00:23:25,706 --> 00:23:26,540
+先检查...
 
 
 534
-00:26:16,846 --> 00:26:19,386
-because passes are drawn
-a little differently
+00:23:26,907 --> 00:23:27,941
+是否有支付通行证
 
 
 535
-00:26:20,236 --> 00:26:21,046
-on Apple Watch.
+00:23:28,008 --> 00:23:29,009
+是否可激活？
 
 
 536
-00:26:22,046 --> 00:26:23,156
-This is a pretty cool graphic.
+00:23:30,677 --> 00:23:33,247
+还记得当我们从用户库中
 
 
 537
-00:26:23,726 --> 00:26:27,646
-This is what a pass rendered
-on Apple Watch looks like.
+00:23:33,313 --> 00:23:35,148
+提取PKPasses时吗？
 
 
 538
-00:26:27,646 --> 00:26:30,056
-As you can see this
-is our MLB pass
+00:23:35,215 --> 00:23:36,783
+这就是激活的用处所在
 
 
 539
-00:26:30,846 --> 00:26:31,766
-from a couple of slides back.
+00:23:37,251 --> 00:23:41,755
+你可以把PKPaymentPass
 
 
 540
-00:26:33,096 --> 00:26:36,016
-And you will notice right away
-it looks a little different.
+00:23:42,389 --> 00:23:43,590
+传递到这个调用命令中去
 
 
 541
-00:26:37,126 --> 00:26:39,096
-That strip image
-is no longer there.
+00:23:43,824 --> 00:23:45,058
+并向其中传入一些激活数据
 
 
 542
-00:26:39,746 --> 00:26:43,656
-And, in fact, we don't even
-have a back of the pass.
+00:23:45,726 --> 00:23:47,594
+然后你会得到一个
+表示已完成的反馈
 
 
 543
-00:26:43,656 --> 00:26:46,416
-So take a look and remember,
-passes do look different
+00:23:47,661 --> 00:23:49,596
+告知您激活是否成功
 
 
 544
-00:26:46,416 --> 00:26:48,356
-on different devices,
-especially on Apple Watch.
+00:23:50,597 --> 00:23:55,369
+那就是您如何在自己的app里
+执行验证程序
 
 
 545
-00:26:48,356 --> 00:26:51,746
-So consider that when you
-are designing your passes
+00:23:56,336 --> 00:23:58,505
+这也是我们的手机
+一直非常受欢迎的原因
 
 
 546
-00:26:51,836 --> 00:26:52,736
-and implementing them.
+00:23:58,739 --> 00:24:00,140
+除此之外我们还有特别棒
 
 
 547
-00:26:53,186 --> 00:26:56,026
-But, of course, if you
-follow the HI guidelines,
+00:24:00,207 --> 00:24:01,708
+真的非常棒的辅助程序
 
 
 548
-00:26:56,146 --> 00:27:01,226
-we will promise and do our best
-to make your passes look great
+00:24:02,776 --> 00:24:04,144
+还会衍生出一些功能
 
 
 549
-00:27:01,516 --> 00:27:04,486
-on every single one
-of our devices.
+00:24:04,711 --> 00:24:06,113
+我们应该好好利用
 
 
 550
-00:27:04,836 --> 00:27:07,146
-So that's PassKit
-and Apple Watch.
+00:24:06,380 --> 00:24:07,347
+这些辅助程序功能
 
 
 551
-00:27:07,576 --> 00:27:10,996
-There's one more thing
-I do want to talk about.
+00:24:08,015 --> 00:24:09,516
+我们现在宣布与iOS 9一起推出
 
 
 552
-00:27:11,736 --> 00:27:12,996
-And that's 1D bar codes.
+00:24:09,850 --> 00:24:12,753
+一个无接触界面按压API
 
 
 553
-00:27:13,846 --> 00:27:17,106
-We have been getting a lot
-of requests for 1D barcodes
+00:24:14,154 --> 00:24:17,591
+它会暂时使用户界面失效
 
 
 554
-00:27:17,656 --> 00:27:20,846
-and I'm really glad
-to say that iOS 9,
+00:24:18,025 --> 00:24:19,793
+这是你看到的通行证表单
 
 
 555
-00:27:20,846 --> 00:27:24,946
-we are bringing 1D
-Barcode support to Wallet.
+00:24:20,961 --> 00:24:23,163
+这将需要征得用户允许
 
 
 556
-00:27:25,096 --> 00:27:25,646
-Yeah.
+00:24:24,898 --> 00:24:26,033
+来看一下我们是如何做的
 
 
 557
-00:27:26,016 --> 00:27:27,936
-[ Applause ]
+00:24:27,668 --> 00:24:29,603
+还是在那个
+PKPassLibrary中
 
 
 558
-00:27:27,936 --> 00:27:29,926
-I'm glad you are glad.
+00:24:30,437 --> 00:24:33,273
+PKPassLibrary
+有一个新函数 名为
 
 
 559
-00:27:29,926 --> 00:27:32,596
-So we have a new barcode format.
+00:24:33,507 --> 00:24:38,679
+requestAutomaticPassPresentation
+SuppressionWithResponseHandler
 
 
 560
-00:27:33,126 --> 00:27:35,466
-It's PKBarcodeFormatCode128.
+00:24:38,779 --> 00:24:39,613
+太绕嘴了
 
 
 561
-00:27:36,286 --> 00:27:39,456
-You may ask what about my users
-that are who are still on iOS 8
+00:24:40,614 --> 00:24:44,451
+你能得到一个回复结果
 
 
 562
-00:27:39,456 --> 00:27:40,766
-and below, are they
-going to get this?
+00:24:44,518 --> 00:24:46,220
+关于用户是否同意
 
 
 563
-00:27:40,766 --> 00:27:45,746
-Well, no. That's why you
-will have this fallback.
+00:24:46,286 --> 00:24:49,690
+在你的app里允许按压
 
 
 564
-00:27:46,546 --> 00:27:47,916
-We still have that barcode key.
+00:24:50,791 --> 00:24:52,226
+同时还有一个申请图标
 
 
 565
-00:27:48,266 --> 00:27:50,676
-That barcode key is
-very, very important
+00:24:52,292 --> 00:24:54,995
+用这个图标
+你就可以再一次调用
 
 
 566
-00:27:50,676 --> 00:27:53,486
-but we have here is
-implementing that 2D barcode.
+00:24:55,295 --> 00:24:57,865
+endAutomaticPassPresentation
 
 
 567
-00:27:53,896 --> 00:27:58,496
-We have a new barcodes, plural,
-key that is an array that takes
+00:24:57,998 --> 00:24:59,967
+传递进去这个
+requestToken
 
 
 568
-00:27:58,496 --> 00:27:59,886
-in a dictionary of barcodes.
+00:25:00,734 --> 00:25:04,071
+payment UI
+就会再次出现在你的app中
 
 
 569
-00:28:00,396 --> 00:28:03,896
-So, as you can see, we have a
-new barcodes array here that has
+00:25:04,338 --> 00:25:08,108
+你也可以查看是否
+automaticPassPresentation
 
 
 570
-00:28:03,896 --> 00:28:05,866
-in the first dictionary,
+00:25:08,175 --> 00:25:09,576
+Suppression已经
 
 
 571
-00:28:05,866 --> 00:28:09,396
-a barcode with
-PKBarcodeFormatCode128.
+00:25:09,643 --> 00:25:11,178
+通过使用这个函数
+而出现在这里
 
 
 572
-00:28:09,396 --> 00:28:10,886
-And that's the 1D barcode.
+00:25:11,945 --> 00:25:13,881
+正如我刚刚讲到的
+这只是暂时的
 
 
 573
-00:28:11,436 --> 00:28:13,406
-So please, please, as you
-are implementing this,
+00:25:13,947 --> 00:25:16,016
+如果你的app被停用
 
 
 574
-00:28:14,236 --> 00:28:17,966
-do me a favor, please verify
-your system supports 1D barcodes
+00:25:16,783 --> 00:25:19,152
+支付通行证 UI 
+会重新出现在用户面前
 
 
 575
-00:28:18,756 --> 00:28:20,976
-and what I really mean
-is optical scanners.
+00:25:19,253 --> 00:25:22,055
+或者在你上一次请求24小时后
 
 
 576
-00:28:21,476 --> 00:28:25,856
-And please remember to
-fall back to 2D barcodes
+00:25:22,389 --> 00:25:25,092
+你需要再次申请征得你用户的允许
 
 
 577
-00:28:25,856 --> 00:28:27,866
-so that your users on iOS 8
+00:25:26,126 --> 00:25:28,595
+这些类和调用已被授权
 
 
 578
-00:28:27,866 --> 00:28:30,716
-and below have a
-barcode on their passes.
+00:25:28,662 --> 00:25:30,497
+所以如果你有意向使用它们
+请一定告诉我们
 
 
 579
-00:28:31,776 --> 00:28:32,076
-All right.
+00:25:32,232 --> 00:25:33,967
+去年秋天
 
 
 580
-00:28:32,166 --> 00:28:34,106
-I have done a lot of
-talking this morning.
+00:25:34,501 --> 00:25:37,237
+与苹果支付一起推出的
+还有Apple Watch
 
 
 581
-00:28:34,106 --> 00:28:38,216
-If I had to say that you
-should remember something
+00:25:38,839 --> 00:25:40,440
+现在我非常高兴的宣布:
 
 
 582
-00:28:38,216 --> 00:28:42,146
-from this session, it's
-these things: We're solving
+00:25:40,807 --> 00:25:42,509
+我们将在watchOS 2中
 
 
 583
-00:28:42,146 --> 00:28:43,426
-that overstuffed wallet problem.
+00:25:43,010 --> 00:25:47,047
+内置对Apple Watch的
+全面PassKit支持
 
 
 584
-00:28:44,346 --> 00:28:45,586
-We don't want that
-wallet anymore.
+00:25:48,015 --> 00:25:49,516
+这很了不起 因为现在
 
 
 585
-00:28:45,736 --> 00:28:47,256
-We don't want to see
-that wallet anymore.
+00:25:49,983 --> 00:25:52,586
+在Apple Watch上
+你可以添加
 
 
 586
-00:28:47,896 --> 00:28:48,996
-We do that with passes.
+00:25:53,086 --> 00:25:56,156
+移除 查询通行证
+就像你原来
 
 
 587
-00:28:49,936 --> 00:28:52,996
-Passes allow us to take
-action in the real world.
+00:25:57,024 --> 00:25:58,525
+在手机上做的...
 
 
 588
-00:28:53,576 --> 00:28:54,896
-They are really easy
-to integrate
+00:25:59,259 --> 00:26:00,093
+那样
 
 
 589
-00:28:54,896 --> 00:28:56,746
-into your apps, into your flow.
+00:26:01,161 --> 00:26:05,766
+所以Apple Watch和watchOS 2
+将获得全面PassKit支持 
 
 
 590
-00:28:57,616 --> 00:29:00,826
-And passes when they are
-engaging really keep your users
+00:26:06,233 --> 00:26:08,035
+我想说的还有一件事
 
 
 591
-00:29:01,556 --> 00:29:04,586
-interactive and interested
-in your systems.
+00:26:08,335 --> 00:26:10,838
+是关于Apple Watch
+屏幕尺寸的
 
 
 592
-00:29:05,486 --> 00:29:06,806
-And I want to remind you
+00:26:11,872 --> 00:26:15,576
+Apple Watch屏幕要小很多
 
 
 593
-00:29:06,806 --> 00:29:08,126
-to integrate Apple
-Pay into your apps.
+00:26:15,642 --> 00:26:16,877
+我要指出的是正因如此
 
 
 594
-00:29:08,246 --> 00:29:11,016
-Encourage your users to use
-Apple Pay into their apps.
+00:26:17,444 --> 00:26:19,413
+通行证的调用有些不同
 
 
 595
-00:29:11,796 --> 00:29:14,786
-Remember you want that smooth
-and seamless checkout flow
+00:26:20,113 --> 00:26:21,081
+在Apple Watch上
 
 
 596
-00:29:14,786 --> 00:29:17,316
-and we also want the
-higher conversion rates
+00:26:22,049 --> 00:26:23,150
+请看这个漂亮的界面
 
 
 597
-00:29:17,506 --> 00:29:18,106
-for our merchants.
+00:26:23,717 --> 00:26:27,654
+这是通行证在
+Apple Watch上的样子
 
 
 598
-00:29:19,406 --> 00:29:21,616
-I didn't even talk about
-integrating Apple Pay
+00:26:28,755 --> 00:26:30,490
+如您所见 这是MLB通行证
 
 
 599
-00:29:21,616 --> 00:29:23,186
-as a payment inside apps at all.
+00:26:30,858 --> 00:26:32,092
+前面的幻灯片出现过
 
 
 600
-00:29:23,646 --> 00:29:26,106
-This session cannot
-contain that awesomeness.
+00:26:33,093 --> 00:26:34,228
+你会马上发现...
 
 
 601
-00:29:26,666 --> 00:29:30,726
-We have our own session
-immediately following this one,
+00:26:35,062 --> 00:26:36,029
+它的些许不同
 
 
 602
-00:29:31,126 --> 00:29:34,446
-give by my colleagues Nick
-and Rachel, and it's going
+00:26:37,130 --> 00:26:39,266
+长条形图片没有了
 
 
 603
-00:29:34,446 --> 00:29:35,576
-to be really, really amazing.
+00:26:39,733 --> 00:26:41,835
+而且通行证也没有反面
 
 
 604
-00:29:35,576 --> 00:29:37,796
-They will solve that
-abandoned cart issue.
+00:26:43,570 --> 00:26:45,906
+所以请看一下并且记住
+在不同的设备上
 
 
 605
-00:29:38,056 --> 00:29:41,806
-They're going to help integrate
-Apple Pay into your apps.
+00:26:45,973 --> 00:26:48,842
+通行证看起来确实不一样
+尤其是在Apple Watch上
 
 
 606
-00:29:42,966 --> 00:29:45,836
-Remember, please use
-Wallet and use Apple Pay.
+00:26:48,942 --> 00:26:51,778
+因此设计通行证并实施的时候
 
 
 607
-00:29:45,836 --> 00:29:47,306
-Go out there and redeem coupons.
+00:26:51,845 --> 00:26:52,746
+请考虑到那一点
 
 
 608
-00:29:47,936 --> 00:29:48,976
-Go out there and spend money!
+00:26:53,480 --> 00:26:56,016
+当然了 如果你遵循
+《人机界面指南》
 
 
 609
-00:29:49,566 --> 00:29:55,526
-I mentioned a lot of resources
-during this talk and I want
+00:26:56,149 --> 00:27:01,221
+我们将承诺
+尽力让你的通行证看起来很棒
 
 
 610
-00:29:55,526 --> 00:29:57,026
-to point a couple
-of them out to you.
+00:27:01,522 --> 00:27:04,691
+无论在我们的何种设备上
 
 
 611
-00:29:57,436 --> 00:30:00,676
-First, we have Passbook for
-Developers specific site
+00:27:05,592 --> 00:27:07,294
+这就是PassKit
+和Apple Watch
 
 
 612
-00:30:00,676 --> 00:30:02,296
-on our developer website.
+00:27:09,129 --> 00:27:10,831
+还有一件事我要讲
 
 
 613
-00:30:02,776 --> 00:30:04,756
-We also have one specific
-to Apple Pay as well.
+00:27:11,765 --> 00:27:13,166
+一维条形码
 
 
 614
-00:30:04,756 --> 00:30:08,526
-And I mentioned a couple of
-talks from previous WWDCs.
+00:27:14,501 --> 00:27:17,271
+我们一直在收到很多
+使用一维条形码的申请
 
 
 615
-00:30:09,206 --> 00:30:10,546
-Here's one from 2012,
+00:27:18,906 --> 00:27:20,908
+我很高兴告诉大家在iOS 9中
 
 
 616
-00:30:10,796 --> 00:30:14,266
-it's called "Introducing
-Passbook Part 1 & 2" that's
+00:27:20,974 --> 00:27:23,544
+我们将对Wallet
+提供一维条形码支持
 
 
 617
-00:30:14,266 --> 00:30:16,176
-really going to go in
-depth into designing passes
+00:27:27,981 --> 00:27:28,815
+很高兴大家喜欢
 
 
 618
-00:30:16,276 --> 00:30:17,486
-and updating passes as well.
+00:27:29,449 --> 00:27:32,586
+所以我们有个新的条形码格式
 
 
 619
-00:30:17,856 --> 00:30:19,736
-And then "Integrating Passbook
+00:27:33,086 --> 00:27:35,589
+就是
+PKBarcodeFormatCode128
 
 
 620
-00:30:19,736 --> 00:30:23,096
-Into Your Ecosystem"
-which is WWDC 2013.
+00:27:36,290 --> 00:27:39,660
+你也许要问:我那些
+仍用iOS 8或更低版本的用户
 
 
 621
-00:30:24,016 --> 00:30:26,006
-These are really great resources
-for you guys to check out.
+00:27:39,726 --> 00:27:41,128
+怎么办呢？
+他们能享用这些吗？
 
 
 622
-00:30:26,596 --> 00:30:28,366
-And of course we have
-our developer forum
+00:27:41,828 --> 00:27:45,732
+很遗憾不能
+这也是你们为何会有这条退路
 
 
 623
-00:30:28,876 --> 00:30:30,806
-that you guys can
-utilize as well.
+00:27:46,533 --> 00:27:47,901
+我们还是有条形码密钥
 
 
 624
-00:30:32,016 --> 00:30:35,956
-And a really awesome evangelist
-Paul can also help you guys
+00:27:48,268 --> 00:27:50,204
+那个条形码密钥
+是非常非常重要的
 
 
 625
-00:30:35,956 --> 00:30:37,576
-out here, here's
-his email address.
+00:27:50,270 --> 00:27:53,473
+这里我们要做的
+是实施二维条形码
 
 
 626
-00:30:38,746 --> 00:30:42,166
-So again, thank you for your
-time, thank you for coming
+00:27:53,907 --> 00:27:56,443
+我们有新的多条形码密钥
 
 
 627
-00:30:42,166 --> 00:30:44,876
-and listening about
-Wallet and Apple Pay.
+00:27:56,977 --> 00:27:58,011
+它是一个阵列
 
 
 628
-00:30:45,236 --> 00:30:48,026
-I hope you go out there have
-a really, really great week.
+00:27:58,078 --> 00:27:59,980
+包括一个由多个条形码
+组成的字典
 
 
 629
-00:30:48,226 --> 00:30:48,726
-Thanks a lot.
+00:28:00,681 --> 00:28:03,350
+所以你看在第一个字典里
 
 
 630
-00:30:49,508 --> 00:30:51,508
-[Applause]
+00:28:03,417 --> 00:28:05,219
+我们有个新的条形码阵列
+
+
+631
+00:28:05,552 --> 00:28:09,656
+PKBarcodeFormatCode128
+的条形码
+
+
+632
+00:28:09,723 --> 00:28:11,024
+就是一维条形码
+
+
+633
+00:28:11,425 --> 00:28:13,594
+因此
+请大家在实施时
+
+
+634
+00:28:14,228 --> 00:28:15,062
+拜托大家
+
+
+635
+00:28:15,462 --> 00:28:18,098
+一定要核实
+你的系统支持一维条形码
+
+
+636
+00:28:18,799 --> 00:28:21,101
+我指的是光学扫描仪
+
+
+637
+00:28:22,736 --> 00:28:25,839
+请大家记住要退回到二维条形码
+
+
+638
+00:28:26,173 --> 00:28:28,375
+只有这样使用iOS 8
+或更低版本的用户
+
+
+639
+00:28:28,876 --> 00:28:30,978
+他们的通行证才有条形码
+
+
+640
+00:28:31,745 --> 00:28:34,081
+好了
+今早我已经讲了很多
+
+
+641
+00:28:34,448 --> 00:28:39,386
+如果一定要我说
+应该记住本讲座的哪些内容的话
+
+
+642
+00:28:39,620 --> 00:28:40,587
+那就是这些内容：
+
+
+643
+00:28:41,588 --> 00:28:43,457
+我们正在解决现实中钱包过满的问题
+
+
+644
+00:28:44,358 --> 00:28:45,859
+我们现在不需要那个实物钱包了
+
+
+645
+00:28:45,926 --> 00:28:47,261
+我们不想再查看钱夹子了
+
+
+646
+00:28:47,895 --> 00:28:49,229
+我们用通行证实现
+
+
+647
+00:28:49,930 --> 00:28:52,999
+通行证让我们
+在现实世界通行无阻
+
+
+648
+00:28:53,567 --> 00:28:54,902
+它们能被很容易被整合
+
+
+649
+00:28:54,968 --> 00:28:56,737
+融入你的app
+你的现金流
+
+
+650
+00:28:57,604 --> 00:29:00,841
+当通行证有了吸引力
+它们能让你的用户们
+
+
+651
+00:29:01,542 --> 00:29:04,645
+在你的系统里保持互动
+并持续关注您的系统
+
+
+652
+00:29:05,646 --> 00:29:06,780
+而我想要提醒大家的是
+
+
+653
+00:29:06,847 --> 00:29:08,182
+把苹果支付集成进您的app
+
+
+654
+00:29:08,248 --> 00:29:11,118
+并鼓励你的用户在他们的app里
+使用苹果支付
+
+
+655
+00:29:11,785 --> 00:29:14,788
+记住你要的是平稳无缝的
+支付流程
+
+
+656
+00:29:15,289 --> 00:29:17,391
+我们也想要为我们的商户
+
+
+657
+00:29:17,491 --> 00:29:18,325
+带来高的转换率
+
+
+658
+00:29:19,459 --> 00:29:21,628
+我甚至都没谈到把苹果支付
+
+
+659
+00:29:21,695 --> 00:29:23,397
+作为支付手段集成到app内
+
+
+660
+00:29:23,497 --> 00:29:26,266
+本讲座不包括那么大的话题
+
+
+661
+00:29:26,667 --> 00:29:27,768
+但紧接着的...
+
+
+662
+00:29:28,302 --> 00:29:33,607
+讲座主讲人是我的同事
+Nick和Rachel
+
+
+663
+00:29:34,041 --> 00:29:35,542
+将是非常非常棒的
+
+
+664
+00:29:35,609 --> 00:29:37,911
+他们会讲到我略过的话题
+
+
+665
+00:29:38,478 --> 00:29:41,949
+他们会帮大家
+将苹果支付集成到您的app中
+
+
+666
+00:29:42,950 --> 00:29:45,819
+请记住
+使用Wallet和苹果支付
+
+
+667
+00:29:45,886 --> 00:29:47,554
+去吧 去兑换优惠券！
+
+
+668
+00:29:47,921 --> 00:29:49,122
+去吧 去花钱消费吧！
+
+
+669
+00:29:52,793 --> 00:29:55,429
+我讲的过程中提到了很多资源
+
+
+670
+00:29:55,495 --> 00:29:56,897
+有几个我想要告诉大家
+
+
+671
+00:29:57,431 --> 00:29:59,733
+首先
+在我们的开发者网站上
+
+
+672
+00:29:59,800 --> 00:30:02,703
+有个Passbook for Developers
+专属站点
+
+
+673
+00:30:02,769 --> 00:30:04,771
+我们还有一个
+苹果支付专属站点
+
+
+674
+00:30:05,739 --> 00:30:08,442
+我还提到了往年WWDC的
+几次讲座
+
+
+675
+00:30:09,209 --> 00:30:10,544
+这是2012年的
+
+
+676
+00:30:10,811 --> 00:30:13,714
+名为"Passbook简介:
+第一和第二部分"
+
+
+677
+00:30:14,081 --> 00:30:16,183
+它将真正地深入探讨
+如何设计通行证
+
+
+678
+00:30:16,283 --> 00:30:17,484
+以及如何升级通行证
+
+
+679
+00:30:18,218 --> 00:30:20,187
+然后是2013WWDC讲座
+
+
+680
+00:30:20,254 --> 00:30:23,090
+“将Passbook
+融入您的生态系统”
+
+
+681
+00:30:24,024 --> 00:30:25,993
+这些是大家应该查看的
+真的很棒的资源
+
+
+682
+00:30:26,593 --> 00:30:28,362
+当然我们的开发者论坛
+
+
+683
+00:30:28,862 --> 00:30:30,797
+也供大家使用
+
+
+684
+00:30:32,032 --> 00:30:35,903
+一个真正了不起的技术传播者
+保羅随时帮助你们
+
+
+685
+00:30:35,969 --> 00:30:37,804
+这是他的电子邮件地址
+
+
+686
+00:30:38,672 --> 00:30:41,909
+再次感谢您拨冗出席
+感谢您的到来
+
+
+687
+00:30:41,975 --> 00:30:44,945
+并倾听关于Wallet
+和苹果支付的内容
+
+
+688
+00:30:45,245 --> 00:30:48,115
+希望大家过得愉快
+
+
+689
+00:30:48,182 --> 00:30:49,016
+非常感谢
 

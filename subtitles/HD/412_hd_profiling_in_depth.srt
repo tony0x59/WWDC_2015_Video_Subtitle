@@ -1,4538 +1,3833 @@
 1
-00:00:25,461 --> 00:00:27,461
-[Applause]
+00:00:19,786 --> 00:00:25,292
+深入分析
 
 
 2
-00:00:27,906 --> 00:00:28,206
->> CHAD WOOLF: Thank you.
+00:00:27,861 --> 00:00:28,695
+谢谢
 
 
 3
-00:00:31,486 --> 00:00:32,555
-Thank you.
+00:00:31,565 --> 00:00:33,367
+谢谢 我是查德·伍尔夫
 
 
 4
-00:00:32,555 --> 00:00:33,316
-I'm Chad Woolf.
+00:00:33,634 --> 00:00:34,735
+我是克里斯·马克尔
 
 
 5
-00:00:33,626 --> 00:00:34,536
->> KRIS MARKEL: I'm Kris Markel.
+00:00:35,035 --> 00:00:37,271
+我们是苹果的性能工具工程师
 
 
 6
-00:00:34,536 --> 00:00:35,026
->> CHAD WOOLF:
+00:00:37,704 --> 00:00:39,506
+这是会议412
 
 
 7
-00:00:35,026 --> 00:00:37,256
-We are performance tools
-engineers for Apple.
+00:00:39,573 --> 00:00:41,208
+我们会深入谈一下“分析”
 
 
 8
-00:00:37,696 --> 00:00:39,876
-This is session 412.
+00:00:42,910 --> 00:00:46,380
+也就是谈一下Instruments
+中的时间分析器以及如何用它
 
 
 9
-00:00:39,876 --> 00:00:43,626
-We'll talking about
-profiling in depth.
+00:00:46,446 --> 00:00:49,149
+来优化你的应用程序
 
 
 10
-00:00:43,626 --> 00:00:46,476
-This will talk about the time
-profiler in Instruments and how
+00:00:50,317 --> 00:00:52,886
+当你想要找出你的应用程序
+把大部分时间都花在哪里了
 
 
 11
-00:00:46,476 --> 00:00:49,146
-to use it to optimize
-your applications.
+00:00:52,953 --> 00:00:56,089
+的时候你就可以求助于时间分析器
 
 
 12
-00:00:50,336 --> 00:00:52,946
-Time profiler is place to go
-when you're trying to figure
+00:00:56,290 --> 00:00:57,124
+举个例子
 
 
 13
-00:00:52,946 --> 00:00:56,106
-out where your application is
-spending the bulk of its time.
+00:00:58,425 --> 00:01:00,027
+当你试图查明应用程序在
 
 
 14
-00:00:56,336 --> 00:00:56,826
-An example.
+00:01:00,093 --> 00:01:02,629
+运行时间内做了什么事时
+时间分析器就会非常有用
 
 
 15
-00:00:57,406 --> 00:01:00,076
-It is useful when trying
+00:01:02,696 --> 00:01:04,364
+你想看到具体调用情况
 
 
 16
-00:01:00,076 --> 00:01:02,736
-to discover what the
-application is doing at runtime.
+00:01:05,999 --> 00:01:08,202
+我们的会议会这样分成若干部分
 
 
 17
-00:01:02,736 --> 00:01:04,465
-You want to see who
-is calling what.
+00:01:08,268 --> 00:01:11,138
+我们将会谈谈为什么我们
+想要举办一场专门针对
 
 
 18
-00:01:05,996 --> 00:01:08,226
-Our session breaks
-down a bit like this.
+00:01:11,205 --> 00:01:13,707
+时间分析器的会议的动机
 
 
 19
-00:01:08,226 --> 00:01:11,166
-We'll talk a bit about the
-motivation on why we wanted
+00:01:15,042 --> 00:01:18,245
+不过会议会以向你们演示
+展示它的工作原理的细节
 
 
 20
-00:01:11,166 --> 00:01:14,156
-to create a session devoted
-to the time profiler only.
+00:01:18,345 --> 00:01:22,349
+你的应用程序在源代码级别
 
 
 21
-00:01:15,036 --> 00:01:18,366
-But the session will
-revolve around demonstrations
+00:01:22,416 --> 00:01:25,886
+以下的工作原理为中心
 
 
 22
-00:01:18,366 --> 00:01:21,226
-and showing you details
-on how it works
+00:01:27,487 --> 00:01:30,090
+最后我们会就你们如何
+自行使用时间分析器
 
 
 23
-00:01:21,366 --> 00:01:25,986
-and how your applications
-work below the source level.
+00:01:30,224 --> 00:01:31,225
+给你们一些小窍门
 
 
 24
-00:01:27,496 --> 00:01:29,466
-Then we'll give you
-final tips on how
+00:01:31,291 --> 00:01:34,161
+首先快速谈谈我们的动机这次会议是受
 
 
 25
-00:01:29,466 --> 00:01:31,246
-to use the time profiler
-on your own.
+00:01:34,228 --> 00:01:36,129
+“Instruments 7”的
+直接启发
 
 
 26
-00:01:31,246 --> 00:01:34,196
-Quickly about our motivation,
-it comes from the creation
+00:01:36,697 --> 00:01:38,899
+“Instruments 7”的
+目的是展示新的外观新的感觉
 
 
 27
-00:01:34,196 --> 00:01:35,796
-of Instruments 7 itself.
+00:01:38,966 --> 00:01:41,368
+它意味着新的工艺图
+并且还意味着我们想让这种
 
 
 28
-00:01:36,806 --> 00:01:38,786
-With Instrument 7 we wanted
-to go with a new look and feel
+00:01:41,435 --> 00:01:46,573
+新感觉更具响应性想让
+这种新感觉更流畅
 
 
 29
-00:01:38,786 --> 00:01:40,946
-which meant new artwork
-but it also meant
+00:01:46,740 --> 00:01:50,143
+我们会从在各个方面对
+我们的UI进行优化
 
 
 30
-00:01:40,946 --> 00:01:44,366
-that for the new feel, we
-wanted it to be more responsive
+00:01:51,445 --> 00:01:53,213
+我们还想尝试新的图形风格
 
 
 31
-00:01:45,036 --> 00:01:46,566
-and we wanted to feel smoother.
+00:01:53,280 --> 00:01:55,916
+我们过去就想尝试新的图形风格
 
 
 32
-00:01:46,726 --> 00:01:48,656
-We'll do performance
-optimizations
+00:01:55,983 --> 00:02:00,554
+但是我们现有的图形代码的性能不足
 
 
 33
-00:01:48,786 --> 00:01:50,136
-for our UI in general.
+00:02:02,022 --> 00:02:04,258
+我们知道我们不得不
+把注意力放在渲染上面
 
 
 34
-00:01:51,436 --> 00:01:53,256
-We also wanted to try
-new graphing styles.
+00:02:04,758 --> 00:02:07,961
+因为它是应用中的一块硬骨头
 
 
 35
-00:01:53,256 --> 00:01:55,906
-These graphing styles were
-things that we wanted to do
+00:02:08,027 --> 00:02:10,964
+Instruments必须处理
+成百上千
 
 
 36
-00:01:55,906 --> 00:01:57,656
-in the past but didn't
-have the performance
+00:02:11,031 --> 00:02:14,268
+有时候甚至是数以百万的数据点
+ Instruments必须把这些
 
 
 37
-00:01:57,656 --> 00:01:59,956
-to in our existing graphic code.
+00:02:14,868 --> 00:02:18,505
+处理成一个非常容易理解的表达
 
 
 38
-00:02:00,306 --> 00:02:04,246
-We knew that we would have
-to focus on the rendering
+00:02:18,805 --> 00:02:21,175
+那里的算法复杂性
+毫无疑问就很高了
 
 
 39
-00:02:04,766 --> 00:02:08,076
-which is a pretty difficult
-piece of application.
+00:02:22,676 --> 00:02:25,779
+对于我们来说 这就意味着
+我们必须对我们的应用程序中
 
 
 40
-00:02:08,076 --> 00:02:10,996
-Instruments have to deal
-with hundreds of thousands,
+00:02:25,846 --> 00:02:29,750
+特别重要的一部分进行重写也就是对
+位于app顶部的轨迹视图进行重写
 
 
 41
-00:02:10,996 --> 00:02:13,646
-sometimes millions of data
-points and has to try to crunch
+00:02:31,118 --> 00:02:35,322
+整个冬季 克里斯和我拿出了
+新的轨迹视图的设计
 
 
 42
-00:02:13,646 --> 00:02:17,496
-that down into a
-presentation that's both simple
+00:02:35,956 --> 00:02:38,458
+开始根据一系列的原型进行构建
 
 
 43
-00:02:17,496 --> 00:02:18,506
-and easy to understand.
+00:02:38,959 --> 00:02:41,361
+我们并没有在Instruments中
+直接生成原型
 
 
 44
-00:02:18,806 --> 00:02:22,786
-There is definitely algorithm
-complexities in there.
+00:02:41,428 --> 00:02:43,830
+而是为了简单起见 把它拆分
+到了一个单独的应用程序中
 
 
 45
-00:02:22,786 --> 00:02:25,796
-What that meant for us, we had
-to rewrite a significant portion
+00:02:44,665 --> 00:02:47,935
+这就是我们最近的一个原型的样子
 
 
 46
-00:02:25,796 --> 00:02:29,296
-of our application which is
-the track view which lives
+00:02:49,403 --> 00:02:51,839
+当我们生成原型时
+我们做了一件事 我们设置了
 
 
 47
-00:02:29,296 --> 00:02:31,486
-up at the top of the app.
+00:02:51,905 --> 00:02:53,207
+一项“性能预算”
 
 
 48
-00:02:31,486 --> 00:02:35,336
-Chris and I over winter took our
-design for the new track view
+00:02:53,874 --> 00:02:55,309
+当我们分层堆放功能特性的
 
 
 49
-00:02:35,946 --> 00:02:38,476
-and we started building it up
-out of a series of prototypes.
+00:02:55,375 --> 00:02:58,378
+时候 我们会依据这项
+“预算” 不断地对
 
 
 50
-00:02:38,616 --> 00:02:41,236
-We didn't do the prototyping
-in Instruments itself,
+00:02:58,445 --> 00:03:00,948
+我们的代码的性能进行评估
 
 
 51
-00:02:41,236 --> 00:02:43,476
-we broke it out in a separate
-application to keep it simple.
+00:03:01,815 --> 00:03:04,818
+当我们超出了“预算”时
+我们就会借助于时间分析器
 
 
 52
-00:02:44,196 --> 00:02:47,926
-This is what one of the
-last prototypes looked like.
+00:03:04,885 --> 00:03:08,255
+看看到底是我们的
+应用程序的哪一部分出了问题
 
 
 53
-00:02:49,416 --> 00:02:51,866
-Now while we were
-prototyping, a thing we did,
+00:03:09,523 --> 00:03:12,993
+有时候很容易就可以修复
+而有时候则不然
 
 
 54
-00:02:51,866 --> 00:02:53,196
-we set a performance budget.
+00:03:13,727 --> 00:03:14,928
+因为我们生成的是原型
 
 
 55
-00:02:53,876 --> 00:02:55,316
-As we layered on feature
+00:03:15,195 --> 00:03:17,197
+所以即使我们需要进行一些
+大的结构改变才能把
 
 
 56
-00:02:55,316 --> 00:02:58,886
-after feature we were constantly
-evaluating our performance
+00:03:17,264 --> 00:03:20,100
+性能拉回正道这也是相当容易的
 
 
 57
-00:02:58,886 --> 00:03:00,946
-of our code against the budget.
+00:03:21,602 --> 00:03:24,338
+当我们把它集成回
+Instruments时
 
 
 58
-00:03:01,816 --> 00:03:04,816
-When we found we were exceeding
-the budget we would use the time
+00:03:24,638 --> 00:03:26,106
+我们会再次借助于时间分析器
 
 
 59
-00:03:04,816 --> 00:03:06,406
-profiler to figure out where
+00:03:26,206 --> 00:03:28,876
+找出我们的集成点中的“热点”
 
 
 60
-00:03:06,406 --> 00:03:08,246
-in our application
-things were going wrong.
+00:03:29,009 --> 00:03:32,546
+这样经过几次迭代后我们最终
+得到了Instruments 7
 
 
 61
-00:03:08,246 --> 00:03:12,996
-Sometimes it was an easy
-fix but sometimes it wasn't.
+00:03:32,613 --> 00:03:34,281
+这个版本实现了我们的性能目标
 
 
 62
-00:03:13,726 --> 00:03:14,926
-Since we were prototyping,
+00:03:35,315 --> 00:03:38,051
+时间分析器帮助我们
+“熬过”了这个冬天
 
 
 63
-00:03:15,256 --> 00:03:17,246
-even some of the bigger
-structural changes we had
+00:03:38,118 --> 00:03:40,921
+为此我们兴奋不已
+因此当苹果全球开发者大会
 
 
 64
-00:03:17,246 --> 00:03:18,476
-to make to get the
-performance back
+00:03:40,988 --> 00:03:45,325
+来临时 我们想开一次会议
+谈谈时间分析器
 
 
 65
-00:03:18,476 --> 00:03:20,106
-on track was still fairly easy.
+00:03:45,659 --> 00:03:47,528
+谈谈它善于解决哪些问题
 
 
 66
-00:03:21,596 --> 00:03:22,856
-When we integrated it back
+00:03:48,629 --> 00:03:52,900
+我们想要和你们分享
+我们写轨迹视图时的经验
 
 
 67
-00:03:22,856 --> 00:03:26,116
-into Instruments we use
-the time profiler again
+00:03:54,001 --> 00:03:58,505
+我们今年所做的就是在iOS上
+创建了一个演示应用程序
 
 
 68
-00:03:26,206 --> 00:03:28,866
-to find the hot spots in
-our integration points,
+00:03:59,173 --> 00:04:02,643
+它和轨迹视图的第一个原型看起来很像
 
 
 69
-00:03:28,996 --> 00:03:32,636
-and after a few iterations, we
-had a version of Instruments 7
+00:04:03,544 --> 00:04:06,613
+我们也给自己设定了性能目标
 
 
 70
-00:03:32,636 --> 00:03:34,286
-which was meeting our
-performance goals.
+00:04:06,680 --> 00:04:10,317
+我们想要绘制十万个数据点
 
 
 71
-00:03:35,306 --> 00:03:38,086
-We were thrilled with how
-the time profiler got us
+00:04:11,084 --> 00:04:15,222
+我们想要平移和缩放的帧速
+为完美的每秒钟六十帧
 
 
 72
-00:03:38,116 --> 00:03:40,966
-through this winter,
-that when WWDC 2015 came,
+00:04:15,989 --> 00:04:18,825
+我们还想让它支持
+第一代iPad mini
 
 
 73
-00:03:40,996 --> 00:03:45,336
-we wanted to create a session
-that talks about time profiler
+00:04:19,493 --> 00:04:22,062
+我们选择第一代iPad mini
+的原因是...
 
 
 74
-00:03:45,646 --> 00:03:47,516
-and the problems that it's
-really good at solving.
+00:04:22,696 --> 00:04:24,464
+你知道我说的是什么...
 
 
 75
-00:03:48,636 --> 00:03:51,796
-We wanted to share
-our experience
+00:04:24,531 --> 00:04:27,734
+如果它能支持第一代iPad
+mini 那么它在其它的平台上
 
 
 76
-00:03:51,796 --> 00:03:52,906
-when writing the track view.
+00:04:27,801 --> 00:04:30,737
+尤其是后面的平台上
+也就没问题
 
 
 77
-00:03:53,986 --> 00:03:55,246
-What we did this year,
+00:04:30,804 --> 00:04:32,439
+克里斯会向你们展示这个应用程序
 
 
 78
-00:03:55,246 --> 00:03:58,506
-we created a demonstration
-application on iOS
+00:04:32,706 --> 00:04:36,777
+他会对它进行时间剖析
+他会向你们展示把这些东西
 
 
 79
-00:03:59,176 --> 00:04:02,626
-that looks similar to the
-first track view prototypes
+00:04:36,844 --> 00:04:39,580
+组合到一起时我们发现了什么东西
 
 
 80
-00:04:03,546 --> 00:04:06,636
-and we set performance
-targets for ourselves,
+00:04:41,081 --> 00:04:45,285
+谢谢 查德 这里我有
+Xcode的原型应用程序
 
 
 81
-00:04:06,636 --> 00:04:10,416
-100,000 data points is
-what we wanted to graph,
+00:04:45,586 --> 00:04:48,055
+我想点出几样东西
 
 
 82
-00:04:11,086 --> 00:04:15,236
-we wanted a perfect 60 frame per
-second for panning and zooming.
+00:04:48,121 --> 00:04:51,191
+当我们初步实现时
+我们发现 我们根本就处理
 
 
 83
-00:04:16,005 --> 00:04:18,826
-We wanted to make it work on
-a iPad mini 1st generation.
+00:04:51,258 --> 00:04:52,826
+不了不到十万个的数据点
 
 
 84
-00:04:19,495 --> 00:04:21,435
-We picked the iPad
-mini 1st gen --
+00:04:53,160 --> 00:04:55,963
+一开始 我们先从一万个数据点开始
 
 
 85
-00:04:21,435 --> 00:04:24,376
-you know what I'm
-talking about --
+00:04:56,396 --> 00:04:59,733
+还有一点也很重要
+你应该在你的发版构建上进行
 
 
 86
-00:04:24,376 --> 00:04:27,056
-we knew it would
-work well on all
+00:04:59,800 --> 00:05:02,569
+时间剖析因为你肯定想在你进行
 
 
 87
-00:04:27,056 --> 00:04:30,776
-of the other platforms
-especially the later platforms.
+00:05:02,636 --> 00:05:05,906
+剖析时 把编译器的优化利用起来
 
 
 88
-00:04:30,776 --> 00:04:32,436
-Chris will show you
-the application,
+00:05:06,540 --> 00:05:09,510
+我要开始剖析应用程序了
 
 
 89
-00:04:32,696 --> 00:04:36,766
-he'll time profile it, and he's
-going to show you the things
+00:05:09,710 --> 00:05:12,813
+我要从产品菜单中选择“剖析”
 
 
 90
-00:04:36,846 --> 00:04:39,456
-that we found when putting
-this together for you.
+00:05:13,580 --> 00:05:16,483
+这样就会构建应用程序
+把它安装到iPad上
 
 
 91
-00:04:41,066 --> 00:04:41,596
->> KRIS MARKEL: Thank you, Chad.
+00:05:16,817 --> 00:05:18,952
+并且显示出
+Instrument模板用户
 
 
 92
-00:04:41,836 --> 00:04:45,276
-Here I have the prototype
-application of an Xcode,
+00:05:19,586 --> 00:05:22,089
+这里 时间分析器已经为我们选择好了
 
 
 93
-00:04:45,596 --> 00:04:48,076
-and I want to call
-out a few things.
+00:05:22,656 --> 00:05:24,057
+我要点击“选择”
 
 
 94
-00:04:48,076 --> 00:04:51,246
-Our initial implementation we
-discovered can't handle even
+00:05:24,491 --> 00:05:27,227
+这里 你可以在我们的轨迹
+视图中看到Instruments
 
 
 95
-00:04:51,246 --> 00:04:52,806
-close to 100,000 data points.
+00:05:27,461 --> 00:05:29,296
+我们过一会儿再回来看这个
 
 
 96
-00:04:53,156 --> 00:04:55,946
-Initially we're working with
-10,000 data points to get going.
+00:05:29,363 --> 00:05:31,265
+现在我要开始录制了
 
 
 97
-00:04:56,386 --> 00:04:59,766
-Another important point, you
-should do your time profiling
+00:05:31,732 --> 00:05:35,169
+点击“录制”按钮
+我们向你展示了app
 
 
 98
-00:04:59,766 --> 00:05:02,616
-on release builds, you
-want to take advantage
+00:05:35,235 --> 00:05:39,239
+我想要强调下 你们在这里
+看到的 这个并不是模拟器
 
 
 99
-00:05:02,616 --> 00:05:05,906
-of the compiler optimizations
-while you're profiling.
+00:05:39,306 --> 00:05:43,010
+这是QuickTime对app上已有的
+东西进行的镜像
 
 
 100
-00:05:05,906 --> 00:05:09,976
-I'll go ahead, start profiling
-the application and to do
+00:05:43,810 --> 00:05:48,515
+这是我们的图表我要开始滚动
 
 
 101
-00:05:09,976 --> 00:05:12,806
-that I'll, from the product
-menu, choose profile.
+00:05:49,183 --> 00:05:52,686
+滚动没有什么不好
+我要通过收聚进行缩小
 
 
 102
-00:05:13,596 --> 00:05:17,416
-This will build the application,
-install it on the iPad and bring
+00:05:53,220 --> 00:05:56,390
+刚开始还不错不过之后就开始卡了
 
 
 103
-00:05:17,416 --> 00:05:18,966
-up the Instrument template user.
+00:05:56,924 --> 00:05:58,025
+这可不太妙
 
 
 104
-00:05:19,576 --> 00:05:22,926
-Here it is, time profiler
-is selected for me.
+00:05:58,792 --> 00:06:02,196
+最后我要用我的手指进行
 
 
 105
-00:05:22,926 --> 00:05:24,066
-I'll click choose.
+00:06:02,262 --> 00:06:04,064
+前后滚动我正在移动我的手指
 
 
 106
-00:05:24,486 --> 00:05:27,216
-Here you will see Instruments
-in our new track view
+00:06:04,131 --> 00:06:07,668
+但是显示器并没有更新太卡了
 
 
 107
-00:05:27,466 --> 00:05:29,296
-and we'll get back
-to that in a minute.
+00:06:08,202 --> 00:06:10,504
+性能表现太糟糕了
 
 
 108
-00:05:29,366 --> 00:05:31,276
-Right now I'll go ahead
-and start recording,
+00:06:11,238 --> 00:06:12,873
+我们来看看发生了什么
 
 
 109
-00:05:31,736 --> 00:05:34,796
-click the record button,
-we'll show you the app.
+00:06:13,140 --> 00:06:15,642
+让我们回到Xcode中
+回到Instruments中
 
 
 110
-00:05:35,536 --> 00:05:39,266
-I want to emphasize what you see
-here, this is not the simulator,
+00:06:15,809 --> 00:06:16,777
+我们把分析器停下来
 
 
 111
-00:05:39,266 --> 00:05:43,016
-this is QuickTime mirroring that
-which is already on the app.
+00:06:16,910 --> 00:06:19,313
+快速让你们看看新的轨迹视图
 
 
 112
-00:05:43,806 --> 00:05:48,516
-Here's our graph, I'll go ahead
-and scroll, scrolling isn't bad,
+00:06:19,713 --> 00:06:21,682
+这里我们看到了CPU使用情况
 
 
 113
-00:05:48,516 --> 00:05:52,476
-it is not bad, I'll zoom out
-by pinching, it is okay at fist
+00:06:22,082 --> 00:06:24,384
+它指的是在某个特定的时间单位内
 
 
 114
-00:05:52,476 --> 00:05:55,436
-and then starts to
-stutter, stutter,
+00:06:24,585 --> 00:06:26,320
+平均的CPU使用情况
 
 
 115
-00:05:55,806 --> 00:05:57,826
-stutter, that's pretty bad.
+00:06:26,620 --> 00:06:28,722
+这里的时间单位取决于
+你当前的缩放程度
 
 
 116
-00:05:58,776 --> 00:06:02,256
-Now, finally, I'm going to
-just scroll back and forth
+00:06:29,122 --> 00:06:31,458
+当我使用我的app时
+你可以看到不同的部分
 
 
 117
-00:06:02,256 --> 00:06:04,106
-with my finger, I'm
-actually moving my finger
+00:06:31,925 --> 00:06:33,360
+那里消耗的时间是不同的
 
 
 118
-00:06:04,106 --> 00:06:07,666
-but the display is not updating,
-it is very, very laggy.
+00:06:33,427 --> 00:06:37,798
+这是滚动 这是缩小这是
+缩小时进行前后滚动
 
 
 119
-00:06:08,206 --> 00:06:10,516
-That's very poor performance.
+00:06:38,265 --> 00:06:41,401
+关于轨迹视图 还有一点
+很棒 就是我可以使用这个
 
 
 120
-00:06:11,226 --> 00:06:12,866
-Let's look at what's going on.
+00:06:41,468 --> 00:06:47,207
+缩小手势来放大我感兴趣的某段数据
 
 
 121
-00:06:13,126 --> 00:06:14,986
-Let's go back to
-Xcode -- Instruments.
+00:06:47,774 --> 00:06:50,878
+如果你用的不是Trackpad
+那么你可以按住选项键
 
 
 122
-00:06:14,986 --> 00:06:16,746
-We'll stop the profiler
+00:06:50,978 --> 00:06:54,481
+上下滚动来进行放大和缩小
 
 
 123
-00:06:16,906 --> 00:06:19,316
-and quickly show you
-the new track view.
+00:06:55,115 --> 00:06:57,718
+我想看看这段特定的数据
 
 
 124
-00:06:19,726 --> 00:06:21,666
-Here we have the CPU usage.
+00:06:57,885 --> 00:06:59,720
+就是这里的这个活动
 
 
 125
-00:06:22,066 --> 00:06:24,396
-What this is, this is
-the average CPU usage
+00:07:00,020 --> 00:07:01,388
+刚才我在这里进行了滚动
 
 
 126
-00:06:24,576 --> 00:06:26,306
-for specific unit of time.
+00:07:01,455 --> 00:07:05,592
+为此我要使用一个过滤器
+只需单击并拖动
 
 
 127
-00:06:26,616 --> 00:06:28,706
-That time depends on
-your current zoom level.
+00:07:06,260 --> 00:07:11,265
+就可以把那些特定的样例给选中
+这样我就可以专注于
 
 
 128
-00:06:29,106 --> 00:06:31,466
-You see the different
-parts as I use my app
+00:07:11,331 --> 00:07:12,566
+那个特定的数据
 
 
 129
-00:06:31,916 --> 00:06:33,406
-where it was spending time.
+00:07:13,567 --> 00:07:16,370
+我要在下面这里创建更多的空白
 
 
 130
-00:06:33,406 --> 00:06:36,766
-This is scrolling, the zooming
-out, this is the scrolling back
+00:07:17,070 --> 00:07:19,339
+下面这里是我们的详细视图
 
 
 131
-00:06:36,766 --> 00:06:38,786
-and forth while zoomed out.
+00:07:19,940 --> 00:07:22,676
+它可以向我们显示
+我们在某个特定的函数
 
 
 132
-00:06:38,786 --> 00:06:41,486
-A nice thing about the new track
-view is that I can go ahead
+00:07:22,743 --> 00:07:27,481
+或者方法内拥有的时间分析器的
+样本百分比的数量
 
 
 133
-00:06:41,486 --> 00:06:46,406
-and use this pinch gesture
-to zoom in on a piece of data
+00:07:27,748 --> 00:07:28,815
+这样我们就有了符号名
 
 
 134
-00:06:46,406 --> 00:06:47,206
-that I'm interested in.
+00:07:28,882 --> 00:07:31,852
+这是我们的百分比这是我们的符号
 
 
 135
-00:06:47,786 --> 00:06:50,866
-If you're not using a Trackpad,
-you can hold down the option key
+00:07:32,386 --> 00:07:37,124
+当你进行时间剖析时你通常所做的
+第一件事是把这个扩展开来
 
 
 136
-00:06:50,986 --> 00:06:54,476
-and scroll up and down
-to zoom in and out.
+00:07:37,591 --> 00:07:42,563
+然后查看某种...
+在这里对数字进行对比
 
 
 137
-00:06:54,836 --> 00:06:57,706
-I want to focus on this
-particular piece of data,
+00:07:42,629 --> 00:07:45,098
+这里是具体的方法函数
 
 
 138
-00:06:57,896 --> 00:06:59,706
-the activity right here.
+00:07:45,432 --> 00:07:48,035
+看看突出来的是什么类型的情况 
 
 
 139
-00:07:00,026 --> 00:07:01,716
-I was scrolling here.
+00:07:48,402 --> 00:07:50,504
+你知道的那些值得你进行
+调查的情况会显示出来
 
 
 140
-00:07:01,716 --> 00:07:05,596
-To do that, I'll apply a filter,
-that's just a click and drag
+00:07:50,871 --> 00:07:53,740
+还有一个选项 如果我们
+认真看看检查器窗格
 
 
 141
-00:07:06,276 --> 00:07:11,476
-and it selecting just those
-specific samples so I can focus
+00:07:54,174 --> 00:07:58,612
+点击扩展开的细节 我们就能
+看到最厚重的堆栈踪迹
 
 
 142
-00:07:11,476 --> 00:07:12,566
-on that particular data.
+00:07:59,146 --> 00:08:00,247
+这是针对主线程的
 
 
 143
-00:07:13,576 --> 00:07:16,386
-I'll create more
-space down here.
+00:08:00,681 --> 00:08:03,984
+当我进行时间剖析希望提高性能时
 
 
 144
-00:07:17,056 --> 00:07:19,356
-Down here this is
-our detailed view.
+00:08:04,051 --> 00:08:08,255
+我就会关注这里因为
+这里是最物有所值的
 
 
 145
-00:07:19,946 --> 00:07:22,756
-What this is showing
-us is how many --
+00:08:08,822 --> 00:08:10,290
+我们来看看发生了什么
 
 
 146
-00:07:22,756 --> 00:07:25,976
-the percentage of time
-profiler samples we have inside
+00:08:10,457 --> 00:08:14,428
+主线程调用了应用程序的
+主线程 进行循环
 
 
 147
-00:07:25,976 --> 00:07:27,496
-of a particular function
-or method
+00:08:14,828 --> 00:08:18,298
+核心动画开始工作了
 
 
 148
-00:07:27,746 --> 00:07:28,846
-and then we have
-the symbol name.
+00:08:21,268 --> 00:08:27,574
+没有什么异常情况发生
 
 
 149
-00:07:28,846 --> 00:07:31,846
-Here is our percentage
-and here is our symbols.
+00:08:28,075 --> 00:08:31,245
+实际上这就是剖析时常见的事
 
 
 150
-00:07:32,396 --> 00:07:33,926
-Now the first thing
-you usually do
+00:08:31,345 --> 00:08:33,780
+你想看看应用程序最常干的事情是什么
 
 
 151
-00:07:33,926 --> 00:07:37,126
-when you time profile is you
-start to expand these out
+00:08:34,214 --> 00:08:36,850
+但是看起来它并没有做什么特别的事情
 
 
 152
-00:07:37,606 --> 00:07:42,586
-and looking for kind of a --
-comparing the numbers over here
+00:08:36,917 --> 00:08:38,485
+那里什么也没有
 
 
 153
-00:07:42,586 --> 00:07:45,096
-with specific methods
-over here, function.
+00:08:38,552 --> 00:08:41,655
+没有要求在这里计算第四十个斐
+波纳契数也没有做什么其它异常的事
 
 
 154
-00:07:45,416 --> 00:07:48,046
-Looking for things that kind
-of stand out as, you know,
+00:08:42,456 --> 00:08:45,425
+但是 你知道的看看这个调用栈
 
 
 155
-00:07:48,416 --> 00:07:50,396
-jump out at you as something
-that's worthy of investigating.
+00:08:45,492 --> 00:08:48,829
+看看这个堆栈踪迹
+我知道了我的应用程序做了什么事
 
 
 156
-00:07:50,876 --> 00:07:54,476
-Another option, if we go over
-to the inspector pane and click
+00:08:48,896 --> 00:08:52,032
+这是一个简单的原型
+app它的作用就是
 
 
 157
-00:07:54,476 --> 00:07:58,666
-on the extended detail, we
-see the heaviest stack trace.
+00:08:52,099 --> 00:08:54,434
+构建一个路径并且绘制一个路径
 
 
 158
-00:07:59,156 --> 00:08:00,246
-This is for the main thread.
+00:08:55,369 --> 00:08:58,972
+实际上 我能够看到这里有一个
+调用一个CG环境路径
 
 
 159
-00:08:00,666 --> 00:08:04,086
-This is where focusing here is
-where I'll get the most bang
+00:08:59,239 --> 00:09:02,409
+它没有被我的代码根据堆栈踪迹调用到
 
 
 160
-00:08:04,086 --> 00:08:07,126
-for my buck when doing
-a time profiling trying
+00:09:02,743 --> 00:09:05,078
+就在这里占据了很大一块时间
 
 
 161
-00:08:07,126 --> 00:08:08,266
-to make performance
-improvements.
+00:09:05,145 --> 00:09:07,047
+我要点击下那个看看它
 
 
 162
-00:08:08,266 --> 00:08:10,276
-Let's see what's going on.
+00:09:07,881 --> 00:09:09,850
+如果我们看看我们的调用树
 
 
 163
-00:08:10,456 --> 00:08:14,486
-The main is calling
-application main, run loop,
+00:09:10,417 --> 00:09:12,219
+我就可以看到一些有趣的事
 
 
 164
-00:08:14,486 --> 00:08:18,326
-there is core animation
-work happening, some --
+00:09:12,286 --> 00:09:14,855
+我们可以看到根据这个调用树
 
 
 165
-00:08:18,326 --> 00:08:22,956
-there is nothing
-standing out as something
+00:09:14,922 --> 00:09:16,690
+这个绘制路径会被这个
 
 
 166
-00:08:22,956 --> 00:08:27,566
-that seems out of the ordinary.
+00:09:16,757 --> 00:09:19,092
+绘制分层法在UI试图上调用
 
 
 167
-00:08:28,086 --> 00:08:31,246
-In fact, this is a really common
-occurrence when profiling.
+00:09:19,626 --> 00:09:24,264
+它还会为图形视图调用我们的
+drawRect
 
 
 168
-00:08:31,356 --> 00:08:33,765
-You look at what the
-application is doing the most,
+00:09:24,765 --> 00:09:26,767
+这占据了大量的时间
 
 
 169
-00:08:34,216 --> 00:08:36,916
-well it doesn't look like it
-is doing anything special.
+00:09:26,834 --> 00:09:29,536
+这就是app所做的其中一件事
 
 
 170
-00:08:36,916 --> 00:08:38,405
-There is nothing -- no call
+00:09:29,937 --> 00:09:34,374
+如果我看看这里的那个时间
+环境绘制路径占据了
 
 
 171
-00:08:38,405 --> 00:08:40,785
-to compute the 40th
-Fibonacci number here
+00:09:34,541 --> 00:09:38,812
+你知道 样本的55%但是这个
+drawRect占据的却非常少
 
 
 172
-00:08:40,785 --> 00:08:41,466
-in here or something.
+00:09:39,379 --> 00:09:42,549
+这就很有趣了
+如果我在drawRect方法上
 
 
 173
-00:08:42,446 --> 00:08:45,496
-However, you know,
-looking at this call stack,
+00:09:42,616 --> 00:09:45,052
+右击下我就可以看到源代码
 
 
 174
-00:08:45,496 --> 00:08:48,016
-this stack trace, there is
-something I know what my
+00:09:45,686 --> 00:09:47,821
+我知道了如果你看看底部那里
 
 
 175
-00:08:48,016 --> 00:08:48,996
-application does.
+00:09:47,955 --> 00:09:51,592
+我就可以从drawRect方法上
+调用绘制路径
 
 
 176
-00:08:48,996 --> 00:08:52,056
-It is a simple prototype
-app, what it does,
+00:09:52,059 --> 00:09:55,128
+但是在哪个样例中都显示不出来
 
 
 177
-00:08:52,056 --> 00:08:55,706
-it builds a path
-and it draws a path.
+00:09:55,429 --> 00:09:58,432
+只是在添加路径
 
 
 178
-00:08:55,706 --> 00:08:56,866
-I can actually see in here
+00:09:58,699 --> 00:10:01,635
+这可不太寻常
 
 
 179
-00:08:56,866 --> 00:08:58,966
-that there is a call,
-a CG context path.
+00:10:01,702 --> 00:10:04,738
+因为我的预期是我的
+drawRect方法
 
 
 180
-00:08:59,246 --> 00:09:02,396
-It is not called by my code
-according to the stack trace.
+00:10:04,805 --> 00:10:05,906
+运行需要一段时间
 
 
 181
-00:09:02,736 --> 00:09:05,096
-It is here, it is taking
-up a fair amount of time.
+00:10:06,540 --> 00:10:08,275
+它只是我的app完成的一半
 
 
 182
-00:09:05,096 --> 00:09:07,056
-I'll go ahead, click on
-that, take a look at that.
+00:10:08,709 --> 00:10:10,644
+看这个我注意到
 
 
 183
-00:09:07,866 --> 00:09:11,716
-If we look back at our call
-tree I do see something
+00:10:11,078 --> 00:10:12,579
+drawRect返回了一个空白
 
 
 184
-00:09:11,716 --> 00:09:12,286
-interesting here.
+00:10:12,846 --> 00:10:16,350
+最后调用的方法是环境绘制路径
 
 
 185
-00:09:12,286 --> 00:09:14,966
-What we have, we have
-the draw path according
+00:10:16,950 --> 00:10:20,521
+这可能就是所谓的“尾部调用消除”
 
 
 186
-00:09:14,966 --> 00:09:16,386
-to this call tree is called
+00:10:21,388 --> 00:10:25,259
+查德会给大家讲讲什么是
+“尾部调用消除”
 
 
 187
-00:09:16,386 --> 00:09:19,076
-by this draw layer
-method on UI view.
+00:10:25,325 --> 00:10:27,227
+以及如何对它进行验证
 
 
 188
-00:09:19,426 --> 00:09:24,266
-That's also calling our
-drawRect for the graph view.
+00:10:30,464 --> 00:10:34,168
+好的 要解释刚才克里斯看到的情况
 
 
 189
-00:09:24,756 --> 00:09:26,796
-That's taking a fair
-amount of time.
+00:10:34,234 --> 00:10:39,173
+我们就需要理解时间分析器是怎样
+知道在你的应用程序内调用什么的
 
 
 190
-00:09:26,796 --> 00:09:30,326
-That's one of the
-things that the app does.
+00:10:40,040 --> 00:10:42,743
+这个的技术含量就比较高了
+我会一步一步向你们讲解
 
 
 191
-00:09:30,326 --> 00:09:34,376
-If I look at the time over here,
-context draw path is taking up,
+00:10:44,411 --> 00:10:48,148
+左边是drawRect的代码
+右边则和你想象的堆栈
 
 
 192
-00:09:34,536 --> 00:09:38,816
-you know, 55% of the samples but
-the drawRect, it in very few.
+00:10:48,215 --> 00:10:54,588
+在UIKit调用drawRect
+之前为那个线程找到的一样
 
 
 193
-00:09:38,816 --> 00:09:42,556
-This is interesting,
-if I double-click
+00:10:56,290 --> 00:10:57,858
+当向drawRect进行调用时
 
 
 194
-00:09:42,626 --> 00:09:45,046
-on the drawRect method it will
-take me to the source code.
+00:10:58,025 --> 00:11:01,261
+和大多数函数 方法所做的事情一样
 
 
 195
-00:09:45,696 --> 00:09:47,816
-I see, if you look
-to the bottom,
+00:11:01,328 --> 00:11:02,863
+它会建立自己的调用帧
 
 
 196
-00:09:47,866 --> 00:09:51,806
-I actually do call draw path
-from the drawRect method
+00:11:03,864 --> 00:11:07,768
+它会首先推送链路寄存器以及堆栈上的
 
 
 197
-00:09:52,046 --> 00:09:55,126
-but it is not showing
-up in any sample.
+00:11:07,868 --> 00:11:11,705
+帧指针的上一个值的返回地址
 
 
 198
-00:09:55,426 --> 00:09:58,426
-Everything in here
-is an add path.
+00:11:12,039 --> 00:11:16,376
+现在drawRect知道了怎样返回
+它的调用程序怎样恢复帧指针
 
 
 199
-00:09:58,696 --> 00:10:01,356
-This is unusual especially
+00:11:18,078 --> 00:11:21,515
+下一件发生的事是我们
+得到帧指针设置成新的基础
 
 
 200
-00:10:01,356 --> 00:10:05,106
-since my expectation is my own
-drawRect method would take a
+00:11:23,317 --> 00:11:26,320
+然后drawRect会给它的
+局部变量
 
 
 201
-00:10:05,106 --> 00:10:05,796
-while to run.
+00:11:26,386 --> 00:11:28,455
+编译程序的暂存空间腾出空间
 
 
 202
-00:10:05,796 --> 00:10:08,286
-It is basically half
-of what my app does.
+00:11:28,522 --> 00:11:30,357
+现在我们有了一个
+drawRect的帧
 
 
 203
-00:10:08,696 --> 00:10:10,046
-Looking at this,
-I actually notice
+00:11:31,325 --> 00:11:34,494
+现在代码开始运行了
+我们到绘制路径那里
 
 
 204
-00:10:10,046 --> 00:10:12,566
-that while drawRect
-returns a void
+00:11:35,796 --> 00:11:39,166
+绘制路径做的事也相同
+它把自己的帧推送到了堆栈上
 
 
 205
-00:10:12,836 --> 00:10:16,346
-and context draw path is
-the last method called
+00:11:40,400 --> 00:11:43,437
+时间分析器的工作方式
+就是在内核中使用一项服务
 
 
 206
-00:10:16,956 --> 00:10:18,856
-and this is probably a case
+00:11:43,737 --> 00:11:47,207
+以每秒1000x的速度对
+CPU所做的事进行采样
 
 
 207
-00:10:18,856 --> 00:10:20,526
-of what's called Tail
-Call Elimination.
+00:11:48,408 --> 00:11:50,511
+在这个例子中如果我们采一次样
 
 
 208
-00:10:20,946 --> 00:10:25,276
-To tell us more about Tail
-Call Elimination and how
+00:11:50,911 --> 00:11:53,280
+我们就可以看到 我们是在
+环境绘制路径中运行的
 
 
 209
-00:10:25,276 --> 00:10:29,766
-to verify that, back to Chad.
+00:11:54,381 --> 00:11:58,252
+然后内核会看下帧指针寄存器
 
 
 210
-00:10:30,456 --> 00:10:30,716
->> CHAD WOOLF: Okay.
+00:11:58,318 --> 00:12:01,488
+看看函数帧的基础在哪里
 
 
 211
-00:10:30,816 --> 00:10:34,216
-So to explain the situation
-that Kris is seeing we have
+00:12:01,822 --> 00:12:03,657
+然后找到调用它的程序的返回地址
 
 
 212
-00:10:34,216 --> 00:10:38,116
-to understand how the time
-profiler sees what's calling
+00:12:04,291 --> 00:12:08,362
+现在我们可以看到那个
+drawRect是在绘制路径中调用
 
 
 213
-00:10:38,116 --> 00:10:39,396
-what inside of your application.
+00:12:09,263 --> 00:12:11,098
+如果我们想看看drawRect中
 
 
 214
-00:10:40,046 --> 00:10:41,506
-This is going to get technical,
+00:12:11,632 --> 00:12:14,268
+调用了什么我们就可以使用我们推送到
 
 
 215
-00:10:41,546 --> 00:10:44,216
-I'll walk through
-it step by step.
+00:12:15,035 --> 00:12:17,004
+堆栈上的帧指针来找到
+drawRect的基础
 
 
 216
-00:10:44,426 --> 00:10:48,196
-On the left, we have the code
-for drawRect and on the right,
+00:12:17,237 --> 00:12:20,507
+然后继续返回堆栈直到我们到达底部
 
 
 217
-00:10:48,196 --> 00:10:51,266
-we have what you would imagine
-the stack to look like for
+00:12:21,108 --> 00:12:22,242
+这就是一次回溯
 
 
 218
-00:10:51,266 --> 00:10:54,676
-that thread, right before the
-UIKit calls into the drawRect.
+00:12:22,876 --> 00:12:25,212
+如果我们有足够的回溯
+并且把它们放到
 
 
 219
-00:10:55,146 --> 00:10:57,206
-When that call is made
+00:12:25,279 --> 00:12:29,183
+调用树视图你就可以搞清楚在你的
+应用程序内发生了什么
 
 
 220
-00:10:57,206 --> 00:11:01,036
-to the drawRect it will do what
-most functions and methods do,
+00:12:30,083 --> 00:12:32,152
+我想指出一点堆栈上的帧指针
 
 
 221
-00:11:01,126 --> 00:11:02,856
-to establish their
-own call frame.
+00:12:32,319 --> 00:12:34,021
+是绝对必须的
 
 
 222
-00:11:03,866 --> 00:11:07,776
-That starts off by first
-pushing the return address
+00:12:34,421 --> 00:12:37,424
+如果你编译代码时
+关闭了fomit-frame-pointer
 
 
 223
-00:11:07,776 --> 00:11:10,186
-from the link register
-and the previous value
+00:12:37,524 --> 00:12:41,428
+想要进行和我们这里一样的时间剖析
 
 
 224
-00:11:10,186 --> 00:11:11,716
-of the frame Pointer
-on the stack.
+00:12:42,996 --> 00:12:44,531
+让我们看看这个优化实例
 
 
 225
-00:11:12,036 --> 00:11:15,276
-Now drawRect knows how
-to return to its caller
+00:12:44,598 --> 00:12:46,967
+启用编辑器优化后drawRect
 
 
 226
-00:11:15,276 --> 00:11:16,366
-and restore the frame Pointer.
+00:12:47,034 --> 00:12:48,402
+就是进行编译的
 
 
 227
-00:11:18,086 --> 00:11:19,236
-Now the next thing that happens,
+00:12:49,303 --> 00:12:51,271
+同样地我们有一个drawRect帧
 
 
 228
-00:11:19,286 --> 00:11:21,566
-we take the frame Pointer
-set up to the new base.
+00:12:51,738 --> 00:12:53,273
+我们要准备调用绘制路径了
 
 
 229
-00:11:23,016 --> 00:11:26,316
-Then drawRect will make
-room for its local variables
+00:12:54,074 --> 00:12:57,578
+你可以注意到 当绘制路径
+返回drawRect时就完成了
 
 
 230
-00:11:26,316 --> 00:11:28,566
-and the compiler scratch
-space and that's --
+00:12:57,744 --> 00:12:58,779
+什么也不需要做
 
 
 231
-00:11:28,566 --> 00:11:30,196
-now we have a frame
-for drawRect.
+00:12:59,279 --> 00:13:00,214
+它就会返回回来
 
 
 232
-00:11:30,746 --> 00:11:34,506
-Now the code starts to run
-and we come down to draw path
+00:13:00,280 --> 00:13:03,050
+它返回时会弹出堆栈结构
 
 
 233
-00:11:35,806 --> 00:11:37,506
-and draw path does
-the same thing.
+00:13:03,483 --> 00:13:06,086
+恢复帧指针的上一个值
 
 
 234
-00:11:37,536 --> 00:11:39,176
-It pushes the own
-frame on to the stack.
+00:13:06,520 --> 00:13:07,788
+然后回到调用程序
 
 
 235
-00:11:40,396 --> 00:11:43,436
-The way time profiler works,
-it uses a service in the kernel
+00:13:09,022 --> 00:13:11,191
+编译器看到这个后会想
 
 
 236
-00:11:43,726 --> 00:11:45,726
-that will sample what
-the CPUs are doing
+00:13:11,458 --> 00:13:17,397
+为什么绘制路径需要用到
+drawRect的堆栈结构的东西？
 
 
 237
-00:11:45,806 --> 00:11:47,196
-at about 1000x per second.
+00:13:18,398 --> 00:13:20,834
+明明不需要的
+此外返回它的调用程序时
 
 
 238
-00:11:48,396 --> 00:11:50,506
-In this case, if
-we take a sample,
+00:13:20,901 --> 00:13:23,270
+为什么要返回drawRect？
 
 
 239
-00:11:50,906 --> 00:11:54,006
-we see that we're running
-inside of context draw path.
+00:13:23,871 --> 00:13:27,374
+那么它就会把代码重新整理成这样
 
 
 240
-00:11:54,366 --> 00:11:58,316
-Then the kernal looks at the
-frame Pointer register to see
+00:13:27,674 --> 00:13:30,811
+它会弹出堆栈结构恢复帧指针
 
 
 241
-00:11:58,316 --> 00:12:01,496
-where the base of that
-function's frame is
+00:13:30,878 --> 00:13:34,248
+然后直接向绘制路径进行回调
 
 
 242
-00:12:01,806 --> 00:12:03,666
-and find the return
-address of who called it.
+00:13:34,414 --> 00:13:36,149
+这就意味着我们无需再跳回调用程序了
 
 
 243
-00:12:04,306 --> 00:12:08,176
-Now we can see that drawRect
-called into draw path.
+00:13:36,984 --> 00:13:39,686
+解释这个要比让你们直接看到更困难
 
 
 244
-00:12:09,256 --> 00:12:10,446
-If we want to see who called
+00:13:39,753 --> 00:13:42,422
+让我们想象一下 当运行
+这个代码时它会是什么样的
 
 
 245
-00:12:10,446 --> 00:12:13,776
-into drawRect we can use the
-frame Pointers that were pushed
+00:13:43,524 --> 00:13:46,059
+我们会弹出堆栈结构去掉局部变量
 
 
 246
-00:12:13,776 --> 00:12:16,596
-on the stack to find
-the base of drawRect
+00:13:47,060 --> 00:13:49,329
+我们会把帧指针恢复成初始值
 
 
 247
-00:12:17,226 --> 00:12:19,726
-and then continuously go
-back through the stack
+00:13:49,463 --> 00:13:50,864
+链路寄存器的值
 
 
 248
-00:12:19,726 --> 00:12:20,766
-until we hit the bottom.
+00:13:51,665 --> 00:13:54,668
+然后我们跳回绘制路径代码的开头
 
 
 249
-00:12:21,096 --> 00:12:22,236
-This is a backtrace.
+00:13:55,536 --> 00:13:58,739
+绘制路径会使用它在
+链路寄存器中找到的值
 
 
 250
-00:12:22,886 --> 00:12:24,446
-If we take enough of
-these and put them
+00:13:59,306 --> 00:14:02,843
+帧指针中找到的值把它
+自己的帧推送回堆栈
 
 
 251
-00:12:24,446 --> 00:12:27,436
-in the call tree view you
-can get a pretty good picture
+00:14:03,610 --> 00:14:07,080
+从绘制路径的透视图中它会直接在
 
 
 252
-00:12:27,436 --> 00:12:29,176
-of what's going on inside
-of your application.
+00:14:07,147 --> 00:14:09,149
+UIKit的环境中
+从绘制层上得到调用
 
 
 253
-00:12:29,546 --> 00:12:32,166
-I want to point out,
-the frame Pointers
+00:14:09,950 --> 00:14:11,685
+此时如果我们进行一次时间采样
 
 
 254
-00:12:32,306 --> 00:12:34,026
-on the stack are
-absolutely required.
+00:14:12,119 --> 00:14:13,754
+我们就可以看到同样的情况
 
 
 255
-00:12:34,536 --> 00:12:38,256
-If you're compiling code
-with fomit-frame-pointer turn
+00:14:15,022 --> 00:14:16,890
+即使发生的不是实际的调用序列
 
 
 256
-00:12:38,256 --> 00:12:40,966
-that off to try to do the
-time type of profiling
+00:14:16,957 --> 00:14:19,092
+时间分析器看到的就是这样
 
 
 257
-00:12:40,966 --> 00:12:42,466
-that we're doing here.
+00:14:19,660 --> 00:14:22,963
+我们在我们的调用树上
+最后看到的就是这个
 
 
 258
-00:12:43,116 --> 00:12:44,566
-Let's look at the
-optimize cases.
+00:14:23,564 --> 00:14:25,966
+这就叫“尾部调用消除”
+在高度优化的代码上
 
 
 259
-00:12:44,566 --> 00:12:47,026
-This is where drawRect
-was compiled
+00:14:26,033 --> 00:14:29,203
+很常见也有一些好处
 
 
 260
-00:12:47,026 --> 00:12:48,396
-with compiler optimizations
-enabled.
+00:14:30,804 --> 00:14:31,972
+它能够节省堆栈内存
 
 
 261
-00:12:48,966 --> 00:12:51,166
-Same situation, we
-have a drawRect frame.
+00:14:32,806 --> 00:14:35,242
+节省堆栈内存时
+它会让缓存保持“热度”
 
 
 262
-00:12:51,166 --> 00:12:53,116
-We're about to call
-into draw path.
+00:14:35,309 --> 00:14:38,045
+然后重新利用内存缓存和数据
 
 
 263
-00:12:54,086 --> 00:12:57,586
-You notice when draw path
-returns drawRect is finished.
+00:14:39,179 --> 00:14:42,749
+它对递归代码有着深刻影响
 
 
 264
-00:12:57,686 --> 00:12:58,766
-Doesn't need to do anything.
+00:14:42,816 --> 00:14:45,919
+尤其是尾部调用递归代码
+在那里 一个函数或者方法
 
 
 265
-00:12:59,006 --> 00:13:00,256
-It is going to return.
+00:14:45,986 --> 00:14:48,355
+会最后调用自身然后返回回来
 
 
 266
-00:13:00,256 --> 00:13:03,056
-The way it returns, it is
-it pops the stack frame,
+00:14:49,223 --> 00:14:52,893
+无需推送这些帧一个递归函数内的
 
 
 267
-00:13:03,476 --> 00:13:06,076
-restores the previous
-value of the frame Pointer
+00:14:53,093 --> 00:14:56,463
+尾部调用消除
+就可以让性能和迭代版本
 
 
 268
-00:13:06,506 --> 00:13:07,786
-and jumps back to the caller.
+00:14:56,530 --> 00:15:00,200
+一样好所以堆栈就不会增长
 
 
 269
-00:13:09,016 --> 00:13:11,176
-The compiler looks at
-this and says well,
+00:15:00,267 --> 00:15:01,735
+并且性能也很优秀
 
 
 270
-00:13:11,456 --> 00:13:17,146
-why does draw path need anything
-from drawRect's stack frame.
+00:15:02,536 --> 00:15:06,406
+这个优化也能兼容高度递归代码
 
 
 271
-00:13:18,406 --> 00:13:18,806
-It doesn't.
+00:15:07,140 --> 00:15:09,109
+如果为了剖析你想把它关掉
 
 
 272
-00:13:18,806 --> 00:13:20,886
-Furthermore, why come
-in to drawRect --
+00:15:09,176 --> 00:15:11,111
+显示一个更清晰的堆栈踪迹
 
 
 273
-00:13:20,886 --> 00:13:22,426
-back to drawRect at
-all when it is going
+00:15:12,145 --> 00:15:15,315
+你就可以到项目的构建设置中把它关掉
 
 
 274
-00:13:22,426 --> 00:13:23,266
-to return to its caller?
+00:15:15,782 --> 00:15:17,684
+并且把编辑器标志
 
 
 275
-00:13:23,966 --> 00:13:27,376
-What it does, it rearranges
-the code like this.
+00:15:17,751 --> 00:15:20,787
+从CFLAGS设置成
+FNO-optimize-sibling-calls
 
 
 276
-00:13:27,676 --> 00:13:30,836
-It is going to pop the stack
-frame, restore the frame Pointer
+00:15:20,854 --> 00:15:22,122
+关掉优化
 
 
 277
-00:13:30,886 --> 00:13:34,076
-and make a direct call
-back into draw path meaning
+00:15:22,422 --> 00:15:24,625
+不幸的是性能同时也会受到影响
 
 
 278
-00:13:34,416 --> 00:13:36,026
-that we don't need to
-jump back to the caller.
+00:15:25,092 --> 00:15:27,394
+但是这样你可以在时间分析器
+中得到更好一个的结果
 
 
 279
-00:13:36,986 --> 00:13:39,706
-That's harder to explain
-than it is to see.
+00:15:28,562 --> 00:15:31,131
+如果你选择忍受它
+你想要知道是否发生了
 
 
 280
-00:13:39,706 --> 00:13:43,286
-Let's imagine what it would look
-like when running this code.
+00:15:31,298 --> 00:15:34,768
+尾部调用消除那么你该怎么做？
 
 
 281
-00:13:43,616 --> 00:13:46,046
-We'll pop the stack frame off to
-get rid of the local variables.
+00:15:34,835 --> 00:15:38,405
+你可以看看反汇编调用最后调用的情况
 
 
 282
-00:13:47,066 --> 00:13:49,346
-We'll restore the frame
-Pointer to the original value
+00:15:39,473 --> 00:15:41,942
+如果是个普通的调用
+那么它会使用指令的
 
 
 283
-00:13:49,456 --> 00:13:50,856
-and the value of
-the link register.
+00:15:42,009 --> 00:15:44,711
+一个分支和家族链接
+那里是第一个实例
 
 
 284
-00:13:51,596 --> 00:13:55,676
-Then we'll jump to the beginning
-of the code for draw path.
+00:15:45,746 --> 00:15:47,614
+那就意味着它会跳到新函数
 
 
 285
-00:13:55,676 --> 00:13:57,916
-Draw path is going to
-push its own frame back
+00:15:47,681 --> 00:15:50,117
+并且在链路寄存器内保存返回的值
 
 
 286
-00:13:57,916 --> 00:14:00,776
-on to the stack using
-the value that it found
+00:15:51,318 --> 00:15:54,021
+如果是一个尾部调用
+并且我们需要直接跳到
 
 
 287
-00:14:00,776 --> 00:14:02,836
-in the link register
-and the frame Pointer.
+00:15:54,087 --> 00:15:59,893
+直接跳到新函数内 那么
+它就是一个直接的分支指令没有BL
 
 
 288
-00:14:03,096 --> 00:14:06,266
-From draw path's perspective
-it was called directly
+00:16:00,561 --> 00:16:04,665
+那就是一个指令和链路的调用指令
 
 
 289
-00:14:06,266 --> 00:14:09,066
-from draw layer in
-context from UIKit.
+00:16:04,731 --> 00:16:06,600
+分支就是一个转移指令
 
 
 290
-00:14:09,996 --> 00:14:11,626
-If we take a time
-sample at this point,
+00:16:06,733 --> 00:16:09,102
+如果你看看它你会发现很眼熟
 
 
 291
-00:14:12,136 --> 00:14:13,696
-we'll see the exact same story.
+00:16:10,137 --> 00:16:14,741
+现在就由克里斯来决定了
+他可以禁用优化 重新编译
 
 
 292
-00:14:15,036 --> 00:14:16,966
-Even though that's not
-the actual call sequence
+00:16:14,808 --> 00:16:17,444
+或者他也可以继续由你决定
 
 
 293
-00:14:16,966 --> 00:14:19,086
-that happened, this is
-what the time profiler saw.
+00:16:18,412 --> 00:16:20,747
+我要看看反汇编
 
 
 294
-00:14:19,546 --> 00:14:22,966
-That's what we ended up
-seeing in our call trees.
+00:16:20,814 --> 00:16:24,885
+在Instruments详细视图的
+右上角那里
 
 
 295
-00:14:23,576 --> 00:14:25,996
-This is called Tail Call
-Elimination, it is common
+00:16:24,952 --> 00:16:28,055
+有一个按钮
+查看反汇编 如果我点击下
 
 
 296
-00:14:25,996 --> 00:14:31,046
-in highly optimized code
-and has some benefits.
+00:16:28,622 --> 00:16:30,858
+我就可以看到那个方法的反汇编
 
 
 297
-00:14:31,046 --> 00:14:31,966
-It saves stack memory.
+00:16:31,091 --> 00:16:35,395
+我们就可以确认添加路径
+环境调用是一个分支和链路
 
 
 298
-00:14:32,796 --> 00:14:35,286
-In the process of saving stack
-memory, it keeps the caches hot,
+00:16:35,929 --> 00:16:39,166
+环境调用绘制路径是一个简单的分支
 
 
 299
-00:14:35,286 --> 00:14:39,436
-that reuses the memory,
-the caches and data.
+00:16:39,600 --> 00:16:42,669
+我确信这是一个尾部调用消除的例子
 
 
 300
-00:14:39,436 --> 00:14:42,766
-It has a profound
-effect on recursive code,
+00:16:43,036 --> 00:16:48,442
+我在调用树上看到的55%的
+调用都不属于我的drawRect
 
 
 301
-00:14:42,806 --> 00:14:45,906
-especially tail call recursive
-code, where a function
+00:16:48,509 --> 00:16:51,345
+它们本来应该属于
+我的drawRect
 
 
 302
-00:14:45,906 --> 00:14:48,346
-or method calls itself as the
-last thing and then returns.
+00:16:51,845 --> 00:16:53,447
+这是个好消息
 
 
 303
-00:14:49,226 --> 00:14:53,436
-Without pushing those frames
-a Tail Call Elimination inside
+00:16:53,514 --> 00:16:57,951
+现在我知道了drawRect就是
+我的最重的堆栈结构
 
 
 304
-00:14:53,436 --> 00:14:56,406
-of a recursive function can
-make the performance as good
+00:16:58,018 --> 00:16:59,052
+我的最重的堆栈踪迹
 
 
 305
-00:14:56,406 --> 00:15:00,216
-as its iterative version, so
-you don't get the stack growth
+00:16:59,453 --> 00:17:02,456
+消耗了我55%到60%的时间
 
 
 306
-00:15:00,216 --> 00:15:02,856
-and you get the high
-performance as well.
+00:17:02,723 --> 00:17:04,724
+很好 我知道应该优化哪里了
 
 
 307
-00:15:02,856 --> 00:15:06,276
-This optimization leave on
-with highly recursive code.
+00:17:04,892 --> 00:17:07,594
+我要优化drawRect开始吧
 
 
 308
-00:15:06,696 --> 00:15:09,156
-If you want to turn it off
-for the sake of profiling
+00:17:08,395 --> 00:17:09,930
+我们来看看这个drawRect
 
 
 309
-00:15:09,156 --> 00:15:13,536
-to show a cleaner stack trace
-you can turn it off by going
+00:17:11,231 --> 00:17:14,867
+看看这个drawRect 如果
+有张桌子的话我早就掀了
 
 
 310
-00:15:13,536 --> 00:15:15,306
-in the build settings
-of the project
+00:17:15,702 --> 00:17:17,971
+优化的地方不多
 
 
 311
-00:15:15,786 --> 00:15:17,546
-and setting the compiler flag,
+00:17:18,172 --> 00:17:20,440
+很难想出一个能用的更简单的
 
 
 312
-00:15:17,726 --> 00:15:20,646
-the CFLAGS to
-FNO-optimize-sibling-calls,
+00:17:20,674 --> 00:17:22,075
+但是又能用的drawRect
 
 
 313
-00:15:20,856 --> 00:15:22,116
-turning off the optimization,
+00:17:22,175 --> 00:17:28,015
+我们有四个函数调用 环境
+你知道的 CG调用
 
 
 314
-00:15:22,426 --> 00:15:24,736
-and unfortunately the
-performance gains with it,
+00:17:28,515 --> 00:17:30,584
+这个drawRect
+没有起到多少作用
 
 
 315
-00:15:25,096 --> 00:15:28,876
-but you'll get a better
-result in the time profiler.
+00:17:31,251 --> 00:17:33,720
+那么这个实际上就是进行剖析时
 
 
 316
-00:15:28,876 --> 00:15:31,116
-If you choose to live with
-it, and you want to identify
+00:17:33,787 --> 00:17:35,389
+一个很常见的事
 
 
 317
-00:15:31,296 --> 00:15:34,796
-if a tail call is happening,
-then what you can do,
+00:17:36,657 --> 00:17:41,762
+你看了下自己的“热点”和代码
 
 
 318
-00:15:34,796 --> 00:15:38,626
-you can look at the disassembly
-and call sight of the last call.
+00:17:42,062 --> 00:17:45,799
+发现你没有多少能直接在
+代码中进行修改
 
 
 319
-00:15:39,476 --> 00:15:42,056
-If it is a normal call, it
-is going to use a branch
+00:17:45,999 --> 00:17:47,334
+提高你的性能的地方
 
 
 320
-00:15:42,056 --> 00:15:44,716
-and link family of instructions,
-that's the first example there.
+00:17:48,068 --> 00:17:50,404
+你知道 这个节点你该做什么？
 
 
 321
-00:15:45,756 --> 00:15:47,606
-What that does, it jumps
-to the new function
+00:17:51,305 --> 00:17:55,776
+你知道 除了掀桌子
+晚上在枕头上嚎啕大哭之外
 
 
 322
-00:15:47,606 --> 00:15:50,126
-and saves the return value
-in the link register.
+00:17:57,277 --> 00:18:01,715
+我们所做的事 就是仔细检查
+开始查看核心图像文档以及其它绘图
 
 
 323
-00:15:51,316 --> 00:15:54,066
-If it is a tail call case and
-we're going to jump directly
+00:18:01,782 --> 00:18:03,517
+你知道 Cocoa绘图资料
 
 
 324
-00:15:54,066 --> 00:15:59,166
-into the new function, it will
-be a direct branch instruction.
+00:18:04,184 --> 00:18:07,087
+我们无意中发现了这里的
+这个特殊的属性
 
 
 325
-00:15:59,236 --> 00:16:00,776
-Without the BL.
+00:18:07,921 --> 00:18:09,823
+这是
+drawsAsynchrously
 
 
 326
-00:16:00,926 --> 00:16:04,656
-That could be a call instruction
-for a branch and link
+00:18:10,123 --> 00:18:12,926
+你瞧！这是一个
+“让我的代码更快”按钮
 
 
 327
-00:16:04,716 --> 00:16:06,596
-and the branch would
-be a jump instruction,
+00:18:13,060 --> 00:18:17,064
+是一位苹果工程师创建的
 
 
 328
-00:16:06,726 --> 00:16:10,576
-if you see that,
-it looks similar.
+00:18:19,066 --> 00:18:20,334
+非常棒
 
 
 329
-00:16:10,656 --> 00:16:14,816
-Now it is up to Kris if he wants
-to disable the optimization
+00:18:20,734 --> 00:18:23,103
+在那个上面 你可以看到
 
 
 330
-00:16:14,816 --> 00:16:17,456
-and recompile, or he can
-carry on, it is your choice.
+00:18:23,170 --> 00:18:25,272
+我从资料中复制出来粘贴都了那里
 
 
 331
-00:16:18,396 --> 00:16:20,856
->> KRIS MARKEL: I'll
-look at the disassembly.
+00:18:25,606 --> 00:18:27,541
+它说了几件有趣的事
 
 
 332
-00:16:20,856 --> 00:16:24,936
-In Instruments, upper right-hand
-corner of the detailed view,
+00:18:27,608 --> 00:18:31,645
+首先它说 它可能提高性能
+也可能不会提高性能
 
 
 333
-00:16:24,936 --> 00:16:28,826
-there's a button, view
-disassembly, if I click that,
+00:18:31,712 --> 00:18:32,846
+你应该衡量得失
 
 
 334
-00:16:28,826 --> 00:16:30,866
-I see the disassembly
-for the method
+00:18:33,614 --> 00:18:35,749
+你懂得 好了 爸爸
 
 
 335
-00:16:31,076 --> 00:16:35,006
-and we can confirm the call to
-context add path is a branch
+00:18:36,216 --> 00:18:37,117
+我们开始度量吧
 
 
 336
-00:16:35,006 --> 00:16:37,616
-and link, the call
-to context draw path,
+00:18:37,317 --> 00:18:39,887
+我们看看这个能否提高性能
 
 
 337
-00:16:37,716 --> 00:16:39,176
-it is just a simple branch.
+00:18:40,420 --> 00:18:43,156
+这次 要启动Instruments
+我要给Instruments进行
 
 
 338
-00:16:39,596 --> 00:16:42,676
-I'm confident that this is a
-case of Tail Call Elimination
+00:18:43,223 --> 00:18:45,325
+运行command-I
 
 
 339
-00:16:43,046 --> 00:16:48,466
-that 55% that I saw on the call
-tree that was not attributed
+00:18:45,726 --> 00:18:46,760
+它会做同样的事情
 
 
 340
-00:16:48,466 --> 00:16:51,346
-to my drawRect should be
-attributed to the drawRect.
+00:18:47,361 --> 00:18:50,531
+它会构建应用程序安装到设备上
 
 
 341
-00:16:51,836 --> 00:16:53,716
-That is good news.
+00:18:51,198 --> 00:18:52,299
+显示出模板选择器
 
 
 342
-00:16:53,826 --> 00:16:57,966
-I know now my drawRect is
-on my heaviest deck frame,
+00:18:53,267 --> 00:18:54,368
+需要一点时间
 
 
 343
-00:16:58,026 --> 00:16:59,066
-my heaviest stack trace
+00:18:55,802 --> 00:18:56,637
+还需要一点时间
 
 
 344
-00:16:59,456 --> 00:17:02,946
-and it is consuming
-55 to 60% of my time.
+00:18:57,771 --> 00:18:58,705
+还得再需要一点时间
 
 
 345
-00:17:03,016 --> 00:17:03,656
-This is great.
+00:18:59,173 --> 00:19:04,311
+好了 我还想使用另外一种
+快捷方式 如果你看看下面的选择按钮
 
 
 346
-00:17:03,656 --> 00:17:04,715
-I know where to optimize.
+00:19:04,945 --> 00:19:07,548
+如果我按住选择按钮
+它就变成了“剖析”
 
 
 347
-00:17:04,886 --> 00:17:07,606
-I optimize drawRect,
-I'm good to go.
+00:19:07,981 --> 00:19:09,850
+这就意味着着
+当我点击这个按钮时
 
 
 348
-00:17:08,465 --> 00:17:09,695
-Let's look at this drawRect.
+00:19:10,150 --> 00:19:11,852
+应用程序就会开始录制
 
 
 349
-00:17:11,215 --> 00:17:14,866
-Looking that the drawRect, if
-I had a table I would flip it.
+00:19:12,186 --> 00:19:13,787
+会替我省一两步
 
 
 350
-00:17:15,685 --> 00:17:17,955
-There is not much
-to optimize here.
+00:19:14,021 --> 00:19:15,055
+我现在点了
 
 
 351
-00:17:18,165 --> 00:17:20,276
-It is hard to think
-of a simpler drawRect
+00:19:15,822 --> 00:19:18,625
+现在时间分析器出来了
 
 
 352
-00:17:20,736 --> 00:17:21,996
-that actually is functional.
+00:19:19,092 --> 00:19:20,160
+会对app进行度量
 
 
 353
-00:17:22,175 --> 00:17:28,006
-We have 4 function calls,
-context, you know, CG calls,
+00:19:20,627 --> 00:19:22,496
+我要快速进行一些前后滚动
 
 
 354
-00:17:28,516 --> 00:17:30,596
-this drawRect really
-does not do much.
+00:19:22,563 --> 00:19:24,698
+捕捉一些数据
 
 
 355
-00:17:30,996 --> 00:17:33,716
-It turns out that this is
-actually a really common
+00:19:25,499 --> 00:19:26,333
+我想够了
 
 
 356
-00:17:33,716 --> 00:17:36,206
-occurrence when doing profiling.
+00:19:26,400 --> 00:19:28,302
+让我们把录制停下来
 
 
 357
-00:17:36,646 --> 00:17:41,776
-You will take a look at
-your hot spots and code,
+00:19:28,769 --> 00:19:33,040
+我要进行过滤获得具体滚动数据
 
 
 358
-00:17:42,046 --> 00:17:45,796
-there is not much you can
-do in your code directly
+00:19:33,707 --> 00:19:35,843
+如果我们到下面这里看看细节视图
 
 
 359
-00:17:46,006 --> 00:17:47,346
-to improve your performance.
+00:19:36,310 --> 00:19:37,711
+很有希望
 
 
 360
-00:17:48,056 --> 00:17:50,336
-You know, this junction,
-what do you do?
+00:19:37,945 --> 00:19:40,714
+实际上上你们可以看到这里有多个线程
 
 
 361
-00:17:50,336 --> 00:17:55,466
-You know, other than flipping
-tables, crying into your pillow
+00:19:40,881 --> 00:19:42,216
+线程正在发挥作用
 
 
 362
-00:17:55,466 --> 00:17:59,186
-at night, what we did was we
-went through, started to look
+00:19:42,683 --> 00:19:43,750
+这很好
 
 
 363
-00:17:59,186 --> 00:18:01,916
-at the core graphics
-documentation and other drawing,
+00:19:43,851 --> 00:19:45,652
+如果我们继续如果我按住选项
 
 
 364
-00:18:01,916 --> 00:18:03,526
-you know, Cocoa drawing
-documentation.
+00:19:45,986 --> 00:19:48,055
+点击提示三角符号
+我就可以看到这个线程在
 
 
 365
-00:18:04,496 --> 00:18:07,076
-We came across this
-particular property here.
+00:19:48,622 --> 00:19:52,092
+调用什么这是一些群调用
 
 
 366
-00:18:07,936 --> 00:18:09,576
-This drawsAsynchrously.
+00:19:52,159 --> 00:19:53,493
+一些CG调用 很好
 
 
 367
-00:18:10,136 --> 00:18:12,916
-Lo and behold, there was a
-make my code faster button
+00:19:53,560 --> 00:19:54,628
+这就是绘制代码
 
 
 368
-00:18:13,046 --> 00:18:17,116
-that was created by
-an Apple engineer.
+00:19:55,195 --> 00:19:57,097
+我们继续一个接一个检查下
 
 
 369
-00:18:19,076 --> 00:18:20,156
-This is excellent.
+00:19:58,265 --> 00:19:59,266
+按住这个选项键
 
 
 370
-00:18:20,746 --> 00:18:23,146
-Above that, you see I copied
+00:19:59,900 --> 00:20:02,202
+群调用 CG调用
 
 
 371
-00:18:23,146 --> 00:18:25,906
-out of the documentation,
-pasted it in there.
+00:20:02,503 --> 00:20:04,738
+很好 这个看起来很有希望
 
 
 372
-00:18:25,906 --> 00:18:27,456
-It says a couple of things
-that are interesting.
+00:20:05,239 --> 00:20:09,142
+我是多线程
+理论上我的app应该更快了
 
 
 373
-00:18:27,456 --> 00:18:31,816
-It says, first of all, it may
-improve performance, it may not.
+00:20:10,043 --> 00:20:13,914
+但是 多线程并不一定意味着更快
 
 
 374
-00:18:31,816 --> 00:18:32,756
-You should always measure.
+00:20:13,981 --> 00:20:17,217
+我们应该确认它真的在帮我们做事
 
 
 375
-00:18:32,756 --> 00:18:35,756
-You know, okay, dad.
+00:20:17,751 --> 00:20:21,755
+有一种方法可以确认 我碰巧
+知道这台设备有两个CPU
 
 
 376
-00:18:36,206 --> 00:18:37,126
-Let's measure.
+00:20:22,122 --> 00:20:24,157
+如果CPU以最大性能
 
 
 377
-00:18:37,306 --> 00:18:39,896
-Let's see if this
-improves in performance.
+00:20:24,224 --> 00:20:28,662
+并行运行 那么我应该会看到
+在我图表上面这里
 
 
 378
-00:18:40,386 --> 00:18:43,196
-This time to start the
-Instruments, I'm just going
+00:20:29,096 --> 00:20:30,497
+看到200%的CPU使用情况
 
 
 379
-00:18:43,196 --> 00:18:45,316
-to do command-I for Instruments.
+00:20:31,131 --> 00:20:33,634
+但是我看不到有超过100%的情况
 
 
 380
-00:18:45,316 --> 00:18:46,766
-It will do the same thing.
+00:20:33,700 --> 00:20:36,270
+那么这就是某种警告信号了
+它并不一定意味着两个
 
 
 381
-00:18:47,356 --> 00:18:50,536
-It will build the application
-and install on the device,
+00:20:36,537 --> 00:20:38,639
+CPU没有同时工作
 
 
 382
-00:18:51,126 --> 00:18:52,306
-bring up the template chooser.
+00:20:39,039 --> 00:20:40,541
+它只是意味着我应该进一步检查下
 
 
 383
-00:18:53,256 --> 00:18:54,366
-It takes a moment.
+00:20:41,074 --> 00:20:42,276
+那么我们怎样进一步检查？
 
 
 384
-00:18:55,816 --> 00:18:56,926
-Two moments.
+00:20:42,609 --> 00:20:44,678
+Instruments就有我们称
+之为“策略”的东西 
 
 
 385
-00:18:57,556 --> 00:18:58,946
-Three moments.
+00:20:44,745 --> 00:20:47,314
+它指的是对数据进行划分的
+不同方法为的是查看数据
 
 
 386
-00:18:59,176 --> 00:19:00,396
-Here we go.
+00:20:47,481 --> 00:20:48,415
+这里有三个
 
 
 387
-00:19:00,396 --> 00:19:02,856
-Another shortcut I like
-to use, if you take a look
+00:20:48,849 --> 00:20:51,451
+第一个是Instrument策略
+即默认值
 
 
 388
-00:19:02,856 --> 00:19:04,316
-at the choose button down here.
+00:20:51,652 --> 00:20:52,553
+我们在这里看的就是
 
 
 389
-00:19:04,956 --> 00:19:07,556
-If I hold down the option
-button it changes to profile.
+00:20:53,387 --> 00:20:55,289
+第二个是CPU策略
 
 
 390
-00:19:07,996 --> 00:19:09,856
-What it means, when
-I click this,
+00:20:55,656 --> 00:20:58,926
+它显示的是每个CPU或者CPU
+的数据 相关数据
 
 
 391
-00:19:10,156 --> 00:19:11,866
-the application is going
-to start recording.
+00:20:59,826 --> 00:21:01,662
+最后一个是线程策略
 
 
 392
-00:19:12,186 --> 00:19:13,776
-It saves me a step or two.
+00:21:01,962 --> 00:21:04,531
+它给你显示了每个线程
+处理的细节情况
 
 
 393
-00:19:14,016 --> 00:19:15,046
-I'll do that now.
+00:21:05,399 --> 00:21:07,467
+我们来看看CPU策略
 
 
 394
-00:19:15,836 --> 00:19:18,636
-Now the time profiler
-will come up.
+00:21:08,569 --> 00:21:10,971
+我们可以看到我们拥有的每个CPU
 
 
 395
-00:19:19,076 --> 00:19:20,156
-This is measuring the app.
+00:21:11,038 --> 00:21:12,606
+我们可以看到它们做了多少功
 
 
 396
-00:19:20,616 --> 00:19:22,536
-I'll do some quick
-scrolling back
+00:21:12,673 --> 00:21:14,808
+在底部我们可以看到组合使用情况
 
 
 397
-00:19:22,536 --> 00:19:24,296
-and forth, capturing some data.
+00:21:15,242 --> 00:21:21,982
+这里有一件很棒的事可以做
+当我放大的足够大
 
 
 398
-00:19:24,296 --> 00:19:26,606
-I think that's enough.
+00:21:22,049 --> 00:21:24,251
+图表向我显示的细节就会发生变更
 
 
 399
-00:19:26,606 --> 00:19:28,296
-Let's go ahead, stop
-the recording.
+00:21:25,018 --> 00:21:27,387
+它就会显示那个CPU是
+否处于活跃状态 
 
 
 400
-00:19:28,776 --> 00:19:33,046
-I'm going to filter to
-specifically the scrolling data.
+00:21:27,721 --> 00:21:29,957
+而不再显示平均使用情况
 
 
 401
-00:19:33,496 --> 00:19:35,846
-If we go ahead down here
-looking at the detailed view.
+00:21:30,023 --> 00:21:32,793
+它就会显示活跃或者不活跃
+而不再显示平均使用情况
 
 
 402
-00:19:36,296 --> 00:19:37,696
-This is promising.
+00:21:33,393 --> 00:21:37,130
+现在每个CPU都显示了一个
+在线状态或者离线状态是否处于工作中
 
 
 403
-00:19:37,946 --> 00:19:40,706
-I'm actually -- you can see,
-there is multiple threads here.
+00:21:37,831 --> 00:21:41,535
+这里你可以注意到
+CPU从来没有一起工作中
 
 
 404
-00:19:40,866 --> 00:19:42,206
-The threads are doing work.
+00:21:41,602 --> 00:21:44,438
+这里没有并行性
 
 
 405
-00:19:42,696 --> 00:19:43,756
-That's really good.
+00:21:44,771 --> 00:21:48,642
+你懂得 这可不好
 
 
 406
-00:19:43,846 --> 00:19:45,656
-If we go ahead, if
-I hold down option,
+00:21:49,276 --> 00:21:53,146
+如果我们还想试试伤口撒盐
+我们可以看看线程策略
 
 
 407
-00:19:45,986 --> 00:19:49,226
-click the disclosure triangle
-I can see what the thread is
+00:21:54,181 --> 00:21:56,416
+它可以向我们显示每个图标
 
 
 408
-00:19:49,226 --> 00:19:52,126
-calling, there is
-some dispatch calls,
+00:21:56,817 --> 00:22:00,120
+每个图标代表了时间分析器
+采集的一个样本
 
 
 409
-00:19:52,126 --> 00:19:53,546
-some CG calls, that's good.
+00:22:00,187 --> 00:22:02,222
+你可以点击 看看调用堆栈
 
 
 410
-00:19:53,546 --> 00:19:54,636
-That's the drawing code.
+00:22:02,623 --> 00:22:05,359
+这里的这个是位于一个后台线程上
 
 
 411
-00:19:55,186 --> 00:19:57,096
-We'll go ahead, check
-the other one to see.
+00:22:05,726 --> 00:22:08,161
+你可以看到核心图形调用这是主线程
 
 
 412
-00:19:57,826 --> 00:19:59,226
-Hold down the option key.
+00:22:08,228 --> 00:22:14,668
+你可以看到主线程...
+我们在主线程上进行的工作
 
 
 413
-00:19:59,886 --> 00:20:02,206
-Dispatch, CG calls.
+00:22:15,202 --> 00:22:17,204
+你可以看到 如果我放大到合适的程度
 
 
 414
-00:20:02,506 --> 00:20:03,366
-This is good.
+00:22:17,804 --> 00:22:18,972
+应该就是这里了我滚动下
 
 
 415
-00:20:03,366 --> 00:20:04,736
-This is looking promising.
+00:22:19,339 --> 00:22:24,611
+你可以看到两个线程并没有
+真的同时工作过
 
 
 416
-00:20:05,226 --> 00:20:09,156
-I'm multithreaded, in
-theory my app is faster.
+00:22:24,811 --> 00:22:27,314
+它是从一个线程跳到另一个线程
 
 
 417
-00:20:10,036 --> 00:20:13,946
-However, multithreading does
-not necessarily mean faster.
+00:22:28,682 --> 00:22:34,354
+因此drawsAsynchronously
+并没有真的为我们做什么事
 
 
 418
-00:20:13,946 --> 00:20:17,206
-We should confirm this is
-actually doing anything for us.
+00:22:34,421 --> 00:22:36,890
+从理论上来说它可能会拖慢我们
 
 
 419
-00:20:18,006 --> 00:20:21,746
-One way to do that, I happen to
-know this device is two CPUs,
+00:22:37,391 --> 00:22:42,429
+我们不仅进行了绘制而且还进行了管理
 
 
 420
-00:20:22,136 --> 00:20:24,166
-if the CPUs operate in parallel
+00:22:42,663 --> 00:22:45,065
+你懂得 核心图形系统
+对它工作的线程进行了管理
 
 
 421
-00:20:24,166 --> 00:20:28,746
-at max capacity I should
-see a 200% CPU usage
+00:22:45,132 --> 00:22:48,769
+类似这种的事情 并没有什么实质作用
 
 
 422
-00:20:29,096 --> 00:20:30,326
-in my graph up here.
+00:22:49,903 --> 00:22:51,738
+我会把它关掉
 
 
 423
-00:20:31,126 --> 00:20:33,666
-I'm not seeing anything
-over 100%, that's a bit
+00:22:53,006 --> 00:22:56,176
+我会再掀一张桌子
 
 
 424
-00:20:33,666 --> 00:20:36,286
-of a warning sign, it
-doesn't necessarily mean
+00:22:56,543 --> 00:22:59,780
+不很清晰神奇按钮没多大作用
 
 
 425
-00:20:36,536 --> 00:20:38,646
-that they're not both doing
-work at the same time.
+00:23:00,547 --> 00:23:01,682
+我们现在该怎么做？
 
 
 426
-00:20:39,046 --> 00:20:40,296
-It means that I need
-to check further.
+00:23:02,382 --> 00:23:05,485
+同样这也是时间剖析中
+一个很常见的情况
 
 
 427
-00:20:41,076 --> 00:20:42,016
-How do we check further?
+00:23:06,320 --> 00:23:08,755
+你尝试了很多事但是大部分都不起作用
 
 
 428
-00:20:42,676 --> 00:20:45,436
-Instruments has what we call
-strategies, it is different ways
+00:23:09,489 --> 00:23:11,625
+我们往回退一步
 
 
 429
-00:20:45,436 --> 00:20:47,326
-of partitioning the
-data to look at them.
+00:23:11,892 --> 00:23:12,726
+app会怎么做？
 
 
 430
-00:20:47,466 --> 00:20:48,406
-There is three of them.
+00:23:13,060 --> 00:23:15,128
+它构建了一条路径
+然后描绘了一条路径
 
 
 431
-00:20:48,836 --> 00:20:51,456
-The first one is the Instrument
-strategies, the default,
+00:23:15,963 --> 00:23:17,364
+我们已经看过绘制路径代码了
 
 
 432
-00:20:51,646 --> 00:20:52,546
-we're looking at it here.
+00:23:17,431 --> 00:23:19,633
+我们来考虑下构建路径代码
 
 
 433
-00:20:53,396 --> 00:20:55,286
-The second one is
-the CPU strategy,
+00:23:19,933 --> 00:23:23,470
+就在这里
 
 
 434
-00:20:55,656 --> 00:20:58,916
-it shows the data per
-CPU or CPU relevant data
+00:23:25,105 --> 00:23:29,109
+我们想做的事就是调查下
+我们构建的实际路径
 
 
 435
-00:20:59,816 --> 00:21:01,656
-and the final one is
-the thread strategy.
+00:23:29,643 --> 00:23:32,613
+这个代码的作用就是循环数据元素
 
 
 436
-00:21:01,966 --> 00:21:04,546
-It shows you details on
-what each thread is doing.
+00:23:32,880 --> 00:23:35,949
+创建一条路径然后为每个
+数据元素向那个路径中一行
 
 
 437
-00:21:05,386 --> 00:21:07,456
-Let's look at the CPU strategy.
+00:23:36,250 --> 00:23:39,319
+我们想知道我们向那个路径中
+添加了多少行
 
 
 438
-00:21:07,456 --> 00:21:10,576
-We can see we have
-each of the CPUs,
+00:23:39,386 --> 00:23:42,122
+时间分析器就可以告诉我们这个信息
 
 
 439
-00:21:10,576 --> 00:21:12,626
-we can see how much
-work it is doing.
+00:23:42,422 --> 00:23:44,291
+它不能告诉你某个特定的方法
 
 
 440
-00:21:12,626 --> 00:21:14,816
-At the bottom, we see
-the combined usage.
+00:23:44,558 --> 00:23:47,528
+函数被调用了多久被调用了多少次
 
 
 441
-00:21:15,176 --> 00:21:21,986
-A nice thing to do here, when I
-zoom in far enough, the details,
+00:23:48,228 --> 00:23:49,897
+它不知道一个被调用了仅仅
 
 
 442
-00:21:22,046 --> 00:21:24,236
-what the graph shows me,
-it will actually change.
+00:23:49,963 --> 00:23:52,266
+几次的慢函数同一个被调用了
+很多次的快函数之间
 
 
 443
-00:21:25,016 --> 00:21:28,336
-Rather than show making the
-average usage, it will show
+00:23:52,332 --> 00:23:53,934
+有什么区别
 
 
 444
-00:21:28,336 --> 00:21:30,386
-if the CPU is active or not,
+00:23:54,535 --> 00:23:56,970
+在这个例子中 我们要借助于
+NSLog 我们就可以实现
 
 
 445
-00:21:30,386 --> 00:21:32,796
-it will go from average
-usage, to either on or off.
+00:23:57,404 --> 00:24:01,341
+一个情况 即我们每次添加
+一个路径 我们就放大计数器一次
 
 
 446
-00:21:33,386 --> 00:21:36,016
-Now each CPU shows an
-on state or off state,
+00:24:01,642 --> 00:24:05,312
+然后当我们循环结束时
+我们就把它录入
 
 
 447
-00:21:36,016 --> 00:21:37,146
-whether or not it is working.
+00:24:05,679 --> 00:24:07,881
+重点要指出的是NSLog并不是一个
 
 
 448
-00:21:37,846 --> 00:21:41,566
-What you notice here, the
-CPUs are never working
+00:24:08,415 --> 00:24:10,617
+很快的函数
 
 
 449
-00:21:41,566 --> 00:21:44,426
-at the same time, there
-is no parallelism here.
+00:24:11,151 --> 00:24:13,387
+在高性能代码中你不会想让它出现的
 
 
 450
-00:21:44,786 --> 00:21:48,656
-You know, this is not good.
+00:24:13,520 --> 00:24:16,056
+除了收集诊断信息或者进行调试以外
 
 
 451
-00:21:49,276 --> 00:21:53,136
-If we want to feel worse, we
-look at the thread strategy.
+00:24:16,123 --> 00:24:18,825
+你可能不会想用它做任何其它事情
 
 
 452
-00:21:54,186 --> 00:21:56,166
-What this is showing
-us, each icon,
+00:24:19,393 --> 00:24:21,762
+当你用完后把它从代码中删掉
 
 
 453
-00:21:56,166 --> 00:22:00,226
-it represents a sample
-the time profiler took,
+00:24:21,995 --> 00:24:23,897
+在这个例子中 我们仅仅添加
+注释 这样你可以看到
 
 
 454
-00:22:00,226 --> 00:22:01,376
-you can click on it.
+00:24:24,665 --> 00:24:29,636
+我们发现 我们在例子中的
+这个点这里添加了十万行
 
 
 455
-00:22:01,376 --> 00:22:02,206
-See the call stack.
+00:24:30,204 --> 00:24:32,506
+这是没有必要的
 
 
 456
-00:22:02,626 --> 00:22:04,756
-Here this is on a
-background thread
+00:24:32,573 --> 00:24:36,076
+事实上 这台设备上无论如何
+也显示不了十万行
 
 
 457
-00:22:04,756 --> 00:22:08,246
-and you see the core graphics
-calls, here is the main thread,
+00:24:37,110 --> 00:24:39,079
+尤其是当你缩的足够小所有的数据
 
 
 458
-00:22:08,246 --> 00:22:14,666
-you see the main -- the work
-we're doing on the main thread.
+00:24:39,146 --> 00:24:41,682
+就都需要适合一百个屏幕点
 
 
 459
-00:22:15,206 --> 00:22:17,216
-As you see, if I zoom
-in to the right level,
+00:24:42,015 --> 00:24:44,251
+没理由在那里绘制十万行
 
 
 460
-00:22:17,216 --> 00:22:18,986
-it is probably here,
-I scroll around,
+00:24:44,318 --> 00:24:47,754
+我们绘制一百行就可以了
 
 
 461
-00:22:19,336 --> 00:22:22,426
-you see there is
-not really anywhere
+00:24:47,955 --> 00:24:48,956
+这样工作就少了很多
 
 
 462
-00:22:22,426 --> 00:22:24,596
-where two threads are
-working at the same time.
+00:24:49,923 --> 00:24:54,127
+我们继续 创建一个执行来实现它
 
 
 463
-00:22:24,816 --> 00:22:27,326
-It is jumping from
-one thread to another.
+00:24:54,728 --> 00:24:58,065
+如果是多个数据元素
+数据点位于一个单一的
 
 
 464
-00:22:28,696 --> 00:22:34,356
-So the drawsAsynchronously, this
-has not really done anything
+00:24:58,165 --> 00:25:01,368
+屏幕点那么它就会找出最大值
 
 
 465
-00:22:34,356 --> 00:22:38,036
-for us, in theory, it
-may have slowed us down.
+00:25:01,435 --> 00:25:02,669
+绘制一条单一的行
 
 
 466
-00:22:38,036 --> 00:22:42,426
-Now not only we doing the same
-drawing work but also managing,
+00:25:03,136 --> 00:25:07,341
+如果我们使用一百个屏幕点
+我们就会创建一百个屏幕行
 
 
 467
-00:22:42,426 --> 00:22:45,096
-you know, core graphics system
-managed the threads it is
+00:25:08,408 --> 00:25:11,378
+我们来切换到那个执行
 
 
 468
-00:22:45,096 --> 00:22:47,926
-working on, that sort of thing.
+00:25:12,312 --> 00:25:14,481
+我们对它的感觉很好
 
 
 469
-00:22:47,926 --> 00:22:48,756
-That didn't really help.
+00:25:14,581 --> 00:25:18,352
+我们把元素数量的上限改成了十万
 
 
 470
-00:22:49,916 --> 00:22:51,726
-I'll turn it off.
+00:25:18,418 --> 00:25:20,621
+而不是一万
 
 
 471
-00:22:51,866 --> 00:22:56,166
-I'll flip another table I guess.
+00:25:21,488 --> 00:25:23,790
+我们看看这对我们是否有帮助
 
 
 472
-00:22:56,246 --> 00:22:59,776
-It is not clear, the
-magic button didn't help.
+00:25:25,559 --> 00:25:29,630
+我要使用command-I来启动
+Instruments
 
 
 473
-00:23:00,556 --> 00:23:01,696
-What do we do now?
+00:25:30,030 --> 00:25:31,899
+因为Instruments已经打开了
+它就会把它弄到
 
 
 474
-00:23:02,396 --> 00:23:04,726
-This is a really
-common occurrence again
+00:25:31,965 --> 00:25:35,369
+前台立即开始录制
 
 
 475
-00:23:04,726 --> 00:23:05,496
-in time profiling.
+00:25:37,004 --> 00:25:38,872
+好了 一个新的录制
 
 
 476
-00:23:06,336 --> 00:23:08,756
-You try lots of things,
-most don't work.
+00:25:39,540 --> 00:25:43,243
+我们来滚动下滚动看起来没问题
 
 
 477
-00:23:09,496 --> 00:23:11,626
-We step back.
+00:25:44,478 --> 00:25:45,846
+我再缩小下
 
 
 478
-00:23:11,876 --> 00:23:12,716
-What does the app do?
+00:25:46,747 --> 00:25:49,216
+缩放性能也有了非常大的提高
 
 
 479
-00:23:13,076 --> 00:23:15,136
-It builds a path
-and draws a path.
+00:25:49,383 --> 00:25:52,085
+需要的时间更多
+因为我要缩小的数据更多了
 
 
 480
-00:23:15,956 --> 00:23:17,446
-We have seen the draw path code.
+00:25:52,853 --> 00:25:54,054
+看起来真的很好
 
 
 481
-00:23:17,446 --> 00:23:19,666
-Let's think about
-the build path code.
+00:25:54,888 --> 00:25:56,623
+我要进行前后滑动
 
 
 482
-00:23:19,936 --> 00:23:23,466
-That's right in here.
+00:25:56,690 --> 00:25:59,226
+现在它能很好地追踪我的手指了
 
 
 483
-00:23:24,086 --> 00:23:26,316
-What we wanted to do, we wanted
+00:25:59,726 --> 00:26:02,696
+它能跟得上我的手指真棒
 
 
 484
-00:23:26,316 --> 00:23:29,116
-to investigate the actual
-path we're building.
+00:26:04,031 --> 00:26:05,799
+万岁！都搞定了！
 
 
 485
-00:23:29,636 --> 00:23:32,616
-What this code does, it
-loops the data elements,
+00:26:07,601 --> 00:26:09,536
+还差一点
 
 
 486
-00:23:32,886 --> 00:23:35,036
-creating a path and
-adds a line to that path
+00:26:11,038 --> 00:26:12,506
+当我们前后滚动时
 
 
 487
-00:23:35,036 --> 00:23:35,936
-for each data element.
+00:26:12,573 --> 00:26:15,108
+如果我们看一下我们使用的
+CPU的实际数量
 
 
 488
-00:23:36,236 --> 00:23:39,386
-We want to know how many lines
-we're adding to the path.
+00:26:15,709 --> 00:26:18,345
+我们就可以看到 你懂得
+有时候会降到60%
 
 
 489
-00:23:39,386 --> 00:23:42,106
-This is something that the
-time profiler can't tell us.
+00:26:18,412 --> 00:26:20,180
+通常是七十到八十秒
 
 
 490
-00:23:42,416 --> 00:23:44,296
-It can't tell you how long,
+00:26:21,048 --> 00:26:23,951
+从技术上说
+我们实现了我们的性能目标
 
 
 491
-00:23:44,566 --> 00:23:46,356
-or how many times
-a particular method
+00:26:24,551 --> 00:26:27,454
+我们要做的
+我们接下来要对这个app
 
 
 492
-00:23:46,356 --> 00:23:47,536
-or function has been called.
+00:26:27,721 --> 00:26:28,655
+原型做什么？
 
 
 493
-00:23:47,536 --> 00:23:49,936
-It doesn't know the difference
+00:26:28,722 --> 00:26:30,591
+我们添加了一些附加特性
 
 
 494
-00:23:49,936 --> 00:23:52,296
-between a slow function
-that's called a few times
+00:26:31,191 --> 00:26:36,263
+我们知道我们需要比这里更多的净空
 
 
 495
-00:23:52,296 --> 00:23:54,716
-or a fast function
-that's called a lot.
+00:26:36,997 --> 00:26:42,169
+我们怎样能让它更快？
+我们怎样能让这个app更好？
 
 
 496
-00:23:54,716 --> 00:23:58,386
-In this case we resorted to
-NSLog and we just have a thing,
+00:26:42,236 --> 00:26:44,338
+我们怎样实现性能目标？
 
 
 497
-00:23:58,386 --> 00:24:01,346
-every time we add a path
-we increment our counter
+00:26:45,405 --> 00:26:46,940
+我们专注下这个
 
 
 498
-00:24:01,346 --> 00:24:05,666
-and then we log it when
-we're done with the loop.
+00:26:47,441 --> 00:26:48,675
+我们来过滤下那个数据
 
 
 499
-00:24:05,666 --> 00:24:07,886
-Something important
-to point out, NSLog,
+00:26:50,143 --> 00:26:52,579
+我要给我自己一点空间
 
 
 500
-00:24:08,416 --> 00:24:10,626
-it is not a very fast function.
+00:26:53,180 --> 00:26:55,282
+在这个例子中我要按住选项键
 
 
 501
-00:24:11,166 --> 00:24:13,406
-You don't want it in
-high performance code.
+00:26:56,250 --> 00:26:57,985
+点击“主要”把它展开
 
 
 502
-00:24:13,406 --> 00:24:16,076
-You probably don't want to
-use it for anything other
+00:26:58,085 --> 00:27:02,222
+我就可以到这里看到这里的这个方法
 
 
 503
-00:24:16,076 --> 00:24:18,816
-than gathering diagnostic
-information or debugging.
+00:27:02,890 --> 00:27:06,460
+你懂得 现在绘制路径就足够快了
 
 
 504
-00:24:19,386 --> 00:24:21,776
-When you're done,
-delete it from the code.
+00:27:06,527 --> 00:27:11,198
+反而是构建路径成了瓶颈
 
 
 505
-00:24:21,776 --> 00:24:24,736
-In this case we just comment
-it out so you can see it.
+00:27:12,266 --> 00:27:14,701
+我想关注下这个方法
 
 
 506
-00:24:25,066 --> 00:24:29,636
-What we have found, we're
-adding 10,000 lines to the point
+00:27:15,035 --> 00:27:16,436
+我要点击下“聚焦”按钮
 
 
 507
-00:24:30,206 --> 00:24:32,616
-in cases where we did
-not need to do that.
+00:27:16,803 --> 00:27:21,708
+它会把方法中的所有事情移动到一边
 
 
 508
-00:24:32,616 --> 00:24:33,866
-In fact, there is no way
+00:27:21,775 --> 00:27:26,480
+把这个方法中
 
 
 509
-00:24:33,866 --> 00:24:36,956
-to display 10,000
-lines on this device.
+00:27:27,080 --> 00:27:29,082
+我们的百分比标准化
 
 
 510
-00:24:37,096 --> 00:24:39,026
-Especially when you're
-zoomed out far enough
+00:27:29,149 --> 00:27:33,587
+这个方法把55%的时间用在了
+获取下个元素上
 
 
 511
-00:24:39,026 --> 00:24:41,676
-that all the data fits
-within 100 screen points.
+00:27:34,221 --> 00:27:38,892
+把10到11%的时间用在了
+objc msgSend上
 
 
 512
-00:24:41,716 --> 00:24:44,356
-There is no reason to draw
-10,000 lines in there.
+00:27:39,560 --> 00:27:42,930
+关于objc msgSend
+我知道的是
 
 
 513
-00:24:44,356 --> 00:24:47,746
-We need to draw 100 lines.
+00:27:42,996 --> 00:27:45,299
+它是一个超快的方法
 
 
 514
-00:24:47,966 --> 00:24:48,946
-It is a lot less work.
+00:27:45,365 --> 00:27:46,733
+它是经过极致优化的
 
 
 515
-00:24:49,936 --> 00:24:54,136
-We went ahead, we created an
-implementation that did that.
+00:27:47,134 --> 00:27:51,438
+但是如果我能把那个10%
+拿回来 我还是想要
 
 
 516
-00:24:54,296 --> 00:24:58,306
-If multiple data
-elements, data points are
+00:27:52,539 --> 00:27:58,445
+如果我们看看我们代码里面
+我们就可以看到它已经 
 
 
 517
-00:24:58,306 --> 00:25:01,386
-within a single screen
-point it just finds the max
+00:27:58,512 --> 00:27:59,646
+很干净了
 
 
 518
-00:25:01,436 --> 00:25:02,686
-and draws a single line.
+00:27:59,713 --> 00:28:03,383
+我们大部分的时间都花在了
+获取下个元素上
 
 
 519
-00:25:03,146 --> 00:25:07,336
-If we're using 100 screen points
-we're creating 100 screen lines.
+00:28:04,084 --> 00:28:06,787
+这里的这个百分比 要比
+树状视图中的略微高一点
 
 
 520
-00:25:08,396 --> 00:25:11,386
-We'll go ahead and switch
-to that implementation.
+00:28:07,120 --> 00:28:09,690
+因为它包括了
+objc msgSend的时间
 
 
 521
-00:25:12,306 --> 00:25:14,496
-. . We're feeling
-good about that.
+00:28:10,090 --> 00:28:14,795
+如果我把它去掉
+这个迭代程序就更快了
 
 
 522
-00:25:14,576 --> 00:25:18,386
-We'll change the element
-count up to the goal
+00:28:15,128 --> 00:28:19,366
+希望我就可以实现我想要的性能提升
 
 
 523
-00:25:18,386 --> 00:25:20,616
-of 100,000 rather than 10,000.
+00:28:19,600 --> 00:28:23,103
+请查德给我们讲讲如何实现这一点
 
 
 524
-00:25:21,476 --> 00:25:25,796
-We'll see if that
-helped us at all.
+00:28:26,106 --> 00:28:29,042
+我们来谈谈objc msgSend
 
 
 525
-00:25:25,796 --> 00:25:29,626
-I'll use command-I to
-start up the Instruments.
+00:28:30,410 --> 00:28:35,148
+无论你何时使用方括号符号
 
 
 526
-00:25:30,016 --> 00:25:31,926
-Since Instruments is already
-open, it is just going
+00:28:35,349 --> 00:28:37,951
+无论你何时使用点符号
+来访问一个对象的属性
 
 
 527
-00:25:31,926 --> 00:25:35,366
-to bring it to the foreground
-and start recording immediately.
+00:28:38,552 --> 00:28:41,822
+编辑器就会把它隐式插入
 
 
 528
-00:25:35,366 --> 00:25:36,976
-Here we go.
+00:28:43,156 --> 00:28:46,026
+它的目的是查找选择器的实现方法
 
 
 529
-00:25:37,076 --> 00:25:38,856
-A new recording.
+00:28:46,093 --> 00:28:48,662
+然后调用那个方法
 
 
 530
-00:25:39,556 --> 00:25:43,236
-We'll go ahead and scroll,
-the scrolling seems fine.
+00:28:49,029 --> 00:28:51,598
+我们如何在Objective-C中
+进行动态分派
 
 
 531
-00:25:44,486 --> 00:25:45,836
-I'll zoom out.
+00:28:51,665 --> 00:28:52,799
+要讲的东西还很多
 
 
 532
-00:25:46,746 --> 00:25:49,216
-Zooming performance
-is much, much better.
+00:28:54,101 --> 00:28:59,139
+Objc msgSend非常快
+也不会推送堆栈结构
 
 
 533
-00:25:49,396 --> 00:25:52,136
-It takes longer because I
-have more data to zoom out.
+00:28:59,773 --> 00:29:02,376
+当你看你的时间剖析时
 
 
 534
-00:25:52,846 --> 00:25:54,056
-It is actually looking
-pretty good.
+00:29:02,576 --> 00:29:04,311
+通常来说你不会看到它的效果
 
 
 535
-00:25:54,896 --> 00:25:56,686
-I'm going to do the
-swiping back and forth.
+00:29:05,412 --> 00:29:08,549
+你能看到它的时机
+就是在一个完美的例子中
 
 
 536
-00:25:56,686 --> 00:25:59,236
-It is tracking my
-finger really well now.
+00:29:08,615 --> 00:29:11,451
+就像我们在我们的
+迭代程序中看到的那样
 
 
 537
-00:25:59,726 --> 00:26:02,696
-It is actually keeping up with
-it, doing a fantastic job.
+00:29:11,518 --> 00:29:15,088
+我们要做的就是迭代超过十万个点
 
 
 538
-00:26:04,046 --> 00:26:07,266
-Hooray! All done!
+00:29:15,155 --> 00:29:19,359
+用一个小的方法主体
+称之为“获得下一个方法”
 
 
 539
-00:26:07,606 --> 00:26:11,036
-Except not quite.
+00:29:19,426 --> 00:29:21,428
+只需增加一对值返回一个结构即可
 
 
 540
-00:26:11,036 --> 00:26:12,336
-If we look at the actual amount
+00:29:22,529 --> 00:29:26,200
+那么接下来要发生的
+就是Objective-C消息发送
 
 
 541
-00:26:12,386 --> 00:26:15,106
-of CPU we're using while
-scrolling back and forth,
+00:29:26,266 --> 00:29:30,070
+开销时间会积累到一个可测量的程度
 
 
 542
-00:26:15,106 --> 00:26:18,416
-we can see, you know,
-sometimes it is down to 60%,
+00:29:31,405 --> 00:29:34,074
+是否有方法可以避开开销呢？
 
 
 543
-00:26:18,416 --> 00:26:20,186
-it is usually in the 70s or 80s.
+00:29:35,442 --> 00:29:37,544
+不一定
 
 
 544
-00:26:21,046 --> 00:26:23,956
-Technically we're meeting
-our performance goals.
+00:29:38,212 --> 00:29:41,181
+Objective-C从设计上
+就是一种动态语言
 
 
 545
-00:26:24,566 --> 00:26:26,986
-What are we doing --
-what's the next thing to do
+00:29:41,481 --> 00:29:43,851
+要访问对象和类的方法你就必须
 
 
 546
-00:26:26,986 --> 00:26:28,716
-with this app or prototype?
+00:29:44,117 --> 00:29:47,454
+进行objc msgSend调用
 
 
 547
-00:26:28,716 --> 00:26:30,606
-We'll add additional features.
+00:29:48,255 --> 00:29:52,025
+每次它都会这样做
+因为你可以在运行时间
 
 
 548
-00:26:31,176 --> 00:26:36,266
-We know that we need more
-headroom than what we have here.
+00:29:52,092 --> 00:29:53,694
+转换方法执行
 
 
 549
-00:26:36,766 --> 00:26:42,036
-How do we make it faster,
-how do we make the app better
+00:29:54,161 --> 00:29:57,631
+Objective-C内没有
+编译时间
 
 
 550
-00:26:42,036 --> 00:26:44,346
-and meet performance goals?
+00:29:57,698 --> 00:29:59,600
+比如说我想调用这个特殊的方法主体
 
 
 551
-00:26:45,416 --> 00:26:46,936
-We'll focus on this.
+00:30:00,534 --> 00:30:04,505
+这里唯一的异常是 如果
+你进行所谓的“方法缓存”
 
 
 552
-00:26:47,426 --> 00:26:50,156
-We'll filter to that data.
+00:30:04,905 --> 00:30:07,307
+你可以自己查找方法执行
 
 
 553
-00:26:50,156 --> 00:26:52,576
-I'll give myself a little room.
+00:30:07,774 --> 00:30:09,543
+然后通过函数指针调用它
 
 
 554
-00:26:53,196 --> 00:26:55,266
-In this case, I'm going to
-hold down the option key
+00:30:10,244 --> 00:30:12,846
+一般来说我不推荐你们这么做
 
 
 555
-00:26:56,246 --> 00:26:57,996
-and click main and
-expand this out.
+00:30:13,347 --> 00:30:15,282
+你可以想象的到它很脆弱
 
 
 556
-00:26:58,076 --> 00:27:02,206
-I can actually go down here
-and I can see this method here.
+00:30:15,782 --> 00:30:20,687
+一般来说 根据我的经验它没有给过
+我期望的性能你得想想我们起初
 
 
 557
-00:27:02,876 --> 00:27:06,566
-You know, now that the drawing
-of the paths is fast enough,
+00:30:21,255 --> 00:30:23,757
+到这里的目的是什么
 
 
 558
-00:27:06,566 --> 00:27:09,976
-it is the building of the path
-that becomes the bottleneck.
+00:30:24,124 --> 00:30:28,028
+我们到这里的原因获得下个
+元素方法有一个小的方法主体
 
 
 559
-00:27:09,976 --> 00:27:14,716
-I want to focus on this method.
+00:30:28,729 --> 00:30:31,565
+即使你通过函数指针调用它
+你也必须对自变量
 
 
 560
-00:27:15,046 --> 00:27:17,456
-I will click the focus button.
+00:30:31,632 --> 00:30:34,234
+进行整理把帧推送到堆栈上
 
 
 561
-00:27:17,456 --> 00:27:21,736
-That just moves aside
-everything outside of the method
+00:30:34,301 --> 00:30:35,936
+并且在你完成后把它们弹出来
 
 
 562
-00:27:21,736 --> 00:27:29,126
-and normalizes our percentages
-to within this method.
+00:30:36,803 --> 00:30:38,839
+你们在上一组幻灯片中看到的正是这个
 
 
 563
-00:27:29,126 --> 00:27:33,596
-This method is spending 55% of
-time in the get next element
+00:30:38,906 --> 00:30:42,142
+开销可能会很大增加后会再返回
 
 
 564
-00:27:34,206 --> 00:27:38,876
-and 10, 11% of time
-in objc msgSend.
+00:30:43,177 --> 00:30:47,781
+我想要指出的是方法缓存并不像
 
 
 565
-00:27:39,566 --> 00:27:43,306
-Something that I
-know, objc msgSend,
+00:30:47,848 --> 00:30:49,449
+直接插入那样快在这个例子中
 
 
 566
-00:27:43,306 --> 00:27:45,326
-it is a super fast method.
+00:30:49,516 --> 00:30:53,120
+我们真正想实现的是
+直接插入那个小的方法主体
 
 
 567
-00:27:45,326 --> 00:27:46,746
-It is super optimized.
+00:30:54,488 --> 00:30:56,390
+我们在Objective-C中
+该怎样实现？
 
 
 568
-00:27:47,126 --> 00:27:52,726
-But, if I can get that
-10% back, I want it.
+00:30:56,790 --> 00:30:59,059
+你还有其它选项
 
 
 569
-00:27:52,726 --> 00:27:59,136
-If we look inside of our code
-here we can see it is actually
+00:30:59,159 --> 00:31:01,461
+首先 你本来应该用 C
 
 
 570
-00:27:59,136 --> 00:27:59,686
-very clear.
+00:31:02,396 --> 00:31:04,398
+你本来应该用结构而不是一个
 
 
 571
-00:27:59,686 --> 00:28:03,396
-Most of our time is spent
-on getting the next element.
+00:31:04,464 --> 00:31:08,001
+迭代程序举例来说 你可以向这个
+方法中传递一个C线
 
 
 572
-00:28:04,086 --> 00:28:06,896
-This percentage here, it is a
-bit higher than in the tree view
+00:31:08,702 --> 00:31:13,640
+如果你想要那个OO特点
+你可以使用C++
 
 
 573
-00:28:07,126 --> 00:28:10,436
-because it includes
-the objc msgSend time.
+00:31:14,274 --> 00:31:16,210
+你在Objective-C中使用
+C++的方法
 
 
 574
-00:28:10,436 --> 00:28:14,806
-If I get rid of that and
-make this iterator faster,
+00:31:16,276 --> 00:31:18,679
+是把文件从a .m
+重命名为a .mm
 
 
 575
-00:28:15,126 --> 00:28:19,366
-I hopefully can get the
-performance boost that I want.
+00:31:18,879 --> 00:31:20,714
+然后你就可以使用C++语法
 
 
 576
-00:28:19,616 --> 00:28:26,406
-To give us ideas on how much
-to do that, it is back to Chad.
+00:31:21,448 --> 00:31:23,183
+因为通常Arc是默认打开的
 
 
 577
-00:28:26,526 --> 00:28:31,996
->> CHAD WOOLF: Let's talk
-about objc msgSend a bit.
+00:31:23,350 --> 00:31:27,487
+然后你取出Objective-C
+对象把它们放进
 
 
 578
-00:28:31,996 --> 00:28:35,286
-It implicitly gets inserted
+00:31:27,955 --> 00:31:32,025
+STL容器内把它们放到
+你的类和结构的实体变量中
 
 
 579
-00:28:35,346 --> 00:28:37,966
-by the compiler whenever you
-use the square bracket notation
+00:31:33,126 --> 00:31:37,231
+这很方便
+你也可以得到C++的性能好处
 
 
 580
-00:28:38,566 --> 00:28:40,136
-or whenever you use
-the dot notation
+00:31:37,297 --> 00:31:39,766
+我在Instruments中大量用它
+以便在轨迹视图
 
 
 581
-00:28:40,136 --> 00:28:41,836
-to access a property
-on an object.
+00:31:39,833 --> 00:31:45,272
+以及Instruments
+其它关键的地方尽可能地快
 
 
 582
-00:28:43,166 --> 00:28:46,016
-Its purpose is to look up
-the method implementation
+00:31:46,039 --> 00:31:50,110
+根据我的亲身经验
+这个有一个主要的下降趋势
 
 
 583
-00:28:46,016 --> 00:28:48,646
-for the selector and
-invoke that method.
+00:31:50,677 --> 00:31:53,313
+你需要提前知道
+你的代码的哪一部分会
 
 
 584
-00:28:49,026 --> 00:28:51,586
-That's a long way of saying
-that's how we do dynamic
+00:31:53,614 --> 00:31:56,783
+从C++中受益
+哪一部分代码会从
 
 
 585
-00:28:51,616 --> 00:28:52,806
-dispatch in Objective-C.
+00:31:57,317 --> 00:31:59,820
+Objective-C中受益
 
 
 586
-00:28:54,086 --> 00:28:59,146
-Objc msgSend is extremely fast
-and does not push a stack frame.
+00:32:00,487 --> 00:32:02,956
+有时候像我们在演示示例中那样
 
 
 587
-00:28:59,786 --> 00:29:02,366
-When you look at
-your time profiles,
+00:32:03,156 --> 00:32:05,826
+你可能在那里犯错误
+并且直到进行剖析才意识到
 
 
 588
-00:29:02,576 --> 00:29:04,306
-you typically won't
-see its effect.
+00:32:06,193 --> 00:32:07,594
+我们是用Objective-C
+写了我们的
 
 
 589
-00:29:05,426 --> 00:29:08,636
-The times that you do see it
-would be a perfect example
+00:32:07,661 --> 00:32:11,832
+Objective-C没有意识到
+它在我们的时间剖析中有多慢
 
 
 590
-00:29:08,636 --> 00:29:11,536
-like we have where we
-see it in our iterator.
+00:32:12,900 --> 00:32:17,538
+除了我刚刚提到的这些
+你还有其它更好的选项吗？
 
 
 591
-00:29:11,536 --> 00:29:15,126
-What we're doing, we're
-iterating over 100,000 points
+00:32:19,006 --> 00:32:23,210
+当然了 你知道的已经有了
 
 
 592
-00:29:15,126 --> 00:29:19,406
-and calling it the get next
-method with a small method body.
+00:32:26,580 --> 00:32:29,183
+Swift非常完美因为不像
+Objective-C
 
 
 593
-00:29:19,406 --> 00:29:21,436
-Just increments a couple
-values and returns a structure.
+00:32:29,249 --> 00:32:31,652
+Swift只有在注释为动态时
+它才是动态的
 
 
 594
-00:29:22,676 --> 00:29:26,266
-What's happening, all
-of that overhead time
+00:32:32,386 --> 00:32:35,989
+如果你确保性能关键类是内部的
 
 
 595
-00:29:26,266 --> 00:29:29,066
-from the Objective-C
-message send is accumulating
+00:32:36,056 --> 00:32:39,760
+并且使用整体模块优化
 
 
 596
-00:29:29,066 --> 00:29:31,716
-into something that's
-measurable.
+00:32:39,860 --> 00:32:43,130
+编译器或者整体工具链
+就可以确定何时只有
 
 
 597
-00:29:31,716 --> 00:29:36,196
-Is there a way to get
-around that overhead?
+00:32:43,430 --> 00:32:45,199
+一个方法执行
 
 
 598
-00:29:36,466 --> 00:29:38,866
-Not exactly.
+00:32:45,432 --> 00:32:49,369
+并且把它内联到调用点
+让你的性能有明显的提升
 
 
 599
-00:29:38,866 --> 00:29:41,166
-Objective-C by design
-is a dynamic language,
+00:32:49,436 --> 00:32:52,940
+尤其是对迭代程序这个例子
 
 
 600
-00:29:41,586 --> 00:29:43,856
-you have to make the
-objc msgSend call
+00:32:53,607 --> 00:32:56,944
+因为我们是在生成原型
+在Swift的视图控制器中
 
 
 601
-00:29:44,116 --> 00:29:47,446
-when accessing methods
-for objects and classes.
+00:32:57,010 --> 00:32:59,413
+重写迭代程序就非常容易了
 
 
 602
-00:29:48,246 --> 00:29:52,046
-It does this every time
-because you can switch
+00:32:59,947 --> 00:33:01,181
+克里斯之前干过这个
 
 
 603
-00:29:52,046 --> 00:29:53,506
-out method implementations
-at runtime.
+00:33:02,850 --> 00:33:09,623
+我有一个Swift执行已经就绪了
 
 
 604
-00:29:54,156 --> 00:29:57,676
-There is no compile time in
-Objective-C saying I want
+00:33:10,057 --> 00:33:14,862
+这是Objective-C执行的
+一个简易的接口
 
 
 605
-00:29:57,676 --> 00:29:59,516
-to call in this particular
-method body.
+00:33:14,928 --> 00:33:17,164
+采用了他们在今天上午的
+会议上提出的关于...
 
 
 606
-00:29:59,856 --> 00:30:04,506
-The only exception here, if you
-do what's called method caching,
+00:33:18,665 --> 00:33:22,269
+...优化Swift代码的几点建议
 
 
 607
-00:30:04,906 --> 00:30:07,306
-where you look up the method
-implementation yourself
+00:33:22,636 --> 00:33:24,805
+具体来说就是打开整体模块优化
 
 
 608
-00:30:07,786 --> 00:30:09,556
-and you call it through
-its function Pointer.
+00:33:25,506 --> 00:33:28,342
+让我们来剖析下这个
+Command-I
 
 
 609
-00:30:09,806 --> 00:30:13,816
-In general I don't
-recommend that you do that.
+00:33:29,042 --> 00:33:29,877
+它会开始构建
 
 
 610
-00:30:13,816 --> 00:30:15,266
-It is fragile as
-you can imagine.
+00:33:30,711 --> 00:33:33,480
+安装到设备上
 
 
 611
-00:30:15,766 --> 00:30:18,996
-In general, in my experience
-it hasn't given me the kind
+00:33:34,081 --> 00:33:36,350
+它会开始进行剖析
 
 
 612
-00:30:18,996 --> 00:30:21,716
-of performance wins I'm
-expecting because you got
+00:33:39,052 --> 00:33:42,823
+好的 我要把应用程序提前
+这样你们就能看到
 
 
 613
-00:30:21,856 --> 00:30:23,746
-to think about why we're
-here in the first place.
+00:33:44,124 --> 00:33:45,292
+这是滚动
 
 
 614
-00:30:24,136 --> 00:30:27,026
-The reason we're here, the
-get next element method has
+00:33:45,926 --> 00:33:47,060
+看起来不错
 
 
 615
-00:30:27,026 --> 00:30:28,016
-that small method body.
+00:33:48,295 --> 00:33:49,162
+缩小
 
 
 616
-00:30:28,716 --> 00:30:31,586
-Even if you invoke it through
-the function Pointer you still
+00:33:49,696 --> 00:33:51,298
+好了
 
 
 617
-00:30:31,586 --> 00:30:34,256
-have to have to marshal the
-arguments and push the frames
+00:33:51,932 --> 00:33:52,766
+缩小
 
 
 618
-00:30:34,256 --> 00:30:35,926
-on to the stack and pop
-them when you're done.
+00:33:53,033 --> 00:33:54,201
+非常棒 非常快
 
 
 619
-00:30:36,806 --> 00:30:38,766
-That's exactly what you saw
-in the previous set of slides,
+00:33:54,368 --> 00:33:55,936
+要缩小很多数据
 
 
 620
-00:30:38,926 --> 00:30:40,286
-that can be a lot of overhead
+00:33:57,671 --> 00:34:02,075
+现在 如果我前后移动
+它移动的就非常快了
 
 
 621
-00:30:40,286 --> 00:30:42,126
-with an increment
-and then return.
+00:34:03,911 --> 00:34:04,745
+太棒了
 
 
 622
-00:30:42,546 --> 00:30:47,826
-I want to make sure I point it
-out that method caching is not
+00:34:06,647 --> 00:34:09,349
+谢谢 实际上我们可以到这里
 
 
 623
-00:30:47,826 --> 00:30:50,906
-as fast as inlining, what we
-really want in this case is
+00:34:09,416 --> 00:34:11,385
+看看CPU使用情况
 
 
 624
-00:30:50,906 --> 00:30:53,116
-that small method
-body to be inlined.
+00:34:11,818 --> 00:34:15,022
+你懂得我们取得的优化超过了
 
 
 625
-00:30:54,486 --> 00:30:55,886
-How do you that in Objective-C?
+00:34:15,088 --> 00:34:19,193
+我们的预期去掉
+objc msgSend
 
 
 626
-00:30:57,246 --> 00:30:59,046
-Well, you have alternatives.
+00:34:19,259 --> 00:34:23,797
+我们本来预期会
+有5到6%的提升 这个有点低
 
 
 627
-00:30:59,166 --> 00:31:01,466
-The first one, you
-could have used C
+00:34:25,132 --> 00:34:28,402
+如果我关掉这个提示三角符号 
+你就可以看到
 
 
 628
-00:31:02,406 --> 00:31:04,436
-and you could have
-used structures instead
+00:34:28,902 --> 00:34:31,572
+它们两个以此运行 你可以
+看到之前的运行更低...
 
 
 629
-00:31:04,436 --> 00:31:06,856
-of an iterator, you
-could pass a C ray
+00:34:31,972 --> 00:34:37,010
+当前的运行很明显更低
 
 
 630
-00:31:06,856 --> 00:31:07,986
-into the method for example.
+00:34:37,643 --> 00:34:39,580
+事实上如果我到这儿
 
 
 631
-00:31:08,416 --> 00:31:13,966
-If you want that OO
-flavor you can use C++.
+00:34:39,646 --> 00:34:44,150
+查找我的构建路径方法
+现在我就必须进行搜索
 
 
 632
-00:31:14,286 --> 00:31:16,156
-The way you use C++
-in Objective-C,
+00:34:44,384 --> 00:34:45,652
+这就是你进行搜索的方法
 
 
 633
-00:31:16,156 --> 00:31:18,436
-is you rename the file
-from a .m to a .mm
+00:34:46,954 --> 00:34:50,424
+如果我点击command-F
+这个对话就会显示出来
 
 
 634
-00:31:18,436 --> 00:31:20,726
-and then you can use C++ syntax.
+00:34:50,991 --> 00:34:53,827
+我可以输入构建路径 
 
 
 635
-00:31:21,446 --> 00:31:23,176
-Because Arc is usually
-on by default,
+00:34:54,995 --> 00:34:58,899
+它会在这里给我显示我的方法
 
 
 636
-00:31:23,366 --> 00:31:26,296
-then you take Objective-C
-objects and put them
+00:34:59,967 --> 00:35:03,670
+如果我们看看这个 你就可以
+在这里看到我的Swift代码
 
 
 637
-00:31:26,296 --> 00:31:29,896
-in STL containers, and put
-them in instance variables
+00:35:04,204 --> 00:35:07,674
+我的获得下一个调用就在这里
 
 
 638
-00:31:29,896 --> 00:31:32,016
-on your classes and structures.
+00:35:08,175 --> 00:35:09,810
+没有在任何样例中显示出来
 
 
 639
-00:31:33,136 --> 00:31:37,226
-This is handy and you get the
-performance benefits of C++
+00:35:14,214 --> 00:35:15,749
+你懂得没有样例包括了这个
 
 
 640
-00:31:37,306 --> 00:31:40,326
-and I have used it extensively
-in Instruments to get
+00:35:16,116 --> 00:35:19,186
+为什么？因为Swift能够把它内联
 
 
 641
-00:31:40,326 --> 00:31:43,126
-as much speed as I could
-out of the track view
+00:35:19,820 --> 00:35:22,322
+鞭子意味着这里没有函数开销
 
 
 642
-00:31:43,126 --> 00:31:45,256
-and other critical
-areas of Instruments.
+00:35:22,389 --> 00:35:24,191
+没有方法调用开销等等
 
 
 643
-00:31:46,026 --> 00:31:49,676
-I know from firsthand experience
-also there is a major downside
+00:35:24,258 --> 00:35:28,595
+因为迭代程序的代码
+和其余的代码是内联的
 
 
 644
-00:31:49,676 --> 00:31:50,116
-to this.
+00:35:28,662 --> 00:35:32,132
+它就有了进一步优化
+这就解释了出现比我们预期的
 
 
 645
-00:31:50,336 --> 00:31:54,146
-That is that you have to know
-ahead of time which parts
+00:35:32,199 --> 00:35:34,034
+更高的性能的原因
 
 
 646
-00:31:54,146 --> 00:31:56,776
-of your code are going
-to benefit from C++
+00:35:34,668 --> 00:35:37,638
+它是忽略了动态调度
 
 
 647
-00:31:57,306 --> 00:31:59,826
-and which codes will
-benefit from Objective-C?
+00:35:39,006 --> 00:35:42,042
+查德 你还有什么想对大家说的么？
 
 
 648
-00:32:00,496 --> 00:32:02,966
-Sometimes, until
-you're doing profiling,
+00:35:43,744 --> 00:35:44,878
+当然了 我们还剩五分钟！
 
 
 649
-00:32:03,166 --> 00:32:05,826
-you can make a mistake there
-as we did in the demo case.
+00:35:47,581 --> 00:35:50,751
+当你自行探索Instruments时
+这里有一些小窍门
 
 
 650
-00:32:06,236 --> 00:32:07,526
-We wrote our iterator
+00:35:51,385 --> 00:35:55,722
+首先要指出的是在录制设置下面
 
 
 651
-00:32:07,646 --> 00:32:10,396
-in Objective-C not
-realizing it would show
+00:35:56,190 --> 00:35:57,624
+叫做“录制等待线程”
 
 
 652
-00:32:10,396 --> 00:32:11,846
-up in our time profiles.
+00:35:58,058 --> 00:35:59,293
+我提到过我们使用样例
 
 
 653
-00:32:12,896 --> 00:32:17,486
-Is there a better alternative
-than what I just mentioned here?
+00:35:59,359 --> 00:36:01,528
+活跃CPU的服务和内核
 
 
 654
-00:32:18,996 --> 00:32:22,586
-There is. You knew
-it was coming.
+00:36:01,795 --> 00:36:04,097
+但是如果你有空闲的线程
+被一个加锁阻塞或者等待
 
 
 655
-00:32:26,586 --> 00:32:30,846
-Swift is ideal, because unlike
-Objective-C it is only dynamic
+00:36:04,164 --> 00:36:07,134
+输入/输出
+你就可以勾选这个复选框
 
 
 656
-00:32:30,846 --> 00:32:32,766
-when it notes to be.
+00:36:07,467 --> 00:36:09,736
+服务就同样也会对空闲线程进行采样
 
 
 657
-00:32:32,766 --> 00:32:36,026
-If you make sure that the
-performance critical classes are
+00:36:10,370 --> 00:36:12,172
+如果你有代码和加锁争夺支配权
 
 
 658
-00:32:36,076 --> 00:32:39,756
-internal and you use
-whole module optimization,
+00:36:12,239 --> 00:36:14,741
+那么当你激活录制等待线程时
 
 
 659
-00:32:39,866 --> 00:32:43,136
-the compiler or the whole
-tool chain can determine
+00:36:15,142 --> 00:36:17,711
+你会看到热区显示出来
 
 
 660
-00:32:43,426 --> 00:32:45,186
-when there's only one
-method implementation
+00:36:18,946 --> 00:36:20,781
+我还发现了另外一件有趣的事
 
 
 661
-00:32:45,416 --> 00:32:49,376
-and inlines it right into
-the call site giving you some
+00:36:21,448 --> 00:36:25,886
+在“显示设置”中调用树那里
 
 
 662
-00:32:49,376 --> 00:32:52,926
-significant wins especially
-on the iterator case.
+00:36:26,386 --> 00:36:27,454
+调用树被反转了过来
 
 
 663
-00:32:53,606 --> 00:32:56,716
-Because we're prototyping,
-rewriting the iterator
+00:36:28,689 --> 00:36:31,658
+打个比喻就是它把调用树颠倒了过来
 
 
 664
-00:32:56,716 --> 00:33:00,426
-in the View Controller
-in Swift is easy.
+00:36:31,992 --> 00:36:36,096
+在树的底部节点看到的就不是叶子
 
 
 665
-00:33:00,426 --> 00:33:03,206
-Kris has done that.
+00:36:36,196 --> 00:36:37,831
+那就是没有被调用到任何地方的函数
 
 
 666
-00:33:03,826 --> 00:33:09,636
->> KRIS MARKEL: I have a Swift
-implementation ready to go,
+00:36:38,098 --> 00:36:38,966
+它们显示到了顶部
 
 
 667
-00:33:10,046 --> 00:33:14,886
-this is an easy port of the
-Objective-C implementation
+00:36:39,299 --> 00:36:42,302
+如果某个实用功能同时
+被五六个地方调用了
 
 
 668
-00:33:14,886 --> 00:33:19,856
-with a couple of the
-suggestions they made
+00:36:42,636 --> 00:36:46,607
+你把调用树反转过来
+看看到底是谁在调用
 
 
 669
-00:33:19,856 --> 00:33:22,276
-in this morning's session
-about improving Swift code,
+00:36:46,807 --> 00:36:48,375
+那个特定的函数
 
 
 670
-00:33:22,426 --> 00:33:24,816
-specifically turning on
-whole module optimization.
+00:36:48,909 --> 00:36:51,211
+它给你提供了调用树上的
+数据的一个不同的视角
 
 
 671
-00:33:25,496 --> 00:33:27,236
-Let's profile this.
+00:36:51,979 --> 00:36:53,847
+当你在调用树上右键点击一个节点
 
 
 672
-00:33:27,236 --> 00:33:28,346
-Command-I.
+00:36:54,548 --> 00:36:58,852
+你就可以看到环境菜单
+这也是那里的一件有趣的事
 
 
 673
-00:33:29,076 --> 00:33:29,756
-It will build.
+00:36:59,086 --> 00:37:03,123
+我经常做的一件事就是给调用者记账
 
 
 674
-00:33:30,706 --> 00:33:33,466
-Install to the device.
+00:37:03,423 --> 00:37:06,426
+那么你就可以给调用者的方法
+记一笔欠函数的账
 
 
 675
-00:33:34,086 --> 00:33:36,336
-It should just start profiling.
+00:37:07,027 --> 00:37:10,130
+你可以给调用者记一笔欠
+整个框架库的账
 
 
 676
-00:33:36,976 --> 00:33:42,206
-Okay. I'm going to bring
-the application forward
+00:37:11,064 --> 00:37:14,635
+那里还有一个选项可以修剪子树
 
 
 677
-00:33:42,206 --> 00:33:42,836
-so you can see.
+00:37:14,701 --> 00:37:16,904
+如果你当时不想处理某个具体的问题
 
 
 678
-00:33:44,136 --> 00:33:45,286
-Here is the scrolling.
+00:37:16,970 --> 00:37:20,641
+你可以把它从数据上
+修剪掉然后专注于你想专注的事情
 
 
 679
-00:33:45,916 --> 00:33:47,056
-Looking good.
+00:37:22,543 --> 00:37:23,777
+我们从中学到了什么？
 
 
 680
-00:33:48,286 --> 00:33:49,166
-Zooming out.
+00:37:25,679 --> 00:37:29,583
+就是通过这个我要提醒你们的第一件事
 
 
 681
-00:33:49,706 --> 00:33:51,286
-There you go.
+00:37:29,917 --> 00:37:32,352
+就是提前合并性能目标
 
 
 682
-00:33:51,926 --> 00:33:52,726
-Zooming out.
+00:37:33,387 --> 00:37:35,455
+如果你像我们一样
+进行了一个大的性能重写
 
 
 683
-00:33:53,026 --> 00:33:54,206
-Staying nice and fast.
+00:37:35,522 --> 00:37:38,859
+你要首先设好预算然后对它进行监视
 
 
 684
-00:33:54,366 --> 00:33:57,476
-A lot of data to zoom out of.
+00:37:38,926 --> 00:37:41,428
+因为一旦你开始在它的顶部
+分层放置大量的代码
 
 
 685
-00:33:57,686 --> 00:34:01,976
-Now, if I go ahead, move back
-and forth, it moves really fast.
+00:37:41,495 --> 00:37:42,963
+要改变就很难了
 
 
 686
-00:34:02,031 --> 00:34:04,031
-[Applause]
+00:37:44,431 --> 00:37:45,499
+其次 要经常进行度量
 
 
 687
-00:34:04,046 --> 00:34:07,796
->> KRIS MARKEL: It is very nice.
+00:37:45,832 --> 00:37:48,535
+在我们的整个演示中我们用时间
+分析器进行了时间剖析
 
 
 688
-00:34:07,796 --> 00:34:10,045
-Thanks. Actually we can
-go ahead in here and look
+00:37:48,602 --> 00:37:52,105
+我们用那个数据来找出“热区”
 
 
 689
-00:34:10,045 --> 00:34:11,396
-at what the CPU usage is.
+00:37:52,172 --> 00:37:56,076
+然后把它返回最后我们就
+得到了一个运行良好的应用程序
 
 
 690
-00:34:11,826 --> 00:34:15,156
-You know, we've got,
-actually further improvement
+00:37:56,610 --> 00:38:00,681
+如果你还是不明白 可能
+你可能很幸运 直接点吧
 
 
 691
-00:34:15,156 --> 00:34:19,295
-than what we expected, we're
-expecting 5, 6% improvement
+00:38:01,081 --> 00:38:03,483
+我会从一个测量开始
+然后把它当成领头羊来追随
 
 
 692
-00:34:19,295 --> 00:34:23,786
-from removing the objc msgSend,
-this is lower and I can actually
+00:38:05,152 --> 00:38:06,720
+第三 这个对我来说很重要
 
 
 693
-00:34:23,936 --> 00:34:27,726
-if I turn down this disclosure
-triangle you see the two runs
+00:38:07,187 --> 00:38:09,022
+我鼓励你们深入挖掘下去
 
 
 694
-00:34:27,726 --> 00:34:31,556
-next to each other and you see
-the previous run in the lower --
+00:38:09,790 --> 00:38:11,558
+你第一眼看到的某些性能问题可能
 
 
 695
-00:34:31,966 --> 00:34:37,025
-the current run, it
-is clearly much lower.
+00:38:11,625 --> 00:38:13,827
+看上去是无解的
 
 
 696
-00:34:37,656 --> 00:34:39,585
-Actually if I go
-ahead, I go in here,
+00:38:14,294 --> 00:38:16,763
+你说别人的的代码中就出现过这种问题
 
 
 697
-00:34:39,585 --> 00:34:44,255
-I look for my build path method
-I have to search for it now, oh,
+00:38:16,830 --> 00:38:18,365
+或者是运行时间的副效应
 
 
 698
-00:34:44,386 --> 00:34:45,666
-that's not how you do a search.
+00:38:19,166 --> 00:38:22,135
+我们给出你时间分析器
+运行时间的详细资料的
 
 
 699
-00:34:46,106 --> 00:34:50,406
-If I hit command-F, it will
-bring up this dialogue here.
+00:38:22,202 --> 00:38:24,938
+原因给出你反汇编视图的样子
 
 
 700
-00:34:50,406 --> 00:34:58,886
-I can type in build path and
-it shows me my method here.
+00:38:25,506 --> 00:38:29,176
+就是想向你们展示那是一个
+细节丰富的一个完整的世界
 
 
 701
-00:34:59,966 --> 00:35:03,666
-If we look at this, you
-see here is my Swift code.
+00:38:29,443 --> 00:38:34,414
+用它你就可以像我们
+今天一样解决性能问题
 
 
 702
-00:35:04,216 --> 00:35:07,666
-My get next call
-which is right here,
+00:38:34,982 --> 00:38:38,619
+我鼓励你们带着创造性去
+进一步挖掘
 
 
 703
-00:35:07,666 --> 00:35:09,746
-it isn't showing
-up in any samples.
+00:38:38,852 --> 00:38:40,854
+看看像这样的会议
 
 
 704
-00:35:09,746 --> 00:35:16,226
-You know, no samples
-landed on this.
+00:38:40,988 --> 00:38:44,525
+我知道你们能够修复
+问题 实现你们想要的性能目标
 
 
 705
-00:35:16,226 --> 00:35:19,046
-Why? It is because Swift
-was able to inline it,
+00:38:46,960 --> 00:38:48,896
+只要你今天开始干就行
 
 
 706
-00:35:19,836 --> 00:35:22,436
-whip means that there's
-no function overhead,
+00:38:49,263 --> 00:38:52,599
+史蒂芬·莱塞是我们的
+开发工具福音传道者
 
 
 707
-00:35:22,436 --> 00:35:24,056
-no method call overhead
-whatsoever.
+00:38:52,666 --> 00:38:54,868
+如果你有问题的话就可以联系他
 
 
 708
-00:35:24,486 --> 00:35:28,696
-Because the code for the
-iterator is inline with the rest
+00:38:55,769 --> 00:39:00,641
+与我们相关的会议是
+“能量调试问题”
 
 
 709
-00:35:28,696 --> 00:35:32,116
-of the code it makes further
-improvements explaining the
+00:39:00,941 --> 00:39:03,644
+证明了如果你在CPU上的代码
+是有效的 CPU耗能就会更低
 
 
 710
-00:35:32,116 --> 00:35:35,346
-better performance
-than what we hoped
+00:39:03,810 --> 00:39:05,846
+那次会议是周三举行的
 
 
 711
-00:35:35,346 --> 00:35:39,306
-for by skipping the
-dynamic dispatch.
+00:39:06,380 --> 00:39:09,917
+明天还会有一个关于iOS
+以及Watch OS的会议
 
 
 712
-00:35:39,676 --> 00:35:42,036
-Chad, anything else to
-tell these nice people?
+00:39:10,284 --> 00:39:13,287
+好消息是 时间分析器
+也能用于watch上的app
 
 
 713
-00:35:42,616 --> 00:35:44,866
->> CHAD WOOLF: We
-have 5 minutes!
+00:39:13,353 --> 00:39:14,188
+这是一项大福利
 
 
 714
-00:35:45,506 --> 00:35:47,586
-Of course I do.
-
-
-715
-00:35:47,586 --> 00:35:50,766
-Some tips for you to explore
-Instruments on your own.
-
-
-716
-00:35:51,376 --> 00:35:55,726
-The first one to point out,
-under the recording settings,
-
-
-717
-00:35:56,176 --> 00:35:57,626
-it's called record
-waiting threads.
-
-
-718
-00:35:57,756 --> 00:35:59,286
-I mentioned that the service
-
-
-719
-00:35:59,286 --> 00:36:00,926
-and kernel we use
-samples the active CPUs
-
-
-720
-00:36:00,926 --> 00:36:04,116
-but if you have threads sitting
-around, blocked on a lock
-
-
-721
-00:36:04,116 --> 00:36:07,146
-or waiting for I/O, you
-check this checkbox,
-
-
-722
-00:36:07,476 --> 00:36:09,736
-and the service will sample
-the idle threads as well.
-
-
-723
-00:36:10,366 --> 00:36:12,156
-If you have code
-that's contending
-
-
-724
-00:36:12,156 --> 00:36:14,736
-over a lock you see
-the hot pods show
-
-
-725
-00:36:15,146 --> 00:36:17,726
-up when you enable
-record waiting threads.
-
-
-726
-00:36:18,946 --> 00:36:20,796
-Another thing that
-I find interesting,
-
-
-727
-00:36:21,456 --> 00:36:25,886
-in the display settings,
-in the call tree section,
-
-
-728
-00:36:25,986 --> 00:36:27,396
-it is invert call tree.
-
-
-729
-00:36:28,686 --> 00:36:32,226
-Figuratively what it does, it
-flips the call tree upside down.
-
-
-730
-00:36:32,226 --> 00:36:36,086
-Instead of seeing the leafs at
-the bottom nodes of the tree,
-
-
-731
-00:36:36,186 --> 00:36:37,746
-that's functions that
-don't call into anything,
-
-
-732
-00:36:38,106 --> 00:36:38,976
-they appear at the top.
-
-
-733
-00:36:39,296 --> 00:36:42,286
-If a utility function is
-being called from 5, 6 places,
-
-
-734
-00:36:42,636 --> 00:36:46,606
-you invert that call tree to
-see who is actually calling
-
-
-735
-00:36:46,806 --> 00:36:48,376
-into that particular function.
-
-
-736
-00:36:48,536 --> 00:36:50,016
-It gives you a different
-perspective
-
-
-737
-00:36:50,016 --> 00:36:51,226
-on the data in the call tree.
-
-
-738
-00:36:51,986 --> 00:36:53,856
-When you right click a
-node in the call tree,
-
-
-739
-00:36:54,556 --> 00:36:58,066
-you get a context menu and
-there is interesting stuff
-
-
-740
-00:36:58,066 --> 00:36:58,846
-under there as well.
-
-
-741
-00:36:59,076 --> 00:37:03,116
-One thing that I use from time
-to time is the charge to caller,
-
-
-742
-00:37:03,436 --> 00:37:04,996
-so what you can do, you
-can charge a function
-
-
-743
-00:37:04,996 --> 00:37:06,436
-on method to the caller.
-
-
-744
-00:37:07,036 --> 00:37:10,136
-You can charge an entire Library
-of Framework to the caller.
-
-
-745
-00:37:11,066 --> 00:37:14,546
-There's an option in there
-as well to prune a subtree.
-
-
-746
-00:37:14,736 --> 00:37:16,896
-You don't want to work on a
-specific problem at the time,
-
-
-747
-00:37:16,896 --> 00:37:19,966
-you can prune that out
-of the data and focus
-
-
-748
-00:37:19,966 --> 00:37:23,496
-on what you want to focus on.
-
-
-749
-00:37:23,496 --> 00:37:26,116
-What did we learn?
-
-
-750
-00:37:26,116 --> 00:37:28,616
-Through all of this,
-the first things I want
-
-
-751
-00:37:28,836 --> 00:37:29,576
-to remind you about,
-
-
-752
-00:37:29,906 --> 00:37:32,346
-is to incorporate
-performance targets early.
-
-
-753
-00:37:33,376 --> 00:37:35,496
-If you're doing a big
-performance rewrite
-
-
-754
-00:37:35,496 --> 00:37:38,886
-like we were, start with a
-budget and keep monitoring it
-
-
-755
-00:37:38,886 --> 00:37:41,476
-because once you start layering
-a lot of code on top of that,
-
-
-756
-00:37:41,476 --> 00:37:42,976
-it is harder to change.
-
-
-757
-00:37:44,426 --> 00:37:45,506
-Secondly, always measure.
-
-
-758
-00:37:45,816 --> 00:37:46,076
-Through all
-
-
-759
-00:37:46,076 --> 00:37:48,456
-of our demonstrations we
-were taking time profiles
-
-
-760
-00:37:48,456 --> 00:37:52,136
-with the time profiler, we used
-that data to find the hot spots
-
-
-761
-00:37:52,136 --> 00:37:54,596
-and retuning it,
-by the end we had a
-
-
-762
-00:37:54,596 --> 00:37:56,076
-well-performing application.
-
-
-763
-00:37:56,626 --> 00:38:00,666
-If you go in blind, depends,
-you may be lucky, hit it.
-
-
-764
-00:38:01,086 --> 00:38:03,486
-I would start with a measurement
-and go after that first.
-
-
-765
-00:38:03,976 --> 00:38:07,326
-In the third one, this
-is most important to me,
-
-
-766
-00:38:07,326 --> 00:38:09,036
-I want to encourage
-you to keep digging.
-
-
-767
-00:38:09,796 --> 00:38:11,596
-Some of these performance
-problems you look
-
-
-768
-00:38:11,596 --> 00:38:13,826
-at at first may have
-seemed impassable,
-
-
-769
-00:38:13,826 --> 00:38:16,806
-you say that's happening
-in someone else's code
-
-
-770
-00:38:16,806 --> 00:38:18,356
-or a side effect of the runtime.
-
-
-771
-00:38:19,176 --> 00:38:22,166
-The reason we gave you the
-details on the time profiler,
-
-
-772
-00:38:22,166 --> 00:38:24,936
-the runtimer, what the
-disassembly view looks like,
-
-
-773
-00:38:25,496 --> 00:38:27,826
-is we wanted to show you
-there is a whole world
-
-
-774
-00:38:27,826 --> 00:38:29,186
-out there of more details.
-
-
-775
-00:38:29,456 --> 00:38:33,226
-By using that, you can solve
-the performance problems
-
-
-776
-00:38:33,226 --> 00:38:34,416
-that we were solving today.
-
-
-777
-00:38:34,986 --> 00:38:38,606
-I encourage you to keep
-digging, and with creativity,
-
-
-778
-00:38:38,846 --> 00:38:40,856
-going out there into
-sessions like this,
-
-
-779
-00:38:40,996 --> 00:38:42,866
-I know you guys will
-be able to fix
-
-
-780
-00:38:42,976 --> 00:38:44,516
-and hit the performance
-targets you want.
-
-
-781
-00:38:45,036 --> 00:38:49,386
-That just about does
-it for today.
-
-
-782
-00:38:49,386 --> 00:38:52,606
-Stefan Lesser is our
-dev tools evangelist,
-
-
-783
-00:38:52,606 --> 00:38:54,856
-contact him if you
-have any questions.
-
-
-784
-00:38:55,756 --> 00:39:00,626
-We related sessions, Energy
-debugging issues, turns out that
-
-
-785
-00:39:00,956 --> 00:39:03,676
-if you have efficient code on
-the CPU it uses less energy.
-
-
-786
-00:39:03,676 --> 00:39:05,836
-There was that session
-on Wednesday.
-
-
-787
-00:39:06,396 --> 00:39:09,926
-Also tomorrow, there is
-performance on iOS and Watch OS,
-
-
-788
-00:39:10,296 --> 00:39:13,276
-good news, the time profiler
-can target apps on the watch.
-
-
-789
-00:39:13,346 --> 00:39:13,766
-That's a big boon.
-
-
-790
-00:39:13,766 --> 00:39:15,106
-Tomorrow we'll be in
-labs from 9:00 to 2:00.
-
-
-791
-00:39:15,136 --> 00:39:15,976
-Enjoy the rest of
-your conference.
-
-
-792
-00:39:16,016 --> 00:39:18,000
-[Applause]
+00:39:14,821 --> 00:39:16,423
+祝你们在会议剩余的时间内过得愉快
 

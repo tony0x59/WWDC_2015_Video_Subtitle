@@ -1,4373 +1,3812 @@
 1
-00:00:06,726 --> 00:00:07,106
-(Applause)
+00:00:32,499 --> 00:00:33,400
+尼尔·德赛: 大家好
 
 
 2
-00:00:07,106 --> 00:00:10,806
->> NEIL DESAI: Hi, everyone.
+00:00:33,467 --> 00:00:35,035
+欢迎来到《构建Watch App》
+讲座
 
 
 3
-00:00:23,296 --> 00:00:34,966
-Welcome to Building Watch Apps.
+00:00:35,102 --> 00:00:37,004
+我是尼尔·德赛是位工程师
 
 
 4
-00:00:35,006 --> 00:00:37,006
-My name is Neil Desai,
-and I am an engineer
+00:00:37,271 --> 00:00:38,906
+在watchOS项目工作
 
 
 5
-00:00:37,276 --> 00:00:38,916
-on the watchOS program.
+00:00:39,940 --> 00:00:43,210
+今天我给大家演示如何
+从下到上构建watchOS app
 
 
 6
-00:00:39,946 --> 00:00:40,976
-Today I am going to show you how
+00:00:44,778 --> 00:00:48,215
+我们要谈谈
+Watch app的架构
 
 
 7
-00:00:40,976 --> 00:00:43,356
-to build a watchOS app
-from the ground up.
+00:00:48,282 --> 00:00:51,652
+我们正在全面了解
+app的生命周期布局模型
 
 
 8
-00:00:43,786 --> 00:00:48,266
-So we're going to talk through
-the architecture of a Watch app,
+00:00:52,352 --> 00:00:54,888
+我们会使用不同的界面元素
 
 
 9
-00:00:48,266 --> 00:00:50,626
-we are going to walk
-through the app life cycle,
+00:00:54,955 --> 00:00:57,791
+以便为用户实现美好的体验
 
 
 10
-00:00:50,766 --> 00:00:51,666
-the layout model.
+00:00:58,792 --> 00:00:59,927
+我们会调试app
 
 
 11
-00:00:51,666 --> 00:00:54,876
-We are going to use those
-different interface elements
+00:01:01,261 --> 00:01:04,897
+还将通过不同的watchOS 2
+功能增强app的性能
 
 
 12
-00:00:54,956 --> 00:00:57,876
-to provide a great
-experience for your user.
+00:01:05,966 --> 00:01:10,170
+那么 在Apple Watch中
+你有四个机会来展示信息
 
 
 13
-00:00:58,806 --> 00:01:02,046
-We're going to debug the
-app, and we are also going
+00:01:10,537 --> 00:01:12,339
+从Apple Watch的
+Home屏幕 
 
 
 14
-00:01:02,046 --> 00:01:04,896
-to enhance our app using
-various watchOS 2 features.
+00:01:12,439 --> 00:01:14,441
+到在Watch app中
+可以手工启动的位置
 
 
 15
-00:01:05,956 --> 00:01:08,956
-So, on the Apple Watch you
-have four opportunities
+00:01:14,741 --> 00:01:17,678
+Watch app可以提供
+深度用户体验
 
 
 16
-00:01:08,956 --> 00:01:10,156
-to present information.
+00:01:17,744 --> 00:01:20,080
+大家会主要集中进行开发方面的工作
 
 
 17
-00:01:10,776 --> 00:01:12,326
-From the Home screen
-on Apple Watch
+00:01:21,448 --> 00:01:23,083
+可以选择提供Glance
 
 
 18
-00:01:12,396 --> 00:01:14,146
-to where it can manually
-launch your Watch app.
+00:01:23,317 --> 00:01:26,887
+这可以从app给出最及时的相关数据
 
 
 19
-00:01:14,726 --> 00:01:17,686
-The Watch app offers an
-in-depth user experience
+00:01:26,987 --> 00:01:28,255
+还是以缩略形式
 
 
 20
-00:01:17,686 --> 00:01:20,096
-and where you will focus most
-of your development efforts.
+00:01:30,090 --> 00:01:34,528
+可以为app的远程和
+本地通知提供自定义UI
 
 
 21
-00:01:21,456 --> 00:01:23,086
-You can optionally
-provide a Glance,
+00:01:34,962 --> 00:01:36,163
+Apple Watch利用
 
 
 22
-00:01:23,326 --> 00:01:26,876
-which offers the most timely
-and relevant data from your app
+00:01:36,230 --> 00:01:39,333
+iOS的现有互动通知支持允许
 
 
 23
-00:01:26,976 --> 00:01:28,256
-in an abbreviated form.
+00:01:39,833 --> 00:01:42,936
+佩戴者对具体行动做出反应
 
 
 24
-00:01:28,836 --> 00:01:33,246
-You can also provide a custom
-UI for your app's remote
+00:01:43,203 --> 00:01:45,506
+将app转移到指定区域
 
 
 25
-00:01:33,246 --> 00:01:34,436
-and local notifications.
-
-
-26
-00:01:34,946 --> 00:01:36,296
-Apple Watch takes advantage
-
-
-27
-00:01:36,296 --> 00:01:39,236
-of the existing interactive
-notification support on iOS
-
-
-28
-00:01:39,846 --> 00:01:42,936
-to allow the wearer to
-respond with a specific action,
-
-
-29
-00:01:43,206 --> 00:01:45,906
-transition to a specific
-area of your app,
-
-
-30
-00:01:45,906 --> 00:01:47,526
-or later view the notification
-
-
-31
-00:01:47,646 --> 00:01:49,626
-in Notification Center
-on Apple Watch.
-
-
-32
-00:01:50,616 --> 00:01:55,006
-And lastly, you can add --
-now you can add a Complication
-
-
-33
-00:01:55,006 --> 00:01:57,826
-to display information on the
-clock face, and this is one
-
-
-34
-00:01:57,826 --> 00:01:59,056
-that I am really excited about.
-
-
-35
-00:01:59,176 --> 00:02:01,406
-This is great for small
-pieces of information
-
-
-36
-00:02:01,716 --> 00:02:06,036
-that the user may want to
-know while viewing the time.
-
-
-37
-00:02:06,236 --> 00:02:08,996
-So now that we know the
-different ways the user will
-
-
-38
-00:02:08,996 --> 00:02:10,166
-interact with your app,
-
-
-39
-00:02:10,166 --> 00:02:14,126
-let's discuss the
-architecture of a Watch app.
-
-
-40
-00:02:14,396 --> 00:02:17,316
-Your existing iPhone app
-contains your WatchKit extension
-
-
-41
-00:02:17,376 --> 00:02:18,156
-and Watch app.
-
-
-42
-00:02:18,746 --> 00:02:21,666
-These both get installed on
-the Watch after initial pairing
-
-
-43
-00:02:21,666 --> 00:02:25,946
-at the user's request or a later
-user-initiated installation via
-
-
-44
-00:02:25,946 --> 00:02:26,856
-the Apple Watch app.
-
-
-45
-00:02:27,766 --> 00:02:30,956
-The Watch app is comprised
-of two pieces, first,
-
-
-46
-00:02:30,956 --> 00:02:33,966
-the WatchKit extension,
-and this extension now runs
-
-
-47
-00:02:33,966 --> 00:02:35,856
-on Apple Watch and executes code
-
-
-48
-00:02:36,096 --> 00:02:38,006
-in response to user
-interactions.
-
-
-49
-00:02:38,496 --> 00:02:40,576
-The second piece
-is the Watch app.
-
-
-50
-00:02:40,676 --> 00:02:42,316
-Your Watch app's UI is loaded
-
-
-51
-00:02:42,376 --> 00:02:44,226
-from a bundle containing
-your storyboard
-
-
-52
-00:02:44,516 --> 00:02:46,906
-and static resources
-such as images.
-
-
-53
-00:02:47,466 --> 00:02:51,216
-So this UI, which
-lives in the Watch app,
-
-
-54
-00:02:51,776 --> 00:02:53,496
-then talks to your
-WatchKit extension,
-
-
-55
-00:02:53,856 --> 00:02:55,466
-where you can place
-all of your logic.
-
-
-56
-00:02:56,226 --> 00:02:58,086
-Now that the extension
-lives on the Watch,
-
-
-57
-00:02:58,336 --> 00:03:00,566
-you can enable all sorts
-of new capabilities,
-
-
-58
-00:03:00,676 --> 00:03:01,736
-which I will get into later.
-
-
-59
-00:03:02,746 --> 00:03:05,716
-And in the moments when your
-Watch app needs to communicate
-
-
-60
-00:03:05,946 --> 00:03:08,396
-with your iOS app, there's
-a new framework called
-
-
-61
-00:03:08,396 --> 00:03:12,036
-WatchConnectivity that you can
-use to offload heavy processing
-
-
-62
-00:03:12,226 --> 00:03:15,476
-or networking tasks, and
-WatchConnectivity lives
-
-
-63
-00:03:15,476 --> 00:03:20,166
-on both iOS and watchOS 2 so you
-can communicate back and forth.
-
-
-64
-00:03:23,056 --> 00:03:25,316
-To summarize, your
-storyboard and all
-
-
-65
-00:03:25,316 --> 00:03:28,106
-of your static resources are
-stored in the Watch app bundle.
-
-
-66
-00:03:28,986 --> 00:03:30,516
-The Watch app target
-provided to you
-
-
-67
-00:03:30,516 --> 00:03:33,706
-by Xcode already contains
-the storyboard you'll use
-
-
-68
-00:03:33,706 --> 00:03:34,486
-during development.
-
-
-69
-00:03:35,386 --> 00:03:38,026
-Because these resources
-are part of the Watch app,
-
-
-70
-00:03:38,346 --> 00:03:40,496
-they must all be
-specified at design time
-
-
-71
-00:03:40,626 --> 00:03:42,846
-and can only be modified
-slightly at runtime.
-
-
-72
-00:03:43,686 --> 00:03:45,796
-This means you need
-to incorporate all
-
-
-73
-00:03:45,796 --> 00:03:47,626
-of the UI elements
-that you might need
-
-
-74
-00:03:47,626 --> 00:03:49,266
-into each scene of
-your storyboard.
-
-
-75
-00:03:50,236 --> 00:03:53,876
-At runtime, coding your WatchKit
-extension can update those UI
-
-
-76
-00:03:53,876 --> 00:03:56,456
-elements, including
-hiding, showing,
-
-
-77
-00:03:56,456 --> 00:03:57,946
-or animating them as needed.
-
-
-78
-00:03:58,416 --> 00:04:01,196
-Additionally, your WatchKit
-extension can send dynamically
-
-
-79
-00:04:01,196 --> 00:04:03,846
-generated content over to
-the Watch app for display.
-
-
-80
-00:04:05,616 --> 00:04:09,106
-So in Interface Controller
-manages the UI elements
-
-
-81
-00:04:09,106 --> 00:04:10,466
-for a single stream of content.
-
-
-82
-00:04:10,926 --> 00:04:12,876
-It sets the initial
-values of those elements,
-
-
-83
-00:04:13,116 --> 00:04:14,696
-responds to user interactions,
-
-
-84
-00:04:15,066 --> 00:04:16,926
-and updates the UI
-as appropriate.
-
-
-85
-00:04:17,875 --> 00:04:20,026
-When you create your
-Interface Controller subclass,
-
-
-86
-00:04:20,555 --> 00:04:23,476
-you add outlets for each UI
-element you need to manage.
-
-
-87
-00:04:23,996 --> 00:04:26,416
-These outlets connect to
-objects in your storyboard
-
-
-88
-00:04:26,676 --> 00:04:28,386
-and handle the transfer
-of information
-
-
-89
-00:04:28,696 --> 00:04:31,536
-between your WatchKit
-extension and Watch app.
-
-
-90
-00:04:32,146 --> 00:04:34,896
-In addition to outlets,
-you set up action methods
-
-
-91
-00:04:34,896 --> 00:04:37,446
-for the interactive
-elements of your storyboard,
-
-
-92
-00:04:37,846 --> 00:04:41,096
-and as with outlets, you
-connect each action method
-
-
-93
-00:04:41,376 --> 00:04:42,896
-to the corresponding UI element.
-
-
-94
-00:04:43,606 --> 00:04:46,516
-And when the wearer interacts
-with that element on the Watch,
-
-
-95
-00:04:46,976 --> 00:04:49,606
-WatchKit will then call
-your action method.
-
-
-96
-00:04:50,796 --> 00:04:52,816
-So let's get started
-thinking about how
-
-
-97
-00:04:52,816 --> 00:04:55,446
-to modify an existing
-iPhone app.
-
-
-98
-00:04:56,276 --> 00:05:00,776
-So in the run-up to WWDC, I
-have been a little forgetful
-
-
-99
-00:05:00,776 --> 00:05:03,296
-about contacting people such
-as my family and friends,
-
-
-100
-00:05:03,906 --> 00:05:06,256
-so I wanted to create
-an app that reminds me
-
-
-101
-00:05:06,256 --> 00:05:08,066
-who I have contacted
-and who I haven't,
-
-
-102
-00:05:08,476 --> 00:05:12,626
-and it's called WWDC Call Me
-Lately and helps notify me
-
-
-103
-00:05:12,656 --> 00:05:13,596
-when I should contact them.
-
-
-104
-00:05:14,216 --> 00:05:17,226
-So I communicate with
-my server to keep track
-
-
-105
-00:05:17,226 --> 00:05:19,836
-of the people I need to
-contact via NSURLSession.
-
-
-106
-00:05:20,246 --> 00:05:23,626
-This is a great iOS
-app I made, but really,
-
-
-107
-00:05:23,626 --> 00:05:25,956
-it makes even more
-sense as a Watch app.
-
-
-108
-00:05:26,686 --> 00:05:31,566
-When I am busy, I quickly can
-know who I need to contact next.
-
-
-109
-00:05:31,566 --> 00:05:34,686
-Let's get started
-making our Watch app.
-
-
-110
-00:05:34,956 --> 00:05:37,306
-So what I want to do is
-I want to show you how
-
-
-111
-00:05:37,306 --> 00:05:40,046
-to add a Watch app target
-to an existing iOS app,
-
-
-112
-00:05:40,046 --> 00:05:42,666
-and then we are going
-to walk through where
-
-
-113
-00:05:42,666 --> 00:05:44,596
-to get started configuring
-your interface.
-
-
-114
-00:05:45,216 --> 00:05:46,996
-And lastly, we are
-going to build and run
-
-
-115
-00:05:47,076 --> 00:05:48,746
-to see how things
-look in the simulator.
-
-
-116
-00:05:50,116 --> 00:05:51,416
-So speaking of the simulator,
-
-
-117
-00:05:51,726 --> 00:05:54,886
-we actually have a brand-new
-simulator in the watchOS 2 SDK.
-
-
-118
-00:05:56,086 --> 00:05:59,256
-So you guys are all probably
-familiar with the iOS simulator,
-
-
-119
-00:05:59,256 --> 00:06:00,476
-and it looks something
-like this.
-
-
-120
-00:06:01,466 --> 00:06:03,596
-And now we have a
-new Watch simulator.
-
-
-121
-00:06:04,326 --> 00:06:07,446
-So what's great about this is
-it's a fully fledged simulator,
-
-
-122
-00:06:07,516 --> 00:06:10,646
-so we can easily look
-at our 38-millimeter
-
-
-123
-00:06:10,646 --> 00:06:12,216
-and 42-millimeter sizes.
-
-
-124
-00:06:13,256 --> 00:06:14,936
-We can simulate touch pressure.
-
-
-125
-00:06:16,216 --> 00:06:18,116
-We can also look at
-different clock faces.
-
-
-126
-00:06:18,316 --> 00:06:20,786
-So like I mentioned earlier,
-there's now the ability
-
-
-127
-00:06:21,106 --> 00:06:25,246
-to support Complications in
-watchOS 2, and so you can look
-
-
-128
-00:06:25,246 --> 00:06:27,386
-at how your Complication views
-
-
-129
-00:06:27,386 --> 00:06:29,616
-in different clock
-faces in the simulator.
-
-
-130
-00:06:30,986 --> 00:06:32,676
-And lastly, you can have
-multiple apps installed
-
-
-131
-00:06:32,676 --> 00:06:33,406
-at the same time.
-
-
-132
-00:06:33,406 --> 00:06:36,216
-So we think this is going to
-be a really great way for you
-
-
-133
-00:06:36,216 --> 00:06:38,706
-to easily make a new
-project, iterate on an idea,
-
-
-134
-00:06:38,706 --> 00:06:43,266
-and then quickly go back and
-forth between different apps.
-
-
-135
-00:06:44,456 --> 00:06:47,876
-So to simulate touch pressure,
-you go into the Simulator menu,
-
-
-136
-00:06:47,876 --> 00:06:50,316
-and you go to Hardware,
-Simulate Touch Pressure,
-
-
-137
-00:06:50,586 --> 00:06:53,046
-and then you can
-select the Deep Press.
-
-
-138
-00:06:53,046 --> 00:06:55,346
-This is useful for
-things like wanting
-
-
-139
-00:06:55,346 --> 00:06:58,576
-to change the clock
-face in the sim.
-
-
-140
-00:06:58,576 --> 00:07:02,286
-Now let's jump into Xcode and
-see how we can add our Watch app
-
-
-141
-00:07:02,286 --> 00:07:03,866
-and use this brand-new
-simulator.
-
-
-142
-00:07:04,196 --> 00:07:18,416
-So let's go to demo.
-
-
-143
-00:07:18,556 --> 00:07:19,896
-Great. So let's launch Xcode.
-
-
-144
-00:07:20,536 --> 00:07:23,866
-And let's select our app.
-
-
-145
-00:07:24,936 --> 00:07:28,436
-And let's make this a
-little bit easier to view.
-
-
-146
-00:07:29,056 --> 00:07:32,926
-Great. So now if I wanted to
-add a new app, I would just go
-
-
-147
-00:07:32,926 --> 00:07:41,396
-to File, New Target, and then
-I now have a new watchOS pane,
-
-
-148
-00:07:41,466 --> 00:07:43,706
-so I have an application
-and framework in library.
-
-
-149
-00:07:43,766 --> 00:07:47,016
-I select Framework In Library
-so I can add a Watch framework
-
-
-150
-00:07:47,016 --> 00:07:48,286
-or Watch static library.
-
-
-151
-00:07:48,746 --> 00:07:51,966
-For now I am going to
-add a WatchKit app.
-
-
-152
-00:07:51,966 --> 00:07:56,896
-I double-click, add
-a product name,
-
-
-153
-00:07:56,896 --> 00:08:00,146
-and my main app is always
-going to be enabled by default,
-
-
-154
-00:08:00,146 --> 00:08:02,326
-but I can also include
-a Notification scene,
-
-
-155
-00:08:02,476 --> 00:08:04,326
-a Glance scene, and
-a Complication.
-
-
-156
-00:08:04,996 --> 00:08:06,036
-So I can add those here.
-
-
-157
-00:08:06,636 --> 00:08:08,316
-I already added it to this app.
-
-
-158
-00:08:08,826 --> 00:08:09,766
-Let's just press Cancel.
-
-
-159
-00:08:11,106 --> 00:08:12,806
-Now let's see what we are given.
-
-
-160
-00:08:13,796 --> 00:08:16,736
-Here is our Watch app, and
-here is our WatchKit extension.
-
-
-161
-00:08:17,336 --> 00:08:18,326
-Like I mentioned before,
-
-
-162
-00:08:18,326 --> 00:08:20,646
-our Watch app contains
-our storyboard,
-
-
-163
-00:08:20,646 --> 00:08:23,746
-all our static resources,
-and our asset catalog.
-
-
-164
-00:08:24,146 --> 00:08:26,406
-Our WatchKit extension will
-contain all our interface
-
-
-165
-00:08:26,406 --> 00:08:31,966
-controllers and any other
-code we might want to add.
-
-
-166
-00:08:31,966 --> 00:08:33,496
-Let's go into the storyboard.
-
-
-167
-00:08:36,895 --> 00:08:39,826
-So now, as you can see,
-I have a main interface,
-
-
-168
-00:08:40,006 --> 00:08:42,606
-I have my Glance interface,
-and then I have my static
-
-
-169
-00:08:42,606 --> 00:08:45,056
-and dynamic interface
-for my notification.
-
-
-170
-00:08:46,296 --> 00:08:48,516
-Now, let's also go into
-the utilities inspector,
-
-
-171
-00:08:49,806 --> 00:08:51,906
-and I can look at the
-object library and see
-
-
-172
-00:08:51,906 --> 00:08:55,026
-that I have a lot of different
-objects here that I can use,
-
-
-173
-00:08:55,026 --> 00:08:59,486
-and I have all my WatchKit
-interface elements as well.
-
-
-174
-00:08:59,696 --> 00:09:02,546
-So let's just drag and drop
-an interface controller over.
-
-
-175
-00:09:04,456 --> 00:09:06,276
-For instance, if I wanted
-
-
-176
-00:09:06,276 --> 00:09:08,686
-to very simply make
-a page controller,
-
-
-177
-00:09:08,686 --> 00:09:12,426
-I could select Control on
-my keyboard and then drag
-
-
-178
-00:09:12,426 --> 00:09:14,016
-over to my new interface
-controller
-
-
-179
-00:09:14,276 --> 00:09:17,386
-and create a segue
-for next page.
-
-
-180
-00:09:17,596 --> 00:09:23,136
-So for now, we'll just get rid
-of that, and if you see below,
-
-
-181
-00:09:23,136 --> 00:09:25,506
-there's a static interface
-and a dynamic interface,
-
-
-182
-00:09:25,696 --> 00:09:28,276
-so the dynamic interface
-is actually what hooks
-
-
-183
-00:09:28,276 --> 00:09:30,196
-up to your Notification
-Controller class.
-
-
-184
-00:09:30,686 --> 00:09:33,836
-So when your user first
-raises their wrist
-
-
-185
-00:09:33,836 --> 00:09:36,476
-when they get your notification
-and then they see it,
-
-
-186
-00:09:36,476 --> 00:09:38,686
-your Notification Controller
-class will get called,
-
-
-187
-00:09:38,946 --> 00:09:41,456
-and you can provide
-a very rich UI there.
-
-
-188
-00:09:42,586 --> 00:09:46,266
-Now, your static interface is
-typically going to be invoked
-
-
-189
-00:09:46,266 --> 00:09:49,386
-when the user, for example,
-misses your notification
-
-
-190
-00:09:49,386 --> 00:09:51,586
-and goes to view it again
-in the Notification Center,
-
-
-191
-00:09:51,886 --> 00:09:54,016
-and that's typically when you
-will see the static interface.
-
-
-192
-00:09:56,076 --> 00:10:00,376
-So also, I have this
-My Category here.
-
-
-193
-00:10:00,826 --> 00:10:05,066
-So for different categories that
-we send for different payloads,
-
-
-194
-00:10:05,066 --> 00:10:08,236
-we can actually create custom
-UIs and custom notifications
-
-
-195
-00:10:08,786 --> 00:10:10,276
-for those different categories.
-
-
-196
-00:10:10,546 --> 00:10:13,696
-So it's not just one
-interface for one --
-
-
-197
-00:10:14,126 --> 00:10:16,406
-for all of the notifications
-you send.
-
-
-198
-00:10:16,406 --> 00:10:19,516
-You can actually modify this
-and create multiple interfaces.
-
-
-199
-00:10:20,766 --> 00:10:22,876
-So let's just add a new
-notification controller.
-
-
-200
-00:10:27,176 --> 00:10:28,316
-Let's place that here.
-
-
-201
-00:10:29,206 --> 00:10:32,546
-So if I wanted to, I could drag
-over an interface controller
-
-
-202
-00:10:32,546 --> 00:10:35,166
-and then, just like I did
-before, I would Control-click,
-
-
-203
-00:10:35,166 --> 00:10:37,276
-and then create my
-new dynamic interface.
-
-
-204
-00:10:38,126 --> 00:10:41,436
-Or I can also just go here
-into the attributes inspector
-
-
-205
-00:10:41,646 --> 00:10:43,446
-and select Has Dynamic
-Interface.
-
-
-206
-00:10:44,036 --> 00:10:46,706
-So now I can modify my category
-
-
-207
-00:10:46,706 --> 00:10:48,046
-and I can create
-a new interface,
-
-
-208
-00:10:48,046 --> 00:10:50,086
-and then I possibly would want
-
-
-209
-00:10:50,086 --> 00:10:53,216
-to create a new Notification
-Controller class
-
-
-210
-00:10:53,216 --> 00:10:54,746
-and then hook that up as well.
-
-
-211
-00:10:55,876 --> 00:10:58,886
-So also we have given to us
-
-
-212
-00:10:58,886 --> 00:11:02,296
-by the template a push
-notification payload .apns file.
-
-
-213
-00:11:03,306 --> 00:11:05,206
-If you see here, this looks just
-
-
-214
-00:11:05,206 --> 00:11:06,836
-like a normal payload
-we might have.
-
-
-215
-00:11:07,176 --> 00:11:10,586
-It has an alert, a body,
-a title, a category.
-
-
-216
-00:11:11,196 --> 00:11:13,906
-What's great about this
-is in the simulator,
-
-
-217
-00:11:13,906 --> 00:11:16,316
-we can use these
-different payload files
-
-
-218
-00:11:16,586 --> 00:11:18,136
-and mockup different interfaces.
-
-
-219
-00:11:18,436 --> 00:11:21,836
-If we want to test out all of
-these different notifications,
-
-
-220
-00:11:22,166 --> 00:11:23,586
-we don't have to
-just do it to device.
-
-
-221
-00:11:24,016 --> 00:11:25,886
-We can now quickly iterate
-
-
-222
-00:11:25,886 --> 00:11:27,856
-on different ideas
-using the simulator
-
-
-223
-00:11:27,856 --> 00:11:29,386
-and these notification payloads.
-
-
-224
-00:11:29,946 --> 00:11:32,896
-So let's go back
-to my storyboard.
-
-
-225
-00:11:33,406 --> 00:11:35,246
-So now I just want
-to build and run
-
-
-226
-00:11:35,676 --> 00:11:37,756
-and view my main app
-in the simulator.
-
-
-227
-00:11:38,566 --> 00:11:40,346
-So I am going to go
-up to my schemes,
-
-
-228
-00:11:40,726 --> 00:11:44,726
-and I see I have my iOS scheme
-and then my WatchKit app scheme.
-
-
-229
-00:11:45,596 --> 00:11:48,776
-And then I have two simulators
-here, an iPhone 6 Plus
-
-
-230
-00:11:48,776 --> 00:11:49,796
-with a 38-millimeter
-
-
-231
-00:11:50,056 --> 00:11:52,566
-and an iPhone 6 Plus
-with a 42-millimeter.
-
-
-232
-00:11:52,976 --> 00:11:55,546
-As I mentioned before, this
-is actually a full simulator
-
-
-233
-00:11:55,546 --> 00:11:56,106
-for the Watch.
-
-
-234
-00:11:56,216 --> 00:11:58,916
-It's actually going to be
-paired with my iPhone sim,
-
-
-235
-00:12:00,096 --> 00:12:06,256
-so let's select the iPhone 6
-scheme, and let's build and run,
-
-
-236
-00:12:06,476 --> 00:12:09,896
-and now I have two
-simulators open.
-
-
-237
-00:12:11,136 --> 00:12:15,836
-So what I expect to have happen
-is that the main app will launch
-
-
-238
-00:12:15,836 --> 00:12:17,786
-and I will get attached
-to it in the debugger.
-
-
-239
-00:12:18,586 --> 00:12:22,296
-So great. So let's press Allow,
-because I do want to allow this.
-
-
-240
-00:12:22,916 --> 00:12:24,676
-And now I am attaching
-the debugger,
-
-
-241
-00:12:24,676 --> 00:12:27,706
-and I have a small thing
-that has appeared here,
-
-
-242
-00:12:27,706 --> 00:12:29,806
-it says "extension
-received request to wake
-
-
-243
-00:12:29,806 --> 00:12:31,246
-up for complication support."
-
-
-244
-00:12:31,636 --> 00:12:34,346
-So if I were to implement
-my Complication,
-
-
-245
-00:12:34,756 --> 00:12:37,266
-this would later go away.
-
-
-246
-00:12:37,506 --> 00:12:40,626
-So now let's just stop
-this debug session.
-
-
-247
-00:12:41,056 --> 00:12:42,526
-Let's go back to our Watch sim.
-
-
-248
-00:12:43,826 --> 00:12:46,366
-So here's my new simulator.
-
-
-249
-00:12:46,366 --> 00:12:47,296
-I have my clock face.
-
-
-250
-00:12:47,686 --> 00:12:50,826
-Now if I really just wanted
-to change out my clock face,
-
-
-251
-00:12:50,826 --> 00:12:53,826
-I can go into Hardware,
-Simulate Touch Pressure,
-
-
-252
-00:12:55,046 --> 00:12:58,666
-and now I can simulate a deep
-press, then I can go back
-
-
-253
-00:12:59,406 --> 00:13:02,756
-to a shallow press, and then
-I can modify my clock face.
-
-
-254
-00:13:03,766 --> 00:13:06,006
-Now I can customize my
-clock in the simulator.
-
-
-255
-00:13:06,946 --> 00:13:09,846
-So if I were to go to
-this screen on a device,
-
-
-256
-00:13:09,846 --> 00:13:11,196
-I would use my Digital Crown,
-
-
-257
-00:13:11,196 --> 00:13:12,716
-and then I would
-easily change the color.
-
-
-258
-00:13:13,076 --> 00:13:15,196
-So there isn't a Digital
-Crown on my mouse,
-
-
-259
-00:13:15,456 --> 00:13:18,026
-but thankfully I
-have a scroll wheel,
-
-
-260
-00:13:18,446 --> 00:13:20,956
-and I can use the
-trackpad or Magic Mouse,
-
-
-261
-00:13:21,956 --> 00:13:23,656
-and I can change
-the color as such.
-
-
-262
-00:13:23,726 --> 00:13:26,066
-Now I can simulate the
-Digital Crown behavior.
-
-
-263
-00:13:26,976 --> 00:13:29,376
-Also, when I am in my
-Complications view,
-
-
-264
-00:13:29,686 --> 00:13:34,956
-as I swipe over, I can
-then enable my Complication
-
-
-265
-00:13:35,206 --> 00:13:38,826
-that I have, and so if I am
-iterating on Complication ideas,
-
-
-266
-00:13:38,826 --> 00:13:41,496
-I want to build some
-new Complications
-
-
-267
-00:13:41,496 --> 00:13:44,116
-on different faces, I would
-just enable these Complications
-
-
-268
-00:13:44,116 --> 00:13:44,656
-as such.
-
-
-269
-00:13:45,956 --> 00:13:49,456
-So for now, let's just go back,
-and let's do Command-Shift-H
-
-
-270
-00:13:49,456 --> 00:13:54,956
-for home, and let's select and
-then do Command-Shift-H again.
-
-
-271
-00:13:55,716 --> 00:13:58,186
-So now I am at the Home screen,
-so I have my Settings app,
-
-
-272
-00:13:58,446 --> 00:14:00,146
-my clock face, and
-the app I have.
-
-
-273
-00:14:00,976 --> 00:14:04,286
-And then I can launch my
-app and see it as I expect.
-
-
-274
-00:14:04,666 --> 00:14:08,946
-So let's go back home.
-
-
-275
-00:14:09,096 --> 00:14:12,216
-And now, like I mentioned,
-these sims are paired.
-
-
-276
-00:14:12,216 --> 00:14:14,426
-I have two different
-sims to choose from.
-
-
-277
-00:14:14,426 --> 00:14:17,266
-I go into schemes and
-I see my two sims.
-
-
-278
-00:14:17,686 --> 00:14:19,256
-But what happens if I want
-
-
-279
-00:14:19,386 --> 00:14:22,306
-to have an iPhone 5 sim
-with a 42-millimeter?
-
-
-280
-00:14:22,346 --> 00:14:25,526
-I am going to make a new sim
-and have it paired for me.
-
-
-281
-00:14:26,656 --> 00:14:31,556
-So let's go into Xcode and then
-select Window, and then Devices.
-
-
-282
-00:14:32,356 --> 00:14:35,496
-And so now in my sidebar, I have
-all of my different simulators.
-
-
-283
-00:14:35,766 --> 00:14:39,326
-So if I go to the bottom left,
-I can then add a simulator.
-
-
-284
-00:14:39,636 --> 00:14:41,856
-So I can call it iPhone 5.
-
-
-285
-00:14:43,496 --> 00:14:44,976
-Change my device type.
-
-
-286
-00:14:45,546 --> 00:14:47,266
-I will keep my iOS version.
-
-
-287
-00:14:47,916 --> 00:14:50,756
-I will change the paired
-watch to be a 42-millimeter,
-
-
-288
-00:14:51,146 --> 00:14:53,476
-so I can easily create that.
-
-
-289
-00:14:53,476 --> 00:14:57,196
-Now if I go back to my scheme,
-there's my new simulator.
-
-
-290
-00:14:58,856 --> 00:15:01,836
-So let's go back
-to the storyboard.
-
-
-291
-00:15:02,486 --> 00:15:08,686
-And so as I mentioned,
-there's these schemes
-
-
-292
-00:15:08,686 --> 00:15:11,286
-that we can pick from, so
-there's a Notification scheme,
-
-
-293
-00:15:11,736 --> 00:15:13,566
-there's Glance scheme,
-and a Complication,
-
-
-294
-00:15:13,566 --> 00:15:15,266
-so I can select these
-different schemes
-
-
-295
-00:15:15,676 --> 00:15:17,516
-and quickly debug
-those parts of my app.
-
-
-296
-00:15:18,616 --> 00:15:21,256
-And now, for example,
-I want to just test
-
-
-297
-00:15:21,256 --> 00:15:22,436
-out my Notification scheme,
-
-
-298
-00:15:22,436 --> 00:15:24,386
-I want to see how it
-looks in the simulator.
-
-
-299
-00:15:24,846 --> 00:15:26,526
-We already talked
-about the APNS files.
-
-
-300
-00:15:26,526 --> 00:15:30,356
-I want to see that
-appropriately appear.
-
-
-301
-00:15:30,586 --> 00:15:33,486
-So let's just add a label
-to my dynamic interface.
-
-
-302
-00:15:33,886 --> 00:15:35,726
-And let's drag it over.
-
-
-303
-00:15:36,436 --> 00:15:40,536
-And let's just rename
-this Dynamic.
-
-
-304
-00:15:40,636 --> 00:15:42,916
-So now I selected my
-Notification scheme,
-
-
-305
-00:15:43,726 --> 00:15:46,236
-and I am just going to build
-and run this to the simulator.
-
-
-306
-00:15:50,376 --> 00:15:53,556
-So what I want to have
-happen is on the Watch sim,
-
-
-307
-00:15:54,666 --> 00:15:57,346
-my notification will appear,
-and then it says Dynamic,
-
-
-308
-00:15:57,806 --> 00:16:03,816
-and that's all it
-should say for now.
-
-
-309
-00:16:04,056 --> 00:16:07,006
-So here's my notification,
-and it says Test Message,
-
-
-310
-00:16:07,606 --> 00:16:10,246
-so I am going to
-look into my console.
-
-
-311
-00:16:10,996 --> 00:16:13,726
-It says "took too long to
-show custom notification.
-
-
-312
-00:16:13,726 --> 00:16:14,896
-Falling back to static."
-
-
-313
-00:16:15,746 --> 00:16:19,376
-Okay. So let me look into
-my notification controller
-
-
-314
-00:16:19,376 --> 00:16:20,656
-and see why that
-might have occurred.
-
-
-315
-00:16:21,426 --> 00:16:23,676
-Here is my code for my
-notification controller.
-
-
-316
-00:16:24,776 --> 00:16:27,566
-I go down.
-
-
-317
-00:16:27,946 --> 00:16:31,226
-Okay, so my Did Receive Remote
-Notification is commented out.
-
-
-318
-00:16:31,226 --> 00:16:33,186
-I should probably
-uncomment this.
-
-
-319
-00:16:37,056 --> 00:16:40,516
-And now let's just
-build and run again.
-
-
-320
-00:16:40,736 --> 00:16:43,956
-So now hopefully, after I
-dismiss the old notification,
-
-
-321
-00:16:45,086 --> 00:16:46,176
-I should then see my new one,
-
-
-322
-00:16:46,236 --> 00:16:47,676
-and it says Dynamic
-like I expect.
-
-
-323
-00:16:48,596 --> 00:16:52,676
-So on device, if I was in this
-scenario and got a notification,
-
-
-324
-00:16:52,676 --> 00:16:54,696
-I could select the
-App icon or button
-
-
-325
-00:16:54,696 --> 00:16:56,096
-and I would be taken
-right to the app.
-
-
-326
-00:16:56,466 --> 00:16:58,756
-So I can just do the same
-thing here in the simulator,
-
-
-327
-00:16:58,756 --> 00:17:08,246
-and I am taken right
-to the app as I expect.
-
-
-328
-00:17:08,376 --> 00:17:13,596
-So now I could flesh out this
-code and add a great UI story
-
-
-329
-00:17:13,846 --> 00:17:16,326
-in my notification,
-and I still want
-
-
-330
-00:17:16,326 --> 00:17:18,146
-to be testing my
-static interface.
-
-
-331
-00:17:18,296 --> 00:17:21,886
-The only way I just saw that
-happen was I had to comment
-
-
-332
-00:17:21,886 --> 00:17:23,866
-out Did Receive Remote
+00:01:45,772 --> 00:01:48,375
+或是在Apple Watch的
 Notification
 
 
+26
+00:01:48,442 --> 00:01:49,710
+Center 晚些查看通知
+
+
+27
+00:01:50,611 --> 00:01:54,915
+最后 可以添加
+Complication
+
+
+28
+00:01:54,982 --> 00:01:56,884
+在表盘显示信息的这一功能
+
+
+29
+00:01:57,284 --> 00:01:59,052
+让我非常兴奋
+
+
+30
+00:01:59,186 --> 00:02:01,421
+对于少量信息条而言这一点非常棒
+
+
+31
+00:02:01,722 --> 00:02:04,091
+用户可能会在查看时间时
+希望了解这些信息
+
+
+32
+00:02:06,226 --> 00:02:09,997
+那么我们现在了解了
+用户会与app交动的不同方式
+
+
+33
+00:02:10,163 --> 00:02:12,332
+我们来谈谈
+Watch app的架构
+
+
+34
+00:02:14,401 --> 00:02:17,304
+现有的iPhone app
+包括WatchKit扩展
+
+
+35
+00:02:17,371 --> 00:02:18,272
+和Watch app
+
+
+36
+00:02:18,739 --> 00:02:22,843
+经过用户要求的初始配对后
+这些都已经装在了Watch 上
+
+
+37
+00:02:23,110 --> 00:02:25,879
+或是后来通过
+Apple Watch app
+
+
+38
+00:02:25,946 --> 00:02:26,980
+用户发起的安装也可以
+
+
+39
+00:02:27,781 --> 00:02:29,816
+Watch app包括两部分内容
+
+
+40
+00:02:30,250 --> 00:02:33,854
+首先是WatchKit扩展
+这一扩展现在就在...
+
+
+41
+00:02:33,921 --> 00:02:35,856
+Apple Watch上运行
+
+
+42
+00:02:36,089 --> 00:02:38,125
+并根据用户互动 执行代码
+
+
+43
+00:02:38,492 --> 00:02:40,360
+第二部分是Watch app
+
+
+44
+00:02:40,661 --> 00:02:42,029
+Watch app的UI已经 
+
+
+45
+00:02:42,095 --> 00:02:46,900
+从包括故事板和静态资源捆绑包中
+得以加载例如图像
+
+
+46
+00:02:48,769 --> 00:02:51,205
+因此 存在于 Watch app
+
+
+47
+00:02:51,605 --> 00:02:53,707
+的这个UI随后
+会与WatchKit扩展通话
+
+
+48
+00:02:53,841 --> 00:02:55,475
+可以将全部逻辑置于其中
+
+
+49
+00:02:56,210 --> 00:02:58,078
+现在 这个扩展程序就在Watch中
+
+
+50
+00:02:58,345 --> 00:03:00,480
+可以启动各类新的能力
+
+
+51
+00:03:00,681 --> 00:03:01,748
+这部分稍后介绍
+
+
+52
+00:03:02,749 --> 00:03:05,619
+当Watch app需要
+与iOS app
+
+
+53
+00:03:05,953 --> 00:03:09,256
+进行沟通时
+WatchConnectivity
+
+
+54
+00:03:09,656 --> 00:03:12,025
+可用于卸载重型进程
+
+
+55
+00:03:12,226 --> 00:03:13,260
+或网络任务它存在于
+
+
+56
+00:03:13,794 --> 00:03:16,230
+iOS和watchOS 2上
+
+
+57
+00:03:16,463 --> 00:03:19,433
+所以可以来回沟通
+
+
+58
+00:03:23,370 --> 00:03:28,108
+总之 故事板和所有静态资源
+存储在Watch app捆绑包中 
+
+
+59
+00:03:28,976 --> 00:03:31,245
+Xcode提供的
+Watch app已经包括
+
+
+60
+00:03:31,311 --> 00:03:34,481
+故事板在内在开发期间将会用到
+
+
+61
+00:03:35,382 --> 00:03:38,018
+因为这些资源
+是Watch app的一部分
+
+
+62
+00:03:38,352 --> 00:03:40,487
+在设计时必须全部明确
+
+
+63
+00:03:40,621 --> 00:03:43,090
+只有在运行时可以稍作调整
+
+
+64
+00:03:43,690 --> 00:03:45,392
+这意味着需要将可能用到的
+
+
+65
+00:03:45,559 --> 00:03:47,594
+所有UI元素并入
+
+
+66
+00:03:47,661 --> 00:03:49,263
+故事板的各个场景
+
+
+67
+00:03:50,230 --> 00:03:53,834
+运行时 对WatchKit
+扩展进行编码 
+
+
+68
+00:03:53,901 --> 00:03:56,470
+可以更新UI元素包括按照需要
+
+
+69
+00:03:56,537 --> 00:03:57,938
+对之隐藏 展示或动画处理
+
+
+70
+00:03:58,405 --> 00:04:01,141
+此外 WatchKit扩展
+可以发送动态
+
+
+71
+00:04:01,208 --> 00:04:03,844
+生成的内容
+至Watch app便于显示 
+
+
+72
+00:04:05,879 --> 00:04:09,082
+因此Interface
+Controller对单个内容流
+
+
+73
+00:04:09,149 --> 00:04:10,450
+管理UI元素
+
+
+74
+00:04:10,918 --> 00:04:12,886
+会设置这些元素的初始值
+
+
+75
+00:04:13,120 --> 00:04:14,688
+对用户交互做出反应
+
+
+76
+00:04:15,055 --> 00:04:16,923
+适度更新UI
+
+
+77
+00:04:17,791 --> 00:04:20,226
+创建Interface
+Controller子类时
+
+
+78
+00:04:20,560 --> 00:04:23,463
+需要为需要管理的每个UI添加输出口
+
+
+79
+00:04:23,997 --> 00:04:26,400
+这些输出口与故事板中的对象连接
+
+
+80
+00:04:26,667 --> 00:04:31,238
+并处理WatchKit扩展
+和Watch app之间的信息传送
+
+
+81
+00:04:32,139 --> 00:04:37,444
+除了输出口还要为故事板的
+互动元素设置行动方法
+
+
+82
+00:04:37,845 --> 00:04:41,081
+对输出口而言要将每个动作方法
+
+
+83
+00:04:41,381 --> 00:04:42,883
+和对应的UI元素
+
+
+84
+00:04:43,617 --> 00:04:46,520
+当佩戴者和Watch的元素交互时
+
+
+85
+00:04:46,987 --> 00:04:49,590
+WatchKit就会调用行动方法
+
+
+86
+00:04:50,791 --> 00:04:54,828
+因此我们先来考虑如何
+调整现有iPhone app
+
+
+87
+00:04:56,563 --> 00:05:00,734
+在试运行WWDC时我忘记了
+
+
+88
+00:05:00,801 --> 00:05:03,303
+联系家人和朋友这方面的内容
+
+
+89
+00:05:03,904 --> 00:05:06,240
+所以我想创建个app可以提醒我
+
+
+90
+00:05:06,373 --> 00:05:08,075
+我联系过谁谁还没有联系
+
+
+91
+00:05:08,475 --> 00:05:12,613
+这就是WWDC Call Me
+Lately 并可以通知我 
+
+
+92
+00:05:12,679 --> 00:05:13,580
+何时该联系他们
+
+
+93
+00:05:14,214 --> 00:05:17,184
+所以我和服务器沟通
+
+
+94
+00:05:17,251 --> 00:05:19,820
+跟踪我需要通过
+NSURLSession 联系的人
+
+
+95
+00:05:20,254 --> 00:05:22,656
+这是我做的一个不错的iOS 
+
+
+96
+00:05:23,023 --> 00:05:25,959
+不过它更像是Watch app
+
+
+97
+00:05:26,693 --> 00:05:30,564
+当我特别忙时 很快就可以
+知道接下来该联系谁
+
+
+98
+00:05:31,431 --> 00:05:33,433
+现在就开始制作Watch app
+
+
+99
+00:05:34,968 --> 00:05:37,337
+我想做的是希望给大家展示
+
+
+100
+00:05:37,404 --> 00:05:40,040
+怎样在现有的iOS app中
+添加Watch app目标
+
+
+101
+00:05:40,941 --> 00:05:44,611
+接下来我们会涉及在哪里开始设置界面
+
+
+102
+00:05:45,212 --> 00:05:46,980
+最后 我们要构建和运行
+
+
+103
+00:05:47,080 --> 00:05:48,749
+看看模拟器里的状况
+
+
+104
+00:05:50,117 --> 00:05:51,418
+说到模拟器
+
+
+105
+00:05:51,718 --> 00:05:55,055
+在watchOS 2 SDK中
+实际上有个崭新的模拟器
+
+
+106
+00:05:56,089 --> 00:05:59,193
+大家可能对iOS模拟器很熟悉
+
+
+107
+00:05:59,259 --> 00:06:00,460
+这个看起来是这个样子
+
+
+108
+00:06:01,461 --> 00:06:03,597
+现在就有了新的Watch模拟器
+
+
+109
+00:06:04,331 --> 00:06:07,434
+特别棒的一点是
+这是个全功能模拟器
+
+
+110
+00:06:07,868 --> 00:06:12,272
+可以轻松看到38毫米
+和42毫米的大小
+
+
+111
+00:06:13,240 --> 00:06:14,942
+可以模拟触控压力
+
+
+112
+00:06:16,210 --> 00:06:18,111
+可以看到不同的表盘
+
+
+113
+00:06:18,312 --> 00:06:20,781
+正如我之前所述
+现在可以在watchOS 2中
+
+
+114
+00:06:21,114 --> 00:06:24,151
+支持Complication 
+因此可以
+
+
+115
+00:06:24,751 --> 00:06:27,321
+看到Complication视图
+
+
+116
+00:06:27,387 --> 00:06:29,489
+在模拟器不同表盘的视图效果
+
+
+117
+00:06:31,024 --> 00:06:33,393
+最后 同时可以安装多个app
+
+
+118
+00:06:33,460 --> 00:06:36,230
+我们认为这会令制作新项目
+
+
+119
+00:06:36,463 --> 00:06:38,866
+重复想法等变得非常容易
+
+
+120
+00:06:39,266 --> 00:06:42,636
+随后可以快速在不同app之间往复
+
+
+121
+00:06:44,771 --> 00:06:47,941
+那么 模拟触控压力
+可以进入Simulator菜单 
+
+
+122
+00:06:48,008 --> 00:06:49,243
+来到 Hardware
+Simulate
+
+
+123
+00:06:49,309 --> 00:06:50,511
+Touch Pressure
+
+
+124
+00:06:50,577 --> 00:06:52,212
+接着可以选择
+Deep Press
+
+
+125
+00:06:52,613 --> 00:06:55,315
+这对于想在模拟器中改变
+
+
+126
+00:06:55,382 --> 00:06:57,284
+表盘这类问题非常有用
+
+
+127
+00:06:58,585 --> 00:07:02,256
+现在跳到Xcode 
+来看怎么添加Watch app
+
+
+128
+00:07:02,322 --> 00:07:03,857
+使用这个崭新的模拟器
+
+
+129
+00:07:05,225 --> 00:07:06,326
+来看演示
+
+
+130
+00:07:18,572 --> 00:07:19,907
+非常棒 启动Xcode
+
+
+131
+00:07:22,342 --> 00:07:23,644
+选择app
+
+
+132
+00:07:24,978 --> 00:07:26,847
+这样看起来更容易些
+
+
+133
+00:07:27,447 --> 00:07:28,115
+非常棒
+
+
+134
+00:07:29,349 --> 00:07:32,052
+现在如果想添加新的app
+
+
+135
+00:07:32,119 --> 00:07:33,854
+只需进入File New 
+Target 接着就有了
+
+
+136
+00:07:33,921 --> 00:07:35,022
+新的WatchOS窗口
+
+
+137
+00:07:39,159 --> 00:07:41,395
+那么 在库里就有了应用和框架
+
+
+138
+00:07:41,461 --> 00:07:43,764
+选择Framework In 
+Library就可以
+
+
+139
+00:07:44,298 --> 00:07:46,967
+添加Watch框架
+
+
+140
+00:07:47,034 --> 00:07:48,302
+或是Watch静态库
+
+
+141
+00:07:48,735 --> 00:07:51,538
+现在我来添加
+WatchKit app
+
+
+142
+00:07:51,905 --> 00:07:54,708
+双击 加上产品名称
+
+
+143
+00:07:56,743 --> 00:08:00,113
+主app总是默认启动状态
+
+
+144
+00:08:00,180 --> 00:08:02,316
+但我还要加入
+Notification场景
+
+
+145
+00:08:02,482 --> 00:08:04,685
+Glance场景 
+以及Complication
+
+
+146
+00:08:04,985 --> 00:08:06,019
+可以加在这里
+
+
+147
+00:08:06,620 --> 00:08:08,322
+已经在这款app上加好了
+
+
+148
+00:08:08,822 --> 00:08:09,756
+按下Cancel
+
+
+149
+00:08:11,091 --> 00:08:12,793
+看看都有些什么
+
+
+150
+00:08:13,994 --> 00:08:16,730
+这就是Watch app
+以及WatchKit扩展
+
+
+151
+00:08:17,331 --> 00:08:20,601
+我刚才说过Watch app 
+包含故事板
+
+
+152
+00:08:20,667 --> 00:08:23,737
+所有的静态资源以及资产目录
+
+
+153
+00:08:24,004 --> 00:08:26,340
+WatchKit扩展包括所有界面
+
+
+154
+00:08:26,406 --> 00:08:28,842
+控件和可能会添加的任何其他代码
+
+
+155
+00:08:31,845 --> 00:08:33,480
+进入故事板
+
+
+156
+00:08:37,217 --> 00:08:39,820
+大家都看到我有主界面
+
+
+157
+00:08:40,020 --> 00:08:45,058
+Glance界面接下来
+还有通知的静态和动态界面
+
+
+158
+00:08:46,293 --> 00:08:48,529
+进入实用工具检测器
+
+
+159
+00:08:49,796 --> 00:08:51,365
+可以看到对象库发现这里有许多
+
+
+160
+00:08:51,565 --> 00:08:55,035
+可以使用的不同对象
+
+
+161
+00:08:55,169 --> 00:08:57,971
+还有所有的WatchKit界面元素
+
+
+162
+00:08:59,706 --> 00:09:02,476
+拖拽过一个界面控制器
+
+
+163
+00:09:04,811 --> 00:09:08,682
+例如 如果我只想制作一个页面控制器
+
+
+164
+00:09:09,149 --> 00:09:11,351
+可以在键盘上选择Control
+
+
+165
+00:09:11,818 --> 00:09:14,021
+再拖拽到新的界面控制器中
+
+
+166
+00:09:14,288 --> 00:09:15,989
+并为下一个页面创建引线
+
+
+167
+00:09:17,591 --> 00:09:20,294
+现在就可以处理掉这些
+如果看下面的内容
+
+
+168
+00:09:22,429 --> 00:09:25,499
+有一个静态界面和动态界面
+
+
+169
+00:09:25,699 --> 00:09:28,235
+因此动态界面实际上是与
+Notification
+
+
+170
+00:09:28,302 --> 00:09:30,204
+Controller类相连接
+
+
+171
+00:09:30,671 --> 00:09:35,108
+所以当用户收到通知
+先抬起手腕时就会看到
+
+
+172
+00:09:35,576 --> 00:09:38,679
+Notification
++Controller类 就会调用
+
+
+173
+00:09:38,946 --> 00:09:41,448
+而且还可以提供非常丰富的UI
+
+
+174
+00:09:42,583 --> 00:09:46,653
+现在静态界面通常会被调用
+
+
+175
+00:09:46,987 --> 00:09:49,356
+例如当用户错过了通知
+
+
+176
+00:09:49,423 --> 00:09:51,825
+想在Notification
+Center再看一遍时
+
+
+177
+00:09:51,892 --> 00:09:54,027
+一般这种时候会看到静态界面
+
+
+178
+00:09:56,396 --> 00:09:59,433
+因此 我这有My Category
+
+
+179
+00:10:00,834 --> 00:10:05,038
+针对不同的分类
+我们发送不同的装载模式
+
+
+180
+00:10:05,105 --> 00:10:08,242
+我们实际上可以创建
+自定义UI和自定义通知
+
+
+181
+00:10:08,775 --> 00:10:10,277
+来针对不同的分类
+
+
+182
+00:10:10,544 --> 00:10:13,680
+而这并非一对一的界面
+
+
+183
+00:10:14,114 --> 00:10:16,383
+而是针对所发出的所有通知的界面
+
+
+184
+00:10:16,450 --> 00:10:19,520
+实际上可以调整并创建多个界面
+
+
+185
+00:10:20,754 --> 00:10:22,956
+我们再加一个新的通知控制器
+
+
+186
+00:10:27,561 --> 00:10:28,395
+放在这里
+
+
+187
+00:10:29,196 --> 00:10:32,466
+如果我想的话可以拖拽一个界面控制器
+
+
+188
+00:10:32,533 --> 00:10:35,169
+接下来
+和刚才一样点击Control
+
+
+189
+00:10:35,536 --> 00:10:37,271
+在创建我新的动态界面
+
+
+190
+00:10:38,138 --> 00:10:41,441
+还可以进入这里属性检测器
+
+
+191
+00:10:41,575 --> 00:10:43,677
+选择Has Dynamic
+Interface
+
+
+192
+00:10:44,044 --> 00:10:46,613
+现在我可以调整分类
+
+
+193
+00:10:46,680 --> 00:10:48,048
+并创建新的界面
+
+
+194
+00:10:48,482 --> 00:10:50,384
+然后可能我想...
+
+
+195
+00:10:50,450 --> 00:10:53,220
+创建新的Notification
+Controller类
+
+
+196
+00:10:53,353 --> 00:10:54,688
+接着在做好连接
+
+
+197
+00:10:55,889 --> 00:10:57,991
+我们还有模板
+
+
+198
+00:10:58,292 --> 00:11:02,296
+推送通知装载模式 .apns文件 
+
+
+199
+00:11:03,363 --> 00:11:04,398
+如果看这里
+
+
+200
+00:11:04,464 --> 00:11:06,834
+看似是我们会有的普通装载模式
+
+
+201
+00:11:07,167 --> 00:11:10,571
+其中有提醒 主体 题目 分类
+
+
+202
+00:11:11,205 --> 00:11:13,740
+最棒的部分是在模拟器中
+
+
+203
+00:11:13,907 --> 00:11:16,176
+可以使用这些不同的装载模式文件
+
+
+204
+00:11:16,610 --> 00:11:18,145
+模拟不同界面
+
+
+205
+00:11:18,445 --> 00:11:21,849
+如果想要测试所有这些不同的通知
+
+
+206
+00:11:22,182 --> 00:11:23,584
+我们不必一定在设备上进行
+
+
+207
+00:11:24,017 --> 00:11:25,853
+可以使用模拟器
+
+
+208
+00:11:25,919 --> 00:11:29,389
+这些通知装载模式
+快速重复不同的想法
+
+
+209
+00:11:31,191 --> 00:11:32,793
+我们再回到故事板
+
+
+210
+00:11:33,393 --> 00:11:35,262
+现在我就想在模拟器中
+
+
+211
+00:11:35,662 --> 00:11:37,764
+构建 运行并查看主app
+
+
+212
+00:11:38,999 --> 00:11:40,334
+那我来打开我的计划
+
+
+213
+00:11:40,801 --> 00:11:44,738
+我看到我有iOS计划接下来
+是WatchKit app计划
+
+
+214
+00:11:45,606 --> 00:11:48,809
+我有两个模拟器
+这是iPhone 6 Plus
+
+
+215
+00:11:48,876 --> 00:11:49,810
+38毫米的
+
+
+216
+00:11:50,043 --> 00:11:52,579
+还有iPhone 6 Plus
+42毫米的
+
+
+217
+00:11:52,980 --> 00:11:56,183
+我刚才说过这实际
+是个Watch的全功能模拟器
+
+
+218
+00:11:56,350 --> 00:11:58,919
+实际上需要和我的
+iPhone模拟器相配对
+
+
+219
+00:12:00,087 --> 00:12:04,458
+我们来选择 iPhone 6
+计划 构建并运行
+
+
+220
+00:12:06,460 --> 00:12:09,897
+现在打开了两个模拟器
+
+
+221
+00:12:11,131 --> 00:12:15,802
+那么我预计到主app会启动
+
+
+222
+00:12:15,869 --> 00:12:17,771
+我会把它连在调试器上
+
+
+223
+00:12:18,572 --> 00:12:22,309
+非常棒按下Allow
+因为我确实要允许这么做
+
+
+224
+00:12:22,910 --> 00:12:24,678
+现在是在连接调试器
+
+
+225
+00:12:24,878 --> 00:12:27,681
+这里出现了一个小东西
+
+
+226
+00:12:27,748 --> 00:12:31,118
+是说“扩展收到请求 启动
+表盘组件支持”
+
+
+227
+00:12:31,652 --> 00:12:34,488
+如果要执行
+Complication
+
+
+228
+00:12:34,555 --> 00:12:35,989
+稍后这就会消失
+
+
+229
+00:12:37,491 --> 00:12:40,627
+现在来停止这个调试会话
+
+
+230
+00:12:41,261 --> 00:12:42,529
+返回Watch模拟器
+
+
+231
+00:12:43,830 --> 00:12:47,401
+现在就是新的模拟器
+我有表盘
+
+
+232
+00:12:47,701 --> 00:12:50,804
+现在如果我只想调整表盘
+
+
+233
+00:12:50,871 --> 00:12:52,573
+可以打开Hardware
+Simulate
+
+
+234
+00:12:52,639 --> 00:12:53,941
+Touch Pressure
+
+
+235
+00:12:55,042 --> 00:12:58,679
+现在可以模拟强压接着返回
+
+
+236
+00:12:59,446 --> 00:13:02,749
+轻压 接着调整表盘
+
+
+237
+00:13:03,750 --> 00:13:06,019
+现在可以自定义模拟器上的时钟
+
+
+238
+00:13:06,954 --> 00:13:09,756
+那么如果在设备上进入这个屏幕
+
+
+239
+00:13:09,823 --> 00:13:11,158
+可以使用Digital
+Crown
+
+
+240
+00:13:11,225 --> 00:13:12,726
+接着可以轻松改变颜色
+
+
+241
+00:13:13,060 --> 00:13:15,295
+那么鼠标上
+没有Digital Crown
+
+
+242
+00:13:15,462 --> 00:13:17,865
+不过幸好我有滚轮
+
+
+243
+00:13:18,398 --> 00:13:20,968
+还可以使用触控板
+或Magic Mouse
+
+
+244
+00:13:21,869 --> 00:13:23,637
+我还可以调整颜色像这样
+
+
+245
+00:13:23,704 --> 00:13:26,073
+现在就可以模拟
+Digital Crown行为
+
+
+246
+00:13:26,974 --> 00:13:29,376
+同样 进入
+Complication视图时
+
+
+247
+00:13:29,676 --> 00:13:34,948
+手指划过
+就可以启动Complication
+
+
+248
+00:13:35,215 --> 00:13:38,752
+这样如果想在
+Complication上重复想法
+
+
+249
+00:13:38,819 --> 00:13:41,855
+可以在不同表盘构建新的
+Complications
+
+
+250
+00:13:41,922 --> 00:13:44,658
+我可以像这样
+启动这些Complication
+
+
+251
+00:13:45,959 --> 00:13:49,997
+现在 执行
+Command-Shift-H
+
+
+252
+00:13:52,299 --> 00:13:54,968
+返回主页 再次执行
+Command-Shift-H 
+
+
+253
+00:13:55,669 --> 00:13:58,372
+现在回到了Home屏幕
+于是有了Settings app
+
+
+254
+00:13:58,438 --> 00:14:00,140
+表盘和已有的app 
+
+
+255
+00:14:02,042 --> 00:14:04,278
+然后启动app也正常看到了
+
+
+256
+00:14:04,678 --> 00:14:05,579
+再回到主页
+
+
+257
+00:14:09,149 --> 00:14:12,186
+现在 正如我所讲这些模拟器实现配对
+
+
+258
+00:14:12,252 --> 00:14:14,421
+我有两款不同的模拟器可供选择
+
+
+259
+00:14:14,821 --> 00:14:17,257
+进入计划看到两款模拟器
+
+
+260
+00:14:17,691 --> 00:14:19,259
+可是如果是iPhone 5
+
+
+261
+00:14:19,693 --> 00:14:22,296
+42毫米模拟器会怎样呢
+
+
+262
+00:14:22,796 --> 00:14:25,532
+我来做个新模拟器再实现配对
+
+
+263
+00:14:26,834 --> 00:14:31,538
+打开Xcode 
+选择Xcode 然后是Device
+
+
+264
+00:14:32,406 --> 00:14:35,509
+现在在侧边栏我有所有不同的模拟器
+
+
+265
+00:14:35,776 --> 00:14:39,413
+如果来到底部左侧可以添加模拟器
+
+
+266
+00:14:40,447 --> 00:14:41,915
+可以称之为iPhone 5
+
+
+267
+00:14:43,717 --> 00:14:44,985
+改变设备类型
+
+
+268
+00:14:45,853 --> 00:14:47,254
+继续保持iOS版本
+
+
+269
+00:14:47,921 --> 00:14:50,757
+我将会把配对的手表改为42毫米
+
+
+270
+00:14:51,158 --> 00:14:52,726
+很容易就可以创建
+
+
+271
+00:14:53,260 --> 00:14:57,197
+现在如果返回计划这就是新的模拟器
+
+
+272
+00:14:59,199 --> 00:15:01,835
+那么回到故事板
+
+
+273
+00:15:05,572 --> 00:15:08,642
+正如我说讲有这些计划
+
+
+274
+00:15:08,709 --> 00:15:11,278
+可供选择这有个
+Notification计划
+
+
+275
+00:15:11,345 --> 00:15:13,780
+还有Glance计划
+以及Complication
+
+
+276
+00:15:13,847 --> 00:15:15,282
+那么我可以选择这些不同的计划
+
+
+277
+00:15:15,682 --> 00:15:17,851
+并快速调试app的不同部件
+
+
+278
+00:15:18,619 --> 00:15:20,721
+例如 现在我想测试
+
+
+279
+00:15:20,787 --> 00:15:22,389
+Notification计划
+
+
+280
+00:15:22,456 --> 00:15:24,391
+想看看在模拟器中是什么样子
+
+
+281
+00:15:24,858 --> 00:15:26,460
+我们已经讲过了APNS文件
+
+
+282
+00:15:26,527 --> 00:15:28,529
+我想看看是否正确显示
+
+
+283
+00:15:30,597 --> 00:15:33,500
+那就在动态界面添加标签
+
+
+284
+00:15:34,801 --> 00:15:35,736
+拖动过来
+
+
+285
+00:15:36,436 --> 00:15:38,272
+直接改成Dynamic
+
+
+286
+00:15:40,641 --> 00:15:42,910
+现在我选择了
+Notification计划
+
+
+287
+00:15:43,710 --> 00:15:46,246
+准备在模拟器上构建并运行
+
+
+288
+00:15:50,717 --> 00:15:53,554
+我希望在Watch
+模拟器上看到这种情况
+
+
+289
+00:15:54,655 --> 00:15:57,357
+会出现通知接着是Dynamic
+
+
+290
+00:15:57,791 --> 00:15:59,459
+现在需要介绍的就是这些内容
+
+
+291
+00:16:04,064 --> 00:16:07,000
+这里就是通知
+上面写着Test Message
+
+
+292
+00:16:07,634 --> 00:16:10,237
+我准备打开控制台
+
+
+293
+00:16:11,004 --> 00:16:14,908
+上面写着“用时过长
+无法显示自定义通知返回静态”
+
+
+294
+00:16:15,742 --> 00:16:19,112
+好的再来看通知控制器
+
+
+295
+00:16:19,179 --> 00:16:20,647
+看看为什么会出现这种情况
+
+
+296
+00:16:21,481 --> 00:16:23,684
+这就是通知控制器的代码
+
+
+297
+00:16:24,785 --> 00:16:27,554
+检查一下
+
+
+298
+00:16:27,955 --> 00:16:29,923
+Did Receive
+Remote
+
+
+299
+00:16:29,990 --> 00:16:33,193
+Notification有标注提示
+我应该解决标注问题
+
+
+300
+00:16:37,364 --> 00:16:38,799
+现在再来构建和运行
+
+
+301
+00:16:40,734 --> 00:16:43,971
+希望现在经过取消旧的通知
+
+
+302
+00:16:45,072 --> 00:16:47,674
+就能看到新的正如我所愿
+上面写着Dynamic
+
+
+303
+00:16:48,609 --> 00:16:52,646
+在设备上 如果是
+这样的情形并获得通知
+
+
+304
+00:16:52,713 --> 00:16:54,681
+我可以选择App图标或按钮
+
+
+305
+00:16:54,748 --> 00:16:56,149
+我就会回到这款app上
+
+
+306
+00:16:56,483 --> 00:16:59,019
+在模拟器中可以同样这么做
+
+
+307
+00:16:59,086 --> 00:17:01,321
+正如我所愿回到了这款app中
+
+
+308
+00:17:08,362 --> 00:17:13,599
+现在可以完善代码 在通知中添加
+
+
+309
+00:17:13,834 --> 00:17:16,270
+不错的UI故事我还想测试
+
+
+310
+00:17:16,336 --> 00:17:18,137
+自己的静态界面
+
+
+311
+00:17:18,204 --> 00:17:20,607
+想实现这些的唯一办法是
+需要在Did Receive
+
+
+312
+00:17:20,674 --> 00:17:23,844
+Remote
+Notification标注提示
+
+
+313
+00:17:23,911 --> 00:17:26,180
+以获得静态界面
+而我在重复编码时
+
+
+314
+00:17:26,613 --> 00:17:28,214
+并不希望这样做
+
+
+315
+00:17:28,882 --> 00:17:30,717
+那么我可以有两种办法这么做
+
+
+316
+00:17:31,018 --> 00:17:34,188
+第一 我可以将完成处理程序的自定义
+
+
+317
+00:17:34,421 --> 00:17:38,492
+改为调用Default
+或者实际上我可以进入计划
+
+
+318
+00:17:39,660 --> 00:17:44,831
+可以编辑计划
+现在我可以选择Watch界面
+
+
+319
+00:17:44,898 --> 00:17:48,268
+就可以把它改成静态通知
+
+
+320
+00:17:48,335 --> 00:17:50,971
+而不是动态的大家可以看到
+
+
+321
+00:17:51,038 --> 00:17:52,773
+这里是推送通知装载模式
+
+
+322
+00:17:53,173 --> 00:17:55,409
+如果我有多个装载模式这里会有显示
+
+
+323
+00:17:55,642 --> 00:17:59,079
+我可以快速调整我准备测试的装载模式
+
+
+324
+00:18:00,981 --> 00:18:04,685
+我的目的是想保持静态计划
+
+
+325
+00:18:04,818 --> 00:18:07,821
+一阵子 那我就准备复制这个计划
+
+
+326
+00:18:08,956 --> 00:18:11,458
+我们可以称之为Static
+ Notification
+
+
+327
+00:18:14,461 --> 00:18:15,629
+接着打开Run
+
+
+328
+00:18:16,330 --> 00:18:18,165
+再来把Watch界面改成静态
+
+
+329
+00:18:19,132 --> 00:18:20,367
+按下Close
+
+
+330
+00:18:21,134 --> 00:18:22,903
+现在静态通知也有了
+
+
+331
+00:18:22,970 --> 00:18:25,072
+以及正常的动态通知
+
+
+332
+00:18:27,307 --> 00:18:29,309
+非常好 这就是模板项目的
+
+
 333
-00:17:23,866 --> 00:17:25,996
-to get my static interface,
-and I don't want to be doing
+00:18:29,376 --> 00:18:33,247
+开始部分但需要理解部分上下文
 
 
 334
-00:17:25,996 --> 00:17:28,215
-that while I am iterating
-on my code.
+00:18:33,313 --> 00:18:35,516
+关于app生命周期
+在watchOS上如何运行
 
 
 335
-00:17:28,876 --> 00:17:30,726
-So there's a couple
-ways I can do this.
+00:18:43,357 --> 00:18:46,059
+来介绍一下watchOS app的
+生命周期
 
 
 336
-00:17:31,026 --> 00:17:34,186
-One, I can change this custom
-in my completion handler
+00:18:47,995 --> 00:18:52,232
+我们来看Watch app界面
+但是并没有看到它的生命周期
 
 
 337
-00:17:34,416 --> 00:17:38,486
-to call Default, or I can
-actually go into my schemes,
+00:18:52,666 --> 00:18:55,669
+很重要的一点 是需要
+了解什么时候扩展以及界面控制
 
 
 338
-00:17:39,336 --> 00:17:44,886
-I can edit the scheme, and now
-I can choose my Watch interface.
+00:18:56,069 --> 00:18:57,671
+器何时需要调用安装和拆解
 
 
 339
-00:17:44,886 --> 00:17:48,316
-So I can change it to be a
-static notification rather
+00:18:58,071 --> 00:19:01,141
+那么需要在正确的时间配置UI元素
 
 
 340
-00:17:48,316 --> 00:17:50,966
-than a dynamic, and
-as you can see,
+00:19:01,241 --> 00:19:04,444
+并进行清理操作或完成任务
 
 
 341
-00:17:50,966 --> 00:17:52,776
-here's my push notification
-payload.
+00:19:04,545 --> 00:19:06,713
+这时佩戴者会停止
+与Watch app进行交互
 
 
 342
-00:17:53,166 --> 00:17:55,396
-So if I had multiple payloads,
-they would appear here,
+00:19:07,581 --> 00:19:08,815
+启动Watch app时
 
 
 343
-00:17:55,656 --> 00:17:57,036
-and I can quickly change
+00:19:08,882 --> 00:19:11,952
+扩展委托可以启动get
+ Application Did
 
 
 344
-00:17:57,036 --> 00:18:00,796
-out which payload I
-am trying to test.
+00:19:12,019 --> 00:19:13,520
+Finish Launching
 
 
 345
-00:18:00,966 --> 00:18:05,166
-So for my purposes, I might
-want to keep a static scheme
+00:19:13,921 --> 00:19:17,591
+扩展委托和在iOS上的
+UI应用委托类似
 
 
 346
-00:18:05,166 --> 00:18:07,826
-around for a while, so I am just
-going to duplicate this scheme.
+00:19:18,125 --> 00:19:21,128
+这样 你也会收到
+Did Become Active
 
 
 347
-00:18:09,106 --> 00:18:10,866
-Let's call it Static
-Notification.
+00:19:21,195 --> 00:19:23,597
+回调 以便升级模型数据
 
 
 348
-00:18:10,866 --> 00:18:15,526
-Then let's go to Run.
+00:19:24,865 --> 00:19:28,035
+接下来Watch app捆绑包的
+故事板会装载到
 
 
 349
-00:18:16,316 --> 00:18:18,176
-Then I change my Watch
-interface to be static.
+00:19:28,435 --> 00:19:30,571
+Apple Watch 初始
+界面控制器即可生成
 
 
 350
-00:18:19,126 --> 00:18:20,376
-Let's press Close.
+00:19:31,371 --> 00:19:32,906
+UI一旦生成
 
 
 351
-00:18:21,146 --> 00:18:23,336
-So now I have a static
-notification as well
+00:19:33,173 --> 00:19:36,276
+界面控制器就会收到Awake
+ With Context
 
 
 352
-00:18:23,336 --> 00:18:25,086
-as my normal dynamic
-notification.
+00:19:36,777 --> 00:19:39,079
+调用 使其有机会启动状态变量
 
 
 353
-00:18:26,976 --> 00:18:29,676
-So this is great, and
-we have the beginning
+00:19:39,446 --> 00:19:42,082
+并运用初始值配置UI元素
 
 
 354
-00:18:29,676 --> 00:18:33,266
-of a template project here, but
-let's understand some context
+00:19:43,150 --> 00:19:45,586
+Watch app的UI正在屏幕上
 
 
 355
-00:18:33,266 --> 00:18:35,436
-of how the app life
-cycle works on watchOS.
+00:19:45,652 --> 00:19:49,122
+显示的过程中
+将调用Will Activate
 
 
 356
-00:18:35,436 --> 00:18:46,846
-So let's go through the
-life cycle of a watchOS app.
+00:19:49,389 --> 00:19:51,859
+允许执行紧急任务
 
 
 357
-00:18:47,716 --> 00:18:50,756
-So we looked at the interface
-for the Watch app but haven't
+00:19:51,925 --> 00:19:53,894
+或最终的UI元素配置
 
 
 358
-00:18:50,756 --> 00:18:52,216
-yet observed its life cycle.
+00:19:54,695 --> 00:19:57,064
+现在 如果佩戴者与UI元素交互
 
 
 359
-00:18:52,676 --> 00:18:54,486
-It's important to know
-when the extension
+00:19:57,231 --> 00:20:00,634
+WatchKit调用在界面
+控制器上定义的动作方法
 
 
 360
-00:18:54,486 --> 00:18:57,686
-and interface controller get
-called for setup and tear-down
+00:20:01,401 --> 00:20:04,538
+可以通过这些动作方法执行代码
 
 
 361
-00:18:58,066 --> 00:19:01,136
-so you are configuring UI
-elements at the right time,
+00:20:04,972 --> 00:20:06,340
+并更新app的UI
 
 
 362
-00:19:01,236 --> 00:19:04,456
-as well as performing cleanup
-operations or finishing tasks
+00:20:06,940 --> 00:20:09,209
+要记住交互时间很短
 
 
 363
-00:19:04,556 --> 00:19:06,616
-when the wearer stops
-interacting with your Watch app.
+00:20:09,810 --> 00:20:13,247
+在iOS上　我们以往认为
+在用户和app交互方面
 
 
 364
-00:19:07,586 --> 00:19:08,876
-When your Watch app is launched,
+00:20:13,313 --> 00:20:16,517
+都是按照分钟计算
+但是在watchOS上
 
 
 365
-00:19:08,876 --> 00:19:12,796
-the extension delegate
-will get Application Did
+00:20:16,650 --> 00:20:18,552
+我们是在以秒计算考虑问题
 
 
 366
-00:19:12,796 --> 00:19:13,506
-Finish Launching.
+00:20:19,386 --> 00:20:22,623
+实际上要在佩戴者停止与app交互后
 
 
 367
-00:19:13,926 --> 00:19:15,526
-The extension delegate
-is analogous
+00:20:22,689 --> 00:20:24,992
+点击
+Did Deactivate调用
 
 
 368
-00:19:15,526 --> 00:19:17,336
-to UI application
-delegate on iOS.
+00:20:26,527 --> 00:20:30,063
+调用这种方法后在未来的某个点
 
 
 369
-00:19:18,126 --> 00:19:21,146
-As such, you will also receive
-an Application Did Become Active
+00:20:30,130 --> 00:20:34,434
+界面控制器将会被释放
 
 
 370
-00:19:21,146 --> 00:19:23,586
-callback to allow you to
-update your model data.
+00:20:36,503 --> 00:20:38,172
+现在扩展委托
 
 
 371
-00:19:24,866 --> 00:19:27,466
-Next, the storyboard in your
-Watch app bundle is loaded
+00:20:38,338 --> 00:20:40,741
+在佩戴者完全停止和手表交互后
 
 
 372
-00:19:27,466 --> 00:19:30,586
-on Apple Watch, and the initial
-interface controller is created.
+00:20:40,841 --> 00:20:43,210
+例如可能会返回Home屏幕
 
 
 373
-00:19:31,356 --> 00:19:32,916
-Once the UI is initialized,
+00:20:43,644 --> 00:20:45,846
+你会收到
+Application Will
 
 
 374
-00:19:33,186 --> 00:19:35,366
-your interface controller
-will receive an Awake
+00:20:45,913 --> 00:20:47,314
+Resign Active回调
 
 
 375
-00:19:35,366 --> 00:19:38,566
-With Context call, giving it a
-chance to initialize variables
+00:20:47,514 --> 00:20:52,319
+借此机会可以保存任何
+app相关状态信息
 
 
 376
-00:19:38,566 --> 00:19:40,956
-for state and configure
-UI elements
+00:20:52,452 --> 00:20:53,854
+并关闭任何运行的任务
 
 
 377
-00:19:40,996 --> 00:19:41,876
-with their initial values.
+00:20:56,723 --> 00:20:59,293
+我们了解WatchKit
+扩展的 生命周期
 
 
 378
-00:19:41,876 --> 00:19:45,546
-When the UI of your Watch
-app is in the process
+00:20:59,560 --> 00:21:01,061
+但是要谈谈另一个重要问题
 
 
 379
-00:19:45,546 --> 00:19:49,196
-of getting displayed on screen,
-Will Activate will be called,
+00:21:01,128 --> 00:21:02,863
+是关于Watch app的布局
 
 
 380
-00:19:49,376 --> 00:19:51,886
-allowing you to perform
-any last-minute tasks
+00:21:05,299 --> 00:21:08,135
+watchOS中的WatchKit
 
 
 381
-00:19:51,886 --> 00:19:53,886
-or final UI element
-configurations.
+00:21:08,702 --> 00:21:11,271
+模型不同于UIKit
 
 
 382
-00:19:54,576 --> 00:19:57,056
-And now, as the wearer
-interacts with UI elements,
+00:21:11,338 --> 00:21:13,874
+及AppKit 因为它是流式布局
 
 
 383
-00:19:57,236 --> 00:19:59,446
-WatchKit calls the
-action methods you defined
+00:21:14,474 --> 00:21:18,378
+因此所有的元素都是连续出现
 
 
 384
-00:19:59,446 --> 00:20:00,646
-on your interface controller.
+00:21:19,346 --> 00:21:20,547
+我们的UI主要是在...
 
 
 385
-00:20:01,336 --> 00:20:04,536
-Those action methods are
-your chance to execute code
+00:21:20,614 --> 00:21:22,549
+Interface 
+Builder中创建
 
 
 386
-00:20:04,976 --> 00:20:07,196
-and update your app's UI.
+00:21:23,584 --> 00:21:25,619
+因此具备界面控制器时
 
 
 387
-00:20:07,196 --> 00:20:09,196
-Keep in mind that
-engagement times are short.
+00:21:25,686 --> 00:21:28,689
+可以使用对象库并拖拽图像
 
 
 388
-00:20:09,816 --> 00:20:13,336
-On iOS, we traditionally think
-in terms of our user interacting
+00:21:29,022 --> 00:21:32,993
+或拖拽按钮当我们需要...
 
 
 389
-00:20:13,336 --> 00:20:16,476
-with our app in a sense of
-minutes, but on watchOS,
+00:21:33,427 --> 00:21:36,997
+更为相关联的布局时
 
 
 390
-00:20:16,656 --> 00:20:18,456
-we are going to be thinking
-in terms of seconds.
+00:21:37,497 --> 00:21:39,433
+我们会使用WK界面组
 
 
 391
-00:20:19,306 --> 00:20:22,686
-Actually, we are going to
-hit a Did Deactivate call
+00:21:39,533 --> 00:21:42,669
+用于管理不同项的布局
 
 
 392
-00:20:22,686 --> 00:20:25,826
-after the wearer stops
-interacting with our app.
+00:21:43,370 --> 00:21:46,073
+例如 我们可以在组中添加图像和标签
 
 
 393
-00:20:25,826 --> 00:20:30,136
-And after that method is
-called, then at some point
+00:21:47,908 --> 00:21:50,377
+因此编程模型非常值得注意
 
 
 394
-00:20:30,136 --> 00:20:33,396
-in the future, the
-interface controller will then
+00:21:50,878 --> 00:21:53,714
+不要使用WatchKit编写
+对象生成代码
 
 
 395
-00:20:33,526 --> 00:20:34,426
-get deallocated.
+00:21:54,781 --> 00:21:57,050
+在Interface 
+Builder有微调控制
 
 
 396
-00:20:34,996 --> 00:20:38,156
-And now our extension delegate,
+00:21:57,851 --> 00:22:02,789
+处理位置和大小布局分层和动画
 
 
 397
-00:20:38,156 --> 00:20:39,676
-after the wearer
-stops interacting
+00:22:05,459 --> 00:22:07,594
+我非常鼓励大家参加周四的...
 
 
 398
-00:20:39,676 --> 00:20:42,356
-with the watch completely --
-for example, they might go back
+00:22:07,661 --> 00:22:11,265
+《WatchKit布局和动画技术》
+讲座
 
 
 399
-00:20:42,356 --> 00:20:45,776
-to the Home screen -- you will
-receive an Application Will
+00:22:11,431 --> 00:22:15,802
+是有关如何为用户生成丰富UI的内容
 
 
 400
-00:20:45,776 --> 00:20:49,256
-Resign Active callback, and
-so this is your opportunity
+00:22:16,803 --> 00:22:19,406
+我在考虑
+怎样最好地制作Watch app
 
 
 401
-00:20:49,606 --> 00:20:52,666
-to save any app-related
-state information and close
+00:22:19,473 --> 00:22:23,143
+回想一下 我的iOS app
+是个简单的UI表格视图
 
 
 402
-00:20:52,666 --> 00:20:54,516
-out any ongoing tasks.
+00:22:24,077 --> 00:22:26,947
+我的第一个想法是罗列出
 
 
 403
-00:20:56,436 --> 00:20:59,306
-So we know the life cycle
-of the WatchKit extension,
+00:22:27,014 --> 00:22:29,683
+我需要呼叫的所有人
+与iOS app非常类似
 
 
 404
-00:20:59,556 --> 00:21:01,096
-but another important
-thing to talk
+00:22:30,317 --> 00:22:31,919
+当我开始这么考虑时
 
 
 405
-00:21:01,096 --> 00:21:03,666
-about is the layout
-of the Watch app.
+00:22:32,653 --> 00:22:35,689
+我意识到Watch app
+并不需要所有这些信息
 
 
 406
-00:21:04,936 --> 00:21:11,326
-So the model in watchOS for
-WatchKit is different from UIKit
+00:22:36,390 --> 00:22:38,592
+其实 我只需要了解下一个该联系谁
 
 
 407
-00:21:11,326 --> 00:21:13,886
-and AppKit because it's
-a flow-based layout.
+00:22:38,659 --> 00:22:41,128
+而不是要了解所有需要联系的人
 
 
 408
-00:21:14,476 --> 00:21:18,386
-So all of our elements
-go one after another,
+00:22:41,562 --> 00:22:43,697
+所以UI可以是这个样子
 
 
 409
-00:21:19,416 --> 00:21:22,446
-and our UI is primarily
-created in Interface Builder.
+00:22:44,498 --> 00:22:46,733
+非常棒 现在我知道需要怎么做了
 
 
 410
-00:21:23,596 --> 00:21:25,636
-So when we have an
-interface controller,
+00:22:47,401 --> 00:22:49,503
+我想开始生成UI
 
 
 411
-00:21:25,636 --> 00:21:28,696
-we can use our object
-library and just drag an image
+00:22:49,803 --> 00:22:53,106
+接下来讲讲怎样为主app 
 
 
 412
-00:21:29,026 --> 00:21:32,686
-or drag a button, and then
-in the instances when we want
+00:22:53,173 --> 00:22:55,909
+Glance和
+Notification生成UI
 
 
 413
-00:21:32,686 --> 00:21:36,996
-to have a slightly
-more involved layout,
+00:22:56,410 --> 00:22:58,779
+我们跳到Xcode来看我们有什么
 
 
 414
-00:21:37,506 --> 00:21:39,446
-we could use a WK
-interface group,
+00:23:00,414 --> 00:23:02,115
+我们了解生命周期是什么
 
 
 415
-00:21:39,536 --> 00:21:42,676
-which will just manage the
-layout for different items.
+00:23:02,182 --> 00:23:04,351
+一般而言布局代表什么
 
 
 416
-00:21:43,386 --> 00:21:44,986
-So for example, we
-could add an image
+00:23:04,551 --> 00:23:05,919
+那我们打开故事板
 
 
 417
-00:21:44,986 --> 00:21:46,086
-and a label into the group.
+00:23:07,387 --> 00:23:10,591
+我想在界面控制器添加图像
 
 
 418
-00:21:46,596 --> 00:21:50,496
-And so the programming model
-is really important to note.
+00:23:10,958 --> 00:23:12,759
+先在对象库里选择图像
 
 
 419
-00:21:50,876 --> 00:21:53,726
-You don't write object
-creation code with WatchKit.
+00:23:13,560 --> 00:23:16,697
+然后快速拖拽一个图像过来
 
 
 420
-00:21:54,766 --> 00:21:57,036
-You have fine-tuned control
-in the Interface Builder
+00:23:17,698 --> 00:23:19,466
+我还要添加一个标签
 
 
 421
-00:21:57,866 --> 00:22:02,806
-of positioning and sizing, the
-layout hierarchy, and animation.
+00:23:19,967 --> 00:23:23,504
+那么去找到标签拖拽过来
 
 
 422
-00:22:03,396 --> 00:22:07,636
-And I highly encourage
-you to go to the Layout
+00:23:24,304 --> 00:23:26,240
+如果发现出现了一条蓝线
 
 
 423
-00:22:07,636 --> 00:22:11,266
-and Animation Techniques talk
-for WatchKit on Thursday.
+00:23:26,306 --> 00:23:30,110
+那么在流式布局中可以把标签
 
 
 424
-00:22:11,266 --> 00:22:12,896
-It's going to be a
-great session on how
+00:23:30,210 --> 00:23:32,045
+放在图像的前或后
 
 
 425
-00:22:12,896 --> 00:22:15,786
-to create really rich
-UIs for your users.
+00:23:32,513 --> 00:23:35,048
+那就把它放在后面
 
 
 426
-00:22:16,796 --> 00:22:19,466
-And so I've been thinking about
-how best to make my Watch app,
+00:23:35,249 --> 00:23:40,153
+举例来说 如果我想把
+它们水平方向前后放置 
 
 
 427
-00:22:19,466 --> 00:22:23,156
-and if you recall, my iOS app
-is just a simple UI table view.
+00:23:41,121 --> 00:23:43,857
+好吧 在Interface 
+Builder中 其实无法实现
 
 
 428
-00:22:24,086 --> 00:22:26,956
-So my first idea was to have
-a list of all the people
+00:23:43,924 --> 00:23:45,959
+没有蓝线出现 帮不了我
 
 
 429
-00:22:26,956 --> 00:22:29,676
-that I need to call, very
-similar to my iOS app,
+00:23:46,827 --> 00:23:49,863
+我用WK界面组来实现
 
 
 430
-00:22:30,326 --> 00:22:31,926
-and when I started
-thinking about it,
+00:23:50,998 --> 00:23:55,402
+把这个拖拽过来重新调整图像大小
 
 
 431
-00:22:31,926 --> 00:22:35,916
-I realized I don't need all that
-information in my Watch app.
+00:23:56,803 --> 00:23:58,705
+把标签加入组中
 
 
 432
-00:22:36,376 --> 00:22:38,936
-Really, I just want to know
-who next to call rather
+00:23:59,439 --> 00:24:02,109
+把图像就加在标签旁边
 
 
 433
-00:22:38,936 --> 00:22:41,126
-than knowing a list of
-all those I should call.
+00:24:02,242 --> 00:24:04,278
+这样就可以在水平方向排布
 
 
 434
-00:22:41,546 --> 00:22:43,686
-So my UI might look
-something like this.
+00:24:05,312 --> 00:24:08,815
+现在把标签和图像取出
 
 
 435
-00:22:44,486 --> 00:22:46,726
-So great. Now I have an
-idea of what I want to make,
+00:24:09,483 --> 00:24:10,551
+把组删除
 
 
 436
-00:22:47,406 --> 00:22:49,256
-and I want to start
-creating my UI.
+00:24:11,985 --> 00:24:13,687
+接着在属性检测器中
 
 
 437
-00:22:49,796 --> 00:22:53,156
-So I am going to walk
-through how to create your UI
+00:24:14,221 --> 00:24:15,455
+已经在资产目录里了
 
 
 438
-00:22:53,156 --> 00:22:55,906
-for your main app, your
-Glance, and your Notification.
+00:24:15,522 --> 00:24:17,024
+我有个图像是朋友伊桑的
 
 
 439
-00:22:56,406 --> 00:23:00,226
-So let's jump into Xcode
-and see what we have.
+00:24:17,791 --> 00:24:20,961
+就以这张图像作为参考
 
 
 440
-00:23:00,426 --> 00:23:02,286
-So we understand what
-the life cycle is
+00:24:21,328 --> 00:24:22,696
+伊桑好像有点走形
 
 
 441
-00:23:02,286 --> 00:23:04,366
-and generally speaking
-what the layout is,
+00:24:22,863 --> 00:24:25,165
+让他看起来更开心点
 
 
 442
-00:23:04,546 --> 00:23:05,926
-so let's go into our storyboard.
+00:24:26,600 --> 00:24:27,434
+就这样
 
 
 443
-00:23:07,376 --> 00:23:10,596
-If I wanted to add an image
-to my interface controller,
+00:24:27,501 --> 00:24:28,368
+他开心多了
 
 
 444
-00:23:10,946 --> 00:23:12,766
-I would select it here
-in the object library,
+00:24:28,802 --> 00:24:32,139
+还要把标签文字改成伊桑
 
 
 445
-00:23:12,766 --> 00:23:16,706
-and then I can just
-quickly drag an image over,
+00:24:33,106 --> 00:24:35,976
+现在布局位置确定是左对齐
 
 
 446
-00:23:17,686 --> 00:23:19,466
-and now I just want to
-add a label as well.
+00:24:36,443 --> 00:24:39,112
+我其实是想让它在屏幕居中
 
 
 447
-00:23:19,466 --> 00:23:23,516
-So let's just find the
-label and drag it over.
+00:24:39,713 --> 00:24:41,815
+如果我选定了图像
 
 
 448
-00:23:23,586 --> 00:23:26,226
-And if you notice,
-a blue line appears,
+00:24:42,115 --> 00:24:43,684
+那么打开属性检测器中
 
 
 449
-00:23:26,296 --> 00:23:30,116
-so in my flow-based layout,
-I can position my label to be
+00:24:44,251 --> 00:24:46,987
+可以将位置调到中心
 
 
 450
-00:23:30,196 --> 00:23:32,056
-after or before my image.
+00:24:47,621 --> 00:24:51,024
+我还可以垂直方向调整位置
 
 
 451
-00:23:32,496 --> 00:23:35,046
-So let's place it after.
+00:24:51,091 --> 00:24:53,327
+可以调大小改变视图
 
 
 452
-00:23:35,236 --> 00:23:38,656
-Now, for instance, if I want
-to place them horizontally next
+00:24:53,393 --> 00:24:56,363
+针对这个图像标签也一样
 
 
 453
-00:23:38,656 --> 00:23:40,166
-to one another, I could --
+00:24:56,430 --> 00:24:58,365
+我只想它放在中间位置
 
 
 454
-00:23:41,116 --> 00:23:43,906
-okay, so I can't actually do
-this in Interface Builder.
+00:24:59,867 --> 00:25:01,802
+那就来看Glance
 
 
 455
-00:23:43,906 --> 00:23:45,956
-There's no blue line that
-appears to help me out.
+00:25:02,002 --> 00:25:05,939
+如果仔细观察会发现
+Glance控制器不同于主app
 
 
 456
-00:23:46,836 --> 00:23:51,286
-So let me use a WK
-interface group to do this.
+00:25:06,206 --> 00:25:07,241
+有两个组
 
 
 457
-00:23:51,486 --> 00:23:55,416
-So let's drag this over,
-resize our image a bit,
+00:25:07,674 --> 00:25:09,710
+是因为Glance实际上是模板制成
 
 
 458
-00:23:56,796 --> 00:23:58,756
-and now let's add the
-label into the group,
+00:25:10,277 --> 00:25:12,412
+我有上模板和下模板
 
 
 459
-00:23:58,756 --> 00:24:02,106
-and then let's also add the
-image right next to the label.
+00:25:12,746 --> 00:25:16,550
+如果选择上模板的属性检测器
 
 
 460
-00:24:02,226 --> 00:24:04,286
-So this is how it can
-position things horizontally.
+00:25:16,750 --> 00:25:18,886
+有一系列选项可供选择
 
 
 461
-00:24:05,326 --> 00:24:08,826
-So for now, let's take our
-label out and our image out,
+00:25:19,820 --> 00:25:23,257
+在这个具体案例中我们使用大号的文字
 
 
 462
-00:24:08,826 --> 00:24:10,776
-and let's just delete the group,
+00:25:24,024 --> 00:25:25,893
+改成Call
 
 
 463
-00:24:11,976 --> 00:24:13,686
-and then in my attributes
-inspector,
+00:25:28,428 --> 00:25:31,632
+接着在下模板中添加图像
 
 
 464
-00:24:14,206 --> 00:24:15,406
-already in my asset catalog,
+00:25:33,400 --> 00:25:35,102
+和刚才做的一样
 
 
 465
-00:24:15,406 --> 00:24:17,036
-I have an image for
-my friend, Ethan.
+00:25:35,169 --> 00:25:37,838
+只需要把图像变为伊桑即可
 
 
 466
-00:24:17,806 --> 00:24:20,976
-So let's just reference
-that image.
+00:25:38,739 --> 00:25:41,742
+当我看着Glance时感觉app
 
 
 467
-00:24:21,336 --> 00:24:22,706
-Ethan looks a little squished.
+00:25:41,808 --> 00:25:44,111
+是要对我发火
+因为调用伊桑这里我做的极差
 
 
 468
-00:24:22,876 --> 00:24:25,156
-Let's make him look
-a little bit happier.
+00:25:44,878 --> 00:25:46,380
+那么app会帮我做
 
 
 469
-00:24:26,506 --> 00:24:27,456
-There we go.
+00:25:49,850 --> 00:25:54,354
+在通知界面也是同样的做法
 
 
 470
-00:24:27,456 --> 00:24:28,366
-He seems pretty happy.
+00:25:55,189 --> 00:25:58,992
+大部分情况下我可以找到新界面
 
 
 471
-00:24:28,796 --> 00:24:33,246
-So let's also change the
-label text to be Ethan.
+00:25:59,459 --> 00:26:04,031
+现在通过选择计划来构建并运行界面
 
 
 472
-00:24:33,246 --> 00:24:35,986
-Now my layout is positioned
--- it's left-aligned,
+00:26:05,465 --> 00:26:07,668
+我们来构建和运行Watch模拟器
 
 
 473
-00:24:36,446 --> 00:24:39,116
-so I actually want to position
-it centered in the screen.
+00:26:15,642 --> 00:26:18,812
+希望我的新界面会出现
 
 
 474
-00:24:39,706 --> 00:24:41,816
-So if I just select on my image,
+00:26:20,848 --> 00:26:21,648
+好的 非常棒
 
 
 475
-00:24:42,106 --> 00:24:43,676
-then go to my attributes
-inspector,
+00:26:21,715 --> 00:26:23,650
+好 在这里 我再连上调试器
 
 
 476
-00:24:44,266 --> 00:24:46,996
-and I can change the
-position to be in the center.
+00:26:24,451 --> 00:26:27,888
+停止这个会话看看iOS模拟器
 
 
 477
-00:24:47,616 --> 00:24:50,996
-Then I can also change
-the position vertically,
+00:26:28,255 --> 00:26:30,524
+因为 重要的是
+需要注意这些是配对设备
 
 
 478
-00:24:50,996 --> 00:24:53,346
-I can change the size,
-I can change the view
+00:26:32,059 --> 00:26:34,428
+那么向上滚动向右摇
 
 
 479
-00:24:53,346 --> 00:24:56,376
-for this particular image, and
-I can do the same for my label.
+00:26:35,028 --> 00:26:37,531
+看到iOS app已经安装到位
 
 
 480
-00:24:56,436 --> 00:25:00,096
-I just want to position
-it in the center.
+00:26:37,731 --> 00:26:40,501
+和设备上一样
+app只有通过这一种办法
 
 
 481
-00:25:00,096 --> 00:25:01,786
-Now let's move on to the Glance.
+00:26:40,701 --> 00:26:43,637
+可以装在用户的Watch上
 
 
 482
-00:25:01,996 --> 00:25:05,226
-If you notice, this Glance
-controller looks different
+00:26:43,704 --> 00:26:45,105
+也就是装在iOS设备上
 
 
 483
-00:25:05,226 --> 00:25:05,766
-than our main app.
+00:26:45,706 --> 00:26:47,107
+那么就是现在这样
 
 
 484
-00:25:06,216 --> 00:25:07,226
-There's two groups here.
+00:26:47,641 --> 00:26:51,044
+我们来选择Apple
+Watch app在模拟器里
 
 
 485
-00:25:07,676 --> 00:25:09,696
-That's because Glances
-are actually templated.
+00:26:51,345 --> 00:26:53,080
+可以调整
+Complication
 
 
 486
-00:25:10,266 --> 00:25:12,406
-So I have an upper template
-and a lower template.
+00:26:53,714 --> 00:26:56,016
+那么Call Me Lately
+已经启动了
 
 
 487
-00:25:12,736 --> 00:25:16,566
-So if I select in my attributes
-inspector my upper template,
+00:26:57,384 --> 00:27:02,022
+我还可以卸载app再重新安装
 
 
 488
-00:25:16,746 --> 00:25:18,996
-I have a list of options
-that I can choose from.
+00:27:02,289 --> 00:27:05,592
+还可以关闭Glance再重新启动
 
 
 489
-00:25:19,826 --> 00:25:23,246
-So for this particular case,
-let's just have a large text,
+00:27:06,693 --> 00:27:08,195
+如果我想查看Glance
 
 
 490
-00:25:24,036 --> 00:25:25,876
-and let's change it to be Call.
+00:27:08,262 --> 00:27:11,832
+可以打开模拟器返回表盘
 
 
 491
-00:25:28,096 --> 00:25:31,716
-Then let's add an image
-to my lower template.
+00:27:12,266 --> 00:27:16,637
+就像在设备上一样
+划动一下 接着Glance
 
 
 492
-00:25:32,396 --> 00:25:35,146
-I am going to do the
-same thing as before,
+00:27:17,037 --> 00:27:18,105
+那我们再重新启动
 
 
 493
-00:25:35,146 --> 00:25:37,826
-just change the image
-to reference Ethan.
+00:27:18,939 --> 00:27:21,308
+哎呀 不好意思
 
 
 494
-00:25:38,736 --> 00:25:41,776
-So when I look at my Glance,
-I really kind of want the app
+00:27:22,309 --> 00:27:24,111
+我以为会出现新的UI
 
 
 495
-00:25:41,816 --> 00:25:44,116
-to scream at me because I am
-really bad about calling Ethan,
+00:27:24,444 --> 00:27:26,947
+结果没成功不过我们还是继续
 
 
 496
-00:25:44,876 --> 00:25:49,646
-so the app will help me do that.
+00:27:28,782 --> 00:27:32,186
+我找到了新界面不过我需要了解
 
 
 497
-00:25:49,836 --> 00:25:52,156
-And so also I can
-do the same thing
+00:27:32,252 --> 00:27:34,254
+下一个该联系谁还需要了解
 
 
 498
-00:25:52,156 --> 00:25:54,356
-for my notification
-interfaces as well.
+00:27:34,421 --> 00:27:36,056
+怎样更新app实现这一点
 
 
 499
-00:25:54,356 --> 00:25:58,986
-So for the most part, I
-figured out my new interface,
+00:27:37,457 --> 00:27:38,625
+回到幻灯片
 
 
 500
-00:25:59,446 --> 00:26:02,916
-and now let's just build
-and run the interface
+00:27:42,496 --> 00:27:45,065
+iOS app主要是
+通过NSURLSession
 
 
 501
-00:26:02,916 --> 00:26:04,016
-by selecting the schemes.
+00:27:45,132 --> 00:27:48,268
+与服务器沟通获取亲爱的朋友们的名单
 
 
 502
-00:26:04,546 --> 00:26:07,666
-Let's build and run
-to the Watch sim.
+00:27:48,669 --> 00:27:51,138
+watchOS 2很出色的
+一点是我可以使用
 
 
 503
-00:26:08,596 --> 00:26:20,806
-So I just expect my new
-interface to appear.
+00:27:51,205 --> 00:27:54,208
+许多相同的NSURLSession
+与服务器对话
 
 
 504
-00:26:20,836 --> 00:26:21,666
-Okay. Great.
+00:27:55,275 --> 00:27:57,144
+不过 有时候当我需要确认
 
 
 505
-00:26:21,666 --> 00:26:23,656
-So there it is, and I have
-attached in the debugger.
+00:27:57,211 --> 00:28:00,347
+iOS app和watchOS
+app 彼此在接触
 
 
 506
-00:26:24,466 --> 00:26:27,106
-So let's just stop this session,
-and now let's take a look
+00:28:00,814 --> 00:28:03,317
+可以使用Watch-
+Connectivity 来完成
 
 
 507
-00:26:27,106 --> 00:26:28,836
-at the iOS sim because
-it's important
+00:28:03,584 --> 00:28:05,586
+我们花些时间
 
 
 508
-00:26:28,836 --> 00:26:30,516
-to note these are
-paired devices.
+00:28:05,652 --> 00:28:07,788
+介绍一下新
+WatchConnectivity
 
 
 509
-00:26:31,966 --> 00:26:34,426
-So I scroll up, and
-I pan to the right.
+00:28:07,855 --> 00:28:10,390
+框架然后来看怎样在
+Call Me Lately中使用
 
 
 510
-00:26:35,036 --> 00:26:37,536
-I see I have my iOS
-app installed,
+00:28:11,792 --> 00:28:13,694
+那么
+WatchConnectivity
 
 
 511
-00:26:37,796 --> 00:26:41,046
-so just like on a device, the
-only way your app will get
+00:28:13,760 --> 00:28:15,662
+是iOS和watchOS
 
 
 512
-00:26:41,046 --> 00:26:43,726
-to a user's Watch is
-by also being installed
+00:28:16,563 --> 00:28:19,333
+之间交流的四个核心用途框架
 
 
 513
-00:26:43,726 --> 00:26:45,106
-on the iOS device.
+00:28:20,000 --> 00:28:22,536
+主要注意的是
+WatchConnectivity 
 
 
 514
-00:26:45,646 --> 00:26:47,116
-And so this is what's
-happened here.
+00:28:22,603 --> 00:28:27,541
+在iOS和watchOS之中都有
+在两个平台上均可使用API
 
 
 515
-00:26:47,646 --> 00:26:51,116
-Now let's select our Apple
-Watch app, and in the simulator,
+00:28:27,941 --> 00:28:30,644
+不仅是Watch app
+在与iOS app对话
 
 
 516
-00:26:51,346 --> 00:26:53,026
-I can change out
-my Complications.
+00:28:30,944 --> 00:28:32,746
+有时还需要iOS app
 
 
 517
-00:26:54,346 --> 00:26:56,006
-So Call Me Lately
-is already enabled.
+00:28:32,813 --> 00:28:33,981
+来更新Watch app
 
 
 518
-00:26:56,006 --> 00:27:02,016
-I can also uninstall my
-app and reinstall it,
+00:28:34,982 --> 00:28:37,184
+第一个用途是允许iOS app
 
 
 519
-00:27:02,016 --> 00:27:05,576
-and I can also disable my
-Glance and reenable it.
+00:28:37,417 --> 00:28:39,720
+更新Watch app的应用上下文
 
 
 520
-00:27:06,706 --> 00:27:08,226
-So if I wanted to
-view my Glance,
+00:28:39,786 --> 00:28:40,654
+反之亦然
 
 
 521
-00:27:08,226 --> 00:27:11,816
-I could go in the simulator,
-go back to my clock face,
+00:28:41,255 --> 00:28:43,123
+这也许不是紧急的数据 
 
 
 522
-00:27:12,266 --> 00:27:16,636
-and just like on device, I
-swipe up, and then my Glance --
+00:28:43,190 --> 00:28:45,158
+但是需要向用户更新这些内容
 
 
 523
-00:27:17,046 --> 00:27:19,046
-so let's just reenable it.
+00:28:45,792 --> 00:28:47,361
+第二个是Send Message
 
 
 524
-00:27:19,046 --> 00:27:22,406
-So -- oh, excuse me.
+00:28:47,494 --> 00:28:49,696
+这是需要在iOS app
+和Watch app之间
 
 
 525
-00:27:22,406 --> 00:27:24,096
-So I would expect
-my new UI to appear.
+00:28:49,763 --> 00:28:51,465
+来回传送的
 
 
 526
-00:27:24,096 --> 00:27:28,536
-That hasn't happened, but
-let's just move on for now.
+00:28:51,798 --> 00:28:53,834
+小量信息和Watch app
 
 
 527
-00:27:28,776 --> 00:27:32,196
-So I figured out my new
-interface, but I need to know
+00:28:54,768 --> 00:28:57,104
+第三个是简易传送文件API
 
 
 528
-00:27:32,196 --> 00:27:34,406
-who the next person is, and
-I need to figure out how
+00:28:57,871 --> 00:29:00,541
+最后是传送用户信息
+API 可以和更多
 
 
 529
-00:27:34,406 --> 00:27:37,326
-to update my app to do this.
+00:29:00,607 --> 00:29:02,242
+Complications相连接
 
 
 530
-00:27:37,466 --> 00:27:42,496
-So let's go back to slides.
+00:29:03,777 --> 00:29:06,280
+还有很多内容可以完成
 
 
 531
-00:27:42,496 --> 00:27:44,576
-So my iOS app mainly
-communicates
+00:29:06,346 --> 00:29:07,314
+我鼓励大家和...
 
 
 532
-00:27:44,576 --> 00:27:48,126
-to my server via NSURLSession
-to get my list of loved ones.
+00:29:07,381 --> 00:29:10,617
+WatchConnectivity
+对话发现更多信息
 
 
 533
-00:27:48,656 --> 00:27:51,166
-What's great is in
-watchOS 2, I can use a lot
+00:29:11,251 --> 00:29:14,888
+来看Call Me Lately 
+来看怎么充分利用
 
 
 534
-00:27:51,166 --> 00:27:54,206
-of the same NSURLSession
-code to talk to my server.
+00:29:14,955 --> 00:29:16,657
+WatchConnectivity
 
 
 535
-00:27:55,276 --> 00:27:57,196
-However, there are times
-when I need to make sure
+00:29:17,090 --> 00:29:19,693
+我想在app上添加
+WatchConnectivity 
 
 
 536
-00:27:57,196 --> 00:28:00,506
-that my iOS app and watchOS app
-are in touch with each other,
+00:29:20,360 --> 00:29:25,666
+还要进行调试最后我想
+用Instrument进行调试
 
 
 537
-00:28:00,866 --> 00:28:02,846
-and I can use WatchConnectivity
-to do so.
+00:29:26,166 --> 00:29:28,635
+谈到Instrument
+有人可能还不知道
 
 
 538
-00:28:03,596 --> 00:28:05,976
-So let's take a moment and talk
+00:29:28,936 --> 00:29:31,371
+Instrument是非常强大的
+调试工具
 
 
 539
-00:28:05,976 --> 00:28:08,906
-about the new WatchConnectivity
-framework before we see how we
+00:29:31,438 --> 00:29:33,407
+可以检测app的性能
 
 
 540
-00:28:08,906 --> 00:28:10,376
-can use it in Call Me Lately.
+00:29:34,675 --> 00:29:36,610
+于是我获得调试模板
 
 
 541
-00:28:11,656 --> 00:28:14,126
-So WatchConnectivity
-is a framework
+00:29:36,910 --> 00:29:38,812
+先要启动Instrument
 
 
 542
-00:28:14,176 --> 00:28:17,496
-that has four core
-uses for communication
+00:29:39,313 --> 00:29:44,117
+然后可以从时间事件查看器
+泄露 分配中进行选择
 
 
 543
-00:28:17,496 --> 00:28:19,326
-between iOS and watchOS.
+00:29:45,819 --> 00:29:48,856
+然后大家会看到
+如果我选择时间事件查看器
 
 
 544
-00:28:19,986 --> 00:28:22,636
-An important thing to note is
-that WatchConnectivity lives
+00:29:48,922 --> 00:29:50,390
+例如 我要看这个视图
 
 
 545
-00:28:22,636 --> 00:28:27,556
-on both iOS and watchOS, so you
-can use APIs on both platforms.
+00:29:50,457 --> 00:29:52,092
+可以轻松调试app
 
 
 546
-00:28:27,926 --> 00:28:30,646
-This isn't just your Watch
-app talking to your iOS app
+00:29:53,794 --> 00:29:55,262
+这一点很重要
 
 
 547
-00:28:30,646 --> 00:28:32,796
-when there are times when
-you want your iOS app
+00:29:55,762 --> 00:29:57,798
+Watch上 互动时间非常短
 
 
 548
-00:28:32,796 --> 00:28:33,986
-to be updating your Watch app.
+00:29:57,865 --> 00:30:00,133
+也就是说性能非常关键
 
 
 549
-00:28:34,986 --> 00:28:37,186
-So the first use is
-to allow your iOS app
+00:30:00,734 --> 00:30:02,970
+我们希望使用
+Instrument来确保
 
 
 550
-00:28:37,426 --> 00:28:39,746
-to update your Watch
-app's application context,
+00:30:03,036 --> 00:30:06,740
+app在提供良好的用户体验
 
 
 551
-00:28:39,746 --> 00:28:40,646
-and vice versa.
+00:30:06,974 --> 00:30:09,376
+我们希望在
+设备和模拟器上都进行检测
 
 
 552
-00:28:41,256 --> 00:28:44,056
-This may not be urgent data, but
-something you know you'll want
+00:30:10,143 --> 00:30:12,913
+现在我们了解了一些
+WatchConnectivity
 
 
 553
-00:28:44,056 --> 00:28:45,156
-to update your user with.
+00:30:12,980 --> 00:30:15,115
+和Instrument
+我们再来看演示
 
 
 554
-00:28:45,866 --> 00:28:47,316
-The second is Send Message.
+00:30:15,182 --> 00:30:16,483
+在app中
 
 
 555
-00:28:47,716 --> 00:28:50,106
-This is for small pieces
-of information that I need
+00:30:16,850 --> 00:30:20,821
+我可能有某种算法称
 
 
 556
-00:28:50,106 --> 00:28:51,476
-to transfer back and forth
+00:30:20,921 --> 00:30:22,823
+下一个该联系这个人了
 
 
 557
-00:28:51,796 --> 00:28:53,946
-between my iOS app
-and Watch app.
+00:30:23,056 --> 00:30:25,993
+所以当得到这个数据时
 
 
 558
-00:28:54,756 --> 00:28:56,946
-And the third is a
-simple transfer file API.
+00:30:26,059 --> 00:30:31,498
+我需要更新iOS app
+了解这人是谁查看Watch 
 
 
 559
-00:28:57,866 --> 00:29:01,156
-And lastly, there's a transfer
-user info API that ties in more
+00:30:31,565 --> 00:30:32,999
+就知道接下来该联系他了
 
 
 560
-00:29:01,156 --> 00:29:02,176
-so with Complications.
+00:30:33,500 --> 00:30:36,003
+也许我需要初始启动app
 
 
 561
-00:29:03,566 --> 00:29:06,376
-There's also a wider range
-of things you can accomplish,
+00:30:36,069 --> 00:30:38,305
+只为在iOS app上更新应用
 
 
 562
-00:29:06,376 --> 00:29:09,266
-and I encourage you to go to
-the talk on WatchConnectivity
+00:30:38,572 --> 00:30:41,375
+上下文看看会出现什么
 
 
 563
-00:29:09,266 --> 00:29:10,626
-to find out more information.
+00:30:42,576 --> 00:30:44,811
+我可能希望在扩展委托中
 
 
 564
-00:29:11,376 --> 00:29:14,906
-Let's see in Call Me
-Lately how I can best
+00:30:44,878 --> 00:30:48,282
+在Application Did
+Become Active完成这些
 
 
 565
-00:29:14,906 --> 00:29:16,066
-use WatchConnectivity.
+00:30:49,483 --> 00:30:51,451
+我可以只在这里放置代码
 
 
 566
-00:29:16,936 --> 00:29:19,616
-I just want to add
-WatchConnectivity to my app,
+00:30:51,518 --> 00:30:53,887
+我先来导入
+WatchConnectivity
 
 
 567
-00:29:19,616 --> 00:29:23,396
-I want to debug it,
-and lastly I want
+00:30:59,526 --> 00:31:02,429
+现在在Application
+Did Become Active
 
 
 568
-00:29:23,436 --> 00:29:25,676
-to just profile it
-with Instruments.
+00:31:02,796 --> 00:31:03,931
+我想添加部分代码
 
 
 569
-00:29:26,166 --> 00:29:28,626
-So speaking of Instruments,
-for those that don't know,
+00:31:04,264 --> 00:31:07,034
+生成上下文即名为伊桑的字符串
 
 
 570
-00:29:28,946 --> 00:29:32,016
-Instruments is a powerful
-profiling tool to check
+00:31:07,267 --> 00:31:10,404
+接着在WC Session 这是
+WatchConnectivity
 
 
 571
-00:29:32,126 --> 00:29:34,496
-out the performance of your app.
+00:31:10,470 --> 00:31:12,239
+我有默认的会话
 
 
 572
-00:29:34,676 --> 00:29:36,606
-So you will get a
-profiling template
+00:31:12,306 --> 00:31:13,607
+并且调用方法
+Update
 
 
 573
-00:29:36,876 --> 00:29:40,406
-when you first initially launch
-Instruments, and you can pick
+00:31:13,674 --> 00:31:14,908
+Application
+Context
 
 
 574
-00:29:40,406 --> 00:29:44,056
-from a time profiler,
-leaks, allocations,
+00:31:14,975 --> 00:31:17,511
+连同主要WCApplication
+Context
 
 
 575
-00:29:44,646 --> 00:29:48,866
-and then you will see something,
-if I select a time profiler,
+00:31:17,945 --> 00:31:19,646
+我将只发送上下文部分
 
 
 576
-00:29:48,866 --> 00:29:50,386
-for instance, this is
-the view I would see,
+00:31:19,980 --> 00:31:23,016
+结果却更糟糕现在就来打印出我的错误
 
 
 577
-00:29:50,386 --> 00:29:53,536
-and I can easily profile my app.
+00:31:25,485 --> 00:31:26,453
+来看这个工作
 
 
 578
-00:29:53,796 --> 00:29:55,276
-And it's really important,
+00:31:27,788 --> 00:31:28,856
+我们来构建和运行
 
 
 579
-00:29:55,746 --> 00:29:57,816
-so engagement times
-are short on the Watch.
+00:31:34,995 --> 00:31:36,296
+选择Watch app...
 
 
 580
-00:29:57,816 --> 00:30:00,126
-So this means that
-performance is critical,
+00:31:37,798 --> 00:31:38,465
+app启动
 
 
 581
-00:30:00,726 --> 00:30:02,966
-and we want to be using
-Instruments to make sure
+00:31:41,368 --> 00:31:45,973
+但我看到WC错误提示7004
 
 
 582
-00:30:02,966 --> 00:30:06,736
-that our app is giving
-a good user experience,
+00:31:46,440 --> 00:31:49,009
+根据以往的经验我可以判断
 
 
 583
-00:30:06,976 --> 00:30:09,376
-and we want to check it out
-on both device and simulator.
+00:31:49,076 --> 00:31:50,811
+我的会话没有激活
 
 
 584
-00:30:10,146 --> 00:30:12,956
-So now that we know a little
-bit about WatchConnectivity
+00:31:51,411 --> 00:31:52,646
+来看看代码
 
 
 585
-00:30:12,956 --> 00:30:14,826
-and Instruments, let's
-go into demo again.
+00:31:53,947 --> 00:31:56,149
+我还没有设置委托
 
 
 586
-00:30:15,426 --> 00:30:20,806
-So in my app, I might have an
-algorithm of sorts that says,
+00:31:56,383 --> 00:31:58,585
+我想设置WC会话委托然后在更新应用
 
 
 587
-00:30:20,906 --> 00:30:22,816
-oh, this is the next
-person I want to call.
+00:32:01,121 --> 00:32:05,759
+上下文代码之后或之前
 
 
 588
-00:30:22,816 --> 00:30:25,646
-And so when I have
-this data available,
+00:32:07,561 --> 00:32:09,897
+我只想自己设置委托接着还要激活
 
 
 589
-00:30:26,196 --> 00:30:30,246
-I want to update my iOS app
-to know who is the person
+00:32:10,330 --> 00:32:11,932
+会话部分
 
 
 590
-00:30:30,246 --> 00:30:31,536
-that I am viewing on my Watch
+00:32:12,065 --> 00:32:13,667
+需要注意的是在激活会话前
 
 
 591
-00:30:31,536 --> 00:30:32,986
-and the person I
-should next call.
+00:32:13,734 --> 00:32:19,006
+需要设置委托因为在激活会话时
 
 
 592
-00:30:33,496 --> 00:30:36,046
-So I might want to maybe
-on the initial launch
+00:32:19,273 --> 00:32:20,574
+可能有信息在等着
 
 
 593
-00:30:36,046 --> 00:30:38,316
-of the app just update
-my application context
+00:32:20,974 --> 00:32:23,944
+所以你需要收到适当的委托回调
 
 
 594
-00:30:38,586 --> 00:30:41,376
-over to the iOS app
-and see that appear.
+00:32:25,045 --> 00:32:26,680
+我们现在再来构建和运行
 
 
 595
-00:30:42,586 --> 00:30:44,836
-So I would probably
-just want to do this
+00:32:30,150 --> 00:32:33,921
+需要确定错误代码已经不存在
 
 
 596
-00:30:44,836 --> 00:30:47,656
-on my Application Did Become
-Active in my extension delegate.
+00:32:41,795 --> 00:32:42,563
+好了 非常棒
 
 
 597
-00:30:48,226 --> 00:30:51,476
-So here I could just
-place this code.
+00:32:42,729 --> 00:32:44,064
+现在没有错误了
 
 
 598
-00:30:51,476 --> 00:30:53,896
-So let me first import
-WatchConnectivity.
+00:32:44,531 --> 00:32:46,867
+这就是说正在将应用上下文
 
 
 599
-00:31:00,236 --> 00:31:02,436
-And now in Application
-Did Become Active,
+00:32:46,934 --> 00:32:49,002
+妥善发送至iOS app
 
 
 600
-00:31:02,516 --> 00:31:03,556
-I would add some code,
+00:32:49,303 --> 00:32:51,939
+但是我需要了解
+iOS app确实收到了
 
 
 601
-00:31:03,706 --> 00:31:06,746
-just create a context
-that's a string named Ethan,
+00:32:52,439 --> 00:32:54,508
+所以要打开Scheme来查看
 
 
 602
-00:31:06,746 --> 00:31:10,326
-and then on WC Session, which
-is part of WatchConnectivity,
+00:32:55,509 --> 00:32:56,777
+并选择iOS计划我会选择
 
 
 603
-00:31:10,456 --> 00:31:12,286
-I have the default session
+00:32:57,845 --> 00:33:02,382
+与Watch模拟器配对的相同模拟器
 
 
 604
-00:31:12,286 --> 00:31:14,446
-and I call the method
-Update Application Context
+00:33:02,516 --> 00:33:04,885
+现在来选择iPhone 6模拟器
 
 
 605
-00:31:14,966 --> 00:31:17,526
-with the key WC Application
-Context,
+00:33:05,452 --> 00:33:09,289
+如果点击Control
+再按下Build和Run
 
 
 606
-00:31:17,936 --> 00:31:19,636
-and I would just
-send over my context.
+00:33:09,356 --> 00:33:10,924
+不必构建即可运行
 
 
 607
-00:31:19,976 --> 00:31:22,106
-And worse comes to
-worst, I am just going
+00:33:11,191 --> 00:33:14,528
+这样的话 如果app确实很大
 
 
 608
-00:31:22,106 --> 00:31:23,736
-to print my error for now.
+00:33:14,595 --> 00:33:18,498
+我就不必等着它
+一直编译并安装app等等
 
 
 609
-00:31:25,116 --> 00:31:26,456
-So let's see this work.
+00:33:18,565 --> 00:33:22,202
+我们按下Control
+然后无需构建直接运行
 
 
 610
-00:31:27,286 --> 00:31:34,786
-And let's build and run.
+00:33:24,204 --> 00:33:27,174
+看似app启动了在iOS app
 
 
 611
-00:31:34,986 --> 00:31:36,566
-Let's select our Watch app.
+00:33:27,241 --> 00:33:29,076
+点击了app委托
 
 
 612
-00:31:37,496 --> 00:31:45,976
-My app launched, but I see
-a WC error domain, 7004,
+00:33:29,276 --> 00:33:30,944
+点击委托回调
+Did Receive
 
 
 613
-00:31:45,976 --> 00:31:49,026
-so I know from previous
-experience
+00:33:31,011 --> 00:33:32,813
+Application
+Context
 
 
 614
-00:31:49,026 --> 00:31:50,826
-that my session just
-isn't activated.
+00:33:33,080 --> 00:33:36,316
+然后可以在iOS app上更新UI
 
 
 615
-00:31:51,406 --> 00:31:52,636
-Let's take a look at my code.
+00:33:37,751 --> 00:33:38,986
+我们继续
 
 
 616
-00:31:52,636 --> 00:31:56,166
-I also haven't set
-my delegate either,
+00:33:40,787 --> 00:33:44,558
+现在如果我在Watch
+模拟器上我们返回主页
 
 
 617
-00:31:56,396 --> 00:32:02,086
-so I want to set a WC session
-delegate, and then after --
+00:33:46,093 --> 00:33:49,796
+调试对话还在iOS app中继续
 
 
 618
-00:32:02,736 --> 00:32:05,756
-or before my update
-application context code,
+00:33:50,130 --> 00:33:53,433
+还有Watch app
+激活状态 不好意思
 
 
 619
-00:32:05,756 --> 00:32:10,836
-I just want to set the delegate
-to be myself, and then I want
+00:33:53,600 --> 00:33:56,737
+当它启动时 将会更新应用上下文
 
 
 620
-00:32:10,836 --> 00:32:11,926
-to activate my session.
+00:33:58,105 --> 00:34:00,374
+可以在iOS app再次点击
 
 
 621
-00:32:12,056 --> 00:32:13,706
-And it's important
-to note that you want
+00:34:00,440 --> 00:34:01,775
+并点击委托回调
 
 
 622
-00:32:13,706 --> 00:32:15,886
-to set the delegate before
-activating your session
+00:34:02,342 --> 00:34:05,179
+这非常棒因为现在可以同时
 
 
 623
-00:32:16,256 --> 00:32:19,016
-because you might have
-messages waiting for you
+00:34:05,245 --> 00:34:07,314
+调试两个模拟器
 
 
 624
-00:32:19,256 --> 00:32:20,576
-when you've activated
-that session.
+00:34:07,381 --> 00:34:09,183
+使用
+WatchConnectivity
 
 
 625
-00:32:20,986 --> 00:32:23,946
-So you want to receive the
-appropriate delegate callbacks.
+00:34:09,248 --> 00:34:10,050
+这一点非常棒
 
 
 626
-00:32:24,956 --> 00:32:30,246
-So now let's just
-build and run again.
+00:34:10,117 --> 00:34:12,553
+因此你必须确认所有的调用
 
 
 627
-00:32:30,246 --> 00:32:41,856
-Now let's just make sure that
-my error code has gone away.
+00:34:12,652 --> 00:34:16,556
+都是按照在watchOS和iOS中
+都需要的顺序进行
 
 
 628
-00:32:41,856 --> 00:32:42,546
-Okay. Great.
+00:34:21,228 --> 00:34:21,895
+谢谢大家
 
 
 629
-00:32:42,726 --> 00:32:44,056
-So I don't have my
-error anymore.
+00:34:24,630 --> 00:34:27,201
+现在会话部分告一段落我想快速
 
 
 630
-00:32:44,526 --> 00:32:47,156
-So that means this is
-appropriately sending my
+00:34:27,467 --> 00:34:28,869
+调试一下Instrument
 
 
 631
-00:32:47,156 --> 00:32:49,006
-application context
-to my iOS app.
+00:34:30,771 --> 00:34:32,773
+先来点击Product
+Profile 
 
 
 632
-00:32:49,306 --> 00:32:51,936
-But now I want to see that my
-iOS app actually receives it.
+00:34:33,607 --> 00:34:36,577
+会启动Instrument
+希望会出现模板
 
 
 633
-00:32:52,446 --> 00:32:54,346
-So I can do this
-by going to Schemes
+00:34:38,045 --> 00:34:39,513
+我的模板选择
 
 
 634
-00:32:55,166 --> 00:32:58,006
-and selecting my iOS
-scheme, and I am going
+00:34:40,147 --> 00:34:41,748
+来看一下 好的
 
 
 635
-00:32:58,006 --> 00:33:02,376
-to select the same simulator
-that's paired with my Watch sim.
+00:34:41,882 --> 00:34:43,483
+找到了时间事件查看器
 
 
 636
-00:33:02,376 --> 00:33:04,876
-So I'm going to select
-my iPhone 6 sim.
+00:34:44,117 --> 00:34:45,219
+就选择这个
 
 
 637
-00:33:05,466 --> 00:33:09,276
-Now if I click on Control and
-then press on Build and Run,
+00:34:46,018 --> 00:34:49,690
+接下来不是iOS模拟器
 
 
 638
-00:33:09,356 --> 00:33:10,926
-I can actually run
-without building,
+00:34:49,989 --> 00:34:52,458
+我实际是想调试扩展
 
 
 639
-00:33:11,196 --> 00:33:14,556
-so this way I don't have to
--- if my app is really large,
+00:34:53,293 --> 00:34:54,328
+选择这里
 
 
 640
-00:33:14,556 --> 00:33:16,426
-I don't have to wait
-for it to keep compiling
+00:34:54,661 --> 00:34:55,762
+可以按下Record
 
 
 641
-00:33:16,426 --> 00:33:18,566
-and install the app,
-et cetera, et cetera.
+00:34:56,663 --> 00:34:58,498
+看似我点击错误
 
 
 642
-00:33:18,566 --> 00:33:22,196
-So let's just press Control
-and then run without building.
+00:34:58,565 --> 00:35:02,002
+打开Watch模拟器 把它放在这里
 
 
 643
-00:33:23,816 --> 00:33:27,286
-So now it looks like my
-app launched, and I've hit
+00:35:03,370 --> 00:35:04,338
+按下Record
 
 
 644
-00:33:27,286 --> 00:33:29,086
-on my app delegate
-in my iOS app,
+00:35:04,671 --> 00:35:07,341
+连上了现在可以调试app
 
 
 645
-00:33:29,416 --> 00:33:32,616
-I've hit my delegate callback,
-Did Receive Application Context,
+00:35:08,442 --> 00:35:12,412
+在调用树上还可以看到示例列表
 
 
 646
-00:33:33,076 --> 00:33:36,316
-and I can then update
-my UI in my iOS app.
+00:35:12,479 --> 00:35:15,349
+和iOS app一样
+可以做同样的事情
 
 
 647
-00:33:37,856 --> 00:33:39,376
-Let's just continue through.
+00:35:15,582 --> 00:35:17,251
+可以看到大部分代码都在运行
 
 
 648
-00:33:40,486 --> 00:33:44,566
-So now if I am on my Watch
-sim, and let's go back home.
+00:35:17,317 --> 00:35:19,720
+在主线程这里非常棒
 
 
 649
-00:33:46,096 --> 00:33:49,806
-So my debugging session is
-still ongoing in my iOS app,
+00:35:20,187 --> 00:35:22,422
+接着可以返回调用树
 
 
 650
-00:33:50,126 --> 00:33:53,446
-and my Watch app, when it's
-activated -- excuse me --
+00:35:22,856 --> 00:35:26,393
+也就是说使用Instrument
 
 
 651
-00:33:53,586 --> 00:33:56,746
-when it's launched, it will then
-update my application context.
+00:35:26,593 --> 00:35:27,694
+可以轻松调试
 
 
 652
-00:33:58,106 --> 00:34:00,406
-So I can hit it again
-on my iOS app
+00:35:28,729 --> 00:35:30,063
+停下这一段会话
 
 
 653
-00:34:00,406 --> 00:34:01,776
-and hit the delegate callback.
+00:35:32,666 --> 00:35:34,334
+现在我编写好一个app
 
 
 654
-00:34:02,326 --> 00:34:05,216
-So this is great because you
-can now debug in both simulators
+00:35:34,401 --> 00:35:37,137
+基本上是有着很简单的界面
 
 
 655
-00:34:05,216 --> 00:34:07,316
-at once, which is really great
+00:35:37,204 --> 00:35:38,705
+用到了
+WatchConnectivity
 
 
 656
-00:34:07,316 --> 00:34:09,886
-for when you are using
-WatchConnectivity,
+00:35:38,772 --> 00:35:40,707
+并且用Instrument
+调试了app
 
 
 657
-00:34:09,886 --> 00:34:12,556
-so you can make sure all
-of your calls are occurring
+00:35:41,041 --> 00:35:43,143
+现在可以和设计师聊聊了
 
 
 658
-00:34:12,636 --> 00:34:16,326
-in the order you want them
-to on both watchOS and iOS.
+00:35:43,210 --> 00:35:44,444
+可以真正进行完善
 
 
 659
-00:34:16,985 --> 00:34:21,576
-(Applause) Thank you.
+00:35:45,779 --> 00:35:47,948
+我们来谈谈可以做些什么
 
 
 660
-00:34:24,646 --> 00:34:27,206
-Let's just stop the session
-for now, and I just want
+00:35:48,749 --> 00:35:51,752
+那么我们在现有iPhone 
+app上添加了Watch app
 
 
 661
-00:34:27,206 --> 00:34:28,835
-to quickly profile
-an Instrument.
+00:35:52,786 --> 00:35:54,955
+生成了app和Glance界面
 
 
 662
-00:34:29,525 --> 00:34:33,956
-So I'm going to hit Product,
-Profile, and I am going
+00:35:55,923 --> 00:35:57,925
+用到了
+WatchConnectivity
 
 
 663
-00:34:33,956 --> 00:34:38,525
-to have Instruments come up, and
-I expect my template to appear,
+00:35:58,492 --> 00:36:01,762
+我们同时调试了
+iOS和watchOS app
 
 
 664
-00:34:38,525 --> 00:34:39,525
-my template selection.
+00:36:02,829 --> 00:36:04,731
+还使用Instrument
+调试了app
 
 
 665
-00:34:40,166 --> 00:34:41,735
-So let's find my -- okay.
+00:36:07,234 --> 00:36:10,304
+还有几个问题
+需要大家运用WatchKit
 
 
 666
-00:34:41,896 --> 00:34:43,496
-Let's find my time profiler.
+00:36:10,838 --> 00:36:14,908
+另外还有很多
+其他的watchOS 2功能 
 
 
 667
-00:34:44,106 --> 00:34:45,376
-Let's just choose that.
+00:36:14,975 --> 00:36:16,476
+令我非常兴奋
 
 
 668
-00:34:46,036 --> 00:34:49,786
-And then instead of my
-iOS sim, I actually want
+00:36:16,977 --> 00:36:19,379
+正如我提到的
+有Complication
 
 
 669
-00:34:49,786 --> 00:34:52,456
-to be debugging my,
-profiling my extension.
+00:36:19,746 --> 00:36:22,182
+昨天在专题讲座中大家可能也见过
 
 
 670
-00:34:53,295 --> 00:34:54,326
-Select that here.
+00:36:22,382 --> 00:36:24,017
+甚至可以实现Time Travel
 
 
 671
-00:34:54,656 --> 00:34:55,766
-I can press Record.
+00:36:24,084 --> 00:36:28,422
+我觉得不远的将来就可以
+大家就像是在来回往复
 
 
 672
-00:34:56,666 --> 00:34:58,486
-And it looks like
-I've hit an error.
+00:36:28,488 --> 00:36:29,690
+非常神奇 太酷了
 
 
 673
-00:34:58,486 --> 00:35:01,986
-So let's just open up my
-Watch sim, place that here.
+00:36:29,957 --> 00:36:32,659
+大家还可以使用
+Digital Crown
 
 
 674
-00:35:03,386 --> 00:35:04,326
-Press Record.
+00:36:32,726 --> 00:36:34,828
+因此可以通过
+Digital Crown
 
 
 675
-00:35:04,656 --> 00:35:07,356
-And there I have attached,
-and now I can profile my app.
+00:36:34,895 --> 00:36:37,364
+为用户创建非常直观的体验
 
 
 676
-00:35:08,446 --> 00:35:12,456
-So in my call tree, I can
-also see my sample list just
+00:36:38,632 --> 00:36:41,735
+还可以有简易动画来生成
 
 
 677
-00:35:12,456 --> 00:35:15,356
-like on an iOS app, I can
-do the same sorts of things,
+00:36:42,035 --> 00:36:44,705
+真正的响应式app非常漂亮有趣
 
 
 678
-00:35:15,596 --> 00:35:17,306
-and I can see that most
-of my code is being run
+00:36:46,006 --> 00:36:47,708
+还可以使用心率传感器
 
 
 679
-00:35:17,306 --> 00:35:19,736
-on my main thread
-here, which is great,
+00:36:47,774 --> 00:36:50,410
+那么如果在制作 Workout
+app 或其他健身 app
 
 
 680
-00:35:19,736 --> 00:35:22,576
-and then I can go
-back to my call tree.
+00:36:50,611 --> 00:36:52,613
+可以通过HealthKit 
+获取数据
 
 
 681
-00:35:23,096 --> 00:35:26,386
-And so this is just very simply
-you can easily profile something
+00:36:52,980 --> 00:36:56,750
+并以此为客户提供更好的体验
 
 
 682
-00:35:26,596 --> 00:35:27,706
-using Instruments.
+00:36:57,784 --> 00:37:00,420
+还可以运用交互式
+虚拟触觉实现更棒的体验
 
 
 683
-00:35:28,736 --> 00:35:32,466
-So let's just stop this session.
+00:37:00,854 --> 00:37:04,224
+轻触用户并提供部分上下文
 
 
 684
-00:35:32,466 --> 00:35:34,356
-And now I've written an app
+00:37:04,291 --> 00:37:06,994
+和在app中的做法一样
 
 
 685
-00:35:34,356 --> 00:35:37,146
-that basically has a
-very simple interface
+00:37:08,262 --> 00:37:13,600
+还有媒体播放就和昨天在
+专题讲座中看到的一样
 
 
 686
-00:35:37,326 --> 00:35:38,756
-and uses WatchConnectivity,
+00:37:16,436 --> 00:37:18,705
+大家也可以有音频播放
 
 
 687
-00:35:38,756 --> 00:35:40,546
-and I've profiled my
-app in Instruments.
+00:37:18,772 --> 00:37:20,474
+可以在Watch上使用扬声器
 
 
 688
-00:35:40,596 --> 00:35:43,196
-Now I could talk
-with my designer
+00:37:20,674 --> 00:37:22,776
+或是用户可以配上蓝牙耳机
 
 
 689
-00:35:43,196 --> 00:35:44,456
-and really flesh this out.
+00:37:23,043 --> 00:37:24,745
+接着还可以有路由
 
 
 690
-00:35:45,786 --> 00:35:47,956
-So let's talk about what
-we were just able to do.
+00:37:25,913 --> 00:37:28,782
+还可以录制音频首次实现
 
 
 691
-00:35:48,746 --> 00:35:51,766
-So we added a Watch app to
-our existing iPhone app.
+00:37:28,849 --> 00:37:31,919
+可以使用Watch本身的 麦克风
 
 
 692
-00:35:52,776 --> 00:35:55,036
-We created an interface
-for our app and Glance.
+00:37:32,286 --> 00:37:33,654
+并提供绝妙体验
 
 
 693
-00:35:55,956 --> 00:35:57,416
-We used WatchConnectivity.
+00:37:35,455 --> 00:37:37,491
+现在来看 Keychain
 
 
 694
-00:35:58,486 --> 00:36:01,656
-We debugged our iOS and
-watchOS apps at the same time.
+00:37:37,558 --> 00:37:40,427
+这样可以为用户实现非常安全的体验
 
 
 695
-00:36:02,866 --> 00:36:04,636
-And we profiled our
-app in Instruments.
+00:37:42,462 --> 00:37:46,967
+复习一下
+我们可以探讨app的架构
 
 
 696
-00:36:05,166 --> 00:36:10,136
-So these are just a few of the
-things that you can get started
+00:37:47,267 --> 00:37:49,903
+增添了Watch app
 
 
 697
-00:36:10,136 --> 00:36:14,946
-with in WatchKit, and there are
-so many other watchOS 2 features
+00:37:50,604 --> 00:37:52,406
+谈到了app生命周期
 
 
 698
-00:36:14,946 --> 00:36:16,486
-that I am incredibly
-excited about,
+00:37:53,006 --> 00:37:56,109
+我们用到了不同界面元素 制作app
 
 
 699
-00:36:16,986 --> 00:36:19,366
-and like I mentioned before,
-there's Complications,
+00:37:56,543 --> 00:37:58,445
+和Glance 还谈到了
 
 
 700
-00:36:19,736 --> 00:36:22,196
-and as you might have seen
-in the Keynote yesterday,
+00:37:58,512 --> 00:38:00,080
+通知界面以及怎样轻松重复
 
 
 701
-00:36:22,446 --> 00:36:24,086
-you can even do Time Travel,
+00:38:00,314 --> 00:38:05,652
+不同的通知 并使用
+不同的类别和不同的装载模式
 
 
 702
-00:36:24,086 --> 00:36:26,066
-which I think is
-just the future.
+00:38:07,287 --> 00:38:09,857
+我们可以在新的模拟器中构建并运行
 
 
 703
-00:36:26,316 --> 00:36:28,276
-You can just, like,
-go back and forth.
+00:38:10,424 --> 00:38:11,692
+还调试了app
 
 
 704
-00:36:28,276 --> 00:36:28,866
-It's amazing.
+00:38:12,926 --> 00:38:15,863
+我们用到了不同的watchOS能力
 
 
 705
-00:36:28,866 --> 00:36:29,496
-It's so cool.
+00:38:17,464 --> 00:38:19,566
+网上还有部分更棒的资料
 
 
 706
-00:36:29,946 --> 00:36:32,656
-And then you can also
-use Digital Crown,
+00:38:19,633 --> 00:38:22,135
+《watchOS 2转换指南》
+就非常不错
 
 
 707
-00:36:32,656 --> 00:36:34,836
-so you can create really
-intuitive experiences
+00:38:22,202 --> 00:38:24,271
+我很希望大家都能看看
 
 
 708
-00:36:34,836 --> 00:36:37,376
-for your users using
-the Digital Crown.
+00:38:24,338 --> 00:38:25,639
+还有些不错的技术支持
 
 
 709
-00:36:38,626 --> 00:36:42,146
-You also have simple animations
-to create really responsive apps
+00:38:26,073 --> 00:38:28,742
+可以去论坛看看有些示例代码
 
 
 710
-00:36:42,466 --> 00:36:44,716
-for your user, just
-nice and playful.
+00:38:28,909 --> 00:38:31,645
+如果有一般性问题
+可以联系杰克·贝伦斯
 
 
 711
-00:36:45,636 --> 00:36:47,716
-You also have access to
-the heart rate sensors,
+00:38:31,712 --> 00:38:33,413
+他是watchOS框架的开发顾问
 
 
 712
-00:36:47,716 --> 00:36:50,346
-so if you are making a Workout
-app or some sort of fitness app,
+00:38:34,481 --> 00:38:37,951
+本周还有很多有趣的讲座
 
 
 713
-00:36:50,626 --> 00:36:53,906
-you now get that data
-via HealthKit and can use
+00:38:38,185 --> 00:38:40,921
+可以发现很多信息
+WatchKit in Depth
 
 
 714
-00:36:53,906 --> 00:36:56,736
-that to provide a better
-experience for your user.
+00:38:41,421 --> 00:38:44,925
+Complications 
+Layout等等
 
 
 715
-00:36:56,936 --> 00:37:00,226
-You can also provide a great
-experience using haptics
+00:38:45,893 --> 00:38:49,263
+如果有任何问题如果有一般性问题
 
 
 716
-00:37:00,856 --> 00:37:04,286
-and lightly tap your user
-and provide some context
+00:38:49,329 --> 00:38:51,064
+或是首次深入学习代码
 
 
 717
-00:37:04,286 --> 00:37:07,996
-as to what you are
-doing in the app.
+00:38:51,665 --> 00:38:54,268
+或是对WatchKit开发很有经验
 
 
 718
-00:37:08,166 --> 00:37:10,136
-And there's also media
-playback, so like you saw
+00:38:54,568 --> 00:38:56,537
+都欢迎过来 我们很高兴
+回答大家的任何问题
 
 
 719
-00:37:10,136 --> 00:37:13,616
-in the Keynote yesterday,
-you can view a simple video.
+00:38:58,205 --> 00:38:59,306
+谢谢大家
 
 
 720
-00:37:14,156 --> 00:37:18,726
-And you can also have
-audio playback as well,
-
-
-721
-00:37:18,726 --> 00:37:20,466
-so this would use the
-speaker on the Watch,
-
-
-722
-00:37:20,686 --> 00:37:22,766
-or if the user has paired
-Bluetooth headphones,
-
-
-723
-00:37:23,036 --> 00:37:24,746
-it would then route
-there as well.
-
-
-724
-00:37:24,746 --> 00:37:28,816
-And you can do audio recording,
-so for the first time,
-
-
-725
-00:37:28,816 --> 00:37:31,916
-you can get access to the
-mic on the Watch itself
-
-
-726
-00:37:32,076 --> 00:37:33,666
-and provide a great experience.
-
-
-727
-00:37:35,156 --> 00:37:37,536
-And you have access
-to the Keychain now,
-
-
-728
-00:37:37,536 --> 00:37:40,266
-so you can provide a really
-secure experience for your user.
-
-
-729
-00:37:42,136 --> 00:37:46,956
-So in recap, we were able
-to discuss the architecture
-
-
-730
-00:37:47,276 --> 00:37:49,896
-of an app, we added a Watch app,
-
-
-731
-00:37:50,616 --> 00:37:52,396
-we talked through
-the app life cycle,
-
-
-732
-00:37:52,996 --> 00:37:55,806
-we used the different interface
-elements and we made our app
-
-
-733
-00:37:55,806 --> 00:37:58,466
-and our Glance, and we talked
-
-
-734
-00:37:58,466 --> 00:38:00,626
-through our notification
-interfaces and how
-
-
-735
-00:38:00,626 --> 00:38:02,816
-to easily iterate on
-different notifications
-
-
-736
-00:38:03,166 --> 00:38:05,656
-and using different categories
-and different payloads.
-
-
-737
-00:38:06,286 --> 00:38:09,856
-And we were able to build
-and run in the new simulator,
-
-
-738
-00:38:10,416 --> 00:38:11,656
-and we debugged our app.
-
-
-739
-00:38:12,926 --> 00:38:15,866
-And we were able to use
-various watchOS capabilities.
-
-
-740
-00:38:17,156 --> 00:38:19,606
-So there's some great
-documentation online,
-
-
-741
-00:38:19,606 --> 00:38:22,126
-the watchOS 2 Transition
-Guide is excellent.
-
-
-742
-00:38:22,126 --> 00:38:24,306
-I highly encourage you
-guys to all check it out.
-
-
-743
-00:38:24,306 --> 00:38:25,736
-There's some great
-technical support.
-
-
-744
-00:38:25,926 --> 00:38:28,736
-You can check out the
-Forums, some sample code.
-
-
-745
-00:38:28,736 --> 00:38:31,686
-If you have general inquiries,
-please contact Jake Behrens,
-
-
-746
-00:38:31,686 --> 00:38:33,416
-our watchOS framework's
-Evangelist.
-
-
-747
-00:38:34,466 --> 00:38:37,956
-There is a lot of really amazing
-sessions happening this week,
-
-
-748
-00:38:38,196 --> 00:38:40,936
-there's a lot of info to dig
-through, WatchKit in Depth,
-
-
-749
-00:38:41,416 --> 00:38:44,916
-Complications, Layout,
-and so much more.
-
-
-750
-00:38:45,756 --> 00:38:49,286
-If you have any questions,
-if you have general questions
-
-
-751
-00:38:49,286 --> 00:38:51,066
-or you're digging into
-the code for a first time,
-
-
-752
-00:38:51,666 --> 00:38:54,256
-or if you are an experienced
-WatchKit dev, please come by,
-
-
-753
-00:38:54,256 --> 00:38:58,316
-we will be happy to answer
-any questions you might have.
-
-
-754
-00:38:58,316 --> 00:38:59,186
-So thank you, everyone.
-
-
-755
-00:39:03,796 --> 00:39:04,206
-(Applause) Thank you.
+00:39:00,641 --> 00:39:01,308
+谢谢
 

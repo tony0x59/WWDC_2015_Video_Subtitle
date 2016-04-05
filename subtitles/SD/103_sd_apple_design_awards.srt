@@ -1,6242 +1,5950 @@
 1
-00:00:16,056 --> 00:00:21,186
->> Ladies and gentlemen, welcome
-to the 2015 Apple Design Awards
+00:00:16,049 --> 00:00:17,050
+女士们 先生们
 
 
 2
-00:00:21,936 --> 00:00:26,596
-and welcome your host for
-this evening, John Geleynse.
+00:00:17,384 --> 00:00:21,154
+欢迎来到2015
+苹果设计奖的颁奖现场
 
 
 3
-00:00:27,516 --> 00:00:34,596
-[ Applause ]
+00:00:21,922 --> 00:00:26,026
+让我们欢迎今晚的主持人 
+约翰·格兰斯
 
 
 4
-00:00:35,096 --> 00:00:35,696
->> JOHN GELEYNSE:
-Well, good evening.
+00:00:34,601 --> 00:00:35,802
+约翰·格兰斯:
+大家晚上好
 
 
 5
-00:00:35,696 --> 00:00:37,296
-It is -- or good afternoon.
+00:00:35,869 --> 00:00:37,271
+或者应该说是下午好
 
 
 6
-00:00:37,296 --> 00:00:38,546
-It's still afternoon, actually.
+00:00:37,337 --> 00:00:38,438
+准确来说 现在还是下午
 
 
 7
-00:00:38,546 --> 00:00:40,226
-It is great to be here.
+00:00:38,505 --> 00:00:40,174
+很荣幸来到这里
 
 
 8
-00:00:40,226 --> 00:00:44,126
-It's a great moment
-to end off this day.
+00:00:40,240 --> 00:00:44,077
+现在是最激动人心的时刻
 
 
 9
-00:00:44,126 --> 00:00:46,506
-I know it's been long, many of
-you have been waiting in lines
+00:00:44,144 --> 00:00:46,413
+我知道 大家都在外面
+排队排了很久
 
 
 10
-00:00:46,506 --> 00:00:47,746
-around the building to get
+00:00:46,480 --> 00:00:48,448
+希望可以来听
+Keynote 演讲
 
 
 11
-00:00:47,746 --> 00:00:50,446
-into the Keynote,
-and that was a blast.
+00:00:48,882 --> 00:00:50,050
+这消息真是令人惊讶
 
 
 12
-00:00:50,796 --> 00:00:52,476
-The Keynote was a blast, too.
+00:00:50,384 --> 00:00:52,386
+其实Keynote演讲本身
+也非常令人吃惊
 
 
 13
-00:00:53,016 --> 00:00:55,706
-And then you came into
--- you got your lunch,
+00:00:53,020 --> 00:00:55,656
+然后你们进来了
+-- 就像你们吃了午餐
 
 
 14
-00:00:55,706 --> 00:00:59,236
-then you had State of the Union,
-and that was a great session.
+00:00:55,722 --> 00:00:59,226
+来到联合国参加
+一个盛大的会议
 
 
 15
-00:00:59,436 --> 00:01:03,526
-And now we want to finish
-the day by taking a moment
+00:00:59,426 --> 00:01:03,463
+现在 我们希望可以花点时间
 
 
 16
-00:01:03,526 --> 00:01:05,646
-to celebrate the work that some
+00:01:03,530 --> 00:01:05,599
+来谈谈我们现在所有的成果
 
 
 17
-00:01:05,646 --> 00:01:07,536
-of you have done that's
-been extraordinary.
+00:01:05,666 --> 00:01:07,534
+来为今天画上一个圆满的句号
 
 
 18
-00:01:07,916 --> 00:01:10,426
-Many of you do -- all of
-you do extraordinary work,
+00:01:07,901 --> 00:01:10,337
+你们中的一些人乃至所有人
+都出色地完成了工作
 
 
 19
-00:01:10,466 --> 00:01:13,376
-but there are some that
-stand out from the rest,
+00:01:10,470 --> 00:01:12,506
+但是仍然有一些人投机取巧
 
 
 20
-00:01:13,376 --> 00:01:15,296
-and we want to take
-a few moments
+00:01:12,973 --> 00:01:15,275
+此时此刻 我想花点时间
 
 
 21
-00:01:15,336 --> 00:01:17,996
-to just celebrate some
-excellence in software design.
+00:01:15,342 --> 00:01:18,011
+来表扬那些在软件设计
+方面做出卓越贡献的人
 
 
 22
-00:01:18,656 --> 00:01:22,956
-Now, to begin this
-evening and this ceremony,
+00:01:18,712 --> 00:01:22,883
+现在 让我们开始今晚的典礼
 
 
 23
-00:01:22,956 --> 00:01:26,806
-I want to just kick off with a
-video, which is a retrospective
+00:01:22,950 --> 00:01:26,753
+首先 请大家欣赏一段视频
 
 
 24
-00:01:26,806 --> 00:01:29,426
-of the winners from
-the last 14 years.
+00:01:26,820 --> 00:01:29,423
+回顾14年来所有的获奖者
 
 
 25
-00:03:23,636 --> 00:03:26,536
-You know, time flies;
-doesn't it?
+00:03:23,637 --> 00:03:26,540
+时间如白驹过隙 不是么
 
 
 26
-00:03:26,956 --> 00:03:30,826
-How many of you are familiar
-with so many of those apps?
+00:03:26,940 --> 00:03:30,377
+你们有多少人熟悉
+这么多的 app 呢
 
 
 27
-00:03:30,916 --> 00:03:32,456
-You played with those games.
+00:03:30,911 --> 00:03:32,546
+你们玩这些游戏
 
 
 28
-00:03:33,066 --> 00:03:34,896
-You played with those
-productivity tools,
+00:03:33,080 --> 00:03:35,048
+你们使用这些工具
 
 
 29
-00:03:34,896 --> 00:03:36,636
-some of those design tools.
+00:03:35,182 --> 00:03:36,650
+使用其中一些设计工具
 
 
 30
-00:03:37,006 --> 00:03:38,416
-And I had to demo
-every one of them
+00:03:37,017 --> 00:03:38,452
+我想向大家展示
 
 
 31
-00:03:38,416 --> 00:03:40,446
-on this stage over the years.
+00:03:38,519 --> 00:03:40,454
+这些年来这个舞台上
+出现过的所有应用程序
 
 
 32
-00:03:40,766 --> 00:03:44,336
-And this is just some
-of those that came --
+00:03:41,555 --> 00:03:44,291
+然而你刚刚所看的
 
 
 33
-00:03:44,336 --> 00:03:47,146
-that you saw a moment ago coming
-through for the last 14 years.
+00:03:44,358 --> 00:03:47,160
+只是14年中的一小部分
 
 
 34
-00:03:47,536 --> 00:03:51,186
-Those 14 years represent
-14 years of Design Awards
+00:03:47,528 --> 00:03:51,298
+但是这代表着
+14年的设计大奖
 
 
 35
-00:03:51,186 --> 00:03:55,346
-since OS X was announced,
-Mac OS X entered the stage,
+00:03:51,565 --> 00:03:55,335
+从OS X问世到现在的
+Mac OS X登上舞台
 
 
 36
-00:03:55,546 --> 00:03:58,276
-and we had developers creating
-apps right from day one.
+00:03:55,602 --> 00:03:58,272
+我们的设计者自第一天
+便开始设计app
 
 
 37
-00:03:58,776 --> 00:04:00,796
-And then, of course, the
-App Store came and iOS
+00:03:58,772 --> 00:04:00,741
+然后 App Store
+和IOS诞生了
 
 
 38
-00:04:00,796 --> 00:04:02,526
-and everything that
-we've known since then.
+00:04:00,807 --> 00:04:02,543
+以及我们所熟知关于
+苹果的一切
 
 
 39
-00:04:02,996 --> 00:04:05,656
-So many of you might be familiar
-with the most recent ones
+00:04:03,010 --> 00:04:06,280
+也许你们只知道最近
+的一些应用程序
 
 
 40
-00:04:05,656 --> 00:04:09,076
-that were shown, and if you
-just take a look at this list --
+00:04:06,680 --> 00:04:08,749
+如果你看一眼列表
 
 
 41
-00:04:09,076 --> 00:04:12,276
-and this isn't to pick off
-the best of the 14 years --
+00:04:09,049 --> 00:04:12,186
+这些并不是14年中
+最好的应用
 
 
 42
-00:04:12,276 --> 00:04:14,296
-but these are some notable
-ones that I just wanted
+00:04:12,286 --> 00:04:14,254
+我只是想告诉大家 
+它们值得被纪念
 
 
 43
-00:04:14,296 --> 00:04:15,216
-to highlight for a minute.
+00:04:14,321 --> 00:04:15,222
+哪怕只有一分钟
 
 
 44
-00:04:16,646 --> 00:04:20,396
-You know, Starry Night Backyard,
-I remember showing that off.
+00:04:16,656 --> 00:04:18,392
+我记得我向大家展示过
 
 
 45
-00:04:20,396 --> 00:04:24,476
-That was incredible in the
-first days of Mac OS X.
+00:04:18,458 --> 00:04:20,360
+Starry Night
+Backyard
 
 
 46
-00:04:24,476 --> 00:04:28,576
-Macnification, this
-great app for science.
+00:04:20,427 --> 00:04:23,664
+在Mac OS X问世的
+第一天上架的一款应用
 
 
 47
-00:04:28,576 --> 00:04:32,336
-Delicious Library 2, this
-whole genre of apps that came
+00:04:24,464 --> 00:04:27,935
+那简直是科学界
+app 的创举
 
 
 48
-00:04:32,336 --> 00:04:35,606
-out in the early days of Mac OS
-X that redefined the experience
+00:04:28,569 --> 00:04:30,737
+之后 Delicious
+Library 2
 
 
 49
-00:04:35,606 --> 00:04:39,236
-for so many of us and actually
-forced -- well, not forced --
+00:04:30,804 --> 00:04:32,306
+系列 app 问世
 
 
 50
-00:04:39,236 --> 00:04:40,996
-but got people excited
+00:04:32,372 --> 00:04:34,107
+在 Mac OS X
+问世的早些时候
 
 
 51
-00:04:40,996 --> 00:04:43,796
-to purchase a Mac just
-to use those apps.
+00:04:34,174 --> 00:04:36,577
+<br/>
+它颠覆了我们的传统经验
 
 
 52
-00:04:43,846 --> 00:04:45,666
-MLB.com At Bat.
+00:04:36,977 --> 00:04:39,179
+无论我们是否是自愿
 
 
 53
-00:04:45,666 --> 00:04:47,216
-Flight Control.
+00:04:39,246 --> 00:04:40,914
+人们总是期待着
 
 
 54
-00:04:47,216 --> 00:04:49,326
-Who didn't play Flight
-Control in the first days
+00:04:40,981 --> 00:04:43,417
+购买一台  Mac
+来运行这些 app
 
 
 55
-00:04:49,376 --> 00:04:51,536
-of the App Store, right?
+00:04:43,750 --> 00:04:45,819
+比如 MLB.com 
+At Bat.
 
 
 56
-00:04:51,536 --> 00:04:54,946
-Paper for scientific research,
-and then Monument Valley,
+00:04:46,019 --> 00:04:47,554
+Flight 
+Control
 
 
 57
-00:04:55,256 --> 00:04:58,346
-Infinity Blade, incredible apps.
+00:04:47,621 --> 00:04:49,556
+大家在App Store
+出来第一天就玩过
 
 
 58
-00:04:58,956 --> 00:05:05,686
-What's interesting is that
-these apps have set the standard
+00:04:49,623 --> 00:04:51,124
+Flight 
+Control是么
 
 
 59
-00:05:05,686 --> 00:05:07,616
-for so many things; right?
+00:04:51,592 --> 00:04:53,493
+根据调查 随后
 
 
 60
-00:05:07,956 --> 00:05:09,976
-They've set the standard
-for the user experience
+00:04:53,560 --> 00:04:54,962
+Monument
+Valley
 
 
 61
-00:05:09,976 --> 00:05:12,176
-that we expect on
-these platforms.
+00:04:55,195 --> 00:04:56,496
+Infinity 
+Blade
 
 
 62
-00:05:12,596 --> 00:05:17,046
-These folks were pioneers in
-many ways, not just these apps,
+00:04:56,697 --> 00:04:57,698
+等其他 app
 
 
 63
-00:05:17,046 --> 00:05:20,056
-but the apps that showed up
-across the last 14 years.
+00:04:58,966 --> 00:05:04,304
+这些 app 给很多领域
 
 
 64
-00:05:20,576 --> 00:05:23,766
-And I think the -- what's really
-cool way to think about it is
+00:05:04,371 --> 00:05:07,641
+建立了标准 
 
 
 65
-00:05:23,766 --> 00:05:27,686
-that in so many ways, each of
-the winners each year stood
+00:05:07,941 --> 00:05:09,943
+我们建立了用户体验标准
 
 
 66
-00:05:27,946 --> 00:05:31,196
-on the shoulders of the
-winners from the previous year.
+00:05:10,010 --> 00:05:12,179
+这正是我们所期待的
 
 
 67
-00:05:31,936 --> 00:05:34,646
-Because so many of these
-apps defined a new standard,
+00:05:12,613 --> 00:05:16,950
+这些app在很多方面
+处于领先水平
 
 
 68
-00:05:34,916 --> 00:05:37,616
-a benchmark in performance
-or in usability,
+00:05:17,017 --> 00:05:20,053
+不仅仅是这些app本身 
+还有14年的开发历程
 
 
 69
-00:05:37,986 --> 00:05:40,926
-and they inspired the rest of
-you, inspired so many people
+00:05:20,587 --> 00:05:23,657
+我认为这种经历非常棒
 
 
 70
-00:05:41,306 --> 00:05:43,096
-to go off and create
-the next great thing.
+00:05:23,724 --> 00:05:27,628
+每年的获奖者
 
 
 71
-00:05:44,346 --> 00:05:49,406
-Now, these apps every
-year we've judged the apps
+00:05:28,495 --> 00:05:31,198
+都是站在前年冠军的肩膀上的
 
 
 72
-00:05:49,406 --> 00:05:51,486
-with the same set of
-criteria, basically.
+00:05:31,832 --> 00:05:34,635
+因为很多app都
+设定了新的准则
 
 
 73
-00:05:51,916 --> 00:05:53,846
-We've looked at delightful apps.
+00:05:34,902 --> 00:05:37,604
+性能或可用性的标准
 
 
 74
-00:05:53,906 --> 00:05:55,796
-These are apps that
-invite people to play
+00:05:37,971 --> 00:05:40,941
+鼓励着你们
 
 
 75
-00:05:55,796 --> 00:05:58,066
-or get real things done; right?
+00:05:41,308 --> 00:05:43,110
+去创造新事物
 
 
 76
-00:05:58,066 --> 00:05:59,986
-They are satisfying;
-they are rewarding.
+00:05:44,344 --> 00:05:49,349
+现在我们每年都会评选app
 
 
 77
-00:06:00,956 --> 00:06:02,876
-We've always looked
-for innovative apps,
+00:05:49,416 --> 00:05:51,485
+基本都是以相同的标准
 
 
 78
-00:06:02,876 --> 00:06:07,686
-winners that have this spark
-of brilliance that it's hard
+00:05:51,919 --> 00:05:53,554
+我们一直在寻找好的app
 
 
 79
-00:06:07,686 --> 00:06:10,606
-to define, but you know
-it when you see it.
+00:05:53,921 --> 00:05:55,756
+这些 app 给用户欢笑
 
 
 80
-00:06:11,156 --> 00:06:13,606
-There's state-of-the-art
-apps that are modern.
+00:05:55,822 --> 00:05:58,058
+或帮助用户解决难题
 
 
 81
-00:06:13,726 --> 00:06:15,776
-They are platform
-differentiating.
+00:05:58,125 --> 00:05:59,993
+用户满意就有回报
 
 
 82
-00:06:16,126 --> 00:06:20,426
-They're high performance; they
-have high-end capabilities,
+00:06:00,961 --> 00:06:02,796
+我们一直在寻找创新的app
 
 
 83
-00:06:20,426 --> 00:06:21,786
-and they are superprecise.
+00:06:02,863 --> 00:06:08,268
+寻找优秀的获奖者
+虽然很不容易
 
 
 84
-00:06:23,326 --> 00:06:25,056
-We look for apps
-that are engaging.
+00:06:08,335 --> 00:06:10,003
+但当我们看见就会知道
 
 
 85
-00:06:25,576 --> 00:06:28,006
-Engagement means that
-people keep coming back
+00:06:11,438 --> 00:06:13,607
+那些出神入化的app
 
 
 86
-00:06:28,136 --> 00:06:29,126
-to use these apps.
+00:06:13,841 --> 00:06:15,776
+它们不断地进化着
 
 
 87
-00:06:29,536 --> 00:06:30,886
-Some of the games
-that were shown,
+00:06:16,109 --> 00:06:20,380
+它们性能卓越  无所不能
 
 
 88
-00:06:30,886 --> 00:06:32,586
-some of the productivity
-tools are things
+00:06:20,447 --> 00:06:21,982
+而且超凡卓绝
 
 
 89
-00:06:32,586 --> 00:06:33,776
-that we can't live without.
+00:06:23,317 --> 00:06:25,052
+我们在寻找具
+有吸引力的app
 
 
 90
-00:06:34,386 --> 00:06:36,076
-We can't live without
-playing these games,
+00:06:25,586 --> 00:06:28,021
+有吸引力意味着
+用户会再次使用
 
 
 91
-00:06:36,076 --> 00:06:37,906
-and we keep coming back
-to them again and again.
+00:06:28,121 --> 00:06:29,256
+继续使用这个app
 
 
 92
-00:06:38,916 --> 00:06:41,126
-We look for apps
-that are enabling.
+00:06:29,523 --> 00:06:30,858
+之前视频中的一些游戏
 
 
 93
-00:06:41,176 --> 00:06:44,426
-And great Apple Design
-Award-winning apps
+00:06:30,924 --> 00:06:32,526
+一些我们生活必不可少的
 
 
 94
-00:06:44,806 --> 00:06:47,186
-that are enabling
-allow you to do things
+00:06:32,593 --> 00:06:33,760
+生产工具
 
 
 95
-00:06:47,186 --> 00:06:49,926
-that you could never
-do before in new ways.
+00:06:34,394 --> 00:06:36,029
+我们生活不能离开游戏
 
 
 96
-00:06:50,136 --> 00:06:53,096
-And lastly, we look
-for designed apps.
+00:06:36,096 --> 00:06:37,898
+离开便无法生活
 
 
 97
-00:06:53,566 --> 00:06:57,206
-These are apps that are deeply
-considered, that are familiar,
+00:06:38,932 --> 00:06:41,134
+我们一直在寻找
+有潜力的app
 
 
 98
-00:06:57,596 --> 00:07:00,096
-they're appealing,
-they're attractive,
+00:06:42,035 --> 00:06:44,738
+以及可以获得苹果
+最佳设计奖的app
 
 
 99
-00:07:00,406 --> 00:07:02,756
-and they're super intuitive
-to use for the people
+00:06:45,038 --> 00:06:47,140
+那些可以让你用新办法完成
 
 
 100
-00:07:02,756 --> 00:07:03,946
-that they were created for.
+00:06:47,207 --> 00:06:50,077
+不可能的任务的app
 
 
 101
-00:07:05,016 --> 00:07:07,806
-So, a quick summary of
-how we pick the apps.
+00:06:51,144 --> 00:06:53,313
+最后 我们还一直在寻找
+设计卓越的app
 
 
 102
-00:07:07,936 --> 00:07:10,386
-We've always picked them
-in basically the same way.
+00:06:53,580 --> 00:06:57,217
+那些被重视
+被反复雕琢的app
 
 
 103
-00:07:10,386 --> 00:07:12,916
-We've always used essentially
-this set of criteria,
+00:06:57,651 --> 00:07:00,254
+那些极具吸引力
+和诱惑力的app
 
 
 104
-00:07:13,556 --> 00:07:16,786
-and this is the criteria
-that we used for this year
+00:07:00,521 --> 00:07:02,689
+目标用户非常明确
 
 
 105
-00:07:17,146 --> 00:07:19,356
-to pick tonight's winners.
+00:07:02,756 --> 00:07:03,957
+使用非常便利的app
 
 
 106
-00:07:19,676 --> 00:07:23,016
-I'd like to invite my
-colleague, Shaan Pruden,
+00:07:05,025 --> 00:07:07,828
+那么 我们如何评
+选这些app呢
 
 
 107
-00:07:23,086 --> 00:07:26,456
-on stage to award
-tonight's winners.
+00:07:07,895 --> 00:07:10,531
+方法基本一致
 
 
 108
-00:07:27,516 --> 00:07:35,016
-[ Applause ]
+00:07:10,597 --> 00:07:12,900
+用一直沿用至今的
 
 
 109
-00:07:35,516 --> 00:07:35,976
->> SHAAN PRUDEN: Hello.
+00:07:13,567 --> 00:07:16,770
+最基础的原则
 
 
 110
-00:07:36,746 --> 00:07:39,656
-This year we will be honoring
-ten apps from categories
+00:07:17,137 --> 00:07:19,439
+评选出今晚的获奖者
 
 
 111
-00:07:39,656 --> 00:07:42,936
-across the App Store, but first
-we wanted to take a moment
+00:07:19,673 --> 00:07:23,010
+在这里 我非常荣幸邀请我的
+同事 莎恩·普鲁登
 
 
 112
-00:07:43,186 --> 00:07:45,976
-and honor two students among
-our scholarship winners.
+00:07:23,076 --> 00:07:26,446
+上台宣布获奖者
 
 
 113
-00:07:46,556 --> 00:07:49,816
->> JOHN GELEYNSE: Now,
-the students we are
+00:07:35,522 --> 00:07:36,523
+莎恩·普鲁登: 大家好
 
 
 114
-00:07:49,816 --> 00:07:53,246
-about to award are scholarship
-winners for this year,
+00:07:36,757 --> 00:07:39,293
+今年 我们将为
+App Store中
 
 
 115
-00:07:53,916 --> 00:07:56,476
-but in the process of looking
-at the scholarship apps,
+00:07:39,359 --> 00:07:40,694
+十类 app 颁发奖项
 
 
 116
-00:07:57,006 --> 00:07:58,996
-we discovered some apps
-that they, themselves,
+00:07:41,328 --> 00:07:42,930
+首先 我想占用一点时间
 
 
 117
-00:07:58,996 --> 00:08:00,716
-had also written
-for the App Store,
+00:07:43,197 --> 00:07:46,466
+表彰获得者中的两名学生
 
 
 118
-00:08:01,206 --> 00:08:03,316
-and we were pretty impressed
-with some of these apps
+00:07:48,535 --> 00:07:50,270
+约翰·格兰斯: 
+接下来 我们将颁发
 
 
 119
-00:08:03,356 --> 00:08:05,476
-that were on the App Store
-by these scholarship winners.
+00:07:50,337 --> 00:07:53,040
+今年获得奖金的学生
 
 
 120
-00:08:05,476 --> 00:08:08,166
-So the two awards
-tonight are going to go
+00:07:53,907 --> 00:07:56,743
+在寻找获奖app过程中
 
 
 121
-00:08:08,236 --> 00:08:10,046
-to developer scholarship winners
+00:07:57,010 --> 00:07:58,979
+我们找到一些
 
 
 122
-00:08:10,086 --> 00:08:11,186
-who have an app on
-the App Store.
+00:07:59,046 --> 00:08:00,747
+专为App Store
+而设计的app
 
 
 123
-00:08:11,686 --> 00:08:14,666
->> SHAAN PRUDEN: And our first
-student winner is Elementary
+00:08:01,215 --> 00:08:05,419
+对于其中一些App
+我们印象深刻
 
 
 124
-00:08:14,666 --> 00:08:16,086
-Minute by Klemens Strasser.
+00:08:05,485 --> 00:08:07,988
+所以今晚这两项奖将颁发给
 
 
 125
-00:08:16,316 --> 00:08:24,066
->> The idea for the
-app came to Klemens
+00:08:08,222 --> 00:08:10,023
+App登上
+App Store的
 
 
 126
-00:08:24,306 --> 00:08:30,326
-in April 2014 while
-sitting in his room thinking
+00:08:10,090 --> 00:08:11,191
+获得开发者奖金的获得者
 
 
 127
-00:08:30,326 --> 00:08:32,446
-about the possibility of
-having a quiz on his wrist.
+00:08:11,758 --> 00:08:13,861
+莎恩·普鲁登: 那么我们
+今晚第一位获得者就是
 
 
 128
-00:08:32,446 --> 00:08:34,356
-Since there wasn't
-an Apple Watch yet,
+00:08:13,927 --> 00:08:15,729
+设计 Elementary
+Minute的
 
 
 129
-00:08:34,696 --> 00:08:36,956
-Klemens developed
-it for the iPhone.
+00:08:15,796 --> 00:08:17,297
+Klemens
+Strasser
 
 
 130
-00:08:43,515 --> 00:08:49,616
-[ Applause ]
+00:08:21,034 --> 00:08:25,606
+Klemens 的这个想法
+萌芽于2014年4月
 
 
 131
-00:08:50,116 --> 00:08:50,896
->> SHAAN PRUDEN:
-Congratulations.
+00:08:25,672 --> 00:08:30,244
+当时他坐在他的房间里思考
 
 
 132
-00:08:51,676 --> 00:08:54,096
-Here you go.
+00:08:30,310 --> 00:08:32,546
+在手腕上进行小测试的可能性
 
 
 133
-00:08:54,316 --> 00:08:56,726
-Elementary Minute is a
-fast-paced trivia game
+00:08:32,946 --> 00:08:34,448
+当时还没有
+Apple Watch
 
 
 134
-00:08:56,776 --> 00:08:59,006
-where you are presenting
-with statements on topics
+00:08:34,748 --> 00:08:36,549
+Klemens是为
+iPhone开发的
 
 
 135
-00:08:59,006 --> 00:09:01,526
-that include math,
-geography, and famous people.
+00:08:50,130 --> 00:08:51,131
+莎恩·普鲁登: 恭喜你
 
 
 136
-00:09:02,006 --> 00:09:03,536
-Quickly swipe up
-or down to decide
+00:08:51,498 --> 00:08:52,165
+这边请
 
 
 137
-00:09:03,536 --> 00:09:05,166
-if the statements
-are true or false.
+00:08:53,901 --> 00:08:55,536
+Elementary
+Minute
 
 
 138
-00:09:05,506 --> 00:09:06,876
-This app was created by Klemens,
+00:08:55,602 --> 00:08:56,737
+是一款快速竞答游戏
 
 
 139
-00:09:06,876 --> 00:09:08,086
-who is a computer
-science student
+00:08:57,104 --> 00:08:58,939
+在这里你可以对主题进行设定
 
 
 140
-00:09:08,086 --> 00:09:10,156
-at Technical University
-in Graz, Austria.
+00:08:59,006 --> 00:09:01,542
+包括数学 地理 和一些名人
 
 
 141
-00:09:11,516 --> 00:09:16,656
-[ Applause ]
+00:09:02,009 --> 00:09:05,179
+根据正确与否进行答题
 
 
 142
-00:09:17,156 --> 00:09:17,696
->> JOHN GELEYNSE:
-Austria, right.
+00:09:05,512 --> 00:09:06,847
+App设计者Klemens
 
 
 143
-00:09:18,316 --> 00:09:19,656
-Big cheer down in front here.
+00:09:06,914 --> 00:09:08,148
+是一名计算机专业的学生
 
 
 144
-00:09:20,006 --> 00:09:22,696
-We Picked Elementary Minute as
-a student Design Award winner
+00:09:08,215 --> 00:09:10,150
+就读于奥地利格拉兹的
+科技大学
 
 
 145
-00:09:22,696 --> 00:09:26,796
-because we loved the design, it
-was super simple, and it was one
+00:09:16,557 --> 00:09:17,758
+约翰·格兰斯:
+奥地利 对吧
 
 
 146
-00:09:26,796 --> 00:09:30,416
-of the first games that
-came out for Apple Watch.
+00:09:18,325 --> 00:09:19,660
+享受欢呼吧
 
 
 147
-00:09:30,986 --> 00:09:34,326
-It's built, obviously, on UIKit
-and those sorts of technologies.
+00:09:19,726 --> 00:09:20,394
+我们评选
 
 
 148
-00:09:34,326 --> 00:09:35,746
-It's integrated with
-Game Center,
+00:09:20,460 --> 00:09:21,728
+Elementary
+Minute
 
 
 149
-00:09:35,746 --> 00:09:38,286
-and it has a clever
-two-game mode.
+00:09:21,795 --> 00:09:22,663
+获得学生设计奖
 
 
 150
-00:09:38,286 --> 00:09:41,906
-You can do a quick five-second
-quiz, trivia quiz on your wrist,
+00:09:22,729 --> 00:09:26,733
+是因为我们喜欢
+它的设计操作简单
 
 
 151
-00:09:41,906 --> 00:09:42,946
-which is perfect for the Watch,
+00:09:26,800 --> 00:09:30,404
+这是Apple Watch
+的第一款游戏应用
 
 
 152
-00:09:43,446 --> 00:09:46,016
-and you can do a one-minute
-quiz both on Apple Watch
+00:09:30,971 --> 00:09:34,274
+很显然 它是基于UIKit
+和相关技术搭建的
 
 
 153
-00:09:46,176 --> 00:09:48,356
-and on iPhone, and
-we just thought
+00:09:34,341 --> 00:09:35,742
+它整合到游戏中心中
 
 
 154
-00:09:48,356 --> 00:09:51,846
-that the way this was done
-was really well executed,
+00:09:36,009 --> 00:09:38,245
+可以进行智能双人模式
 
 
 155
-00:09:51,846 --> 00:09:52,926
-so congratulations.
+00:09:38,312 --> 00:09:40,581
+你可以在手腕上的手表上进行
 
 
 156
-00:09:53,616 --> 00:09:54,736
->> SHAAN PRUDEN: And
-that's Elementary Minute.
+00:09:40,647 --> 00:09:43,116
+五秒的快问快答或益智游戏
 
 
 157
-00:10:01,416 --> 00:10:03,436
-Our other student
-Award this evening goes
+00:09:43,450 --> 00:09:44,985
+你还可以在
+Apple Watch
 
 
 158
-00:10:03,516 --> 00:10:06,446
-to jump-O by ByteBrushers.
+00:09:45,052 --> 00:09:46,053
+上进行一分钟知识竞答 
 
 
 159
-00:10:07,516 --> 00:10:11,546
-[ Applause ]
+00:09:46,286 --> 00:09:48,288
+iPhone也支持
 
 
 160
-00:10:12,046 --> 00:10:15,696
->> Founded in 2013, ByteBrushers
-is a two-person game development
+00:09:48,355 --> 00:09:51,792
+这款应用做得非常好
 
 
 161
-00:10:15,776 --> 00:10:16,926
-team located in Brazil.
+00:09:51,859 --> 00:09:52,926
+恭喜你
 
 
 162
-00:10:17,196 --> 00:10:21,076
-In 2012, Victor took a
-game development course,
+00:09:53,527 --> 00:09:54,528
+莎恩·普鲁登: 这就是
 
 
 163
-00:10:21,436 --> 00:10:23,276
-and a year later,
-he convinced Gabriel
+00:09:54,595 --> 00:09:56,196
+Elementary
+Minute
 
 
 164
-00:10:23,456 --> 00:10:25,286
-to attend the same course.
+00:10:01,401 --> 00:10:03,437
+我们今晚的另一个
+学生获奖者是
 
 
 165
-00:10:25,866 --> 00:10:28,416
-One day while discussing what it
-was like when they were bullied
+00:10:03,504 --> 00:10:06,240
+jump-O的设计者
+ByteBrushers
 
 
 166
-00:10:28,416 --> 00:10:30,346
-as kids, they decided
-to create a game
+00:10:11,745 --> 00:10:15,682
+ByteBrushers
+在2013年成立于巴西
 
 
 167
-00:10:30,346 --> 00:10:31,846
-that reflected their experience.
+00:10:15,782 --> 00:10:17,017
+是一个两人游戏开发团队
 
 
 168
-00:10:40,166 --> 00:10:40,666
->> SHAAN PRUDEN:
-Congratulations.
+00:10:17,184 --> 00:10:21,221
+2012年 维克托上了关于
+游戏开发的课程
 
 
 169
-00:10:45,396 --> 00:10:46,836
-Jump-O is a minimalist game
+00:10:21,421 --> 00:10:23,290
+一年后 他说服盖布瑞
 
 
 170
-00:10:46,836 --> 00:10:48,346
-where you play Roundy
-the circle,
+00:10:23,457 --> 00:10:25,292
+因此他也来上课
 
 
 171
-00:10:48,346 --> 00:10:51,106
-overcoming the dangers presented
-by the squareish world.
+00:10:25,859 --> 00:10:28,395
+一天 他们在讨论儿时如何
+被欺负时
 
 
 172
-00:10:51,686 --> 00:10:54,296
-It was created by two
-university students from Brazil
+00:10:28,462 --> 00:10:30,297
+他们决定开发一款游戏
 
 
 173
-00:10:54,296 --> 00:10:56,206
-and features beautiful
-hand-drawn puzzles.
+00:10:30,364 --> 00:10:31,832
+借此反映他们的经历
 
 
 174
-00:10:58,126 --> 00:10:59,066
->> JOHN GELEYNSE: You
-know what's really fun
+00:10:39,840 --> 00:10:40,741
+莎恩·普鲁登: 祝贺
 
 
 175
-00:10:59,066 --> 00:11:01,586
-for us actually at Apple
-is these folks took some
+00:10:45,279 --> 00:10:46,880
+Jump-O 是一款
+极简主义的游戏
 
 
 176
-00:11:01,586 --> 00:11:03,976
-of the iOS training
-courses that are in Brazil
+00:10:46,947 --> 00:10:48,282
+你只需要不停地转圈
 
 
 177
-00:11:03,976 --> 00:11:07,196
-and gained some experience
-there to build this game.
+00:10:48,348 --> 00:10:51,118
+避开squareish
+世界创造的危险
 
 
 178
-00:11:07,416 --> 00:11:10,326
-We picked jump-O as a
-student Design Award winner
+00:10:51,685 --> 00:10:54,288
+这款游戏是由来自巴西的
+两名大学生开发的
 
 
 179
-00:11:10,326 --> 00:11:14,066
-because of its unique minimalist
-design, as Shaan mentioned.
+00:10:54,354 --> 00:10:56,190
+特点是游戏中精美的迷宫
 
 
 180
-00:11:14,396 --> 00:11:16,936
-It's built on Game
-Center, it uses Sprite Kit
+00:10:57,658 --> 00:10:59,159
+约翰·格兰斯: 
+你知道在苹果公司
 
 
 181
-00:11:16,936 --> 00:11:19,586
-for scene management
-and game physics.
+00:10:59,226 --> 00:11:01,128
+对于我们来说
+什么事才是有趣的
 
 
 182
-00:11:19,976 --> 00:11:21,886
-The input of the
-game is super simple.
+00:11:01,195 --> 00:11:02,963
+就是员工在巴西
+接受关于iOS的培训
 
 
 183
-00:11:21,886 --> 00:11:23,756
-It's tap and device motion.
+00:11:03,030 --> 00:11:03,764
+获得相关技能
 
 
 184
-00:11:24,086 --> 00:11:28,206
-And it's got great
-responsiveness, 68 worlds,
+00:11:03,830 --> 00:11:07,201
+去开发这款游戏
 
 
 185
-00:11:28,206 --> 00:11:31,486
-48 levels, just a
-really fun game
+00:11:07,501 --> 00:11:10,337
+我们评选 jump-O
+获得学生设计奖
 
 
 186
-00:11:31,696 --> 00:11:34,326
-that we thought was just
-really, really well done,
+00:11:10,404 --> 00:11:14,074
+因为其独特的极简主义
 
 
 187
-00:11:34,326 --> 00:11:36,536
-and one of those games
-that seems easy to learn
+00:11:14,408 --> 00:11:16,877
+它基于游戏中心开发
 
 
 188
-00:11:36,856 --> 00:11:39,706
-but it's hard to
-master in that genre.
+00:11:16,944 --> 00:11:19,580
+使用Sprite Kit
+设定屏幕和游戏规则
 
 
 189
-00:11:39,706 --> 00:11:41,936
-So congratulations,
-great work, guys.
+00:11:19,980 --> 00:11:21,882
+游戏玩法十分简单
 
 
 190
-00:11:42,516 --> 00:11:49,606
-[ Applause ]
+00:11:22,049 --> 00:11:23,750
+只需按动弹射器按钮
 
 
 191
-00:11:50,106 --> 00:11:51,746
->> SHAAN PRUDEN: And these
-are our two student winners.
+00:11:24,084 --> 00:11:28,222
+用户反馈很好 
+游戏一共68个关 
 
 
 192
-00:11:52,326 --> 00:11:54,596
-Now let's move on to the
-Design Award winners.
+00:11:28,355 --> 00:11:31,491
+分48个级别
+是一款十分有趣的游戏
 
 
 193
-00:11:55,796 --> 00:12:05,156
-Our first winner is an
-imagination-stirring puzzle.
+00:11:32,125 --> 00:11:34,261
+设计十分优秀
 
 
 194
-00:12:05,616 --> 00:12:08,976
-It is Shadowmatic by
-Triada Studio Games.
+00:11:34,328 --> 00:11:36,530
+容易上手
 
 
 195
-00:12:15,026 --> 00:12:18,206
->> Triada Studio was
-established in Armenia in 1993
+00:11:36,864 --> 00:11:39,700
+但不容易通关
 
 
 196
-00:12:18,576 --> 00:12:20,366
-as a computer graphics
-and animation studio,
+00:11:39,833 --> 00:11:42,102
+所以 干的棒 恭喜你们
 
 
 197
-00:12:20,366 --> 00:12:23,546
-and they successfully work on
-TV commercials, visual effects
+00:11:50,077 --> 00:11:52,079
+莎恩·普鲁登: 
+以上就是我们两名学生获奖者
 
 
 198
-00:12:23,606 --> 00:12:26,116
-for movies, and various
-other animation projects.
+00:11:52,312 --> 00:11:54,781
+现在让我们颁发设计奖
 
 
 199
-00:12:26,196 --> 00:12:28,856
-In 2007, they thought about
-branching into video games,
+00:11:58,952 --> 00:12:00,287
+第一位获奖者是
 
 
 200
-00:12:28,906 --> 00:12:30,506
-began building a game engine.
+00:12:01,855 --> 00:12:05,158
+一款智力解谜游戏
 
 
 201
-00:12:30,566 --> 00:12:32,526
-The four-person game
-team started work
+00:12:05,526 --> 00:12:07,694
+它就是由 Triada
+Studio Games
 
 
 202
-00:12:32,526 --> 00:12:36,966
-on Shadowmatic in March 2012.
+00:12:07,761 --> 00:12:09,162
+开发的
+Shadowmatic
 
 
 203
-00:12:38,876 --> 00:12:40,666
->> SHAAN PRUDEN:
-Shadowmatic is a unique twist
+00:12:15,035 --> 00:12:18,205
+Triada Studio
+于1993年成立于美国
 
 
 204
-00:12:40,666 --> 00:12:41,806
-on shadow puppets.
+00:12:18,572 --> 00:12:20,607
+是一家计算机图像
+和动画工作室
 
 
 205
-00:12:42,386 --> 00:12:43,366
-I don't want to stand
-in their way.
+00:12:20,908 --> 00:12:23,544
+在电视广告和视觉效果
+领域和成果丰硕
 
 
 206
-00:12:44,876 --> 00:12:47,236
-Rotate abstract objects
-in a spotlight
+00:12:23,610 --> 00:12:26,113
+拍摄了大量的电影
+以及其他动画项目
 
 
 207
-00:12:47,576 --> 00:12:50,496
-to find recognizable silhouettes
-in the projected shadow
+00:12:26,180 --> 00:12:28,849
+2007年进军视频游戏
 
 
 208
-00:12:50,496 --> 00:12:52,646
-that are relevant to the
-surrounding environment.
+00:12:28,916 --> 00:12:30,517
+并着手开发游戏引擎
 
 
 209
-00:12:56,056 --> 00:12:56,616
->> JOHN GELEYNSE: All right.
+00:12:30,984 --> 00:12:32,452
+四人团队于2012年3月
 
 
 210
-00:12:56,616 --> 00:12:58,556
-So we picked Shadowmatic
-as a winner
+00:12:32,519 --> 00:12:34,588
+开始开发
+Shadowmatic
 
 
 211
-00:12:58,556 --> 00:13:03,516
-since it's ornately crafted
--- bit of feedback --
+00:12:38,091 --> 00:12:39,893
+莎恩·普鲁登:
+Shadowmatic
 
 
 212
-00:13:03,876 --> 00:13:06,666
-super imaginative, and
-really well executed.
+00:12:39,960 --> 00:12:41,862
+是一款独特的解谜游戏
+类似影子傀儡
 
 
 213
-00:13:06,796 --> 00:13:09,356
-And I'd like to show
-this to you now.
+00:12:42,296 --> 00:12:43,363
+我得给他们让让位置
 
 
 214
-00:13:10,186 --> 00:13:12,446
-So let's get into the
-level -- let's turn it off.
+00:12:44,865 --> 00:12:47,234
+旋转聚光灯下的一些抽象目标
 
 
 215
-00:13:12,576 --> 00:13:15,216
-Let's get into the main menu.
+00:12:47,568 --> 00:12:50,504
+让投射的影子构成
+我们环境中常见的
 
 
 216
-00:13:15,286 --> 00:13:18,866
-So what you see here is just
-there's device motion that's
+00:12:50,838 --> 00:12:52,773
+可识别物品的轮廓
 
 
 217
-00:13:18,866 --> 00:13:22,456
-affecting the view
-into this main menu.
+00:12:55,776 --> 00:12:56,777
+约翰·格兰斯: 好的
 
 
 218
-00:13:22,666 --> 00:13:24,936
-I can interact with objects,
-which is no big deal,
+00:12:56,844 --> 00:12:57,978
+我们评选
+Shadowmatic
 
 
 219
-00:13:24,936 --> 00:13:26,256
-but I am just showing
-you the attention
+00:12:58,045 --> 00:12:58,712
+为获奖者
 
 
 220
-00:13:26,256 --> 00:13:28,616
-to detail that's
-even at this level.
+00:12:59,847 --> 00:13:02,816
+是因为这款游戏的技巧性
+-- 游戏声音--
 
 
 221
-00:13:28,616 --> 00:13:31,326
-And straightaway you hear
-this ambient sound track,
+00:13:03,884 --> 00:13:06,653
+想象力和好评度
 
 
 222
-00:13:31,466 --> 00:13:34,516
-and it's a beautiful sound
-track throughout the game,
+00:13:06,987 --> 00:13:09,356
+现在我想演示一下
 
 
 223
-00:13:34,516 --> 00:13:37,056
-and it's available for
-purchase on iTunes even.
+00:13:10,190 --> 00:13:12,426
+我们现在开始演示
 
 
 224
-00:13:37,676 --> 00:13:40,816
-So let me just go into
-this second level here
+00:13:14,061 --> 00:13:15,229
+我们进入到了主菜单
 
 
 225
-00:13:41,556 --> 00:13:42,796
-and show you how this works.
+00:13:15,295 --> 00:13:18,832
+在这里可看到一个装置
 
 
 226
-00:13:43,066 --> 00:13:44,866
-If you play the game,
-you already know.
+00:13:18,899 --> 00:13:22,469
+可以调整主菜单的不同视角
 
 
 227
-00:13:45,106 --> 00:13:47,396
-If you've not played the game,
-this is a good level to start
+00:13:22,669 --> 00:13:24,872
+我可以和这些物品互动
+这很一般
 
 
 228
-00:13:47,396 --> 00:13:49,106
-at to show you how it all works.
+00:13:24,938 --> 00:13:26,206
+但是 我接下来将继续演示
 
 
 229
-00:13:49,706 --> 00:13:51,506
-So basically what we
-are doing is taking one
+00:13:26,273 --> 00:13:28,208
+更多的细节让大家看看
 
 
 230
-00:13:51,506 --> 00:13:54,496
-of these objects here, which is
-represented at various levels
+00:13:28,609 --> 00:13:31,445
+你们可以听到
+游戏中的环境音效
 
 
 231
-00:13:54,496 --> 00:13:56,926
-with ceramics and metal
-and wood and all kinds
+00:13:31,879 --> 00:13:34,515
+游戏中会一直
+播放美妙的环境音效
 
 
 232
-00:13:56,926 --> 00:13:58,746
-of different materials that
-are beautifully rendered
+00:13:34,681 --> 00:13:37,050
+在iTunes上
+可以购买这些音效
 
 
 233
-00:13:58,746 --> 00:14:02,836
-in the scene, and you take one
-finger to rotate it around,
+00:13:37,684 --> 00:13:40,821
+现在让我们选择第二关
 
 
 234
-00:14:02,836 --> 00:14:04,696
-and you take two
-fingers to twist it.
+00:13:41,588 --> 00:13:42,923
+看看怎么玩
 
 
 235
-00:14:05,146 --> 00:14:08,176
-And essentially, what you are
-trying to do is figure out what,
+00:13:43,056 --> 00:13:44,858
+如果你玩过这游戏
+那么你就知道怎么玩
 
 
 236
-00:14:08,256 --> 00:14:09,446
-you know, shadow it is
+00:13:45,092 --> 00:13:47,561
+如果你没玩过
+那么可以从这一关开始玩
 
 
 237
-00:14:09,856 --> 00:14:11,546
-that you're trying
-to build on the wall.
+00:13:48,028 --> 00:13:49,096
+现在看看这是怎么玩的
 
 
 238
-00:14:11,546 --> 00:14:13,416
-So I am going to
-rotate it slightly,
+00:13:49,696 --> 00:13:51,465
+基本上来说 我们要做的
 
 
 239
-00:14:13,416 --> 00:14:15,496
-looks like I am getting
-some kind of a handle there.
+00:13:51,532 --> 00:13:54,468
+就是摆弄这里的这个物品
 
 
 240
-00:14:16,206 --> 00:14:21,536
-And you'll notice on the bottom
-of the screen there's some dots
+00:13:54,535 --> 00:13:56,904
+每个关卡物品有不同的物品
+有陶瓷 木头
 
 
 241
-00:14:21,536 --> 00:14:25,326
-that may light up here soon
-if I get close to what it is
+00:13:56,970 --> 00:13:58,705
+还有其他漂亮的材料
 
 
 242
-00:14:25,326 --> 00:14:28,146
-that I'm -- yeah, as
-soon as I get close
+00:13:58,772 --> 00:14:02,843
+你可以使用一根
+手指旋转这个物品
 
 
 243
-00:14:28,226 --> 00:14:30,796
-to the puzzle I am trying to
-solve, I get this feedback
+00:14:03,076 --> 00:14:04,711
+使用两根手指可以扭曲物品
 
 
 244
-00:14:30,796 --> 00:14:32,296
-on these glowing
-dots at the bottom.
+00:14:05,145 --> 00:14:07,981
+最重要的是 注意看这里
 
 
 245
-00:14:32,736 --> 00:14:35,186
-And so now I think I am pretty
-close to something that looks
+00:14:08,248 --> 00:14:09,583
+这里的影子
 
 
 246
-00:14:35,186 --> 00:14:39,186
-like a teapot, so there we go.
+00:14:09,850 --> 00:14:11,552
+要改变墙壁上影子的形状
 
 
 247
-00:14:39,326 --> 00:14:42,056
-I get the six dots, and I
-figured out this puzzle.
+00:14:11,919 --> 00:14:13,320
+那么 现在我轻轻
+扭曲一下物品
 
 
 248
-00:14:42,376 --> 00:14:45,506
-And every level is like this,
-and obviously, you're timed.
+00:14:13,387 --> 00:14:15,489
+看来我已经慢慢上手了啊
 
 
 249
-00:14:45,696 --> 00:14:47,056
-As you go up through the levels,
+00:14:16,323 --> 00:14:20,561
+在屏幕下面有一些点
 
 
 250
-00:14:47,056 --> 00:14:48,506
-it gets more and
-more complicated.
+00:14:21,528 --> 00:14:25,299
+影子形状如果越接近目标形状
+点就越多被点亮
 
 
 251
-00:14:48,856 --> 00:14:52,616
-We love the parallax effect
-that looks like you are looking
+00:14:25,365 --> 00:14:28,135
+现在 影子已经慢慢成型了
 
 
 252
-00:14:52,706 --> 00:14:54,436
-into a window in the scene.
+00:14:28,235 --> 00:14:30,704
+越接近本关的目标形状
 
 
 253
-00:14:54,736 --> 00:14:58,416
-We love the high-resolution
-rendering, the high fidelity
+00:14:30,771 --> 00:14:32,306
+底下的点就会越来越多
 
 
 254
-00:14:58,416 --> 00:15:01,366
-of the execution in the app,
+00:14:32,739 --> 00:14:35,142
+现在 我感觉这形状
+已经很接近了
 
 
 255
-00:15:01,526 --> 00:15:04,076
-and we think this app
-totally makes an Apple Design
+00:14:35,209 --> 00:14:39,179
+像一个茶壶的形状
 
 
 256
-00:15:04,076 --> 00:15:04,656
-Award winner.
+00:14:39,313 --> 00:14:42,049
+我得到了六个点 
+我通过了这一关
 
 
 257
-00:15:05,076 --> 00:15:06,216
-So congratulations.
+00:14:42,382 --> 00:14:45,519
+每一关都是这样
+当然 这里有计时
 
 
 258
-00:15:07,516 --> 00:15:14,556
-[ Applause ]
+00:14:45,686 --> 00:14:47,020
+当越到后面的关卡
 
 
 259
-00:15:15,056 --> 00:15:20,506
->> SHAAN PRUDEN: Available
-for both iPad and iPhone.
+00:14:47,087 --> 00:14:48,522
+形状就越复杂
 
 
 260
-00:15:20,506 --> 00:15:23,156
-Our next winner is a
-delightful education app.
+00:14:48,856 --> 00:14:52,626
+这里的视差现象很不错
 
 
 261
-00:15:24,006 --> 00:15:26,106
-It's Metamorphabet
-by Vectorpark.
+00:14:52,693 --> 00:14:54,428
+有种视窗视物的感觉
 
 
 262
-00:15:27,516 --> 00:15:31,556
-[ Applause ]
+00:14:54,728 --> 00:14:58,398
+App运行过程中
+游戏的分辨率很高
 
 
 263
-00:15:32,056 --> 00:15:34,646
->> Vectorpark is the one-person
-interactive development studio
+00:14:58,465 --> 00:15:00,434
+保真度也很好
 
 
 264
-00:15:34,646 --> 00:15:35,866
-of artist Patrick Smith.
+00:15:00,901 --> 00:15:04,004
+我们认为这款App
+完全够资格获得
 
 
 265
-00:15:36,056 --> 00:15:38,016
-His educational background
-is in painting.
+00:15:04,071 --> 00:15:04,738
+苹果设计大奖 
 
 
 266
-00:15:38,016 --> 00:15:39,386
-But soon after graduating,
+00:15:05,072 --> 00:15:06,206
+祝贺
 
 
 267
-00:15:39,386 --> 00:15:42,106
-he discovered he could combine
-his particular visual imagery
+00:15:14,314 --> 00:15:16,149
+莎恩•普鲁登: 
+iPad 和 iPhone
 
 
 268
-00:15:42,306 --> 00:15:44,676
-with his lifelong love of
-animation to create responsive,
+00:15:16,216 --> 00:15:17,117
+都可以下载这款游戏
 
 
 269
-00:15:44,676 --> 00:15:46,786
-immersive, and dreamlike
-experiences.
+00:15:20,454 --> 00:15:22,856
+下一位获奖者
+是一款有趣的教育类App
 
 
 270
-00:15:46,946 --> 00:15:50,296
-Metamorphabet launched on the
-App Store in February 2015.
+00:15:23,957 --> 00:15:26,560
+Vectorpark设计的
+Metamorphabet
 
 
 271
-00:16:07,276 --> 00:16:08,706
->> SHAAN PRUDEN:
-Metamorphabet is a playful,
+00:15:31,999 --> 00:15:34,234
+Vectorpark说的是
+单人互动研发工作室
 
 
 272
-00:16:08,706 --> 00:16:10,426
-interactive alphabet
-for all ages.
+00:15:34,301 --> 00:15:35,869
+由艺术家
+帕特里克·斯密斯建立
 
 
 273
-00:16:10,846 --> 00:16:12,986
-Poke, prod, drag,
-and spin objects
+00:15:36,069 --> 00:15:37,971
+他曾求学 想成为画家
 
 
 274
-00:16:13,456 --> 00:16:15,136
-to reveal surprising vignettes,
+00:15:38,038 --> 00:15:39,339
+但是毕业之后不久
 
 
 275
-00:16:15,236 --> 00:16:17,596
-where letters are magically
-transformed into words.
+00:15:39,406 --> 00:15:42,109
+他发现他可以将视觉形象化
 
 
 276
-00:16:18,096 --> 00:16:23,696
->> We picked Metamorphabet for
-its outstanding creativity,
+00:15:42,309 --> 00:15:44,611
+加上他很爱动画
 
 
 277
-00:16:23,836 --> 00:16:26,736
-convincing physics,
-smooth animations,
+00:15:44,678 --> 00:15:46,780
+因此他创作了
+大量优秀的动画作品
 
 
 278
-00:16:26,736 --> 00:16:28,146
-and exploratory design.
+00:15:46,947 --> 00:15:48,248
+Metamorphabet
 
 
 279
-00:16:28,566 --> 00:16:30,886
-I want to show this to you now.
+00:15:48,315 --> 00:15:50,284
+于2015年2月份
+登录App商店
 
 
 280
-00:16:32,346 --> 00:16:37,066
-So pick the first letter.
+00:16:06,333 --> 00:16:08,435
+*莎恩•普鲁登:
+Metamorphabet
 
 
 281
-00:16:37,066 --> 00:16:40,116
-Right from the start you
-see this torn fabric effect,
+00:16:08,502 --> 00:16:10,637
+是一款益智类互动类的应用
+适合所有年龄段人士
 
 
 282
-00:16:40,206 --> 00:16:41,756
-which is the beginning
-of the animations.
+00:16:10,704 --> 00:16:13,073
+玩家可以刺 拖和旋转物品
 
 
 283
-00:16:42,246 --> 00:16:45,186
-I tap on these letters,
-and they start to interact.
+00:16:13,340 --> 00:16:15,108
+形成不同的
 
 
 284
-00:16:45,186 --> 00:16:48,746
-I am simply tapping, pinching,
-zooming, whatever I want to do,
+00:16:15,242 --> 00:16:17,744
+由字母变换而成的物品
 
 
 285
-00:16:48,846 --> 00:16:51,116
-whatever the child would want
-to do, whatever the student
+00:16:19,713 --> 00:16:21,682
+我们评选
+Metamorphabet
 
 
 286
-00:16:51,116 --> 00:16:55,716
-of letters would want to do, and
-you get these scenes that reveal
+00:16:21,748 --> 00:16:23,684
+是因为这款的创意
 
 
 287
-00:16:55,716 --> 00:16:56,976
-as you interact with
-the letters.
+00:16:23,851 --> 00:16:26,653
+包括在物理方面 动画方面
 
 
 288
-00:16:57,466 --> 00:17:00,866
-So as I start to stroke
-the A and move upwards,
+00:16:26,720 --> 00:16:28,155
+以及在设计方面的新发现
 
 
 289
-00:17:01,636 --> 00:17:05,026
-I now get the word Arch, and
-the narrator would tell me
+00:16:28,555 --> 00:16:30,891
+现在我想介绍一下
 
 
 290
-00:17:05,026 --> 00:17:05,715
-that word.
+00:16:32,359 --> 00:16:36,864
+首先 我们选中第一个字母
 
 
 291
-00:17:05,715 --> 00:17:07,556
-It begins with A.
+00:16:36,930 --> 00:16:40,100
+在动画的一开始就会看到
 
 
 292
-00:17:07,556 --> 00:17:10,386
-As I play with the scene,
-suddenly it starts to move.
+00:16:40,200 --> 00:16:41,768
+一种类似被撕破的特效
 
 
 293
-00:17:10,826 --> 00:17:14,086
-I get this effect of ambling.
+00:16:42,236 --> 00:16:45,072
+我选择这些字母
+之后会开始反应
 
 
 294
-00:17:14,816 --> 00:17:16,945
-So you can continue to
-play with these letters,
+00:16:45,172 --> 00:16:48,575
+我们进行刺 放大等任何动作
 
 
 295
-00:17:16,945 --> 00:17:18,356
-and you learn more
-and more words
+00:16:48,842 --> 00:16:51,078
+或者是孩子和学生
+想要的做的任何动作
 
 
 296
-00:17:18,356 --> 00:17:19,415
-that begin with that letter.
+00:16:51,144 --> 00:16:55,682
+然后就可以看到
+屏幕上开始有反应
 
 
 297
-00:17:19,886 --> 00:17:22,465
-And kids, students, you
-know, learning English
+00:16:55,749 --> 00:16:56,984
+这些字母发生的不同反应
 
 
 298
-00:17:22,465 --> 00:17:23,826
-as a second language, whatever,
+00:16:57,451 --> 00:17:00,854
+现在我把字母A往上提
 
 
 299
-00:17:24,106 --> 00:17:27,236
-are going to learn these
-characters and want
+00:17:01,622 --> 00:17:04,992
+我们可以得到单词Arch
+程序会有个声音
 
 
 300
-00:17:27,236 --> 00:17:28,506
-to keep coming back
-to this game.
+00:17:05,058 --> 00:17:05,726
+读出这个单词
 
 
 301
-00:17:28,506 --> 00:17:31,346
-Let me just show you the G.
+00:17:05,791 --> 00:17:06,960
+这是从A开始玩
 
 
 302
-00:17:31,956 --> 00:17:34,276
-My last name starts with
-G, I like the letter.
+00:17:07,361 --> 00:17:10,396
+然后屏幕会突然动起来
 
 
 303
-00:17:34,656 --> 00:17:35,326
-Let's go in.
+00:17:10,830 --> 00:17:14,101
+这是行走的效果
 
 
 304
-00:17:35,326 --> 00:17:37,866
-We tap on it a few times,
-it goes three-dimensional.
+00:17:14,667 --> 00:17:16,904
+你可以继续和这些字母玩
 
 
 305
-00:17:38,286 --> 00:17:40,316
-I pinch on it, it
-becomes a guitar.
+00:17:16,970 --> 00:17:18,338
+这样可以学到这个字母
 
 
 306
-00:17:40,726 --> 00:17:42,856
-You can look at the
-attention to detail here
+00:17:18,405 --> 00:17:19,406
+和更多的单词
 
 
 307
-00:17:43,406 --> 00:17:49,026
-because I can play individual
-strings, but if I start
+00:17:19,873 --> 00:17:22,442
+另外 孩子和学生可以学英语
 
 
 308
-00:17:49,076 --> 00:17:54,066
-to strum the guitar, a
-garden begins to grow.
+00:17:22,509 --> 00:17:23,810
+学外语 或者
 
 
 309
-00:17:54,066 --> 00:17:55,886
-Kids just love this
-stuff, right?
+00:17:24,111 --> 00:17:27,214
+可以通过玩这个游戏
 
 
 310
-00:17:55,886 --> 00:17:58,076
-It's just surprising,
-unexpected,
+00:17:27,281 --> 00:17:28,515
+不断学习新的单词
 
 
 311
-00:17:58,336 --> 00:18:01,846
-and I can pick these flowers,
-and they turn into ghosts,
+00:17:29,116 --> 00:17:31,351
+现在来试试字母G
 
 
 312
-00:18:01,846 --> 00:18:05,786
-which again begins
-with the letter G.
+00:17:32,286 --> 00:17:34,288
+我的姓氏是G开头的
 
 
 313
-00:18:05,786 --> 00:18:09,936
-And that's just an example
-of the nature of this app,
+00:17:34,621 --> 00:17:35,289
+好的，进来了
 
 
 314
-00:18:09,936 --> 00:18:14,296
-which is just this bright,
-cheerful app with super-great --
+00:17:35,355 --> 00:17:37,858
+我们点击几次 变成3D的了
 
 
 315
-00:18:14,386 --> 00:18:17,916
-you know, with fun sound
-effects crafted by one person.
+00:17:38,292 --> 00:17:40,327
+然后 变成了一把吉他
 
 
 316
-00:18:18,196 --> 00:18:18,966
-Congratulations.
+00:17:40,794 --> 00:17:42,863
+可以留意一下细节的部分
 
 
 317
-00:18:19,516 --> 00:18:26,766
-[ Applause ]
+00:17:46,333 --> 00:17:49,036
+我可以弹单弦，但是这样
 
 
 318
-00:18:27,266 --> 00:18:30,136
->> SHAAN PRUDEN: Available
-on the Mac, iPad, and iPhone.
+00:17:49,102 --> 00:17:53,273
+弹和弦的话 就变成一个花园
 
 
 319
-00:18:30,616 --> 00:18:36,666
-Next up, we have a winner
-in the finance category,
+00:17:54,074 --> 00:17:55,809
+小孩子会很喜欢的
 
 
 320
-00:18:37,546 --> 00:18:40,486
-and it is Robinhood
-by Robinhood Markets.
+00:17:55,876 --> 00:17:58,078
+因为游戏不可预测而且有趣
 
 
 321
-00:18:41,516 --> 00:18:45,546
-[ Applause ]
+00:17:58,378 --> 00:18:01,782
+然后我可以摘花
+花会变成幽灵
 
 
 322
-00:18:46,046 --> 00:18:47,876
->> Robinhood's story
-began almost a decade ago
+00:18:01,849 --> 00:18:05,752
+这是从字母G开始这么玩
 
 
 323
-00:18:47,926 --> 00:18:48,976
-at Stanford University,
+00:18:06,253 --> 00:18:09,890
+以上演示的是怎么玩这个游戏
 
 
 324
-00:18:49,336 --> 00:18:52,326
-where cofounders were
-roommates and classmates.
+00:18:09,957 --> 00:18:14,294
+非常有趣 好玩的一个app
 
 
 325
-00:18:52,426 --> 00:18:55,316
-To inspire a new
-generation of investors,
+00:18:14,394 --> 00:18:17,931
+音效也非常不错
 
 
 326
-00:18:55,536 --> 00:18:57,856
-they built a brokerage from
-the ground up, allowing them
+00:18:18,198 --> 00:18:19,166
+祝贺
 
 
 327
-00:18:57,856 --> 00:18:59,286
-to eliminate commissions
-altogether.
+00:18:27,274 --> 00:18:29,142
+莎恩•普鲁登: 
+Mac，iPad
 
 
 328
-00:18:59,836 --> 00:19:00,786
-Since November's launch,
+00:18:29,209 --> 00:18:30,410
+和iPhone都可以下载
 
 
 329
-00:19:00,826 --> 00:19:03,796
-their team of 30 has introduced
-hundreds of thousands of people
+00:18:33,347 --> 00:18:36,650
+下面是金融方面的获奖App
 
 
 330
-00:19:03,876 --> 00:19:06,526
-to investing, with 25%
-of their customers being
+00:18:37,551 --> 00:18:39,286
+Robinhood
+Markets
 
 
 331
-00:19:06,636 --> 00:19:07,526
-first-time investors.
+00:18:39,353 --> 00:18:40,687
+设计的Robinhood
 
 
 332
-00:19:17,926 --> 00:19:19,556
->> SHAAN PRUDEN: Say good-bye
-to commissions and hello
+00:18:45,826 --> 00:18:47,861
+Robinhood 的故事
+要从十年前说起
 
 
 333
-00:19:19,556 --> 00:19:20,586
-to the future of trading.
+00:18:47,928 --> 00:18:48,962
+当时在斯坦福大学
 
 
 334
-00:19:20,936 --> 00:19:23,186
-Robinhood lets you buy
-and sell stocks for free.
+00:18:49,329 --> 00:18:52,866
+合作人是同学 也是室友
 
 
 335
-00:19:23,666 --> 00:19:26,526
-It also gives you access to
-market data and stock quotes
+00:18:53,467 --> 00:18:55,302
+为了赢取投资人的青睐
 
 
 336
-00:19:26,526 --> 00:19:28,046
-in real-time and allows you
+00:18:55,536 --> 00:18:57,804
+他们建立一套经纪人制度
 
 
 337
-00:19:28,046 --> 00:19:30,066
-to build a personalized
-stock watch list
+00:18:57,871 --> 00:18:59,439
+从而免掉了佣金部分
 
 
 338
-00:19:30,066 --> 00:19:31,236
-with smart notifications.
+00:18:59,840 --> 00:19:00,774
+从11月开始以来
 
 
 339
-00:19:33,336 --> 00:19:33,896
->> JOHN GELEYNSE: All right.
+00:19:00,841 --> 00:19:04,478
+这个三十人的团队
+已经获得上百人的投资
 
 
 340
-00:19:33,896 --> 00:19:34,506
-Let's take a look.
+00:19:04,678 --> 00:19:06,513
+其中25%客户
 
 
 341
-00:19:35,056 --> 00:19:37,646
-So Robinhood distinguishes
-itself with this clean,
+00:19:06,647 --> 00:19:07,781
+属于首次投资
 
 
 342
-00:19:37,696 --> 00:19:40,576
-content-centric design,
-beautiful typography,
+00:19:17,858 --> 00:19:19,526
+莎恩•普鲁登: 
+对佣金说再见
 
 
 343
-00:19:40,846 --> 00:19:42,696
-and a design that
-really does a good job
+00:19:19,593 --> 00:19:20,594
+拥抱未来吧
 
 
 344
-00:19:42,806 --> 00:19:46,756
-at balancing app branding
-with iOS design conventions.
+00:19:20,928 --> 00:19:23,197
+Robinhood可以帮助
+你免费买卖股票
 
 
 345
-00:19:47,286 --> 00:19:52,436
-So right out of the gate,
-the app just draws you in.
+00:19:23,664 --> 00:19:26,433
+为你获取市场数据
 
 
 346
-00:19:52,436 --> 00:19:55,596
-The goal of the app is to
-get more people to invest,
+00:19:26,500 --> 00:19:28,001
+实时股价
 
 
 347
-00:19:55,596 --> 00:19:59,446
-and right away, they decide
-that there's no need to sign
+00:19:28,068 --> 00:19:30,003
+帮你建立自选股列表
 
 
 348
-00:19:59,446 --> 00:20:02,656
-up to actually do
-things in the app.
+00:19:30,070 --> 00:19:31,338
+还为你设置提醒通知
 
 
 349
-00:20:03,186 --> 00:20:04,016
-Let's see here.
+00:19:33,507 --> 00:19:35,008
+约翰·格兰斯: 好的
+现在我们看看
 
 
 350
-00:20:04,566 --> 00:20:06,906
-Let me go to my backup.
+00:19:35,075 --> 00:19:37,644
+Robinhood
+的界面简洁明朗
 
 
 351
-00:20:16,436 --> 00:20:17,096
-There we go.
+00:19:37,711 --> 00:19:40,581
+内容突出 设计美观
 
 
 352
-00:20:17,636 --> 00:20:20,786
-Because on the main screen,
-if we simply scroll up,
+00:19:40,848 --> 00:19:42,683
+好的设计的确体现好的功夫
 
 
 353
-00:20:20,786 --> 00:20:23,336
-we get a bunch of stock
-symbols, and these are
+00:19:42,816 --> 00:19:46,854
+特别是在iOS的
+app 设计方面
 
 
 354
-00:20:23,336 --> 00:20:25,486
-because the app is using
-geolocation to come
+00:19:47,287 --> 00:19:52,426
+那么我们现在进入app界面
 
 
 355
-00:20:25,486 --> 00:20:28,896
-up with these symbols based
-on companies that are nearby.
+00:19:52,593 --> 00:19:55,495
+这款app旨在吸引
+更多人进行投资
 
 
 356
-00:20:29,446 --> 00:20:32,756
-So let's just tap into
-Apple, and you can look
+00:19:55,596 --> 00:19:59,700
+并且设计人员采用无需注册
 
 
 357
-00:20:32,756 --> 00:20:35,576
-at Apple's performance
-over the last little while.
+00:20:00,133 --> 00:20:02,669
+就可以在应用内操作
 
 
 358
-00:20:35,576 --> 00:20:38,826
-You can tap on this chart and
-see the stock performance.
+00:20:03,170 --> 00:20:04,004
+我们现在看看
 
 
 359
-00:20:39,006 --> 00:20:40,226
-I am not logged in yet.
+00:20:05,572 --> 00:20:06,907
+进入后台
 
 
 360
-00:20:40,226 --> 00:20:42,006
-I am not a customer of theirs.
+00:20:16,717 --> 00:20:17,384
+进来了
 
 
 361
-00:20:42,006 --> 00:20:43,036
-I am not a member.
+00:20:17,651 --> 00:20:20,754
+在主界面的时候
+如果我们往下翻
 
 
 362
-00:20:43,036 --> 00:20:44,416
-I am not -- you know, I
-haven't done anything here.
+00:20:20,821 --> 00:20:23,290
+我们会看到一堆公司标志
 
 
 363
-00:20:44,416 --> 00:20:46,766
-I am just playing around with
-this app, exploring with it.
+00:20:23,357 --> 00:20:25,459
+因为这款app会根据
+搜索附近的公司
 
 
 364
-00:20:46,766 --> 00:20:50,596
-I can just tap and drag on the
-chart, get some great feedback
+00:20:25,526 --> 00:20:28,896
+进行查找定位
 
 
 365
-00:20:50,596 --> 00:20:51,766
-on the values at the top.
+00:20:29,429 --> 00:20:32,633
+我们选择苹果公司看看
 
 
 366
-00:20:52,156 --> 00:20:55,356
-I can pinch and get a range
-and get an average value.
+00:20:32,699 --> 00:20:35,536
+可以查看苹果公司的股票情况
 
 
 367
-00:20:55,776 --> 00:20:56,746
-So that's pretty cool.
+00:20:35,602 --> 00:20:38,839
+我们可以点击这个
+表格看看股价走势
 
 
 368
-00:20:56,926 --> 00:20:58,706
-I can look at stats
-from the company.
+00:20:39,173 --> 00:20:40,140
+我还没登录
 
 
 369
-00:20:59,116 --> 00:21:02,716
-I can swipe, do the
-page effect to go back
+00:20:40,240 --> 00:20:41,975
+因为我不是他们的客户
 
 
 370
-00:21:02,806 --> 00:21:03,746
-to a different symbol.
+00:20:42,042 --> 00:20:42,976
+我不是会员
 
 
 371
-00:21:04,236 --> 00:21:05,976
-Here I am at SPY; right?
+00:20:43,043 --> 00:20:44,411
+我还什么都没做来着
 
 
 372
-00:21:06,246 --> 00:21:07,706
-I am looking through
-all of this.
+00:20:44,478 --> 00:20:46,246
+我就简单看看
+试试这款app
 
 
 373
-00:21:09,116 --> 00:21:10,556
-Right? So I can explore
-all of these.
+00:20:46,647 --> 00:20:50,517
+我可以点击和拖动
+表格看看效果
 
 
 374
-00:21:11,296 --> 00:21:12,496
-Let's go back to Apple.
+00:20:50,584 --> 00:20:51,752
+看看顶部的这些价格
 
 
 375
-00:21:12,496 --> 00:21:15,356
-And let's say that at this
-point we are like yeah,
+00:20:52,152 --> 00:20:55,355
+我可以这么做 获得平均价格
 
 
 376
-00:21:15,686 --> 00:21:18,186
-wonder what it would be like
-to buy a stock in this app.
+00:20:55,789 --> 00:20:56,757
+实在有意思
 
 
 377
-00:21:18,646 --> 00:21:21,856
-So we tap Buy, we decide
-let's buy 25 shares
+00:20:56,924 --> 00:20:58,692
+我可以看公司统计数据
 
 
 378
-00:21:22,146 --> 00:21:25,966
-at the current market price
-for a total of $3,195.
+00:20:59,126 --> 00:21:02,729
+可以拖动看看也可以返回
 
 
 379
-00:21:25,966 --> 00:21:26,906
-We say that's fine.
+00:21:02,796 --> 00:21:03,730
+到其他项目
 
 
 380
-00:21:27,016 --> 00:21:31,306
-Review. Robinhood tells us
-that this is a simulated trade,
+00:21:04,231 --> 00:21:05,966
+现在看的是SPY公司
 
 
 381
-00:21:31,586 --> 00:21:32,846
-but if we were doing a trade,
+00:21:06,567 --> 00:21:07,935
+我可以都看得到
 
 
 382
-00:21:32,846 --> 00:21:34,306
-we could just swipe
-up from the bottom.
+00:21:09,102 --> 00:21:10,771
+我可以看到其他公司
 
 
 383
-00:21:34,796 --> 00:21:37,116
-The device vibrates,
-I get some feedback,
+00:21:11,305 --> 00:21:12,506
+我们回到苹果公司
 
 
 384
-00:21:37,366 --> 00:21:38,936
-and it says that's
-what it would be
+00:21:13,307 --> 00:21:14,107
+现在 比如说
 
 
 385
-00:21:38,936 --> 00:21:41,286
-like to purchase some
-stock in this application.
+00:21:14,274 --> 00:21:18,145
+我想通过这款app买入股票
 
 
 386
-00:21:41,676 --> 00:21:44,666
-And at this point, I can
-decide this is pretty cool
+00:21:18,612 --> 00:21:21,849
+那么 我们可以点击买入
+ 买25股
 
 
 387
-00:21:44,666 --> 00:21:47,306
-and I am going to sign
-up and you quickly put
+00:21:22,149 --> 00:21:25,619
+按当前市场价格 
+一共3195美金
 
 
 388
-00:21:47,306 --> 00:21:49,776
-in some basic information
-about yourself,
+00:21:25,953 --> 00:21:26,920
+好的 没问题
 
 
 389
-00:21:49,776 --> 00:21:51,936
-you decide how you are going
-to fund your transactions,
+00:21:27,020 --> 00:21:31,291
+Robinhood
+会提醒我这是模拟交易
 
 
 390
-00:21:52,076 --> 00:21:53,896
-whether it's a checking
-account, savings account,
+00:21:31,592 --> 00:21:32,893
+如果在进行交易的时候
 
 
 391
-00:21:54,316 --> 00:21:57,106
-and then you move on from
-there and start investing.
+00:21:32,960 --> 00:21:34,294
+我们返回顶部
 
 
 392
-00:21:57,536 --> 00:22:02,506
-And Robinhood uses Touch ID
-for secure authentication,
+00:21:34,795 --> 00:21:37,130
+这时候会有反馈
 
 
 393
-00:22:02,666 --> 00:22:06,466
-uses SSL encryption
-to protect your data,
+00:21:37,364 --> 00:21:39,199
+说明如果使用本应用
 
 
 394
-00:22:06,466 --> 00:22:08,956
-and this is just
-such a great app.
+00:21:39,466 --> 00:21:41,301
+进行购入股票操作
 
 
 395
-00:22:08,956 --> 00:22:10,166
-We just love the design.
+00:21:41,668 --> 00:21:44,605
+这时候 我可以决定要买
 
 
 396
-00:22:10,276 --> 00:22:13,986
-So simple, just draws you
-in, and really well done.
+00:21:44,872 --> 00:21:46,807
+现在进行快速注册
 
 
 397
-00:22:14,046 --> 00:22:14,786
-Congratulations.
+00:21:47,207 --> 00:21:49,710
+输入基本信息
 
 
 398
-00:22:15,516 --> 00:22:20,636
-[ Applause ]
+00:21:49,776 --> 00:21:51,945
+可以选择投资方式
 
 
 399
-00:22:21,136 --> 00:22:23,686
->> SHAAN PRUDEN: Available on
-both iPhone and Apple Watch.
+00:21:52,079 --> 00:21:53,881
+可以选择活期账户 储蓄账户
 
 
 400
-00:22:24,856 --> 00:22:25,986
-That's Robinhood.
+00:21:54,314 --> 00:21:57,117
+然后进入下一步开始投资
 
 
 401
-00:22:27,876 --> 00:22:30,756
-Switching gears a little bit,
-our next winner is a Mac app
+00:21:59,119 --> 00:22:00,921
+Robinhood使用
+Touch ID
 
 
 402
-00:22:30,876 --> 00:22:31,996
-for creative professionals.
+00:22:00,988 --> 00:22:02,456
+作为安全认证
 
 
 403
-00:22:32,616 --> 00:22:35,826
-And the winner is Affinity
-Designer by Serif Labs.
+00:22:02,656 --> 00:22:05,592
+使用SSL加密算法保护数据
 
 
 404
-00:22:37,516 --> 00:22:40,586
-[ Applause ]
+00:22:07,094 --> 00:22:08,929
+这款app非常棒
 
 
 405
-00:22:41,086 --> 00:22:44,446
->> Founded in 2009 with a vision
-to develop the next generation
+00:22:08,996 --> 00:22:10,163
+设计非常好
 
 
 406
-00:22:44,446 --> 00:22:45,746
-of creative software
-for the Mac,
+00:22:10,264 --> 00:22:13,967
+简明易懂 非常不错
 
 
 407
-00:22:46,186 --> 00:22:48,726
-Serif Labs is a passionate
-team of seven developers
+00:22:14,034 --> 00:22:14,801
+祝贺
 
 
 408
-00:22:48,726 --> 00:22:51,386
-with a combined 120
-years experience
+00:22:21,074 --> 00:22:22,709
+莎恩•普鲁登: 
+iPhone
 
 
 409
-00:22:51,386 --> 00:22:53,176
-in the graphics design industry.
+00:22:22,776 --> 00:22:24,178
+和 Apple
+Watch可下载
 
 
 410
-00:22:53,266 --> 00:22:54,366
-Based in Nottingham, England,
+00:22:25,179 --> 00:22:26,580
+这就是
+Robinhood应用
 
 
 411
-00:22:54,646 --> 00:22:56,276
-the team has been
-laying the foundation
+00:22:28,115 --> 00:22:30,751
+接下来的获奖者是
+一款专业Mac应用
 
 
 412
-00:22:56,276 --> 00:23:02,906
-for the Affinity products
-for the last five years.
+00:22:30,817 --> 00:22:32,085
+适用于创作性专业人士
 
 
 413
-00:23:02,906 --> 00:23:04,866
->> SHAAN PRUDEN: Affinity
-Designer is fast, smooth,
+00:22:32,619 --> 00:22:35,989
+Serif Labs设计的
+Affinity
 
 
 414
-00:23:04,866 --> 00:23:07,356
-and extremely precise
-vector graphics software.
+00:22:40,961 --> 00:22:43,630
+Serif Labs成立于
+2009旨在开发为
 
 
 415
-00:23:07,876 --> 00:23:10,306
-Imagined by designers and
-made exclusively for the Mac,
+00:22:43,697 --> 00:22:44,398
+Mac系统
 
 
 416
-00:23:10,656 --> 00:23:13,616
-this fresh-faced, multifaceted
-illustration app lets
+00:22:44,464 --> 00:22:45,999
+开发下一代的创作性软件
 
 
 417
-00:23:13,616 --> 00:23:14,506
-creatives shine.
+00:22:46,066 --> 00:22:48,302
+Serif Labs是一个
+由7名开发人员组成的
 
 
 418
-00:23:14,656 --> 00:23:20,686
->> JOHN GELEYNSE: This app is
-a seriously fast vector drawing
+00:22:48,368 --> 00:22:49,870
+富有激情的团队
+在平面设计行业
 
 
 419
-00:23:20,686 --> 00:23:22,576
-application for creative
-professionals,
+00:22:49,937 --> 00:22:52,940
+团队总开发年限超过120年
 
 
 420
-00:23:22,646 --> 00:23:25,076
-and there's no way that
-I can show you, you know,
+00:22:53,273 --> 00:22:54,374
+总部在英格兰诺丁汉
 
 
 421
-00:23:25,516 --> 00:23:27,446
-very many of the
-features in this.
+00:22:54,641 --> 00:22:56,276
+团队在过去5年内
 
 
 422
-00:23:27,446 --> 00:23:30,176
-This is a full-featured
-vector drawing app.
+00:22:56,343 --> 00:22:58,445
+不断对Affinity
+产品进行研发升级
 
 
 423
-00:23:30,776 --> 00:23:33,086
-One of the cool things
-that they've got in the --
+00:23:02,749 --> 00:23:04,084
+莎恩·普鲁登:
+Affinity的设计人员
 
 
 424
-00:23:33,086 --> 00:23:36,026
-just to get you oriented
-is in the top-left corner
+00:23:04,151 --> 00:23:04,818
+在非常高效
 
 
 425
-00:23:36,026 --> 00:23:37,866
-of the screen, there
-are three icons,
+00:23:04,885 --> 00:23:07,354
+同时深谙矢量图软件
 
 
 426
-00:23:37,866 --> 00:23:39,816
-and these represent
-their personas,
+00:23:07,888 --> 00:23:10,424
+由设计人员倾力贡献
+专为Mac系统打造
 
 
 427
-00:23:40,296 --> 00:23:41,726
-basically modes for the app.
+00:23:10,657 --> 00:23:13,560
+这款全新的多层面作图app
 
 
 428
-00:23:42,166 --> 00:23:43,616
-So here we have the
-draw persona,
+00:23:13,627 --> 00:23:14,494
+会让创作耳目一新
 
 
 429
-00:23:43,616 --> 00:23:46,606
-which gives us the tools
-we need for vector drawing.
+00:23:17,264 --> 00:23:20,767
+约翰·格兰斯: 这款应用
+对于创作性的专业人员而言
 
 
 430
-00:23:47,006 --> 00:23:49,806
-We can shift to the pixel
-persona, which is the tools
+00:23:20,834 --> 00:23:22,569
+真是一款矢量图绘图利器
 
 
 431
-00:23:49,806 --> 00:23:51,056
-for pixel-based editing.
+00:23:22,636 --> 00:23:25,072
+另外 我在这里没办法
+演示给大家看
 
 
 432
-00:23:51,306 --> 00:23:53,786
-Then we can move to the export
-persona, which allows us
+00:23:25,906 --> 00:23:27,407
+因为有太多的功能了
 
 
 433
-00:23:53,786 --> 00:23:56,326
-to export layers, groups,
-objects, and regions.
+00:23:27,474 --> 00:23:30,177
+这是一款功能齐全的
+矢量图app
 
 
 434
-00:23:56,896 --> 00:23:58,906
-Right? Let's go back
-to the draw persona.
+00:23:30,777 --> 00:23:33,046
+其中一项很牛逼的功能是
 
 
 435
-00:23:59,526 --> 00:24:01,906
-This app was written
-from scratch on OS X
+00:23:33,113 --> 00:23:35,949
+你可以注意到在屏幕左上方
 
 
 436
-00:24:01,906 --> 00:24:05,656
-and takes advantage of Grand
-Central Dispatch, OpenGL,
+00:23:36,016 --> 00:23:37,851
+这里有三个图标
 
 
 437
-00:24:05,966 --> 00:24:09,496
-Core Graphics, and it's
-fully optimized for 64 bit
+00:23:38,151 --> 00:23:39,820
+代表三种模式
 
 
 438
-00:24:09,496 --> 00:24:12,376
-and multicore, which
-means it can do a ton
+00:23:40,287 --> 00:23:41,722
+是app中的三种基础模式
 
 
 439
-00:24:12,376 --> 00:24:13,886
-of stuff super fast.
+00:23:42,155 --> 00:23:43,557
+这里我们可以看到有绘图模式
 
 
 440
-00:24:14,396 --> 00:24:18,316
-So just scrolling around in
-the document is super quick.
+00:23:43,624 --> 00:23:46,593
+我们可以选择矢量绘图的工具
 
 
 441
-00:24:18,726 --> 00:24:23,206
-I can zoom in to up to a
-million percent if I needed to.
+00:23:46,994 --> 00:23:49,730
+我们切换到像素模式
 
 
 442
-00:24:23,536 --> 00:24:25,496
-As I scroll around at something
+00:23:49,796 --> 00:23:51,064
+用于像素编辑
 
 
 443
-00:24:25,496 --> 00:24:28,326
-like 5,000 percent right
-now, it's very quick.
+00:23:51,298 --> 00:23:53,767
+我们还可以选择输出模式
 
 
 444
-00:24:28,906 --> 00:24:31,266
-They've got a great
-feature where I can go
+00:23:53,834 --> 00:23:56,336
+用于输出涂层
+集合 区域等等
 
 
 445
-00:24:31,266 --> 00:24:32,486
-into these split views.
+00:23:56,904 --> 00:23:58,906
+好的 我们现在回到绘图模式
 
 
 446
-00:24:33,476 --> 00:24:34,246
-Just a second here.
+00:23:59,540 --> 00:24:02,242
+OS X系统曾使用
+这款app进行设计
 
 
 447
-00:24:35,096 --> 00:24:42,976
-Let's go into view mode
-and go into split view,
+00:24:02,409 --> 00:24:05,646
+同时这款应用还采用 多线程
+优化技术开放图形语言
 
 
 448
-00:24:43,256 --> 00:24:45,926
-which lets me split the
-screen into two views,
+00:24:05,979 --> 00:24:07,748
+以及Core
+Graphics系统
 
 
 449
-00:24:45,926 --> 00:24:49,596
-and one of these views I can
-actually go into outline view,
+00:24:07,814 --> 00:24:09,416
+并64位系统进行了优化
 
 
 450
-00:24:49,596 --> 00:24:52,596
-which means that in real-time,
-I am getting my object --
+00:24:09,483 --> 00:24:12,352
+因此 能够进行多任务
 
 
 451
-00:24:53,116 --> 00:24:55,266
-I can see the full
-rendered version or I can go
+00:24:12,419 --> 00:24:13,887
+快速处理
 
 
 452
-00:24:55,266 --> 00:24:59,976
-into outline view and select
-individual objects [applause].
+00:24:14,388 --> 00:24:18,325
+这样查看文件可以非常快
 
 
 453
-00:25:01,046 --> 00:25:03,516
-So then I can select them,
-rotate them, grow them,
+00:24:18,725 --> 00:24:23,197
+如果需要 我还可以放大查看
 
 
 454
-00:25:03,816 --> 00:25:07,136
-whatever I need to do,
-and all of this is live.
+00:24:23,530 --> 00:24:25,465
+还可以这样移动查看
 
 
 455
-00:25:07,196 --> 00:25:12,516
-So I could pick this object here
-and grow it into this portion
+00:24:25,532 --> 00:24:28,335
+放大50倍反应也非常快
 
 
 456
-00:25:12,516 --> 00:25:14,796
-of the screen, and you would see
-the rendering effect right live
+00:24:28,902 --> 00:24:31,238
+这个应用有个很好的功能
 
 
 457
-00:25:15,196 --> 00:25:17,196
-across the divide.
+00:24:31,305 --> 00:24:32,673
+分屏浏览
 
 
 458
-00:25:17,196 --> 00:25:19,106
-And I can just move this
+00:24:33,307 --> 00:24:34,408
+请稍等
 
 
 459
-00:25:19,106 --> 00:25:21,116
-in real-time back
-and forth super fast.
+00:24:40,347 --> 00:24:42,983
+找到显示模式
+然后进入分屏显示
 
 
 460
-00:25:21,696 --> 00:25:26,456
-Now, I was talking about
-how you could do zoom,
+00:24:43,250 --> 00:24:45,853
+这样可以使用两个屏幕显示
 
 
 461
-00:25:26,646 --> 00:25:30,666
-and I remember seeing that there
-was a spelling error up here,
+00:24:45,919 --> 00:24:48,722
+我还可以选择其中
+一个视图进行编辑
 
 
 462
-00:25:30,666 --> 00:25:32,496
-so I am just going
-to zoom in here
+00:24:49,590 --> 00:24:52,593
+这是实时显示的也就是说
 
 
 463
-00:25:32,496 --> 00:25:34,366
-and fix something on my design.
+00:24:53,126 --> 00:24:55,262
+画面会实时进行视图变化
 
 
 464
-00:25:34,366 --> 00:25:36,366
-Now I am in at about
-10,000 percent.
+00:24:55,329 --> 00:24:59,066
+在轮廓试图下
+还可以选择个别对象
 
 
 465
-00:25:36,406 --> 00:25:41,726
-And I am just going to
-change this one edit here,
+00:25:01,034 --> 00:25:03,504
+我可以选择 旋转或放大图像
 
 
 466
-00:25:42,146 --> 00:25:43,916
-and you know, move back out.
+00:25:03,804 --> 00:25:07,140
+而这一切操作都是实时的
 
 
 467
-00:25:44,586 --> 00:25:46,666
-And you are looking
-at this image here.
+00:25:07,207 --> 00:25:12,412
+我可以选取该对象
+放大到屏幕这部分
 
 
 468
-00:25:47,326 --> 00:25:50,606
-Right? So there's a
-ton I could show you.
+00:25:12,479 --> 00:25:14,781
+而你能在分屏视图中
 
 
 469
-00:25:50,606 --> 00:25:52,416
-They've got a great corner tool,
+00:25:15,315 --> 00:25:17,784
+实时看到渲染效果
 
 
 470
-00:25:52,686 --> 00:25:56,056
-they've got tremendous
-functionality,
+00:25:18,151 --> 00:25:21,121
+我还可以实时快速来回移动它
 
 
 471
-00:25:56,176 --> 00:26:00,216
-and we were just blown away
-by how modern this app was
+00:25:21,688 --> 00:25:26,460
+现在我将谈谈如何放大显示
 
 
 472
-00:26:00,636 --> 00:26:03,716
-and how capable it was
-and how great it was --
+00:25:26,760 --> 00:25:30,564
+我记得这里有个拼写错误
 
 
 473
-00:26:03,716 --> 00:26:06,936
-and how optimized it was for the
-most modern Mac hardware today.
+00:25:30,998 --> 00:25:32,432
+所以我要放大图像
 
 
 474
-00:26:07,366 --> 00:26:08,816
-Excellent work, guys.
+00:25:32,499 --> 00:25:34,334
+对我的设计图进行修改
 
 
 475
-00:26:08,936 --> 00:26:09,746
-Thank you so much.
+00:25:34,401 --> 00:25:36,370
+我现在把图像放大到100倍
 
 
 476
-00:26:09,746 --> 00:26:10,576
-Congratulations.
+00:25:38,605 --> 00:25:41,742
+我现在要进行编辑一下
 
 
 477
-00:26:10,576 --> 00:26:22,596
->> SHAAN PRUDEN: That's Affinity
-Designer available for the Mac.
+00:25:43,076 --> 00:25:43,911
+返回删除
 
 
 478
-00:26:22,816 --> 00:26:25,036
-Next up, a game from
-a classic genre.
+00:25:44,678 --> 00:25:46,680
+在这里可以看到操作图像
 
 
 479
-00:26:25,626 --> 00:26:28,726
-The winner is Crossy
-Road by Hipster Whale.
+00:25:47,314 --> 00:25:50,584
+其实我还有很多东西
+可以展示给你们
 
 
 480
-00:26:29,516 --> 00:26:31,846
-[ Applause ]
+00:25:50,651 --> 00:25:52,419
+还有一个出色的修角工具
 
 
 481
-00:26:32,346 --> 00:26:34,596
->> Based in Australia,
-Hipster Whale was founded
+00:25:52,686 --> 00:25:56,056
+功能非常强大
 
 
 482
-00:26:34,596 --> 00:26:35,836
-by Matthew and Andrew.
+00:25:56,323 --> 00:26:00,227
+这款APP的的设计令人惊讶
 
 
 483
-00:26:36,416 --> 00:26:38,726
-Crossy Road is Andy's
-first-ever mobile game.
+00:26:00,627 --> 00:26:03,664
+功能强大 特性杰出
 
 
 484
-00:26:39,166 --> 00:26:43,796
-The game was popular from day
-one, but it really struck a cord
+00:26:03,730 --> 00:26:06,934
+非常适合最新款
+Mac硬件配置
 
 
 485
-00:26:43,796 --> 00:26:45,116
-in schoolyards around the world.
+00:26:07,367 --> 00:26:08,802
+非常好
 
 
 486
-00:26:45,486 --> 00:26:47,316
-Since launching, the
-team has expanded,
+00:26:08,936 --> 00:26:09,670
+谢谢你们
 
 
 487
-00:26:47,316 --> 00:26:49,246
-and now six people
-work on Crossy Road.
+00:26:09,736 --> 00:26:10,637
+也恭喜你们
 
 
 488
-00:27:04,216 --> 00:27:06,486
->> SHAAN PRUDEN: Crossy Road is
-an endless arcade hopper game.
+00:26:16,877 --> 00:26:18,946
+莎恩·普鲁登: 
+真的适合Mac设计师
 
 
 489
-00:27:07,076 --> 00:27:10,736
-It has a retro feel but
-with updated twists.
+00:26:22,816 --> 00:26:25,052
+接下来是一款经典游戏
 
 
 490
-00:27:11,086 --> 00:27:13,286
-As you hop over endless
-freeways, railroads,
+00:26:25,619 --> 00:26:27,287
+获胜者是 Hipster
+Whale
 
 
 491
-00:27:13,286 --> 00:27:15,176
-and rivers you almost
-don't mind getting run
+00:26:27,354 --> 00:26:28,722
+开发的
+Crossy Road
 
 
 492
-00:27:15,176 --> 00:27:17,396
-over because the animations
+00:26:32,259 --> 00:26:33,660
+Matthew
+和 Andrew
 
 
 493
-00:27:17,396 --> 00:27:22,646
-for collisions are absolutely
-hysterical, as you will see.
+00:26:33,727 --> 00:26:36,263
+在澳大利亚成立了
+Hipster Whale
 
 
 494
-00:27:22,906 --> 00:27:23,176
->> JOHN GELEYNSE: Great.
+00:26:36,330 --> 00:26:37,965
+Crossy Road
+是Andy开发的
 
 
 495
-00:27:23,176 --> 00:27:27,406
-So Crossy Road -- let's go
-to the iPad -- has this --
+00:26:38,031 --> 00:26:38,732
+第一款手机游戏
 
 
 496
-00:27:27,496 --> 00:27:29,436
-you know, it's got
-this addictive balance
+00:26:39,166 --> 00:26:43,737
+这款游戏自问世后
+就非常受欢迎
 
 
 497
-00:27:29,516 --> 00:27:33,936
-between a casual puzzle and
-arcade game and, you know,
+00:26:43,804 --> 00:26:45,105
+并在校园中掀起热潮
 
 
 498
-00:27:33,936 --> 00:27:36,326
-if you haven't played this game
-you are missing out big time,
+00:26:45,472 --> 00:26:47,241
+游戏发布后 
+开发团队已经扩大
 
 
 499
-00:27:36,386 --> 00:27:39,086
-but if you have, you know
-exactly what this is all about;
+00:26:47,307 --> 00:26:49,610
+现在已经有六位人员参与
+开发Crossy Road
 
 
 500
-00:27:39,086 --> 00:27:39,246
-right?
+00:27:03,657 --> 00:27:05,359
+莎恩·普鲁登: 
+Crossy Road
 
 
 501
-00:27:39,246 --> 00:27:41,546
-You are this chicken
-or some crazy character
+00:27:05,425 --> 00:27:06,627
+是一款无限跳跃游戏
 
 
 502
-00:27:41,546 --> 00:27:44,806
-that they've drawn, and you are
-crossing these multilane roads.
+00:27:08,529 --> 00:27:10,731
+既有复古感也有现代反转
 
 
 503
-00:27:45,286 --> 00:27:46,926
-Now, in this particular
-case, I am not the chicken,
+00:27:11,164 --> 00:27:13,233
+当你跃过连续公路
+铁路和河流时
 
 
 504
-00:27:46,926 --> 00:27:48,126
-but let's move anyway.
+00:27:13,300 --> 00:27:15,135
+你甚至不介意被车辆碾过
 
 
 505
-00:27:48,836 --> 00:27:52,676
-I am tapping to move forward,
-and I can move left and right.
+00:27:15,202 --> 00:27:17,337
+因为你会发现
 
 
 506
-00:27:55,166 --> 00:27:57,756
-This is the schoolgirl.
+00:27:17,404 --> 00:27:19,806
+撞击画面超级刺激
 
 
 507
-00:27:58,546 --> 00:27:59,996
-See how far I can get here.
+00:27:22,843 --> 00:27:23,844
+约翰·格兰斯: 太棒了
 
 
 508
-00:28:01,816 --> 00:28:03,826
-Oh, let's go, miss the
-train, get out of the way.
+00:27:23,911 --> 00:27:26,113
+在iPad上也有
+Crossy Road
 
 
 509
-00:28:03,826 --> 00:28:06,496
-Whoa. Let's keep going.
+00:27:26,747 --> 00:27:27,414
+这款游戏
 
 
 510
-00:28:06,826 --> 00:28:10,896
-Oh, she got run over.
+00:27:27,481 --> 00:27:29,449
+它完美地结合了
 
 
 511
-00:28:10,896 --> 00:28:11,676
-Okay. I am sorry.
+00:27:29,516 --> 00:27:33,854
+休闲益智和街机游戏
 
 
 512
-00:28:11,676 --> 00:28:12,606
-Let's try another one.
+00:27:33,921 --> 00:27:36,323
+如果你没玩过这款游戏 
+可以试试游戏体验
 
 
 513
-00:28:12,606 --> 00:28:13,456
-Let's try the chicken,
+00:27:36,390 --> 00:27:39,092
+但如果你玩过的话 那你懂的
 
 
 514
-00:28:13,526 --> 00:28:15,856
-see if the chicken comes
-up, love the chicken.
+00:27:39,259 --> 00:27:41,528
+游戏里你是这只小鸡
+或一些疯狂的角色
 
 
 515
-00:28:15,886 --> 00:28:18,146
-So you have all these
-characters that they've created,
+00:27:41,595 --> 00:27:44,798
+你需要穿过多车道马路
 
 
 516
-00:28:18,146 --> 00:28:19,646
-and there's some
-really good stuff.
+00:27:45,299 --> 00:27:46,934
+现在 我操作着这个角色
 
 
 517
-00:28:19,646 --> 00:28:23,666
-Here's the dress,
-you know, #thedress.
+00:27:47,000 --> 00:27:48,135
+然后试试移动看看
 
 
 518
-00:28:23,796 --> 00:28:27,466
-There is dark lord,
-gravedigger, hot shot.
+00:27:48,836 --> 00:27:52,439
+我点击前进 
+我也可以左右移动
 
 
 519
-00:28:27,826 --> 00:28:29,426
-Let's go back to one
-of my favorite ones.
+00:27:55,175 --> 00:27:57,744
+这是个女学生
 
 
 520
-00:28:29,426 --> 00:28:33,106
-I actually own chickens, just
-the funniest creatures around,
+00:27:58,846 --> 00:27:59,980
+看看我能走多远
 
 
 521
-00:28:33,556 --> 00:28:35,986
-so this is a real fun game
-to play with your chicken.
+00:28:01,815 --> 00:28:03,784
+好 那我们出发吧 
+避开了火车
 
 
 522
-00:28:36,826 --> 00:28:43,806
-So if you just look at the
-8-bit isometric graphics,
+00:28:03,851 --> 00:28:06,486
+哇 继续走
 
 
 523
-00:28:43,856 --> 00:28:48,556
-just the sound.
+00:28:09,256 --> 00:28:10,858
+噢 她被车撞了
 
 
 524
-00:28:48,556 --> 00:28:52,146
-Oh, and if that happens,
-I can actually share this
+00:28:10,924 --> 00:28:11,692
+好吧 我很抱歉
 
 
 525
-00:28:52,226 --> 00:28:55,646
-with my friends and
-look at the effect.
+00:28:11,758 --> 00:28:12,693
+我们试试另一个角色
 
 
 526
-00:28:56,516 --> 00:29:01,696
-[ Applause ]
+00:28:12,759 --> 00:28:13,460
+我们来试试小鸡
 
 
 527
-00:29:02,196 --> 00:29:03,616
-You know, Crossy Road -- I mean,
+00:28:13,527 --> 00:28:15,863
+看看这只小鸡能否出现
+大家喜欢这只小鸡吧
 
 
 528
-00:29:03,676 --> 00:29:05,226
-you could play this
-forever; right?
+00:28:16,029 --> 00:28:18,131
+你可以选择
+他们创设的所有角色
 
 
 529
-00:29:05,226 --> 00:29:07,786
-And I know people who
-get all the way up to 700
+00:28:18,365 --> 00:28:19,600
+还有其他非常棒的东西
 
 
 530
-00:29:07,786 --> 00:29:09,466
-and it kills me because
-the highest I can get is
+00:28:19,666 --> 00:28:21,935
+这是一件裙子
+没错 就是裙子
 
 
 531
-00:29:09,466 --> 00:29:10,516
-about 70 or something.
+00:28:23,804 --> 00:28:27,474
+还有黑暗领主 
+掘墓者和篮球火
 
 
 532
-00:29:10,886 --> 00:29:13,426
-But Crossy Road is such
-exciting game play.
+00:28:27,908 --> 00:28:29,343
+我们回到我最喜欢的那款吧
 
 
 533
-00:29:13,426 --> 00:29:16,206
-They have beautiful,
-gorgeous 8-bit graphics,
+00:28:29,409 --> 00:28:33,113
+事实上我真的养了
+一群非常逗趣的小鸡
 
 
 534
-00:29:16,836 --> 00:29:18,846
-if that even makes sense,
-but there's just something
+00:28:33,547 --> 00:28:35,983
+这事一款可以你可以
+同你的小鸡一起玩的有趣游戏
 
 
 535
-00:29:18,846 --> 00:29:21,756
-about the way you've designed
-your characters, the artwork.
+00:28:39,653 --> 00:28:42,389
+如果你单看这8位等距图形
 
 
 536
-00:29:22,086 --> 00:29:25,576
-Hilarious collision animations,
-expressive characters,
+00:28:43,390 --> 00:28:44,391
+或单听声音
 
 
 537
-00:29:25,736 --> 00:29:28,256
-excellent sound design,
-and you know what?
+00:28:48,195 --> 00:28:52,132
+噢 如果真是这样
 
 
 538
-00:29:28,256 --> 00:29:32,186
-I think all of that combines to
-create really great personality.
+00:28:52,199 --> 00:28:55,636
+我真的可以和我的朋友
+分享看看效果如何
 
 
 539
-00:29:32,496 --> 00:29:34,796
-This game has got
-tremendous personality,
+00:29:01,875 --> 00:29:03,610
+你懂的 我是说
+Crossy Road
 
 
 540
-00:29:35,146 --> 00:29:37,106
-which is really actually
-a great characteristic
+00:29:03,677 --> 00:29:05,145
+可以永远玩下去 对吗
 
 
 541
-00:29:37,106 --> 00:29:37,966
-for an ADA winner.
+00:29:05,212 --> 00:29:07,748
+我听说有人已经
+玩到第700关
 
 
 542
-00:29:38,046 --> 00:29:39,206
-So congratulations.
+00:29:07,814 --> 00:29:09,183
+这真是要了我的命
 
 
 543
-00:29:40,516 --> 00:29:44,546
-[ Applause ]
+00:29:09,249 --> 00:29:10,751
+因为我最高也只玩到
+第70关而已
 
 
 544
-00:29:45,046 --> 00:29:46,676
->> SHAAN PRUDEN: Crossy Road
-available on iPhone and iPad.
+00:29:10,918 --> 00:29:13,420
+但是Crossy Road
+就是一款如此刺激的手游
 
 
 545
-00:29:46,866 --> 00:29:53,746
-Next up, an app in the
-productivity category.
+00:29:13,787 --> 00:29:16,356
+人设全都是华丽的8位图形
 
 
 546
-00:29:55,026 --> 00:29:57,626
-It's by Flexibits,
-Fantastical 2.
+00:29:16,690 --> 00:29:18,825
+如果这还不算什么
 
 
 547
-00:29:58,516 --> 00:30:02,586
-[ Applause ]
+00:29:18,892 --> 00:29:21,762
+你还可以自由设计你的角色
 
 
 548
-00:30:03,086 --> 00:30:06,296
->> Flexibits creates enjoyable
-and flexible productivity apps
+00:29:22,095 --> 00:29:25,566
+滑稽的碰撞画面 传神的角色
 
 
 549
-00:30:06,296 --> 00:30:08,236
-for Mac, iPhone, and iPad.
+00:29:25,732 --> 00:29:28,202
+卓越的音效设计你明白吗
 
 
 550
-00:30:08,236 --> 00:30:10,576
-Cofounded by Michael
-Simmons and Kent Sutherland,
+00:29:28,268 --> 00:29:32,172
+我认为所有这些共同
+创造出了超凡的特性
 
 
 551
-00:30:10,576 --> 00:30:13,396
-the seven-person Flexibits team
-is located around the globe
+00:29:32,506 --> 00:29:34,808
+这款游戏实在伟大
 
 
 552
-00:30:13,396 --> 00:30:15,576
-in San Francisco,
-Boston, New York,
+00:29:35,142 --> 00:29:36,043
+对ADA获胜者而言
 
 
 553
-00:30:15,826 --> 00:30:17,306
-Houston, Germany, and Austria.
+00:29:36,109 --> 00:29:37,978
+真的是一款非常棒的游戏
 
 
 554
-00:30:17,866 --> 00:30:20,036
-Fantastical 2 launched
-on the Mac App Store
+00:29:38,045 --> 00:29:39,146
+所以 祝贺你们
 
 
 555
-00:30:20,196 --> 00:30:25,636
-in March of this year.
+00:29:44,551 --> 00:29:46,553
+莎恩·普鲁登: 在
+iPhone和iPad上
 
 
 556
-00:30:27,776 --> 00:30:29,196
->> SHAAN PRUDEN:
-Fantastical is a calendar app
+00:29:46,620 --> 00:29:48,021
+都可以玩
+Crossy Road
 
 
 557
-00:30:29,196 --> 00:30:31,846
-that strikes the right balance
-between features and usability.
+00:29:50,023 --> 00:29:53,760
+接下来是一款关于
+生产力应用的软件
 
 
 558
-00:30:32,316 --> 00:30:34,866
-With natural language creation
-of events and reminders,
+00:29:55,028 --> 00:29:57,631
+它就是 Flexibits
+Fantastical 2
 
 
 559
-00:30:35,366 --> 00:30:41,196
-beautiful calendar views,
-and ultra smart event lists.
+00:30:02,836 --> 00:30:04,838
+Flexibits
+为Mac，iPhone
 
 
 560
-00:30:41,356 --> 00:30:41,616
->> JOHN GELEYNSE: Great.
+00:30:04,905 --> 00:30:06,173
+和 iPad 开发了许多
 
 
 561
-00:30:41,616 --> 00:30:45,026
-So we picked Fantastical
-for the beautiful
+00:30:06,306 --> 00:30:08,008
+有趣而且相当有
+用的app应用
 
 
 562
-00:30:45,026 --> 00:30:47,126
-and thoughtfully designed
-experience they brought
+00:30:08,242 --> 00:30:10,511
+创始人是麦克·西蒙斯
+和肯特·萨瑟兰
 
 
 563
-00:30:47,126 --> 00:30:48,246
-to OS X Yosemite.
+00:30:10,577 --> 00:30:13,380
+Flexibits团队
+共7人成员来自世界各地
 
 
 564
-00:30:48,446 --> 00:30:51,206
-I know that they've
-worked really hard on this
+00:30:13,447 --> 00:30:15,582
+有旧金山 波斯顿 纽约
 
 
 565
-00:30:51,706 --> 00:30:56,406
-because they have supported
-prior to this iPad, iPhone,
+00:30:15,816 --> 00:30:17,317
+休斯顿 德国和澳大利亚
 
 
 566
-00:30:56,616 --> 00:30:58,626
-most recently they just
-came out with Apple Watch,
+00:30:17,851 --> 00:30:20,153
+Fantastical 2
+于今年的3月份
 
 
 567
-00:30:58,626 --> 00:31:02,706
-and they have done a great job
-at bringing the visual style
+00:30:20,220 --> 00:30:21,255
+登录App应用商店
 
 
 568
-00:31:02,706 --> 00:31:05,246
-of the app across
-all of those devices
+00:30:27,227 --> 00:30:29,162
+莎恩·普鲁登:
+Fantastical
 
 
 569
-00:31:05,246 --> 00:31:08,436
-and at delivering
-something fantastic on OS X.
+00:30:29,229 --> 00:30:30,597
+是一款日历应用
 
 
 570
-00:31:08,756 --> 00:31:11,116
-So I want to just show you a
-couple of features in this app
+00:30:30,664 --> 00:30:31,832
+不仅实用还很有特色
 
 
 571
-00:31:11,206 --> 00:31:13,356
-that we think make
-it really great.
+00:30:32,332 --> 00:30:34,868
+有事件和提醒语言设置
 
 
 572
-00:31:13,756 --> 00:31:15,346
-First of all, it's super fast.
+00:30:35,369 --> 00:30:38,305
+漂亮的日历界面以及
+智能事件列表功能
 
 
 573
-00:31:15,976 --> 00:31:18,066
-So if you just go to the
-left side of the screen here,
+00:30:40,941 --> 00:30:41,975
+约翰·格兰斯：非常好
 
 
 574
-00:31:18,296 --> 00:31:21,116
-you scroll through all
-your stuff, the entire --
+00:30:42,042 --> 00:30:43,644
+我们将
+Fantactical
 
 
 575
-00:31:21,406 --> 00:31:22,906
-you know, everything
-just follows along.
+00:30:43,710 --> 00:30:44,978
+这款应用的
 
 
 576
-00:31:22,906 --> 00:31:25,566
-You look at the top-left corner,
-it's whipping across the weeks
+00:30:45,045 --> 00:30:47,014
+理念和优美界面融入到
 
 
 577
-00:31:25,616 --> 00:31:27,106
-to indicate the ones
-that are selected.
+00:30:47,080 --> 00:30:48,515
+OS X Yosemite
+操作系统的设计当中
 
 
 578
-00:31:27,396 --> 00:31:30,006
-The right side is moving
-through your full calendar.
+00:30:48,582 --> 00:30:51,451
+对此他们真的非常认真
 
 
 579
-00:31:30,006 --> 00:31:33,086
-And there's just not a
-hesitation to the app.
+00:30:51,718 --> 00:30:56,390
+由于已经支持iPad
+和iPhone系统
 
 
 580
-00:31:33,306 --> 00:31:34,956
-That's fantastic.
+00:30:56,623 --> 00:30:58,926
+最近他们才开始开发
+Apple Watch应用
 
 
 581
-00:31:35,386 --> 00:31:38,006
-We can examine what's
-going on on a specific day.
+00:30:58,992 --> 00:31:02,663
+开发这类视觉风格
+并适用于所有设备
 
 
 582
-00:31:38,006 --> 00:31:39,836
-If you look at the
-top-left corner here,
+00:31:02,729 --> 00:31:05,632
+他们需要付出很多努力
 
 
 583
-00:31:39,836 --> 00:31:41,576
-you have dots below
-some of these dates.
+00:31:05,899 --> 00:31:08,435
+同时在OS X系统上
+也是惊喜连连
 
 
 584
-00:31:41,576 --> 00:31:44,086
-If I point on the
-dates with dots,
+00:31:08,769 --> 00:31:11,104
+那么 接下来我想展示一下
+这款App的几个特点
 
 
 585
-00:31:44,446 --> 00:31:46,646
-and the dots are colored
-according to my calendar colors,
+00:31:11,205 --> 00:31:13,340
+我们认为这是非常棒的特点
 
 
 586
-00:31:46,976 --> 00:31:48,296
-I can see exactly what's going
+00:31:13,807 --> 00:31:15,676
+首先是超爽的响应速度
 
 
 587
-00:31:48,296 --> 00:31:50,326
-on on those days
-from which calendars.
+00:31:15,976 --> 00:31:18,045
+我们在屏幕的左边这里
 
 
 588
-00:31:50,636 --> 00:31:51,406
-That's pretty cool.
+00:31:18,312 --> 00:31:21,114
+可以查看你的记录
 
 
 589
-00:31:51,406 --> 00:31:53,576
-I don't have to collect and
-examine and go into that day
+00:31:21,415 --> 00:31:22,850
+所有的事项都在这里列出来了
 
 
 590
-00:31:53,576 --> 00:31:56,536
-and look at what's
-happening at that point.
+00:31:22,916 --> 00:31:25,552
+在左上角这里选择其中一周
 
 
 591
-00:31:57,106 --> 00:32:00,636
-Fantastical 2 makes it super
-easy to add new things,
+00:31:25,619 --> 00:31:27,120
+可以看到当周的所有事项
 
 
 592
-00:32:01,046 --> 00:32:02,566
-new events or new reminders.
+00:31:27,387 --> 00:31:29,923
+右侧屏幕则显示全部的日程
 
 
 593
-00:32:03,026 --> 00:32:04,676
-They support both
-reminders and events.
+00:31:30,357 --> 00:31:32,759
+完全没有卡顿现象
 
 
 594
-00:32:05,036 --> 00:32:08,176
-So the way to add something
-new is if you are in the app,
+00:31:33,026 --> 00:31:34,027
+实在太棒了
 
 
 595
-00:32:08,216 --> 00:32:11,966
-you tap this Add button, and now
-you can use just simple English
+00:31:35,395 --> 00:31:37,965
+我们还可以查看
+具体一天的事项
 
 
 596
-00:32:12,016 --> 00:32:15,316
-language sentences, and they
-have a natural language parser
+00:31:38,031 --> 00:31:39,766
+在左上角这里
 
 
 597
-00:32:15,596 --> 00:32:19,076
-that will just interpret
-these and translate, you know,
+00:31:39,833 --> 00:31:41,568
+会显示一些有圆点日期
 
 
 598
-00:32:19,076 --> 00:32:21,546
-and interpret those into
-the actual event details.
+00:31:41,869 --> 00:31:44,071
+如果点击这些有圆点的日期
 
 
 599
-00:32:21,756 --> 00:32:24,696
-And as I type, I want you
-to watch the extra attention
+00:31:44,438 --> 00:31:46,640
+就可以根据日历的
+颜色进行标记
 
 
 600
-00:32:24,696 --> 00:32:26,826
-to detail where, as it's
-parsing, what I am doing,
+00:31:46,974 --> 00:31:48,242
+通过这样查看日历
 
 
 601
-00:32:26,826 --> 00:32:29,406
-it's going to be throwing
-down dates and the times
+00:31:48,308 --> 00:31:50,310
+就可以知道当天有什么事项
 
 
 602
-00:32:29,406 --> 00:32:34,236
-into the spots in that field
-in the form that appears.
+00:31:50,644 --> 00:31:51,411
+实在是很酷
 
 
 603
-00:32:34,696 --> 00:32:40,656
-So let's just do something
-like meet with Ron tomorrow
+00:31:51,478 --> 00:31:53,514
+我无需选择某一天
 
 
 604
-00:32:41,686 --> 00:32:45,016
-at 6:00 p.m. for 30 minutes.
+00:31:53,580 --> 00:31:55,315
+就可以知道当天有什么事项
 
 
 605
-00:32:45,296 --> 00:32:46,006
-For example.
+00:31:57,117 --> 00:31:58,952
+在
+Fantastical 2
 
 
 606
-00:32:46,336 --> 00:32:48,106
-Boom. And there it is.
+00:31:59,019 --> 00:32:00,787
+里添加新的日程 
 
 
 607
-00:32:48,106 --> 00:32:49,376
-It knows what tomorrow means,
+00:32:00,988 --> 00:32:02,656
+新的事件和提醒也非常简单
 
 
 608
-00:32:49,376 --> 00:32:51,116
-it knows what 30
-minutes means, etcetera.
+00:32:03,023 --> 00:32:04,691
+你可以添加新的提醒和事件
 
 
 609
-00:32:51,416 --> 00:32:53,726
-The app is localized
-into nine languages,
+00:32:05,025 --> 00:32:08,195
+因此 如果要添加新的事件
 
 
 610
-00:32:53,976 --> 00:32:56,146
-and the natural language
-parser works
+00:32:08,262 --> 00:32:11,965
+点击这个添加按钮
+使用简单的句子
 
 
 611
-00:32:56,146 --> 00:32:57,626
-in those nine languages as well.
+00:32:12,032 --> 00:32:15,302
+系统会自动进行语言分析
 
 
 612
-00:32:57,856 --> 00:33:00,656
-So this is a really great
-experience across the world
+00:32:15,602 --> 00:32:19,039
+之后系统会进行翻译
 
 
 613
-00:33:00,656 --> 00:33:03,976
-for people in many,
-many countries.
+00:32:19,106 --> 00:32:21,475
+然后自动生成细节信息
 
 
 614
-00:33:04,626 --> 00:33:06,316
-You can also add events.
+00:32:21,842 --> 00:32:24,678
+现在我打字大家可以注意一下
 
 
 615
-00:33:06,316 --> 00:33:08,646
-If you were in another
-application, you could just go
+00:32:24,745 --> 00:32:26,880
+这是怎么工作的
 
 
 616
-00:33:08,646 --> 00:33:12,136
-up to the menu extra and
-just add stuff up here,
+00:32:26,980 --> 00:32:29,349
+日期和时间是如何
 
 
 617
-00:33:12,136 --> 00:33:13,636
-so I could do something else,
+00:32:29,416 --> 00:32:34,221
+与这些圆点进行匹配的
 
 
 618
-00:33:13,636 --> 00:33:22,126
-like pick up sushi next
-Tuesday at 7:00 p.m. Boom.
+00:32:34,688 --> 00:32:36,790
+那么 我们可以设置
 
 
 619
-00:33:22,126 --> 00:33:23,356
-And it throws the date in there,
+00:32:36,857 --> 00:32:40,661
+明天罗恩见面的提醒
 
 
 620
-00:33:23,356 --> 00:33:24,736
-puts it on my calendar,
-and it's gone.
+00:32:41,695 --> 00:32:45,199
+下午6点 见面30分钟
 
 
 621
-00:33:25,016 --> 00:33:27,046
-This little guy can
-be torn off --
+00:32:45,265 --> 00:32:45,999
+这样设置
 
 
 622
-00:33:27,046 --> 00:33:29,766
-I wouldn't do this with the main
-app running, but for the demo,
+00:32:46,333 --> 00:32:47,801
+看 完成了
 
 
 623
-00:33:29,766 --> 00:33:32,296
-let me tear this off, and you
-can have a Mini Window there
+00:32:47,968 --> 00:32:49,336
+系统知道明天是什么意思
 
 
 624
-00:33:32,506 --> 00:33:35,506
-that's really handy to have
-sticking around onscreen.
+00:32:49,403 --> 00:32:51,104
+知道30分钟什么意思 
+之类的
 
 
 625
-00:33:36,236 --> 00:33:39,836
-The other thing that they
-do is that they've got --
+00:32:51,405 --> 00:32:53,740
+该app一共有9种语言
 
 
 626
-00:33:39,836 --> 00:33:42,126
-Fantastical has got
-multiple calendar sets,
+00:32:53,974 --> 00:32:56,009
+而且每种语言都有
 
 
 627
-00:33:42,566 --> 00:33:46,086
-and you can create work sets,
-home sets, vacation sets,
+00:32:56,076 --> 00:32:57,611
+自动语言分析功能
 
 
 628
-00:33:46,086 --> 00:33:47,736
-whatever sets of
-calendars you want,
+00:32:57,845 --> 00:33:00,614
+这对世界其他国家的用户来说
 
 
 629
-00:33:47,866 --> 00:33:52,246
-and these calendars can have
-multiple calendars within them,
+00:33:00,681 --> 00:33:03,984
+真的是非常好的一款应用
 
 
 630
-00:33:52,356 --> 00:33:55,716
-and each set of calendars
-can be activated at any time.
+00:33:04,618 --> 00:33:06,253
+你还可以添加事件
 
 
 631
-00:33:55,846 --> 00:33:59,166
-And not only that, you can go
-in and say I want this calendar
+00:33:06,320 --> 00:33:07,888
+如果你正在使用其他应用
 
 
 632
-00:33:59,166 --> 00:34:02,116
-to be activated on my
-arrival at this location.
+00:33:08,121 --> 00:33:12,092
+可以从这里返回主菜单
 
 
 633
-00:34:02,416 --> 00:34:04,336
-So I get to work, boom,
-my calendar enables.
+00:33:12,159 --> 00:33:13,594
+这样就可以做其他的事情
 
 
 634
-00:34:04,886 --> 00:34:08,346
-Or I get home, or I leave home
-and some other calendar enables.
+00:33:13,660 --> 00:33:18,799
+比如 下周二晚上7点
 
 
 635
-00:34:08,815 --> 00:34:09,396
-Very cool.
+00:33:19,099 --> 00:33:22,069
+去吃寿司
 
 
 636
-00:34:10,536 --> 00:34:13,406
-So you can see that here when
-you go into Manage Calendars,
+00:33:22,369 --> 00:33:23,303
+添加到下面的日期
 
 
 637
-00:34:13,735 --> 00:34:16,186
-you can go through, pick the
-different ones you've got,
+00:33:23,370 --> 00:33:24,738
+这样就添加到我们日历中了
 
 
 638
-00:34:16,186 --> 00:34:17,746
-and you can automatically
-activate
+00:33:25,005 --> 00:33:26,740
+这个小窗口可以拖动
 
 
 639
-00:34:17,746 --> 00:34:20,996
-on a location that
-you might want.
+00:33:27,040 --> 00:33:29,710
+我在这里仅仅是
+简单地演示一下 
 
 
 640
-00:34:21,226 --> 00:34:24,266
-Fantastical does a
-great job of toggling
+00:33:29,776 --> 00:33:32,212
+拖动之后就可以形成小窗口
 
 
 641
-00:34:24,266 --> 00:34:29,275
-between these calendars, and it
-also supports a Today widget.
+00:33:32,513 --> 00:33:35,516
+方便在一个窗口内进行操作
 
 
 642
-00:34:29,275 --> 00:34:32,815
-They have Share and
-Action extensions.
+00:33:37,117 --> 00:33:39,253
+另外的一项特色是
 
 
 643
-00:34:32,815 --> 00:34:34,606
-They support geolocation.
+00:33:39,820 --> 00:33:42,322
+Fantastical
+有多款风格可以选择
 
 
 644
-00:34:34,896 --> 00:34:38,626
-They are deeply integrated
-with OS X Yosemite,
+00:33:42,556 --> 00:33:45,993
+你可以选择工作型 
+家用型 假期型
 
 
 645
-00:34:38,626 --> 00:34:41,255
-and I just think it's a
-tremendous productivity app.
+00:33:46,059 --> 00:33:47,728
+不管你选择什么类型的日历
 
 
 646
-00:34:41,666 --> 00:34:44,775
-You guys have done a fantastic
-job and I think set the standard
+00:33:48,195 --> 00:33:52,232
+都有几款供你选择
 
 
 647
-00:34:45,076 --> 00:34:47,416
-for what all other Mac
-productivity apps should
+00:33:52,566 --> 00:33:55,702
+而且可以随时激活
+任何一款日历
 
 
 648
-00:34:47,416 --> 00:34:47,835
-be like.
+00:33:56,170 --> 00:33:59,139
+不仅于此 
+你可以选择一款日历
 
 
 649
-00:34:48,396 --> 00:34:49,416
-So congratulations.
+00:33:59,206 --> 00:34:02,109
+然后设置在到达
+目的地后启用该日历
 
 
 650
-00:34:50,516 --> 00:34:55,545
-[ Applause ]
+00:34:02,409 --> 00:34:04,344
+去工作地方日历会自动被激活
 
 
 651
-00:34:56,045 --> 00:34:57,926
->> SHAAN PRUDEN: Fantastical is
-available not only on the Mac
+00:34:05,345 --> 00:34:08,348
+或者回到家 或者到其他地方
+日历都会自动被激活
 
 
 652
-00:34:58,146 --> 00:35:01,266
-but also supports iPad,
-iPhone, and Apple Watch.
+00:34:08,815 --> 00:34:09,483
+非常棒
 
 
 653
-00:35:04,836 --> 00:35:08,586
-Our next winner is a utility
-app with a very unique story.
+00:34:10,551 --> 00:34:13,487
+在这里
+我们可以进入到日历管理
 
 
 654
-00:35:09,566 --> 00:35:12,106
-The winner is Workflow
-by DeskConnect.
+00:34:13,719 --> 00:34:16,156
+这里可以查看 
+选择不同的日历
 
 
 655
-00:35:13,516 --> 00:35:16,746
-[ Applause ]
+00:34:16,223 --> 00:34:17,724
+然后可以选择在某个地点
 
 
 656
-00:35:17,246 --> 00:35:20,286
->> WWDC scholarship
-winners in 2014,
+00:34:17,791 --> 00:34:19,860
+自动激活日历
 
 
 657
-00:35:20,286 --> 00:35:25,336
-the three-person DeskConnect
-team have been huge Apple fans
+00:34:21,228 --> 00:34:24,197
+Fantastical
+在日历切换方面非常优秀
 
 
 658
-00:35:25,336 --> 00:35:26,216
-since their early teens.
+00:34:24,264 --> 00:34:29,136
+而且还支持一些小插件
 
 
 659
-00:35:26,666 --> 00:35:29,306
-Workflow is a result of a
-year of work which kicked
+00:34:29,203 --> 00:34:31,638
+包括分享和应用扩展
 
 
 660
-00:35:29,346 --> 00:35:39,236
-into high gear after
-attending last year's WWDC.
+00:34:32,806 --> 00:34:34,608
+而且还支持定位功能
 
 
 661
-00:35:43,696 --> 00:35:45,236
->> SHAAN PRUDEN: Workflow
-allows you to connect apps
+00:34:35,042 --> 00:34:38,512
+而且已经整合到 OS X
+Yosemite系统中
 
 
 662
-00:35:45,236 --> 00:35:47,246
-and actions together to
-automate the things you do
+00:34:38,579 --> 00:34:41,248
+我认为这是一款非常
+有生产力的app
 
 
 663
-00:35:47,246 --> 00:35:47,896
-on your device.
+00:34:41,681 --> 00:34:44,784
+你们团队的工作非常棒 
 
 
 664
-00:35:48,486 --> 00:35:51,236
-Drag and drop any
-combination of over 200 objects
+00:34:45,085 --> 00:34:47,120
+我认为其他的Mac
+生产力app应该
 
 
 665
-00:35:51,236 --> 00:35:52,806
-to create powerful workflows.
+00:34:47,187 --> 00:34:47,855
+以你们为榜样
 
 
 666
-00:35:53,876 --> 00:35:55,266
->> JOHN GELEYNSE:
-Workflow was selected
+00:34:48,355 --> 00:34:49,523
+祝贺你们
 
 
 667
-00:35:55,266 --> 00:35:58,856
-as an Apple Design Award winner
-because of its extensive use
+00:34:55,195 --> 00:34:56,996
+莎恩·普鲁登:
+Fantastical
 
 
 668
-00:35:58,856 --> 00:36:02,376
-of the iOS accessibility API,
+00:34:57,063 --> 00:34:58,065
+不仅支持Mac系统
 
 
 669
-00:36:02,806 --> 00:36:06,386
-and just like a moment ago
-I said Fantastical set the
+00:34:58,131 --> 00:35:00,234
+还支持iPad
+iPhone
 
 
 670
-00:36:06,386 --> 00:36:09,606
-standard for what productivity
-apps on the Mac should be like,
+00:35:00,300 --> 00:35:01,401
+和 Apple Watch
 
 
 671
-00:36:10,176 --> 00:36:13,136
-Workflow sets the standard
-for what accessibility --
+00:35:05,739 --> 00:35:08,575
+下一位获奖者是一款
+很有意思的实用性app
 
 
 672
-00:36:13,346 --> 00:36:16,816
-what apps should be doing in
-terms of adopting accessibility,
+00:35:09,576 --> 00:35:11,111
+获奖者是
+DeskConnect
 
 
 673
-00:36:17,106 --> 00:36:19,966
-to enable these apps
-to be used by people
+00:35:11,178 --> 00:35:12,279
+设计的Workflow
 
 
 674
-00:36:19,966 --> 00:36:21,476
-with vision impairment.
+00:35:16,483 --> 00:35:19,586
+2014年WWDC
+奖学金获得者是
 
 
 675
-00:36:22,026 --> 00:36:25,266
-And I could do this
-demo, but honestly,
+00:35:19,653 --> 00:35:23,123
+拥有众多果粉的三人团队
 
 
 676
-00:36:25,266 --> 00:36:29,036
-it's far more impactful if
-it is done by a colleague --
+00:35:23,190 --> 00:35:25,292
+DeskConnect
 
 
 677
-00:36:29,036 --> 00:36:30,166
-a few colleagues of mine
+00:35:25,359 --> 00:35:26,226
+还在青少年时期
 
 
 678
-00:36:30,166 --> 00:36:32,466
-from the iOS accessibility
-engineering team
+00:35:26,660 --> 00:35:29,263
+Workflow就在
+上一年的WWDC脱颖而出
 
 
 679
-00:36:32,776 --> 00:36:34,686
-who can really show you
-how this thing is used.
+00:35:29,329 --> 00:35:32,232
+当选年度优秀应用作品
 
 
 680
-00:36:34,896 --> 00:36:37,496
-So I would like to invite
-Ryan and Dean on stage.
+00:35:43,277 --> 00:35:44,778
+莎恩·普鲁登: 
+Workflow
 
 
 681
-00:36:38,516 --> 00:36:47,546
-[ Applause ]
+00:35:44,845 --> 00:35:46,079
+可以关联不同应用和动作
 
 
 682
-00:36:48,046 --> 00:36:48,396
->> DEAN HUDSON: All right.
+00:35:46,146 --> 00:35:47,181
+然后在你的设备上
 
 
 683
-00:36:49,176 --> 00:36:52,936
-My name is Dean Hudson, along
-with my coworker, Ryan Dour.
+00:35:47,247 --> 00:35:48,048
+进行程序自动处理
 
 
 684
-00:36:53,676 --> 00:36:55,976
-We are quality engineers
-on the Accessibility Team,
+00:35:48,482 --> 00:35:51,218
+可组合超过200种对象
 
 
 685
-00:36:56,946 --> 00:37:01,376
-and we're really excited
-about the accessibility.
+00:35:51,285 --> 00:35:52,819
+创建强大的工作流
 
 
 686
-00:37:01,376 --> 00:37:05,966
-It's just amazing work that
-the Workflow team has done
+00:35:53,687 --> 00:35:55,189
+约翰·格兰斯:
+Workflow
 
 
 687
-00:37:06,406 --> 00:37:08,426
-in the Workflow app.
+00:35:55,255 --> 00:35:57,824
+可充分接入
+iOS系统程序接口
 
 
 688
-00:37:10,456 --> 00:37:13,406
-Apple is very deeply
-committed to accessibility.
+00:35:57,891 --> 00:36:00,460
+凭此 Workflow
+获得苹果设计大奖
 
 
 689
-00:37:14,276 --> 00:37:20,406
-We have accessibility in all our
-products, including iOS, OS X,
+00:36:00,794 --> 00:36:02,262
+可谓当之无愧
 
 
 690
-00:37:20,406 --> 00:37:22,756
-and now even the Watch.
+00:36:03,664 --> 00:36:05,032
+正如刚刚我提到的
 
 
 691
-00:37:23,876 --> 00:37:26,496
-But you know, today I want to
-talk about VoiceOver in iOS.
+00:36:05,132 --> 00:36:07,434
+Fantastical为
+Mac系统设立了
 
 
 692
-00:37:27,506 --> 00:37:28,356
-Now, if you don't know,
+00:36:07,501 --> 00:36:09,603
+生产型应用标准
 
 
 693
-00:37:28,356 --> 00:37:30,906
-VoiceOver is a built-in
-screen reader
+00:36:10,170 --> 00:36:13,006
+Workflow
+则在接入性方面树立标准
 
 
 694
-00:37:31,336 --> 00:37:33,806
-that allows visually
-impaired users
+00:36:13,073 --> 00:36:16,810
+规定了应用程序的接入性标准
 
 
 695
-00:37:34,026 --> 00:37:37,086
-to access iOS and your apps.
+00:36:17,110 --> 00:36:19,947
+这样方便视力障碍的用户
 
 
 696
-00:37:38,356 --> 00:37:43,476
-So you may be asking yourself,
-well, how do I use VoiceOver?
+00:36:20,013 --> 00:36:21,481
+使用这些应用程序
 
 
 697
-00:37:43,476 --> 00:37:43,846
-What's that?
+00:36:22,015 --> 00:36:25,219
+当然我可以做演示 
+但是说实话
 
 
 698
-00:37:44,016 --> 00:37:46,986
-I mean -- to use
-VoiceOver, you really need
+00:36:25,285 --> 00:36:28,989
+为了更有说服力
+我想请我的同事
 
 
 699
-00:37:46,986 --> 00:37:48,086
-to know three gestures --
+00:36:29,056 --> 00:36:30,123
+我的其他同事们
 
 
 700
-00:37:48,706 --> 00:37:52,416
-touch, swipe, and
-double-tap to activate.
+00:36:30,190 --> 00:36:32,459
+来自iOS接入性工程团队的
+同事来演示
 
 
 701
-00:37:52,666 --> 00:37:55,226
-In a moment, I am going to
-have Ryan demo those gestures.
+00:36:32,759 --> 00:36:34,695
+他们可以更好展示
+如何使用该应用
 
 
 702
-00:37:55,226 --> 00:37:57,706
-Let's talk about
-touch, touch to explore.
+00:36:35,162 --> 00:36:37,497
+接下来 我想邀请
+莱恩和迪恩上舞台
 
 
 703
-00:37:58,386 --> 00:38:01,466
-It's a way for visually
-impaired users
+00:36:47,341 --> 00:36:48,408
+迪恩·哈德森: 好的
 
 
 704
-00:38:01,466 --> 00:38:06,616
-to safely navigate your apps in
-iOS without activating anything.
+00:36:49,176 --> 00:36:52,946
+我叫迪恩·哈德森 
+这是我们的同事 莱恩·杜尔
 
 
 705
-00:38:07,576 --> 00:38:08,936
-And so they can get
-the layout of the app.
+00:36:53,680 --> 00:36:55,983
+我们是接入性团队的
+质量工程师
 
 
 706
-00:38:10,166 --> 00:38:11,746
-And to demonstrate that,
-I am going to ask Ryan
+00:36:56,950 --> 00:37:01,388
+我们非常高兴能够
+做接入性的工作
 
 
 707
-00:38:11,746 --> 00:38:13,276
-to show you touch to explore.
+00:37:02,022 --> 00:37:05,959
+Workflow
+团队正在从事的工作
 
 
 708
-00:38:16,236 --> 00:38:17,566
->> Game Center.
+00:37:06,393 --> 00:37:07,594
+非常有意思
 
 
 709
-00:38:18,396 --> 00:38:19,326
-Double-tap to open.
+00:37:10,464 --> 00:37:13,400
+苹果公司对于
+接入性一直非常重视
 
 
 710
-00:38:20,386 --> 00:38:22,246
->> DEAN HUDSON: The second
-gesture we have is swipe
+00:37:14,268 --> 00:37:19,840
+我们的产品可接入到
+iOS， OS X系统
 
 
 711
-00:38:22,366 --> 00:38:27,606
-to navigate, and this allows a
-user to swipe through buttons,
+00:37:20,374 --> 00:37:22,743
+现在也可以接入
+Apple手表了
 
 
 712
-00:38:27,606 --> 00:38:30,966
-UI elements within your
-application sequentially,
+00:37:23,877 --> 00:37:26,947
+但是今天我想谈谈iOS
+系统的 VoiceOver
 
 
 713
-00:38:31,226 --> 00:38:33,776
-either forwards or backwards,
-with a single finger swipe.
+00:37:27,447 --> 00:37:28,348
+现在 你们可能都知道
 
 
 714
-00:38:34,206 --> 00:38:34,496
-Ryan?
+00:37:28,415 --> 00:37:30,918
+VoiceOver
+是一款内置的屏幕阅读器
 
 
 715
-00:38:35,666 --> 00:38:36,126
->> iBooks.
+00:37:31,351 --> 00:37:33,820
+是专为视力障碍人士设计的
 
 
 716
-00:38:36,976 --> 00:38:40,226
-Settings. Extras
-folder to Workflow.
+00:37:34,021 --> 00:37:37,224
+可用于iOS系统
+和其他app
 
 
 717
-00:38:40,936 --> 00:38:41,866
-Double-tap to open.
+00:37:39,860 --> 00:37:43,430
+那么 你可能会问 要如何
+使用VoiceOver呢
 
 
 718
-00:38:42,746 --> 00:38:44,896
->> DEAN HUDSON: Now, the third
-gesture we have is double-tap.
+00:37:43,497 --> 00:37:44,231
+这是什么东西呢
 
 
 719
-00:38:45,806 --> 00:38:47,756
-Now, remember, with
-VoiceOver on,
+00:37:44,531 --> 00:37:46,233
+我想说的是 
+要使用Voiceover
 
 
 720
-00:38:48,016 --> 00:38:49,546
-touching is not going
-to activate the item.
+00:37:46,300 --> 00:37:48,101
+你需要了解三种手势
 
 
 721
-00:38:50,706 --> 00:38:52,676
-You have to use a double-tap.
+00:37:48,702 --> 00:37:52,406
+触屏 扫屏和双击激活
 
 
 722
-00:38:52,976 --> 00:38:55,026
-What's interesting about
-this gesture, though,
+00:37:52,673 --> 00:37:55,108
+等下我会让莱恩演示这些手势
 
 
 723
-00:38:55,416 --> 00:38:58,156
-is you can have VoiceOver
-focused on an element
+00:37:55,175 --> 00:37:57,711
+让我们先谈谈触屏手势
 
 
 724
-00:38:58,686 --> 00:39:01,746
-and double-tap anywhere
-else on the screen.
+00:37:58,378 --> 00:38:01,448
+这是为视力障碍用户而设的
 
 
 725
-00:39:02,246 --> 00:39:03,226
-And that's very unique.
+00:38:01,515 --> 00:38:06,620
+这手势能在iOS系统中
+操作应用而不会激活其他程序
 
 
 726
-00:39:03,606 --> 00:39:06,996
-It's very crucial for VoiceOver
-users because it's hard to find
+00:38:07,588 --> 00:38:09,022
+这样他们可以明白
+app的用途
 
 
 727
-00:39:06,996 --> 00:39:09,096
-that focus area again.
+00:38:10,157 --> 00:38:11,792
+现在我想让莱恩演示一下
 
 
 728
-00:39:10,666 --> 00:39:11,366
-And Ryan?
+00:38:11,859 --> 00:38:13,260
+如何使用触屏手势打开
 
 
 729
-00:39:12,786 --> 00:39:14,516
->> Workflow edit dimmed button.
+00:38:16,230 --> 00:38:17,564
+游戏中心.
 
 
 730
-00:39:15,556 --> 00:39:17,076
-Turns on Workflow editing mode.
+00:38:18,398 --> 00:38:19,333
+双击打开
 
 
 731
-00:39:19,016 --> 00:39:21,266
->> DEAN HUDSON: So that's
-VoiceOver, it's awesome, great,
+00:38:20,400 --> 00:38:22,236
+迪恩· 哈德森: 
+第二个手势是扫屏
 
 
 732
-00:39:21,556 --> 00:39:25,156
-we love it, we use it, but it's
-really only half the story;
+00:38:22,369 --> 00:38:27,508
+用于导航 让用户可以按顺序
 
 
 733
-00:39:25,416 --> 00:39:25,696
-right?
+00:38:27,574 --> 00:38:30,978
+知道界面上的按钮和UI元素
 
 
 734
-00:39:26,776 --> 00:39:30,056
-You know, the other half is
-what you, as a developer,
+00:38:31,211 --> 00:38:33,780
+使用一根手指就可以实现
+往前和往后扫
 
 
 735
-00:39:30,586 --> 00:39:32,386
-does in your apps to
-make it accessible.
+00:38:34,147 --> 00:38:34,815
+莱恩
 
 
 736
-00:39:32,896 --> 00:39:35,436
-And it's using VoiceOver
-together with accessibility
+00:38:35,582 --> 00:38:36,250
+iBooks
 
 
 737
-00:39:35,436 --> 00:39:37,196
-that makes a great
-user experience.
+00:38:36,984 --> 00:38:40,220
+设置 杂项
+返回至Workflow
 
 
 738
-00:39:37,686 --> 00:39:40,996
-Right now I am going to have
-Ryan show the Workflow app
+00:38:40,921 --> 00:38:41,989
+双击打开
 
 
 739
-00:39:40,996 --> 00:39:42,786
-with accessibility
-using VoiceOver.
+00:38:42,756 --> 00:38:45,158
+迪恩·哈德森: 
+接下来 第三个手势是双击
 
 
 740
-00:39:44,056 --> 00:39:46,056
->> RYAN DOUR: So as Dean
-said, my name is Ryan Dour,
+00:38:45,792 --> 00:38:47,928
+请注意 VoiceOver
+这时候是开启的
 
 
 741
-00:39:46,056 --> 00:39:46,936
-and I am going to take you
+00:38:47,995 --> 00:38:49,630
+触屏是不会打开所选项目的
 
 
 742
-00:39:46,936 --> 00:39:48,546
-through Workflow
-using VoiceOver.
+00:38:50,697 --> 00:38:52,132
+你需要通过双击才能打开
 
 
 743
-00:39:48,876 --> 00:39:52,176
-First I am going to go ahead
-and start creating a Workflow.
+00:38:52,966 --> 00:38:55,035
+这就是这个手势的乐趣所在
 
 
 744
-00:39:52,176 --> 00:39:54,826
-You'll notice that
-it's a visual button,
+00:38:55,402 --> 00:38:58,372
+你可以让VoiceOver
+读出其中一个项目
 
 
 745
-00:39:54,826 --> 00:39:56,396
-for me it's going
-to speak a label.
+00:38:58,739 --> 00:39:01,742
+然后再屏幕任意位置双击
 
 
 746
-00:39:56,396 --> 00:39:58,366
-Let's swipe over to our
-right and see what it is.
+00:39:02,242 --> 00:39:03,210
+这实在是很特别
 
 
 747
-00:39:58,476 --> 00:40:01,546
->> Select Gallery button
-to create Workflow button.
+00:39:03,610 --> 00:39:06,914
+对于VoiceOver
+用户而言比较困难的是
 
 
 748
-00:40:02,486 --> 00:40:03,736
-Creates a new Workflow.
+00:39:06,980 --> 00:39:08,081
+再次找到项目的所在位置
 
 
 749
-00:40:03,736 --> 00:40:04,686
->> RYAN DOUR: I am
-going to go ahead
+00:39:08,682 --> 00:39:09,349
+莱恩?
 
 
 750
-00:40:04,686 --> 00:40:06,676
-and double-tap to activate that.
+00:39:12,786 --> 00:39:14,688
+Workflow
+编辑无效按钮
 
 
 751
-00:40:06,676 --> 00:40:07,866
->> Create Workflow.
+00:39:15,556 --> 00:39:17,090
+打开Workflow
+编辑模式
 
 
 752
-00:40:08,596 --> 00:40:09,606
-Untitled Workflow.
+00:39:19,026 --> 00:39:21,395
+迪恩·哈德森: 这就是
+VoiceOver 非常酷
 
 
 753
-00:40:09,696 --> 00:40:10,866
-Actions. Back button.
+00:39:21,562 --> 00:39:25,165
+我们很喜欢使用 
+但是故事还没结束
 
 
 754
-00:40:11,846 --> 00:40:13,536
->> RYAN DOUR: I think what
-I want to do here, actually,
+00:39:25,332 --> 00:39:25,999
+没错
 
 
 755
-00:40:13,656 --> 00:40:17,226
-I would like to get my current
-location, then I think I want
+00:39:26,767 --> 00:39:30,070
+作为一名应用程序开发人员
 
 
 756
-00:40:17,226 --> 00:40:20,786
-to turn it into a URL so I
-can share it with friends.
+00:39:30,637 --> 00:39:32,372
+需要让应用更有具备接入性
 
 
 757
-00:40:20,846 --> 00:40:23,256
-Finally, I think I'll copy
-to my clipboard, actually,
+00:39:33,073 --> 00:39:34,708
+这里我们使用
+VoiceOver
 
 
 758
-00:40:23,256 --> 00:40:25,116
-so that it's easy to use
-in a bunch of places.
+00:39:34,775 --> 00:39:35,709
+和接入性技术
 
 
 759
-00:40:25,886 --> 00:40:26,936
-Let's go ahead and start.
+00:39:35,776 --> 00:39:37,211
+这样让用户体验更好
 
 
 760
-00:40:26,936 --> 00:40:29,676
-I am going to touch
-the thing I am looking
+00:39:37,678 --> 00:39:40,948
+现在我想请莱恩演示
+一下 Workflow
 
 
 761
-00:40:29,676 --> 00:40:30,816
-for on the left side here.
+00:39:41,014 --> 00:39:42,783
+并使用
+VoiceOver进行接入
 
 
 762
-00:40:30,816 --> 00:40:32,066
-So I'm going to touch
-this sidebar.
+00:39:44,051 --> 00:39:46,019
+莱恩·杜尔: 正如迪恩所说
+我叫莱恩
 
 
 763
-00:40:32,066 --> 00:40:33,566
->> Contact action.
+00:39:46,086 --> 00:39:47,588
+现在我将使用
+VoiceOver 
 
 
 764
-00:40:34,506 --> 00:40:35,026
-Draggable.
+00:39:47,654 --> 00:39:49,122
+带领你们来到
+Workflow
 
 
 765
-00:40:35,026 --> 00:40:35,996
->> RYAN DOUR: I am going
-to pause the speech.
+00:39:49,189 --> 00:39:52,192
+首先 我会先建立
+一个 Workflow
 
 
 766
-00:40:36,466 --> 00:40:37,746
-Now I am going to swipe my way
+00:39:52,659 --> 00:39:54,728
+这是一个视觉按钮
 
 
 767
-00:40:37,746 --> 00:40:39,936
-over to the location
-that I would like.
+00:39:54,795 --> 00:39:56,396
+我会说出一个标签
 
 
 768
-00:40:39,936 --> 00:40:42,916
->> Get current location action.
+00:39:56,563 --> 00:39:58,265
+现在我们向右扫屏
+看看这是什么
 
 
 769
-00:40:44,016 --> 00:40:47,306
->> That's what I am
-looking for, so I am going
+00:39:58,465 --> 00:40:01,668
+选择图库按钮创建一个
+Workflow 按钮
 
 
 770
-00:40:47,306 --> 00:40:49,626
-to go ahead and drag that over.
+00:40:02,503 --> 00:40:03,737
+创建新的Workflow
 
 
 771
-00:40:49,856 --> 00:40:50,236
->> Dragging.
+00:40:04,137 --> 00:40:05,239
+莱恩•杜尔: 我要开始了
 
 
 772
-00:40:50,236 --> 00:40:51,856
-Adding to current
-locations to Workflow.
+00:40:05,305 --> 00:40:06,206
+轻敲两下激活
 
 
 773
-00:40:52,896 --> 00:40:54,486
-Search local businesses action.
+00:40:06,673 --> 00:40:07,875
+创建 Workflow
 
 
 774
-00:40:54,956 --> 00:40:56,266
->> RYAN DOUR: So I have
-added that first piece.
+00:40:08,509 --> 00:40:09,610
+无标题 Workflow
 
 
 775
-00:40:56,266 --> 00:40:59,636
-Now let's go ahead
-and go get that URL.
+00:40:09,710 --> 00:40:10,878
+动作 返回按钮
 
 
 776
-00:41:00,906 --> 00:41:01,516
->> Draggable.
+00:40:11,845 --> 00:40:13,547
+莱恩•杜尔:
+事实上我想做的是
 
 
 777
-00:41:01,956 --> 00:41:02,906
-Double-tap and hold.
+00:40:13,647 --> 00:40:17,184
+获取我现在的位置信息
 
 
 778
-00:41:03,116 --> 00:41:05,246
-Wait for the sound,
-then drag to the right
+00:40:17,251 --> 00:40:20,220
+把它转成URL 与朋友分享
 
 
 779
-00:41:05,246 --> 00:41:06,386
-to add to your Workflow.
+00:40:20,621 --> 00:40:23,190
+最后 复制到剪切板
 
 
 780
-00:41:06,606 --> 00:41:08,416
-Double-tap to read the
-action description.
+00:40:23,257 --> 00:40:25,125
+这样 就很容易使用位置信息
 
 
 781
-00:41:08,596 --> 00:41:10,806
-Swipe up or down to
-select a custom action,
+00:40:25,893 --> 00:40:26,894
+我们开始吧
 
 
 782
-00:41:10,926 --> 00:41:12,266
-then double-tap to activate.
+00:40:26,960 --> 00:40:29,630
+我将触摸我在左边
 
 
 783
-00:41:12,726 --> 00:41:13,726
->> RYAN DOUR: By the
-way, isn't it wonderful
+00:40:29,696 --> 00:40:30,764
+寻找的东西
 
 
 784
-00:41:13,726 --> 00:41:14,936
-that they've added
-those great hints?
+00:40:30,831 --> 00:40:32,366
+所以 我将触摸这个工具条
 
 
 785
-00:41:15,046 --> 00:41:16,416
-They are fantastic.
+00:40:32,699 --> 00:40:33,700
+关联动作
 
 
 786
-00:41:16,416 --> 00:41:18,016
-It's basically a
-self-described app.
+00:40:34,368 --> 00:40:35,035
+拖动
 
 
 787
-00:41:18,016 --> 00:41:18,796
-It's great; isn't it?
+00:40:35,102 --> 00:40:36,303
+莱恩•杜尔: 我得暂停一下
 
 
 788
-00:41:19,516 --> 00:41:24,956
-[ Applause ]
+00:40:36,470 --> 00:40:37,704
+现在 我将扫一下
 
 
 789
-00:41:25,456 --> 00:41:26,636
-So let's add it.
+00:40:37,771 --> 00:40:40,007
+我想要显示的位置
 
 
 790
-00:41:26,636 --> 00:41:29,436
-Okay. I am going to go ahead
-and do a double-tap and hold
+00:40:40,274 --> 00:40:42,910
+获取目前位置信息
 
 
 791
-00:41:29,436 --> 00:41:30,306
-and drag it over to the right.
+00:40:45,712 --> 00:40:47,080
+这就是我正在寻找的
 
 
 792
-00:41:30,306 --> 00:41:31,336
->> Dragging.
+00:40:47,147 --> 00:40:48,182
+我将继续并拖动到结束
 
 
 793
-00:41:31,336 --> 00:41:34,156
-Added Get Maps URL
-to Workflow below.
+00:40:49,082 --> 00:40:49,750
+拖动
 
 
 794
-00:41:34,156 --> 00:41:35,036
-Get current location.
+00:40:49,950 --> 00:40:51,852
+在Workflow中
+增加目前位置
 
 
 795
-00:41:35,196 --> 00:41:36,276
->> RYAN DOUR: I know
-it's in the right place.
+00:40:53,153 --> 00:40:54,488
+搜索当地交易信息
 
 
 796
-00:41:36,316 --> 00:41:39,706
-Let's get that third item.
+00:40:54,821 --> 00:40:56,523
+莱恩•杜尔: 
+第一条信息已经增加进去
 
 
 797
-00:41:40,776 --> 00:41:42,326
-And this time I am
-just going to touch
+00:40:56,590 --> 00:40:58,025
+继续获得URL信息
 
 
 798
-00:41:42,326 --> 00:41:44,996
-because I know it's
-right over here.
+00:40:58,258 --> 00:41:00,027
+拖动
 
 
 799
-00:41:44,996 --> 00:41:46,616
->> Copy to Clipboard action.
+00:41:00,961 --> 00:41:02,996
+轻按两下并长按
 
 
 800
-00:41:46,716 --> 00:41:47,276
->> RYAN DOUR: There it is.
+00:41:03,130 --> 00:41:05,199
+等语音提醒 然后拖到右边
 
 
 801
-00:41:47,376 --> 00:41:48,606
-I am going to add that.
+00:41:05,265 --> 00:41:06,400
+加到Workflow中
 
 
 802
-00:41:48,606 --> 00:41:49,536
->> Double-tap and hold.
+00:41:06,600 --> 00:41:08,402
+轻敲两下 阅读功能描述
 
 
 803
-00:41:49,736 --> 00:41:50,696
-Wait for the sound.
+00:41:08,602 --> 00:41:10,804
+上下滑动 选择自定义功能
 
 
 804
-00:41:50,786 --> 00:41:55,696
-Dragging. Added copy
-to clipboard --
+00:41:10,938 --> 00:41:12,272
+轻敲两下激活
 
 
 805
-00:41:56,856 --> 00:41:58,006
->> RYAN DOUR: Look, I
-even know the position.
+00:41:12,706 --> 00:41:13,707
+莱恩•杜尔: 很棒 是吧
 
 
 806
-00:41:58,006 --> 00:41:58,606
-I am above it.
+00:41:13,774 --> 00:41:15,042
+增加了这么多提示
 
 
 807
-00:41:58,606 --> 00:41:59,956
-I am below it.
+00:41:15,108 --> 00:41:16,376
+非常的棒
 
 
 808
-00:42:00,286 --> 00:42:02,126
-I am going to let go.
+00:41:16,610 --> 00:41:18,011
+基本上这是一款自定义app
 
 
 809
-00:42:03,616 --> 00:42:04,896
-Hey, I have a complete Workflow.
+00:41:18,145 --> 00:41:18,879
+非常好 不是吗
 
 
 810
-00:42:04,896 --> 00:42:06,616
-I could run this right
-now if I wanted to.
+00:41:25,886 --> 00:41:26,553
+添加
 
 
 811
-00:42:06,876 --> 00:42:08,926
-That's Workflow with VoiceOver.
+00:41:26,620 --> 00:41:29,356
+好了 我将继续
+轻敲两下后长按
 
 
 812
-00:42:10,516 --> 00:42:19,626
-[ Applause ]
+00:41:29,423 --> 00:41:30,290
+拖到右边
 
 
 813
-00:42:20,126 --> 00:42:21,186
->> DEAN HUDSON: They
-did an excellent job.
+00:41:31,358 --> 00:41:32,025
+拖动
 
 
 814
-00:42:21,236 --> 00:42:24,316
-When I first saw the
-app, I was just like man,
+00:41:32,092 --> 00:41:34,228
+将获取地图URL并增加到
+下面的Workflow
 
 
 815
-00:42:24,396 --> 00:42:25,666
-this accessibility is cra-cra.
+00:41:34,294 --> 00:41:35,095
+获取目前位置信息
 
 
 816
-00:42:25,866 --> 00:42:28,896
-This is off the charts
-[laughter].
+00:41:35,162 --> 00:41:37,064
+莱恩•杜尔:
+我知道它现在在右边
 
 
 817
-00:42:29,486 --> 00:42:31,676
-It's interesting because
-VoiceOver users are
+00:41:37,965 --> 00:41:39,466
+现在找第三个项目
 
 
 818
-00:42:31,866 --> 00:42:32,966
-like any other users.
+00:41:40,767 --> 00:41:42,302
+而这次 我将继续点击
 
 
 819
-00:42:32,966 --> 00:42:35,076
-We go to the store, go
-to the same App Store,
+00:41:42,369 --> 00:41:43,704
+因为我知道它就在那
 
 
 820
-00:42:35,666 --> 00:42:40,286
-look at the same games,
-applications, prices,
+00:41:43,770 --> 00:41:46,540
+复制到剪贴板
 
 
 821
-00:42:41,476 --> 00:42:45,166
-and we purchase and download
-and open your app, it's amazing
+00:41:46,607 --> 00:41:47,608
+莱恩•杜尔:
+就是这样
 
 
 822
-00:42:45,166 --> 00:42:46,556
-when we find it's accessible.
+00:41:47,674 --> 00:41:48,542
+我要添加进去
 
 
 823
-00:42:46,686 --> 00:42:50,056
-It just really makes
-things work out well for us.
+00:41:48,609 --> 00:41:49,610
+轻敲两下并长按
 
 
 824
-00:42:50,366 --> 00:42:52,756
-If you want to know more about
-how to make your app accessible,
+00:41:49,743 --> 00:41:50,711
+等待语音提醒
 
 
 825
-00:42:53,096 --> 00:42:55,716
-you can check out
-the WWDC app and see
+00:41:50,777 --> 00:41:51,478
+拖动
 
 
 826
-00:42:55,716 --> 00:42:57,406
-when the accessibility
-sessions are.
+00:41:52,179 --> 00:41:56,450
+复制到剪贴板中
 
 
 827
-00:42:57,406 --> 00:42:59,306
-We also have a couple of
-labs that you can check out
+00:41:56,517 --> 00:41:58,218
+莱恩•杜尔: 
+看 我甚至可以知道位置了
 
 
 828
-00:42:59,706 --> 00:43:02,466
-and bring your apps in and
-we'll check them out for you.
+00:41:58,285 --> 00:41:58,952
+我在上面
 
 
 829
-00:43:03,156 --> 00:43:03,386
-Thanks.
+00:42:00,287 --> 00:42:01,088
+我在下面
 
 
 830
-00:43:04,516 --> 00:43:11,806
-[ Applause ]
+00:42:01,455 --> 00:42:02,122
+我要放手了
 
 
 831
-00:43:12,306 --> 00:43:15,056
->> SHAAN PRUDEN: And that's
-Workflow, available on Mac,
+00:42:03,524 --> 00:42:05,259
+现在我有一个
+完整的Workflow
 
 
 832
-00:43:15,056 --> 00:43:16,526
-iPhone, and Apple Watch.
+00:42:05,325 --> 00:42:06,627
+现在就可以使用
 
 
 833
-00:43:17,916 --> 00:43:21,326
-This next app has a unique
-spin on driving games.
+00:42:06,860 --> 00:42:09,162
+这就是VoiceOver
+提示的Workflow
 
 
 834
-00:43:22,306 --> 00:43:24,306
-It's Does Not Commute
-by Mediocre.
+00:42:19,373 --> 00:42:21,175
+迪恩·哈德森:
+他们的工作非常的出色
 
 
 835
-00:43:25,516 --> 00:43:28,576
-[ Applause ]
+00:42:21,241 --> 00:42:23,477
+我第一次看到这个app时 
 
 
 836
-00:43:29,076 --> 00:43:31,276
->> This Swedish company
-was founded in 2011
+00:42:24,077 --> 00:42:25,746
+简洁明了的
+操作简直是棒极了
 
 
 837
-00:43:31,276 --> 00:43:33,326
-by Dennis Gustafson
-and Heinrich Johansen,
+00:42:25,879 --> 00:42:28,015
+好得没治了
 
 
 838
-00:43:33,326 --> 00:43:35,246
-who have known each
-other for 20 years.
+00:42:28,815 --> 00:42:31,685
+很有趣 因为
+VoiceOver使用者
 
 
 839
-00:43:35,766 --> 00:43:36,756
-Their original intention was
+00:42:31,852 --> 00:42:33,086
+就像其他的使用者
 
 
 840
-00:43:36,756 --> 00:43:38,356
-to make Does Not
-Commute a quick minigame,
+00:42:33,420 --> 00:42:35,088
+我们去商店
+去同一家应用商店
 
 
 841
-00:43:38,736 --> 00:43:40,166
-but as they progressed,
-the game grew
+00:42:35,656 --> 00:42:39,126
+看看相同的游戏 应用 价格
 
 
 842
-00:43:40,276 --> 00:43:42,096
-and they became increasingly
-attached to it.
+00:42:39,259 --> 00:42:40,060
+然后购买
 
 
 843
-00:43:42,576 --> 00:43:44,936
-While still the only two
-employees, they have worked
+00:42:41,628 --> 00:42:45,132
+下载 打开app
+太让人吃惊了
 
 
 844
-00:43:44,936 --> 00:43:49,286
-with various contractors.
+00:42:45,199 --> 00:42:46,567
+我们发现它操作简单
 
 
 845
-00:43:56,706 --> 00:44:00,296
->> SHAAN PRUDEN: Does Not
-Commute is a strategic top-down
+00:42:46,700 --> 00:42:48,936
+它真的能让事物
+更好的服务我们
 
 
 846
-00:44:00,296 --> 00:44:00,916
-driving game.
+00:42:50,370 --> 00:42:52,739
+若你想了解更多
+如何简易操作app的信息
 
 
 847
-00:44:01,276 --> 00:44:03,816
-What starts out as a relaxing
-commute in a small town
+00:42:53,106 --> 00:42:55,676
+请查看 WWDC app
 
 
 848
-00:44:03,816 --> 00:44:06,676
-in the '70s quickly
-devolves into traffic chaos
+00:42:55,742 --> 00:42:57,377
+在简易操作会议进行时
 
 
 849
-00:44:07,016 --> 00:44:08,606
-with hot dog trucks,
-school buses,
+00:42:57,444 --> 00:42:59,313
+我们也有不少实验室
+供您进行检验
 
 
 850
-00:44:08,606 --> 00:44:11,096
-and dozens of other vehicles,
-and you drive them all.
+00:42:59,713 --> 00:43:02,482
+您将您的应用程序带到实验室
+我们将为您提供检验
 
 
 851
-00:44:11,096 --> 00:44:11,846
->> JOHN GELEYNSE: All right.
+00:43:02,916 --> 00:43:03,584
+谢谢
 
 
 852
-00:44:13,096 --> 00:44:15,746
-So this is the time
-traveler's paradox
+00:43:11,758 --> 00:43:13,527
+莎恩·普鲁登: 
+这是Workflow
 
 
 853
-00:44:15,746 --> 00:44:19,336
-in which you are
-completing these challenges,
+00:43:13,627 --> 00:43:16,663
+可在Mac,iPhone,
+和Apple 手表上使用
 
 
 854
-00:44:19,726 --> 00:44:23,516
-but as you drive -- as you try
-to complete the challenges,
+00:43:18,198 --> 00:43:21,335
+下个app
+有独特的旋转驱动游戏
 
 
 855
-00:44:23,516 --> 00:44:25,016
-you are driving these
-different vehicles,
+00:43:21,902 --> 00:43:23,270
+Mediocre开发的
 
 
 856
-00:44:25,016 --> 00:44:27,936
-and every time you drive
-one and maybe, you know,
+00:43:23,337 --> 00:43:24,738
+Does Not
+Commute
 
 
 857
-00:44:28,116 --> 00:44:30,846
-veer off the road or whatever,
-make a mistake or screw
+00:43:28,809 --> 00:43:31,245
+这个瑞典公司成立于2011
 
 
 858
-00:44:30,846 --> 00:44:34,846
-up somehow, it's going to
-get you in the next level.
+00:43:31,311 --> 00:43:33,514
+由丹尼斯和海因里希创立
 
 
 859
-00:44:34,846 --> 00:44:36,996
-And so if you succeed
-well, you are great.
+00:43:33,714 --> 00:43:35,249
+他们相识20年
 
 
 860
-00:44:36,996 --> 00:44:39,906
-If you screw up, you get caught,
-and it comes back to haunt you
+00:43:35,782 --> 00:43:36,517
+他们的初衷是
 
 
 861
-00:44:39,906 --> 00:44:44,956
-because it's basically
-this time paradox.
+00:43:36,583 --> 00:43:37,718
+制作一个快速小游戏
 
 
 862
-00:44:45,426 --> 00:44:50,416
-So here we've got the app,
-and we go in -- I am sorry.
+00:43:37,784 --> 00:43:38,685
+Does Not
+ Commute
 
 
 863
-00:44:50,996 --> 00:44:53,186
-Here we are.
+00:43:38,752 --> 00:43:40,153
+但开始进行后
+游戏也随之发展
 
 
 864
-00:44:53,556 --> 00:44:57,256
-There's some really great
-visual design here that kind
+00:43:40,220 --> 00:43:42,089
+越来越多的人喜欢它
 
 
 865
-00:44:57,256 --> 00:44:59,186
-of evokes the '60s and '70s.
+00:43:42,589 --> 00:43:44,858
+还是只有两名雇员
 
 
 866
-00:44:59,316 --> 00:45:03,036
-I am on the main level here
-to start, the simplest level
+00:43:44,925 --> 00:43:50,163
+他们和各种承包商合作
 
 
 867
-00:45:03,036 --> 00:45:04,866
-for you if you have not
-played the game before.
+00:43:57,437 --> 00:43:59,540
+莎恩·普鲁登: Does
+Not Commute
 
 
 868
-00:45:05,316 --> 00:45:07,796
-What you are doing is you've
-got to follow this arrow,
+00:43:59,606 --> 00:44:01,108
+是一种战略性自上而下
+推进的游戏
 
 
 869
-00:45:07,796 --> 00:45:11,336
-and you've got 60 seconds
-to drive 13 commuters
+00:44:01,275 --> 00:44:03,744
+从小镇让人放松的通勤开始
 
 
 870
-00:45:11,406 --> 00:45:12,436
-to their destinations.
+00:44:03,810 --> 00:44:06,680
+在70秒处 
+迅速转移到嘈杂的交通中
 
 
 871
-00:45:12,916 --> 00:45:15,906
-So this first car, we'll
-just tap and drive.
+00:44:07,014 --> 00:44:08,582
+有卖热狗的卡车 校车
 
 
 872
-00:45:15,906 --> 00:45:18,526
-At this point now it's
-just right and left turns.
+00:44:08,649 --> 00:44:11,285
+以及许多其他车辆 
+这些你都可以驾驶
 
 
 873
-00:45:18,626 --> 00:45:22,196
-Right. Great.
+00:44:13,453 --> 00:44:14,855
+约翰·格兰斯:好的
 
 
 874
-00:45:22,196 --> 00:45:25,416
-Not bad, 53, took me 7
-seconds to do that one.
+00:44:14,922 --> 00:44:16,023
+所以这是旅客矛盾的时候
 
 
 875
-00:45:25,416 --> 00:45:27,276
-This next one's got to go.
+00:44:16,089 --> 00:44:19,326
+在这里 你完成这些挑战
 
 
 876
-00:45:27,616 --> 00:45:30,996
-Watch the attention to detail
-as the van kind of leans.
+00:44:19,726 --> 00:44:23,530
+但当你开车 
+当你试着完成挑战时
 
 
 877
-00:45:30,996 --> 00:45:31,976
-There is my first car.
+00:44:23,597 --> 00:44:24,998
+你在驾驶这些不同车辆
 
 
 878
-00:45:32,436 --> 00:45:33,116
-I better watch out.
+00:44:25,065 --> 00:44:27,935
+每当你驾驶时 可能 
+你知道的
 
 
 879
-00:45:33,606 --> 00:45:34,206
-Okay. Great.
+00:44:28,101 --> 00:44:30,871
+突然开离公路等等 犯错 
 
 
 880
-00:45:34,206 --> 00:45:35,276
-Not doing too bad.
+00:44:31,038 --> 00:44:34,575
+莫名其妙弄错
+你将进入下个环境
 
 
 881
-00:45:35,586 --> 00:45:37,836
-The currency in this
-game is time,
+00:44:34,842 --> 00:44:36,944
+若你成功了 非常好
 
 
 882
-00:45:37,836 --> 00:45:41,256
-so if you ever see a
-time token on the road,
+00:44:37,010 --> 00:44:39,880
+若没成功 你将被逮捕
+并回到围绕你的模式
 
 
 883
-00:45:41,256 --> 00:45:42,526
-you can just go pick that up.
+00:44:40,047 --> 00:44:44,952
+因为基本是时间问题
 
 
 884
-00:45:43,046 --> 00:45:43,716
-Okay. All right.
+00:44:45,419 --> 00:44:50,490
+所以我们用这个app 进入
+不好意思
 
 
 885
-00:45:43,716 --> 00:45:45,306
-We are lucky here we are
-on the second street.
+00:44:53,527 --> 00:44:54,194
+好了
 
 
 886
-00:45:45,306 --> 00:45:49,156
-Notice it's replaying all of the
-driving on my previous turns.
+00:44:54,261 --> 00:44:57,231
+有非常棒的视觉设计
 
 
 887
-00:45:49,156 --> 00:45:49,406
-All right.
+00:44:57,297 --> 00:44:59,199
+在60秒和70秒处
 
 
 888
-00:45:49,406 --> 00:45:53,186
-Now this is where it gets a
-little screwy because -- whoops.
+00:45:00,601 --> 00:45:02,970
+我现在启动的是基本级别
+最简单的基本
 
 
 889
-00:45:53,186 --> 00:45:54,786
-Oh, man. Oh, man.
+00:45:03,036 --> 00:45:04,872
+若你从没玩过 
+可以从这个级别开始
 
 
 890
-00:45:54,846 --> 00:45:58,696
-Now, if I screw up,
-I can hit the rewind
+00:45:05,305 --> 00:45:07,774
+你要做的是 
+按照箭头指示操作
 
 
 891
-00:45:58,696 --> 00:46:00,336
-in the corner, it backs up.
+00:45:07,841 --> 00:45:11,345
+你有60秒载13名乘客
 
 
 892
-00:46:00,396 --> 00:46:01,056
-Okay. Here we go.
+00:45:11,411 --> 00:45:12,446
+到他们的目的地
 
 
 893
-00:46:01,056 --> 00:46:02,536
-Let's try it again.
+00:45:12,913 --> 00:45:15,883
+所以第一辆车 轻敲并开动
 
 
 894
-00:46:03,246 --> 00:46:04,336
-All right, John, pay attention.
+00:45:15,949 --> 00:45:18,519
+此刻 刚好是左右转弯
 
 
 895
-00:46:04,426 --> 00:46:05,266
-Pick up the token.
+00:45:18,619 --> 00:45:22,155
+右边 很好
 
 
 896
-00:46:05,536 --> 00:46:07,756
-Boom. Oh, we are good.
+00:45:22,222 --> 00:45:25,325
+不错53花了7秒载一位乘客
 
 
 897
-00:46:07,866 --> 00:46:09,286
-Okay. Not bad.
+00:45:25,392 --> 00:45:26,560
+下一位开始
 
 
 898
-00:46:09,366 --> 00:46:10,716
-I picked up ten seconds there.
+00:45:26,627 --> 00:45:30,631
+注意细节 因为货车有点倾斜
 
 
 899
-00:46:10,716 --> 00:46:11,666
-Let's go for the next one.
+00:45:30,731 --> 00:45:31,965
+这是我的第一辆车
 
 
 900
-00:46:11,986 --> 00:46:16,016
-Here I am an ambulance.
+00:45:32,432 --> 00:45:33,100
+我最好小心点
 
 
 901
-00:46:16,016 --> 00:46:17,586
-Not bad. That one's good.
+00:45:33,534 --> 00:45:34,201
+好了 很好
 
 
 902
-00:46:18,216 --> 00:46:18,676
-All right.
+00:45:34,268 --> 00:45:35,269
+干得还不错
 
 
 903
-00:46:18,676 --> 00:46:20,376
-Let's keep going.
+00:45:35,602 --> 00:45:37,404
+游戏的货币就是时间
 
 
 904
-00:46:21,046 --> 00:46:22,926
-Now it starts to
-get a little scary
+00:45:37,838 --> 00:45:41,175
+所以要是看到路上有时间代币
 
 
 905
-00:46:22,966 --> 00:46:25,836
-because I am driving an ice
-cream truck, I could tip over,
+00:45:41,241 --> 00:45:42,543
+尽管捡起
 
 
 906
-00:46:25,836 --> 00:46:27,296
-and then the ice
-cream would melt.
+00:45:43,010 --> 00:45:43,677
+好了
 
 
 907
-00:46:27,576 --> 00:46:28,856
-Okay. We are doing good.
+00:45:43,744 --> 00:45:45,279
+很幸运 我们在第二条街道
 
 
 908
-00:46:28,856 --> 00:46:31,476
-Now, notice all of the
-vehicles I have been driving
+00:45:45,345 --> 00:45:48,649
+注意 它在重演我先前的转弯
 
 
 909
-00:46:31,476 --> 00:46:34,196
-to date are coming in
-to potentially haunt me,
+00:45:48,749 --> 00:45:49,416
+好了
 
 
 910
-00:46:34,286 --> 00:46:37,876
-so you know, I'm doing
-pretty good, actually, today,
+00:45:49,483 --> 00:45:52,152
+此处是有点弯曲的地方 
+因为... 哎呀
 
 
 911
-00:46:37,876 --> 00:46:40,296
-so I could cut through
-here -- or not -- you know.
+00:45:53,053 --> 00:45:54,388
+哦 天哪 天哪
 
 
 912
-00:46:41,126 --> 00:46:43,676
-My car is smoking and
-I am dropping oil.
+00:45:55,189 --> 00:45:58,625
+现在 如果我弄错了 
 
 
 913
-00:46:43,986 --> 00:46:44,836
-All right.
+00:45:58,692 --> 00:46:00,327
+我可以在角落点击回转
+ 它后退了
 
 
 914
-00:46:44,836 --> 00:46:47,806
-Now here is the school bus, and
-if we could just get the volume
+00:46:00,394 --> 00:46:01,128
+好了 开始
 
 
 915
-00:46:47,806 --> 00:46:49,916
-up a little bit on this,
-this is pretty good
+00:46:01,528 --> 00:46:02,196
+再试一下
 
 
 916
-00:46:49,916 --> 00:46:52,416
-because the kids really
-don't like me as a driver.
+00:46:03,297 --> 00:46:04,331
+好了 约翰 注意了
 
 
 917
-00:46:53,516 --> 00:47:00,806
-[ Kids Screaming ]
+00:46:04,431 --> 00:46:05,265
+捡起代币
 
 
 918
-00:47:01,306 --> 00:47:02,556
-So there you go.
+00:46:05,532 --> 00:46:07,768
+轰 啊 很好
 
 
 919
-00:47:02,556 --> 00:47:05,636
-And I'm just limping
-to school here.
+00:46:07,868 --> 00:46:09,303
+好了 不错
 
 
 920
-00:47:06,446 --> 00:47:08,196
-Kids are having a great time.
+00:46:09,369 --> 00:46:10,704
+我在那获得10秒
 
 
 921
-00:47:09,326 --> 00:47:12,796
-And lastly, you know,
-I am scraping the back
+00:46:10,871 --> 00:46:11,672
+开始下一个
 
 
 922
-00:47:12,796 --> 00:47:14,576
-of that house, flying
-along here.
+00:46:11,972 --> 00:46:12,840
+这次是救护车
 
 
 923
-00:47:14,916 --> 00:47:16,666
-You get the point.
+00:46:16,243 --> 00:46:17,578
+不错 那个不错
 
 
 924
-00:47:16,666 --> 00:47:18,826
-This game is just so compelling.
+00:46:18,212 --> 00:46:18,879
+好了
 
 
 925
-00:47:18,826 --> 00:47:21,136
-Each of the characters
-has a personality.
+00:46:19,479 --> 00:46:20,380
+继续前进
 
 
 926
-00:47:21,136 --> 00:47:23,916
-The story goes on and on,
-as you finish the level,
+00:46:21,281 --> 00:46:22,850
+现在开始有点吓人
 
 
 927
-00:47:23,916 --> 00:47:25,856
-you move into a whole
-different scene.
+00:46:22,916 --> 00:46:25,853
+因为我开着冰激凌车 
+可能会翻到
 
 
 928
-00:47:26,106 --> 00:47:28,136
-You go downtown, you
-have different vehicles.
+00:46:26,286 --> 00:46:27,287
+冰激凌就会融化
 
 
 929
-00:47:28,446 --> 00:47:30,746
-And all of your moves are
-constantly coming back
+00:46:27,988 --> 00:46:28,856
+好了 我们做得不错
 
 
 930
-00:47:30,746 --> 00:47:33,626
-to haunt you, and it's
-just so impressive.
+00:46:29,289 --> 00:46:31,458
+现在 注意所有我开过的车辆
 
 
 931
-00:47:33,626 --> 00:47:36,226
-We just loved the visual
-design of the game.
+00:46:31,525 --> 00:46:34,194
+至此正过来 可能困住我
 
 
 932
-00:47:36,226 --> 00:47:38,666
-We loved the art in the game.
+00:46:34,294 --> 00:46:37,831
+所以事实上 今天我做得不错
 
 
 933
-00:47:38,666 --> 00:47:40,506
-We love the attention to detail.
+00:46:37,898 --> 00:46:40,300
+我可以从这里抄近路 
+哟 完了
 
 
 934
-00:47:40,856 --> 00:47:43,626
-And we think that this is one
-of the most unique games to come
+00:46:41,268 --> 00:46:43,670
+我的车正在冒烟我正在丢弃油
 
 
 935
-00:47:43,626 --> 00:47:46,816
-out in iOS this year,
-and so congratulations.
+00:46:44,505 --> 00:46:45,205
+好了
 
 
 936
-00:47:47,566 --> 00:47:48,616
-That's Does Not Commute.
+00:46:45,639 --> 00:46:47,774
+这是校车如果我们能获得
 
 
 937
-00:47:49,516 --> 00:47:53,546
-[ Applause ]
+00:46:47,841 --> 00:46:49,910
+一些体积 这将非常好
 
 
 938
-00:47:54,046 --> 00:47:54,886
->> SHAAN PRUDEN:
-That's Does Not Commute,
+00:46:50,277 --> 00:46:52,412
+因为孩子们不喜欢我当司机
 
 
 939
-00:47:54,886 --> 00:47:56,886
-available on both
-iPad and iPhone.
+00:47:01,889 --> 00:47:02,556
+好了
 
 
 940
-00:47:57,026 --> 00:48:01,116
-The last winner from the game
-category goes to a company
+00:47:03,790 --> 00:47:05,626
+我正在下坡 驶往学校
 
 
 941
-00:48:01,116 --> 00:48:02,866
-with probably the
-best name ever.
+00:47:06,460 --> 00:47:07,694
+孩子们玩得很高兴
 
 
 942
-00:48:03,466 --> 00:48:05,956
-It's Vainglory by
-Super Evil Megacorp.
+00:47:09,329 --> 00:47:14,535
+最后 背面碰到房屋刮擦了
 
 
 943
-00:48:07,516 --> 00:48:10,556
-[ Applause ]
+00:47:15,302 --> 00:47:16,069
+获得分数
 
 
 944
-00:48:11,056 --> 00:48:12,396
->> Headquartered in
-San Mateo, California,
+00:47:16,537 --> 00:47:18,805
+这个游戏引人注目
 
 
 945
-00:48:12,676 --> 00:48:15,466
-the Super Evil Megacorp
-team includes 35 developers
+00:47:18,872 --> 00:47:20,874
+每个角色都有自己的个性
 
 
 946
-00:48:15,896 --> 00:48:18,716
-from Riot Games, Lizard
-Entertainment, Rock Star Games,
+00:47:21,141 --> 00:47:23,844
+故事一直进行
+直至你完成级别
 
 
 947
-00:48:18,886 --> 00:48:21,496
-Gorilla Games, Playfish,
-Supercell, and more.
+00:47:23,911 --> 00:47:25,846
+你将进入一个完全不同的画面
 
 
 948
-00:48:21,496 --> 00:48:25,186
-Vainglory is their
-first game and launched
+00:47:26,113 --> 00:47:28,148
+到市区去 你将有不同的车辆
 
 
 949
-00:48:25,256 --> 00:48:32,786
-on the App Store in late 2013.
+00:47:28,448 --> 00:47:30,717
+你所有的移动将不断的回来
 
 
 950
-00:48:35,346 --> 00:48:38,586
->> SHAAN PRUDEN: Vainglory is a
-multiplayer online battle arena
+00:47:30,784 --> 00:47:33,587
+围绕着你 实在令人印象深刻
 
 
 951
-00:48:38,586 --> 00:48:41,966
-perfected for touch where
-you outplay real opponents.
+00:47:33,654 --> 00:47:36,190
+我们喜欢游戏的视觉设计
 
 
 952
-00:48:42,776 --> 00:48:45,526
-Fight with lightning-fast
-controls using powerful heroes
+00:47:36,256 --> 00:47:38,625
+喜欢游戏中的艺术
 
 
 953
-00:48:45,616 --> 00:48:48,806
-to destroy the enemy Vain
-crystal and claim glory.
+00:47:38,692 --> 00:47:40,494
+喜欢对细节的注意
 
 
 954
-00:48:48,806 --> 00:48:52,476
->> JOHN GELEYNSE: This is a
-massive online battle arena
+00:47:40,861 --> 00:47:43,597
+我们认为这将是
+iOS今年推出的
 
 
 955
-00:48:52,476 --> 00:48:55,256
-game, and it's going to require,
-of course, multiple players
+00:47:43,664 --> 00:47:46,867
+最独特的游戏之一 恭喜
 
 
 956
-00:48:55,336 --> 00:48:58,296
-to really come up with
-the greatest experience
+00:47:47,568 --> 00:47:49,269
+这就是 Does Not
+Commute
 
 
 957
-00:48:58,296 --> 00:49:00,376
-and the best demo,
-and there is only me,
+00:47:53,607 --> 00:47:54,608
+莎恩·普鲁登:
+这就是
 
 
 958
-00:49:00,686 --> 00:49:04,286
-not to mention I would probably
-screw it up, so we decided
+00:47:54,675 --> 00:47:55,709
+Does Not
+Commute
 
 
 959
-00:49:04,286 --> 00:49:06,656
-that we would, instead, get
-a bunch of people to play,
+00:47:55,776 --> 00:47:57,578
+可在iPad和
+iPhone上操作
 
 
 960
-00:49:06,656 --> 00:49:10,516
-we capture it on a device,
-and show you the video,
+00:47:58,245 --> 00:48:01,181
+最后的游戏胜利者是
 
 
 961
-00:49:10,516 --> 00:49:13,416
-and I can just comment on the
-things that you are seeing
+00:48:01,248 --> 00:48:02,850
+拥有最好的名字的公司
 
 
 962
-00:49:13,416 --> 00:49:15,806
-in terms of the quality of
-work that these guys have done.
+00:48:03,183 --> 00:48:04,885
+Super Evil
+Megacorp
 
 
 963
-00:49:15,806 --> 00:49:23,236
-So if we could roll the video.
+00:48:04,952 --> 00:48:06,153
+开发的Vainglory 
 
 
 964
-00:49:23,236 --> 00:49:25,096
-This game has been three years
+00:48:10,524 --> 00:48:12,392
+<br/> 
+总部位于加州圣马特奥
 
 
 965
-00:49:25,256 --> 00:49:28,246
-in the making by
-this small team.
+00:48:12,659 --> 00:48:14,394
+Super Evil
+Megacorp
 
 
 966
-00:49:31,586 --> 00:49:34,946
-The creators are huge MOBA
-fans, and their goal was
+00:48:14,461 --> 00:48:15,796
+有35名研发人员
 
 
 967
-00:49:35,046 --> 00:49:37,946
-to create a MOBA game
-that they, themselves,
+00:48:15,863 --> 00:48:17,297
+来自Riot Games 
+Lizard
 
 
 968
-00:49:37,946 --> 00:49:39,716
-would want to play
-on a touch device.
+00:48:17,364 --> 00:48:18,065
+Entertainment
 
 
 969
-00:49:42,756 --> 00:49:47,686
-Vainglory uses Metal
-on iOS and the A8 chip
+00:48:18,131 --> 00:48:18,799
+Rock Star
+Games
 
 
 970
-00:49:47,796 --> 00:49:51,966
-to bring incredible game visuals
-and a great gaming experience.
+00:48:18,866 --> 00:48:19,766
+Gorilla 
+Games,
 
 
 971
-00:49:52,666 --> 00:49:55,516
-In terms of visuals, you are
-getting 60-frame-per-second
+00:48:19,833 --> 00:48:21,935
+Playfish,
+Supercell 等等
 
 
 972
-00:49:55,516 --> 00:49:59,866
-performance, 1.3 million
-polygon rendering.
+00:48:22,002 --> 00:48:24,304
+Vainglory
+是他们的第一个游戏
 
 
 973
-00:50:01,046 --> 00:50:02,626
-Check out the environmental
-effects.
+00:48:24,371 --> 00:48:26,373
+于2013年末在
+App Store正式推出
 
 
 974
-00:50:02,826 --> 00:50:05,556
-You've got grass
-and trees moving.
+00:48:35,349 --> 00:48:36,950
+莎恩·普鲁登: 
+Vainglory
 
 
 975
-00:50:05,556 --> 00:50:08,846
-You've got particle effects,
-gorgeous lighting effects.
+00:48:37,017 --> 00:48:38,519
+是一款多玩家在线战斗竞技场
 
 
 976
-00:50:08,846 --> 00:50:13,406
-I mean, this game is all
-about the experience.
+00:48:38,585 --> 00:48:41,955
+触摸效果好 
+你可以打败真正的对手
 
 
 977
-00:50:14,126 --> 00:50:18,476
-The highs, the lows, the
-excitement, the anticipation,
+00:48:42,789 --> 00:48:45,526
+与闪电般超级英雄并肩作战
 
 
 978
-00:50:18,866 --> 00:50:20,046
-the community that's built,
+00:48:45,626 --> 00:48:48,795
+破坏敌人Vain水晶 
+获得荣耀
 
 
 979
-00:50:20,416 --> 00:50:22,776
-the friendships,
-and the competition.
+00:48:49,596 --> 00:48:52,399
+约翰·格兰斯: 
+这是大型在线战斗竞技场游戏
 
 
 980
-00:50:24,226 --> 00:50:27,396
-We are just so impressed by
-this game pushing the envelope
+00:48:52,466 --> 00:48:55,269
+要求多名玩家
 
 
 981
-00:50:27,396 --> 00:50:29,096
-in terms of performance
-on the platform.
+00:48:55,335 --> 00:48:58,772
+提出最好的经验
 
 
 982
-00:50:29,356 --> 00:50:29,976
-Congratulations.
+00:48:58,839 --> 00:49:00,374
+最好的演示 那就是我
 
 
 983
-00:50:30,516 --> 00:50:38,546
-[ Applause ]
+00:49:00,674 --> 00:49:04,244
+不用说 我可能会搞砸
 
 
 984
-00:50:39,046 --> 00:50:39,576
->> SHAAN PRUDEN: And now we come
+00:49:04,311 --> 00:49:06,613
+所以我决定找一些人来玩
 
 
 985
-00:50:39,576 --> 00:50:41,286
-to our last award
-this afternoon.
+00:49:06,680 --> 00:49:10,484
+我们通过设备录制 请看视频
 
 
 986
-00:50:41,426 --> 00:50:43,376
-It goes to an app in
-the music category.
+00:49:10,551 --> 00:49:13,353
+我可以对你所看到的进行评论
 
 
 987
-00:50:43,806 --> 00:50:46,396
-I have to say this is the
-demo I've been looking forward
+00:49:13,420 --> 00:49:15,789
+对这些人所做的质量进行评论
 
 
 988
-00:50:46,396 --> 00:50:47,066
-to the most.
+00:49:15,856 --> 00:49:17,090
+如果我们能够滚动视频
 
 
 989
-00:50:47,366 --> 00:50:50,776
-The winner is Pacemaker
-by Pacemaker Music.
+00:49:23,096 --> 00:49:25,132
+这个游戏三年前就有了
 
 
 990
-00:50:51,516 --> 00:50:53,636
-[ Cheers and Applause ]
+00:49:25,199 --> 00:49:28,235
+由这个小团队制作
 
 
 991
-00:50:54,136 --> 00:50:56,166
->> Pacemaker Music is an
-eight-person company based
+00:49:31,572 --> 00:49:34,942
+创作者是MOBA狂热爱好者
 
 
 992
-00:50:56,166 --> 00:50:57,236
-in Stockholm, Sweden.
+00:49:35,042 --> 00:49:37,911
+他们的目标
+是创造MOBA游戏
 
 
 993
-00:50:57,726 --> 00:51:01,186
-After the launch of Pacemaker
-for iPad in early 2014,
+00:49:37,978 --> 00:49:40,013
+且可以在触摸设备上操作
 
 
 994
-00:51:01,486 --> 00:51:03,186
-the team soon realized
-that their users,
+00:49:42,916 --> 00:49:47,621
+Vainglory在iOS
+上使用金属和A8芯片
 
 
 995
-00:51:03,186 --> 00:51:05,676
-predominantly college
-students, wanted to participate
+00:49:47,688 --> 00:49:52,226
+带来了难以置信的游戏外观
+和非常棒的游戏体验
 
 
 996
-00:51:05,676 --> 00:51:08,306
-in the party rather than being
-stuck with DJing the music.
+00:49:52,659 --> 00:49:56,230
+说到外观 每秒有60幅
 
 
 997
-00:51:08,676 --> 00:51:10,786
-To solve this, the
-Pacemaker team decided
+00:49:56,864 --> 00:49:59,867
+130万多边图形
 
 
 998
-00:51:10,786 --> 00:51:19,276
-to develop an AI DJ, which
-launched in December 2014.
+00:50:01,034 --> 00:50:02,636
+看看环境效果
 
 
 999
-00:51:22,366 --> 00:51:23,936
->> SHAAN PRUDEN: Pacemaker
-provides a full range
+00:50:02,836 --> 00:50:05,539
+草和树可以移动
 
 
 1000
-00:51:23,936 --> 00:51:25,836
-of music mix creation apps,
+00:50:05,606 --> 00:50:09,243
+有粒子效果 绚丽的灯光效果
 
 
 1001
-00:51:25,836 --> 00:51:28,986
-everything from instant mobile
-mixing on iPhone and Apple Watch
+00:50:11,311 --> 00:50:13,647
+我是说 这个游戏是经验游戏
 
 
 1002
-00:51:29,216 --> 00:51:34,876
-to live, hands-on DJing
-with Pacemaker for iPad.
+00:50:14,081 --> 00:50:18,485
+高 低 兴奋 希望
 
 
 1003
-00:51:34,876 --> 00:51:36,166
->> JOHN GELEYNSE:
-Let's take a look.
+00:50:18,852 --> 00:50:20,053
+建立的社区
 
 
 1004
-00:51:36,166 --> 00:51:39,426
-This app is set up to
-give you the experience
+00:50:20,420 --> 00:50:23,023
+友谊 竞争
 
 
 1005
-00:51:39,426 --> 00:51:43,366
-of really making DJ fun and
-personal with your music.
+00:50:24,224 --> 00:50:27,327
+让人印象深刻 这个游戏
 
 
 1006
-00:51:43,656 --> 00:51:45,786
-This isn't about
-running a concert
+00:50:27,394 --> 00:50:29,096
+通过平台上的表现挑战极限
 
 
 1007
-00:51:45,786 --> 00:51:47,726
-for 70,000 fans necessarily.
+00:50:29,363 --> 00:50:30,030
+祝贺他们
 
 
 1008
-00:51:47,726 --> 00:51:51,256
-It's more about just, you know,
-creating a beat and a groove
+00:50:38,672 --> 00:50:39,773
+莎恩·普鲁登: 现在进入
 
 
 1009
-00:51:51,256 --> 00:51:54,186
-at home maybe with some
-friends at a party.
+00:50:39,840 --> 00:50:41,275
+今天下午最后一个奖项
 
 
 1010
-00:51:54,186 --> 00:51:58,466
-So I am going to launch the
-app and pick some songs here,
+00:50:41,441 --> 00:50:43,377
+音乐类app
 
 
 1011
-00:51:58,826 --> 00:52:00,946
-and let's pick this one.
+00:50:43,810 --> 00:50:44,678
+必须说 这是
 
 
 1012
-00:52:01,416 --> 00:52:02,126
-Play that.
+00:50:44,745 --> 00:50:47,080
+我最期待的展示
 
 
 1013
-00:52:02,126 --> 00:52:04,266
-See what it sounds like.
+00:50:47,381 --> 00:50:49,683
+获胜者是Pacemaker
+Music的
 
 
 1014
-00:52:04,956 --> 00:52:06,376
-We've got sound here.
+00:50:49,750 --> 00:50:50,651
+Pacemaker
 
 
 1015
-00:52:07,516 --> 00:52:12,546
-[ Music ]
+00:50:53,720 --> 00:50:55,122
+Pacemaker
+Music
 
 
 1016
-00:52:13,046 --> 00:52:13,416
-I don't know.
+00:50:55,189 --> 00:50:57,291
+是一家有着8名员工的公司
+位于瑞典斯德哥尔摩
 
 
 1017
-00:52:13,416 --> 00:52:14,326
-That sounds kind of lame.
+00:50:57,724 --> 00:51:01,328
+2014年初iPad
+正式使用Pacemaker
 
 
 1018
-00:52:14,326 --> 00:52:15,266
-There is something wrong here.
+00:51:01,495 --> 00:51:03,197
+该团队迅速意识到他们的用户
 
 
 1019
-00:52:15,266 --> 00:52:18,596
-Hold on a second.
+00:51:03,263 --> 00:51:05,666
+主要是大学生 想要参与
 
 
 1020
-00:52:19,166 --> 00:52:20,156
-Something's not right.
+00:51:05,732 --> 00:51:08,302
+而不是被迫接受音乐
 
 
 1021
-00:52:21,516 --> 00:52:24,936
-[ Laughter ]
+00:51:08,669 --> 00:51:10,771
+为解决这个问题
+Pacemaker团队决定
 
 
 1022
-00:52:25,436 --> 00:52:26,256
-There. All right.
+00:51:10,838 --> 00:51:14,675
+开发AI DJ
+在2014年12月正式推出
 
 
 1023
-00:52:26,866 --> 00:52:27,416
-That's better.
+00:51:21,982 --> 00:51:23,584
+莎恩·普鲁登: 
+Pacemaker
 
 
 1024
-00:52:27,876 --> 00:52:30,166
-Okay. So let's add
-another track here.
+00:51:23,650 --> 00:51:25,786
+提供一整个系列
+混合音乐创作程序
 
 
 1025
-00:52:30,166 --> 00:52:34,796
-Let's try this one,
-Mogadishu, and let's move on
+00:51:25,853 --> 00:51:28,388
+所有在iPhone 
+和Apple Watch上
 
 
 1026
-00:52:34,796 --> 00:52:36,736
-and add another track here.
+00:51:28,455 --> 00:51:29,122
+即刻混合播放
 
 
 1027
-00:52:36,926 --> 00:52:37,506
-All right.
+00:51:29,223 --> 00:51:32,492
+在iPad上利用
+Pacemaker亲手打碟
 
 
 1028
-00:52:37,506 --> 00:52:38,896
-So this is on iPhone; right?
+00:51:34,094 --> 00:51:35,495
+约翰·格兰斯:
+让我们来看一下
 
 
 1029
-00:52:38,896 --> 00:52:41,846
-And I can start a
-track playing [music].
+00:51:35,562 --> 00:51:39,399
+这个app是让你感受
 
 
 1030
-00:52:44,046 --> 00:52:45,336
-Let's skip to the next one.
+00:51:39,466 --> 00:51:43,370
+正在制作DJ的乐趣
+ 亲手制作音乐
 
 
 1031
-00:52:45,586 --> 00:52:49,146
-And it's going to
-automatically merge the two
+00:51:43,670 --> 00:51:45,739
+这并不是为
 
 
 1032
-00:52:49,146 --> 00:52:52,076
-of these tracks together
-pretty quickly.
+00:51:45,806 --> 00:51:47,741
+70,000粉丝开音乐会
 
 
 1033
-00:52:52,076 --> 00:52:52,416
-All right.
+00:51:47,875 --> 00:51:51,211
+更多的是 在家创作些
 
 
 1034
-00:52:52,576 --> 00:52:55,776
-So we are in Mogadishu here,
-and we can turn on the effects.
+00:51:51,278 --> 00:51:54,181
+拍子和旋律 和朋友开个派对
 
 
 1035
-00:52:56,276 --> 00:52:59,796
-Right on iPhone, we can start
-doing some cool effects.
+00:51:54,681 --> 00:51:58,352
+我将打开这个app 
+挑选些音乐
 
 
 1036
-00:53:00,516 --> 00:53:06,546
-[ Music ]
+00:51:58,819 --> 00:52:00,954
+就这首
 
 
 1037
-00:53:07,046 --> 00:53:08,536
-Okay. I can do a high-low.
+00:52:01,421 --> 00:52:02,122
+播放
 
 
 1038
-00:53:13,046 --> 00:53:14,646
-I can do an 8-bit.
+00:52:03,323 --> 00:52:04,258
+听听像什么
 
 
 1039
-00:53:18,046 --> 00:53:19,056
-Right. Let's move
-to the next song.
+00:52:05,526 --> 00:52:06,493
+声音出来了
 
 
 1040
-00:53:19,056 --> 00:53:21,446
-It's going to do this
-autopilot mixing.
+00:52:12,466 --> 00:52:13,200
+我不知道
 
 
 1041
-00:53:21,636 --> 00:53:24,136
-So you just say move
-on to the next song.
+00:52:13,267 --> 00:52:14,401
+这声音听起来很差劲
 
 
 1042
-00:53:24,136 --> 00:53:25,766
-It's got this animation
-coming in.
+00:52:14,468 --> 00:52:15,302
+这里出了点问题
 
 
 1043
-00:53:25,986 --> 00:53:28,976
-It's going to analyze the
-beats, and then it's going
+00:52:15,369 --> 00:52:16,103
+稍等一下
 
 
 1044
-00:53:28,976 --> 00:53:31,566
-to merge these two songs
-together really nicely.
+00:52:19,173 --> 00:52:20,140
+出错了
 
 
 1045
-00:53:34,126 --> 00:53:41,146
-Well, I sped that
-up a little bit.
+00:52:25,445 --> 00:52:26,246
+这里 好了
 
 
 1046
-00:53:41,316 --> 00:53:45,486
-Sorry. Right, so you see the
-effect that we've got here.
+00:52:26,813 --> 00:52:27,481
+这样好多了
 
 
 1047
-00:53:45,486 --> 00:53:50,826
-Right? So I can do some
-white noise in the app.
+00:52:27,881 --> 00:52:30,117
+好了 加些效果在这
 
 
 1048
-00:53:50,826 --> 00:53:53,036
-Then you've got that
-happening on the iPhone.
+00:52:30,184 --> 00:52:34,755
+试试这首
+Mogadishu 继续
 
 
 1049
-00:53:53,296 --> 00:53:55,406
-But they actually added
-Apple Watch support,
+00:52:34,821 --> 00:52:36,623
+在这里加些其他效果
 
 
 1050
-00:53:55,716 --> 00:54:00,386
-so you can take your iPhone,
-stick it in the stereo at home,
+00:52:36,690 --> 00:52:37,457
+好了
 
 
 1051
-00:54:00,606 --> 00:54:04,756
-and now pick up your watch, go
-dancing with your friends --
+00:52:37,524 --> 00:52:38,892
+这是在iPhone上 是吧
 
 
 1052
-00:54:05,006 --> 00:54:06,776
-let's switch to the Watch here.
+00:52:38,959 --> 00:52:41,862
+我可以开始播放
 
 
 1053
-00:54:06,936 --> 00:54:09,256
-Let's launch Pacemaker
-on the Watch.
+00:52:44,031 --> 00:52:45,332
+让我们跳过到下一首
 
 
 1054
-00:54:09,846 --> 00:54:17,056
-We can add these effects.
+00:52:47,134 --> 00:52:50,938
+它将自动把合并
+这些特效非常快
 
 
 1055
-00:54:17,846 --> 00:54:20,526
-And it knows exactly
-which track is playing,
+00:52:52,506 --> 00:52:53,173
+好了
 
 
 1056
-00:54:21,096 --> 00:54:22,546
-and so we can add
-some white noise.
+00:52:53,240 --> 00:52:56,009
+我们现在Mogadishu
+可以打开效果
 
 
 1057
-00:54:23,116 --> 00:54:25,996
-We can stop it.
+00:52:56,276 --> 00:52:59,313
+就在iPhone上 
+我们可以开始做些很酷的效果
 
 
 1058
-00:54:27,456 --> 00:54:30,606
-We can add the chop.
+00:53:06,887 --> 00:53:08,422
+好了 我可以调高低音
 
 
 1059
-00:54:31,406 --> 00:54:34,086
-And you notice see the feedback
-going right on the watch?
+00:53:12,960 --> 00:53:13,827
+我可以做8拍
 
 
 1060
-00:54:34,496 --> 00:54:37,846
-It's all timed with the music
-that's playing right now.
+00:53:17,564 --> 00:53:19,032
+好了 换下一首
 
 
 1061
-00:54:39,786 --> 00:54:40,976
-I can add the 8-bit effect.
+00:53:19,099 --> 00:53:21,401
+它将自动混合
 
 
 1062
-00:54:48,046 --> 00:54:49,836
-I didn't say I was a DJ, but
-you know, you get the point.
+00:53:21,835 --> 00:53:24,104
+所以你只需要说 进入下一首
 
 
 1063
-00:54:50,306 --> 00:54:54,806
-And I can apply the low filter
-effect, and it will dip.
+00:53:24,171 --> 00:53:25,772
+有这个动画进来
 
 
 1064
-00:54:54,806 --> 00:54:57,976
-And you see what's
-going on on the watch.
+00:53:25,973 --> 00:53:28,742
+它将分析节拍 然后将
 
 
 1065
-00:54:58,566 --> 00:55:01,576
-That's Pacemaker for
-Apple Watch and iPhone.
+00:53:28,809 --> 00:53:31,345
+这两首合在一起 非常棒
 
 
 1066
-00:55:01,576 --> 00:55:02,436
-Congratulations.
+00:53:36,016 --> 00:53:37,684
+我稍微加速
 
 
 1067
-00:55:03,516 --> 00:55:08,936
-[ Applause ]
+00:53:43,190 --> 00:53:45,459
+是的 你看到我们
+刚获得的效果
 
 
 1068
-00:55:09,436 --> 00:55:11,906
->> SHAAN PRUDEN: Pacemaker
-also available on iPad,
+00:53:45,526 --> 00:53:50,564
+对吧 我可以在
+app上做一些白噪音
 
 
 1069
-00:55:11,946 --> 00:55:13,156
-iPhone, and Apple Watch.
+00:53:50,764 --> 00:53:53,033
+随后就可以在
+iPhone上播放
 
 
 1070
-00:55:13,956 --> 00:55:17,426
-So those are our winners
-for the 2015 Design Awards.
+00:53:53,300 --> 00:53:55,402
+实际上他们现在已经支持
+Apple Watch
 
 
 1071
-00:55:18,516 --> 00:55:23,546
-[ Applause ]
+00:53:55,702 --> 00:54:00,374
+所以在家使用iPhone 
+就可以享受立体音效果
 
 
 1072
-00:55:24,046 --> 00:55:26,476
-These apps are from
-categories across the App Store,
+00:54:00,741 --> 00:54:04,878
+拿起你的手表
+ 和你的朋友一起跳舞
 
 
 1073
-00:55:26,876 --> 00:55:28,636
-plus our two special
-student winners,
+00:54:05,546 --> 00:54:06,780
+让我们切换到手表
 
 
 1074
-00:55:29,086 --> 00:55:31,496
-and I'd like to invite all
-of the winners back on stage
+00:54:06,947 --> 00:54:09,383
+在手表上启动
+Pacemaker
 
 
 1075
-00:55:31,626 --> 00:55:33,716
-for final acknowledgment of
-their great work this year.
+00:54:09,850 --> 00:54:12,786
+可以增加这些效果
 
 
 1076
-00:55:34,516 --> 00:56:14,746
-[ Applause ]
+00:54:18,292 --> 00:54:20,360
+可以确切知道播放的是哪一个
 
 
 1077
-00:56:15,246 --> 00:56:18,256
-In addition to the coveted Apple
-Design Award trophy they receive
+00:54:20,961 --> 00:54:22,729
+因此我们可以增加白噪音
 
 
 1078
-00:56:18,326 --> 00:56:21,166
-today, you will notice they all
-have special Apple Design Award
+00:54:24,965 --> 00:54:25,899
+可以停止
 
 
 1079
-00:56:21,166 --> 00:56:23,246
-lanyards they are
-wearing, and we invite you
+00:54:29,870 --> 00:54:30,671
+可以增加敲击
 
 
 1080
-00:56:23,326 --> 00:56:24,906
-to meet them here
-this week and learn
+00:54:31,805 --> 00:54:34,174
+看到手表右边的反馈了吗
 
 
 1081
-00:56:24,906 --> 00:56:26,336
-from these award-winning
-developers.
+00:54:34,508 --> 00:54:37,878
+是现在正在播放的音乐
 
 
 1082
-00:56:27,766 --> 00:56:31,146
-Teams also receive almost one
+00:54:39,780 --> 00:54:41,048
+可以增加8拍效果
 
 
 1083
-00:56:31,146 --> 00:56:32,946
-of everything we make
-as a prize package.
+00:54:47,454 --> 00:54:49,823
+我并不是DJ 但是我做到了
 
 
 1084
-00:56:36,656 --> 00:56:38,786
->> JOHN GELEYNSE: And we just
-want to thank you for joining us
+00:54:50,290 --> 00:54:54,795
+我现在使用低滤效果 
 
 
 1085
-00:56:38,786 --> 00:56:41,926
-at the end of this long
-day to celebrate the work
+00:54:56,463 --> 00:54:58,065
+你可以看到手表上正在播放的
 
 
 1086
-00:56:41,926 --> 00:56:43,636
-that these guys have
-done, these folks.
+00:54:58,398 --> 00:55:00,501
+这就是 Apple 
+Watch和iPhone上
 
 
 1087
-00:56:43,806 --> 00:56:46,646
-They have worked really hard to
-create some really great apps,
+00:55:00,567 --> 00:55:01,568
+使用的Pacemaker
 
 
 1088
-00:56:47,306 --> 00:56:49,526
-and we are looking forward
-to seeing what you are going
+00:55:01,635 --> 00:55:02,436
+祝贺他们
 
 
 1089
-00:56:49,526 --> 00:56:52,156
-to make with iOS
-9, with El Capitan,
+00:55:08,876 --> 00:55:10,611
+莎恩·普鲁登: 
+Pacemaker
 
 
 1090
-00:56:52,856 --> 00:56:55,426
-with watchOS 2.0 next year.
+00:55:10,677 --> 00:55:11,578
+也可在iPad
 
 
 1091
-00:56:55,876 --> 00:56:58,236
-Let's give these
-folks a last round
+00:55:11,645 --> 00:55:13,647
+iPhone和Apple
+Watch上使用
 
 
 1092
-00:56:58,236 --> 00:57:00,006
-of applause, and thank you.
+00:55:13,947 --> 00:55:17,584
+以上就是2015
+设计大奖赛获奖者
 
 
 1093
-00:57:00,126 --> 00:57:00,806
-Have a great week.
+00:55:23,991 --> 00:55:26,460
+这些app来自
+App Store分类
 
 
 1094
-00:57:00,866 --> 00:57:01,506
->> SHAAN PRUDEN:
-Have a great week.
+00:55:26,860 --> 00:55:28,629
+还有两位特别的学生获奖者
 
 
 1095
-00:57:02,516 --> 00:57:16,060
-[ Cheers and Applause ]
+00:55:29,096 --> 00:55:31,498
+请所有的获奖者上台
+
+
+1096
+00:55:31,632 --> 00:55:33,767
+再次感谢他们今年的出色表现
+
+
+1097
+00:56:15,242 --> 00:56:18,245
+除今天获得的
+令人垂涎的苹果设计奖奖杯外
+
+
+1098
+00:56:18,312 --> 00:56:21,148
+你看到他们都戴着
+苹果设计奖勋带
+
+
+1099
+00:56:21,215 --> 00:56:23,250
+本周我们邀请您
+
+
+1100
+00:56:23,317 --> 00:56:24,885
+在这里和他们见面
+
+
+1101
+00:56:24,952 --> 00:56:26,320
+并学习这些大奖获得者
+
+
+1102
+00:56:27,754 --> 00:56:31,091
+团队也将获得
+
+
+1103
+00:56:31,158 --> 00:56:32,960
+一个我们提供的奖品包
+
+
+1104
+00:56:36,663 --> 00:56:38,732
+约翰·格兰斯: 
+感谢和我们一起
+
+
+1105
+00:56:38,799 --> 00:56:41,869
+度过漫长的一天 谢谢
+
+
+1106
+00:56:41,935 --> 00:56:43,637
+这些人所做的工作
+
+
+1107
+00:56:43,804 --> 00:56:46,840
+他们努力工作 
+创造好用的app
+
+
+1108
+00:56:47,307 --> 00:56:49,476
+我们也期待来年可以看到
+
+
+1109
+00:56:49,543 --> 00:56:52,613
+你们用iOS9
+和 El Capitan
+
+
+1110
+00:56:52,846 --> 00:56:55,415
+watchOS 2.0
+制作的东西
+
+
+1111
+00:56:55,883 --> 00:56:58,218
+让我们再次用掌声
+
+
+1112
+00:56:58,285 --> 00:56:59,987
+祝贺他们 谢谢
+
+
+1113
+00:57:00,053 --> 00:57:00,821
+周末愉快
+
+
+1114
+00:57:00,888 --> 00:57:01,989
+莎恩·普鲁登:
+周末愉快
 

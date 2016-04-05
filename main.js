@@ -65,14 +65,14 @@ async.waterfall([
                 callback(null, videoInfo);
             } else {
                 console.log("start download subtitle index file of " + videoInfo.videoNameWithOutExtension);
-                var videoSubtitleIndexFileURL = videoInfo.videoURLPrefix + "subtitles/eng/prog_index.m3u8";
+                var videoSubtitleIndexFileURL = videoInfo.videoURLPrefix + "subtitles/zho/prog_index.m3u8";
                 request(videoSubtitleIndexFileURL, function (err, response, body) {
                     if (!err && response.statusCode === 200) {
                         var webvttFileNames = body.split("\n").filter(function(line, index) {
                             return line.indexOf("fileSequence") === 0;
                         });
                         webvttFileNames = webvttFileNames.map(function (fileName) {
-                            return videoInfo.videoURLPrefix + "subtitles/eng/"+ fileName;
+                            return videoInfo.videoURLPrefix + "subtitles/zho/"+ fileName;
                         });
                         videoInfo.webvttFileNames = webvttFileNames;
                     } else {

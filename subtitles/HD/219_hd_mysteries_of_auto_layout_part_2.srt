@@ -1,4901 +1,4735 @@
 1
-00:00:20,516 --> 00:00:23,216
-[Applause]
+00:00:20,387 --> 00:00:23,390
+欢迎来到自动布局迷宫 第二部分
 
 
 2
-00:00:23,716 --> 00:00:24,266
->> JESSE DONALDSON:
-Hi, everyone.
+00:00:23,690 --> 00:00:24,358
+大家好
 
 
 3
-00:00:24,986 --> 00:00:25,646
-Thanks for coming.
+00:00:24,992 --> 00:00:26,660
+感谢来参加讲座
+我是杰西
 
 
 4
-00:00:25,776 --> 00:00:28,656
-My name is Jesse, and I am
-responsible for Auto Layout
+00:00:27,094 --> 00:00:28,662
+负责AppKit中的
 
 
 5
-00:00:28,746 --> 00:00:30,386
-in the AppKit and
-Foundation frameworks.
+00:00:28,762 --> 00:00:30,697
+Auto Layout和
+Foundation框架部分的工作
 
 
 6
-00:00:31,106 --> 00:00:33,206
-Layout is one of the
-most fundamental tasks
+00:00:31,098 --> 00:00:33,200
+布局是我们
+设计应用时
 
 
 7
-00:00:33,396 --> 00:00:36,666
-that we perform when we build an
-application, and Auto Layout is
+00:00:33,400 --> 00:00:36,603
+最基础的工作之一
+Auto Layout 
 
 
 8
-00:00:36,666 --> 00:00:39,656
-about the neatest thing ever,
-but sometimes it can seem kind
+00:00:36,670 --> 00:00:39,573
+非常干净简洁
+但是有时似乎
 
 
 9
-00:00:39,656 --> 00:00:42,246
-of mysterious, and so today I
-want to look at a few aspects
+00:00:39,640 --> 00:00:42,176
+也有些神秘
+今天我来介绍
 
 
 10
-00:00:42,246 --> 00:00:44,996
-of Auto Layout that are
-less well understood and go
+00:00:42,242 --> 00:00:44,978
+Auto Layout
+不为人知的几方面
 
 
 11
-00:00:45,046 --> 00:00:46,086
-through them in some detail.
+00:00:45,045 --> 00:00:46,613
+并会做详细解释
 
 
 12
-00:00:47,326 --> 00:00:49,866
-This is the second part
-of our two-part series,
+00:00:47,314 --> 00:00:49,850
+这是两部分讲座
+的第二部分内容
 
 
 13
-00:00:49,916 --> 00:00:51,026
-and here's a brief list
+00:00:49,917 --> 00:00:50,951
+这里是我们
 
 
 14
-00:00:51,026 --> 00:00:52,916
-of the topics we're
-going to be looking at.
+00:00:51,018 --> 00:00:52,920
+准备介绍的
+话题简介
 
 
 15
-00:00:53,416 --> 00:00:55,056
-I would like to start
-with the layout cycle.
+00:00:53,420 --> 00:00:55,055
+我希望先从
+布局循环讲起
 
 
 16
-00:00:55,606 --> 00:00:59,046
-You probably know how to
-configure your user interface,
+00:00:55,622 --> 00:00:59,059
+大家可能都知道
+怎样配置用户界面
 
 
 17
-00:00:59,596 --> 00:01:03,176
-but Auto Layout can still be
-a little bit of a black box.
+00:00:59,593 --> 00:01:03,163
+但是Auto Layout
+还是有些内容存在未知
 
 
 18
-00:01:03,506 --> 00:01:04,896
-You kind of configure things,
+00:01:03,497 --> 00:01:04,831
+可以进行配置
 
 
 19
-00:01:04,896 --> 00:01:07,836
-you run your application,
-you get some layout.
+00:01:04,897 --> 00:01:07,835
+运行应用
+获得布局
 
 
 20
-00:01:08,366 --> 00:01:11,286
-Hopefully it's the layout that
-you want, but if it's not,
+00:01:08,368 --> 00:01:11,205
+希望这就是你
+想要的布局 但如果不是
 
 
 21
-00:01:11,286 --> 00:01:12,656
-it can be hard to
-know where to look.
+00:01:11,271 --> 00:01:12,873
+很难知道
+该从哪里下手
 
 
 22
-00:01:13,076 --> 00:01:15,946
-So I want to look at what
-happens in the middle here,
+00:01:13,073 --> 00:01:15,943
+我想了解
+中间这里出了什么问题
 
 
 23
-00:01:16,056 --> 00:01:18,646
-how we actually go from
-having constraints on the view
+00:01:16,043 --> 00:01:18,579
+也就是怎样从视图中
+获得约束
 
 
 24
-00:01:18,646 --> 00:01:21,156
-to having the frames
-assigned to those views.
+00:01:18,645 --> 00:01:21,148
+再到将框架
+安排到这些视图中
 
 
 25
-00:01:22,496 --> 00:01:25,306
-So here is a high-level
-overview of the process.
+00:01:22,482 --> 00:01:25,319
+这里是整个流程的
+高度概述
 
 
 26
-00:01:25,376 --> 00:01:27,846
-We start with the application
-run loop cheerfully iterating
+00:01:25,385 --> 00:01:27,855
+先是应用高兴地运行
+循坏 如此往复
 
 
 27
-00:01:28,296 --> 00:01:30,736
-until the constraints
-change in such a way
+00:01:28,288 --> 00:01:30,657
+直至约束改变
+使得计算出的
 
 
 28
-00:01:30,736 --> 00:01:33,216
-that the calculated layout
-needs to be different.
+00:01:30,724 --> 00:01:33,227
+布局需要
+有所不同
 
 
 29
-00:01:33,646 --> 00:01:36,326
-This causes a deferred
-layout pass to be scheduled.
+00:01:33,660 --> 00:01:36,330
+这会导致需要安排
+延迟布局过程
 
 
 30
-00:01:36,716 --> 00:01:38,706
-When that layout pass
-eventually comes around,
+00:01:36,730 --> 00:01:38,699
+当布局过程
+最终出现时
 
 
 31
-00:01:38,986 --> 00:01:40,166
-we go through the hierarchy
+00:01:38,999 --> 00:01:40,133
+我们经过层次
 
 
 32
-00:01:40,206 --> 00:01:41,886
-and update all the
-frames for the views.
+00:01:40,200 --> 00:01:41,835
+并且升级
+视图的所有框架
 
 
 33
-00:01:41,886 --> 00:01:45,666
-This is a little abstract, so
-I made a simple example here.
+00:01:41,902 --> 00:01:45,672
+这有点抽象
+我来举个简单例子
 
 
 34
-00:01:45,666 --> 00:01:49,886
-The idea is that when we
-uncheck this top checkbox,
+00:01:46,473 --> 00:01:49,877
+也就是说 当我们
+不勾选顶部的复选框时
 
 
 35
-00:01:50,256 --> 00:01:52,846
-we'll modify a constraint
-to shrink the window
+00:01:50,244 --> 00:01:52,779
+我们将调整约束
+收缩窗口
 
 
 36
-00:01:52,846 --> 00:01:55,966
-and hide the checkboxes
-on the bottom.
+00:01:52,846 --> 00:01:55,382
+并隐藏底部的
+复选框
 
 
 37
-00:01:55,966 --> 00:01:58,326
-So we start with frames
-looking like this.
+00:01:55,449 --> 00:01:58,318
+开始时 框架是
+这样的
 
 
 38
-00:01:58,666 --> 00:02:01,576
-When we change the constraint,
-the layout engine's notion
+00:01:58,652 --> 00:02:01,522
+调整约束时
+布局引擎关于
 
 
 39
-00:02:01,576 --> 00:02:03,386
-of where everything is
-has already changed,
+00:02:01,588 --> 00:02:03,390
+每个内容的位置概念
+都已发生改变
 
 
 40
-00:02:03,446 --> 00:02:05,136
-but the UI hasn't updated yet.
+00:02:03,457 --> 00:02:05,125
+但是UI还没有更新
 
 
 41
-00:02:05,136 --> 00:02:07,576
-And then when the
-layout pass comes along,
+00:02:05,526 --> 00:02:07,561
+接着当布局过程
+继续时 
 
 
 42
-00:02:07,856 --> 00:02:10,436
-the UI actually changes to
-match what the engine thinks
+00:02:07,861 --> 00:02:10,797
+UI实际上的改变
+是与引擎认为的方式相匹配
 
 
 43
-00:02:10,436 --> 00:02:10,795
-should be.
+00:02:11,932 --> 00:02:13,534
+我们来谈谈
+约束改变
 
 
 44
-00:02:11,936 --> 00:02:13,536
-So let's talk about
-constraint changes.
+00:02:14,568 --> 00:02:16,803
+你所创造的
+约束变成了
 
 
 45
-00:02:14,566 --> 00:02:16,856
-The constraints that
-you create are converted
+00:02:16,870 --> 00:02:19,840
+数学表达式 
+保存在Layout Engine中
 
 
 46
-00:02:16,856 --> 00:02:19,826
-to mathematical expressions and
-kept inside the Layout Engine.
+00:02:20,340 --> 00:02:23,744
+因此约束改变
+实际上是可以影响
 
 
 47
-00:02:20,326 --> 00:02:23,796
-So a constraints change
-is really just anything
+00:02:23,810 --> 00:02:26,980
+这些表达式的任何内容
+这其中包部分
 
 
 48
-00:02:23,796 --> 00:02:27,046
-that affects these expressions,
-and so that includes some
+00:02:27,047 --> 00:02:28,549
+很明显的内容
+例如激活或
 
 
 49
-00:02:27,046 --> 00:02:28,616
-of the obvious things
-like activating
+00:02:28,615 --> 00:02:31,451
+关闭约束
+改变优先级
 
 
 50
-00:02:28,616 --> 00:02:31,506
-or deactivating constraints
-or changing the priority
+00:02:31,518 --> 00:02:34,788
+或约束的常数
+但是也有不那么明显的
 
 
 51
-00:02:31,506 --> 00:02:34,856
-or the constant on a constraint,
-but also less obvious things
+00:02:34,855 --> 00:02:36,757
+例如操控
+视图层次
 
 
 52
-00:02:34,856 --> 00:02:36,836
-like manipulating
-the view hierarchy
+00:02:36,823 --> 00:02:38,926
+或是重新配置
+部分控件
 
 
 53
-00:02:36,836 --> 00:02:38,986
-or reconfiguring certain
-kinds of controls.
+00:02:38,992 --> 00:02:41,728
+因为这些可能会
+间接导致约束改变
 
 
 54
-00:02:38,986 --> 00:02:41,716
-Because those may cause
-constraint changes indirectly.
+00:02:43,330 --> 00:02:45,399
+那么 约束改变时
+会发生什么
 
 
 55
-00:02:43,326 --> 00:02:45,406
-So what happens when
-a constraint changes?
+00:02:46,333 --> 00:02:47,434
+首先会发生
+的是 
 
 
 56
-00:02:46,326 --> 00:02:47,516
-Well, the first thing
-that happens is
+00:02:47,501 --> 00:02:49,236
+Layout Engine
+会重新计算布局
 
 
 57
-00:02:47,516 --> 00:02:49,236
-that the Layout Engine
-will recompute the layout.
+00:02:49,570 --> 00:02:52,773
+表达式由这些变量构成
+以代表诸如
 
 
 58
-00:02:49,566 --> 00:02:52,826
-These expressions are made up of
-variables that represent things
+00:02:52,840 --> 00:02:56,076
+特定视图的原点
+或大小尺寸
 
 
 59
-00:02:52,826 --> 00:02:56,086
-like the origin or the
-size of a particular view.
+00:02:56,410 --> 00:02:58,111
+当我们重新计算
+布局时
 
 
 60
-00:02:56,406 --> 00:02:58,136
-And when we recalculate
-the layout,
+00:02:58,178 --> 00:03:00,480
+这些变量可能会
+收到新的值
 
 
 61
-00:02:58,186 --> 00:03:00,466
-these variables may
-receive new values.
+00:03:00,981 --> 00:03:02,516
+出现这些情况时
 
 
 62
-00:03:00,966 --> 00:03:02,566
-When this happens, the views
+00:03:02,583 --> 00:03:03,984
+它们所代表的视图
+会得到通知
 
 
 63
-00:03:02,566 --> 00:03:03,976
-that they represent
-are notified,
+00:03:04,117 --> 00:03:05,853
+并将父视图
+标为需要布局
 
 
 64
-00:03:04,106 --> 00:03:05,866
-and they mark their
-superview as needing layout.
+00:03:06,286 --> 00:03:09,423
+这实际是导致
+安排延迟布局过程
 
 
 65
-00:03:06,276 --> 00:03:08,776
-This is actually what causes
-the deferred layout pass
+00:03:11,358 --> 00:03:13,660
+如果来看
+这里的示例
 
 
 66
-00:03:08,896 --> 00:03:09,416
-to be scheduled.
+00:03:14,361 --> 00:03:17,364
+大家会在这里看到
+框架实际会在
 
 
 67
-00:03:10,726 --> 00:03:13,666
-So if we look at
-the example here,
+00:03:17,431 --> 00:03:20,234
+Layout Engine发生改变
+但在视图层次中尚未变化
 
 
 68
-00:03:14,366 --> 00:03:17,436
-this is where you see
-the frame actually change
+00:03:21,602 --> 00:03:24,438
+当延迟布局过程
+继续时
 
 
 69
-00:03:17,436 --> 00:03:20,226
-in the Layout Engine but not
-yet in the view hierarchy.
+00:03:24,771 --> 00:03:27,808
+目的当然是要
+将位置不对的视图
 
 
 70
-00:03:20,846 --> 00:03:24,256
-So when the deferred
-layout pass comes along,
+00:03:27,875 --> 00:03:29,109
+进行重新排布
 
 
 71
-00:03:24,766 --> 00:03:27,806
-the purpose of this, of course,
-is to reposition any views
+00:03:29,243 --> 00:03:31,512
+我们完成后
+所有内容都各就各位
 
 
 72
-00:03:27,886 --> 00:03:29,096
-that are not in the right place.
+00:03:32,779 --> 00:03:35,082
+过程一词实际
+有些不太恰当
 
 
 73
-00:03:29,236 --> 00:03:31,516
-So when we are finished,
-everything is in the right spot.
+00:03:35,148 --> 00:03:37,551
+这里出现的
+是两个过程
 
 
 74
-00:03:32,786 --> 00:03:35,136
-And a pass is actually a
-little bit of a misnomer.
+00:03:38,485 --> 00:03:40,587
+第一个是为了
+更新约束
 
 
 75
-00:03:35,136 --> 00:03:37,566
-There are a couple of
-passes that happen here.
+00:03:40,654 --> 00:03:42,656
+其中的想法是
+要确保
 
 
 76
-00:03:38,476 --> 00:03:40,656
-The first is for
-updating constraints.
+00:03:42,723 --> 00:03:45,559
+约束是否有任何
+未决改变
 
 
 77
-00:03:40,656 --> 00:03:42,716
-The idea with this
-is to make sure
+00:03:45,626 --> 00:03:48,228
+在我们需要费力通过
+视图层次 对所有视图
 
 
 78
-00:03:42,716 --> 00:03:45,576
-that if there are any pending
-changes to constraints,
+00:03:48,295 --> 00:03:51,231
+重新定位之前 这些问题
+现在就出现了
 
 
 79
-00:03:45,626 --> 00:03:48,296
-they happen now, before
-we go to all the trouble
+00:03:51,999 --> 00:03:54,968
+接着 第二个过程发生在
+视图重新定位的时候
 
 
 80
-00:03:48,296 --> 00:03:51,246
-to traverse the view hierarchy
-and reposition all the views.
+00:03:56,203 --> 00:03:58,005
+我们来谈谈
+更新约束
 
 
 81
-00:03:51,986 --> 00:03:54,976
-And then the second pass is when
-we do that view repositioning.
+00:03:58,805 --> 00:04:01,008
+视图需要显性请求
 
 
 82
-00:03:56,206 --> 00:03:58,016
-So let's talk about
-update constraints.
+00:04:01,375 --> 00:04:03,844
+来调用升级
+约束方式
 
 
 83
-00:03:58,816 --> 00:04:00,996
-Views need to explicitly request
+00:04:03,911 --> 00:04:06,780
+这和setNeedsDisplay
+的运作方式大体相同
 
 
 84
-00:04:01,376 --> 00:04:03,846
-that their update
-constraints method be called.
-
-
-85
-00:04:03,906 --> 00:04:06,766
-And this pretty much works the
-same way as setNeedsDisplay.
-
-
-86
-00:04:07,346 --> 00:04:08,986
-You call
-setNeedsUpdateConstraints,
-
-
-87
-00:04:09,376 --> 00:04:12,336
-and then some time later your
-update constraints method will
-
-
-88
-00:04:13,366 --> 00:04:14,236
-be called.
-
-
-89
-00:04:14,286 --> 00:04:17,916
-Really, all this is is a way
-for views to have a chance
-
-
-90
-00:04:17,916 --> 00:04:20,016
-to make changes to
-constraints just in time
-
-
-91
-00:04:20,206 --> 00:04:23,996
-for the next layout pass, but
-it's often not actually needed.
-
-
-92
-00:04:25,206 --> 00:04:27,556
-All of your initial constraint
-setup should ideally happen
-
-
-93
-00:04:27,556 --> 00:04:28,656
-inside Interface Builder.
-
-
-94
-00:04:29,156 --> 00:04:30,536
-Or if you really
-find that you need
-
-
-95
-00:04:30,536 --> 00:04:32,696
-to allocate your
-constraints programmatically,
-
-
-96
-00:04:32,946 --> 00:04:34,956
-some place like viewDidLoad
-is much better.
-
-
-97
-00:04:35,226 --> 00:04:37,266
-Update constraints is really
-just for work that needs
-
-
-98
-00:04:37,296 --> 00:04:38,836
-to be repeated periodically.
-
-
-99
-00:04:39,886 --> 00:04:42,236
-Also, it's pretty
-straightforward
-
-
-100
-00:04:42,236 --> 00:04:45,886
-to just change constraints when
-you find the need to do that;
-
-
-101
-00:04:47,046 --> 00:04:48,926
-whereas, if you take
-that logic apart
-
-
-102
-00:04:48,926 --> 00:04:51,036
-from the other code that's
-related to it and you move it
-
-
-103
-00:04:51,036 --> 00:04:53,786
-into a separate method that
-gets executed at a later time,
-
-
-104
-00:04:54,146 --> 00:04:56,656
-your code becomes a lot harder
-to follow, so it will be harder
-
-
-105
-00:04:56,656 --> 00:04:58,466
-for you to maintain,
-it will be a lot harder
-
-
-106
-00:04:58,466 --> 00:05:00,286
-for other people to understand.
-
-
-107
-00:05:01,236 --> 00:05:03,696
-So when would you need to
-use update constraints?
-
-
-108
-00:05:04,376 --> 00:05:06,096
-Well, it boils down
-to performance.
-
-
-109
-00:05:07,126 --> 00:05:09,376
-If you find that just
-changing your constraints
-
-
-110
-00:05:09,376 --> 00:05:10,606
-in place is too slow,
-
-
-111
-00:05:10,636 --> 00:05:13,396
-then update constraints might
-be able to help you out.
-
-
-112
-00:05:13,896 --> 00:05:16,576
-It turns out that changing
-a constraint inside update
-
-
-113
-00:05:16,576 --> 00:05:17,946
-constraints is actually faster
-
-
-114
-00:05:18,086 --> 00:05:20,826
-than changing a constraint
-at other times.
-
-
-115
-00:05:20,826 --> 00:05:22,726
-The reason for that is
-because the engine is able
-
-
-116
-00:05:22,726 --> 00:05:25,016
-to treat all the constraint
-changes that happen
-
-
-117
-00:05:25,016 --> 00:05:26,416
-in this pass as a batch.
-
-
-118
-00:05:26,996 --> 00:05:29,396
-This is the same kind of
-performance benefit that you get
-
-
-119
-00:05:29,446 --> 00:05:32,426
-by calling activate
-constraints on an entire array
-
-
-120
-00:05:32,426 --> 00:05:34,846
-of constraints as
-opposed to activating each
-
-
-121
-00:05:34,846 --> 00:05:36,366
-of those constraints
-individually.
-
-
-122
-00:05:38,176 --> 00:05:40,466
-One of the common
-patterns where we find
-
-
-123
-00:05:40,606 --> 00:05:43,096
-that this is really useful
-is if you have a view
-
-
-124
-00:05:43,386 --> 00:05:46,126
-that will rebuild constraints
-in response to some kind
-
-
-125
-00:05:46,126 --> 00:05:47,196
-of a configuration change.
-
-
-126
-00:05:47,886 --> 00:05:50,706
-It turns out to be very common
-for clients of these kinds
-
-
-127
-00:05:50,706 --> 00:05:53,046
-of views to need to configure
-more than one property,
-
-
-128
-00:05:53,356 --> 00:05:55,836
-so it's very easy
-for the view, then,
-
-
-129
-00:05:55,836 --> 00:05:58,276
-to end up rebuilding its
-constraints multiple times.
-
-
-130
-00:05:58,336 --> 00:05:59,796
-That's just a lot
-of wasted work.
-
-
-131
-00:06:00,256 --> 00:06:02,936
-It's much more efficient in
-these kinds of situations
-
-
-132
-00:06:02,936 --> 00:06:06,466
-to have the view just call
+00:04:07,347 --> 00:04:08,982
+调用
 setNeedsUpdateConstraints
 
 
+85
+00:04:09,383 --> 00:04:12,853
+不久之后 
+将会调用升级约束方式
+
+
+86
+00:04:13,554 --> 00:04:17,858
+的确 所有这些都是
+让视图为
+
+
+87
+00:04:17,925 --> 00:04:20,027
+下一个布局过程
+有机会
+
+
+88
+00:04:20,194 --> 00:04:23,997
+及时修改约束
+但实际上并不常常需要
+
+
+89
+00:04:25,199 --> 00:04:27,501
+所有的初始约束设置
+都应该理想地出现在
+
+
+90
+00:04:27,568 --> 00:04:28,936
+Interface Builder
+中
+
+
+91
+00:04:29,002 --> 00:04:30,470
+或者如果当真
+发现需要
+
+
+92
+00:04:30,537 --> 00:04:32,706
+在程序中
+分配约束
+
+
+93
+00:04:32,940 --> 00:04:34,942
+viewDidLoad
+这样的位置则更好些
+
+
+94
+00:04:35,242 --> 00:04:37,244
+升级约束只是
+针对需要
+
+
+95
+00:04:37,311 --> 00:04:39,112
+定期重复的工作
+
+
+96
+00:04:39,880 --> 00:04:42,182
+而且还
+非常简单
+
+
+97
+00:04:42,249 --> 00:04:45,886
+当发现有必要时
+相应修改约束即可
+
+
+98
+00:04:47,054 --> 00:04:48,856
+不过如果将逻辑
+从另一个
+
+
+99
+00:04:48,922 --> 00:04:50,958
+相关代码中拿开 
+并将之移至
+
+
+100
+00:04:51,024 --> 00:04:53,794
+稍后会执行的
+不同的方式中
+
+
+101
+00:04:54,161 --> 00:04:56,597
+代码就会很难继续
+更难去
+
+
+102
+00:04:56,663 --> 00:04:58,398
+继续维护
+更难以让
+
+
+103
+00:04:58,465 --> 00:05:00,300
+其他人理解
+
+
+104
+00:05:01,235 --> 00:05:03,704
+那么在应用中
+更新约束
+
+
+105
+00:05:04,371 --> 00:05:06,106
+最后 会影响到
+性能表现
+
+
+106
+00:05:07,140 --> 00:05:09,309
+如果发现单纯
+相应改变约束
+
+
+107
+00:05:09,376 --> 00:05:10,577
+速度太慢的话
+
+
+108
+00:05:10,644 --> 00:05:13,380
+升级约束可能
+会帮你解决问题
+
+
+109
+00:05:13,881 --> 00:05:16,517
+结果就是在更新
+约束内部改变约束
+
+
+110
+00:05:16,583 --> 00:05:17,951
+实际要比
+
+
+111
+00:05:18,085 --> 00:05:20,120
+在其他时候
+改变约束快得多
+
+
+112
+00:05:20,187 --> 00:05:22,656
+原因在于引擎
+可以分批处理
+
+
+113
+00:05:22,723 --> 00:05:26,426
+在这一过程中
+发生的所有约束改变
+
+
+114
+00:05:26,994 --> 00:05:29,363
+通过调用整个数组约束 
+来激活约束
+
+
+115
+00:05:29,429 --> 00:05:32,366
+而不是单独激活
+每个约束 
+
+
+116
+00:05:32,432 --> 00:05:34,768
+这样会
+实现
+
+
+117
+00:05:34,835 --> 00:05:36,370
+同样的
+性能优势
+
+
+118
+00:05:38,172 --> 00:05:40,474
+如果有个视图
+根据某种配置调整 
+
+
+119
+00:05:40,607 --> 00:05:43,110
+需要重建约束 
+我们所发现的
+
+
+120
+00:05:43,377 --> 00:05:47,181
+一个常见模式
+会非常有用
+
+
+121
+00:05:47,881 --> 00:05:50,651
+结果就是这对
+具有这类需要
+
+
+122
+00:05:50,717 --> 00:05:53,053
+配置视图而不是 
+属性的客户端非常常见
+
+
+123
+00:05:53,353 --> 00:05:55,756
+这对视图而言
+非常容易
+
+
+124
+00:05:55,822 --> 00:05:58,258
+最后是需要对约束
+多次重建
+
+
+125
+00:05:58,325 --> 00:05:59,793
+这会产生需要
+无用功
+
+
+126
+00:06:00,260 --> 00:06:02,863
+在这类情况下效率则要高很多
+即视图要调用
+
+
+127
+00:06:02,930 --> 00:06:06,466
+setNeedsUpdateCon
+straints接着当升级
+
+
+128
+00:06:06,867 --> 00:06:09,403
+约束过程出现时 
+可以重建
+
+
+129
+00:06:09,469 --> 00:06:11,138
+一次约束
+以便与
+
+
+130
+00:06:11,238 --> 00:06:12,940
+当前配置
+相匹配
+
+
+131
+00:06:14,474 --> 00:06:17,010
+在任何情况下
+一旦这一过程完成
+
+
+132
+00:06:17,077 --> 00:06:19,246
+我们了解约束均已
+更新 我们可以
+
+
 133
-00:06:06,876 --> 00:06:09,436
-and then when the update
-constraints pass comes along,
+00:06:19,313 --> 00:06:21,315
+在重新定位后的视图
+基础上继续
 
 
 134
-00:06:09,486 --> 00:06:11,126
-it can rebuild its
-constraints once
+00:06:22,282 --> 00:06:25,552
+我们在这里需要
+从上到下穿过
 
 
 135
-00:06:11,226 --> 00:06:12,956
-to match whatever the
-current configuration is.
+00:06:25,619 --> 00:06:28,121
+视图层次我们将调用layoutSu
+bviews
 
 
 136
-00:06:14,466 --> 00:06:17,066
-In any case, once
-this pass is complete,
+00:06:28,188 --> 00:06:30,224
+到标为所需
+布局的任何视图上
 
 
 137
-00:06:17,066 --> 00:06:19,306
-we know the constraints are
-all up-to-date, we are ready
+00:06:31,058 --> 00:06:33,660
+在OS X上 这种方法
+称之为布局
 
 
 138
-00:06:19,306 --> 00:06:21,326
-to proceed with repositioning
-the views.
+00:06:33,727 --> 00:06:34,962
+不过思路是一样的
 
 
 139
-00:06:22,276 --> 00:06:25,626
-So this is where we
-traverse the view hierarchy
+00:06:35,495 --> 00:06:39,266
+接收方的目的是
+重新定位子视图
 
 
 140
-00:06:25,626 --> 00:06:28,186
-from the top down, and
-we'll call layoutSubviews
+00:06:39,633 --> 00:06:41,802
+不是让接收方
+重新定位自己
 
 
 141
-00:06:28,186 --> 00:06:30,216
-on any view marked
-as needing layout.
+00:06:43,637 --> 00:06:46,507
+因此框架执行的工作
+是将通过
 
 
 142
-00:06:31,056 --> 00:06:33,646
-On OS X, this method
-is called layout,
+00:06:46,573 --> 00:06:48,275
+Layout Engine
 
 
 143
-00:06:33,736 --> 00:06:34,956
-but the idea is the same.
+00:06:48,342 --> 00:06:50,310
+读出子视图
+然后进行安排
 
 
 144
-00:06:35,496 --> 00:06:39,276
-The purpose is for the receiver
-to reposition its subviews.
+00:06:50,744 --> 00:06:54,047
+在Mac上 我们用的是
+setFrame 在iOS
 
 
 145
-00:06:39,626 --> 00:06:41,786
-It's not for the receiver
-to reposition itself.
+00:06:54,114 --> 00:06:56,116
+是setBounds和setCen
+ter不过思路是一样的
 
 
 146
-00:06:43,626 --> 00:06:46,566
-So what the framework
-implementation does is it will
+00:06:57,551 --> 00:06:59,219
+那么如果再来看
+这个示例
 
 
 147
-00:06:46,566 --> 00:06:48,356
-read frames for the subviews
+00:06:59,286 --> 00:07:01,588
+你在这会看到
+UI升级与
 
 
 148
-00:06:48,356 --> 00:06:50,316
-out of the Layout Engine
-and then assign them.
+00:07:01,655 --> 00:07:03,957
+Layout Engine的
+框架相匹配
 
 
 149
-00:06:50,736 --> 00:06:54,106
-On the Mac we use setFrame for
-this, and on iOS, it's setBounds
-
-
-150
-00:06:54,106 --> 00:06:56,116
-and setCenter, but
-the idea is the same.
-
-
-151
-00:06:57,536 --> 00:06:59,286
-So if we look at
-the example again,
-
-
-152
-00:06:59,286 --> 00:07:01,586
-this is where you
-actually see the UI update
-
-
-153
-00:07:01,666 --> 00:07:03,966
-to match the frames that
-are in the Layout Engine.
-
-
-154
-00:07:05,296 --> 00:07:07,106
-One other note about
+00:07:05,292 --> 00:07:07,528
+还需要注意的是
 layoutSubviews:
 
 
+150
+00:07:07,728 --> 00:07:10,597
+很多人为
+获得某种自定义
+
+
+151
+00:07:10,664 --> 00:07:13,700
+布局将之覆盖
+如果需要这样做<c.blue>的话</c>
+
+
+152
+00:07:14,101 --> 00:07:16,570
+当然可以
+但是需要了解一些内容
+
+
+153
+00:07:16,637 --> 00:07:18,805
+因为这里所做的事情
+很容易给你
+
+
+154
+00:07:18,872 --> 00:07:19,873
+带来麻烦
+
+
 155
-00:07:07,156 --> 00:07:10,666
-A lot of people will override
-this in order to get some kind
+00:07:19,940 --> 00:07:21,675
+所以我想
+详细介绍一下
 
 
 156
-00:07:10,666 --> 00:07:13,716
-of a custom layout, and it's
-fine if you need to do this,
+00:07:23,377 --> 00:07:26,213
+如果需要
+某种布局
 
 
 157
-00:07:14,106 --> 00:07:16,646
-but there are some things
-that you need to know
+00:07:26,280 --> 00:07:27,714
+不能使用
+约束来表达
 
 
 158
-00:07:16,646 --> 00:07:18,866
-because it can be very
-easy to do things here
+00:07:27,781 --> 00:07:31,118
+那么应该只是将
+layoutSubviews覆盖
 
 
 159
-00:07:18,866 --> 00:07:19,946
-that can get you into trouble.
+00:07:31,185 --> 00:07:32,986
+如果可以发现使用
+约束来实现的方法
 
 
 160
-00:07:19,946 --> 00:07:21,686
-So I want to look at this
-in a little more detail.
+00:07:33,053 --> 00:07:36,056
+那么将非常强大
+而且不会有麻烦
 
 
 161
-00:07:23,376 --> 00:07:26,286
-You should really only need
-to override layoutSubviews
+00:07:37,891 --> 00:07:42,529
+如果选择覆盖
+需要牢记
 
 
 162
-00:07:26,286 --> 00:07:27,786
-if you need some
-kind of a layout
+00:07:42,596 --> 00:07:45,632
+我们此刻是处于
+布局形式当中
 
 
 163
-00:07:27,786 --> 00:07:31,176
-that just can't be
-expressed using constraints.
+00:07:45,766 --> 00:07:47,968
+部分视图
+已经安排
 
 
 164
-00:07:31,176 --> 00:07:33,066
-If you can find a way to
-do it using constraints,
+00:07:48,035 --> 00:07:50,671
+部分视图还没有
+但是可能很快就会<c.blue>有</c>
 
 
 165
-00:07:33,066 --> 00:07:36,056
-that's usually more
-robust, more trouble free.
+00:07:51,104 --> 00:07:53,774
+因此 这是个
+微妙的关头
 
 
 166
-00:07:37,906 --> 00:07:43,436
-If you do choose to override
-this, you should keep in mind
+00:07:53,974 --> 00:07:56,243
+需要遵循一些
+特殊的规则
 
 
 167
-00:07:43,436 --> 00:07:45,636
-that we're in the middle of the
-layout ceremony at this point.
+00:07:58,178 --> 00:08:01,815
+其一是需要
+<c.blue>触</c>出发超类执行
 
 
 168
-00:07:45,756 --> 00:07:48,046
-Some views have already
-been laid out,
+00:08:02,182 --> 00:08:04,351
+出于若干簿记目的
+我们都需要这么做
 
 
 169
-00:07:48,046 --> 00:07:50,686
-other views haven't been, but
-they probably will be soon,
+00:08:05,252 --> 00:08:08,255
+而且可以关闭
+字树中的
 
 
 170
-00:07:51,106 --> 00:07:53,766
-and so it's a bit of
-a delicate moment.
+00:08:08,322 --> 00:08:11,792
+视图布局
+但是需要在调用
 
 
 171
-00:07:53,986 --> 00:07:58,486
-There are some special
-rules to follow.
+00:08:11,859 --> 00:08:13,360
+超类执行前
+完成这项工作
 
 
 172
-00:07:58,486 --> 00:08:01,826
-One is that you need to invoke
-the superclass implementation.
+00:08:16,797 --> 00:08:20,767
+其二 若不想调用setNeeds
+UpdateConstraints
 
 
 173
-00:08:02,196 --> 00:08:04,366
-We need that for various
-bookkeeping purposes.
+00:08:20,834 --> 00:08:22,536
+存在一个升级
+约束过程
 
 
 174
-00:08:05,266 --> 00:08:08,306
-Also, it's fine to
-invalidate the layout of views
+00:08:22,603 --> 00:08:23,637
+我们走一遍
 
 
 175
-00:08:08,306 --> 00:08:11,796
-within your subtree, but you
-should do that before you call
+00:08:23,737 --> 00:08:27,007
+完成
+结果错过了
 
 
 176
-00:08:11,846 --> 00:08:13,346
-through to the superclass
-implementation.
+00:08:27,174 --> 00:08:28,742
+如果还需要它时
+已经太晚了
 
 
 177
-00:08:13,836 --> 00:08:20,846
-Second, you don't want to call
-setNeedsUpdateConstraints.
+00:08:29,610 --> 00:08:32,346
+同样还要确保
+并未在子树以外
 
 
 178
-00:08:20,846 --> 00:08:22,526
-There was an update
-constraints pass.
+00:08:32,412 --> 00:08:34,181
+关闭视图布局
 
 
 179
-00:08:22,616 --> 00:08:23,636
-We went through that,
+00:08:34,381 --> 00:08:37,049
+如果这么做
+很容易会导致
 
 
 180
-00:08:23,726 --> 00:08:27,016
-we finished it, and
-so we missed it.
+00:08:37,116 --> 00:08:39,186
+布局反馈循环
+这样执行
 
 
 181
-00:08:27,166 --> 00:08:28,756
-If we still need it
-now, it's too late.
+00:08:39,453 --> 00:08:42,089
+布局的做法
+实际会导致布局
 
 
 182
-00:08:29,606 --> 00:08:32,426
-Also, you want to make sure
-you don't invalidate the layout
+00:08:42,155 --> 00:08:43,090
+再次变脏
 
 
 183
-00:08:32,426 --> 00:08:34,166
-of views outside your subtree.
+00:08:43,457 --> 00:08:45,425
+那么我们会
+周而复始 停不下来
 
 
 184
-00:08:34,385 --> 00:08:37,106
-If you do this, it
-can be very easy
+00:08:45,492 --> 00:08:46,860
+这对谁都不好
 
 
 185
-00:08:37,106 --> 00:08:39,196
-to cause layout feedback
-loops where the act
+00:08:48,629 --> 00:08:52,232
+大家会常常看到在layoutSub
+views覆盖内
 
 
 186
-00:08:39,456 --> 00:08:42,166
-of performing layout
-actually causes the layout
+00:08:52,299 --> 00:08:54,468
+需要调整约束
+以便将视图
 
 
 187
-00:08:42,166 --> 00:08:43,086
-to be dirtied again.
+00:08:54,535 --> 00:08:57,704
+放在正确的
+位置 这样也可以
 
 
 188
-00:08:43,765 --> 00:08:45,486
-Then we can just end
-up iterating forever,
+00:08:57,771 --> 00:08:59,239
+但还是要
+非常小心才行
 
 
 189
-00:08:45,486 --> 00:08:46,876
-and that's no fun for anybody.
+00:08:59,673 --> 00:09:01,208
+在调整约束时 
 
 
 190
-00:08:48,616 --> 00:08:52,306
-You'll often find inside
-a layoutSubviews override
+00:09:01,408 --> 00:09:03,944
+很难预料在层次中
+的其他视图
 
 
 191
-00:08:52,306 --> 00:08:54,526
-that you need to modify
-constraints in order
+00:09:04,011 --> 00:09:05,546
+会不会
+受到影响
 
 
 192
-00:08:54,526 --> 00:08:57,766
-to get your views in the right
-places, and that's fine too,
+00:09:05,946 --> 00:09:08,015
+因此 如果在修改
+约束 很容易偶然间
 
 
 193
-00:08:57,766 --> 00:08:59,236
-but again, you need
-to be careful.
+00:09:08,081 --> 00:09:11,351
+在子树之外
+关闭了布局
 
 
 194
-00:08:59,676 --> 00:09:01,196
-It can be difficult to predict
+00:09:13,120 --> 00:09:15,656
+在任何情况下 
+假设一切顺利
 
 
 195
-00:09:01,416 --> 00:09:03,996
-when you modify a
-constraint what other views
+00:09:15,822 --> 00:09:18,125
+布局循环在这里
+完成 所有内容
 
 
 196
-00:09:03,996 --> 00:09:05,536
-in the hierarchy
-might be affected.
+00:09:18,192 --> 00:09:21,061
+都各就各位
+约束改变就已完全应用了
 
 
 197
-00:09:05,936 --> 00:09:08,066
-So if you are changing
-constraints, it's very easy
+00:09:22,362 --> 00:09:25,032
+关于布局循环
+需要记住几点<c.blue> </c>首先
 
 
 198
-00:09:08,066 --> 00:09:11,346
-to accidentally invalidate
-layout outside your subtree.
+00:09:25,465 --> 00:09:27,668
+不要指望调整约束时 
+视图框架
 
 
 199
-00:09:11,346 --> 00:09:15,656
-In any case, assuming that
-all this goes smoothly,
+00:09:27,734 --> 00:09:28,836
+会立刻改变
 
 
 200
-00:09:15,806 --> 00:09:18,176
-layout cycle is complete at
-this point, everything is
+00:09:28,902 --> 00:09:31,138
+我们所经过的
+全过程是关于
 
 
 201
-00:09:18,176 --> 00:09:20,456
-in the right place, and our
-constraints change has been
+00:09:31,205 --> 00:09:32,506
+稍后会发生什么
 
 
 202
-00:09:20,546 --> 00:09:21,066
-fully applied.
+00:09:33,040 --> 00:09:36,276
+如果发现
+需要覆盖layoutSubview
 
 
 203
-00:09:22,356 --> 00:09:25,046
-So some things to remember
-about the layout cycle: First,
+00:09:36,677 --> 00:09:39,046
+则要非常小心
+避免布局反馈循环
 
 
 204
-00:09:25,456 --> 00:09:27,726
-don't expect view frames
-to change immediately
+00:09:39,112 --> 00:09:41,148
+因为调试过程
+并不容易
 
 
 205
-00:09:27,726 --> 00:09:28,846
-when you modify a constraint.
+00:09:42,850 --> 00:09:45,919
+接下来我会聊聊
+Auto Layout怎样和
 
 
 206
-00:09:28,896 --> 00:09:31,206
-We've just been through
-this whole process
+00:09:45,986 --> 00:09:47,421
+Legacy Layout系统互动
 
 
 207
-00:09:31,206 --> 00:09:32,506
-about how that happens later.
+00:09:48,922 --> 00:09:52,125
+传统而言我们通过
+设置框架定位视图
 
 
 208
-00:09:33,056 --> 00:09:36,286
-And if you do find that you
-need to override layoutSubviews,
+00:09:52,793 --> 00:09:54,695
+然后就有了
+autoresizingMask
 
 
 209
-00:09:36,676 --> 00:09:39,096
-be very careful to avoid
-layout feedback loops
+00:09:54,761 --> 00:09:57,931
+以规定视图
+在父视图改变大小时
 
 
 210
-00:09:39,096 --> 00:09:43,116
-because they can
-be a pain to debug.
+00:09:58,498 --> 00:10:00,000
+应该怎样调整大小
 
 
 211
-00:09:43,116 --> 00:09:45,986
-So next I'd like to talk about
-how Auto Layout interacts
+00:10:00,267 --> 00:10:03,403
+接着在Auto Layout
+用约束实现所有目的
 
 
 212
-00:09:45,986 --> 00:09:47,316
-with the Legacy Layout system.
+00:10:03,704 --> 00:10:06,073
+实际上 子框架
+不会按照所预期
 
 
 213
-00:09:49,106 --> 00:09:52,136
-Traditionally we positioned
-views just by setting the frame,
+00:10:06,139 --> 00:10:07,341
+方式进行工作
 
 
 214
-00:09:52,136 --> 00:09:54,716
-then we have an autoresizingMask
+00:10:07,407 --> 00:10:10,410
+你仍可以设置
+视图框架 但是...
 
 
 215
-00:09:54,766 --> 00:09:57,916
-that specifies how the
-view should be resized
+00:10:11,011 --> 00:10:13,180
+它可以移到
+所放置的位置
 
 
 216
-00:09:58,506 --> 00:10:00,016
-when its superview changes size.
+00:10:13,547 --> 00:10:15,782
+不过 如果布局
+过程继续
 
 
 217
-00:10:00,256 --> 00:10:03,406
-Then under Auto Layout, we just
-do everything with constraints.
+00:10:15,849 --> 00:10:19,520
+框架从Layout Engine
+复制框架内容
 
 
 218
-00:10:03,696 --> 00:10:06,126
-And in fact, subframe
-doesn't even work the way you
+00:10:19,586 --> 00:10:21,321
+并在视图中应用
+框架可能随时被重写
 
 
 219
-00:10:06,126 --> 00:10:07,396
-might expect.
+00:10:21,788 --> 00:10:23,257
+导致有时
 
 
 220
-00:10:07,396 --> 00:10:10,406
-You can still set the
-frame of view, but --
+00:10:23,323 --> 00:10:26,159
+需要设置
+框架
 
 
 221
-00:10:10,996 --> 00:10:13,196
-and it will move
-where you put it,
+00:10:26,226 --> 00:10:28,695
+例如 如果覆盖
+layoutSubview
 
 
 222
-00:10:13,556 --> 00:10:15,796
-but that frame may be
-overwritten at any time
+00:10:29,429 --> 00:10:31,498
+可能会需要为
+这些视图设置框架
 
 
 223
-00:10:15,846 --> 00:10:19,596
-if a layout pass comes along and
-the framework copies the frame
+00:10:32,666 --> 00:10:34,768
+幸好 这里有
+<c.blue>有</c>个旗标
 
 
 224
-00:10:19,596 --> 00:10:21,316
-from the Layout Engine and
-applies it to that view.
+00:10:35,269 --> 00:10:38,438
+名为translatesAutoResizingMask
+IntoConstraints
 
 
 225
-00:10:21,776 --> 00:10:23,296
-The trouble with this is
+00:10:38,505 --> 00:10:41,041
+是有点拗口
+不过功能也如文字所述
 
 
 226
-00:10:23,336 --> 00:10:26,156
-that sometimes you just
-need to set the frame.
+00:10:41,108 --> 00:10:43,243
+它可以使视图按照
+Legacy Layout
 
 
 227
-00:10:26,236 --> 00:10:28,706
-For example, if you are
-overriding layoutSubviews,
+00:10:43,343 --> 00:10:46,413
+的状态下表现是在Auto
+Layout的环境下
 
 
 228
-00:10:29,446 --> 00:10:31,506
-you may need to set the
-frame of those views.
+00:10:47,314 --> 00:10:51,218
+因此 如果在有这个旗标的
+视图中设置框架
 
 
 229
-00:10:32,666 --> 00:10:34,756
-And so luckily, there's
-a flag for that.
+00:10:51,585 --> 00:10:53,720
+框架实际上会
+生成约束
 
 
 230
-00:10:35,356 --> 00:10:37,256
-It's called
-translatesAutoResizingMask
+00:10:53,787 --> 00:10:56,456
+并在 Layout Engine中
+执行这一框架
 
 
 231
-00:10:37,256 --> 00:10:38,146
-IntoConstraints [without space].
+00:10:57,257 --> 00:11:00,360
+这意味着你可以
+随时按照自己的想法
 
 
 232
-00:10:38,496 --> 00:10:41,096
-It's a bit of a mouthful, but it
-pretty much does what it says.
+00:11:00,427 --> 00:11:02,596
+设置框架
+还可以依赖Auto Layout
 
 
 233
-00:10:41,096 --> 00:10:43,256
-It makes views behave
-the way that they did
+00:11:02,663 --> 00:11:04,131
+把视图保留在
+所放置的位置
 
 
 234
-00:10:43,346 --> 00:10:46,426
-under the Legacy Layout system
-but in an Auto Layout world.
+00:11:05,465 --> 00:11:08,569
+此外 这些约束
+实际上执行了
 
 
 235
-00:10:47,306 --> 00:10:51,206
-So if you set the frame
-on a view with this flag,
+00:11:09,002 --> 00:11:10,504
+autoresizingMask的
+行为
 
 
 236
-00:10:51,596 --> 00:10:53,716
-the framework will actually
-generate constraints
+00:11:10,571 --> 00:11:13,507
+例如如果有
+部分应用
 
 
 237
-00:10:53,776 --> 00:10:56,336
-that enforce that frame
-in the Layout Engine.
+00:11:13,574 --> 00:11:16,844
+并未升级到
+Auto Layout 你需要
 
 
 238
-00:10:57,246 --> 00:11:00,436
-What this means is that you
-can set the frame as often
+00:11:16,910 --> 00:11:18,512
+依赖自动重新调整大小的行为
 
 
 239
-00:11:00,436 --> 00:11:02,626
-as you like, and you
-can count on Auto Layout
+00:11:18,879 --> 00:11:20,681
+它应仍按照你所
+希望的方式行为
 
 
 240
-00:11:02,666 --> 00:11:05,206
-to keep the view
-where you put it.
+00:11:22,082 --> 00:11:25,519
+最后 通过实际运用Auto
+Layout Engine 
 
 
 241
-00:11:05,476 --> 00:11:08,566
-Furthermore, these constraints
-actually implement the behavior
+00:11:25,586 --> 00:11:28,889
+来执行设置的框架
+使之可以使用
 
 
 242
-00:11:09,016 --> 00:11:10,276
-of the autoresizingMask.
+00:11:28,956 --> 00:11:32,259
+约束定位
+其他视图相对与这个视图的位置
 
 
 243
-00:11:10,756 --> 00:11:14,366
-So if you have some portion of
-your application, for example,
+00:11:33,327 --> 00:11:35,395
+因为设置了框架
+你不可以在周围
 
 
 244
-00:11:14,366 --> 00:11:16,896
-that isn't updated to Auto
-Layout yet and you are depending
+00:11:35,462 --> 00:11:38,932
+移动视图
+但是如果没有告知
 
 
 245
-00:11:16,896 --> 00:11:18,526
-on this auto-resizing behavior,
+00:11:38,999 --> 00:11:41,468
+Layout Engine这个视图
+应该所处的位置
 
 
 246
-00:11:18,876 --> 00:11:20,676
-it should still behave
-the way that you expect.
+00:11:41,535 --> 00:11:44,938
+那么一旦提供约束为参考
+就会出现问题
 
 
 247
-00:11:22,096 --> 00:11:25,586
-And finally, by actually
-using the Auto Layout Engine
+00:11:45,005 --> 00:11:48,509
+你会看到尺寸大小
+或原点和零点冲突
 
 
 248
-00:11:25,586 --> 00:11:28,966
-to enforce the frame that
-you set, it makes it possible
+00:11:48,575 --> 00:11:51,411
+如果不希望出现这种效果
+这类行为会
 
 
 249
-00:11:28,966 --> 00:11:31,646
-to use constraints to
-position other views relative
+00:11:51,512 --> 00:11:52,946
+<c.blue>会</c>非常奇怪
 
 
 250
-00:11:31,706 --> 00:11:33,616
-to this one.
+00:11:54,181 --> 00:11:58,585
+那么这里需要注意的是
+当计划
 
 
 251
-00:11:33,616 --> 00:11:35,476
-Since you set the frame,
-you can't move the view
+00:11:58,652 --> 00:12:00,687
+使用约束
+定位视图时
 
 
 252
-00:11:35,476 --> 00:11:38,996
-around itself, but if we
-didn't tell the Layout Engine
+00:12:00,754 --> 00:12:02,055
+你需要确保
+这是关闭状态
 
 
 253
-00:11:38,996 --> 00:11:42,226
-where this view needed to be,
-then as soon as you reference it
+00:12:02,122 --> 00:12:03,290
+如果是在Interface
+Builder中
 
 
 254
-00:11:42,226 --> 00:11:44,996
-with a constraint, we
-can run into problems
+00:12:03,357 --> 00:12:04,458
+构建UI 它会处理得很好
 
 
 255
-00:11:44,996 --> 00:11:48,576
-where you'll see the size or
-the origin collapse to zero.
+00:12:04,525 --> 00:12:07,494
+并妥善设置
+这个旗标
 
 
 256
-00:11:48,576 --> 00:11:51,396
-And that kind of behavior
-can be very confusing
+00:12:08,028 --> 00:12:10,364
+但是如果是在用编码
+分配UI
 
 
 257
-00:11:51,526 --> 00:11:53,966
-if you are not expecting it.
+00:12:10,430 --> 00:12:12,165
+这会默认为是
+开启状态
 
 
 258
-00:11:54,416 --> 00:11:58,666
-So another note here is
-that when you are planning
+00:12:12,232 --> 00:12:14,735
+之所以这样
+是因为有许多代码
 
 
 259
-00:11:58,666 --> 00:12:00,686
-to position your view
-using constraints,
+00:12:14,801 --> 00:12:16,470
+会分配给视图
+并希望按照
 
 
 260
-00:12:00,916 --> 00:12:02,226
-you need to make sure
-that this is off.
+00:12:16,537 --> 00:12:18,172
+一定方式来执行
 
 
 261
-00:12:02,386 --> 00:12:04,516
-And if you are building your
-UI in Interface Builder,
+00:12:19,473 --> 00:12:22,910
+所以是默认开启状态
+如果通过编码分配UI
 
 
 262
-00:12:04,516 --> 00:12:07,506
-it will take good care of you
-and set this flag appropriately.
+00:12:22,976 --> 00:12:24,845
+并且忘记
+关闭这里
 
 
 263
-00:12:08,026 --> 00:12:10,416
-But if you are allocating
-your UI programmatically,
+00:12:24,912 --> 00:12:27,247
+这会导致一系列
+意想不到的问题
 
 
 264
-00:12:10,416 --> 00:12:12,176
-this actually defaults
-to being on.
+00:12:27,814 --> 00:12:29,550
+我们来看一下
+如果忘记会怎样
 
 
 265
-00:12:12,216 --> 00:12:14,786
-It needs to because
-there's just a lot of code
+00:12:30,350 --> 00:12:32,486
+这里是个很简单
+的代码
 
 
 266
-00:12:14,786 --> 00:12:16,536
-that allocates a view
-and then expects it
+00:12:32,553 --> 00:12:34,555
+我们分配一个按钮
+并进行配置
 
 
 267
-00:12:16,536 --> 00:12:18,816
-to behave in a certain way.
+00:12:34,621 --> 00:12:36,590
+然后生成
+两个约束来
 
 
 268
-00:12:19,466 --> 00:12:22,966
-So it defaults to on, and if
-you are allocating your UI
+00:12:36,657 --> 00:12:39,092
+定位这个按钮
+顶部10点
 
 
 269
-00:12:22,966 --> 00:12:24,896
-programmatically and you
-forget to turn this off,
+00:12:39,259 --> 00:12:40,994
+距离左边10点
 
 
 270
-00:12:24,896 --> 00:12:27,246
-it can cause a number
-of unexpected problems.
+00:12:41,061 --> 00:12:42,596
+这非常简单
 
 
 271
-00:12:27,806 --> 00:12:29,536
-Let's look at what
-happens if you forget.
+00:12:42,663 --> 00:12:44,231
+但是运行一下
+结果却是这样
 
 
 272
-00:12:30,356 --> 00:12:32,536
-So this is a pretty
-simple piece of code.
+00:12:44,765 --> 00:12:46,667
+窗口太小
+没有按照
 
 
 273
-00:12:32,536 --> 00:12:34,606
-We just allocate a
-button and configure it,
+00:12:46,733 --> 00:12:48,735
+预想来执行
+按钮也不见了
 
 
 274
-00:12:34,606 --> 00:12:36,596
-and then we create
-two constraints
+00:12:49,770 --> 00:12:52,206
+会全都喷到
+控制台上
 
 
 275
-00:12:36,666 --> 00:12:39,106
-that position this button
-ten points from the top,
+00:12:53,073 --> 00:12:56,210
+实际上这说明
+存在问题
 
 
 276
-00:12:39,256 --> 00:12:41,046
-ten points from the left.
+00:12:56,276 --> 00:12:59,613
+大家看到的是NSAutoresizingMask
+LayoutConstraint
 
 
 277
-00:12:41,046 --> 00:12:42,666
-So it's very straightforward,
+00:12:59,880 --> 00:13:01,782
+这是布局约束类
+是框架
 
 
 278
-00:12:42,666 --> 00:12:44,226
-but if you run it,
-this is what you get.
+00:13:02,216 --> 00:13:03,584
+为有需要设置
 
 
 279
-00:12:44,766 --> 00:12:46,736
-The window is too small,
-it doesn't behave the way
+00:13:03,650 --> 00:13:07,354
+translatesAutoResizingMask
+IntoConstraints 的视图而生成的
 
 
 280
-00:12:46,736 --> 00:12:48,736
-that you expect, the button
-is nowhere to be seen.
+00:13:08,722 --> 00:13:11,325
+这里实际发生的情况
+是因为我们忘记
 
 
 281
-00:12:49,776 --> 00:12:52,206
-And you get all this
-spew in the console.
+00:13:11,592 --> 00:13:15,195
+清理旗标
+框架为按钮上的
 
 
 282
-00:12:53,066 --> 00:12:56,266
-So there's actually a hint
-about the problem in this spew.
+00:13:15,262 --> 00:13:16,897
+初始框架生成
+约束
 
 
 283
-00:12:56,266 --> 00:12:58,726
-You can see this is an
-NSAutoresizingMaskLayout
+00:13:17,264 --> 00:13:19,900
+框架为空 尺寸和原点
+也都是零值
 
 
 284
-00:12:58,726 --> 00:12:59,196
-Constraint [without space].
+00:13:20,467 --> 00:13:22,936
+所以没什么用
+不过当我们添加
 
 
 285
-00:12:59,866 --> 00:13:01,766
-This is the class
-of layout constraint
+00:13:23,003 --> 00:13:24,738
+约束 想把按钮定位
+在10,10的位置
 
 
 286
-00:13:02,226 --> 00:13:04,306
-that the framework
-will create for views
+00:13:24,805 --> 00:13:26,707
+就会出现真正的问题
 
 
 287
-00:13:04,306 --> 00:13:06,146
-that have
-translatesAutoResizingMask
+00:13:27,207 --> 00:13:29,843
+它不可能同时出现在
+0,0和10,10两个位置
 
 
 288
-00:13:06,146 --> 00:13:07,196
-IntoConstraints [without
-space] set.
+00:13:29,910 --> 00:13:32,246
+因此 Layout Engine
+突然无法满足
 
 
 289
-00:13:08,726 --> 00:13:11,336
-What actually happened
-here is because we forgot
+00:13:32,312 --> 00:13:35,148
+约束的要求 就会导致
+出现意想不到的问题
 
 
 290
-00:13:11,596 --> 00:13:15,246
-to clear this flag, the
-framework generated constraints
+00:13:36,483 --> 00:13:39,920
+如果返回代码
+加上一行
 
 
 291
-00:13:15,246 --> 00:13:16,896
-for the initial frame
-on this button.
+00:13:39,987 --> 00:13:42,589
+清理旗标
+效果就会好得多
 
 
 292
-00:13:17,256 --> 00:13:19,886
-That frame was empty, the origin
-and the size were both zero,
+00:13:43,891 --> 00:13:46,627
+我们得到想要的布局
+按钮的位置
 
 
 293
-00:13:20,476 --> 00:13:23,006
-so it's not very useful,
-but the real problem came
+00:13:46,693 --> 00:13:49,062
+也没问题
+窗口的表现也正常
 
 
 294
-00:13:23,006 --> 00:13:24,796
-up when we then added
-constraints to try
+00:13:50,597 --> 00:13:52,799
+需要记住的是
 
 
 295
-00:13:24,796 --> 00:13:27,016
-to position the button at 10,10.
+00:13:52,866 --> 00:13:55,536
+translatesAutoResizingMask
+IntoConstraints 
 
 
 296
-00:13:27,196 --> 00:13:29,926
-It can't be at 0,0 and
-10,10 simultaneously,
+00:13:55,602 --> 00:13:58,672
+通常都不会用到
+这个旗标
 
 
 297
-00:13:29,926 --> 00:13:32,296
-so the Layout Engine
-suddenly can't satisfy all the
+00:13:58,739 --> 00:14:00,807
+但是如果有视图
+需要通过直接设置
 
 
 298
-00:13:32,296 --> 00:13:35,146
-constraints, and things go
-wrong in unexpected ways.
+00:14:00,908 --> 00:14:04,178
+框架来定位
+这就会很有用
 
 
 299
-00:13:36,496 --> 00:13:39,976
-If we go back to the code
-and we just add a line
+00:14:04,912 --> 00:14:07,181
+而且 如果计划
+用约束来定位
 
 
 300
-00:13:39,976 --> 00:13:43,896
-to clear this flag, then
-things get much better.
+00:14:07,247 --> 00:14:09,883
+需要确定这是
+关闭状态
 
 
 301
-00:13:43,896 --> 00:13:46,696
-We get the layout that we
-are expecting, the button is
+00:14:09,950 --> 00:14:11,752
+如果你没有使用Interface
+Builder的话
 
 
 302
-00:13:46,696 --> 00:13:50,476
-in the right place, the window
-behaves the way we would expect.
+00:14:13,787 --> 00:14:15,989
+接下来我会聊聊
+约束生成
 
 
 303
-00:13:50,586 --> 00:13:52,876
-So some things to keep in mind
+00:14:16,990 --> 00:14:20,394
+我觉得这更容易
+只要看看
 
 
 304
-00:13:52,876 --> 00:13:55,296
-about translatesAutoResizingMask
-IntoConstraints [without space]:
+00:14:20,460 --> 00:14:22,229
+我们刚刚在
+屏幕上的代码就明白
 
 
 305
-00:13:55,606 --> 00:13:58,726
-You usually won't need this
-flag at all, but if you find
+00:14:22,629 --> 00:14:24,331
+特别是
+结尾的那一段
 
 
 306
-00:13:58,726 --> 00:14:00,816
-that you have a view
-that you need to position
+00:14:24,398 --> 00:14:25,933
+我们构建的是
+这些约束
 
 
 307
-00:14:00,906 --> 00:14:04,166
-by setting the frame directly,
-then this will help you out.
+00:14:26,934 --> 00:14:30,304
+这和在Auto
+Layout开始之初我们就有的约束
 
 
 308
-00:14:04,916 --> 00:14:07,236
-And again, if you are
-planning to position things
+00:14:30,370 --> 00:14:31,872
+工厂方法
+完全一样
 
 
 309
-00:14:07,236 --> 00:14:09,956
-with constraints, you need
-to make sure that this is off
+00:14:31,939 --> 00:14:33,106
+而且相当有效
 
 
 310
-00:14:09,956 --> 00:14:12,896
-if you are not using
-Interface Builder.
+00:14:33,273 --> 00:14:35,275
+但是用起来
+有点麻烦
 
 
 311
-00:14:13,786 --> 00:14:15,996
-So next I'd like to talk
-about constraint creation.
+00:14:35,943 --> 00:14:37,678
+代码相当冗长
 
 
 312
-00:14:16,976 --> 00:14:20,476
-We can do that most easily,
-I think, just by looking
+00:14:38,111 --> 00:14:40,013
+不是很好
+读出来
 
 
 313
-00:14:20,476 --> 00:14:22,226
-at the code we just
-had up on the screen,
+00:14:40,080 --> 00:14:42,049
+我们这里真正想
+表达的是
 
 
 314
-00:14:22,626 --> 00:14:24,406
-specifically the
-piece at the end,
+00:14:42,115 --> 00:14:44,218
+我们想把按钮
+定位在距离顶部10点
 
 
 315
-00:14:24,406 --> 00:14:25,686
-where we are building
-these constraints.
+00:14:44,351 --> 00:14:45,752
+距离左边10点
 
 
 316
-00:14:26,936 --> 00:14:30,336
-This is the same constraint
-factory method that we've had
+00:14:46,253 --> 00:14:48,322
+但是为了理解这一点
+需要仔细
 
 
 317
-00:14:30,386 --> 00:14:31,926
-since the beginning
-of Auto Layout,
+00:14:48,388 --> 00:14:49,823
+了解代码
+再把这些
 
 
 318
-00:14:31,926 --> 00:14:33,096
-and it's perfectly effective,
+00:14:49,890 --> 00:14:51,158
+都拼在一起
 
 
 319
-00:14:33,286 --> 00:14:35,266
-but it can be a little
-bit awkward to use.
+00:14:51,558 --> 00:14:54,261
+那么在新版OS X
+和iOS中
 
 
 320
-00:14:35,946 --> 00:14:37,676
-The code is pretty verbose,
+00:14:54,328 --> 00:14:56,797
+我们介绍了
+更简洁的新语句
 
 
 321
-00:14:37,676 --> 00:14:40,066
-and it's a little bit
-difficult to read.
+00:14:56,897 --> 00:14:57,965
+来生成约束
 
 
 322
-00:14:40,066 --> 00:14:42,096
-What we are really trying
-to express here is just
+00:14:58,532 --> 00:14:59,933
+大概是这样
 
 
 323
-00:14:42,126 --> 00:14:44,226
-that we want to position the
-button ten points from the top
+00:15:01,235 --> 00:15:03,971
+这个语句使用的对象
+叫做布局锚点
 
 
 324
-00:14:44,346 --> 00:14:45,546
-and ten points from the left.
+00:15:11,111 --> 00:15:12,946
+谢谢很高兴大家喜欢
 
 
 325
-00:14:46,256 --> 00:14:48,376
-But in order to understand
-that, you need to read
+00:15:15,048 --> 00:15:16,817
+布局锚点代表
+具体视图的
 
 
 326
-00:14:48,376 --> 00:14:49,886
-through this code
-pretty carefully and kind
+00:15:16,917 --> 00:15:20,320
+具体属性
+锚点对象会
 
 
 327
-00:14:49,886 --> 00:14:50,866
-of put the pieces together.
+00:15:20,387 --> 00:15:23,423
+<c.blue>会</c>面对多种工厂方式
+来生成不同的约束形式
 
 
 328
-00:14:51,556 --> 00:14:54,246
-So in the new release
-of OS X and iOS,
+00:15:24,024 --> 00:15:26,894
+本例中 我们是在
+约束上端锚点
 
 
 329
-00:14:54,336 --> 00:14:56,806
-we are introducing a
-new, more concise syntax
+00:15:26,960 --> 00:15:30,564
+使之等于视图上端锚点
+再加10
 
 
 330
-00:14:56,906 --> 00:14:57,956
-for creating constraints.
+00:15:31,665 --> 00:15:33,333
+如果你们还在用
+Objective-C
 
 
 331
-00:14:58,536 --> 00:14:59,926
-Here is what it looks like.
+00:15:33,400 --> 00:15:35,102
+其中也有这些
+而且
 
 
 332
-00:15:00,476 --> 00:15:03,966
-This syntax works using
-objects called layout anchors.
+00:15:35,469 --> 00:15:37,104
+差别会
+更为显著
 
 
 333
-00:15:04,516 --> 00:15:10,596
-[Applause]
+00:15:37,171 --> 00:15:40,174
+从将近7行降到了
+仅仅两行
 
 
 334
-00:15:11,096 --> 00:15:12,956
-Thanks. I am glad you like them.
+00:15:41,375 --> 00:15:43,243
+这个新语句还
+遵守我们所有的
 
 
 335
-00:15:13,031 --> 00:15:15,031
-[Laughter]
+00:15:43,310 --> 00:15:45,979
+命名规范
+但读起来更
 
 
 336
-00:15:15,046 --> 00:15:16,816
-A layout anchor represents
-a particular attribute
+00:15:46,046 --> 00:15:48,081
+像是表达式
+我感觉这样
 
 
 337
-00:15:16,926 --> 00:15:20,376
-of a particular view, and
-anchor objects expose a variety
+00:15:48,148 --> 00:15:49,716
+更容易看清代码的意图
 
 
 338
-00:15:20,376 --> 00:15:23,426
-of factory methods for creating
-different forms of constraints.
+00:15:50,951 --> 00:15:53,520
+约束的所有有效形式
+都可以运用这个语句
 
 
 339
-00:15:24,026 --> 00:15:26,956
-So in this case we see we are
-constraining the top anchor
+00:15:53,587 --> 00:15:57,624
+来创建 你实际上
+还会得到许多无效的
 
 
 340
-00:15:26,956 --> 00:15:31,656
-to be the same as the top
-anchor of the view plus ten.
+00:15:57,691 --> 00:15:59,393
+约束形式的
+编译器错误
 
 
 341
-00:15:31,656 --> 00:15:33,416
-If you are working
-in Objective-C still,
+00:16:00,227 --> 00:16:03,664
+此刻 你只能得到
+Objective-C的错误 
 
 
 342
-00:15:33,416 --> 00:15:35,096
-they are available
-there as well,
+00:16:03,730 --> 00:16:05,299
+但是这些也会
+变成Swift 
 
 
 343
-00:15:35,096 --> 00:15:37,156
-and the difference is
-even more striking.
+00:16:06,400 --> 00:16:08,602
+例如 视图的左对齐
+边缘应为100
 
 
 344
-00:15:37,156 --> 00:15:41,376
-We go from nearly seven
-lines down to just two.
+00:16:08,669 --> 00:16:11,605
+这样就不合理
+因为没有上下文
 
 
 345
-00:15:41,376 --> 00:15:43,296
-So this new syntax
-still conforms
+00:16:11,705 --> 00:16:14,474
+可以诠释
+这个100
 
 
 346
-00:15:43,296 --> 00:15:46,036
-to all our naming conventions,
-but it reads a lot more
+00:16:14,875 --> 00:16:17,244
+因此错误在于
+这个方式在
 
 
 347
-00:15:46,036 --> 00:15:48,136
-like an expression and, I
-think, makes it a lot easier
+00:16:17,377 --> 00:16:18,979
+位置锚点不存在
 
 
 348
-00:15:48,136 --> 00:15:49,706
-to see the intent of the code.
+00:16:20,080 --> 00:16:22,916
+与之相似 视图的
+左对齐边缘
 
 
 349
-00:15:50,956 --> 00:15:53,596
-All valid forms of constraints
-can be created using this
+00:16:22,983 --> 00:16:25,185
+和不同视图同宽
+这也不合理
 
 
 350
-00:15:53,596 --> 00:15:57,706
-syntax, and you'll actually even
-get compiler errors for many
+00:16:25,886 --> 00:16:29,089
+位置和尺寸大小在
+Auto Layout基本上
 
 
 351
-00:15:57,706 --> 00:15:59,396
-of the invalid forms
-of constraints.
+00:16:29,223 --> 00:16:32,893
+是不兼容的类型
+因此得到的不兼容指针类型
 
 
 352
-00:16:00,216 --> 00:16:03,726
-So at the moment, you only
-get the errors in Objective-C,
+00:16:34,962 --> 00:16:37,865
+以往 这些内容
+仍属于错误
 
 
 353
-00:16:03,726 --> 00:16:05,296
-but they will be
-coming to Swift as well.
+00:16:38,165 --> 00:16:39,666
+但是仅可以在
+运行时间出现
 
 
 354
-00:16:06,406 --> 00:16:08,676
-For example, it doesn't
-make sense to say
+00:16:39,867 --> 00:16:42,603
+因此我觉得
+将确定编译时间错误
 
 
 355
-00:16:08,676 --> 00:16:11,606
-that the leading edge
-of a view should be 100
+00:16:42,669 --> 00:16:44,404
+将有助于我们一开始
+就把约束设置正确
 
 
 356
-00:16:11,716 --> 00:16:14,486
-because there's no context in
-which to interpret that 100.
+00:16:44,938 --> 00:16:47,140
+并可以编写更好读
+更可维护的代码
 
 
 357
-00:16:14,876 --> 00:16:17,236
-So you get an error that
-this method isn't available
+00:16:54,848 --> 00:16:58,085
+接下来我会聊聊
+约束负面空间
 
 
 358
-00:16:17,376 --> 00:16:20,096
-on a location anchor.
+00:16:58,418 --> 00:17:00,521
+有几种不同布局
+会时常出现
 
 
 359
-00:16:20,096 --> 00:16:22,996
-Similarly, it doesn't make
-sense to say the leading edge
+00:17:00,587 --> 00:17:04,156
+具体
+实现方法却不很明显
 
 
 360
-00:16:22,996 --> 00:16:25,186
-of your view is the same as
-the width of a different view.
+00:17:04,691 --> 00:17:06,693
+这里有两个例子
 
 
 361
-00:16:25,896 --> 00:16:29,096
-Locations and sizes are
-fundamentally incompatible types
+00:17:06,760 --> 00:17:10,196
+在第一种情况中
+目标是让
 
 
 362
-00:16:29,236 --> 00:16:34,856
-in Auto Layout, so you get
-an incompatible pointer type.
+00:17:10,263 --> 00:17:11,898
+这些按钮间
+的空间在重新调整
 
 
 363
-00:16:34,946 --> 00:16:37,866
-So previously, these
-things were still errors,
+00:17:12,065 --> 00:17:13,367
+窗口大小时保持相同
 
 
 364
-00:16:38,156 --> 00:16:39,676
-but they would only
-show up at runtime,
+00:17:13,867 --> 00:17:16,170
+在底部 我们有
+图像和标签
 
 
 365
-00:16:39,866 --> 00:16:42,686
-so I think making them compile
-time errors will help us all get
+00:17:16,970 --> 00:17:20,574
+我们想把它们
+居中做成一组
 
 
 366
-00:16:42,686 --> 00:16:44,946
-our constraints right
-the first time,
+00:17:20,641 --> 00:17:23,544
+而不是各自将每个
+内容居中
 
 
 367
-00:16:44,946 --> 00:16:47,156
-as well as write more readable,
-more maintainable code.
+00:17:24,144 --> 00:17:25,546
+结果就是
+这些布局问题的
 
 
 368
-00:16:49,516 --> 00:16:54,346
-[Applause]
+00:17:25,612 --> 00:17:27,580
+解决方案
+都是相同的
 
 
 369
-00:16:54,846 --> 00:16:58,096
-So next I'd like to talk about
-constraining negative space.
+00:17:27,981 --> 00:17:29,483
+也就是要用到虚拟视图
 
 
 370
-00:16:58,426 --> 00:17:00,576
-There are a few different
-kinds of layouts that come
+00:17:30,083 --> 00:17:33,020
+实际上是分配空视图
+把它们进行约束
 
 
 371
-00:17:00,576 --> 00:17:03,546
-up from time to time where it's
-not immediately obvious how
+00:17:33,086 --> 00:17:34,922
+填充到按钮之间
+的空间中
 
 
 372
-00:17:03,546 --> 00:17:04,156
-to achieve them.
+00:17:34,988 --> 00:17:37,257
+一旦视图
+位于这些点
 
 
 373
-00:17:04,685 --> 00:17:06,215
-Here's a couple examples.
+00:17:37,624 --> 00:17:39,927
+我们可以使用等宽约束
+来确保其尺寸大小
 
 
 374
-00:17:06,215 --> 00:17:10,266
-In the first case here, the goal
-is to make sure that the space
+00:17:39,993 --> 00:17:42,629
+在重新调整窗口大小时 
+保持相同
 
 
 375
-00:17:10,266 --> 00:17:11,896
-between these buttons
-remains the same
+00:17:43,697 --> 00:17:46,033
+在底部 我们
+也是同样
 
 
 376
-00:17:12,076 --> 00:17:13,376
-when the window is resized.
+00:17:46,099 --> 00:17:47,201
+使用空视图
 
 
 377
-00:17:13,866 --> 00:17:16,165
-And in the bottom, we
-have an image and a label,
+00:17:48,001 --> 00:17:50,604
+对边缘 图像和标签
+进行约束
 
 
 378
-00:17:16,955 --> 00:17:20,646
-and we want to center
-them as a group rather
+00:17:51,238 --> 00:17:53,040
+然后我们可以在
+空视图上安排
 
 
 379
-00:17:20,646 --> 00:17:23,406
-than center each piece of
-the content individually.
+00:17:53,106 --> 00:17:55,576
+居中约束
+而不是
 
 
 380
-00:17:24,156 --> 00:17:25,596
-So it turns out that
-the solution
+00:17:55,642 --> 00:17:57,144
+处理内容视图本身
 
 
 381
-00:17:25,596 --> 00:17:27,576
-to these layout problems
-is the same,
+00:17:57,911 --> 00:18:00,581
+很有效 传统上 
+我们就是这样解决
 
 
 382
-00:17:27,965 --> 00:17:29,486
-and that's to use dummy views.
+00:18:00,647 --> 00:18:03,483
+这些视图问题
+但是这种技巧
 
 
 383
-00:17:30,096 --> 00:17:33,096
-We actually allocate empty
-views, and we constrain them
+00:18:03,550 --> 00:18:04,918
+知道的人太少 对吧？
 
 
 384
-00:17:33,096 --> 00:17:34,916
-to fill the spaces
-between the buttons.
+00:18:04,985 --> 00:18:07,754
+而且也不够有效
+特别是在iOS上
 
 
 385
-00:17:34,976 --> 00:17:37,246
-Once we have views
-in these spots,
+00:18:07,821 --> 00:18:09,890
+这里每个视图都有
+相关的图层
 
 
 386
-00:17:37,636 --> 00:17:40,006
-we can use an equal width
-constraint to make sure
+00:18:10,757 --> 00:18:11,992
+那么在新版中
 
 
 387
-00:17:40,006 --> 00:17:43,706
-that their size remains the
-same as the window is resized.
+00:18:12,526 --> 00:18:16,797
+我们面对的是布局指南的
+新的公共类 
 
 
 388
-00:17:43,706 --> 00:17:46,106
-And in the bottom case,
-we can do the same thing.
+00:18:17,764 --> 00:18:20,334
+布局指南只
+代表Layout Engine中
 
 
 389
-00:17:46,106 --> 00:17:49,286
-We use an empty view, and
-we constrain it to the edges
+00:18:20,400 --> 00:18:21,134
+的矩形
 
 
 390
-00:17:49,286 --> 00:17:50,686
-of the image and the label,
+00:18:22,002 --> 00:18:23,770
+这很容易使用
 
 
 391
-00:17:50,686 --> 00:17:53,026
-and then we can place
-a centering constraint
+00:18:23,971 --> 00:18:27,441
+只需要将之进行分配
+再加入
 
 
 392
-00:17:53,116 --> 00:17:55,626
-on that empty view
-rather than on any
+00:18:27,508 --> 00:18:29,977
+所属视图
+然后就可以将其
 
 
 393
-00:17:55,626 --> 00:17:57,156
-of the content views themselves.
+00:18:30,043 --> 00:18:30,844
+按照视图处理方式来约束
 
 
 394
-00:17:57,916 --> 00:18:00,646
-So this works, and it's how
-we've traditionally solved these
+00:18:31,345 --> 00:18:33,046
+它们面对的是
+锚点对象 因此可以
 
 
 395
-00:18:00,646 --> 00:18:03,546
-layout problems, but
-it's a little bit
+00:18:33,113 --> 00:18:35,182
+运用新约束
+生成语句
 
 
 396
-00:18:03,546 --> 00:18:04,976
-of an obscure trick, right?
+00:18:35,349 --> 00:18:36,850
+但是还可以将之
 
 
 397
-00:18:04,976 --> 00:18:07,836
-And it's also inefficient,
-especially on iOS,
+00:18:37,451 --> 00:18:39,620
+交给现有的
+约束工厂方法
 
 
 398
-00:18:07,836 --> 00:18:09,876
-where every view has a
-layer associated with it.
+00:18:39,686 --> 00:18:42,956
+这样就可以和视觉格式语言配合使用
+是这样的效果
 
 
 399
-00:18:10,756 --> 00:18:12,056
-And so in the new release,
+00:18:44,091 --> 00:18:46,093
+我们把现有的
+布局指南做转换
 
 
 400
-00:18:12,056 --> 00:18:16,796
-we are exposing a new public
-class for layout guides.
+00:18:46,159 --> 00:18:49,162
+把这些进行内部使用
 
 
 401
-00:18:17,776 --> 00:18:20,366
-A layout guide simply
-represents a rectangle
+00:18:49,596 --> 00:18:51,932
+这里有很好的示例
 
 
 402
-00:18:20,416 --> 00:18:21,136
-in the Layout Engine.
+00:18:51,999 --> 00:18:55,335
+大家可能注意到
+UIView针对边距属性
 
 
 403
-00:18:21,986 --> 00:18:23,756
-They're very easy to use.
+00:18:55,435 --> 00:18:56,537
+并未真正面对布局锚点
 
 
 404
-00:18:23,956 --> 00:18:27,496
-All you need to do is
-allocate them and then add them
+00:18:57,070 --> 00:19:00,073
+相反 UI View有着
+新的布局边距指南
 
 
 405
-00:18:27,496 --> 00:18:30,046
-to an owning view, and then
-you can constrain them just
+00:19:00,274 --> 00:19:02,709
+这一布局指南
+代表边距内
 
 
 406
-00:18:30,046 --> 00:18:30,856
-like you can a view.
+00:19:02,776 --> 00:19:04,545
+视图的区域
 
 
 407
-00:18:31,336 --> 00:18:33,106
-They expose anchor
-objects, so they work
+00:19:05,679 --> 00:19:08,715
+如果需要对边距
+进行约束
 
 
 408
-00:18:33,106 --> 00:18:35,186
-with the new constraint
-creation syntax,
+00:19:08,782 --> 00:19:11,218
+最简单的做法是
+通过布局指南
 
 
 409
-00:18:35,346 --> 00:18:36,866
-but you can also just pass them
+00:19:12,452 --> 00:19:16,823
+因此布局指南并未从根本上启动
+任何全新行为
 
 
 410
-00:18:37,436 --> 00:18:39,636
-to the existing constraint
-factory methods.
+00:19:16,890 --> 00:19:20,227
+现在使用视图
+可以实现所有这些功能
 
 
 411
-00:18:39,696 --> 00:18:42,336
-So they will work with
-visual format language
+00:19:20,694 --> 00:19:22,462
+但是它们可以
+用更轻量级的方式
 
 
 412
-00:18:42,336 --> 00:18:42,946
-and things like that.
+00:19:22,529 --> 00:19:24,898
+来解决这些问题
+而且不需
 
 
 413
-00:18:44,076 --> 00:18:46,156
-We are converting
-existing layout guides
+00:19:24,965 --> 00:19:28,402
+搞乱层次
+因为那些视图
 
 
 414
-00:18:46,156 --> 00:18:52,006
-to use these internally, and
-here is a good example of that.
+00:19:28,468 --> 00:19:29,937
+并不需要
+真正拖动
 
 
 415
-00:18:52,006 --> 00:18:55,336
-UIView, you may notice, doesn't
-actually expose layout anchors
+00:19:31,371 --> 00:19:35,676
+接下来我请会卡西亚
+回到台上 来介绍
 
 
 416
-00:18:55,426 --> 00:18:56,546
-for the margin attributes.
+00:19:35,742 --> 00:19:38,879
+Auto Layout
+出现问题的调试策略
 
 
 417
-00:18:57,066 --> 00:19:00,076
-Instead, UI View has a
-new layout margins guide.
+00:19:46,920 --> 00:19:47,688
+大家好
 
 
 418
-00:19:00,286 --> 00:19:02,786
-This layout guide just
-represents the area
+00:19:47,754 --> 00:19:49,656
+上午我见过
+在座的部分听众
 
 
 419
-00:19:02,786 --> 00:19:04,546
-of the view inside the margins.
+00:19:50,123 --> 00:19:50,824
+我是卡西亚
 
 
 420
-00:19:05,686 --> 00:19:08,776
-And so if you need to constrain
-something to the margins,
+00:19:50,891 --> 00:19:53,760
+我在iOS Keyboards
+Team就职 我来这里和大家
 
 
 421
-00:19:08,776 --> 00:19:11,746
-it's easiest to just go
-through this layout guide.
+00:19:53,827 --> 00:19:55,863
+介绍如何调试布局
+当出现问题时
 
 
 422
-00:19:12,456 --> 00:19:16,216
-So layout guides don't really
-enable any fundamentally
+00:19:55,929 --> 00:19:56,897
+该怎么办
 
 
 423
-00:19:16,216 --> 00:19:16,886
-new behavior.
+00:19:57,631 --> 00:19:59,900
+以前用过
+Auto Layout的朋友
 
 
 424
-00:19:16,886 --> 00:19:20,226
-You can do all of these
-things today using views.
+00:19:59,967 --> 00:20:03,470
+希望大部分都用过
+可能遇到像这样的情况：
 
 
 425
-00:19:20,706 --> 00:19:22,536
-But they let you solve
-these kinds of problems
+00:20:04,304 --> 00:20:07,207
+设计一个UI非常漂亮
 
 
 426
-00:19:22,536 --> 00:19:24,916
-in a much more lightweight
-manner and also
+00:20:07,541 --> 00:20:09,009
+然后准备
+在代码中执行
 
 
 427
-00:19:24,976 --> 00:19:28,456
-without cluttering your
-view hierarchy with views
+00:20:09,076 --> 00:20:10,544
+你把所有约束
+都小心放入其中
 
 
 428
-00:19:28,456 --> 00:19:29,936
-that don't actually
-need to draw.
+00:20:10,611 --> 00:20:11,345
+也做了调整
 
 
 429
-00:19:31,386 --> 00:19:35,736
-So next I'd like to invite Kasia
-back on stage to talk to you
+00:20:11,678 --> 00:20:13,680
+构建和运行时
+出现了问题
 
 
 430
-00:19:35,736 --> 00:19:38,026
-about some debugging
-strategies for problems
+00:20:14,882 --> 00:20:17,351
+完全都不对
+在调试器中
 
 
 431
-00:19:38,026 --> 00:19:38,866
-that come up with Auto Layout.
+00:20:17,451 --> 00:20:19,786
+你看到这样的内容
 
 
 432
-00:19:39,516 --> 00:19:46,406
-[Applause]
+00:20:20,053 --> 00:20:21,989
+文本内容很多
+有点吓人
 
 
 433
-00:19:46,906 --> 00:19:47,256
->> KASIA WAWER: Hello.
+00:20:22,055 --> 00:20:23,991
+但是这的确是
+相当有用的日志
 
 
 434
-00:19:47,766 --> 00:19:49,666
-I saw some of you
-this morning, I think.
+00:20:24,758 --> 00:20:28,462
+遇到不满意的约束错误时
+就会出现这些
 
 
 435
-00:19:50,116 --> 00:19:50,816
-My name is Kasia.
+00:20:28,962 --> 00:20:30,998
+引擎在看所提供的
+约束设置
 
 
 436
-00:19:50,906 --> 00:19:53,826
-I am on the iOS Keyboards Team,
-and I am here to talk to you
+00:20:31,398 --> 00:20:33,834
+决定它无法
+解决布局问题
 
 
 437
-00:19:53,826 --> 00:19:55,936
-about debugging your
-layout, what you should do
+00:20:33,901 --> 00:20:35,836
+因为其中有
+部分内容彼此冲突
 
 
 438
-00:19:55,936 --> 00:19:56,896
-when something goes wrong.
+00:20:36,270 --> 00:20:37,871
+若要解决视图问题
+需要打破
 
 
 439
-00:19:57,616 --> 00:19:59,976
-Those of you who have used
-Auto Layout in the past --
+00:20:37,938 --> 00:20:39,606
+一个约束才行
 
 
 440
-00:19:59,976 --> 00:20:02,946
-which I hope is most of you --
-have probably run into something
+00:20:40,007 --> 00:20:43,143
+于是抛出这个错误
+告诉你它做了什么
 
 
 441
-00:20:02,946 --> 00:20:07,136
-like this: You design a
-UI, and it's beautiful,
+00:20:43,944 --> 00:20:47,147
+你明白 接下来要继续
+深入 找到那个
 
 
 442
-00:20:07,536 --> 00:20:09,086
-and you're trying to
-implement it in your code,
+00:20:47,214 --> 00:20:48,415
+额外的竞争性约束才行
 
 
 443
-00:20:09,086 --> 00:20:10,596
-and you put in all your
-constraints carefully,
+00:20:49,183 --> 00:20:51,318
+我们试着读一下
+这个日志
 
 
 444
-00:20:10,596 --> 00:20:11,346
-and you adjust things.
+00:20:51,585 --> 00:20:54,154
+这里是刚才看的视图
+以及我们的日志
 
 
 445
-00:20:11,686 --> 00:20:13,696
-And you hit build and
-run, and this happens.
+00:20:54,221 --> 00:20:55,923
+从上端移走
+部分内容
 
 
 446
-00:20:14,896 --> 00:20:17,336
-Totally the wrong thing,
-and in the debugger,
+00:20:55,989 --> 00:20:57,357
+使之和屏幕吻合
 
 
 447
-00:20:17,456 --> 00:20:19,796
-you see something like this.
+00:20:57,858 --> 00:21:00,294
+但是要先从底部
+开始处理
 
 
 448
-00:20:20,056 --> 00:20:22,056
-That's a lot of text; it can
-be a little intimidating.
+00:21:01,161 --> 00:21:04,131
+大家看到的最后内容是
+实际上打破的约束
 
 
 449
-00:20:22,056 --> 00:20:24,006
-But it's actually a
-really useful log.
+00:21:04,631 --> 00:21:06,867
+不一定必须是
+导致问题约束
 
 
 450
-00:20:24,756 --> 00:20:28,466
-And this happens when you hit an
-unsatisfiable constraint error.
+00:21:06,934 --> 00:21:09,670
+引擎必须打破的约束
+是为了解决
 
 
 451
-00:20:28,946 --> 00:20:31,006
-The engine has looked at the set
-of constraints you've given it
+00:21:09,736 --> 00:21:12,239
+布局问题
+因此从这里入手很好
 
 
 452
-00:20:31,396 --> 00:20:33,916
-and decided that it can't
-actually solve your layout
+00:21:13,207 --> 00:21:16,844
+先检查该视图的translates
+AutoResizingMaskIntoConstraints
 
 
 453
-00:20:33,916 --> 00:20:35,836
-because something is
-conflicting with something else,
+00:21:16,910 --> 00:21:19,713
+在杰西的例子中
+大家看到 日志中
 
 
 454
-00:20:36,286 --> 00:20:37,936
-so it needs to break
-one of your constraints
+00:21:19,780 --> 00:21:21,515
+也会出现
+但是确保你已经
 
 
 455
-00:20:37,936 --> 00:20:39,616
-in order to solve your view.
+00:21:21,582 --> 00:21:23,116
+事先完成这些内容
+肯定是没错的
 
 
 456
-00:20:40,016 --> 00:20:43,136
-And so it throws this error
-to tell you what it did,
+00:21:23,584 --> 00:21:26,553
+本例中 我们
+打破的是
 
 
 457
-00:20:43,946 --> 00:20:47,226
-and you know, then you need
-to go and dig in and find
+00:21:26,620 --> 00:21:27,721
+Saturn纵横比约束
 
 
 458
-00:20:47,226 --> 00:20:48,416
-that extra competing constraint.
+00:21:28,422 --> 00:21:30,090
+我们在日志上
+提高一些 以示强调
 
 
 459
-00:20:49,166 --> 00:20:51,306
-So let's try reading
-this log a little bit.
+00:21:30,157 --> 00:21:32,025
+在日志本身中
+也会出现
 
 
 460
-00:20:51,576 --> 00:20:54,206
-So here's the view we just
-saw and the log we got.
+00:21:32,092 --> 00:21:36,230
+接下来要做的是
+发现影响日志中
 
 
 461
-00:20:54,206 --> 00:20:55,936
-We've moved some
-stuff from the top
+00:21:36,296 --> 00:21:38,198
+出现的视图的
+其他约束
 
 
 462
-00:20:56,006 --> 00:20:57,366
-to make it fit on the screen.
+00:21:39,032 --> 00:21:42,803
+本例中 我们接下来
+<c.blue>看</c>按到父视图约束的左对齐
 
 
 463
-00:20:57,856 --> 00:21:00,296
-But the first place to start
-is by looking at the bottom.
+00:21:42,870 --> 00:21:46,406
+和父视图约束的右对齐
+以及上端的一个
 
 
 464
-00:21:01,166 --> 00:21:03,156
-The last thing you
-see is the constraint
+00:21:47,341 --> 00:21:49,243
+还有下面
+标签视图的一个
 
 
 465
-00:21:03,156 --> 00:21:04,126
-that was actually broken.
+00:21:50,210 --> 00:21:51,044
+这些都没问题
 
 
 466
-00:21:04,626 --> 00:21:06,936
-This is not necessarily the
-constraint that's causing the
+00:21:51,111 --> 00:21:52,679
+没有一个
+产生直接冲突
 
 
 467
-00:21:06,936 --> 00:21:09,736
-problem but the one the
-engine had to break in order
+00:21:53,313 --> 00:21:55,883
+接下来要看
+相关的视图
 
 
 468
-00:21:09,736 --> 00:21:12,226
-to solve your layout, so it's
-a really good place to start.
+00:21:55,949 --> 00:21:56,917
+本例中 是标签
 
 
 469
-00:21:13,216 --> 00:21:15,226
-You start with checking
-translatesAutoResizingMask
+00:21:58,051 --> 00:22:00,254
+因此这个标签
+有着和Saturn底部
 
 
 470
-00:21:15,226 --> 00:21:16,486
-IntoConstraints [without
-space] on that view.
+00:22:00,320 --> 00:22:03,390
+相同的关联约束
+下一个约束
 
 
 471
-00:21:16,906 --> 00:21:19,776
-As you saw with Jesse's
-example, that will show up also
+00:22:03,457 --> 00:22:04,892
+关联到
+父视图上端
 
 
 472
-00:21:19,776 --> 00:21:21,596
-in the log, but it's
-usually a good thing
+00:22:05,659 --> 00:22:07,995
+因为Saturn
+高度应该
 
 
 473
-00:21:21,596 --> 00:21:23,116
-to make sure you've
-done that first.
+00:22:08,061 --> 00:22:11,131
+超过100点
+约束告诉它应该如此
 
 
 474
-00:21:23,586 --> 00:21:26,626
-In this case, we have an
-aspect ratio constraint
+00:22:11,765 --> 00:22:14,635
+你会注意到
+标签旁的约束
 
 
 475
-00:21:26,626 --> 00:21:27,726
-on Saturn that was broken.
+00:22:14,701 --> 00:22:19,306
+确实告诉你
+这个约束看似
 
 
 476
-00:21:28,436 --> 00:21:30,146
-So let's highlight that
-higher up in the log.
+00:22:19,373 --> 00:22:22,075
+非常像以往
+你可能用来
 
 
 477
-00:21:30,146 --> 00:21:32,096
-It will show up in
-the log itself.
+00:22:22,142 --> 00:22:24,511
+生成约束的视觉格式语言
 
 
 478
-00:21:32,096 --> 00:21:36,306
-The next thing to do is to
-find the other constraints
+00:22:24,678 --> 00:22:27,414
+我们看到
+从父视图上端
 
 
 479
-00:21:36,306 --> 00:21:38,186
-that are affecting that view
-that show up in the log.
+00:22:27,915 --> 00:22:29,716
+是100点 还因为
+Saturn需要比这个多
 
 
 480
-00:21:39,026 --> 00:21:42,856
-So in this case, we next see a
-leading to superview constraint
+00:22:30,083 --> 00:22:31,218
+只能打破
+一个约束
 
 
 481
-00:21:42,856 --> 00:21:46,396
-and a trailing to superview
-constraint, and one to the top,
+00:22:31,285 --> 00:22:32,252
+才能解决布局问题
 
 
 482
-00:21:47,346 --> 00:21:49,256
-and then one to the
-label view underneath it.
+00:22:33,020 --> 00:22:35,255
+所以其实
+并不难读
 
 
 483
-00:21:50,216 --> 00:21:51,106
-And all of these are fine.
+00:22:36,123 --> 00:22:38,725
+现在我们让问题
+更简单些
 
 
 484
-00:21:51,106 --> 00:21:52,686
-None of these are
-directly conflicting.
+00:22:38,892 --> 00:22:41,495
+因为你可能习惯于
+看到这样效果的
 
 
 485
-00:21:53,316 --> 00:21:55,906
-So the next thing to look at
-are the views it's tied to,
+00:22:41,562 --> 00:22:43,997
+约束日志
+其中有一组
 
 
 486
-00:21:55,936 --> 00:21:56,916
-in this case, the label.
+00:22:44,064 --> 00:22:47,534
+内存地址和类名称
+除非在视图中
 
 
 487
-00:21:58,046 --> 00:22:00,336
-So this label has the same
-constraint that ties it
+00:22:47,601 --> 00:22:49,837
+有导航文本 否则
+不会告知各自是什么
 
 
 488
-00:22:00,336 --> 00:22:03,446
-to the bottom of Saturn, and the
-next constraint it has is one
+00:22:50,771 --> 00:22:52,639
+如果是这样的效果
+则会容易很多
 
 
 489
-00:22:03,446 --> 00:22:04,896
-that ties it to the
-top of a superview.
+00:22:53,740 --> 00:22:55,175
+为实现这一点
+你只需要
 
 
 490
-00:22:04,896 --> 00:22:08,076
-And this is a problem because
-Saturn is supposed to be more
+00:22:55,242 --> 00:22:57,144
+在约束中
+增添标识符
 
 
 491
-00:22:08,076 --> 00:22:10,616
-than 100 points tall, and
-this constraint is telling it
+00:22:57,778 --> 00:22:59,112
+那么我可以有两种
+方便的方法来实现
 
 
 492
-00:22:10,616 --> 00:22:11,136
-to be that way.
+00:22:59,780 --> 00:23:01,949
+如果使用的是
+显性约束
 
 
 493
-00:22:11,776 --> 00:22:14,626
-You'll notice that
-the constraint next
+00:23:02,015 --> 00:23:02,883
+那只是一个属性
 
 
 494
-00:22:14,706 --> 00:22:19,386
-to the label there tells you
-exactly what the constraint
+00:23:03,650 --> 00:23:06,386
+建议命名标识符
+和命名约束的方法
 
 
 495
-00:22:19,386 --> 00:22:20,836
-looks like in something
-very similar
+00:23:06,453 --> 00:23:08,322
+相同 这样如果之后
+需要找出
 
 
 496
-00:22:20,836 --> 00:22:23,166
-to the visual format language
-that you may have used
+00:23:08,388 --> 00:23:10,757
+代码的话
+则会容易很多
 
 
 497
-00:22:23,166 --> 00:22:24,506
-for creating your
-constraints in the past.
+00:23:11,391 --> 00:23:14,962
+但是你可以把它
+任意命名 我们就这么做
 
 
 498
-00:22:24,686 --> 00:22:27,416
-So we see that it's 100 points
-from the top of the superview,
+00:23:15,028 --> 00:23:17,965
+如果使用Visual Format
+Language会得到数组
 
 
 499
-00:22:27,906 --> 00:22:29,706
-and again, since Saturn
-needs to be more than that,
+00:23:18,031 --> 00:23:19,867
+你不会获得约束
+因此只能循环那个数组
 
 
 500
-00:22:30,086 --> 00:22:31,276
-it had to break one
-of the constraints
+00:23:19,933 --> 00:23:22,636
+在每个约束上
+设置标识符
 
 
 501
-00:22:31,276 --> 00:22:32,256
-in order to solve your layout.
+00:23:23,170 --> 00:23:25,005
+可以在数组的每个约束上
+设置相同的
 
 
 502
-00:22:33,036 --> 00:22:35,246
-So it's actually not
-that difficult to read.
+00:23:25,072 --> 00:23:27,040
+标识符
+这一般都很好
 
 
 503
-00:22:36,116 --> 00:22:38,726
-Now, I have made it
-a little bit easier
+00:23:27,374 --> 00:23:29,576
+如果想找出单独约束
+并设置标识符
 
 
 504
-00:22:38,886 --> 00:22:41,576
-because you probably are used
-to seeing constraints logs
+00:23:29,643 --> 00:23:32,045
+之后还要在数组中
+做些改变
 
 
 505
-00:22:41,576 --> 00:22:44,076
-that look more like this,
-where there's just a bunch
+00:23:32,112 --> 00:23:33,714
+顺序就要
+做调整
 
 
 506
-00:22:44,076 --> 00:22:47,586
-of memory addresses and class
-names and there's nothing really
+00:23:33,780 --> 00:23:34,615
+那么需要返回
+同样来改变
 
 
 507
-00:22:47,586 --> 00:22:49,846
-to tell you what's what unless
-you have nav text in your view.
+00:23:34,681 --> 00:23:36,383
+标识符
+的顺序
 
 
 508
-00:22:50,766 --> 00:22:52,646
-It's much easier if it
-looks something like this.
+00:23:37,017 --> 00:23:40,754
+此外 一旦看到了
+日志中的短语
 
 
 509
-00:22:53,736 --> 00:22:55,236
-In order to achieve
-that, all you need
+00:23:40,821 --> 00:23:42,189
+你一定会知道
+该怎么找问题
 
 
 510
-00:22:55,236 --> 00:22:57,156
-to do is add identifiers
-to your constraints.
+00:23:42,256 --> 00:23:45,692
+因此不必当真
+把具体约束都摆着那里
 
 
 511
-00:22:57,766 --> 00:22:59,096
-And there's a couple
-easy ways to do that.
+00:23:46,460 --> 00:23:47,461
+最后 在约束检测器中的
 
 
 512
-00:22:59,096 --> 00:23:02,026
-If you are using
-explicit constraints,
+00:23:48,095 --> 00:23:50,564
+Interface Builder
+有个标识符属性
 
 
 513
-00:23:02,026 --> 00:23:02,886
-it's just a property.
+00:23:50,631 --> 00:23:53,233
+那么就太简单了
 
 
 514
-00:23:03,666 --> 00:23:06,446
-I suggest naming the
-identifier the same thing
+00:23:54,268 --> 00:23:55,235
+我们来看一下
 
 
 515
-00:23:06,446 --> 00:23:08,396
-as you are naming your
-constraint just so it's easy
+00:23:55,302 --> 00:23:58,105
+我们来谈谈
+怎么理解这个日志
 
 
 516
-00:23:08,396 --> 00:23:10,756
-to find later if you need
-to dig it out of your code.
+00:23:58,539 --> 00:24:01,508
+更容易了解
+目前发生的情况
 
 
 517
-00:23:11,376 --> 00:23:15,026
-But you can name it anything
-you want, so go forth and do so.
+00:24:02,576 --> 00:24:06,213
+首先 如果在视图设置
+用户友好标识符
 
 
 518
-00:23:15,026 --> 00:23:18,046
-If you are using Visual Format
-Language, you get an array back,
+00:24:07,047 --> 00:24:08,882
+这些标识符会
+在日志中与相应视图
 
 
 519
-00:23:18,046 --> 00:23:19,946
-you don't get a constraint
-back, so you have to loop
+00:24:08,949 --> 00:24:11,185
+成对出现
+因此就可以找到所需视图
 
 
 520
-00:23:19,946 --> 00:23:22,626
-through that array and set the
-identifier on every constraint.
+00:24:11,251 --> 00:24:13,921
+我就是这样从刚才
+看到的约束中
 
 
 521
-00:23:23,176 --> 00:23:25,086
-You can set the same
-identifier on every constraint
+00:24:13,987 --> 00:24:16,390
+找到Saturn 它有用户
+友好标识符名为Saturn
 
 
 522
-00:23:25,086 --> 00:23:27,026
-in the array, and that's
-generally a good idea.
+00:24:17,157 --> 00:24:19,526
+还可以在新的布局向导中
+设置标识符
 
 
 523
-00:23:27,366 --> 00:23:29,636
-If you try to pick out the
-individual constraints there
+00:24:20,060 --> 00:24:22,229
+这是个平铺
+标识符属性
 
 
 524
-00:23:29,636 --> 00:23:32,096
-and set identifiers on them
-and you change something
+00:24:22,296 --> 00:24:25,232
+没有什么特别的
+这会让运用布局指南
 
 
 525
-00:23:32,096 --> 00:23:33,786
-in that array later, the
-ordering is going to change
+00:24:25,699 --> 00:24:27,301
+调试布局变得
+非常简单
 
 
 526
-00:23:33,786 --> 00:23:34,666
-and you are going
-to have to go back
+00:24:27,668 --> 00:24:30,204
+因为效果很棒
+我很确定大家迟早都会用上
 
 
 527
-00:23:34,666 --> 00:23:36,396
-and change your identifier
-order as well.
+00:24:30,938 --> 00:24:31,972
+加上它们再继续
 
 
 528
-00:23:37,016 --> 00:23:40,806
-Plus once you see that phrase
-in your log, you know exactly
+00:24:32,806 --> 00:24:35,876
+如果想试试
+现在就用很复杂的
 
 
 529
-00:23:40,806 --> 00:23:42,256
-where you are going to
-look for the problem,
+00:24:35,943 --> 00:24:37,477
+视图 把所有标识符
+都加进去 你可以完成的
 
 
 530
-00:23:42,256 --> 00:23:45,356
-so you don't really need to have
-each specific constraint laid
+00:24:37,544 --> 00:24:38,312
+但是需要些时间
 
 
 531
-00:23:45,356 --> 00:23:45,706
-out there.
+00:24:38,378 --> 00:24:40,981
+因为你可以以后
+读这个日志 所以也值得
 
 
 532
-00:23:46,446 --> 00:23:47,476
-Finally, Interface Builder
+00:24:41,048 --> 00:24:43,851
+但是如果你继续的时候
+这么做 以后就会少费工夫
 
 
 533
-00:23:48,086 --> 00:23:50,646
-in the constraint inspector just
-has an identifier property right
+00:24:43,917 --> 00:24:45,919
+因为 你也拿不准
+什么时候
 
 
 534
-00:23:50,646 --> 00:23:53,226
-there, so that's super easy.
+00:24:45,986 --> 00:24:47,721
+会遇到这个问题
+所以有必要
 
 
 535
-00:23:54,276 --> 00:23:54,516
-Let's see.
+00:24:48,055 --> 00:24:50,257
+先备着
+以供不时之需
 
 
 536
-00:23:54,516 --> 00:23:58,106
-So let's talk about, you
-know, understanding this log,
+00:24:51,058 --> 00:24:53,994
+最后 如果
+约束日志不理想
 
 
 537
-00:23:58,546 --> 00:24:01,516
-and making it even easier
-to know what's going on.
+00:24:54,061 --> 00:24:55,362
+其中包含
+信息太多
 
 
 538
-00:24:02,566 --> 00:24:06,216
-First, if you set accessibility
-identifiers on your views,
+00:24:55,729 --> 00:24:57,831
+就会导致布局非常复杂
+其中会有
 
 
 539
-00:24:07,046 --> 00:24:08,936
-those identifiers will
-show up in the log paired
+00:24:57,898 --> 00:24:59,933
+数百行
+可以看看
 
 
 540
-00:24:08,936 --> 00:24:10,816
-with those views, so you
-can find the view you are
+00:25:00,000 --> 00:25:02,069
+底部的视图 特别是
+你在看的其他视图
 
 
 541
-00:24:10,816 --> 00:24:11,246
-looking for.
+00:25:02,135 --> 00:25:04,638
+并且实际上要查看
+在调试器中影响
 
 
 542
-00:24:11,246 --> 00:24:13,946
-That's how I got Saturn from
-the constraints we saw earlier.
+00:25:04,705 --> 00:25:05,873
+这些视图的约束
 
 
 543
-00:24:13,976 --> 00:24:16,396
-It has an accessibility
-identifier called Saturn.
+00:25:06,473 --> 00:25:08,976
+在iOS中 是constraints
+AffectingLayoutForAxis
 
 
 544
-00:24:17,156 --> 00:24:19,516
-You can also set identifiers
-on our new layout guides,
+00:25:09,042 --> 00:25:12,045
+在OS X中 是constraints
+AffectingLayoutForOrientation
 
 
 545
-00:24:20,076 --> 00:24:22,286
-and that's just a flat-out
-identifier property,
+00:25:12,579 --> 00:25:15,182
+这可以告知你
+哪些约束在
 
 
 546
-00:24:22,286 --> 00:24:25,216
-nothing special about it, which
-makes it super easy, again,
+00:25:15,249 --> 00:25:18,919
+影响这个或那个
+坐标轴的视图
 
 
 547
-00:24:25,696 --> 00:24:27,316
-to debug layouts that
-are using layout guides,
+00:25:19,553 --> 00:25:20,921
+我们现在来看
+效果怎样
 
 
 548
-00:24:27,656 --> 00:24:29,176
-and since they're awesome I'm
-pretty sure all of you are going
+00:25:22,856 --> 00:25:26,126
+这就是刚刚
 
 
 549
-00:24:29,176 --> 00:24:30,196
-to be using them at some point.
+00:25:28,729 --> 00:25:31,465
+在看的视图
 
 
 550
-00:24:30,926 --> 00:24:31,956
-Add them as you go.
+00:25:31,732 --> 00:25:33,033
+我们看到这里是同样的日志
 
 
 551
-00:24:32,806 --> 00:24:35,946
-If you try and take a very
-complex layout now and throw all
+00:25:33,800 --> 00:25:35,769
+我们先擦去这些
+因为我希望
 
 
 552
-00:24:35,946 --> 00:24:37,546
-of your identifiers
-in, you can do it.
+00:25:35,836 --> 00:25:38,805
+给大家看看
+另外的内容
 
 
 553
-00:24:37,546 --> 00:24:38,366
-It will take time.
+00:25:38,872 --> 00:25:41,074
+我设置了一个
+两指双击来断开这里
 
 
 554
-00:24:38,366 --> 00:24:41,046
-It's worth it because you will
-be able to read this log later.
+00:25:41,141 --> 00:25:42,209
+所以现在
+不用内存地址
 
 
 555
-00:24:41,046 --> 00:24:43,916
-But if you are doing it as
-you go, that's a lot less work
+00:25:42,276 --> 00:25:43,777
+我用的是设置好的名称
 
 
 556
-00:24:43,916 --> 00:24:45,996
-down the road because
-you can't really predict
+00:25:43,844 --> 00:25:46,980
+我们要进入
+调试器
 
 
 557
-00:24:45,996 --> 00:24:47,706
-when you are going to run into
-this problem, necessarily,
+00:25:47,381 --> 00:25:51,718
+让它打印出Saturn的
 
 
 558
-00:24:48,046 --> 00:24:50,246
-and you want to have it
-there when you need it.
+00:25:53,921 --> 00:25:56,723
+constraintsAffectingLayoutForAxis
+以及垂直坐标轴
 
 
 559
-00:24:51,046 --> 00:24:54,056
-Finally, if you have an
-unsatisfiable constraints log
+00:25:57,457 --> 00:26:00,894
+垂直轴是1 水平轴是0
 
 
 560
-00:24:54,056 --> 00:24:55,346
-that just has too
-much information,
+00:26:00,961 --> 00:26:02,729
+如果用错了
+那就是另一种选项
 
 
 561
-00:24:55,716 --> 00:24:57,896
-you have a very complex
-layout, there are hundreds
+00:26:02,796 --> 00:26:04,631
+返回这里
+也相当简单
 
 
 562
-00:24:57,896 --> 00:24:59,986
-of lines there, you
-can take that view
+00:26:04,831 --> 00:26:07,334
+现在我们看到
+视图在上端有布局向导
 
 
 563
-00:24:59,986 --> 00:25:02,136
-at the bottom especially and
-other views that you are looking
+00:26:07,467 --> 00:26:10,270
+没问题
 
 
 564
-00:25:02,136 --> 00:25:04,716
-at and actually view the
-constraints affecting them one
+00:26:10,504 --> 00:26:11,738
+那是视图的约束
 
 
 565
-00:25:04,716 --> 00:25:05,866
-at a time in the debugger.
+00:26:12,472 --> 00:26:14,341
+命名视图中的
+约束还有
 
 
 566
-00:25:06,496 --> 00:25:06,916
-On iOS,
+00:26:14,408 --> 00:26:15,809
+一个好处 就是说
+你会很快知道
 
 
 567
-00:25:06,916 --> 00:25:08,626
-it's constraintsAffectingLayout
-ForAxis [without space],
+00:26:15,876 --> 00:26:18,045
+在约束外
+设置了哪些
 
 
 568
-00:25:09,106 --> 00:25:09,776
-and on OS X,
+00:26:18,111 --> 00:26:19,313
+哪些是由
+你设置的
 
 
 569
-00:25:09,776 --> 00:25:11,896
-it's constraintsAffectingLayout
-ForOrientation [without space].
+00:26:19,580 --> 00:26:22,816
+在Saturn的垂直布局中
+我们了解到
 
 
 570
-00:25:11,896 --> 00:25:15,256
-And that will tell you just the
-constraints that are affecting
+00:26:22,883 --> 00:26:23,884
+它是和上端布局指南关联
 
 
 571
-00:25:15,256 --> 00:25:18,926
-that view in one
-axis or another.
+00:26:24,952 --> 00:26:25,786
+非常好
 
 
 572
-00:25:19,546 --> 00:25:23,666
-So let's look at how
-that works for here.
+00:26:25,853 --> 00:26:29,189
+它还表示
+Saturn和下面的标签关联
 
 
 573
-00:25:25,026 --> 00:25:31,456
-So I've got that view
-that we just looked at.
+00:26:30,157 --> 00:26:32,292
+那么在另一个影响
+Saturn的约束中
 
 
 574
-00:25:31,716 --> 00:25:33,036
-We see the same log down here.
+00:26:32,392 --> 00:26:33,827
+不过不是直接
+关联Saturn
 
 
 575
-00:25:33,786 --> 00:25:35,846
-But let's wipe that out for the
-moment because I really want
+00:26:34,127 --> 00:26:36,396
+我们看到约束
+在视图上端
 
 
 576
-00:25:35,846 --> 00:25:38,796
-to show you how else
-to look at this.
+00:26:36,463 --> 00:26:37,364
+关联了标签
 
 
 577
-00:25:38,866 --> 00:25:41,146
-I have set a two-finger
-double-tap just to break here
+00:26:37,865 --> 00:26:39,733
+因为它并未在
+任何地方提及Saturn
 
 
 578
-00:25:41,146 --> 00:25:42,286
-so I don't have to
-use memory addresses.
+00:26:39,800 --> 00:26:42,035
+这是很好的线索
+说明这就是问题所在
 
 
 579
-00:25:42,286 --> 00:25:43,836
-I can use the names I've set up.
+00:26:42,369 --> 00:26:43,804
+而且整个Saturn
+应该是
 
 
 580
-00:25:43,836 --> 00:25:49,186
-So we are going to break into
-the debugger here and ask it
+00:26:43,871 --> 00:26:46,173
+超过100多才行
+我碰巧知道
 
 
 581
-00:25:49,366 --> 00:25:54,906
-to print out Saturn's
-constraintsAffectingLayout
+00:26:46,240 --> 00:26:48,342
+因为是我做的编码
 
 
 582
-00:25:54,906 --> 00:25:56,546
-ForAxis [without space]
-and its vertical axis.
+00:26:48,609 --> 00:26:51,812
+现在我拿到了
+非常不错的标签
 
 
 583
-00:25:57,456 --> 00:26:00,976
-Vertical is 1, horizontal is 0.
+00:26:51,879 --> 00:26:54,515
+我可以搜索它
+找到我做的约束
 
 
 584
-00:26:00,976 --> 00:26:02,786
-If you use the wrong one, you
-only have one other option,
+00:26:54,581 --> 00:26:55,849
+好了
 
 
 585
-00:26:02,786 --> 00:26:04,626
-so it's pretty easy
-to get back to it.
+00:26:55,916 --> 00:26:58,252
+把它关联到上端锚点
+定为100点
 
 
 586
-00:26:04,846 --> 00:26:07,336
-So here we see the
-view has a layout guide
+00:26:58,952 --> 00:27:01,655
+来看看会在
+哪里激活
 
 
 587
-00:26:07,466 --> 00:26:10,276
-at the top, and that's fine.
+00:27:02,623 --> 00:27:04,057
+删掉
 
 
 588
-00:26:10,506 --> 00:26:11,726
-That's the view's constraints.
+00:27:05,025 --> 00:27:05,726
+重新构建
 
 
 589
-00:26:12,466 --> 00:26:14,406
-One of the other benefits
-to naming your constraints
+00:27:06,460 --> 00:27:08,629
+这次好多了
 
 
 590
-00:26:14,406 --> 00:26:15,876
-in your views is that
-you know pretty quickly
+00:27:08,695 --> 00:27:10,130
+我就是要
+这样子
 
 
 591
-00:26:15,876 --> 00:26:18,106
-which ones were set up
-outside of your constraints
+00:27:10,564 --> 00:27:12,833
+深入研究这些
+问题 其实
 
 
 592
-00:26:18,106 --> 00:26:19,306
-and which ones were
-set up by you.
+00:27:12,900 --> 00:27:13,834
+相当简单
 
 
 593
-00:26:19,596 --> 00:26:22,896
-So our vertical layout for
-Saturn tells us that it's tied
+00:27:13,901 --> 00:27:15,536
+即便布局
+相当复杂也是如此
 
 
 594
-00:26:22,896 --> 00:26:23,896
-to the top layout guide.
+00:27:15,702 --> 00:27:18,972
+如果使用标识符
+方法得当
 
 
 595
-00:26:24,946 --> 00:26:25,386
-That's great.
+00:27:19,907 --> 00:27:23,477
+有关日志 我们讲到哪里了？
 
 
 596
-00:26:25,386 --> 00:26:29,176
-It also tells us that Saturn is
-tied to the label underneath it.
+00:27:24,478 --> 00:27:25,913
+从底部开始
 
 
 597
-00:26:30,146 --> 00:26:32,306
-And then in another
-constraint that affects Saturn
+00:27:26,680 --> 00:27:28,348
+找到打破的约束
+从中了解到许多
 
 
 598
-00:26:32,376 --> 00:26:33,836
-but isn't directly
-related to Saturn,
+00:27:28,415 --> 00:27:31,518
+它为何会打破的
+相关信息
 
 
 599
-00:26:34,136 --> 00:26:36,466
-we see that constraint
-that's tying the label
+00:27:31,885 --> 00:27:35,022
+先来查看translatesAutoResizingMask
+IntoConstraints
 
 
 600
-00:26:36,466 --> 00:26:37,356
-to the top of the view.
+00:27:35,088 --> 00:27:37,891
+它是许多状况的
+罪魁祸首
 
 
 601
-00:26:37,866 --> 00:26:39,806
-Since it doesn't
-mention Saturn anywhere,
+00:27:37,958 --> 00:27:41,128
+在约束和视图上
+都设置标识符
 
 
 602
-00:26:39,806 --> 00:26:42,036
-that's a pretty good clue
-that it's the wrong one --
+00:27:41,828 --> 00:27:44,198
+最后 如果日志
+太过复杂使用
 
 
 603
-00:26:42,376 --> 00:26:43,866
-also that whole Saturn
-is supposed to be more
+00:27:44,531 --> 00:27:47,201
+constraintsAffectingLayoutForAxis
+来缩小范围
 
 
 604
-00:26:43,866 --> 00:26:46,256
-than a hundred points thing,
-which I happen to know
+00:27:48,268 --> 00:27:53,407
+好这就是引擎
+看到约束 了解自己
 
 
 605
-00:26:46,256 --> 00:26:48,346
-since I wrote this code.
+00:27:53,473 --> 00:27:57,211
+没有解决方案后
+发生的一切
 
 
 606
-00:26:48,596 --> 00:26:51,866
-Now that I've got this
-nice handy label here,
+00:27:57,277 --> 00:27:59,246
+没有办法满足
+所有的约束要求
 
 
 607
-00:26:51,866 --> 00:26:54,596
-I can simply search for
-it, find the constraint
+00:27:59,613 --> 00:28:01,782
+可是如果有着
+不只一个解决方案会怎样？
 
 
 608
-00:26:54,596 --> 00:26:55,916
-that I made, and there we go.
+00:28:02,082 --> 00:28:03,450
+这就会出现歧义
 
 
 609
-00:26:55,916 --> 00:26:58,246
-I have tied it to the top
-anchor by a hundred points.
+00:28:04,251 --> 00:28:06,587
+这就是我们最后的
+谜题 祝贺大家
 
 
 610
-00:26:58,956 --> 00:27:01,666
-And find out where
-it's activated.
+00:28:06,653 --> 00:28:07,487
+进行到这里
 
 
 611
-00:27:02,616 --> 00:27:04,786
-And get rid of it.
+00:28:07,955 --> 00:28:09,156
+此外再无其他
+更多内容
 
 
 612
-00:27:05,036 --> 00:27:05,726
-Build again.
+00:28:09,923 --> 00:28:11,692
+我们来看一下
+歧义布局
 
 
 613
-00:27:06,446 --> 00:27:08,706
-That's much better.
+00:28:11,925 --> 00:28:13,660
+造成歧义布局的
 
 
 614
-00:27:08,706 --> 00:27:10,136
-That's exactly what
-I was looking for.
+00:28:13,727 --> 00:28:16,997
+两个可能原因
+只能是约束太少
 
 
 615
-00:27:10,556 --> 00:27:12,906
-And so it's really
-easy to kind of drill
+00:28:17,865 --> 00:28:21,468
+如果是在做
+这样的行星布局
 
 
 616
-00:27:12,906 --> 00:27:13,906
-down into those problems,
+00:28:21,535 --> 00:28:22,569
+希望将Saturn
+放在中间
 
 
 617
-00:27:13,906 --> 00:27:15,546
-even when you have a
-very complex layout,
+00:28:23,237 --> 00:28:25,639
+但是水平方向的约束
+设置不当
 
 
 618
-00:27:15,716 --> 00:27:18,966
-if you are using
-identifiers properly.
+00:28:25,806 --> 00:28:27,074
+视图只能猜测
+该把它放在哪里
 
 
 619
-00:27:19,906 --> 00:27:23,476
-So where are we with this log?
+00:28:28,041 --> 00:28:29,276
+再次提醒一下
+应该是在中心
 
 
 620
-00:27:24,486 --> 00:27:25,906
-Start from the bottom.
+00:28:29,343 --> 00:28:32,513
+引擎把它放得
+偏到了这边
 
 
 621
-00:27:26,666 --> 00:27:28,416
-Finding the constraint that
-was broken gives you a lot
+00:28:32,880 --> 00:28:35,249
+还有一个解决方案
+是把它偏到另一边
 
 
 622
-00:27:28,416 --> 00:27:31,496
-of information about
-why it was broken.
+00:28:35,315 --> 00:28:36,950
+可就是不能
+落在中间的位置
 
 
 623
-00:27:31,496 --> 00:27:34,366
-Check translatesAutoResizingMask
-IntoConstraints [without
+00:28:37,017 --> 00:28:39,620
+因为如果不知道
+该放在哪里 它就会
 
 
 624
-00:27:34,366 --> 00:27:34,636
-space] first.
+00:28:39,686 --> 00:28:41,188
+找个地方放 这就会是
+问题所在
 
 
 625
-00:27:35,096 --> 00:27:37,686
-It is the culprit
-in many situations.
+00:28:41,321 --> 00:28:42,756
+因为不是你想要的
 
 
 626
-00:27:37,956 --> 00:27:41,126
-Set identifiers on both your
-constraints and your views,
+00:28:42,823 --> 00:28:44,825
+需要返回 在视图上
+加上约束
 
 
 627
-00:27:41,826 --> 00:27:43,946
-and finally, if the log
-is just too complex,
+00:28:45,592 --> 00:28:47,194
+另一个歧义布局的
+原因是属性
 
 
 628
-00:27:44,556 --> 00:27:44,686
-go
+00:28:47,261 --> 00:28:48,295
+存在冲突
 
 
 629
-00:27:44,686 --> 00:27:46,346
-for constraintsAffectingLayout
-ForAxis [without space]
+00:28:48,729 --> 00:28:51,365
+在第一部分中
+我们谈过一点
 
 
 630
-00:27:46,426 --> 00:27:47,176
-to narrow it down.
+00:28:51,431 --> 00:28:54,334
+在视图的底部
+我们刚做过调整
 
 
 631
-00:27:48,276 --> 00:27:53,486
-Okay. So that's what
-happens when the engine looks
+00:28:54,401 --> 00:28:56,603
+大家会看到结果会
+是文本域
 
 
 632
-00:27:53,486 --> 00:27:57,286
-at your constraints and knows
-that it can't get a solution.
+00:28:56,670 --> 00:28:59,072
+按钮的比例
+有问题
 
 
 633
-00:27:57,286 --> 00:27:59,256
-There is no solution that
-fits all of your constraints.
+00:28:59,139 --> 00:29:00,474
+我希望它
+是这个样子
 
 
 634
-00:27:59,616 --> 00:28:01,766
-But what happens if it has
-more than one solution?
+00:29:02,342 --> 00:29:04,611
+文本域占据
+视图的主要部分
 
 
 635
-00:28:02,086 --> 00:28:03,456
-That's when we hit ambiguity.
+00:29:05,212 --> 00:29:07,548
+最后变成这个样子
+是因为引擎
 
 
 636
-00:28:04,266 --> 00:28:06,646
-This is our final
-mystery, so congratulations
+00:29:07,614 --> 00:29:10,150
+在两个布局中
+替我做出选择
 
 
 637
-00:28:06,646 --> 00:28:07,496
-for making it this far.
+00:29:11,084 --> 00:29:13,520
+它这么做是因为
+两个视图的内容
 
 
 638
-00:28:07,966 --> 00:28:09,166
-We don't have that
-much farther to go.
+00:29:13,587 --> 00:29:15,255
+吸附性优先级相同
 
 
 639
-00:28:09,916 --> 00:28:10,346
-Let's see.
+00:29:15,322 --> 00:29:17,991
+都是250
+我没有其他方法
 
 
 640
-00:28:10,466 --> 00:28:11,686
-So, ambiguous layouts.
+00:29:18,058 --> 00:29:19,860
+我也没有告诉
+引擎用其他方法在水平方向
 
 
 641
-00:28:11,936 --> 00:28:13,726
-A couple of possible causes
+00:29:19,927 --> 00:29:21,962
+来确定这些
+视图的大小
 
 
 642
-00:28:13,726 --> 00:28:16,986
-of ambiguous layouts are
-simply too few constraints.
+00:29:22,429 --> 00:29:24,131
+那它只能是猜
+所以猜测也许
 
 
 643
-00:28:17,866 --> 00:28:21,526
-If you are doing a planets'
-layout like this and you know
+00:29:24,231 --> 00:29:27,401
+我是想让文本视图
+吸附最近的内容
 
 
 644
-00:28:21,526 --> 00:28:22,566
-that you want Saturn
-in the middle
+00:29:27,734 --> 00:29:29,169
+于是继续
+还把输出了标签
 
 
 645
-00:28:23,226 --> 00:28:25,636
-but your horizontal constraints
-aren't set up properly,
+00:29:29,703 --> 00:29:30,838
+但是我实际上希望
+它做的是
 
 
 646
-00:28:25,796 --> 00:28:27,086
-the view may have to
-guess where to put it.
+00:29:30,971 --> 00:29:32,439
+吸附靠近
+按钮的内容
 
 
 647
-00:28:28,056 --> 00:28:29,326
-Again, reminder, it
-should be in the middle.
+00:29:33,106 --> 00:29:36,343
+这部分要
+反复强调
 
 
 648
-00:28:29,326 --> 00:28:32,496
-The engine put it
-off to the side.
+00:29:36,410 --> 00:29:38,111
+但是按钮的内容
+吸附优先级
 
 
 649
-00:28:32,866 --> 00:28:35,236
-The other solution it has for
-it is off to the other side,
+00:29:38,178 --> 00:29:40,814
+设置的低于
+文字域
 
 
 650
-00:28:35,326 --> 00:28:37,006
-and it never actually
-lands in the middle.
+00:29:41,315 --> 00:29:45,519
+视图的边缘会
+从内容中伸出一块
 
 
 651
-00:28:37,006 --> 00:28:39,696
-And that can be a problem
-because if it doesn't know
+00:29:45,586 --> 00:29:48,088
+因为这不太重要
+它吸附了最近的内容
 
 
 652
-00:28:39,696 --> 00:28:41,196
-where to put it, it's just
-going to put it somewhere.
+00:29:48,255 --> 00:29:49,523
+或者你在告知引擎
+这不太重要
 
 
 653
-00:28:41,316 --> 00:28:42,816
-That's not what you want.
+00:29:49,590 --> 00:29:51,158
+视图吸附
+附近的内容
 
 
 654
-00:28:42,816 --> 00:28:44,836
-You need to go back and add
-constraints on that view.
+00:29:51,892 --> 00:29:54,595
+与此同时 如果设置了以上
+文本视图的
 
 
 655
-00:28:45,596 --> 00:28:47,276
-Another cause of
-ambiguous layouts is
+00:29:54,661 --> 00:29:57,965
+内容吸附性优先级
+按钮吸附了靠近的内容
 
 
 656
-00:28:47,276 --> 00:28:48,286
-conflicting priorities.
+00:29:58,131 --> 00:29:59,299
+且文本域有所延伸
 
 
 657
-00:28:48,726 --> 00:28:51,446
-We talked about this a
-little bit in Part 1.
+00:29:59,733 --> 00:30:02,035
+在这种特殊情况下
+引擎始终都会这样
 
 
 658
-00:28:51,446 --> 00:28:54,386
-At the bottom of this view that
-we just fixed here, you will see
+00:30:02,102 --> 00:30:03,537
+解决布局问题
 
 
 659
-00:28:54,386 --> 00:28:56,676
-that it can actually end up in
-a situation where the text field
+00:30:03,704 --> 00:30:06,874
+因此 如果妥当
+设置这些属性
 
 
 660
-00:28:56,676 --> 00:28:59,136
-and button are kind of
-the wrong proportions.
+00:30:06,940 --> 00:30:09,810
+就可以解决这些
+遇到的歧义布局
 
 
 661
-00:28:59,136 --> 00:29:00,466
-I want it to look
-more like this,
+00:30:09,877 --> 00:30:13,380
+我们还有解决
+歧义的两个工具
 
 
 662
-00:29:02,356 --> 00:29:04,606
-where the text field is
-taking up most of the view.
+00:30:14,548 --> 00:30:15,949
+Interface Builder
+会很有用处
 
 
 663
-00:29:05,196 --> 00:29:07,606
-And the reason that it ended up
-that way is that the engine had
+00:30:16,283 --> 00:30:20,554
+它在边缘有这些
+小图标 如果点击
 
 
 664
-00:29:07,606 --> 00:29:10,166
-to make a choice between
-those two layouts for me.
+00:30:20,687 --> 00:30:23,624
+它会告诉你布局出现了
+哪些它不明白的内容
 
 
 665
-00:29:11,086 --> 00:29:13,576
-And it did that because the
-content hugging priorities
+00:30:24,625 --> 00:30:26,293
+在很多情况下
+它会告知
 
 
 666
-00:29:13,576 --> 00:29:15,316
-on these two views are the same.
+00:30:26,360 --> 00:30:29,897
+你遗漏了约束
+它无法解决
 
 
 667
-00:29:15,316 --> 00:29:18,066
-They are both 250, and I
-don't have any other way --
+00:30:30,264 --> 00:30:32,432
+我需要Y点
+或者高度的约束
 
 
 668
-00:29:18,066 --> 00:29:19,926
-I am not telling the
-engine any other way
+00:30:32,699 --> 00:30:37,571
+当你构建并运行
+的app存在这样的问题时
 
 
 669
-00:29:19,926 --> 00:29:21,966
-to size those views
-horizontally.
+00:30:38,005 --> 00:30:41,742
+最后这些视图
+就会出现在
 
 
 670
-00:29:22,436 --> 00:29:24,116
-So it had to kind of take
-a guess, and it guessed
+00:30:41,808 --> 00:30:45,312
+Y轴的某处
+这是引擎的决定所致
 
 
 671
-00:29:24,216 --> 00:29:27,416
-that maybe I wanted the text
-view to hug its content closely
+00:30:45,379 --> 00:30:46,780
+因为它没有
+从我们这里获得任何信息
 
 
 672
-00:29:27,726 --> 00:29:29,166
-and go ahead and let
-the label spread out,
+00:30:47,548 --> 00:30:48,315
+这就让它相当容易
 
 
 673
-00:29:29,716 --> 00:29:30,836
-but I really wanted
-it to do this
+00:30:48,382 --> 00:30:52,085
+当没有使用Interface
+Builder或者你解决问题后
 
 
 674
-00:29:30,966 --> 00:29:32,436
-and hug the button
-content closely.
+00:30:52,152 --> 00:30:53,253
+仍然会遇到
+这样的情况
 
 
 675
-00:29:33,106 --> 00:29:36,396
-So as I -- this is going to
-be repeat for a couple of you,
+00:30:53,320 --> 00:30:55,556
+我们还有一个很酷的方法
+叫做autolayoutTrace
 
 
 676
-00:29:36,396 --> 00:29:38,186
-but if the content
-hugging priority
+00:30:56,390 --> 00:30:59,693
+可以在视图中的
+调试器来使用
 
 
 677
-00:29:38,186 --> 00:29:40,826
-on the button is set lower
-than that on the text field,
+00:30:59,793 --> 00:31:03,463
+它会用全部大写
+告诉你出现
 
 
 678
-00:29:41,306 --> 00:29:45,596
-the edges of the view are able
-to stretch away from its content
+00:31:03,530 --> 00:31:05,566
+歧义布局的视图
+你可以随即去
 
 
 679
-00:29:45,596 --> 00:29:48,086
-because it's less important
-that it hug its content closely.
+00:31:05,632 --> 00:31:07,901
+查看该视图的
+问题所在
 
 
 680
-00:29:48,246 --> 00:29:49,606
-Or you are telling the
-engine it's less important
+00:31:08,869 --> 00:31:11,238
+在调试菜单中
+我们还有视图调试器
 
 
 681
-00:29:49,606 --> 00:29:51,156
-that that view hug
-its content closely.
+00:31:11,972 --> 00:31:15,542
+可以帮你查看
+布局引擎为视图
 
 
 682
-00:29:51,876 --> 00:29:54,676
-Meanwhile, if you set it above,
-the content hugging priority
+00:31:15,843 --> 00:31:17,811
+计算得出的
+框架和对齐矩形
 
 
 683
-00:29:54,676 --> 00:29:57,966
-of the text view, the
-button now hugs it closely
+00:31:18,512 --> 00:31:19,379
+效果
+就像这样
 
 
 684
-00:29:58,116 --> 00:29:59,286
-and the text field stretches.
+00:31:19,446 --> 00:31:22,115
+它会将拽到
+正在看的视图上
 
 
 685
-00:29:59,746 --> 00:30:02,086
-This is consistently how the
-engine will solve the layout
+00:31:22,683 --> 00:31:25,185
+这里你们可以看到
+Saturn 本应对齐矩形中
 
 
 686
-00:30:02,086 --> 00:30:03,546
-in this particular circumstance.
+00:31:25,252 --> 00:31:27,955
+与内容十分靠近
+可是现在
 
 
 687
-00:30:03,696 --> 00:30:06,956
-So if you set these priorities
-properly, you can resolve some
+00:31:28,021 --> 00:31:29,690
+被延伸得
+非常宽
 
 
 688
-00:30:06,956 --> 00:30:09,866
-of these ambiguous
-layouts that you run into.
+00:31:30,057 --> 00:31:32,092
+这种状况
+不是我想要的
 
 
 689
-00:30:09,866 --> 00:30:13,366
-We have a couple of tools
-for resolving ambiguity.
+00:31:32,893 --> 00:31:37,364
+可是这里
+它的实际尺寸没问题
 
 
 690
-00:30:14,546 --> 00:30:15,936
-Interface Builder
-is a big help here.
+00:31:37,431 --> 00:31:39,433
+只是被固定到边上
+这不是我想要的
 
 
 691
-00:30:16,286 --> 00:30:20,546
-It has these little icons on the
-edge, and if you click on those,
+00:31:39,499 --> 00:31:40,901
+但是我知道这不是
+尺寸问题
 
 
 692
-00:30:20,676 --> 00:30:22,636
-it will tell you what's
-going on with your layout
+00:31:41,268 --> 00:31:45,272
+而是应该与哪里
+关联的问题
 
 
 693
-00:30:22,636 --> 00:30:23,626
-that it doesn't understand.
+00:31:46,773 --> 00:31:48,308
+另一个解决方案是
+来看视图解调器
 
 
 694
-00:30:24,626 --> 00:30:26,366
-And in many cases,
-it will tell you
+00:31:48,375 --> 00:31:50,744
+在所有的
+断点导航旁边
 
 
 695
-00:30:26,366 --> 00:30:29,906
-that you are missing constraints
-and what it can't solve for.
+00:31:50,811 --> 00:31:52,012
+这里有个
+小按钮
 
 
 696
-00:30:30,276 --> 00:30:32,416
-I need constraints for
-the Y position or height.
+00:31:52,145 --> 00:31:54,648
+按下这个的时候
+就会把布局拉开
 
 
 697
-00:30:32,706 --> 00:30:37,566
-When you build and run an
-app that has this issue,
+00:31:54,715 --> 00:31:57,451
+可以点击并查看
+约束等内容
 
 
 698
-00:30:38,006 --> 00:30:41,796
-you are going to end up
-with these views somewhere
+00:31:57,851 --> 00:32:00,654
+是视图的线框图
+还可以看3D效果
 
 
 699
-00:30:41,796 --> 00:30:45,366
-in the Y-axis, where the engine
-kind of decided it had to go
+00:32:01,021 --> 00:32:02,789
+可以看到所有
+图层的视图 很清楚
 
 
 700
-00:30:45,366 --> 00:30:46,796
-because it didn't have
-any information from you.
+00:32:03,257 --> 00:32:06,593
+还有很多视图调试场景
+会很有帮助
 
 
 701
-00:30:47,556 --> 00:30:48,376
-That makes it really easy.
+00:32:07,261 --> 00:32:09,263
+最后 我们还有
+一种调试器方法
 
 
 702
-00:30:48,376 --> 00:30:52,156
-When you are not using Interface
-Builder or when you get passed
+00:32:09,329 --> 00:32:10,797
+因为我非常喜欢
+使用LLDB
 
 
 703
-00:30:52,156 --> 00:30:53,316
-and you are still
-running into this,
+00:32:11,198 --> 00:32:12,966
+名为exerciseAmbigui
+tyInLayout
 
 
 704
-00:30:53,316 --> 00:30:55,546
-we have a really cool method
-called autolayoutTrace,
+00:32:13,200 --> 00:32:16,203
+如果有存在
+歧义的视图
 
 
 705
-00:30:56,396 --> 00:30:59,706
-and you just use that in
-the debugger on a view,
+00:32:16,270 --> 00:32:18,972
+可以运行这个
+在调试器上查看再继续
 
 
 706
-00:30:59,786 --> 00:31:03,546
-and it will just tell you in
-all caps that you have a view
+00:32:19,039 --> 00:32:21,608
+Layout Engine会显示
+所具备的另外解决方案
 
 
 707
-00:31:03,546 --> 00:31:05,626
-that has an ambiguous
-layout, and you can then go
+00:32:22,309 --> 00:32:24,244
+当你想找到问题
+具体出在哪里时
 
 
 708
-00:31:05,626 --> 00:31:07,896
-about diagnosing the
-problem with that view.
+00:32:24,311 --> 00:32:25,712
+这会提供很大的
+帮助
 
 
 709
-00:31:08,856 --> 00:31:11,246
-We also have the view
-debugger in the debug menu,
+00:32:26,446 --> 00:32:27,614
+我给大家展示
+这是什么样子
 
 
 710
-00:31:11,976 --> 00:31:15,556
-which will allow you to view the
-frames and the alignment recs
+00:32:28,916 --> 00:32:32,152
+好现在我们回到这个视图
+刚才我们看到过
 
 
 711
-00:31:15,846 --> 00:31:17,816
-that the layout engine has
-calculated for your view.
+00:32:32,653 --> 00:32:36,423
+当处于正常布局时
+Saturn跑到边上
 
 
 712
-00:31:18,526 --> 00:31:19,436
-It will look something
-like this.
+00:32:36,924 --> 00:32:39,226
+所以我再次
+用调试手势
 
 
 713
-00:31:19,436 --> 00:31:20,966
-It will just draw
-it right on the view
+00:32:39,293 --> 00:32:42,062
+可以这么用是因为
+我需要简单地插入
 
 
 714
-00:31:20,966 --> 00:31:22,106
-that it's looking at right now.
+00:32:42,663 --> 00:32:44,731
+首先我来看看
+整个视图在发生什么
 
 
 715
-00:31:22,666 --> 00:31:25,236
-Here you can see that
-Saturn, who is supposed
+00:32:44,798 --> 00:32:48,836
+运行了自动布局
+来跟踪效果
 
 
 716
-00:31:25,236 --> 00:31:28,026
-to have an alignment rect
-that comes very closely
+00:32:49,770 --> 00:32:52,439
+大家看 都没问题
+除了Saturn
 
 
 717
-00:31:28,026 --> 00:31:29,686
-to its content, is
-stretched very wide.
+00:32:52,506 --> 00:32:53,507
+存在歧义布局
 
 
 718
-00:31:30,066 --> 00:31:32,086
-And that's problematic because
-that's not what I wanted.
+00:32:53,574 --> 00:32:55,475
+我会努力集中精力
+解决这个问题
 
 
 719
-00:31:32,896 --> 00:31:37,376
-But over here, its actual size
-is correct; it's just pinned
+00:32:56,410 --> 00:32:58,478
+这还是个Boolean
+逐个视图告知
 
 
 720
-00:31:37,436 --> 00:31:39,486
-to the side which is,
-again, not what I wanted,
+00:32:58,545 --> 00:33:01,715
+是否存在
+歧义布局
 
 
 721
-00:31:39,486 --> 00:31:40,906
-but I know it's not
-a size problem,
+00:33:01,915 --> 00:33:04,084
+这是个hasAmbiguousLa
+yout
 
 
 722
-00:31:41,256 --> 00:31:45,286
-it's a tied-to-where
-sort of problem.
+00:33:04,918 --> 00:33:07,321
+很容易记住
+在Saturn的这个例子中 是真
 
 
 723
-00:31:46,766 --> 00:31:48,306
-The other solution is to
-look in the view debugger;
+00:33:08,388 --> 00:33:12,793
+如果存在这种情况
+还还可以练习布局歧义
 
 
 724
-00:31:48,386 --> 00:31:50,816
-right next to all of your
-breakpoint navigation,
+00:33:12,860 --> 00:33:14,161
+并且继续
 
 
 725
-00:31:50,816 --> 00:31:52,026
-you have this little
-button here.
+00:33:14,962 --> 00:33:18,665
+它会给你提供 它为此
+问题准备的另一个解决方案
 
 
 726
-00:31:52,156 --> 00:31:54,706
-When you press that, it
-pulls up your layout in a way
+00:33:18,732 --> 00:33:20,534
+我们再来运行一遍
 
 
 727
-00:31:54,706 --> 00:31:57,456
-that you can click through and
-view things like constraints,
+00:33:21,401 --> 00:33:22,669
+哎呀
 
 
 728
-00:31:57,846 --> 00:32:00,666
-just the wireframes for the
-views, you can see stuff in 3D.
+00:33:22,970 --> 00:33:24,171
+真不该再运行
 
 
 729
-00:32:01,006 --> 00:32:02,796
-It gives you a really nice
-view of all your layers,
+00:33:24,738 --> 00:33:30,110
+现在又跑到
+一边去了
 
 
 730
-00:32:03,246 --> 00:32:06,596
-and that can really help with a
-lot of view debugging scenarios.
+00:33:30,577 --> 00:33:32,412
+在这种情况下
+看似出于某种原因
 
 
 731
-00:32:07,256 --> 00:32:09,316
-Finally, we have
-another debugger method,
+00:33:32,479 --> 00:33:35,015
+布局指南放在
+Saturn的哪一侧都不行
 
 
 732
-00:32:09,316 --> 00:32:10,806
-because I really
-like using LLDB,
+00:33:35,382 --> 00:33:39,052
+那我继续找
+关联行星
 
 
 733
-00:32:11,186 --> 00:32:12,966
-called
-exerciseAmbiguityInLayout.
+00:33:39,119 --> 00:33:40,888
+到特定
+区域的约束
 
 
 734
-00:32:13,196 --> 00:32:16,276
-If you have a view that you know
-is ambiguous and you run this
+00:33:40,954 --> 00:33:44,958
+它们在各边都有
+布局指南比率
 
 
 735
-00:32:16,276 --> 00:32:19,026
-on that view in the
-debugger and continue,
+00:33:45,025 --> 00:33:47,261
+以此来确定
+其位置
 
 
 736
-00:32:19,026 --> 00:32:21,596
-the Layout Engine will show
-you the other solution it had,
+00:33:47,327 --> 00:33:49,129
+这里找到了Saturn
+的那个
 
 
 737
-00:32:22,316 --> 00:32:24,306
-which is a great clue when
-you are trying to figure
+00:33:49,830 --> 00:33:51,899
+应该在各边
+有着相同的布局指南
 
 
 738
-00:32:24,306 --> 00:32:25,726
-out where the problem
-is coming from.
+00:33:51,965 --> 00:33:53,534
+应该是正好
+放在中间在对
 
 
 739
-00:32:26,456 --> 00:32:27,626
-And I will show you
-how that looks now.
+00:33:53,600 --> 00:33:58,172
+问题好似
+我根本没有把这个
 
 
 740
-00:32:28,926 --> 00:32:32,156
-Okay. So we are back to this
-view that we just saw a bit ago,
+00:33:58,272 --> 00:34:01,875
+加入为视图激活的
+约束数组中
 
 
 741
-00:32:32,646 --> 00:32:35,746
-and when it's in its regular
-layout, Saturn is flying off
+00:34:02,209 --> 00:34:07,014
+如果我加入的话
+效果就会好得多
 
 
 742
-00:32:35,746 --> 00:32:39,296
-to the side, so I have,
-again, my debug gesture
+00:34:07,414 --> 00:34:10,050
+Saturn就会准确
+待在我希望它在的位置
 
 
 743
-00:32:39,296 --> 00:32:42,066
-that I can use just because
-I need an easy way to break.
+00:34:10,449 --> 00:34:12,252
+在分析歧义问题时
+确实只需要
 
 
 744
-00:32:42,656 --> 00:32:44,806
-The first thing I can
-do is see what's going
+00:34:12,386 --> 00:34:14,321
+做这些即可
 
 
 745
-00:32:44,806 --> 00:32:48,836
-on with the whole view by
-running auto layout trace on it,
+00:34:15,289 --> 00:34:17,491
+一旦开始用了这个功能
+就会觉得
 
 
 746
-00:32:49,766 --> 00:32:52,516
-and you see that everything
-is okay, except for Saturn,
+00:34:17,558 --> 00:34:20,460
+非常简单
 
 
 747
-00:32:52,516 --> 00:32:53,586
-which has an ambiguous layout.
+00:34:21,728 --> 00:34:22,829
+来调试布局
 
 
 748
-00:32:53,586 --> 00:32:55,476
-That's where I am going
-to concentrate my efforts.
+00:34:23,130 --> 00:34:25,098
+最重要的是要
+仔细考虑
 
 
 749
-00:32:56,426 --> 00:32:58,546
-There's also a Boolean
-that will tell you view
+00:34:25,431 --> 00:34:27,034
+引擎所需的
+信息
 
 
 750
-00:32:58,546 --> 00:33:01,706
-by view whether it has
-an ambiguous layout.
+00:34:27,601 --> 00:34:28,635
+今天上午 我们谈论了
 
 
 751
-00:33:01,926 --> 00:33:04,096
-And that's just
-hasAmbiguousLayout --
+00:34:28,702 --> 00:34:32,105
+许多为Layout Engine
+提供所有信息
 
 
 752
-00:33:04,926 --> 00:33:07,316
-pretty easy to remember, and
-in Saturn's case, it's true.
+00:34:32,172 --> 00:34:34,208
+这样可以在各种
+自适配场景中
 
 
 753
-00:33:08,376 --> 00:33:11,846
-And if you have that happening,
-you can also exercise ambiguity
+00:34:34,274 --> 00:34:35,809
+妥善计算布局
 
 
 754
-00:33:11,846 --> 00:33:14,146
-in layout and continue,
+00:34:36,409 --> 00:34:40,746
+如果把所有这些汇总在一起
+遇到的问题
 
 
 755
-00:33:14,946 --> 00:33:18,716
-and it will show you the other
-solution it had for that issue.
+00:34:40,813 --> 00:34:43,350
+就会少很多
+而不是只是
 
 
 756
-00:33:18,716 --> 00:33:20,546
-So let's run that again.
+00:34:43,417 --> 00:34:44,885
+在这里或那里
+做两个约束
 
 
 757
-00:33:21,406 --> 00:33:22,656
-And -- oops.
+00:34:44,952 --> 00:34:46,587
+再把它扔进来
 
 
 758
-00:33:22,966 --> 00:33:24,186
-Wrong thing to run again.
+00:34:47,721 --> 00:34:50,489
+但是如果遇到问题
+约束也不理想的话
 
 
 759
-00:33:24,726 --> 00:33:30,106
-And now it's over
-to the side again.
+00:34:50,757 --> 00:34:52,125
+可以使用
+日志
 
 
 760
-00:33:30,576 --> 00:33:32,486
-So in this case, it looks
-like the layout guides I put
+00:34:52,192 --> 00:34:53,893
+它会提供
+很多有用信息
 
 
 761
-00:33:32,486 --> 00:33:35,026
-on either side of Saturn
-aren't working for some reason,
+00:34:54,061 --> 00:34:56,830
+为了充分利用日志
+可以为所有的约束
 
 
 762
-00:33:35,386 --> 00:33:39,126
-so I am going to go up
-and find my constraints
+00:34:57,364 --> 00:34:58,465
+和视图添加
+标识符
 
 
 763
-00:33:39,126 --> 00:33:40,966
-that are tying my planets
-to their specific areas,
+00:34:58,866 --> 00:35:01,034
+如果想经常性
+检查歧义
 
 
 764
-00:33:40,966 --> 00:33:45,016
-and they are doing that by
-having a ratio of layout guides
+00:35:01,335 --> 00:35:03,270
+在第一次运行时
+不一定会看到
 
 
 765
-00:33:45,016 --> 00:33:47,256
-on either side in order
-to determine where it is.
+00:35:03,704 --> 00:35:05,839
+可以加入
+比如单元测试
 
 
 766
-00:33:47,336 --> 00:33:49,126
-I've got one for
-Saturn right here,
+00:35:05,906 --> 00:35:08,041
+并在所有视图上
+经常性运行
 
 
 767
-00:33:49,836 --> 00:33:51,956
-and it should have equal
-layout guides on either side,
+00:35:08,108 --> 00:35:11,111
+如果遇到歧义布局
+可以在看到它之前进行分析
 
 
 768
-00:33:51,956 --> 00:33:53,596
-which should put it pretty
-much exactly in the middle.
+00:35:12,179 --> 00:35:13,580
+我们还有好几种工具
 
 
 769
-00:33:53,596 --> 00:33:58,176
-The problem appears to be that
-I did not actually add this
+00:35:13,647 --> 00:35:14,781
+可以帮助解决
+这类问题
 
 
 770
-00:33:58,256 --> 00:34:01,886
-to the constraints array I
-am activating for that view.
+00:35:15,015 --> 00:35:17,851
+Interface builder
+就很有用当然还有视图调试器
 
 
 771
-00:34:02,196 --> 00:34:07,026
-And so if I add it,
-things go much better.
+00:35:17,951 --> 00:35:20,153
+以及lldb中的各种方法
 
 
 772
-00:34:07,426 --> 00:34:10,045
-Saturn stays put exactly
-where I wanted it to be.
+00:35:21,922 --> 00:35:25,192
+好 今天讲了
+很多内容
 
 
 773
-00:34:10,085 --> 00:34:12,255
-And that's really
-all that's involved
+00:35:26,059 --> 00:35:29,029
+如果上午就听了
+我们的讲座
 
 
 774
-00:34:12,396 --> 00:34:14,326
-in diagnosing ambiguity.
+00:35:29,096 --> 00:35:30,831
+你会听到用到堆栈视图的
+可维护布局
 
 
 775
-00:34:14,326 --> 00:34:17,565
-It's pretty easy
-once you start kind
+00:35:31,265 --> 00:35:32,833
+以及妥当
+改变约束
 
 
 776
-00:34:17,565 --> 00:34:20,985
-of working with it a little bit.
+00:35:33,267 --> 00:35:35,536
+配合使用视图大小和
+进行自适应调整
 
 
 777
-00:34:21,735 --> 00:34:22,815
-So, debugging your layout.
+00:35:35,636 --> 00:35:37,738
+还有运用优先级
+和对齐安排
 
 
 778
-00:34:23,146 --> 00:34:25,085
-The most important thing
-is to think carefully
+00:35:37,804 --> 00:35:39,606
+确保视图
+在各种
 
 
 779
-00:34:25,446 --> 00:34:27,025
-about the information
-that your engine needs.
+00:35:39,673 --> 00:35:41,708
+自适配环境下
+完全符合要求
 
 
 780
-00:34:27,585 --> 00:34:28,706
-This morning we talked a lot
+00:35:42,476 --> 00:35:45,312
+刚才 我们深入探讨了
+布局循环
 
 
 781
-00:34:28,706 --> 00:34:32,166
-about giving the Layout
-Engine all of its information
+00:35:46,113 --> 00:35:49,316
+和旧布局的互动
+用布局锚点而不是
 
 
 782
-00:34:32,166 --> 00:34:34,286
-so that it can calculate
-your layout properly
+00:35:49,383 --> 00:35:52,886
+旧方法来
+生成约束
 
 
 783
-00:34:34,286 --> 00:34:35,806
-in various adaptive scenarios.
+00:35:52,953 --> 00:35:55,389
+以及用布局指南
+约束负面空间
 
 
 784
-00:34:36,406 --> 00:34:40,806
-If you can kind of pull that all
-together, you are going to run
+00:35:56,023 --> 00:35:58,725
+我们还谈到
+不理想的约束
 
 
 785
-00:34:40,806 --> 00:34:43,406
-into a lot fewer problems
-as opposed to just trying
+00:35:58,792 --> 00:36:00,894
+和如何解决歧义
+这两个问题
 
 
 786
-00:34:43,406 --> 00:34:44,936
-to make a couple
-of constraints here
+00:36:00,961 --> 00:36:02,729
+人们会在使用
+Auto Layout时
 
 
 787
-00:34:44,936 --> 00:34:46,596
-and there and throwing it in.
+00:36:02,796 --> 00:36:03,764
+经常遇到
 
 
 788
-00:34:47,726 --> 00:34:50,505
-But if you do run into
-problems, use the logs
+00:36:03,931 --> 00:36:06,500
+这就是所有的
+谜题内容
 
 
 789
-00:34:50,766 --> 00:34:52,196
-if constraints are
-unsatisfiable.
+00:36:07,234 --> 00:36:09,169
+希望我们都为
+大家解释清楚了
 
 
 790
-00:34:52,196 --> 00:34:53,886
-It gives you a lot of
-really good information.
+00:36:09,903 --> 00:36:13,173
+如果还没有
+听过第一部分内容
 
 
 791
-00:34:54,065 --> 00:34:56,846
-In order to make good use of
-those logs, add identifiers
+00:36:13,240 --> 00:36:15,742
+建议大家找来看看
+因为其中的很多
 
 
 792
-00:34:57,356 --> 00:34:58,466
-for all those constraints
-and views.
+00:36:16,009 --> 00:36:18,946
+内容都非常有用
+相关视频应该
 
 
 793
-00:34:58,866 --> 00:35:01,036
-You also want to regularly
-check for ambiguity.
+00:36:19,012 --> 00:36:20,247
+很快就能
+做出来
 
 
 794
-00:35:01,346 --> 00:35:03,256
-You won't necessarily
-see it on the first run.
+00:36:20,514 --> 00:36:22,282
+或者大家可以
+回到11:00的时候
 
 
 795
-00:35:03,706 --> 00:35:05,916
-This is a good thing to put
-in something like a unit test
+00:36:22,516 --> 00:36:27,087
+怎么都行
+当然想要了解更多详情
 
 
 796
-00:35:05,916 --> 00:35:08,106
-and just run it on all your
-views regularly, so if you run
+00:36:27,154 --> 00:36:29,823
+网站上有文档资料
+我们还有行星代码
 
 
 797
-00:35:08,106 --> 00:35:11,116
-into ambiguous layout, you can
-diagnose it before you see it.
+00:36:29,890 --> 00:36:32,526
+很多是在第一部分中
+提到 不过我们
 
 
 798
-00:35:12,186 --> 00:35:13,646
-And then we have several tools
+00:36:32,593 --> 00:36:33,493
+这里也有用到
 
 
 799
-00:35:13,646 --> 00:35:14,786
-to help you resolve
-these issues.
+00:36:33,560 --> 00:36:36,763
+你们在这看到的行星代码
+并没有问题
 
 
 800
-00:35:15,016 --> 00:35:17,866
-Interface builder is helpful,
-as always, the view debugger,
+00:36:36,830 --> 00:36:38,031
+实际上运行正常
 
 
 801
-00:35:17,946 --> 00:35:20,146
-and our various methods in lldb.
+00:36:38,098 --> 00:36:40,200
+如果希望使用这里
+介绍的调试方法
 
 
 802
-00:35:21,916 --> 00:35:22,316
-All right.
+00:36:40,267 --> 00:36:41,568
+可以人为地
+破坏它
 
 
 803
-00:35:22,406 --> 00:35:25,186
-So we have come a
-very long way today.
+00:36:41,635 --> 00:36:43,904
+我们还有几个相关讲座
 
 
 804
-00:35:26,046 --> 00:35:29,086
-If you were with us this
-morning, you saw us talking
+00:36:44,171 --> 00:36:47,374
+再说一下 第一部分讲座
+是在今天早些时候
 
 
 805
-00:35:29,086 --> 00:35:30,826
-about maintainable
-layouts with stack views
+00:36:47,441 --> 00:36:49,109
+明天还有两个
+大家可能会有兴趣
 
 
 806
-00:35:31,276 --> 00:35:32,826
-and changing constraints
-properly,
+00:36:49,176 --> 00:36:51,712
+在这之后 我们还要
+直接返回实验室
 
 
 807
-00:35:33,256 --> 00:35:35,546
-working with view sizing and
-making self-sizing views,
+00:36:52,246 --> 00:36:54,281
+如果大家对
+Auto Layout
 
 
 808
-00:35:35,646 --> 00:35:37,796
-and then using priorities
-and alignment to make sure
+00:36:54,348 --> 00:36:55,349
+和
+Interface Builder
 
 
 809
-00:35:37,796 --> 00:35:39,606
-that your layout stays
-exactly the way you want it
+00:36:55,415 --> 00:36:56,783
+有问题的话 我们可以回答
 
 
 810
-00:35:39,686 --> 00:35:41,716
-to in various adaptive
-environments.
+00:36:56,850 --> 00:36:58,185
+今天就是
+这些内容
 
 
 811
-00:35:42,486 --> 00:35:45,976
-And then just now, we talked
-about the layout cycle in depth,
-
-
-812
-00:35:46,126 --> 00:35:49,386
-interacting with legacy
-layout, creating constraints
-
-
-813
-00:35:49,386 --> 00:35:52,946
-with layout anchors rather
-than the old methods,
-
-
-814
-00:35:52,946 --> 00:35:55,376
-and constraining negative
-space with layout guides.
-
-
-815
-00:35:56,016 --> 00:35:58,806
-And we just now talked about
-unsatisfiable constraints
-
-
-816
-00:35:58,806 --> 00:36:00,966
-and resolving ambiguity,
-which are two problems
-
-
-817
-00:36:00,966 --> 00:36:02,796
-that people tend to
-run into regularly
-
-
-818
-00:36:02,796 --> 00:36:03,776
-when they are using Auto Layout.
-
-
-819
-00:36:03,916 --> 00:36:06,496
-So those are all
-of our mysteries.
-
-
-820
-00:36:07,226 --> 00:36:09,166
-I hope we laid them all out
-for you pretty well here.
-
-
-821
-00:36:09,906 --> 00:36:13,256
-If you haven't seen Part
-1, I recommend going back
-
-
-822
-00:36:13,256 --> 00:36:15,756
-and viewing it because there
-was a lot of information there
-
-
-823
-00:36:16,026 --> 00:36:19,016
-that can be very useful to
-you, and the video should be
-
-
-824
-00:36:19,016 --> 00:36:20,246
-up at some point
-in the near future,
-
-
-825
-00:36:20,506 --> 00:36:22,186
-or you can travel
-back in time to 11:00.
-
-
-826
-00:36:22,526 --> 00:36:22,866
-Either way.
-
-
-827
-00:36:23,606 --> 00:36:27,156
-So to get more information on
-all of this, we, of course,
-
-
-828
-00:36:27,156 --> 00:36:29,876
-have documentation up on
-the website, and we do have
-
-
-829
-00:36:29,876 --> 00:36:32,586
-that planets code, which is
-more for the first session
-
-
-830
-00:36:32,586 --> 00:36:33,546
-but we also used here.
-
-
-831
-00:36:33,546 --> 00:36:36,846
-The planets code that you
-see here is not broken.
-
-
-832
-00:36:36,846 --> 00:36:38,096
-It actually works properly.
-
-
-833
-00:36:38,096 --> 00:36:40,256
-You will have to break it if you
-want to play around with some
-
-
-834
-00:36:40,256 --> 00:36:41,576
-of the debugging
-methods you saw here.
-
-
-835
-00:36:41,626 --> 00:36:43,906
-We have some related sessions.
-
-
-836
-00:36:44,166 --> 00:36:47,426
-So again, Part 1 was earlier
-today, and we have a couple
-
-
-837
-00:36:47,426 --> 00:36:49,186
-of sessions tomorrow that
-you might be interested in.
-
-
-838
-00:36:49,186 --> 00:36:51,696
-We are also going to head
-down to the lab after this,
-
-
-839
-00:36:52,236 --> 00:36:54,336
-and we will be there to
-answer questions that you have
-
-
-840
-00:36:54,336 --> 00:36:55,896
-about Auto Layout and
-Interface Builder.
-
-
-841
-00:36:56,836 --> 00:36:58,186
-And that's what we've
-got for you today.
-
-
-842
-00:36:58,516 --> 00:36:58,946
-Have a good one.
-
-
-843
-00:36:59,516 --> 00:37:03,500
-[Applause]
+00:36:58,519 --> 00:36:59,453
+希望大家过的愉快
 

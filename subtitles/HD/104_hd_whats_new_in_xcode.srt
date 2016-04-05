@@ -1,4140 +1,3850 @@
 1
-00:00:26,536 --> 00:00:27,056
->> Ken Orr: Good morning.
+00:00:26,527 --> 00:00:27,227
+肯奥尔：早上好
 
 
 2
-00:00:28,516 --> 00:00:34,616
-[applause]
+00:00:35,102 --> 00:00:38,071
+Xcode 7是我们下一步
+推出的主要工具
 
 
 3
-00:00:35,116 --> 00:00:38,076
->> Ken Orr: Xcode 7 is our
-next major release of tools
+00:00:38,372 --> 00:00:40,641
+是为了开发 Mac、
+iPhone、iPad
 
 
 4
-00:00:38,366 --> 00:00:42,206
-for building Mac, iPhone,
-iPad and Apple Watch apps.
+00:00:40,707 --> 00:00:42,509
+和 Apple
+Watch app准备的
 
 
 5
-00:00:43,096 --> 00:00:44,826
-Let's get started this
-morning and take a look
+00:00:43,110 --> 00:00:44,778
+今天上午
+让我们来看一看
 
 
 6
-00:00:44,826 --> 00:00:47,166
-at what's new in Xcode.
+00:00:44,845 --> 00:00:46,580
+Xcode 加了哪些新料
 
 
 7
-00:00:48,896 --> 00:00:52,516
-The biggest news this year
-is that we've added support
+00:00:49,483 --> 00:00:52,519
+今年最大的变化
+是我们添加了
 
 
 8
-00:00:52,836 --> 00:00:56,886
-for a third platform,
-Watch OS, and of course,
+00:00:52,819 --> 00:00:56,890
+第三方平台Watch OS
+的支持 当然了
 
 
 9
-00:00:57,336 --> 00:00:59,386
-you can build Apple
-Watch apps right
+00:00:57,090 --> 00:00:58,992
+你仍然可以用Xcode
+这款你已经熟悉的
 
 
 10
-00:00:59,386 --> 00:01:02,656
-in the same great Xcode
-tools that you already know.
+00:00:59,193 --> 00:01:02,029
+同样工具来开发 Apple
+Watch应用
 
 
 11
-00:01:03,616 --> 00:01:07,356
-Xcode 7 also includes Swift 2,
+00:01:03,964 --> 00:01:07,367
+Xcode 7同样也包括
+Swift 2
 
 
 12
-00:01:08,366 --> 00:01:10,536
-building on the new programming
-language we introduced
+00:01:08,368 --> 00:01:10,470
+后者是基于去年
+我们介绍的
 
 
 13
-00:01:10,536 --> 00:01:10,986
-last year.
+00:01:10,537 --> 00:01:11,238
+新的编程语言
 
 
 14
-00:01:12,256 --> 00:01:14,926
-Swift 2 is faster
-across the board,
+00:01:12,272 --> 00:01:14,942
+从整体上说 
+Swift 2速度更快
 
 
 15
-00:01:15,536 --> 00:01:18,156
-not only will your apps run
-faster when you're running
+00:01:15,542 --> 00:01:18,078
+不仅是指你的
+app在Xcode中
 
 
 16
-00:01:18,156 --> 00:01:20,776
-and debugging in
-Xcode, more importantly,
+00:01:18,145 --> 00:01:20,781
+运行和调试速度更快 
 
 
 17
-00:01:21,236 --> 00:01:23,376
-they'll run faster
-on customer devices.
+00:01:21,248 --> 00:01:23,350
+此外app在用户的
+设备上也更快
 
 
 18
-00:01:23,706 --> 00:01:28,626
-Swift 2 also includes a number
-of new language features,
+00:01:25,485 --> 00:01:28,622
+Swift 2
+还有一些新的语言功能
 
 
 19
-00:01:29,076 --> 00:01:33,156
-like Error Handling which
-introduces an explicit syntax
+00:01:29,089 --> 00:01:33,160
+比如错误处理 
+引入了显式语法
 
 
 20
-00:01:33,556 --> 00:01:36,476
-that makes it much more natural
-to deal with errors in Swift.
+00:01:33,560 --> 00:01:36,463
+这样处理Swift中的
+错误就更快了
 
 
 21
-00:01:37,826 --> 00:01:40,686
-Availability, Swift
-now has insight
+00:01:37,831 --> 00:01:40,667
+可及性 现在Swift
+对某些API的最低
 
 
 22
-00:01:40,686 --> 00:01:45,496
-into the minimum OS required for
-particular API, making it easier
+00:01:40,734 --> 00:01:45,439
+OS需求有了深刻理解
+这样采纳新API
 
 
 23
-00:01:45,496 --> 00:01:46,726
-for you to adopt new API
+00:01:45,506 --> 00:01:50,777
+继续支持现有的OS
+也都更加容易
 
 
 24
-00:01:47,096 --> 00:01:50,536
-and also maintaining
-support for existing OSs.
+00:01:52,279 --> 00:01:53,046
+可测试性
 
 
 25
-00:01:51,996 --> 00:01:53,056
-Testability.
+00:01:53,647 --> 00:01:57,518
+现在测试丛就可参阅
+内部API
 
 
 26
-00:01:53,636 --> 00:01:57,306
-Test bundles can now
-see internal API,
+00:01:57,851 --> 00:02:01,255
+你的测试覆盖更广而无需公开
 
 
 27
-00:01:57,836 --> 00:02:01,276
-letting you get broader
-test coverage without having
+00:02:01,321 --> 00:02:03,724
+任何其它源信息
 
 
 28
-00:02:01,276 --> 00:02:03,716
-to expose anything
-additional in your sources.
+00:02:05,392 --> 00:02:09,329
+协议扩展使得你
+能够为任何类添加方法，
 
 
 29
-00:02:04,856 --> 00:02:09,336
-Protocol Extensions lets
-you add methods to any type
+00:02:09,630 --> 00:02:11,265
+以便实现某一协议
 
 
 30
-00:02:09,336 --> 00:02:11,276
-that implements a
-particular protocol.
+00:02:14,401 --> 00:02:17,137
+你可以借助Xcode 7的
+Migrator
 
 
 31
-00:02:11,876 --> 00:02:16,266
-You can convert all
-of your Swift code
+00:02:17,504 --> 00:02:19,506
+把所有的Swift代码 
+转换成Swift 2
 
 
 32
-00:02:16,266 --> 00:02:19,386
-to Swift 2 using
-Xcode 7's Migrator.
+00:02:20,340 --> 00:02:23,777
+它既适合项目 也适合
+playgrounds
 
 
 33
-00:02:20,036 --> 00:02:23,766
-It works great for projects
-as well as playgrounds.
+00:02:27,514 --> 00:02:29,216
+我们还向
+Objective-C中添
 
 
 34
-00:02:27,436 --> 00:02:29,996
-We have also added a couple
-of new language features
+00:02:29,283 --> 00:02:29,983
+加了新语言功能
 
 
 35
-00:02:30,096 --> 00:02:33,886
-to Objective-C to make it
-work even better with Swift.
+00:02:30,083 --> 00:02:33,887
+这样它和Swift
+就配合的更好
 
 
 36
-00:02:34,856 --> 00:02:37,926
-Like Generics which let you
-specify type information
+00:02:34,855 --> 00:02:37,925
+比如Generics让你
+可以指定收集的...
 
 
 37
-00:02:38,406 --> 00:02:40,276
-for collections.
+00:02:39,493 --> 00:02:40,260
+类型信息
 
 
 38
-00:02:40,786 --> 00:02:45,116
-Also Nullability Annotations
-which let you specify
+00:02:41,628 --> 00:02:43,830
+Nullability
+Annotations
 
 
 39
-00:02:45,116 --> 00:02:47,696
-when you expect something
-it to be nil or non-nil.
+00:02:43,897 --> 00:02:45,098
+能让你指定你
 
 
 40
-00:02:48,236 --> 00:02:51,056
-In Objective-C which makes it
-really seamless when you want
+00:02:45,165 --> 00:02:47,701
+何时期待零值 何时期待非零
 
 
 41
-00:02:51,056 --> 00:02:54,406
-to interact with options
-in Swift, really nice.
+00:02:48,001 --> 00:02:49,303
+这样
+Objective-C
 
 
 42
-00:02:55,106 --> 00:02:57,496
-We have gone ahead, we have
-adopted all these language
+00:02:49,369 --> 00:02:51,004
+和Swift之间
+就真正实现了
 
 
 43
-00:02:57,526 --> 00:02:58,636
-features in our own SDKs.
+00:02:51,071 --> 00:02:54,408
+无缝交互 这很棒
 
 
 44
-00:02:58,636 --> 00:03:04,706
-So you will start seeing
-the benefits today.
+00:02:55,108 --> 00:02:57,477
+我们已经先行一步，
+在我们的SDK中
 
 
 45
-00:03:04,896 --> 00:03:08,606
-Now, if you want to get started
-with Swift 2 or maybe some
+00:02:57,544 --> 00:02:58,579
+采用了这些特性
 
 
 46
-00:03:08,606 --> 00:03:10,826
-of those new APIs
-you saw yesterday,
+00:02:58,645 --> 00:03:01,949
+因此你现在就可以看到好处
 
 
 47
-00:03:11,416 --> 00:03:14,646
-well there's no better place to
-do that than in the playground.
+00:03:04,885 --> 00:03:07,888
+如果你想用Swift 2
 
 
 48
-00:03:15,746 --> 00:03:17,686
-We introduced playgrounds
-last year
+00:03:08,055 --> 00:03:10,824
+或者你昨天看到的新的API
 
 
 49
-00:03:18,356 --> 00:03:20,956
-and they have come a
-long way since then.
+00:03:11,425 --> 00:03:14,661
+在playground中
+做就再好不过了
 
 
 50
-00:03:21,756 --> 00:03:25,076
-Not only can you explore
-and play with code,
+00:03:15,762 --> 00:03:17,698
+去年 我们引入了
+playground
 
 
 51
-00:03:25,846 --> 00:03:29,746
-but now you can explain
-an idea or a concept all
+00:03:18,265 --> 00:03:20,968
+从那时起它们的进展很大
 
 
 52
-00:03:29,746 --> 00:03:31,096
-from within a playground.
+00:03:21,768 --> 00:03:25,072
+现在你不仅能探索摆弄代码
 
 
 53
-00:03:32,586 --> 00:03:35,926
-We have introduced
-features like Rich Comments
+00:03:25,839 --> 00:03:28,041
+还可以从一个
+playground中
 
 
 54
-00:03:36,066 --> 00:03:37,556
-which let you explain
-what's going
+00:03:28,108 --> 00:03:31,111
+解释一个想法 一个概念
 
 
 55
-00:03:37,556 --> 00:03:41,396
-on in the surrounding code
-using a simple mark-up syntax.
+00:03:32,579 --> 00:03:35,916
+我们引入了像Rich
+Comments这样的特性
 
 
 56
-00:03:42,256 --> 00:03:44,206
-They have beautiful
-formatting and fonts
+00:03:36,049 --> 00:03:37,484
+你就可以用一个标示语法 
 
 
 57
-00:03:44,556 --> 00:03:46,506
-which really help
-them stand out.
+00:03:37,551 --> 00:03:41,388
+来解释环境代码中发生了什么
 
 
 58
-00:03:47,766 --> 00:03:52,006
-Within these comments you can
-include things like web links
+00:03:42,256 --> 00:03:44,191
+它们的格式和字体都很漂亮
 
 
 59
-00:03:52,176 --> 00:03:54,066
-or lists or even images.
+00:03:44,558 --> 00:03:46,493
+非常显眼
 
 
 60
-00:03:54,556 --> 00:03:59,456
-We have also made it possible
-to pull results which were shown
+00:03:47,761 --> 00:03:51,999
+你可以在这些
+评论中添加网页链接列表
 
 
 61
-00:03:59,456 --> 00:04:02,166
-in quick-look popovers,
-you can pull them right
+00:03:52,165 --> 00:03:54,067
+甚至添加图像
 
 
 62
-00:04:02,216 --> 00:04:04,436
-into the source code
-under the line
+00:03:56,203 --> 00:03:59,439
+我们还允许拉取结果并显示在
 
 
 63
-00:04:04,436 --> 00:04:05,916
-of source that generated them.
+00:03:59,506 --> 00:04:02,142
+快速浏览窗中 你可以把它们
 
 
 64
-00:04:07,236 --> 00:04:09,456
-This really helps tie the cause
+00:04:02,209 --> 00:04:05,913
+拉取到源代码中
+对应的那一行代码下面
 
 
 65
-00:04:09,456 --> 00:04:11,856
-and the effect much
-more closely together.
+00:04:07,247 --> 00:04:11,852
+这对定位因果关系的
+作用非常大
 
 
 66
-00:04:12,356 --> 00:04:13,396
-This is really nice.
+00:04:12,352 --> 00:04:13,387
+这很棒
 
 
 67
-00:04:13,846 --> 00:04:18,326
-You can add almost unlimited
-functionality to a playground
+00:04:15,522 --> 00:04:18,458
+通过向新支持源文件夹中
+添加Swift代码
 
 
 68
-00:04:19,036 --> 00:04:22,106
-by adding Swift code to the
-new supporting sources folder.
+00:04:18,858 --> 00:04:20,459
+你几乎可以向
+playground
 
 
 69
-00:04:23,146 --> 00:04:25,076
-This helps you keep
-your playground clean
+00:04:20,527 --> 00:04:22,095
+无限添加功能
 
 
 70
-00:04:25,436 --> 00:04:28,486
-and focused while also
-giving you a place
+00:04:23,130 --> 00:04:23,830
+这有助于帮助你
 
 
 71
-00:04:28,656 --> 00:04:30,186
-to put the supporting
-functionality.
+00:04:23,897 --> 00:04:25,599
+保持playground
+的整洁专注
 
 
 72
-00:04:31,426 --> 00:04:32,846
-There is also a performance
-one here
+00:04:25,732 --> 00:04:30,170
+同时 你也有地方
+去放支持功能
 
 
 73
-00:04:33,346 --> 00:04:36,286
-because the supporting
-sources, they can be compiled
+00:04:31,438 --> 00:04:32,840
+这里 还有一项性能
 
 
 74
-00:04:36,286 --> 00:04:38,676
-down because they're
-not run interactively.
+00:04:33,340 --> 00:04:34,808
+因为是配套代码 
 
 
 75
-00:04:38,996 --> 00:04:41,376
-They're only there to
-support your playground
+00:04:35,042 --> 00:04:38,679
+运行时不是交互式的
+就能对它们进行编译
 
 
 76
-00:04:41,816 --> 00:04:46,056
-and that helps them run
-really, really fast.
+00:04:39,012 --> 00:04:40,714
+它们只是对
+playground
 
 
 77
-00:04:46,056 --> 00:04:51,986
-Our newest playground
-feature is Pages
+00:04:40,781 --> 00:04:41,448
+提供支持
 
 
 78
-00:04:52,616 --> 00:04:57,226
-which lets you create content
-that progresses through a topic.
+00:04:41,815 --> 00:04:44,151
+所以可以运行的很快
 
 
 79
-00:04:58,386 --> 00:05:00,886
-For example, if you wanted
-to author a playground
+00:04:48,689 --> 00:04:50,190
+我们最新的
+playground
 
 
 80
-00:05:00,886 --> 00:05:05,416
-about sorting, you could add
-an introductory page that went
+00:04:50,991 --> 00:04:51,992
+特性是 Pages
 
 
 81
-00:05:05,416 --> 00:05:07,316
-into the fundamentals of sorting
+00:04:52,626 --> 00:04:57,231
+这使你可以为
+某一话题编写内容
 
 
 82
-00:05:07,316 --> 00:05:09,836
-and then you could
-add subsequent pages
+00:04:58,398 --> 00:05:00,834
+例如 如果你想
+制作一个与排序相关的
 
 
 83
-00:05:10,166 --> 00:05:10,956
-that covered things
+00:05:00,901 --> 00:05:05,372
+playground 
+你就可以添加
 
 
 84
-00:05:10,956 --> 00:05:14,536
-like specific sorting algorithms
-quick sort, bubble sort.
+00:05:05,439 --> 00:05:07,307
+一个与排序原则相关的介绍页
 
 
 85
-00:05:15,646 --> 00:05:18,346
-Then, when you wanted to provide
-navigation through the pages,
+00:05:07,908 --> 00:05:09,276
+然后你可以添加涵盖特定
 
 
 86
-00:05:18,906 --> 00:05:21,456
-you can add some of the
-new mark-up syntax we
+00:05:09,343 --> 00:05:10,911
+排序算法、快速排序、
 
 
 87
-00:05:21,456 --> 00:05:22,706
-have introduced.
+00:05:10,978 --> 00:05:14,548
+冒泡排序等事情的后续页面
 
 
 88
-00:05:23,336 --> 00:05:26,856
-Playgrounds are a
-powerful way to teach.
+00:05:15,649 --> 00:05:18,352
+之后 如果你想添加页面导航
 
 
 89
-00:05:28,896 --> 00:05:31,916
-Last year we introduced the
-guided tour as a playground.
+00:05:18,919 --> 00:05:22,089
+你可以添加一些
+我们之前介绍的标示语法
 
 
 90
-00:05:32,526 --> 00:05:35,716
-This year we have
-updated it to use Pages.
+00:05:23,657 --> 00:05:27,227
+Playgrounds是
+进行教导的得力方式
 
 
 91
-00:05:38,676 --> 00:05:42,036
-That's Swift 2 and
-the new playgrounds.
+00:05:28,896 --> 00:05:31,932
+去年 我们把教程
+做成了playground
 
 
 92
-00:05:43,476 --> 00:05:50,186
-In addition to iOS 9 and OS 10
-El Capitan we have added sport
+00:05:32,533 --> 00:05:35,702
+今年 我们又升级成了
+Pages
 
 
 93
-00:05:50,186 --> 00:05:51,636
-for Watch OS 2.
+00:05:39,006 --> 00:05:42,042
+这就是Swift 2 
+和新playgrounds
 
 
 94
-00:05:52,706 --> 00:05:56,776
-The new WatchKit will help
-make your apps more responsive,
+00:05:44,878 --> 00:05:48,982
+除了iOS 9和OS 10
+El Capitan
 
 
 95
-00:05:57,806 --> 00:05:59,566
-but it also gives
-you more control
+00:05:49,049 --> 00:05:51,652
+我们还向Watch 
+OS 2中 添加了新运动
 
 
 96
-00:05:59,566 --> 00:06:01,006
-and flexibility as a developer.
+00:05:52,719 --> 00:05:56,890
+新的WatchKit能帮助
+使你的app更具响应性
 
 
 97
-00:06:02,186 --> 00:06:03,896
-If you haven't already,
-I encourage you to check
+00:05:57,791 --> 00:05:59,560
+并且增强你作为开发者的
 
 
 98
-00:06:03,896 --> 00:06:05,686
-out What's New in Watch OS 2.
+00:05:59,626 --> 00:06:01,061
+控制能力和灵活性
 
 
 99
-00:06:05,776 --> 00:06:09,086
-Some really nice stuff.
+00:06:02,196 --> 00:06:03,096
+如果你还没看
 
 
 100
-00:06:10,696 --> 00:06:12,916
-You can build your entire
-watch app, of course,
+00:06:03,163 --> 00:06:04,898
+“Watch OS 2中
+有什么新料”
 
 
 101
-00:06:13,346 --> 00:06:17,336
-right in Xcode using storyboards
-where you can quickly lay
+00:06:04,965 --> 00:06:05,632
+我建议你看看
 
 
 102
-00:06:17,336 --> 00:06:19,756
-out how your app will flow
-from screen to screen.
+00:06:05,766 --> 00:06:06,800
+有些东西很棒。
 
 
 103
-00:06:20,886 --> 00:06:23,176
-You can design and
-implement glances
+00:06:10,704 --> 00:06:12,906
+当然 你也可以
+使用Xcode中的故事板
 
 
 104
-00:06:24,126 --> 00:06:26,126
-or even the new WatchKit
-complications.
+00:06:13,340 --> 00:06:17,311
+来开发完整的watch
+app 你还能快速展示
 
 
 105
-00:06:27,086 --> 00:06:31,476
-For iOS, using things like
-the new StackView it never was
+00:06:17,377 --> 00:06:19,746
+你的app如何在屏幕间转换
 
 
 106
-00:06:31,476 --> 00:06:34,336
-easier to create a universal
-app that deals with things
+00:06:20,881 --> 00:06:23,183
+你可以设计并完成
+glances
 
 
 107
-00:06:34,336 --> 00:06:36,666
-such as changing
-screen orientation
+00:06:23,250 --> 00:06:25,485
+甚至新WatchKit
+complications
 
 
 108
-00:06:36,666 --> 00:06:38,656
-or different screen sizes.
+00:06:25,552 --> 00:06:26,220
+也可以
 
 
 109
-00:06:39,906 --> 00:06:43,766
-With the new iPad multitasking,
-size classes which you define
+00:06:27,020 --> 00:06:29,022
+对于iOS来说使用新
+StackView等
 
 
 110
-00:06:43,766 --> 00:06:46,796
-in interface builder, they
-have never been more important.
+00:06:29,089 --> 00:06:30,390
+事物来开发
 
 
 111
-00:06:47,236 --> 00:06:53,416
-Along with iOS 9 we're
-introducing a new crosscutting
+00:06:31,091 --> 00:06:34,394
+改变屏幕方向
+适配不同屏幕
 
 
 112
-00:06:53,416 --> 00:06:55,266
-feature called App Thinning.
+00:06:34,461 --> 00:06:38,665
+尺寸的app从未如此的简单
 
 
 113
-00:06:56,546 --> 00:07:01,256
-The App Store can tailor
-your app to deliver the best,
+00:06:39,900 --> 00:06:41,768
+有了新iPad
+多任务处理功能
 
 
 114
-00:07:01,386 --> 00:07:05,646
-smallest possible version to
-each unique customer device.
+00:06:41,902 --> 00:06:44,104
+你在界面构建器中
+定义的大小类
 
 
 115
-00:07:07,426 --> 00:07:10,176
-This will let you focus
-more on building a great app
+00:06:44,171 --> 00:06:47,007
+比以往任何时候都要重要
 
 
 116
-00:07:10,176 --> 00:07:14,136
-and worry less about size
-because you will know
+00:06:48,742 --> 00:06:53,380
+和iOS 9一起， 
+我们还引入了一项叫
 
 
 117
-00:07:14,356 --> 00:07:18,346
-that customers, they'll never
-download bits they won't use.
+00:06:53,447 --> 00:06:55,282
+App Thinning
+的新横切特性
 
 
 118
-00:07:18,746 --> 00:07:21,356
-Xcode of course has
-great support
+00:06:56,350 --> 00:07:00,020
+App Store
+可以量身定制你的app
 
 
 119
-00:07:21,356 --> 00:07:24,486
-to help you configure how
-your app will be thinned.
+00:07:00,087 --> 00:07:01,388
+为每台用户设备
 
 
 120
-00:07:25,816 --> 00:07:28,776
-There are three separate
-parts to App Thinning,
+00:07:01,455 --> 00:07:05,592
+推送最佳、最小版本
 
 
 121
-00:07:30,296 --> 00:07:31,796
-starting with Bitcode.
+00:07:07,427 --> 00:07:10,264
+这样你就可以集中精力
+开发优秀的app
 
 
 122
-00:07:32,706 --> 00:07:36,896
-When you archive for submission,
-Xcode compiles your app
+00:07:11,164 --> 00:07:13,033
+而不用担心app的大小 
 
 
 123
-00:07:36,896 --> 00:07:40,046
-down into an intermediate
-representation called Bitcode
+00:07:13,133 --> 00:07:18,338
+因为你知道客户
+不会下载到无用内容
 
 
 124
-00:07:40,456 --> 00:07:42,056
-which gets sent to the store.
+00:07:19,840 --> 00:07:21,775
+当然 Xcode也会帮助你
+配置你的app
 
 
 125
-00:07:43,326 --> 00:07:47,336
-The App Store can later
-re-optimize your binary,
+00:07:21,842 --> 00:07:23,944
+让你的app瘦身
 
 
 126
-00:07:47,616 --> 00:07:51,876
-helping you future-proof for
-things like compiler updates
+00:07:26,446 --> 00:07:28,916
+App Thinning
+由三个不同的部分组成
 
 
 127
-00:07:52,066 --> 00:07:54,076
-or even new processer
-capabilities.
+00:07:30,217 --> 00:07:31,785
+第一个部分
+就是Bitcode
 
 
 128
-00:07:55,156 --> 00:07:57,846
-To take advantage of Bitcode
-you don't actually have
+00:07:32,719 --> 00:07:36,857
+当你存档提交时
+Xcode会把你的app
 
 
 129
-00:07:57,846 --> 00:07:58,426
-to do anything.
+00:07:36,924 --> 00:07:40,060
+编译到一个叫做
+Bitcode的中间表述
 
 
 130
-00:07:58,676 --> 00:08:02,436
-Xcode will do all
-the hard work here.
+00:07:40,460 --> 00:07:42,062
+然后再发送到store
 
 
 131
-00:08:02,646 --> 00:08:04,476
-The second, there is Slicing.
+00:07:43,330 --> 00:07:47,334
+稍后App Store会
+重新优化你的代码 
 
 
 132
-00:08:05,046 --> 00:08:08,776
-When the App Store
-goes to send your app
+00:07:47,601 --> 00:07:51,872
+帮助你进一步校对编译器更新
 
 
 133
-00:08:08,776 --> 00:08:12,996
-to a customer device it will
-only include artwork that's
+00:07:52,072 --> 00:07:54,074
+新处理器性能等事情
 
 
 134
-00:08:12,996 --> 00:08:14,626
-needed for that particular
-device.
+00:07:55,142 --> 00:07:56,677
+你不需要做任何事情
 
 
 135
-00:08:15,046 --> 00:08:19,486
-For example, if you have both
-2x and 3x artwork in your app
+00:07:57,110 --> 00:07:58,612
+就可以坐享
+Bitcode的益处
 
 
 136
-00:08:19,556 --> 00:08:24,676
-for an iPhone6 and a 6+ the
-iPhone6 will only get the 2x
+00:07:58,679 --> 00:08:00,781
+Xcode会替你搞定一切
 
 
 137
-00:08:24,676 --> 00:08:28,676
-artwork and the iPhone6+
-will only get the 3x artwork.
+00:08:02,649 --> 00:08:04,484
+其次就是Slicing
 
 
 138
-00:08:29,916 --> 00:08:32,785
-To take advantage of
-Slicing, all you need
+00:08:05,419 --> 00:08:09,923
+当App Store向
+用户设备推送你的app时
 
 
 139
-00:08:32,785 --> 00:08:38,546
-to do is use Asset
-Catalogs in Xcode.
+00:08:10,958 --> 00:08:14,761
+它会只推送那台
+需要的设备美术资源
 
 
 140
-00:08:38,546 --> 00:08:42,916
-Third, on-demand resources,
-which let you control
+00:08:15,062 --> 00:08:19,499
+举例来说 如果你的
+app中有为iPhone6
 
 
 141
-00:08:43,265 --> 00:08:45,046
-when assets are downloaded.
+00:08:19,566 --> 00:08:21,969
+和iPhone6s准备的
+2x和3x的资源
 
 
 142
-00:08:45,796 --> 00:08:48,386
-For example, you can
-start downloading level 5
+00:08:22,035 --> 00:08:25,072
+那么iPhone6
+只会收到2x资源
 
 
 143
-00:08:48,386 --> 00:08:52,536
-of your game just as the
-user is finishing up level 4.
+00:08:25,439 --> 00:08:28,675
+而iPhone6s
+只会收到3x资源
 
 
 144
-00:08:53,456 --> 00:08:55,206
-It gives you a ton of control.
+00:08:29,910 --> 00:08:32,746
+要利用Slicing 
+你只需要使用
 
 
 145
-00:08:55,506 --> 00:08:56,146
-Really nice.
+00:08:32,813 --> 00:08:35,148
+Xcode中的 Asset
+Catalogs即可
 
 
 146
-00:08:57,426 --> 00:09:01,776
-Here to give us a demo of Watch
-OS 2 and App Thinning is Jon.
+00:08:38,485 --> 00:08:42,923
+最后是点播资源你可以控制
 
 
 147
-00:09:02,896 --> 00:09:10,476
->> Jon Hess: Good morning.
+00:08:43,256 --> 00:08:45,058
+何时下载资源
 
 
 148
-00:09:10,476 --> 00:09:13,776
-Today I would like to show you
-two of my favorite new features
+00:08:45,792 --> 00:08:48,362
+例如 你可以在用户通关
 
 
 149
-00:09:13,776 --> 00:09:16,206
-in Xcode 7; native-watch
-extensions
+00:08:48,428 --> 00:08:52,533
+你的游戏第4关时
+才开始下载第5关
 
 
 150
-00:09:16,446 --> 00:09:17,416
-and application thinning.
+00:08:53,467 --> 00:08:55,202
+你可以控制很多东西
 
 
 151
-00:09:21,076 --> 00:09:23,276
-Let's get started with
-our trivia game project.
+00:08:55,502 --> 00:08:56,170
+这很棒
 
 
 152
-00:09:24,256 --> 00:09:26,526
-Now in our trivia game we
-already have things set
+00:08:57,437 --> 00:08:59,439
+约翰会给大家演示一下
+Watch OS 2
 
 
 153
-00:09:26,526 --> 00:09:30,296
-up for WatchKit 1,
-and right now I want
+00:08:59,506 --> 00:09:01,775
+和 App
+Thinning
 
 
 154
-00:09:30,296 --> 00:09:31,746
-to update it to Watch OS 2.
+00:09:10,017 --> 00:09:10,918
+乔恩·赫斯：早上好
 
 
 155
-00:09:32,556 --> 00:09:34,076
-It looks like Xcode
-has the same idea.
+00:09:11,652 --> 00:09:13,754
+今天我会演示Xcode7中
+我最爱的两项特色
 
 
 156
-00:09:34,626 --> 00:09:37,666
-Here in the navigator, I can see
-a project modernization sequence
+00:09:13,820 --> 00:09:16,190
+即 native
+watch 扩展功能
 
 
 157
-00:09:37,726 --> 00:09:38,656
-already queued up for me.
+00:09:16,456 --> 00:09:17,424
+和应用瘦身
 
 
 158
-00:09:38,656 --> 00:09:40,656
-I going to go ahead
-and select it
+00:09:21,361 --> 00:09:23,263
+让我们通过一个小游戏来展示
 
 
 159
-00:09:40,656 --> 00:09:43,546
-and begin migrating my
-project settings to Watch OS 2.
+00:09:24,198 --> 00:09:26,767
+我们的小游戏 已经为
+WatchKit 1 
 
 
 160
-00:09:44,426 --> 00:09:46,976
-Here in the panel, Xcode
-gives me a brief overview
+00:09:26,934 --> 00:09:28,936
+做好准备了
 
 
 161
-00:09:46,976 --> 00:09:49,006
-of everything that's
-going to happen.
+00:09:29,469 --> 00:09:31,738
+现在我想升级成
+Watch OS 2
 
 
 162
-00:09:49,166 --> 00:09:51,386
-I would like to go into it
-with more detail for you.
+00:09:32,573 --> 00:09:34,174
+Xcode好像和我心有灵犀
 
 
 163
-00:09:52,406 --> 00:09:56,316
-Just like Watch OS 1, Watch
-OS 2 applications are composed
+00:09:34,641 --> 00:09:38,645
+我在导航这里看到一个现代项
+目的化序列已经放在队列中了
 
 
 164
-00:09:56,316 --> 00:09:58,296
-of an app extension
-and application.
+00:09:39,279 --> 00:09:40,514
+我会选中它
 
 
 165
-00:09:59,076 --> 00:10:00,696
-Your code goes in
-the app extension
+00:09:40,647 --> 00:09:43,550
+开始把我的项目设置迁移到
+Watch OS 2
 
 
 166
-00:10:00,696 --> 00:10:02,406
-and drives the app remotely.
+00:09:44,418 --> 00:09:46,987
+面板这里 
+Xcode给了我一个总览
 
 
 167
-00:10:03,236 --> 00:10:05,856
-New in Watch OS 2,
-both the app extension
+00:09:47,054 --> 00:09:49,022
+让我知道接下来会发生什么
 
 
 168
-00:10:06,126 --> 00:10:08,356
-and the app run directly
-on the watch.
+00:09:49,523 --> 00:09:51,258
+我想多向你们谈谈细节
 
 
 169
-00:10:08,776 --> 00:10:09,906
-This allows our applications
+00:09:52,392 --> 00:09:55,095
+像Watch OS 1
+一样 Watch OS 2
 
 
 170
-00:10:09,906 --> 00:10:12,116
-to be more responsive
-and independent.
+00:09:55,162 --> 00:09:58,298
+应用是由一个app
+扩展功能和一个应用组成
 
 
 171
-00:10:12,866 --> 00:10:13,696
-Sounds great.
+00:09:59,066 --> 00:10:00,667
+你的代码会进入
+app扩展功能
 
 
 172
-00:10:13,696 --> 00:10:15,406
-I want to perform these changes.
+00:10:00,734 --> 00:10:02,402
+然后远程驱动app
 
 
 173
-00:10:16,296 --> 00:10:17,176
-What just happened?
+00:10:03,203 --> 00:10:04,505
+Watch OS 2
+就不一样了
 
 
 174
-00:10:17,756 --> 00:10:19,356
-Xcode took care of the details
+00:10:04,838 --> 00:10:08,342
+app扩展功能和app都会
+直接运行在watch上
 
 
 175
-00:10:19,356 --> 00:10:21,916
-of migrating my project
-settings to Watch OS 2.
+00:10:08,775 --> 00:10:12,112
+这样应用的响应性
+和独立性都更好
 
 
 176
-00:10:21,916 --> 00:10:24,216
-It configured my
-Watch targets to build
+00:10:12,880 --> 00:10:13,647
+听起来很棒
 
 
 177
-00:10:24,216 --> 00:10:26,776
-against the new Watch OS SDK
-that we released yesterday,
+00:10:13,714 --> 00:10:15,415
+我来试一下
 
 
 178
-00:10:26,776 --> 00:10:29,646
-it set their minimum
-deployment target to Watch OS 2
+00:10:16,283 --> 00:10:17,184
+发生了什么？
 
 
 179
-00:10:29,646 --> 00:10:33,606
-and it configured my Watch app
-extension to be copied inside
+00:10:17,751 --> 00:10:19,319
+Xcode帮我搞定了
 
 
 180
-00:10:33,606 --> 00:10:36,106
-of my Watch app so that
-when they're installed
+00:10:19,386 --> 00:10:21,922
+所有迁移项目设置到
+Watch OS 2的细节
 
 
 181
-00:10:36,106 --> 00:10:38,266
-on the Watch itself they
-both go over together.
+00:10:22,456 --> 00:10:23,857
+昨天它帮我配置了构建
 
 
 182
-00:10:38,266 --> 00:10:39,236
-All right.
+00:10:23,924 --> 00:10:25,993
+我们发布的新Watch
+OS SDK的
 
 
 183
-00:10:39,236 --> 00:10:41,196
-That's everything with
-upgrading my project settings
+00:10:26,059 --> 00:10:26,793
+Watch目标
 
 
 184
-00:10:41,196 --> 00:10:42,136
-to Watch OS 2.
+00:10:27,294 --> 00:10:29,763
+它帮我设置了Watch
+OS 2 最低部署目标
 
 
 185
-00:10:43,406 --> 00:10:45,326
-Our Watch application
-is nice and light,
+00:10:30,297 --> 00:10:33,567
+为它还帮我配置Watch
+app扩展功能
 
 
 186
-00:10:46,296 --> 00:10:48,976
-but our iOS application
-is a quite bit bigger.
+00:10:33,634 --> 00:10:36,069
+Watch app内部复制
+这样当在Watch上安装时
 
 
 187
-00:10:48,976 --> 00:10:52,446
-It is mostly due to all of these
-images in my asset catalog.
+00:10:36,136 --> 00:10:38,272
+它们会一起移过去
 
 
 188
-00:10:53,186 --> 00:10:55,516
-I want to make it
-smaller but don't want
+00:10:38,972 --> 00:10:41,175
+好的 这就是升级项目设置到
+Watch OS 2的
 
 
 189
-00:10:55,516 --> 00:10:56,626
-to remove any content.
+00:10:41,241 --> 00:10:42,009
+全部内容
 
 
 190
-00:10:57,326 --> 00:10:59,906
-This is where the new App
-Slicing feature comes in play.
+00:10:43,410 --> 00:10:45,379
+我们的Watch应用都
+很美观、很轻便
 
 
 191
-00:11:00,556 --> 00:11:02,566
-You see every one ever
-these images has a 1,
+00:10:46,280 --> 00:10:48,982
+但是我们的iOS应用
+却比较笨重
 
 
 192
-00:11:02,916 --> 00:11:05,196
-2, 3x representation?
+00:10:50,083 --> 00:10:52,452
+这主要是因为
+我的资源目录中的图片太多
 
 
 193
-00:11:05,846 --> 00:11:08,996
-Well with App Slicing, Xcode
-7 and the App Store are going
+00:10:53,520 --> 00:10:56,623
+我想让资源变小
+但又不想去除任何内容
 
 
 194
-00:11:08,996 --> 00:11:10,076
-to work together to make sure
+00:10:57,324 --> 00:10:58,926
+这就是新App 
+Slicing特性
 
 
 195
-00:11:10,076 --> 00:11:13,266
-that each device just gets this
-single image that best suits it.
+00:10:58,992 --> 00:10:59,893
+大显身手的时候了
 
 
 196
-00:11:13,696 --> 00:11:16,496
-This cuts 30- to 40 percent
-off the size of our application
+00:11:00,561 --> 00:11:05,199
+大家看到这些图像有1，2，
+3x的不同表达了吧？
 
 
 197
-00:11:16,496 --> 00:11:18,956
-and the best part is it's
-pretty much automatic.
+00:11:05,632 --> 00:11:07,434
+有了App Slicing
+Xcode 7
 
 
 198
-00:11:19,436 --> 00:11:22,306
-All I need to do is use
-Xcode 7 in an asset catalog
+00:11:07,501 --> 00:11:08,969
+就能和App
+Store一起
 
 
 199
-00:11:22,456 --> 00:11:23,376
-which I'm already doing.
+00:11:09,036 --> 00:11:10,037
+确保每台设备
 
 
 200
-00:11:23,376 --> 00:11:25,616
-What about the other
-assets you would
+00:11:10,103 --> 00:11:13,173
+仅仅获取最最适合的单张图像
 
 
 201
-00:11:25,616 --> 00:11:28,426
-like to target for each device.
+00:11:13,707 --> 00:11:16,510
+这样就可以降低
+30%到40%的应用大小
 
 
 202
-00:11:28,896 --> 00:11:32,116
-We have extended the
-asset catalog in Xcode 7
+00:11:17,010 --> 00:11:18,946
+最妙的是这基本上是自动的
 
 
 203
-00:11:32,376 --> 00:11:33,706
-to support arbitrary data.
+00:11:19,446 --> 00:11:22,316
+我只需在工作
+资源目录中使用
 
 
 204
-00:11:33,806 --> 00:11:35,666
-You can put whatever
-you want in here.
+00:11:22,449 --> 00:11:23,383
+Xcode 7就行了
 
 
 205
-00:11:36,776 --> 00:11:38,126
-Down here further
-in the catalog,
+00:11:24,751 --> 00:11:28,422
+但是如果你想把某些资源推
+送给全体设备怎么办？
 
 
 206
-00:11:38,226 --> 00:11:39,656
-I have this skylines folder.
+00:11:28,889 --> 00:11:32,125
+我们扩展了Xcode 7的
+资源目录
 
 
 207
-00:11:40,246 --> 00:11:43,716
-It's filled with 3D models of
-cities from around the world.
+00:11:32,392 --> 00:11:33,694
+以便支持任意数据
 
 
 208
-00:11:43,776 --> 00:11:45,746
-We present them to the
-user and they guess
+00:11:34,161 --> 00:11:35,662
+你可以把任何数据放到这里
 
 
 209
-00:11:45,746 --> 00:11:48,266
-which city they are looking at.
+00:11:36,763 --> 00:11:38,131
+我在目录下面这里
 
 
 210
-00:11:48,266 --> 00:11:52,596
-San Francisco, I have a really
-high-quality model of the city
+00:11:38,398 --> 00:11:39,666
+有一个天际线文件夹
 
 
 211
-00:11:52,596 --> 00:11:54,246
-of San Francisco I would
-like to include in our game,
+00:11:40,234 --> 00:11:43,704
+里面是世界各地城市的
+3D模型
 
 
 212
-00:11:54,606 --> 00:11:57,026
-but I only want to send it
-to the most high-end devices.
+00:11:44,037 --> 00:11:45,239
+我们把这些模型展示给用户
 
 
 213
-00:11:57,596 --> 00:11:58,256
-No problem.
+00:11:45,305 --> 00:11:46,673
+让他们猜是哪座城市
 
 
 214
-00:11:58,696 --> 00:12:01,846
-Just like images can vary by
-scale factor and size class,
+00:11:47,441 --> 00:11:52,279
+我想把旧金山的
+高质量模型
 
 
 215
-00:12:02,156 --> 00:12:05,006
-data assets can vary by device
-performance characteristics,
+00:11:52,346 --> 00:11:54,248
+加到游戏中
 
 
 216
-00:12:05,446 --> 00:12:07,376
-things like the amount
-of memory on the device,
+00:11:54,615 --> 00:11:57,017
+但是只推送给最高端的设备
 
 
 217
-00:12:07,566 --> 00:12:08,916
-or the GPU capabilities.
+00:11:57,584 --> 00:11:58,252
+没问题
 
 
 218
-00:12:09,136 --> 00:12:11,826
-I want to add a specialization
-for machines
+00:11:58,685 --> 00:12:01,855
+图像可以按照
+比例因子和尺寸变动
 
 
 219
-00:12:11,826 --> 00:12:12,946
-with 2 gigabytes of memory.
+00:12:02,155 --> 00:12:04,992
+数据资产也可以
+根据设备的性能特征变动，
 
 
 220
-00:12:13,016 --> 00:12:15,306
-Then I will just
-go ahead and drag
+00:12:05,459 --> 00:12:07,361
+比如设备的内存大小
 
 
 221
-00:12:15,306 --> 00:12:18,336
-in my high-end resource
-and I'm good to go.
+00:12:07,561 --> 00:12:08,929
+GPU性能。
 
 
 222
-00:12:18,546 --> 00:12:21,286
-Each device will get the
-resource that best suits it
+00:12:09,763 --> 00:12:12,933
+我想给2G内存的设备
+增加专用资源
 
 
 223
-00:12:21,286 --> 00:12:22,296
-without double-paying.
+00:12:14,201 --> 00:12:15,602
+那么我只需要把高端资源
 
 
 224
-00:12:22,736 --> 00:12:23,046
-All right.
+00:12:16,036 --> 00:12:18,338
+拖动到这里来 就万事大吉了
 
 
 225
-00:12:24,196 --> 00:12:27,126
-Now I would like to show
-you on-demand resources.
+00:12:18,539 --> 00:12:21,241
+每台设备都能得到最佳资源
 
 
 226
-00:12:28,246 --> 00:12:30,706
-On-demand resources allow
-us to host the content
+00:12:21,308 --> 00:12:22,309
+而不用重付费
 
 
 227
-00:12:30,706 --> 00:12:34,426
-for application remotely
-on the App Store.
+00:12:24,411 --> 00:12:25,078
+好的
 
 
 228
-00:12:34,626 --> 00:12:37,536
-We opt our resources
-in to on-demand hosting
+00:12:25,279 --> 00:12:27,114
+现在我想向你展示点播资源
 
 
 229
-00:12:37,536 --> 00:12:39,216
-by tagging them with strings.
+00:12:28,248 --> 00:12:30,651
+它使得我们可以在
+App Store中
 
 
 230
-00:12:39,786 --> 00:12:41,556
-The strings can be
-anything we want.
+00:12:30,717 --> 00:12:32,953
+远程管理应用内容
 
 
 231
-00:12:42,186 --> 00:12:45,376
-For example, if we're making
-a game, we might tag each
+00:12:34,621 --> 00:12:36,957
+通过用字符串做标记
 
 
 232
-00:12:45,376 --> 00:12:46,706
-of the assets that comprise one
+00:12:37,224 --> 00:12:39,326
+我们把资源加进了点播资源中
 
 
 233
-00:12:46,706 --> 00:12:48,536
-of the levels by
-that level's name.
+00:12:39,793 --> 00:12:41,562
+字符串可以是任何内容
 
 
 234
-00:12:49,186 --> 00:12:52,176
-Then, at run time, we use the
-new NS Bundle Resource Request
+00:12:42,196 --> 00:12:45,299
+例如 如果我们是在开发游戏
 
 
 235
-00:12:52,176 --> 00:12:55,256
-class to fetch and pull down
-whole tags worth of content
+00:12:45,365 --> 00:12:48,535
+我们就可以根据关卡名称
+标记构成某一个关卡的资源
 
 
 236
-00:12:55,586 --> 00:12:57,566
-into our game for
-fast, local access.
+00:12:49,203 --> 00:12:50,838
+运行时 我们使用
+NS Bundle
 
 
 237
-00:12:58,006 --> 00:12:59,426
-Let me show you how
-to get started
+00:12:50,904 --> 00:12:52,539
+Resource
+Request 类
 
 
 238
-00:12:59,426 --> 00:13:00,606
-with on-demand resources.
+00:12:52,840 --> 00:12:55,242
+就可以把整个
+标签的资源提取到游戏中
 
 
 239
-00:13:01,826 --> 00:13:03,656
-Here I've selected a
-folder in the catalog.
+00:12:55,576 --> 00:12:57,578
+<br/> 
+供本地快速访问
 
 
 240
-00:13:03,976 --> 00:13:05,556
-It represents all
-of the questions
+00:12:58,011 --> 00:13:00,614
+我给你们展示一下
+如何使用点播资源
 
 
 241
-00:13:05,596 --> 00:13:07,016
-in the world genre of the game.
+00:13:01,815 --> 00:13:03,650
+我先从目录中选择一个文件夹
 
 
 242
-00:13:08,056 --> 00:13:09,116
-In the inspector I'm going
+00:13:03,984 --> 00:13:07,020
+与游戏类型相关的
+问题都在这里了
 
 
 243
-00:13:09,116 --> 00:13:11,386
-to use the new on-demand
-resource tag section
+00:13:08,055 --> 00:13:09,056
+我要在监视窗中
 
 
 244
-00:13:11,916 --> 00:13:15,616
-and tag this content,
-world questions.
+00:13:09,122 --> 00:13:11,391
+使用新的点播资源标记
 
 
 245
-00:13:15,766 --> 00:13:17,936
-I've just opted all of it
-in to on-demand hosting.
+00:13:13,627 --> 00:13:15,629
+把问题部分给标记出来
 
 
 246
-00:13:19,126 --> 00:13:21,136
-Now, what kind of things
-can you tag in a catalog?
+00:13:15,762 --> 00:13:17,931
+我只需勾选它们为
+点播资源托管即可
 
 
 247
-00:13:21,916 --> 00:13:23,966
-You can tag entire
-folders like I just did.
+00:13:19,132 --> 00:13:21,134
+那么你可以勾选
+目录中的哪些东西呢？
 
 
 248
-00:13:24,496 --> 00:13:26,636
-You can tag images and
-data assets directly,
+00:13:21,902 --> 00:13:23,971
+你可以像我一样
+标记整个文件夹
 
 
 249
-00:13:26,676 --> 00:13:29,526
-you can also tag Sprite
-Atlases in the Asset catalog.
+00:13:24,505 --> 00:13:26,640
+你也可以直接标记图像和数据
 
 
 250
-00:13:29,896 --> 00:13:31,416
-Sprite Atlases are
-a new component
+00:13:26,740 --> 00:13:28,242
+你还可以标记
+资源目录中的...
 
 
 251
-00:13:31,416 --> 00:13:32,916
-of the Asset catalog in Xcode 7.
+00:13:28,308 --> 00:13:29,610
+Sprite
+Atlases
 
 
 252
-00:13:33,556 --> 00:13:35,616
-By putting your Sprite
-Atlases in the catalog,
+00:13:29,676 --> 00:13:31,345
+Sprite 
+Atlases是...
 
 
 253
-00:13:35,686 --> 00:13:37,756
-it makes them eligible
-for the Splicing feature I
+00:13:31,411 --> 00:13:33,113
+Xcode 7资源目录中的
+一个新组件
 
 
 254
-00:13:37,756 --> 00:13:38,416
-mentioned earlier.
+00:13:33,514 --> 00:13:35,616
+把你的Sprite 
+Atlases放到目录中
 
 
 255
-00:13:39,696 --> 00:13:42,566
-You can also tag loose
-files in your Xcode project.
+00:13:35,682 --> 00:13:38,418
+就激活了我之前提到的
+Splicing 这一功能
 
 
 256
-00:13:43,926 --> 00:13:46,956
-This inspector gives me
-a great overview of all
+00:13:39,686 --> 00:13:42,556
+你还可以在Xcode项目中
+标记松散文件
 
 
 257
-00:13:46,956 --> 00:13:48,646
-of the tags on a
-particular file.
+00:13:43,924 --> 00:13:48,662
+我可以通过监视窗对某一文件
+中的所有标签进行总览
 
 
 258
-00:13:49,186 --> 00:13:51,846
-What if I want to see
-all the files in a tag,
+00:13:49,196 --> 00:13:51,164
+如果我想看到
+某个标签中的文件
 
 
 259
-00:13:51,846 --> 00:13:53,046
-or just all the tags period.
+00:13:51,231 --> 00:13:53,033
+或者所有标签中的
+全部文件，该怎么办？
 
 
 260
-00:13:53,676 --> 00:13:55,746
-For that, I can head over
-to the Project Editor,
+00:13:53,667 --> 00:13:55,736
+我可以到 Project
+Editor
 
 
 261
-00:13:56,456 --> 00:13:58,746
-by selecting our
-Application Target and going
+00:13:56,470 --> 00:13:57,137
+选择我们的
 
 
 262
-00:13:58,746 --> 00:14:01,786
-to the New Resource tag section
-I can see all of my tags.
+00:13:57,204 --> 00:13:58,505
+Application
+Target
 
 
 263
-00:14:02,386 --> 00:14:04,776
-As you see, I tagged a
-lot of content earlier.
+00:13:58,572 --> 00:14:00,374
+然后再到 New
+Resource 标签中
 
 
 264
-00:14:04,776 --> 00:14:07,396
-It is a great place
-to get an overview
+00:14:00,607 --> 00:14:02,042
+就可以看到我的全部标签了
 
 
 265
-00:14:07,396 --> 00:14:09,686
-and make sure things are
-consistent like I expect.
+00:14:02,376 --> 00:14:04,778
+如你所见
+之前我标记了很多内容
 
 
 266
-00:14:11,106 --> 00:14:13,936
-For example, I see this books
-tag doesn't match the format
+00:14:05,913 --> 00:14:09,683
+这里可以进行总览 
+确保一致性不出问题
 
 
 267
-00:14:13,936 --> 00:14:16,326
-of the others, they all
-have this question suffix.
+00:14:11,118 --> 00:14:13,887
+例如 我发现这个
+标签和其它格式不一致
 
 
 268
-00:14:17,006 --> 00:14:17,606
-No problem.
+00:14:13,954 --> 00:14:16,323
+缺少问号后缀
 
 
 269
-00:14:17,606 --> 00:14:21,986
-I'll edit this, and update
-all the content in one go.
+00:14:16,990 --> 00:14:17,691
+没问题
 
 
 270
-00:14:21,986 --> 00:14:27,296
-Now with tag to all of our
-content for on-demand resources,
+00:14:19,226 --> 00:14:22,429
+我一下子就编辑 更新好了
 
 
 271
-00:14:27,486 --> 00:14:30,576
-and I would like to show you how
-to started using it from code.
+00:14:24,598 --> 00:14:27,301
+我们的内容在
+点播资源中有标签
 
 
 272
-00:14:30,846 --> 00:14:33,496
-That's where the new NS Bundle
-resource request class comes
+00:14:28,068 --> 00:14:30,571
+现在我演示下
+如何在代码中调用
 
 
 273
-00:14:33,496 --> 00:14:33,856
-into play.
+00:14:30,838 --> 00:14:33,841
+现在是新NS Bundle
+资源请求类大显身手的时候了
 
 
 274
-00:14:34,776 --> 00:14:37,356
-Here in our game class,
-we have two callbacks
+00:14:34,775 --> 00:14:38,312
+游戏分类中有两个回调非常
+适合这种情景
 
 
 275
-00:14:37,356 --> 00:14:38,306
-that will be perfect for this,
+00:14:38,745 --> 00:14:40,747
+启用类和终止类
 
 
 276
-00:14:38,736 --> 00:14:40,736
-start using genre
-and stop using genre.
+00:14:41,815 --> 00:14:43,917
+它们非常适用于点播资源 
 
 
 277
-00:14:41,826 --> 00:14:44,366
-Two reasons they are great for
-using on-demand resources first,
+00:14:43,984 --> 00:14:45,752
+有两个原因 
+第一 它们会适时归类， 
 
 
 278
-00:14:44,366 --> 00:14:46,416
-they are bracketed
-in time, and second,
+00:14:45,853 --> 00:14:49,389
+第二 它们发生在
+用户启动游戏前
 
 
 279
-00:14:46,626 --> 00:14:49,036
-they happen a just a bit before
-the user actually initiates the
+00:14:49,456 --> 00:14:51,425
+但是我们一知道用户要玩游戏
 
 
 280
-00:14:49,036 --> 00:14:51,056
-game but as soon as when we
-know what they're going to play
+00:14:51,558 --> 00:14:53,493
+我们就可以
+对点播资源进行预取
 
 
 281
-00:14:51,056 --> 00:14:53,496
-in the game, It lets us
-pre-fetch the on-demand content.
+00:14:54,761 --> 00:14:56,864
+我用一个实例变量来延迟
 
 
 282
-00:14:54,756 --> 00:14:56,886
-I'll get started with
-an instance variable
+00:14:56,930 --> 00:14:58,899
+一个 NS Bundle
+资源请求
 
 
 283
-00:14:56,886 --> 00:14:58,896
-to hold an NS Bundle
-resource request.
+00:14:59,867 --> 00:15:02,970
+NS Bundle资源请求
+是由标签证实的
 
 
 284
-00:14:59,536 --> 00:15:02,536
-NS Bundle resource requests
-are substantiated from tags,
+00:15:03,036 --> 00:15:05,072
+别忘了 
+标签就是简单的字符串
 
 
 285
-00:15:02,536 --> 00:15:04,946
-and remember, tags are
-just simple strings.
+00:15:05,572 --> 00:15:09,810
+我在类名后面附加批问题
+来构成标签
 
 
 286
-00:15:05,576 --> 00:15:08,766
-I'll use our genre's name
-with batch questions appended
+00:15:11,278 --> 00:15:14,948
+然后我就可以
+通过标签创建丛资源请求
 
 
 287
-00:15:08,766 --> 00:15:09,796
-to the end to form our tag.
+00:15:16,283 --> 00:15:19,019
+最后 我要使用
+新的开始获取资源
 
 
 288
-00:15:11,266 --> 00:15:16,456
-Then I can create the bundle
-resource request from that tag.
+00:15:19,419 --> 00:15:22,589
+来完成处理程序方法
+来调用请求
 
 
 289
-00:15:16,456 --> 00:15:19,006
-Finally, I can invoke
-the request
+00:15:23,090 --> 00:15:25,325
+这是一种在后台运行的
+异步方法
 
 
 290
-00:15:19,426 --> 00:15:21,376
-with the new begin
-accessing resources
+00:15:25,926 --> 00:15:27,628
+它会从store中下载
+全部内容
 
 
 291
-00:15:21,376 --> 00:15:22,586
-with completion handler method.
+00:15:28,095 --> 00:15:30,330
+下载完后会激发完成处理程序
 
 
 292
-00:15:23,106 --> 00:15:25,326
-This is an asynchronous method
-that runs in the background.
+00:15:31,031 --> 00:15:34,902
+只要它开始运行
+我不说资源请求不用了
 
 
 293
-00:15:25,936 --> 00:15:27,626
-It downloads all the
-content from the store,
+00:15:35,202 --> 00:15:37,638
+所有内容的
+本地访问一直会很快
 
 
 294
-00:15:27,626 --> 00:15:30,176
-and when it's done, it
-fires my completion handler.
+00:15:38,172 --> 00:15:39,206
+我爱死这个了
 
 
 295
-00:15:31,016 --> 00:15:33,926
-Once my completion handler
-runs, and until I say I'm done
+00:15:39,606 --> 00:15:42,743
+我已经在用的相同
+API的内容都有了
 
 
 296
-00:15:33,926 --> 00:15:34,896
-with the resource request,
+00:15:43,010 --> 00:15:44,611
+NS Bundle、
+Path of
 
 
 297
-00:15:34,896 --> 00:15:37,626
-I have fast local access
-to all the content.
+00:15:44,678 --> 00:15:46,446
+Resource、 
+UI Image、
 
 
 298
-00:15:38,166 --> 00:15:39,196
-This is my favorite part.
+00:15:46,513 --> 00:15:48,615
+Image Name、
+ Texture Name
 
 
 299
-00:15:39,196 --> 00:15:42,736
-I get it all, that content with
-the same APIs I'm already using.
+00:15:48,682 --> 00:15:50,717
+这些方法的用法
+都和之前一模一样
 
 
 300
-00:15:43,016 --> 00:15:46,566
-Methods like NS Bundle, Path of
-Resource, UI Image, Image Name,
+00:15:50,984 --> 00:15:55,255
+我的应用中其它的
+资源了望码都没有变
 
 
 301
-00:15:46,566 --> 00:15:48,916
-Texture, Texture
-Name, all continue
+00:15:57,357 --> 00:15:59,927
+现在 所有的内容都可用
 
 
 302
-00:15:48,916 --> 00:15:50,716
-to work exactly as
-they did before.
+00:15:59,993 --> 00:16:01,895
+直到我说不用 
+NS Bundle资源请求
 
 
 303
-00:15:50,716 --> 00:15:53,206
-I'm not making any
-changes to the rest
+00:16:01,962 --> 00:16:02,663
+我是怎样做的？
 
 
 304
-00:15:53,206 --> 00:15:55,266
-of the resource lookout code
-throughout my application.
+00:16:03,263 --> 00:16:05,399
+在终止类这一方法中
 
 
 305
-00:15:57,056 --> 00:16:00,366
-Now, I set all that content as
-available until I say I'm done
+00:16:05,899 --> 00:16:09,703
+我会调用结束访问 NS
+Bundle 资源请求
 
 
 306
-00:16:00,366 --> 00:16:01,596
-with the NS Bundle
-resource request.
+00:16:10,370 --> 00:16:13,040
+我读取到缓存中的
+内容都删掉了
 
 
 307
-00:16:01,966 --> 00:16:02,656
-How do I do that?
+00:16:13,440 --> 00:16:16,643
+以后可以继续访问
 
 
 308
-00:16:03,246 --> 00:16:05,386
-In our stop using genre method,
+00:16:16,844 --> 00:16:18,378
+并且当系统空间不足时
 
 
 309
-00:16:05,886 --> 00:16:08,256
-I'll invoke end accessing
-resource
+00:16:18,445 --> 00:16:19,947
+这里会标记为“可清除”
 
 
 310
-00:16:08,256 --> 00:16:09,716
-on the NS Bundle
-resource request.
+00:16:20,881 --> 00:16:24,184
+这样我们就搞定了点播资源
+所需的代码
 
 
 311
-00:16:10,366 --> 00:16:13,046
-This moves all the content
-that I fetched into the cache
+00:16:24,251 --> 00:16:25,919
+我想构建并运行
+我们的游戏
 
 
 312
-00:16:13,426 --> 00:16:16,636
-so it is available for future
-access but it also marks it
+00:16:26,987 --> 00:16:27,855
+开始新游戏
 
 
 313
-00:16:16,786 --> 00:16:18,446
-as available for
-purging in the even
+00:16:28,822 --> 00:16:30,858
+我要演示使用点播资源时的
 
 
 314
-00:16:18,446 --> 00:16:19,956
-that the system runs
-out of space.
+00:16:31,191 --> 00:16:32,593
+一些调试功能
 
 
 315
-00:16:20,896 --> 00:16:23,106
-With that, we have written
-all of the code we need
+00:16:33,727 --> 00:16:37,264
+调试导航器这里我要选择磁盘
 
 
 316
-00:16:23,106 --> 00:16:24,196
-for on-demand resources.
+00:16:37,331 --> 00:16:41,835
+得到磁盘报告 了解应用
+在磁盘上的使用情况
 
 
 317
-00:16:24,496 --> 00:16:25,906
-I want to build and
-run our game.
+00:16:42,569 --> 00:16:45,873
+我们已经在Xcode 7
+这里添加了点播资源标签
 
 
 318
-00:16:26,996 --> 00:16:27,866
-We'll start a new game.
+00:16:46,273 --> 00:16:49,409
+在“我的标签”内 你可以
+看到它们的大小和当前状态
 
 
 319
-00:16:28,836 --> 00:16:30,846
-I'll show you some of the
-debugging functionality
+00:16:50,210 --> 00:16:52,145
+现在标记为
+“未下载”状态的
 
 
 320
-00:16:31,186 --> 00:16:32,586
-for working with
-on-demand resources.
+00:16:52,880 --> 00:16:55,215
+都由Xcode扮演了
+app store的角色
 
 
 321
-00:16:33,726 --> 00:16:36,896
-Here in the debug navigator, I'm
-going to select the disk gage
+00:16:55,549 --> 00:16:58,886
+我所有的资源都在Xcode
+还没有到模拟器
 
 
 322
-00:16:37,586 --> 00:16:39,976
-to bring up the disk
-report to get an overview
+00:16:59,386 --> 00:17:01,221
+但是 我点击其中的一个类
 
 
 323
-00:16:39,976 --> 00:16:41,846
-of all the ways the
-application is using the disk.
+00:17:02,623 --> 00:17:05,858
+我们在后台运行的代码
+就会下载内容
 
 
 324
-00:16:42,576 --> 00:16:44,456
-We've added a new
-section here in Xcode 7,
+00:17:05,992 --> 00:17:07,895
+现在 “我的标签”
+的状态成了“使用中”
 
 
 325
-00:16:44,636 --> 00:16:45,856
-on-demand resource tags.
+00:17:08,529 --> 00:17:10,097
+我换一个类
 
 
 326
-00:16:46,286 --> 00:16:49,416
-You see can see my tags, their
-size, and their current status.
+00:17:10,731 --> 00:17:12,900
+你就可以看到
+第一个内容从缓存中删除了
 
 
 327
-00:16:50,196 --> 00:16:52,146
-All that are currently
-marked not downloaded,
+00:17:13,165 --> 00:17:14,101
+“已下载”标记还在
 
 
 328
-00:16:52,886 --> 00:16:55,076
-Xcode is mimicking the role
-of the app store right now.
+00:17:14,468 --> 00:17:16,537
+现在正在使用的是
+“技术问题”
 
 
 329
-00:16:55,536 --> 00:16:58,986
-All of my resources are in
-Xcode, not on the simulator yet.
+00:17:17,171 --> 00:17:19,006
+这就是Slicing 
+和点播资源
 
 
 330
-00:16:59,396 --> 00:17:01,216
-But, when I click
-one of these genres,
+00:17:19,606 --> 00:17:22,675
+有了应用 Slicing 
+我们就能把iPhone 6
 
 
 331
-00:17:02,636 --> 00:17:04,796
-the code that we just wrote
-runs in the background,
+00:17:22,742 --> 00:17:27,814
+应用的大小从140多MB
+降到不足100MB
 
 
 332
-00:17:05,006 --> 00:17:07,886
-downloads the content and now
-you see my tag is marked in use.
+00:17:28,515 --> 00:17:30,083
+有了点播资源
+我们还能进一步
 
 
 333
-00:17:08,526 --> 00:17:10,086
-If I switch to a second genre,
+00:17:30,184 --> 00:17:33,887
+把初始安装包的
+大小降到30MB
 
 
 334
-00:17:10,746 --> 00:17:12,896
-you can see the first
-content is moved to the cache,
+00:17:34,354 --> 00:17:36,990
+现在用户启动游戏就更快了
 
 
 335
-00:17:13,175 --> 00:17:16,026
-just marked downloaded, and
-now engineering questions are
+00:17:37,391 --> 00:17:38,192
+又轮到你了 肯
 
 
 336
-00:17:16,026 --> 00:17:16,536
-in use.
+00:17:45,933 --> 00:17:46,967
+肯奥尔：谢谢 乔恩
 
 
 337
-00:17:17,156 --> 00:17:19,006
-That's Slicing and
-on-demand resources.
+00:17:50,003 --> 00:17:51,738
+今年 为了直接增强
+你的app品质
 
 
 338
-00:17:19,606 --> 00:17:22,756
-With Application Slicing,
-we're able to lower the size
+00:17:51,805 --> 00:17:57,144
+我们引入了很多新的特性
 
 
 339
-00:17:22,756 --> 00:17:26,205
-of our iPhone 6 application
-from more than 140 megabytes
+00:17:58,445 --> 00:18:00,480
+我们先来谈谈调试和剖析
 
 
 340
-00:17:26,445 --> 00:17:27,826
-to less than 100 megabytes.
+00:18:02,382 --> 00:18:06,787
+Xcode 7我们给iOS
+app引入了电量刻度
 
 
 341
-00:17:28,516 --> 00:17:30,086
-With on-demand resources
-we were able
+00:18:07,521 --> 00:18:11,458
+IOS 9会对比
+每进程消耗的电量
 
 
 342
-00:17:30,086 --> 00:17:32,166
-to further lower the
-initial install size
+00:18:11,692 --> 00:18:14,127
+会在右边的电量报告这里显示
 
 
 343
-00:17:32,446 --> 00:17:33,896
-down to just 30 megabytes.
+00:18:15,596 --> 00:18:18,065
+Xcode中的量规能让你
 
 
 344
-00:17:34,356 --> 00:17:36,976
-Now users can get started with
-our game faster than ever.
+00:18:18,298 --> 00:18:21,134
+预期情况和现实情况...
 
 
 345
-00:17:37,406 --> 00:17:38,116
-Back to you, Ken.
+00:18:21,468 --> 00:18:23,871
+进行对比
 
 
 346
-00:17:39,516 --> 00:17:45,436
-[applause]
+00:18:24,471 --> 00:18:26,974
+如果你发现电量使用中
 
 
 347
-00:17:45,936 --> 00:17:46,976
->> Ken Orr: Thank you, Jon.
+00:18:27,207 --> 00:18:29,910
+有尖峰而应用又处于空闲状态
 
 
 348
-00:17:49,696 --> 00:17:51,766
-This year we have
-introduced a number
+00:18:30,310 --> 00:18:33,280
+这就提示你可能有问题了
 
 
 349
-00:17:51,766 --> 00:17:54,046
-of new features targeted
-squarely
+00:18:33,780 --> 00:18:36,016
+当你遇到此类问题时
 
 
 350
-00:17:54,046 --> 00:17:57,266
-at helping you enhance
-the quality of your app.
+00:18:36,250 --> 00:18:38,318
+你就知道到底应该看哪处代码
 
 
 351
-00:17:58,446 --> 00:18:00,466
-Let's start by talking about
-debugging and profiling.
+00:18:39,386 --> 00:18:43,790
+或者 你可以跳转到
+Xcode 的各个报表的
 
 
 352
-00:18:01,056 --> 00:18:06,796
-In Xcode 7 we have brought
-the energy gage to iOS apps.
+00:18:43,857 --> 00:18:45,359
+Instruments
+那里
 
 
 353
-00:18:07,536 --> 00:18:11,466
-IOS 9 contracts energy
-on a per process basis.
+00:18:46,059 --> 00:18:49,963
+从电量报告那里我们可以跳转
+到New Location
 
 
 354
-00:18:11,676 --> 00:18:14,126
-That's reflected right
-here in the energy report.
+00:18:50,230 --> 00:18:52,566
+仪表那里
+然后就可以知道
 
 
 355
-00:18:15,606 --> 00:18:18,186
-The gages in Xcode are
-a great way for you
+00:18:52,633 --> 00:18:55,969
+是否有效利用了
+核心位置API
 
 
 356
-00:18:18,236 --> 00:18:21,126
-to match what you
-expect to be happening
+00:18:56,703 --> 00:19:01,475
+我们可以知道
+是否过多请求了用户位置？
 
 
 357
-00:18:21,476 --> 00:18:24,866
-against what's actually
-happening.
+00:19:02,576 --> 00:19:05,913
+是否请求的用户
+位置的精度过高？
 
 
 358
-00:18:24,866 --> 00:18:27,906
-If you see a spike in energy
-usage and you're sitting
+00:19:07,447 --> 00:19:09,516
+这些请求很耗电
 
 
 359
-00:18:27,906 --> 00:18:31,416
-in your app apparently
-idle, that's a first clue
+00:19:09,750 --> 00:19:12,653
+我们就可以检查一下
 
 
 360
-00:18:31,416 --> 00:18:33,266
-that maybe you have a problem.
+00:19:14,021 --> 00:19:15,389
+iOS中还有一个新...
 
 
 361
-00:18:34,006 --> 00:18:36,146
-Sometimes when you have
-a problem like that,
+00:19:15,489 --> 00:19:18,325
+Metal System 
+Trace 工具
 
 
 362
-00:18:36,246 --> 00:18:38,316
-you know exactly where to
-go looking in your code.
+00:19:18,392 --> 00:19:23,997
+你可以了解你的代码
+是如何影响帧频的
 
 
 363
-00:18:38,316 --> 00:18:43,826
-But when you don't, you can jump
-right into Instruments from all
+00:19:24,665 --> 00:19:29,036
+硬件渲染显卡驱动能让你了解
 
 
 364
-00:18:43,826 --> 00:18:45,346
-of the reports in Xcode.
+00:19:29,436 --> 00:19:33,273
+整个 Graphic 
+Stack 功能很强大
 
 
 365
-00:18:46,056 --> 00:18:48,226
-From the Energy report
-we can jump
+00:19:34,741 --> 00:19:36,777
+你或许还注意到
+Instruments
 
 
 366
-00:18:48,226 --> 00:18:52,596
-into the New Location instrument
-which lets us make sure
+00:19:37,144 --> 00:19:39,279
+这里有一个重新
+设计了的轨迹视图
 
 
 367
-00:18:52,596 --> 00:18:55,536
-that we're efficiently
-using core location APIs.
+00:19:40,314 --> 00:19:41,515
+更清晰了 
 
 
 368
-00:18:56,706 --> 00:18:59,456
-We can answer questions
-like are we asking
+00:19:42,583 --> 00:19:45,786
+并且用起来也更加顺手
 
 
 369
-00:18:59,456 --> 00:19:03,276
-for the user's location
-too often, are we asking
+00:19:46,320 --> 00:19:47,955
+通过双指缩放等手势
 
 
 370
-00:19:03,276 --> 00:19:05,926
-for the user's location
-with too high a precision?
+00:19:48,222 --> 00:19:51,658
+在数据中导航也很容易
 
 
 371
-00:19:07,156 --> 00:19:09,516
-Things like that are
-going to cost energy
+00:19:53,193 --> 00:19:55,162
+新Instruments 
+就介绍到这里
 
 
 372
-00:19:09,756 --> 00:19:12,346
-and we can investigate
-those right here.
+00:19:58,098 --> 00:19:59,800
+我敢说
 
 
 373
-00:19:12,346 --> 00:19:18,476
-For iOS, this is also the new
-Metal System Trace instrument
+00:20:00,434 --> 00:20:02,536
+这里的每个开发人员
 
 
 374
-00:19:18,476 --> 00:19:21,626
-letting you see how the
-frame rate is being effected
+00:20:02,803 --> 00:20:06,840
+都遇到过客户报告崩溃了
 
 
 375
-00:19:21,876 --> 00:19:24,006
-by things like your own code.
+00:20:08,775 --> 00:20:10,344
+但你就是没法重现的问题
 
 
 376
-00:19:24,666 --> 00:19:29,026
-The graphics driver, hardware
-rendering, it gives you insight
+00:20:11,245 --> 00:20:11,912
+好的
 
 
 377
-00:19:29,426 --> 00:19:33,276
-into the entire Graphic
-Stack, really powerful.
+00:20:12,312 --> 00:20:13,614
+总有那么一两次吧？
 
 
 378
-00:19:34,736 --> 00:19:36,816
-You may also notice
-here in Instruments
+00:20:15,082 --> 00:20:16,016
+Xcode 7中的
 
 
 379
-00:19:36,926 --> 00:19:39,276
-that there is a redesigned
-track view.
+00:20:16,083 --> 00:20:17,684
+Address
+Sanitizer
 
 
 380
-00:19:40,326 --> 00:19:41,516
-It has a cleaner look,
+00:20:17,751 --> 00:20:18,452
+能助你一臂之力
 
 
 381
-00:19:42,566 --> 00:19:45,726
-more importantly it is
-more natural to use.
+00:20:20,053 --> 00:20:21,655
+Address
+Sanitizer
 
 
 382
-00:19:46,326 --> 00:19:47,956
-With gestures like
-pinch to zoom,
+00:20:21,722 --> 00:20:23,290
+会把你的
+Objective-C
 
 
 383
-00:19:48,236 --> 00:19:51,656
-navigating through your
-data is really, really easy.
+00:20:23,357 --> 00:20:24,091
+编译成C代码 
 
 
 384
-00:19:52,156 --> 00:19:55,726
-That's a quick peak at
-the new Instruments.
+00:20:24,625 --> 00:20:28,128
+并捕获类似缓冲区溢出的事件
 
 
 385
-00:19:57,806 --> 00:20:03,186
-I'm willing to bet that every
-developer in this room has been
+00:20:28,362 --> 00:20:32,132
+一发生这种事件就可以捕获
 
 
 386
-00:20:03,186 --> 00:20:08,576
-in a situation where a
-customer reports a crash
+00:20:32,766 --> 00:20:36,970
+Xcode会停在造成这个
+问题的那行代码那里
 
 
 387
-00:20:08,766 --> 00:20:10,356
-and you just can't reproduce it.
+00:20:37,604 --> 00:20:40,274
+这个新调试特性很厉害
 
 
 388
-00:20:11,326 --> 00:20:11,586
-All right.
+00:20:40,974 --> 00:20:42,509
+凯特 会给大家演示一下
 
 
 389
-00:20:12,416 --> 00:20:13,616
-That happened once
-or twice maybe?
+00:20:42,576 --> 00:20:44,178
+Address
+Sanitizer
 
 
 390
-00:20:15,066 --> 00:20:19,046
-The new in Address
-Sanitizer in Xcode 7 can help.
+00:20:49,383 --> 00:20:51,118
+凯特·斯通：谢谢 肯
 
 
 391
-00:20:20,176 --> 00:20:25,356
-Address Sanitizer compiles your
-Objective-C in C code in a way
+00:20:51,185 --> 00:20:53,787
+我们的小游戏很适合
+和朋友一起玩
 
 
 392
-00:20:25,356 --> 00:20:28,116
-that catch things
-like buffer overflows
+00:20:54,288 --> 00:20:57,858
+但是有时启动游戏时会崩溃
 
 
 393
-00:20:28,346 --> 00:20:32,116
-and it can catch them
-immediately when they happen.
+00:20:58,992 --> 00:21:01,595
+崩溃很难预测
+这种故障也很难重现
 
 
 394
-00:20:32,576 --> 00:20:35,686
-Xcode will stop you
-right on the line of code
+00:21:01,662 --> 00:21:04,665
+很难弄清楚原因
 
 
 395
-00:20:35,926 --> 00:20:36,956
-that caused the problem.
+00:21:05,632 --> 00:21:07,367
+你肯定遇到过类似情况 
 
 
 396
-00:20:37,886 --> 00:20:40,286
-This is a powerful
-new debugging feature.
+00:21:07,434 --> 00:21:11,572
+因为我听说有人会使用指针
+来明确地管理内存
 
 
 397
-00:20:40,676 --> 00:20:43,746
-Here to give us a demo of
-Address Sanitizer is Kate.
+00:21:13,941 --> 00:21:15,976
+这个游戏很美
 
 
 398
-00:20:49,236 --> 00:20:49,716
->> Kate Stone: Thank you, Ken.
+00:21:16,777 --> 00:21:19,179
+我们可以开始新游戏
 
 
 399
-00:20:50,306 --> 00:20:53,796
-Our trivia game is a great
-diversion with friends
+00:21:19,880 --> 00:21:20,681
+选择一个类
 
 
 400
-00:20:54,306 --> 00:20:56,806
-but some are experiencing
-crashes
+00:21:21,815 --> 00:21:25,586
+再选择一些用户
+好了
 
 
 401
-00:20:56,806 --> 00:20:57,866
-when they're setting up a game.
+00:21:26,220 --> 00:21:28,889
+看起来很不错 突然...
 
 
 402
-00:20:58,996 --> 00:21:01,216
-It is unpredictable
-enough that it is the kind
+00:21:29,223 --> 00:21:33,293
+现在在关卡中 正好重现问题
 
 
 403
-00:21:01,216 --> 00:21:04,496
-of bug that's hard to reproduce
-and make heads or tails of.
+00:21:33,427 --> 00:21:34,528
+故障不好找
 
 
 404
-00:21:05,626 --> 00:21:07,436
-I'm sure you experienced
-something similar
+00:21:35,996 --> 00:21:37,297
+我们看看这个
 
 
 405
-00:21:07,436 --> 00:21:10,106
-as I've heard anywhere
-you have used pointers
+00:21:37,364 --> 00:21:39,099
+是在哪里崩溃的呢？
 
 
 406
-00:21:10,136 --> 00:21:11,556
-to explicitly managed memory.
+00:21:39,166 --> 00:21:40,067
+我怎么调试？
 
 
 407
-00:21:12,126 --> 00:21:15,916
-Our game is looking beautiful.
+00:21:40,934 --> 00:21:43,904
+是主类崩溃了
 
 
 408
-00:21:16,786 --> 00:21:20,576
-We can dive on in, start
-a new game, pick a genre,
+00:21:44,505 --> 00:21:46,807
+我在那里根本就没写代码
 
 
 409
-00:21:21,816 --> 00:21:25,526
-pick a few users to work
-with and we're ready to play.
+00:21:47,007 --> 00:21:49,409
+Stack Trace里面
+也没有任何提示
 
 
 410
-00:21:26,206 --> 00:21:28,886
-So it seems to work
-just fine -- oh.
+00:21:49,776 --> 00:21:51,712
+这种故障最难处理了
 
 
 411
-00:21:30,696 --> 00:21:33,296
-Being on stage is
-perfect to reproduce this.
+00:21:52,279 --> 00:21:54,481
+幸亏Address 
+Sanitizer能帮上忙
 
 
 412
-00:21:33,426 --> 00:21:34,516
-Hard to find bugs.
+00:21:55,115 --> 00:21:58,752
+在Xcode中
+我们有很多此类诊断工具
 
 
 413
-00:21:35,986 --> 00:21:37,326
-So let's have a look at this.
+00:21:58,986 --> 00:22:00,787
+你只需要在Scheme
+Editor中
 
 
 414
-00:21:37,326 --> 00:21:39,196
-It's crashed, where
-is it crashed?
+00:22:00,854 --> 00:22:01,755
+运行你的app即可
 
 
 415
-00:21:39,196 --> 00:21:40,056
-What can I debug?
+00:22:02,122 --> 00:22:04,958
+当我在Scheme 
+Editor中点击Run时
 
 
 416
-00:21:40,856 --> 00:21:43,316
-It's crashed in my main class.
+00:22:05,025 --> 00:22:06,560
+<c.color000000><u> </u></c>我会按下选项这个快捷键
 
 
 417
-00:21:43,556 --> 00:21:46,756
-So there's not even I line
-of code I've written there.
+00:22:07,661 --> 00:22:09,830
+我可以对应用的运行方式
+进行配置
 
 
 418
-00:21:46,996 --> 00:21:48,246
-There's nothing in
-the Stack Trace
+00:22:10,130 --> 00:22:11,832
+其中
+Diagnostics标记
 
 
 419
-00:21:48,276 --> 00:21:49,406
-to give me a place to start.
+00:22:12,165 --> 00:22:14,768
+能让你选择一些旧工具
 
 
 420
-00:21:49,766 --> 00:21:51,936
-That's typical of
-this kind of bug.
+00:22:15,002 --> 00:22:17,337
+以及Address
+Sanitizer这新工具
 
 
 421
-00:21:52,296 --> 00:21:54,356
-Luckily, Address
-Sanitizer can help there.
+00:22:17,771 --> 00:22:19,373
+Address 
+Sanitizer
 
 
 422
-00:21:55,116 --> 00:21:57,376
-We have a variety of
-these diagnostic tools
+00:22:19,439 --> 00:22:20,841
+会重新编译应用 
+添加许多新工具
 
 
 423
-00:21:57,376 --> 00:21:58,736
-that you can get to from Xcode.
+00:22:21,008 --> 00:22:23,143
+告诉我哪里失效了
 
 
 424
-00:21:59,076 --> 00:21:59,916
-All you need to do is go
+00:22:23,577 --> 00:22:25,612
+以及为什么失效了
 
 
 425
-00:21:59,916 --> 00:22:01,596
-to the Scheme editor
-for running your app.
+00:22:25,979 --> 00:22:29,349
+这一点与众不同
 
 
 426
-00:22:02,136 --> 00:22:04,996
-As that handy shortcut, I'll
-hold down Option while I click
+00:22:30,517 --> 00:22:33,620
+我们重新运行一下应用看看
 
 
 427
-00:22:04,996 --> 00:22:06,546
-on Run to get to
-the Scheme Editor.
+00:22:34,922 --> 00:22:36,757
+现在我发现 当我选择一个类
 
 
 428
-00:22:07,656 --> 00:22:09,816
-I can configure how I
-run my application here,
+00:22:36,924 --> 00:22:40,427
+并移动到下个页面时
+应用马上停止了
 
 
 429
-00:22:10,136 --> 00:22:11,846
-including the Diagnostics tab
+00:22:40,661 --> 00:22:43,830
+就是这里发生了内存崩溃
 
 
 430
-00:22:12,176 --> 00:22:14,766
-which lets me select some
-potentially familiar tools
+00:22:44,364 --> 00:22:47,267
+这样我在应用急刹车之前
 
 
 431
-00:22:15,006 --> 00:22:17,346
-as well as the new
-tool, Address Sanitizer.
+00:22:47,334 --> 00:22:49,670
+就能找到问题所在
 
 
 432
-00:22:18,066 --> 00:22:20,716
-Enabling Address Sanitizer
-does something different
+00:22:50,470 --> 00:22:53,373
+此时我就知道具体
 
 
 433
-00:22:20,996 --> 00:22:24,366
-in that it recompiles the
-application adding a bunch more
+00:22:53,774 --> 00:22:55,375
+是停在了哪个堆栈上 
+是我调用的某个
 
 
 434
-00:22:24,366 --> 00:22:27,526
-Instrumentation showing
-me not just where I failed
+00:22:55,442 --> 00:22:57,110
+Objective-C
+代码有问题
 
 
 435
-00:22:27,886 --> 00:22:29,366
-but why I failed as well.
+00:22:57,878 --> 00:23:01,215
+并不是每个人都能
+全部用Swift写代码
 
 
 436
-00:22:30,526 --> 00:22:33,616
-Let's rerun that application
-and see how this works.
+00:23:01,515 --> 00:23:03,617
+事实上 这个游戏就是
+用Objective-C
 
 
 437
-00:22:34,936 --> 00:22:37,256
-Now I'll find when I
-select a genre and move
+00:23:03,684 --> 00:23:06,286
+框架封装C代码写成
 
 
 438
-00:22:37,256 --> 00:22:40,416
-to the next page it
-immediately stops my application
+00:23:06,353 --> 00:23:08,455
+我们的问题就出在这里
 
 
 439
-00:22:40,656 --> 00:22:43,826
-because this is where the memory
-corruption actually occurred.
+00:23:09,022 --> 00:23:10,457
+我不熟悉这种代码。
 
 
 440
-00:22:44,356 --> 00:22:47,306
-Far before the application
-finally comes
+00:23:10,524 --> 00:23:13,227
+是我要看看调用的代码
 
 
 441
-00:22:47,306 --> 00:22:49,656
-to a screeching halt I can
-find out what went wrong.
+00:23:13,293 --> 00:23:14,261
+用Swift写的
 
 
 442
-00:22:50,456 --> 00:22:53,376
-In this case I get the exact
-Stack of where it stopped
+00:23:15,028 --> 00:23:17,898
+我正在调用一些登录API
 
 
 443
-00:22:53,876 --> 00:22:56,406
-and it turns out that it
-is some Objective-C code
+00:23:18,432 --> 00:23:21,535
+它告诉我到底哪里出故障了
 
 
 444
-00:22:56,406 --> 00:22:57,116
-that I'm calling.
+00:23:21,869 --> 00:23:23,403
+但没说原因
 
 
 445
-00:22:57,866 --> 00:23:01,296
-Not everybody has the luxury
-of writing everything in Swift.
+00:23:24,505 --> 00:23:26,807
+再往侦错导航栏下面看
 
 
 446
-00:23:01,566 --> 00:23:04,786
-In fact, in our case, we have
-this C code that's been wrapped
+00:23:27,207 --> 00:23:30,244
+我发现Address 
+Sanitizer 
 
 
 447
-00:23:04,866 --> 00:23:06,356
-in an Objective-C framework.
+00:23:30,310 --> 00:23:32,846
+还告诉我我使用了已经
+释放的内存
 
 
 448
-00:23:06,356 --> 00:23:08,446
-That's the source
-of our problem.
+00:23:32,913 --> 00:23:35,382
+这就是问题的根源所在
 
 
 449
-00:23:09,036 --> 00:23:10,476
-I'm not familiar with this code.
+00:23:36,316 --> 00:23:39,953
+我可以从侦错导航栏中
+看到具体是哪个内存
 
 
 450
-00:23:10,476 --> 00:23:13,266
-I'll have a look at the
-code that I'm calling it
+00:23:40,320 --> 00:23:43,023
+我正在读取一个
+50字节热区的首个字节
 
 
 451
-00:23:13,266 --> 00:23:14,276
-from written in Swift.
+00:23:43,090 --> 00:23:44,424
+而这里已经分配出去了
 
 
 452
-00:23:15,036 --> 00:23:17,536
-Here I am calling
-some logging API.
+00:23:45,192 --> 00:23:48,762
+我还可以再点击下
+实际看下内存
 
 
 453
-00:23:18,226 --> 00:23:21,526
-That tells me where exactly
-I'm triggering the failure
+00:23:48,829 --> 00:23:51,798
+它之前是用来保存日志消息的
 
 
 454
-00:23:21,856 --> 00:23:23,416
-but still not yet why.
+00:23:52,299 --> 00:23:53,901
+Address 
+Sanitizer
 
 
 455
-00:23:24,506 --> 00:23:26,816
-If I look further down the
-Debug navigator though,
+00:23:54,401 --> 00:23:55,903
+用灰色告诉我 这个内存无效
 
 
 456
-00:23:27,216 --> 00:23:30,716
-I can see that in addition to
-Address Sanitizer telling me
+00:23:56,136 --> 00:24:00,707
+我不应该再继续读取这个内存
 
 
 457
-00:23:30,916 --> 00:23:32,886
-that I'm using deallocated
-memory
+00:24:01,475 --> 00:24:02,809
+它还给了我
 
 
 458
-00:23:32,886 --> 00:23:35,366
-and that that's the actual
-source of my problem.
+00:24:02,910 --> 00:24:05,646
+内存初始分配调用堆栈
 
 
 459
-00:23:36,316 --> 00:23:39,956
-I can also see in the Debug
-navigator what memory that is.
+00:24:05,712 --> 00:24:09,116
+我就知道是我在创建
+有意义的使用日志时
 
 
 460
-00:23:40,306 --> 00:23:43,046
-I'm accessing the first bite
-in a 50-bite heat region
+00:24:09,850 --> 00:24:13,654
+产生的更重要的是 
+告诉我当时内存分配到了哪里
 
 
 461
-00:23:43,046 --> 00:23:44,436
-that was previously allocated.
+00:24:14,688 --> 00:24:17,724
+我能看出来 是我调用
 
 
 462
-00:23:45,186 --> 00:23:48,796
-I can go a step further, click
-on and actually see the memory,
+00:24:18,358 --> 00:24:20,627
+终止登录那个设计欠佳的
+API时发生的
 
 
 463
-00:23:48,796 --> 00:23:51,796
-and see it has been previously
-used to store a log message.
+00:24:20,794 --> 00:24:23,230
+我本来以为它只会清除登录
 
 
 464
-00:23:52,356 --> 00:23:55,906
-Because it is gray, Address
-Sanitizer is telling me
+00:24:23,497 --> 00:24:26,300
+但它却搞坏了关键资源
 
 
 465
-00:23:56,136 --> 00:23:58,746
-that it knows that it is
-no longer valid memory,
+00:24:26,900 --> 00:24:28,402
+让我们快速解决这个问题
 
 
 466
-00:23:58,836 --> 00:24:00,706
-no longer memory I
-should be accessing.
+00:24:29,303 --> 00:24:30,737
+我把这行代码拿掉
 
 
 467
-00:24:01,476 --> 00:24:02,796
-It also gives me the call Stack,
+00:24:30,804 --> 00:24:33,106
+每次录入消息时不再调用它
 
 
 468
-00:24:02,926 --> 00:24:05,666
-where that memory was originally
-allocated and I can see
+00:24:33,507 --> 00:24:35,843
+而改成仅在销毁时调用
 
 
 469
-00:24:05,666 --> 00:24:09,106
-that it is when I'm creating
-a usage log that makes sense,
+00:24:37,110 --> 00:24:39,112
+连同工具 Address
+Sanitizer
 
 
 470
-00:24:09,836 --> 00:24:11,316
-and more importantly
-in this case,
+00:24:39,179 --> 00:24:39,947
+重构了应用
 
 
 471
-00:24:11,636 --> 00:24:13,646
-where that memory
-was deallocated.
+00:24:40,013 --> 00:24:43,016
+仍然很好用 仍然能交互使用
 
 
 472
-00:24:14,486 --> 00:24:17,716
-I can tell here that it is
-when I call end logging,
+00:24:43,083 --> 00:24:46,954
+但我还能更进一步
 
 
 473
-00:24:18,356 --> 00:24:20,346
-the particularly
-badly designed API.
+00:24:47,020 --> 00:24:50,524
+现在一切正常了
+除非再有问题
 
 
 474
-00:24:20,806 --> 00:24:23,906
-I thought it was just to
-flush the log but it turns
+00:24:52,526 --> 00:24:54,127
+Address 
+Sanitizer
 
 
 475
-00:24:23,906 --> 00:24:26,286
-out it takes down
-critical resources.
+00:24:54,194 --> 00:24:56,463
+不仅仅能提示已释放的内存
 
 
 476
-00:24:26,916 --> 00:24:28,416
-Let's solve that
-problem quickly.
+00:24:56,730 --> 00:24:58,198
+它还能告诉我缓冲区溢出
 
 
 477
-00:24:29,306 --> 00:24:30,736
-I can take that line of code,
+00:24:58,265 --> 00:25:01,635
+并告诉我正在溢出的流
 
 
 478
-00:24:30,896 --> 00:24:33,106
-instead of calling it
-every time I log a message,
+00:25:01,969 --> 00:25:05,272
+和堆栈内存
 
 
 479
-00:24:33,516 --> 00:24:37,386
-I'm going to call it only
-once during tear down.
+00:25:05,739 --> 00:25:07,841
+这是件非常强大的工具
 
 
 480
-00:24:37,626 --> 00:24:40,386
-Now Address Sanitizer rebuilds
-the application complete
+00:25:08,342 --> 00:25:11,712
+你现在就应该把这件工具
+用在你的应用上 
 
 
 481
-00:24:40,386 --> 00:24:43,676
-with Instrumentation, still
-very snappy, still possible
+00:25:11,879 --> 00:25:14,381
+找出所有潜藏的内存问题
 
 
 482
-00:24:43,676 --> 00:24:46,946
-to use it interactively, and
-I can get a step further.
+00:25:15,215 --> 00:25:17,551
+我们尽量让它容易上手
 
 
 483
-00:24:47,026 --> 00:24:50,526
-It all looks good until
-it finds my next problem.
+00:25:18,118 --> 00:25:20,320
+因为Address 
+Sanitizer不仅能以
 
 
 484
-00:24:52,226 --> 00:24:56,456
-Because Address Sanitizer is not
-just about deallocated memory.
+00:25:20,854 --> 00:25:22,890
+这种交互方式运行，
 
 
 485
-00:24:56,726 --> 00:24:57,586
-In this case it is telling me
+00:25:23,223 --> 00:25:25,292
+你还能把它用在
+Xcode服务器中
 
 
 486
-00:24:57,586 --> 00:25:00,646
-about a heap buffer
-overflow similarly telling me
+00:25:25,359 --> 00:25:27,194
+这样你就能
+用它做一系列测试
 
 
 487
-00:25:00,646 --> 00:25:04,536
-about under flows and Stack
-memory that I'm overflowing
+00:25:27,394 --> 00:25:31,598
+代码出现问题时及时发现问题
 
 
 488
-00:25:04,536 --> 00:25:07,746
-or under flowing, it is an
-extraordinarily powerful tool.
+00:25:33,734 --> 00:25:35,836
+你想尽量减少崩溃次数
 
 
 489
-00:25:08,326 --> 00:25:10,326
-It's the kind of
-tool you should use
+00:25:35,903 --> 00:25:38,739
+但老实说 彻底杜绝崩溃
+是不可能的
 
 
 490
-00:25:10,326 --> 00:25:11,526
-on your applications right now
+00:25:39,306 --> 00:25:41,975
+所以我请板井
+给大家讲讲Xcode
 
 
 491
-00:25:11,886 --> 00:25:14,386
-to find all those
-lurking memory issues.
+00:25:42,042 --> 00:25:45,379
+如何能帮助你分析得到的
 
 
 492
-00:25:15,206 --> 00:25:17,566
-We tried to make that
-as easy as possible
+00:25:45,445 --> 00:25:46,146
+崩溃日志
 
 
 493
-00:25:18,146 --> 00:25:21,626
-because Address Sanitizer
-cannot only run
+00:25:57,391 --> 00:25:58,492
+板井·罗姆：谢谢 凯特
 
 
 494
-00:25:21,626 --> 00:25:24,206
-in this interactive
-form, but you can use it
+00:25:58,559 --> 00:25:59,426
+大家早上好
 
 
 495
-00:25:24,206 --> 00:25:26,726
-with Xcode Servers so you
-can set up a suite of tests
+00:26:00,460 --> 00:26:02,963
+Apple开发者项目成员
+可以读取
 
 
 496
-00:25:27,396 --> 00:25:30,106
-with Address Sanitizer
-enabled and find those problems
+00:26:03,030 --> 00:26:04,565
+Xcode中的新崩溃日志
 
 
 497
-00:25:30,106 --> 00:25:32,126
-when they creep in your code.
+00:26:05,232 --> 00:26:06,433
+当你通过
+App Store
 
 
 498
-00:25:33,436 --> 00:25:35,866
-Because you want to minimize
-the number of crashes
+00:26:06,500 --> 00:26:08,135
+或者TestFlight
+分发你的app 
 
 
 499
-00:25:35,906 --> 00:25:38,736
-but let's be realistic, you
-can't eliminate them entirely.
+00:26:08,202 --> 00:26:10,137
+并把符号信息包含在内时
 
 
 500
-00:25:39,306 --> 00:25:42,046
-So I'm proud to bring
-up Itai to talk
+00:26:10,437 --> 00:26:12,172
+我们会从用户那里
+收集崩溃日志
 
 
 501
-00:25:42,046 --> 00:25:45,436
-about how Xcode helps you
-analyze those crash logs you
+00:26:13,040 --> 00:26:17,177
+这些日志会聚合成崩溃报告
 
 
 502
-00:25:45,436 --> 00:25:45,856
-will get.
+00:26:17,244 --> 00:26:19,279
+下载到Xcode中 
+你就可以在配置窗口中
 
 
 503
-00:25:47,516 --> 00:25:56,876
-[applause]
+00:26:19,346 --> 00:26:21,949
+查看并分析这些日志
 
 
 504
-00:25:57,376 --> 00:25:58,526
->> Itai Rom: Thanks, Kate.
+00:26:23,116 --> 00:26:25,519
+这种集成是无缝的
+你可以很容易地
 
 
 505
-00:25:58,526 --> 00:25:59,416
-Good morning, everyone.
+00:26:25,586 --> 00:26:28,322
+找出并修复关键问题
 
 
 506
-00:26:00,056 --> 00:26:02,956
-As Apple developer program
-members you have access
+00:26:28,755 --> 00:26:29,923
+我来告诉你如何使用
 
 
 507
-00:26:03,036 --> 00:26:04,556
-to the new crash logs in Xcode.
+00:26:33,827 --> 00:26:35,529
+去年 我们引入了
+TestFlight
 
 
 508
-00:26:05,386 --> 00:26:07,086
-When you distribute your
-app through the App Store
+00:26:36,263 --> 00:26:38,065
+TestFlight是一项
+便捷的服务
 
 
 509
-00:26:07,086 --> 00:26:11,216
-or TestFlight and include symbol
-information we'll collect crash
+00:26:38,131 --> 00:26:39,600
+能够分发你的
+apps测试版本
 
 
 510
-00:26:11,216 --> 00:26:12,176
-logs from your users.
+00:26:39,666 --> 00:26:42,636
+和Xcode中的崩溃日志
+配合的很好
 
 
 511
-00:26:13,056 --> 00:26:17,286
-Those crash logs will be fully
-aggregated into crash reports
+00:26:43,470 --> 00:26:46,473
+昨天我们刚刚分发了
+游戏的一个测试版
 
 
 512
-00:26:17,286 --> 00:26:19,346
-and downloaded into
-Xcode wher you can view
+00:26:46,874 --> 00:26:49,309
+用户报告了一些崩溃
 
 
 513
-00:26:19,346 --> 00:26:21,946
-and analyze them right
-in the organizer window.
+00:26:49,376 --> 00:26:50,744
+我想找出并修复
 
 
 514
-00:26:22,866 --> 00:26:25,456
-The integration here is
-seamless making it easier
+00:26:52,479 --> 00:26:53,614
+我先启动Xcode
 
 
 515
-00:26:25,456 --> 00:26:28,306
-than ever before to find and
-fix your most critical issues.
+00:26:54,147 --> 00:26:55,382
+我已经在Xcode的
+Account
 
 
 516
-00:26:28,506 --> 00:26:33,586
-I would like to show
-you how to use it.
+00:26:55,449 --> 00:26:57,117
+Preferences
+面板中输入了
 
 
 517
-00:26:33,856 --> 00:26:35,406
-Last year we introduced
-TestFlight.
+00:26:57,184 --> 00:26:59,486
+我的Apple ID 
+所以我只需要打开配置窗口
 
 
 518
-00:26:36,376 --> 00:26:38,086
-TestFlight is a convenient
-service
+00:26:59,553 --> 00:27:02,623
+查看崩溃日志就可以了
 
 
 519
-00:26:38,086 --> 00:26:41,156
-for distributing beta builds
-of your apps and works great
+00:27:04,491 --> 00:27:07,160
+窗口左边是Xcode下载的
+我的研发团队通过
 
 
 520
-00:26:41,156 --> 00:26:42,646
-with crash logs in Xcode.
+00:27:07,227 --> 00:27:08,929
+iTunes 
+Connect 上传到
 
 
 521
-00:26:43,486 --> 00:26:46,486
-We just distributed a beta build
-of our trivia game yesterday.
+00:27:08,996 --> 00:27:10,797
+App Store或
+TestFlight的
 
 
 522
-00:26:46,876 --> 00:26:49,306
-I'll like to find and
-fix some of the crashes
+00:27:10,864 --> 00:27:13,600
+与apps相关的全部信息
 
 
 523
-00:26:49,376 --> 00:26:50,756
-that our testers reported.
+00:27:14,434 --> 00:27:15,369
+我选择好游戏
 
 
 524
-00:26:52,196 --> 00:26:53,626
-I'll launch Xcode.
+00:27:16,436 --> 00:27:19,940
+我可以从右边选择想要的版本
 
 
 525
-00:26:54,066 --> 00:26:56,706
-I have already entered
-my Apple ID information
+00:27:20,541 --> 00:27:23,310
+列表最上面的55号版本
 
 
 526
-00:26:56,706 --> 00:26:59,646
-into Xcode's Account Preferences
-panel, so all I have to do
+00:27:23,377 --> 00:27:25,279
+是昨天通过
+TestFlight分发的
 
 
 527
-00:26:59,646 --> 00:27:02,306
-to view crashes is open
-the Organizer window.
+00:27:25,345 --> 00:27:26,079
+我点击它
 
 
 528
-00:27:02,886 --> 00:27:07,576
-On the left side of the window,
-Xcode will download information
+00:27:27,781 --> 00:27:31,185
+Xcode会在下面下载
+全部最近的崩溃信息
 
 
 529
-00:27:07,576 --> 00:27:10,736
-about all of the apps that my
-development team has uploaded
+00:27:31,985 --> 00:27:35,389
+它们会按照出现频率排序 
+列表最上面的
 
 
 530
-00:27:10,856 --> 00:27:13,606
-to iTunes Connect for the
-App Store or TestFlight.
+00:27:35,822 --> 00:27:38,859
+当然就是测试者
+遇到最多的问题
 
 
 531
-00:27:14,426 --> 00:27:15,236
-I'll choose trivia.
+00:27:40,394 --> 00:27:42,763
+在右边我能看到
+崩溃的回溯跟踪
 
 
 532
-00:27:15,236 --> 00:27:18,676
-On the right, I can
-choose which build
+00:27:44,131 --> 00:27:46,266
+Xcode会很贴心地
+以美丽的浅澄色
 
 
 533
-00:27:18,676 --> 00:27:19,936
-of trivia I'm interested in.
+00:27:46,333 --> 00:27:48,268
+高亮其中的一个
+Stack框架 
 
 
 534
-00:27:20,536 --> 00:27:23,366
-This build 55 at the top
-of the list is the one
+00:27:49,069 --> 00:27:51,271
+这样我就知道app 
+可能有问题
 
 
 535
-00:27:23,366 --> 00:27:25,306
-that we distributed through
-TestFlight yesterday.
+00:27:52,940 --> 00:27:55,509
+尤其是使用日志和登录方法中
 
 
 536
-00:27:25,356 --> 00:27:27,586
-I'll click that.
+00:27:55,576 --> 00:27:57,511
+app发生崩溃的地方
 
 
 537
-00:27:27,766 --> 00:27:29,836
-Underneath Xcode will
-download information
+00:27:58,378 --> 00:28:01,248
+这与凯特刚才使用
+Address 
 
 
 538
-00:27:29,836 --> 00:27:31,196
-about all of the top crashes.
+00:28:01,315 --> 00:28:03,317
+Sanitizer
+捕获并修复的崩溃很相似
 
 
 539
-00:27:31,976 --> 00:27:34,966
-These are sorted by frequency of
-occurrence, the one at the top
+00:28:03,517 --> 00:28:05,552
+我最喜欢这种故障报告
+因为会自动修复
 
 
 540
-00:27:34,966 --> 00:27:36,736
-of the list is naturally the one
+00:28:05,619 --> 00:28:07,020
+我看着就行
 
 
 541
-00:27:36,736 --> 00:27:38,846
-that our testers
-experienced the most often.
+00:28:08,722 --> 00:28:10,657
+我会点击窗口上面的
+这个按钮
 
 
 542
-00:27:39,236 --> 00:27:44,016
-To the right I can see the
-back trace for this crash.
+00:28:10,724 --> 00:28:11,959
+把它标记为“已解决”。
 
 
 543
-00:27:44,146 --> 00:27:46,316
-Xcode helpfully highlights
-one of the Stack frames
+00:28:13,460 --> 00:28:17,097
+通过点击窗口下方的过滤器
 
 
 544
-00:27:46,316 --> 00:27:48,256
-in a beautiful orangey
-salmon color,
+00:28:17,598 --> 00:28:19,733
+我还能让Xcode 
+过滤已经解决的崩溃
 
 
 545
-00:27:49,066 --> 00:27:51,256
-that tells me something
-fishy is happening in my app.
+00:28:21,502 --> 00:28:24,171
+我可以集中精力
+解决尚未修复的崩溃
 
 
 546
-00:27:52,946 --> 00:27:55,536
-In particular that's where
-my app crashed inside
+00:28:25,172 --> 00:28:26,473
+我们刚才已经小试身手了
 
 
 547
-00:27:55,536 --> 00:27:58,106
-of this usage log
-and log in method.
+00:28:26,540 --> 00:28:27,875
+让我们再来看看下个崩溃
 
 
 548
-00:27:58,366 --> 00:28:01,276
-That looks similar to the
-crash that Kate just found
+00:28:28,642 --> 00:28:31,478
+这次是在启动画面视图控制
+器内部崩溃的
 
 
 549
-00:28:01,276 --> 00:28:02,916
-and fixed using the
-Address Sanitizer.
+00:28:31,812 --> 00:28:34,481
+即app漂亮的着陆页那里
+你可以在那里看到
 
 
 550
-00:28:03,546 --> 00:28:05,206
-That's my favorite type of
-bug report, I don't have
+00:28:34,548 --> 00:28:35,883
+由你的朋友的图像组成的网格
 
 
 551
-00:28:05,246 --> 00:28:07,666
-to do anything since
-I watched her fix it.
+00:28:36,183 --> 00:28:37,851
+我们想编一个阵列索引
 
 
 552
-00:28:08,366 --> 00:28:10,706
-I'm going to go ahead
-and mark it as resolved
+00:28:38,018 --> 00:28:39,987
+但是我们的索引可能
+超过了阵列界限
 
 
 553
-00:28:10,706 --> 00:28:13,836
-by clicking this button
-on top of the window.
+00:28:40,053 --> 00:28:41,688
+我想修复这个崩溃
 
 
 554
-00:28:13,836 --> 00:28:17,106
-I can have Xcode filter out the
-crashes I have already resolved
+00:28:42,389 --> 00:28:44,725
+我会点击Open
+和Project按钮
 
 
 555
-00:28:17,606 --> 00:28:21,366
-by clicking the filter in
-the bottom of the window.
+00:28:44,791 --> 00:28:48,362
+先点击后者
+再点击前者 回到代码中
 
 
 556
-00:28:21,516 --> 00:28:24,026
-Now I can focus on the crashes
-that I still need to fix.
+00:28:50,364 --> 00:28:52,533
+现在Xcode不仅
+打开了我的项目 
 
 
 557
-00:28:25,156 --> 00:28:26,536
-We have warmed up with
-a pretty easy one.
+00:28:52,633 --> 00:28:54,868
+还神奇地把我刚刚
+在右边整理器中
 
 
 558
-00:28:26,536 --> 00:28:27,876
-Let's take a look
-at the next crash.
+00:28:54,935 --> 00:28:56,503
+查看的崩溃报告传送到了
 
 
 559
-00:28:28,656 --> 00:28:29,796
-This time we're crashing inside
+00:28:56,937 --> 00:28:59,239
+侦错导航器那里
+我就可以点击
 
 
 560
-00:28:29,796 --> 00:28:31,486
-of our splash screen
-view controller,
+00:28:59,306 --> 00:29:00,774
+Stack Frames，
 
 
 561
-00:28:31,826 --> 00:28:34,526
-the beautiful landing page in
-the app where you see a grid
+00:29:00,841 --> 00:29:04,278
+并导航崩溃报告和源代码
 
 
 562
-00:28:34,526 --> 00:28:35,646
-of your friends' images.
+00:29:06,280 --> 00:29:08,615
+我们好像遇到了下一影像法
 
 
 563
-00:28:36,186 --> 00:28:37,906
-It looks like we're
-indexing into an array
+00:29:09,383 --> 00:29:12,152
+这看起来像是乔恩昨天
 
 
 564
-00:28:38,006 --> 00:28:40,116
-and we might have indexed
-beyond the array's bounds.
+00:29:12,219 --> 00:29:14,054
+到我办公室谈到的
+他遇到的崩溃
 
 
 565
-00:28:40,116 --> 00:28:41,676
-I would like to try
-fixing this crash.
+00:29:15,322 --> 00:29:17,824
+我们正在给朋友图像阵列
 
 
 566
-00:28:42,386 --> 00:28:44,766
-I can jump right into my source
-code by clicking the Open
+00:29:17,891 --> 00:29:20,494
+编索引并增加一个计数器
 
 
 567
-00:28:44,766 --> 00:28:48,386
-and Project button, selecting my
-project, and then clicking Open.
+00:29:21,495 --> 00:29:24,231
+我们到达阵列边缘时
+我们把计数器设回零
 
 
 568
-00:28:48,916 --> 00:28:52,546
-Now, Xcode has not
-only opened my project,
+00:29:24,598 --> 00:29:28,035
+这里有一个
+容易忽略的错误
 
 
 569
-00:28:52,646 --> 00:28:54,886
-it has also magically
-transported the crash log
+00:29:28,368 --> 00:29:30,304
+这里应该相等或者更大
 
 
 570
-00:28:54,886 --> 00:28:57,196
-that I was just viewing
-in the organizer right
+00:29:30,370 --> 00:29:31,438
+我来修复它
 
 
 571
-00:28:57,196 --> 00:29:00,356
-into the Debug navigator where
-I can click through Stack Frames
+00:29:32,339 --> 00:29:34,274
+如果你的朋友数量不是很多
 
 
 572
-00:29:00,816 --> 00:29:02,696
-and navigate through
-my crash log
+00:29:34,341 --> 00:29:35,475
+你就很容易遇到这个崩溃
 
 
 573
-00:29:02,696 --> 00:29:04,946
-and source code side-by-side.
+00:29:35,809 --> 00:29:37,611
+看来乔恩能发现
+这个问题不是没有原因的
 
 
 574
-00:29:05,926 --> 00:29:08,626
-It looks like we're crashing
-into the next image method.
+00:29:39,780 --> 00:29:42,249
+现在我回到整理器中
+修复更多崩溃
 
 
 575
-00:29:09,376 --> 00:29:12,186
-This looks similar to a
-crash I think Jon came
+00:29:42,516 --> 00:29:43,917
+Xcode中的
+新崩溃日志功能
 
 
 576
-00:29:12,186 --> 00:29:14,066
-to my office yesterday to
-tell me he was hitting.
+00:29:43,984 --> 00:29:45,185
+和TestFlight
+配合的很好
 
 
 577
-00:29:15,036 --> 00:29:17,886
-What we're doing is indexing
-through an array of images
+00:29:45,252 --> 00:29:46,420
+能在你推送给客户之前
 
 
 578
-00:29:17,886 --> 00:29:20,496
-of our friends and
-incrementing a counter as we go.
+00:29:46,486 --> 00:29:50,457
+帮助你发现并修复
+大多数关键问题
 
 
 579
-00:29:21,496 --> 00:29:22,776
-When we get to the end
-of the end of the array,
+00:29:50,924 --> 00:29:51,792
+肯 ̆轮到你了
 
 
 580
-00:29:22,776 --> 00:29:25,256
-we set the counter back to zero.
+00:30:00,467 --> 00:30:01,468
+肯奥尔：谢谢你 板井
 
 
 581
-00:29:25,256 --> 00:29:28,086
-We have an easy to miss
-off by one error here.
+00:30:03,871 --> 00:30:09,142
+测试 过去几年来 
+我们一直在向Xcode中
 
 
 582
-00:29:28,366 --> 00:29:30,356
-This should be a greater
-than or equal to check.
+00:30:09,343 --> 00:30:11,178
+添加测试支持
 
 
 583
-00:29:30,406 --> 00:29:31,446
-I'll fix that.
+00:30:11,545 --> 00:30:15,949
+让你能测试应用中
+越来越多的部分
 
 
 584
-00:29:32,346 --> 00:29:34,266
-It looks like you could hit
-this crash really easily
+00:30:16,783 --> 00:30:19,486
+Xcode 5中我们添加了
+一个Test导航器
 
 
 585
-00:29:34,266 --> 00:29:35,476
-if you don't have
-very many friends,
+00:30:19,853 --> 00:30:23,223
+把这个和助理编辑器结合起来
 
 
 586
-00:29:35,816 --> 00:29:37,556
-which probably explains
-why Jon found it.
+00:30:23,290 --> 00:30:25,225
+我们的测试驱动
+开发工作流程就很完美了
 
 
 587
-00:29:39,796 --> 00:29:42,176
-Now I can go back to the
-organizer and fix more crashes.
+00:30:25,959 --> 00:30:29,162
+我们已经介绍了
+XC Test单元测试框架
 
 
 588
-00:29:43,016 --> 00:29:44,576
-The new crash logs
-feature in Xcode
+00:30:30,063 --> 00:30:33,567
+再加上Bots 
+你就可以自动在Xcode
 
 
 589
-00:29:44,576 --> 00:29:47,166
-and TestFlight work great
-together to help you find
+00:30:34,001 --> 00:30:36,470
+服务器上跑单元测试
+实现持续集成
 
 
 590
-00:29:47,166 --> 00:29:49,376
-and fix your most critical
-issues before you ship
+00:30:37,738 --> 00:30:40,607
+Xcode 6中我们
+引入了性能测试
 
 
 591
-00:29:49,376 --> 00:29:50,196
-to your customers.
+00:30:40,874 --> 00:30:43,177
+让你很快找出性能回归
 
 
 592
-00:29:50,926 --> 00:29:51,806
-Now back to Ken.
+00:30:43,877 --> 00:30:46,680
+并为异步API添加测试
 
 
 593
-00:29:53,516 --> 00:29:59,976
-[applause]
+00:30:47,881 --> 00:30:52,519
+在Xcode 7中 
+我们还引入了用户界面测试
 
 
 594
-00:30:00,476 --> 00:30:02,056
->> Ken Orr: Thank you, Itai.
+00:30:54,087 --> 00:30:56,857
+UI测试使你能够
+试app中用户真正看到
 
 
 595
-00:30:03,536 --> 00:30:09,046
-Testing. Over the past few
-years we have continually added
+00:30:57,391 --> 00:31:00,160
+触摸的那一部分
 
 
 596
-00:30:09,356 --> 00:30:11,166
-to the testing support in Xcode.
+00:31:01,261 --> 00:31:02,963
+此类测试非常重要
+因为它们能够帮助你
 
 
 597
-00:30:11,536 --> 00:30:13,796
-Making it possible
-for you to test more
+00:31:03,197 --> 00:31:06,066
+确保app运行时始终
 
 
 598
-00:30:13,796 --> 00:30:15,936
-and more parts of
-your application.
+00:31:06,133 --> 00:31:08,669
+和初始目的保持一致
 
 
 599
-00:30:16,776 --> 00:30:19,476
-In Xcode 5 we added
-a Test navigator.
+00:31:09,269 --> 00:31:11,772
+即使你稍后做出变动
+改进也不影响
 
 
 600
-00:30:19,846 --> 00:30:23,246
-When you combine that with the
-assistant editor we have a nice
+00:31:14,875 --> 00:31:17,911
+和我们添加到Xcode中的
+其它测试功能一样
 
 
 601
-00:30:23,246 --> 00:30:25,216
-workflow for test-driven
-development.
+00:31:18,278 --> 00:31:20,480
+UI Tests也和
+code 服务器配合的很好
 
 
 602
-00:30:25,726 --> 00:30:29,166
-We have introduced XC Test
-our unit-testing framework,
+00:31:21,882 --> 00:31:23,617
+这对UI Test来说
+十分重要
 
 
 603
-00:30:30,076 --> 00:30:33,666
-along with Bots which let you
-automatically run the unit tests
+00:31:24,218 --> 00:31:26,386
+因为运行它们耗时比较久
 
 
 604
-00:30:34,016 --> 00:30:36,466
-on Xcode Server for
-continuous integration.
+00:31:27,287 --> 00:31:29,890
+在Xcode服务器上
+你还能使用
 
 
 605
-00:30:37,296 --> 00:30:40,616
-In Xcode 6, we introduced
-performance testing
+00:31:29,957 --> 00:31:32,326
+比你自己办公桌上多的多设备
 
 
 606
-00:30:40,616 --> 00:30:43,446
-to quickly let you identify
-performance regressions
+00:31:33,193 --> 00:31:35,596
+这样你的测试覆盖范围更广
 
 
 607
-00:30:43,576 --> 00:30:46,406
-and added testing for
-asynchronous APIs.
+00:31:36,330 --> 00:31:38,265
+频率更高
 
 
 608
-00:30:46,406 --> 00:30:52,526
-In Xcode 7, we're introducing
-User Interface testing.
+00:31:39,933 --> 00:31:41,935
+说到覆盖范围
+为了完善Xcode 7 
 
 
 609
-00:30:53,766 --> 00:30:57,266
-The UI testing lets you
-test the part of the app
+00:31:42,002 --> 00:31:44,137
+我们还添加了测试 Code
+Coverage
 
 
 610
-00:30:57,386 --> 00:31:00,226
-that users actually
-see and touch.
+00:31:44,771 --> 00:31:49,176
+你可以在Schemes 
+Test action这里
 
 
 611
-00:31:01,326 --> 00:31:02,766
-The tests like this
-are so important
+00:31:49,243 --> 00:31:51,178
+打开 Code
+Coverage
 
 
 612
-00:31:03,206 --> 00:31:06,116
-because they help you ensure
-that your app continues
+00:31:51,845 --> 00:31:54,414
+当你打开后Xcode
+在编译你的app时
 
 
 613
-00:31:06,116 --> 00:31:08,676
-to function the way you
-originally intended.
+00:31:54,581 --> 00:31:56,083
+会使用特殊工具
 
 
 614
-00:31:09,256 --> 00:31:14,986
-Even as you make changes
-and enhancements over time.
+00:31:56,550 --> 00:32:00,087
+轻松跟踪执行的各行代码
 
 
 615
-00:31:15,396 --> 00:31:17,906
-Like all the testing features
-we have added to Xcode,
+00:32:00,888 --> 00:32:02,689
+你运行一系列测试后
 
 
 616
-00:31:18,286 --> 00:31:20,486
-UI Tests work grade
-with Xcode Server.
+00:32:03,190 --> 00:32:05,325
+你会注意到源代码
+编辑器右边这里
 
 
 617
-00:31:21,896 --> 00:31:23,736
-This is particularly
-important for UI Test
+00:32:05,392 --> 00:32:07,561
+有一个 New Code
+Coverage 栏
 
 
 618
-00:31:24,116 --> 00:31:26,446
-because they may take
-a bit longer to run.
+00:32:08,562 --> 00:32:10,497
+你可以很快对调用的代码
 
 
 619
-00:31:27,286 --> 00:31:29,936
-Also on Xcode Server you
-will oftentimes have access
+00:32:10,564 --> 00:32:14,001
+有一个直观感受
 
 
 620
-00:31:29,936 --> 00:31:32,336
-to many more devices than
-you would at your desk.
+00:32:15,068 --> 00:32:17,638
+更重要的是 你可以知道 
+哪行代码未被调用
 
 
 621
-00:31:33,196 --> 00:31:35,606
-This will let you get a
-broader range of coverage
+00:32:18,805 --> 00:32:22,342
+琼会给大家演示下
+Xcode 7的UI测试
 
 
 622
-00:31:36,316 --> 00:31:38,886
-and let you get that
-coverage more often.
+00:32:29,516 --> 00:32:30,551
+琼威·福尔：谢谢 肯
 
 
 623
-00:31:39,656 --> 00:31:44,066
-Speaking of coverage, to
-round things out in Xcode 7,
+00:32:31,818 --> 00:32:34,788
+使用Xcode中的UI
+Testing 真的很容易
 
 
 624
-00:31:44,776 --> 00:31:46,566
-we have added Code
-Coverage for testing.
+00:32:36,957 --> 00:32:41,662
+像这样 你添加一个新
+UI Testing目标
 
 
 625
-00:31:47,786 --> 00:31:51,186
-You can turn on Code Coverage
-here in the Schemes Test action,
+00:32:42,362 --> 00:32:44,631
+如果你之前用过单元测试
 
 
 626
-00:31:51,726 --> 00:31:54,426
-and when you do, Xcode
-will build your app
+00:32:44,798 --> 00:32:46,733
+你可以把它
+当做一个为你创建的
 
 
 627
-00:31:54,586 --> 00:31:58,026
-with special instrumentation
-that lets it track exactly
+00:32:47,201 --> 00:32:49,102
+测试用例子类别和方法
 
 
 628
-00:31:58,026 --> 00:32:00,096
-which lines of code
-are being executed.
+00:32:50,070 --> 00:32:52,472
+如果这是一个单元测试
 
 
 629
-00:32:00,706 --> 00:32:02,706
-After you run a suite of tests,
+00:32:52,573 --> 00:32:55,242
+你就需要徒手写出测试方法
 
 
 630
-00:32:03,186 --> 00:32:05,856
-you will notice the New
-Code Coverage bar here
+00:32:56,109 --> 00:32:58,679
+但现在 我们通过记录应用
 
 
 631
-00:32:05,856 --> 00:32:07,546
-on the right side of
-the source code editor.
+00:32:58,846 --> 00:33:01,915
+为你写好了测试方法
 
 
 632
-00:32:08,566 --> 00:32:10,426
-This gives you a quick
-visual indication
+00:33:02,416 --> 00:33:03,150
+我们来看一下
 
 
 633
-00:32:10,426 --> 00:32:13,996
-that shows you exactly which
-lines of code were called,
+00:33:08,388 --> 00:33:10,924
+我把光标放到Test
+Method这里
 
 
 634
-00:32:13,996 --> 00:32:17,626
-more importantly it shows
-you which ones were not.
+00:33:11,124 --> 00:33:14,261
+点击窗口底部的
 
 
 635
-00:32:18,806 --> 00:32:22,466
-Here to give us a demo of UI
-testing in Xcode 7 is Joar.
+00:33:14,528 --> 00:33:16,530
+Record按钮 开始记录
 
 
 636
-00:32:23,516 --> 00:32:29,056
-[applause]
+00:33:18,365 --> 00:33:22,336
+记录过程中我的
+应用收到的任何事件
 
 
 637
-00:32:29,556 --> 00:32:30,066
->> Joar Wingfors:
-Thank you, Ken.
+00:33:22,402 --> 00:33:24,605
+都会把源代码投射到我的
+Test Method中
 
 
 638
-00:32:30,616 --> 00:32:36,806
-It is really easy to get started
-with UI Testing in Xcode.
+00:33:25,372 --> 00:33:27,574
+我要配置一个新游戏进行测试
 
 
 639
-00:32:36,956 --> 00:32:41,666
-You add a new UI Testing
-target, like I have done here.
+00:33:27,808 --> 00:33:30,210
+我会点击开始新游戏按钮
 
 
 640
-00:32:42,366 --> 00:32:44,636
-If you have used
-unit testing before,
+00:33:34,648 --> 00:33:37,084
+注意 我点击按钮后
+对应的那行代码
 
 
 641
-00:32:44,796 --> 00:32:46,726
-you recognize getting
-a test case sub class
+00:33:37,150 --> 00:33:39,386
+就立即在源码编辑器中
+显示了出来
 
 
 642
-00:32:46,726 --> 00:32:49,106
-and the method created for you.
+00:33:41,255 --> 00:33:42,723
+我要选一个类
 
 
 643
-00:32:50,076 --> 00:32:52,466
-Had this been a unit
-test, you would now have
+00:33:42,890 --> 00:33:44,725
+这次测试
+我选择sci-fi。
 
 
 644
-00:32:52,566 --> 00:32:55,236
-to write the test method
-using your bare hands.
+00:33:46,393 --> 00:33:50,130
+点击下一步 
+我会邀请几个玩家
 
 
 645
-00:32:56,126 --> 00:33:01,916
-Now we can write this for you
-recording the application.
+00:33:50,464 --> 00:33:52,466
+爱丽丝 布兰登 
 
 
 646
-00:33:02,426 --> 00:33:08,156
-Let's take a look.
+00:33:52,866 --> 00:33:54,935
+我搜索一下史黛西
 
 
 647
-00:33:08,416 --> 00:33:12,146
-I put my curser in the Test
-Method and start recording
+00:33:56,904 --> 00:33:57,571
+找到了
 
 
 648
-00:33:12,336 --> 00:33:18,176
-by clicking the Record button
-at the bottom of the window.
+00:33:59,439 --> 00:34:00,107
+我点击下
 
 
 649
-00:33:18,326 --> 00:33:20,826
-While recording any
-event received
+00:34:00,874 --> 00:34:05,913
+点击下一步 最后点击开关
+标记游戏为“准备就绪”
 
 
 650
-00:33:21,106 --> 00:33:22,356
-by my application will result
+00:34:07,381 --> 00:34:10,184
+这样我就搞定了
+想要记录的内容
 
 
 651
-00:33:22,356 --> 00:33:24,376
-in source code being
-emitted into my Test Method.
+00:34:10,317 --> 00:34:12,553
+我们看看最后得到了什么
 
 
 652
-00:33:24,956 --> 00:33:27,566
-For this test I want to
-configure a new game.
+00:34:15,621 --> 00:34:17,456
+第一行代码中包含了
 
 
 653
-00:33:27,796 --> 00:33:30,216
-I'll go ahead, tap the
-Start a New Game button.
+00:34:17,658 --> 00:34:20,027
+一条寻找标记为开始
+新游戏的按钮的查询
 
 
 654
-00:33:30,746 --> 00:33:37,076
-Note that as I tap the
-button, the corresponding line
+00:34:20,594 --> 00:34:23,730
+然后返回了一个元素
 
 
 655
-00:33:37,076 --> 00:33:39,376
-of code showed up in the
-Source Editor right away.
+00:34:24,264 --> 00:34:26,266
+这个元素是应用中
+实际按钮的代理
 
 
 656
-00:33:40,936 --> 00:33:42,726
-Here I'm asked to pick a genre,
+00:34:27,100 --> 00:34:29,937
+经由这个元素我现在就可以
+读取按钮属性
 
 
 657
-00:33:42,966 --> 00:33:45,346
-I'll go with sci-fi
-for this test.
+00:34:30,003 --> 00:34:32,639
+并发送事件
+即一次屏幕触摸
 
 
 658
-00:33:46,076 --> 00:33:53,226
-Tap next. I'll invite a couple
-of players, Alice, Brandon,
+00:34:35,775 --> 00:34:38,145
+下面几行代码
+包含了选择sci-fi类
 
 
 659
-00:33:53,326 --> 00:33:54,926
-I'll search for Stacy.
+00:34:38,212 --> 00:34:41,514
+点击“下一步”按钮的
+源代码
 
 
 660
-00:33:56,036 --> 00:33:57,546
-There she is.
+00:34:44,150 --> 00:34:46,853
+UI Testing 
+APIs设计的非常易读
 
 
 661
-00:33:58,296 --> 00:34:00,056
-I'll tap done.
+00:34:47,254 --> 00:34:49,889
+你能看到写很容易
 
 
 662
-00:34:00,866 --> 00:34:05,916
-Tap next. Finally tap the switch
-to mark the game as ready.
+00:34:50,324 --> 00:34:52,793
+因此能帮你进行鲁棒测试
 
 
 663
-00:34:07,366 --> 00:34:10,176
-With this I'm done with -- with
-what I wanted to record here.
+00:34:54,862 --> 00:34:57,097
+既然是测试， 
+那就需要真的测试某些东西，
 
 
 664
-00:34:10,306 --> 00:34:15,436
-Let's take a look with
-what we ended up with.
+00:34:57,164 --> 00:34:59,733
+它也确实这么做了
 
 
 665
-00:34:15,626 --> 00:34:17,456
-This first line of
-code contains a query
+00:35:00,767 --> 00:35:02,803
+如果我原样运行测试，
+它会隐性验证
 
 
 666
-00:34:17,646 --> 00:34:20,016
-to find a button label
-start a new game,
+00:35:02,903 --> 00:35:05,472
+我交互的所有控件
 
 
 667
-00:34:20,585 --> 00:34:23,716
-and it returns what we call an
-element, an element is a proxy
+00:35:05,873 --> 00:35:09,343
+同时 我还能继续记录
 
 
 668
-00:34:24,266 --> 00:34:26,076
-of the actual button
-in the application.
+00:35:09,409 --> 00:35:12,346
+并且如果通不过测
+试就让其失败
 
 
 669
-00:34:27,085 --> 00:34:29,936
-Using this element I can now
-access properties of the button
+00:35:14,114 --> 00:35:16,016
+除了这一隐性验证
 
 
 670
-00:34:29,985 --> 00:34:33,266
-and also send events,
-in this case, a tap.
+00:35:16,083 --> 00:35:17,551
+我还非常希望在测试中
 
 
 671
-00:34:35,456 --> 00:34:38,176
-These next couple of lines
-contains the source code
+00:35:17,684 --> 00:35:20,254
+在不同的点上
 
 
 672
-00:34:38,176 --> 00:34:44,065
-for selecting the sci-fi genre
-and for tapping the Next button.
+00:35:20,320 --> 00:35:22,990
+对我的应用的其它方面
+进行显性验证
 
 
 673
-00:34:44,156 --> 00:34:46,856
-We designed the UI Testing
-APIs to be easy to read here,
+00:35:24,157 --> 00:35:27,094
+在这个测试中 
+我选择了一个特定类
 
 
 674
-00:34:47,255 --> 00:34:49,666
-as you see here,
-to be easy to write
+00:35:27,528 --> 00:35:29,596
+并邀请了一组特定的玩家
 
 
 675
-00:34:49,666 --> 00:34:53,436
-and to help you produce
-robust tests.
+00:35:30,931 --> 00:35:33,467
+我们再向测试中添加几组声明
 
 
 676
-00:34:54,576 --> 00:34:57,146
-Now for this to be
-a test it would have
+00:35:33,534 --> 00:35:35,235
+确保我们得得到想要的结果
 
 
 677
-00:34:57,146 --> 00:34:59,506
-to actually test something,
-and it already does.
+00:35:40,240 --> 00:35:44,444
+这些声明验证了
+应用中上一个屏幕中
 
 
 678
-00:35:00,776 --> 00:35:02,636
-If I were to run
-this test as-is,
+00:35:44,511 --> 00:35:45,979
+UI有包含类名
 
 
 679
-00:35:02,916 --> 00:35:05,456
-it would implicitly validate
-that all the controls
+00:35:46,313 --> 00:35:49,650
+以及玩家名称的元素
 
 
 680
-00:35:05,886 --> 00:35:09,806
-that I interacted with while
-recording are still available
+00:35:51,485 --> 00:35:53,287
+有了这些声明，
+我就可以运行测试
 
 
 681
-00:35:09,806 --> 00:35:12,236
-to me and fail a
-test if they're not.
+00:35:53,387 --> 00:35:55,923
+确保它如期工作
 
 
 682
-00:35:14,116 --> 00:35:16,086
-In addition to this
-implicit validation,
+00:36:05,132 --> 00:36:05,799
+没问题
 
 
 683
-00:35:16,086 --> 00:35:17,366
-I would typically also want
+00:36:18,145 --> 00:36:19,613
+测试通过了
 
 
 684
-00:35:17,366 --> 00:35:20,716
-to explicitly validate other
-aspects of my application state
+00:36:27,354 --> 00:36:28,956
+琼威·福尔：这是对
+Xcode 7中
 
 
 685
-00:35:21,016 --> 00:35:22,856
-at different points
-throughout the test.
+00:36:29,022 --> 00:36:30,224
+测试的快速概览
 
 
 686
-00:35:24,156 --> 00:35:27,086
-In this test, I selected
-a specific genre
+00:36:31,625 --> 00:36:33,227
+建议你们都试试
 
 
 687
-00:35:27,536 --> 00:35:29,436
-and invited a specific
-set of players.
+00:36:33,927 --> 00:36:35,028
+你会爱上它的
 
 
 688
-00:35:30,936 --> 00:35:33,456
-Let's add a couple of
-assertions to the test
+00:36:35,395 --> 00:36:37,464
+最重要的是
+你们的客户会爱上它
 
 
 689
-00:35:33,586 --> 00:35:40,036
-to make sure that's
-what we ended up with.
+00:36:38,198 --> 00:36:38,866
+又轮到你了 肯
 
 
 690
-00:35:40,246 --> 00:35:44,526
-These assertions validate that
-there are elements in the UI
+00:36:47,007 --> 00:36:48,175
+肯奥尔：很好 谢谢你 琼
 
 
 691
-00:35:44,526 --> 00:35:45,966
-of the last screen
-of the application
+00:36:50,911 --> 00:36:51,645
+今天上午
 
 
 692
-00:35:46,326 --> 00:35:48,106
-that contains the
-name of the genre
+00:36:51,845 --> 00:36:54,381
+我们仅仅看了少数几项特性
 
 
 693
-00:35:48,336 --> 00:35:49,666
-and names of these players.
+00:36:55,682 --> 00:36:57,684
+但愿它们激起了你的兴趣
 
 
 694
-00:35:51,076 --> 00:35:53,276
-With these assertions in
-place, I will be allowed
+00:36:58,118 --> 00:37:00,153
+本周你还会看到
+更多不错的会话
 
 
 695
-00:35:53,386 --> 00:35:55,916
-to run the test to make sure
-it performs as expected.
+00:37:00,220 --> 00:37:01,622
+让你能够更加深入了解
 
 
 696
-00:36:05,166 --> 00:36:05,546
-No hands.
+00:37:01,688 --> 00:37:03,690
+Xcode 7的细节内容
 
 
 697
-00:36:18,156 --> 00:36:19,626
-The test passed.
+00:37:04,691 --> 00:37:06,627
+如果你还没有
+下载新 Xcode 
 
 
 698
-00:36:20,516 --> 00:36:27,006
-[applause]
+00:37:06,693 --> 00:37:08,695
+我建议你去下载 
+并且告诉我你的意见
 
 
 699
-00:36:27,506 --> 00:36:28,756
->> Joar Wingfors: This
-is a quick overview
-
-
-700
-00:36:28,756 --> 00:36:30,126
-of testing in Xcode 7.
-
-
-701
-00:36:31,616 --> 00:36:33,056
-I think you should all try it.
-
-
-702
-00:36:33,056 --> 00:36:35,666
-I think you'll love it.
-
-
-703
-00:36:35,666 --> 00:36:37,476
-More importantly, I think
-your customers will.
-
-
-704
-00:36:38,266 --> 00:36:38,806
-Back to you, Ken.
-
-
-705
-00:36:39,516 --> 00:36:46,506
-[applause]
-
-
-706
-00:36:47,006 --> 00:36:47,206
->> Ken Orr: Great.
-
-
-707
-00:36:47,306 --> 00:36:47,966
-Thank you, Joar.
-
-
-708
-00:36:50,906 --> 00:36:52,446
-We have looked at just a few
-
-
-709
-00:36:52,446 --> 00:36:54,396
-of the many new features
-this morning.
-
-
-710
-00:36:55,666 --> 00:36:57,696
-I hope you're excited
-by what you've seen,
-
-
-711
-00:36:58,116 --> 00:37:00,166
-and you can see even
-more throughout this week
-
-
-712
-00:37:00,166 --> 00:37:01,626
-at the many great
-sessions which will go
-
-
-713
-00:37:01,626 --> 00:37:03,706
-into much more detail
-on Xcode 7.
-
-
-714
-00:37:04,676 --> 00:37:05,946
-If you haven't already,
-I encourage you
-
-
-715
-00:37:05,946 --> 00:37:08,466
-to download the new Xcode and
-let us know what you think.
-
-
-716
-00:37:08,466 --> 00:37:09,836
-Thank you very much.
-
-
-717
-00:37:10,508 --> 00:37:12,508
-[applause]
+00:37:09,329 --> 00:37:09,997
+非常感谢
 

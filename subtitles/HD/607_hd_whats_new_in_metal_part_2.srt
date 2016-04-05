@@ -1,4390 +1,3745 @@
 1
-00:00:22,516 --> 00:00:28,026
-[ Applause ]
+00:00:20,053 --> 00:00:23,590
+在Metal中有什么新内容
+第二部分
 
 
 2
-00:00:28,526 --> 00:00:30,126
->> DAN OMACHI: Good morning,
-welcome to the second part
+00:00:23,657 --> 00:00:24,491
+谢谢
 
 
 3
-00:00:30,126 --> 00:00:31,816
-of our What's New in
-Metal presentation.
+00:00:28,495 --> 00:00:31,832
+早上好 欢迎来到第二部分的讲座
+Metal展示中有什么新内容
 
 
 4
-00:00:32,036 --> 00:00:33,436
-My name is Dan Omachi.
+00:00:32,031 --> 00:00:33,467
+我叫丹·大町市
 
 
 5
-00:00:33,866 --> 00:00:36,616
-I'm an engineer in Apple's
-GPU software frameworks team.
+00:00:33,867 --> 00:00:36,603
+我是苹果GPU软件架构团队的工程师
 
 
 6
-00:00:37,206 --> 00:00:40,226
-Today my colleague Anna
-Tikhonova and I will talk
+00:00:37,237 --> 00:00:40,407
+今天我的同事 安娜·吉洪诺夫
+和我将会谈一谈
 
 
 7
-00:00:40,226 --> 00:00:42,756
-about technologies
-that build upon Metal,
+00:00:40,474 --> 00:00:42,809
+基于Metal的技术
 
 
 8
-00:00:43,166 --> 00:00:46,266
-helping you deliver great
-rendering experiences
+00:00:43,143 --> 00:00:46,313
+有助于在
+iOS 和OS X上向你提供令人
 
 
 9
-00:00:46,376 --> 00:00:49,136
-on both iOS and OS X.
+00:00:46,380 --> 00:00:48,448
+惊叹的渲染体验
 
 
 10
-00:00:50,416 --> 00:00:53,506
-So this is the second
-of three sessions
+00:00:50,717 --> 00:00:53,520
+因此这是三个讲座中的第二部分
 
 
 11
-00:00:53,606 --> 00:00:56,586
-at this years WWDC
-talking about Metal.
+00:00:53,587 --> 00:00:56,690
+在本年度讨论Metal的WWDC上
 
 
 12
-00:00:57,546 --> 00:01:01,386
-In the first session, Rob
-Duraf talked about developments
+00:00:57,524 --> 00:00:58,492
+第一个讲座中
 
 
 13
-00:01:01,386 --> 00:01:03,266
-in Metal that have
-happened in the past year.
+00:00:58,892 --> 00:01:03,263
+罗布·多啦夫 谈论了
+去年对Metal的开发
 
 
 14
-00:01:04,025 --> 00:01:06,206
-He also described some
-of the new features
+00:01:04,031 --> 00:01:08,235
+他还描述了我们刚刚
+发布的Metal的新功能
 
 
 15
-00:01:06,206 --> 00:01:08,096
-in Metal we just released.
+00:01:09,469 --> 00:01:14,308
+他还描述了它的瘦身功能
+如何与Metal应用完美匹配
 
 
 16
-00:01:09,476 --> 00:01:12,686
-He also described how app
-thinning is a great match
+00:01:16,577 --> 00:01:19,847
+在本次讲座中 我首先要谈到
 
 
 17
-00:01:12,816 --> 00:01:14,316
-for your Metal applications.
+00:01:20,180 --> 00:01:26,687
+Metalkit方便的APIs使你
+更快捷地使用Metal应用
 
 
 18
-00:01:14,856 --> 00:01:19,496
-In this session, I will be
-up here first to talk to you
+00:01:27,487 --> 00:01:32,392
+然后 安娜 将会
+谈论Metal性能着色器架构
 
 
 19
-00:01:19,496 --> 00:01:23,886
-about MetalKit, convenience
-APIs allowing you bring
+00:01:32,926 --> 00:01:36,096
+在具有A8处理器的iOS设备上
 
 
 20
-00:01:23,886 --> 00:01:26,556
-up Metal applications
-much more quickly.
+00:01:36,797 --> 00:01:39,333
+它可为可用的公用数据并行操作
 
 
 21
-00:01:27,486 --> 00:01:30,026
-Then Anna will come up to talk
+00:01:39,399 --> 00:01:42,669
+提供很好的着色器
 
 
 22
-00:01:30,026 --> 00:01:32,356
-about Metal performance
-shaders framework,
+00:01:45,205 --> 00:01:46,640
+明天你将有机会
 
 
 23
-00:01:32,956 --> 00:01:36,086
-which offers great shaders
+00:01:47,040 --> 00:01:50,477
+来听取Metal性能优化技术讲座
 
 
 24
-00:01:36,806 --> 00:01:40,276
-for common data parallel
-operations available
+00:01:50,878 --> 00:01:54,181
+在那里将介绍Metal系统追踪工具
 
 
 25
-00:01:40,276 --> 00:01:42,666
-on iOS devices with
-an A8 processor.
+00:01:54,915 --> 00:02:00,087
+且向你提供一些有效的
+Metal应用的最好的范例
 
 
 26
-00:01:43,186 --> 00:01:46,636
-And tomorrow, you
-will get a chance
+00:02:03,123 --> 00:02:05,025
+现在就开始介绍用于Metal应用的
 
 
 27
-00:01:47,036 --> 00:01:50,416
-to catch the Metal Performance
-Optimization Techniques session,
+00:02:05,225 --> 00:02:07,528
+Metalkit实用功能
 
 
 28
-00:01:50,886 --> 00:01:54,346
-where they will introduce
-the Metal System Trace Tool
+00:02:09,930 --> 00:02:16,003
+因为Metal是一个低级的API
+你要做许多事情来建立和运行
 
 
 29
-00:01:54,926 --> 00:01:57,396
-and provide you with
-some best practices
+00:02:17,771 --> 00:02:20,274
+MetalKit希望使用这个
 
 
 30
-00:01:57,796 --> 00:02:00,356
-for shipping an efficient
-Metal application.
+00:02:20,340 --> 00:02:22,609
+来为经常使用的场景
 
 
 31
-00:02:00,356 --> 00:02:04,966
-So let's get started
-with Metal kit.
+00:02:22,843 --> 00:02:24,945
+提供有效的实现
 
 
 32
-00:02:05,226 --> 00:02:08,186
-Utility functionality
-for your Metal apps.
+00:02:26,013 --> 00:02:29,149
+这样你就可以很容易创建和渲染
 
 
 33
-00:02:09,616 --> 00:02:13,586
-So because Metal is a low
-level API, there are a number
+00:02:29,917 --> 00:02:31,952
+并且我们对标准的库存代码
 
 
 34
-00:02:13,586 --> 00:02:17,616
-of things you need to do
-to get up and running.
+00:02:32,019 --> 00:02:35,689
+增强了性能和稳定性
 
 
 35
-00:02:17,766 --> 00:02:20,346
-MetalKit hopes to help with this
+00:02:35,856 --> 00:02:37,424
+你自己就可以实现
 
 
 36
-00:02:20,346 --> 00:02:22,596
-by providing efficient
-implementation
+00:02:38,158 --> 00:02:40,327
+你需要很少的维护
 
 
 37
-00:02:22,856 --> 00:02:24,956
-for commonly used scenarios.
+00:02:40,794 --> 00:02:43,530
+因为维护的负担从你转到了我们
 
 
 38
-00:02:25,466 --> 00:02:28,576
-This requires less effort
-on your part to get up
+00:02:46,033 --> 00:02:49,970
+这样MetalKit由三部分组成
 
 
 39
-00:02:28,576 --> 00:02:31,936
-and rendering and we offer
-increased performance
+00:02:50,938 --> 00:02:53,240
+第一部分是MetalKit视图
 
 
 40
-00:02:32,056 --> 00:02:35,676
-and stability over the
-standard boilerplate code
+00:02:53,841 --> 00:02:57,644
+一个介于iOS
+和OSX之间的统一的视图类
 
 
 41
-00:02:35,866 --> 00:02:37,416
-that you might implement
-yourself.
+00:02:58,212 --> 00:02:59,580
+用于渲染你的Metal场景
 
 
 42
-00:02:38,156 --> 00:02:41,246
-There is less maintenance
-for you as the burden
+00:03:01,114 --> 00:03:03,083
+第二部分是纹理载入器
 
 
 43
-00:02:41,246 --> 00:02:45,786
-of that maintenance has
-been shifted from you to us.
+00:03:03,684 --> 00:03:08,989
+用于创建磁盘上的图像文件的纹理对象
 
 
 44
-00:02:46,046 --> 00:02:49,966
-So MetalKit consists of
-three main components.
+00:03:09,957 --> 00:03:13,493
+最后
+Metal Kit的模块I/O集成
 
 
 45
-00:02:50,926 --> 00:02:53,236
-First is the MetalKit view.
+00:03:13,861 --> 00:03:17,164
+上载和管理
+来自Metal渲染的网格数据
 
 
 46
-00:02:53,506 --> 00:02:57,656
-A unified view class
-between iOS and OS X
+00:03:20,501 --> 00:03:25,572
+MetalKit视图是获Metal
+视频渲染的最简单的方法
 
 
 47
-00:02:58,206 --> 00:02:59,596
-for rendering your Metal scenes.
+00:03:27,407 --> 00:03:31,144
+它是iOS和OS X的统一类
 
 
 48
-00:03:01,126 --> 00:03:05,666
-Second is the texture loader
-which creates texture objects
+00:03:32,012 --> 00:03:35,749
+它在这个两个操作
+系统上提供了几乎相同的接口
 
 
 49
-00:03:06,016 --> 00:03:08,576
-from image files on disk.
+00:03:36,149 --> 00:03:42,289
+但是它本身是iOS的UI视图
+的子类以及OSX上的NS视图的子类
 
 
 50
-00:03:09,966 --> 00:03:14,556
-And finally, Metal kit's model
-I/O integration which loads
+00:03:44,725 --> 00:03:48,462
+它的主要工作是
+为你管理可显示渲染目标
 
 
 51
-00:03:14,676 --> 00:03:17,176
-and manages mesh data
-from Metal rendering.
+00:03:49,396 --> 00:03:51,265
+并且为这些渲染目标
 
 
 52
-00:03:20,506 --> 00:03:23,366
-MetalKit view is
-the simplest way
+00:03:51,331 --> 00:03:53,534
+自动产生渲染路径描述符
 
 
 53
-00:03:23,486 --> 00:03:25,556
-to get Metal rendering
-on screen.
+00:03:55,936 --> 00:03:59,206
+它的超级灵活之处在于
 
 
 54
-00:03:26,136 --> 00:03:31,746
-It's a unified class
-on both iOS and OS X.
+00:03:59,273 --> 00:04:02,209
+它可以执行你的绘制代码
 
 
 55
-00:03:32,006 --> 00:03:34,146
-It offers pretty much
-the same interface
+00:04:03,443 --> 00:04:06,079
+你可以使用一个基于定时器的模式
 
 
 56
-00:03:34,406 --> 00:03:37,546
-on both Operating Systems,
-but naturally it's a subclass
+00:04:06,213 --> 00:04:09,216
+该模式可以在有规律的间隔内
 
 
 57
-00:03:37,546 --> 00:03:42,956
-of UI view for iOS and a
-subclass of NS view on OS X.
+00:04:09,449 --> 00:04:11,618
+与显示同步执行你的绘制代码
 
 
 58
-00:03:43,456 --> 00:03:48,126
-Its main job is to manage
-displayable render targets
+00:04:12,819 --> 00:04:14,288
+或者你可以使用基于事件的模式
 
 
 59
-00:03:48,126 --> 00:03:51,276
-for you, and it creates
-render path descriptors
+00:04:14,354 --> 00:04:18,158
+每当发生触摸或UI事件时
+该模式在就将触发你的绘制代码
 
 
 60
-00:03:51,326 --> 00:03:53,536
-for these render
-targets automatically.
+00:04:18,225 --> 00:04:20,093
+这样你就可以对那个事件做出响应
 
 
 61
-00:03:53,536 --> 00:03:58,906
-Now, it's super flexible
-in terms of the ways
+00:04:21,060 --> 00:04:22,162
+最后也许你可以在
 
 
 62
-00:03:59,276 --> 00:04:02,206
-that it can execute
-your draw code.
+00:04:22,229 --> 00:04:27,067
+你的帧频率下第二线程上的开放环路下
 
 
 63
-00:04:03,436 --> 00:04:05,676
-You can use a timer-based mode
+00:04:27,701 --> 00:04:29,102
+驱动你的绘制代码
 
 
 64
-00:04:06,206 --> 00:04:09,056
-where it will execute your
-draw code at a regular interval
+00:04:32,072 --> 00:04:35,676
+因此有两种
+方法使用MetalKit视图
 
 
 65
-00:04:09,456 --> 00:04:11,416
-in synchronization
-with a display,
+00:04:37,144 --> 00:04:39,580
+最简单的方法是执行一个代表
 
 
 66
-00:04:12,806 --> 00:04:14,366
-or you can use an
-event-based mode
+00:04:39,713 --> 00:04:42,549
+来处理你的绘制及重新调整运行的大小
 
 
 67
-00:04:14,366 --> 00:04:16,776
-which will trigger your
-draw code whenever a touch
+00:04:43,350 --> 00:04:46,687
+在这个实例中
+你可以执行在视图中绘制方法
 
 
 68
-00:04:16,826 --> 00:04:19,836
-or UI event has occurred, so
-you can respond to that event.
+00:04:47,221 --> 00:04:50,390
+来处理你的包括对任何渲染命令编码
 
 
 69
-00:04:21,055 --> 00:04:23,836
-Finally, you can explicitly
-drive your draw code,
+00:04:50,724 --> 00:04:52,459
+的每帧的更新
 
 
 70
-00:04:24,156 --> 00:04:27,066
-perhaps in an open loop
-on a secondary thread
+00:04:53,861 --> 00:04:57,464
+你还可以执行按尺寸布局视图的方法
 
 
 71
-00:04:27,686 --> 00:04:29,096
-at your own frame rate.
+00:04:58,599 --> 00:05:00,834
+来处理你的视图的尺寸的改变
 
 
 72
-00:04:29,726 --> 00:04:35,676
-So there are two approaches
-to using the MetalKit view.
+00:05:01,502 --> 00:05:04,705
+在这里你可以更新投影矩阵
 
 
 73
-00:04:37,146 --> 00:04:39,586
-The simplest approach is
-to implement a delegate
+00:05:05,005 --> 00:05:06,940
+或者改变纹理的大小
 
 
 74
-00:04:39,716 --> 00:04:42,556
-to handle your draw
-and resize operations.
+00:05:07,007 --> 00:05:09,376
+以更好地匹配你的显示区域
 
 
 75
-00:04:43,336 --> 00:04:45,756
-In this case, you would
-implement the draw
+00:05:10,844 --> 00:05:15,315
+如果你有其它的需要改写的视图
 
 
 76
-00:04:45,756 --> 00:04:50,386
-in view method to handle your
-per-frame updates including
+00:05:16,183 --> 00:05:18,552
+可将MetalKit视图设为子类
 
 
 77
-00:04:50,726 --> 00:04:52,456
-encoding any rendering commands.
+00:05:19,620 --> 00:05:21,321
+在iOS的这个实例中
 
 
 78
-00:04:53,846 --> 00:04:56,006
-You would also implement
-the view will layout
+00:05:21,655 --> 00:05:23,757
+你将要改写绘制矩形方法
 
 
 79
-00:04:56,126 --> 00:05:00,836
-with size method to handle
-size changes to your view.
+00:05:25,125 --> 00:05:26,460
+来处理你的每帧更新
 
 
 80
-00:05:01,466 --> 00:05:04,696
-This is where you might
-update your projection matrix
+00:05:27,327 --> 00:05:30,330
+以及布局视图方法来处理大小调整
 
 
 81
-00:05:05,016 --> 00:05:06,966
-or change any texture sizes
+00:05:31,164 --> 00:05:33,834
+同样的在OSX上你要处理
 
 
 82
-00:05:06,996 --> 00:05:09,366
-to better fit your
-displayable area.
+00:05:34,101 --> 00:05:36,637
+你要改写这两种方法绘制矩形
 
 
 83
-00:05:10,836 --> 00:05:14,566
-Now, if you have any other
-pieces of the view that you need
+00:05:36,703 --> 00:05:38,805
+和设置桢大小方法
 
 
 84
-00:05:14,566 --> 00:05:18,536
-to override, you can
-subclass the MetalKit view.
+00:05:44,845 --> 00:05:49,750
+在这里有个设置视图控制器的例子
 
 
 85
-00:05:18,926 --> 00:05:20,896
-And in this case on iOS,
+00:05:49,950 --> 00:05:53,153
+也可以作为我们视图的代表
 
 
 86
-00:05:21,666 --> 00:05:23,566
-you would override
-the draw Rect method
+00:05:54,454 --> 00:05:59,660
+在视图无法加载方法中
+我们在接收到针对视图的一个引用后
 
 
 87
-00:05:25,126 --> 00:05:26,466
-to handle your per-frame updates
+00:06:00,561 --> 00:06:02,963
+我们将我们自己指定为代表
 
 
 88
-00:05:27,336 --> 00:05:30,346
-and the layout subviews
-method to handle resizes.
+00:06:06,900 --> 00:06:11,438
+在OS上特别重要的是我们需要选择
 
 
 89
-00:05:31,156 --> 00:05:33,706
-Likewise on OS X
-you would handle,
+00:06:11,505 --> 00:06:13,373
+和设置一个Metal设备
 
 
 90
-00:05:34,106 --> 00:05:36,516
-you would override these
-two methods, the draw Rect
+00:06:15,375 --> 00:06:18,078
+一旦我们完成了 我们就可以配置
 
 
 91
-00:05:36,516 --> 00:05:38,606
-and set frame size method.
+00:06:18,145 --> 00:06:19,980
+一些视图的功能包括
 
 
 92
-00:05:39,316 --> 00:05:49,756
-So here is an example of
-setting up a view controller
+00:06:20,314 --> 00:06:23,517
+针对色彩、深度和模板缓冲
 
 
 93
-00:05:49,946 --> 00:05:53,166
-that also serves as the
-delegate to our view.
+00:06:23,584 --> 00:06:24,852
+的自定义像素格式
 
 
 94
-00:05:54,446 --> 00:05:58,896
-In the view did load method,
-after we received a reference
+00:06:27,054 --> 00:06:28,655
+我们还可以通过将
 
 
 95
-00:05:59,106 --> 00:06:02,976
-to the view, we will assign
-ourself as the delegate,
+00:06:28,722 --> 00:06:32,526
+采样计数功能增加
+到数值1以上来使用多重采样
 
 
 96
-00:06:04,306 --> 00:06:11,516
-and particularly important on OS
-X is that we will need to choose
+00:06:34,695 --> 00:06:37,231
+或者我们还可以
+设置我们的自定义清除色彩
 
 
 97
-00:06:11,516 --> 00:06:13,376
-and set a Metal device.
+00:06:41,201 --> 00:06:45,639
+这里有个实现每帧更新的
 
 
 98
-00:06:13,976 --> 00:06:18,136
-Once we are done with
-that, we can configure some
+00:06:45,806 --> 00:06:48,575
+MetalKit视图
+的最基本的使用方法
 
 
 99
-00:06:18,136 --> 00:06:21,186
-of the view's properties
-including choosing our own
+00:06:49,510 --> 00:06:53,447
+在我们的绘制视图方法中
+我们叫做视图渲染
 
 
 100
-00:06:21,186 --> 00:06:23,576
-custom pixel formats
-for the color
+00:06:53,714 --> 00:06:55,916
+是render
+past descriptor
 
 
 101
-00:06:23,576 --> 00:06:24,836
-and depth and stencil buffers.
+00:06:55,983 --> 00:06:59,653
+你首次访问每个画面的这个功能
 
 
 102
-00:06:25,516 --> 00:06:28,496
-We can use multisampling
+00:07:00,087 --> 00:07:02,523
+该视图就会调用核心动画
 
 
 103
-00:06:28,706 --> 00:06:32,336
-by increasing the sample count
-property to a value above 1,
+00:07:02,823 --> 00:07:04,658
+并且获得一个可绘制返回
 
 
 104
-00:06:32,336 --> 00:06:41,036
-or we can set our
-custom clear color.
+00:07:05,259 --> 00:07:08,395
+在这里你可以
+对渲染命令编码来进行渲染
 
 
 105
-00:06:41,196 --> 00:06:45,626
-Now, here is a very basic
-usage of the MetalKit view
+00:07:10,497 --> 00:07:12,966
+这样我们就渲染了
+我们最终的render pass
 
 
 106
-00:06:45,796 --> 00:06:48,566
-in the implementation
-of the per frame update.
+00:07:13,467 --> 00:07:15,202
+就会在这个可绘制中展现出来
 
 
 107
-00:06:49,506 --> 00:06:53,336
-In our drawing view method,
-we call the views render,
+00:07:16,670 --> 00:07:18,939
+然后我们就将展现这个可绘制
 
 
 108
-00:06:53,336 --> 00:06:55,466
-I'm sorry, current
-render past descriptor.
+00:07:19,006 --> 00:07:20,741
+它保存在视图的当前的可绘制功能中
 
 
 109
-00:06:55,966 --> 00:06:59,666
-Now, the first time you access
-this property each frame,
+00:07:21,808 --> 00:07:23,343
+并且我们将提交我们的指令缓冲器
 
 
 110
-00:07:00,086 --> 00:07:02,516
-the view will call
-into core animation
+00:07:25,045 --> 00:07:26,914
+因为构建你的每帧更新很重要
 
 
 111
-00:07:02,816 --> 00:07:04,646
-and get a drawable back,
+00:07:27,281 --> 00:07:30,384
+让我花一分钟
 
 
 112
-00:07:05,256 --> 00:07:07,406
-which you can encode
-your rendering commands
+00:07:30,651 --> 00:07:33,053
+来说说管理这些可绘制
 
 
 113
-00:07:07,406 --> 00:07:08,076
-and render to.
+00:07:34,588 --> 00:07:36,890
+这样这个系统中有有限的可绘制
 
 
 114
-00:07:08,686 --> 00:07:12,956
-So we will render our
-final render pass,
+00:07:37,424 --> 00:07:40,027
+都由核心动画来管理
 
 
 115
-00:07:13,466 --> 00:07:15,196
-which will show up
-in this drawable.
+00:07:41,562 --> 00:07:44,164
+由于它们通常只有几个 因为
 
 
 116
-00:07:15,726 --> 00:07:18,996
-And then we will present the
-drawable, which is stored
+00:07:44,231 --> 00:07:45,566
+它们的大小占用了一些空间
 
 
 117
-00:07:18,996 --> 00:07:20,736
-in the view's current
-drawable property
+00:07:46,567 --> 00:07:49,269
+这些可绘制通过许多级别的
 
 
 118
-00:07:21,796 --> 00:07:24,866
-and we will commit
-our command buffer.
+00:07:49,603 --> 00:07:52,472
+显示管道层被同时使用
 
 
 119
-00:07:25,036 --> 00:07:26,776
-Now, because of its importance
+00:07:53,907 --> 00:07:55,209
+这里大致说下它是如何工作的
 
 
 120
-00:07:27,296 --> 00:07:30,396
-in structuring your per-frame
-updates, let me take a minute
+00:07:55,642 --> 00:07:57,644
+首先
+你的应用程序对要在可绘制上渲染的
 
 
 121
-00:07:30,656 --> 00:07:32,896
-to talk about managing
-these drawables.
+00:07:57,711 --> 00:07:58,912
+指令进行编码
 
 
 122
-00:07:33,586 --> 00:07:36,906
-So there are a limited
-pool of drawables
+00:08:00,013 --> 00:08:02,216
+当你的应用程序对下个帧进行编码时
 
 
 123
-00:07:37,436 --> 00:07:40,026
-in this system all
-managed by core animation.
+00:08:02,583 --> 00:08:05,652
+它将那个可绘制向下发送到GPU
 
 
 124
-00:07:41,556 --> 00:07:44,246
-There are only a few of them
-mostly because of their size,
+00:08:05,886 --> 00:08:09,690
+GPU对那个画面进行渲染 核心动画
 
 
 125
-00:07:44,246 --> 00:07:45,456
-they take up some space.
+00:08:09,756 --> 00:08:11,592
+在这个阶段可以和其他层一起
 
 
 126
-00:07:46,556 --> 00:07:49,346
-Now, these drawables
-are concurrently used
+00:08:11,658 --> 00:08:15,028
+对那个可绘制进行合成
 
 
 127
-00:07:49,346 --> 00:07:52,456
-through many stages of
-the display pipeline.
+00:08:17,364 --> 00:08:19,666
+最后显示器获取了可绘制
 
 
 128
-00:07:53,916 --> 00:07:55,206
-Here is roughly how it works.
+00:08:19,733 --> 00:08:21,001
+把它放在屏幕上
 
 
 129
-00:07:55,656 --> 00:07:57,706
-First, your application
-encodes commands
+00:08:21,969 --> 00:08:24,004
+显示器不能用任何东西来替代它
 
 
 130
-00:07:57,706 --> 00:07:58,926
-to be rendered onto
-the drawable.
+00:08:24,071 --> 00:08:25,806
+直到可获得另一个可绘制
 
 
 131
-00:08:00,016 --> 00:08:02,216
-It sends that drawable
-down to the GPU
+00:08:26,106 --> 00:08:29,109
+如果前面的任何阶段花费了很长时间
 
 
 132
-00:08:02,596 --> 00:08:05,656
-as your application encodes
-commands for the next frame
+00:08:29,409 --> 00:08:31,178
+它只能等一会儿
 
 
 133
-00:08:05,876 --> 00:08:09,766
-and the GPU renders to that
-drawable, and core animation
+00:08:31,612 --> 00:08:36,817
+显示器不能将那个可绘制反向循环
 
 
 134
-00:08:09,766 --> 00:08:11,666
-at this stage may do compositing
+00:08:36,884 --> 00:08:38,952
+直到你的帧上有它有可用的东西
 
 
 135
-00:08:11,666 --> 00:08:15,026
-with other layers
-into that drawable.
+00:08:42,322 --> 00:08:47,528
+让我们来看看
+你的带有这些可绘制的应用框架
 
 
 136
-00:08:15,636 --> 00:08:19,726
-And finally, the display
-can take the drawable
+00:08:49,296 --> 00:08:51,732
+首先你调用保留有一个 可绘制的
 
 
 137
-00:08:19,726 --> 00:08:21,016
-and slap it up onto the screen.
+00:08:51,798 --> 00:08:54,268
+MetalKit视图当前渲染描述符
 
 
 138
-00:08:21,966 --> 00:08:24,086
-Now, the display can't
-replace it with anything
+00:08:57,070 --> 00:09:00,107
+然后用你想要的渲染
+指令对那个可绘制进行编码
 
 
 139
-00:08:24,086 --> 00:08:25,806
-until another drawable
-is available.
+00:09:00,774 --> 00:09:06,413
+最后你呈现和提交
+那个会将它发回到核心动画中的可绘制
 
 
 140
-00:08:26,106 --> 00:08:29,106
-So if any of these previous
-stages are taking a lot of time,
+00:09:07,981 --> 00:09:11,985
+一切都好如果我们只是渲染一个
+单独的render pass
 
 
 141
-00:08:29,416 --> 00:08:31,166
-it just has to sit
-there for awhile.
+00:09:12,753 --> 00:09:16,256
+但是很有可能我们将做其他的操作
 
 
 142
-00:08:31,606 --> 00:08:36,876
-Additionally, the display can't
-recycle that drawable back
+00:09:18,058 --> 00:09:20,994
+如一些应用逻辑对
 
 
 143
-00:08:36,876 --> 00:08:39,015
-up to your frame until it
-has something available.
+00:09:22,196 --> 00:09:26,300
+无须可绘制 用offscreen
+render pass进行编码
 
 
 144
-00:08:39,015 --> 00:08:44,986
-So let's take a look at
-your application frame
+00:09:27,734 --> 00:09:31,171
+或运行一些
+物理计算核心程序或其他程序
 
 
 145
-00:08:45,436 --> 00:08:47,456
-with respect to these drawables.
+00:09:33,640 --> 00:09:37,411
+在这种情况下
+我们本质上是在占用我们未来可绘制
 
 
 146
-00:08:48,936 --> 00:08:51,796
-First, you call the MetalKit
-views current render past
+00:09:37,811 --> 00:09:39,346
+因为在后续帧中
 
 
 147
-00:08:51,796 --> 00:08:54,166
-descriptor which
-reserves a drawable.
+00:09:39,613 --> 00:09:41,815
+我们会调用这个当前的渲染描述符
 
 
 148
-00:08:54,166 --> 00:08:59,176
-Then you will encode rendering
-commands that you want
+00:09:42,249 --> 00:09:43,750
+它会呆在那儿
 
 
 149
-00:08:59,176 --> 00:09:02,136
-into that drawable, and
-finally you will present
+00:09:43,851 --> 00:09:47,454
+等待成为可用的 可能等不到
 
 
 150
-00:09:02,236 --> 00:09:03,196
-and commit the drawable
+00:09:47,521 --> 00:09:50,858
+因为我们正在做其它的操作并且将它
 
 
 151
-00:09:03,396 --> 00:09:06,366
-which will release it
-back to core animation.
+00:09:50,924 --> 00:09:52,526
+保留了比我们所需的更长的时间
 
 
 152
-00:09:06,926 --> 00:09:11,266
-Now, this is fine if all we
-are doing is rendering a single
+00:09:52,593 --> 00:09:54,228
+因此要解决这个问题
 
 
 153
-00:09:11,266 --> 00:09:13,156
-render pass, however,
+00:09:54,862 --> 00:09:59,867
+让我们在访问当前渲染描述符之前
+进行这些操作
 
 
 154
-00:09:13,156 --> 00:09:16,246
-it's likely we will
-do other operations
+00:10:00,434 --> 00:10:04,304
+我们注意到这不是
 
 
 155
-00:09:16,856 --> 00:09:24,216
-such as some app logic, encoding
-in offscreen render pass
+00:10:04,404 --> 00:10:05,839
+MetalKit特有的问题
 
 
 156
-00:09:24,456 --> 00:09:28,076
-where we don't actually
-need the drawable,
+00:10:05,906 --> 00:10:11,078
+如果你在直接访问核心动画的时候
+滚动视图 你会注意到这个问题
 
 
 157
-00:09:28,076 --> 00:09:31,166
-or running some compute
-kernels for physics or whatnot.
+00:10:12,179 --> 00:10:17,651
+因此在任何情况下这种信息都很有用
 
 
 158
-00:09:31,716 --> 00:09:36,426
-In this case we are
-essentially hogging the drawable
+00:10:18,519 --> 00:10:23,190
+这里有个每帧渲染更新的更完整的例子
 
 
 159
-00:09:36,426 --> 00:09:39,216
-from our future self because
-in a subsequent frame,
+00:10:23,824 --> 00:10:27,327
+首先 如所述我们想要
+更新我们的应用程序的渲染状态
 
 
 160
-00:09:39,216 --> 00:09:41,816
-we will call this current
-render pass descriptor
+00:10:28,061 --> 00:10:30,097
+对任何的offscreen
+passes进行编码
 
 
 161
-00:09:42,256 --> 00:09:44,996
-and it will sit there
-waiting for a drawable
+00:10:30,163 --> 00:10:31,999
+做任何我们不需要 可绘制的东西
 
 
 162
-00:09:44,996 --> 00:09:47,176
-to become available,
-which may not be the case
+00:10:34,101 --> 00:10:36,203
+然后我们就能够继续像以前那样
 
 
 163
-00:09:47,176 --> 00:09:50,936
-because we are doing these other
-operations and reserving it
+00:10:36,670 --> 00:10:39,206
+获取当前渲染通道描述符
 
 
 164
-00:09:50,936 --> 00:09:52,186
-for much longer than we need to.
+00:10:39,273 --> 00:10:42,276
+为最终的pass的指令进行编码
+然后呈现和提交我们的指令缓冲器
 
 
 165
-00:09:52,606 --> 00:09:54,086
-So to solve this problem,
+00:10:43,010 --> 00:10:45,646
+关键点是这两个阶段
 
 
 166
-00:09:54,876 --> 00:09:58,136
-let's put these operations
-before our access
+00:10:45,846 --> 00:10:48,248
+越靠近越好
 
 
 167
-00:09:58,246 --> 00:09:59,906
-to the current render
-pass descriptor.
+00:10:49,016 --> 00:10:52,152
+它是我们保持资源的临界区段
 
 
 168
-00:10:00,436 --> 00:10:04,306
-Now, let me just note that
-this isn't a problem specific
+00:10:52,719 --> 00:10:55,055
+我们不想将它保留时间过长
 
 
 169
-00:10:04,396 --> 00:10:05,536
-to the MetalKit view.
+00:10:57,624 --> 00:10:58,825
+关于视图的就说这么多
 
 
 170
-00:10:05,896 --> 00:10:08,816
-You need to be aware of this
-issue if you roll your own view
+00:11:00,227 --> 00:11:01,895
+让我们开始讨论纹理载入器
 
 
 171
-00:10:09,066 --> 00:10:11,056
-in access core animation
-directly.
+00:11:04,131 --> 00:11:06,033
+纹理载入很简单
 
 
 172
-00:10:12,126 --> 00:10:17,656
-So this is information that's
-quite useful in any case.
+00:11:07,100 --> 00:11:11,338
+你给一个引用
+然后你就得到一个成形
 
 
 173
-00:10:18,526 --> 00:10:20,846
-Now, here is a more
-complete example
+00:11:11,672 --> 00:11:12,840
+的Metal纹理
 
 
 174
-00:10:20,846 --> 00:10:22,806
-of our per-frame
-rendering update.
+00:11:14,141 --> 00:11:18,579
+它不只是简单而且功能齐全
 
 
 175
-00:10:23,816 --> 00:10:27,316
-First, as I described we want to
-update our app's render state,
+00:11:19,646 --> 00:11:22,216
+它异步解码文件
 
 
 176
-00:10:28,046 --> 00:10:29,866
-encode any offscreen passes,
+00:11:22,983 --> 00:11:26,486
+并且在分别的线程上创建纹理
 
 
 177
-00:10:30,166 --> 00:10:31,986
-do anything where we
-don't need the drawable.
+00:11:27,921 --> 00:11:31,325
+它支持许多通用图像文件格式包括
 
 
 178
-00:10:32,576 --> 00:10:36,266
-And then we can continue
-as we did previously,
+00:11:31,391 --> 00:11:36,230
+JPG、TIF和PNG还支持PVR
 
 
 179
-00:10:36,266 --> 00:10:39,256
-get the current render pass
-descriptor, encode our commands
+00:11:36,330 --> 00:11:38,632
+和KTX纹理文件格式
 
 
 180
-00:10:39,256 --> 00:10:41,996
-for that final pass, and present
-and commit our command buffer.
+00:11:38,999 --> 00:11:41,068
+这些格式的有趣之处
 
 
 181
-00:10:42,996 --> 00:10:46,166
-The key point is that
-these two stages should be
+00:11:41,568 --> 00:11:43,203
+是它们以原始形式保存数据
 
 
 182
-00:10:46,166 --> 00:10:48,236
-as close together as possible.
+00:11:43,270 --> 00:11:47,107
+并且可以上传到你的Metal纹理中
 
 
 183
-00:10:49,016 --> 00:10:52,166
-It's a critical section where
-we are holding onto a resource
+00:11:47,174 --> 00:11:48,609
+不需要任何的改变
 
 
 184
-00:10:52,736 --> 00:10:57,386
-and we don't want to hold onto
-it any longer than we need to.
+00:11:49,543 --> 00:11:53,580
+另你可以将MIT maps数据编码
 
 
 185
-00:10:57,626 --> 00:10:58,476
-That's it for the view.
+00:11:54,314 --> 00:11:57,484
+成其他类型的纹理
 
 
 186
-00:11:00,216 --> 00:11:01,886
-Let's move on to
-the texture loader.
+00:11:57,551 --> 00:12:01,355
+包括3D纹理、立体地图
+和纹理数组
 
 
 187
-00:11:02,476 --> 00:11:06,036
-It's textural loading
-made simple.
+00:12:06,026 --> 00:12:07,194
+它的用法很简单
 
 
 188
-00:11:07,096 --> 00:11:11,336
-You give a reference and
-you get back a fully formed
+00:12:08,729 --> 00:12:10,964
+首先我们通过提供一个设备
 
 
 189
-00:11:11,666 --> 00:11:12,446
-Metal Texture.
+00:12:11,431 --> 00:12:13,400
+来创建了一个纹理上载器对象
 
 
 190
-00:11:13,006 --> 00:11:18,586
-Not only is it simple, it's
-fast and fully featured.
+00:12:15,202 --> 00:12:20,374
+然后一旦我们有了那个纹理上载器对象
+我们就能用它创建许多的纹理
 
 
 191
-00:11:19,656 --> 00:11:22,226
-It asynchronously decodes files
+00:12:21,175 --> 00:12:25,646
+首先提供一个图像文件的URL地址
 
 
 192
-00:11:22,976 --> 00:11:26,486
-and creates textures
-on a separate thread.
+00:12:26,747 --> 00:12:28,849
+然后就可提供许多的选项 
 
 
 193
-00:11:27,936 --> 00:11:31,376
-It has support for many common
-image file formats including
+00:12:28,916 --> 00:12:33,020
+包括 如何处理文件中的sRGB信息
 
 
 194
-00:11:31,376 --> 00:11:36,076
-JPG, TIF and PNG and
-also supports the PVR
+00:12:33,220 --> 00:12:36,290
+或者是我们是否想
+在创建这个纹理的时候
 
 
 195
-00:11:36,336 --> 00:11:38,646
-and KTX texture file formats.
+00:12:36,523 --> 00:12:37,991
+为MIT maps分配内存
 
 
 196
-00:11:38,996 --> 00:11:43,026
-What's interesting about these
-formats is that they store data
+00:12:39,693 --> 00:12:42,496
+最后我们要提供一个完成处理块
 
 
 197
-00:11:43,296 --> 00:11:47,166
-in a raw form that can be
-uploaded to your Metal Texture
+00:12:42,930 --> 00:12:44,631
+只要纹理载入器已经完成了
 
 
 198
-00:11:47,166 --> 00:11:48,516
-without any conversion.
+00:12:45,098 --> 00:12:48,969
+上载纹理并且创建了它
+就会执行块
 
 
 199
-00:11:49,516 --> 00:11:54,996
-Additionally, you can encode
-data for MIT maps for any
+00:12:49,169 --> 00:12:52,639
+它会将纹理处理器发回给你
+你可以将它保存在以后
 
 
 200
-00:11:55,146 --> 00:11:58,896
-of the other types of
-textures including 3D textures,
+00:12:53,140 --> 00:12:55,676
+需要时用来渲染
 
 
 201
-00:11:59,336 --> 00:12:01,886
-cube maps, and texture arrays.
+00:12:57,344 --> 00:12:59,379
+纹理载入器非常简单
 
 
 202
-00:12:05,716 --> 00:12:07,206
-Its usage is really simple.
+00:12:59,513 --> 00:13:01,949
+让我们继续进行Model I/O
 
 
 203
-00:12:08,716 --> 00:12:10,976
-First, we create a
-texture loader object
+00:13:04,952 --> 00:13:07,154
+模型I/0是一个新的结构是与
 
 
 204
-00:12:11,416 --> 00:12:13,386
-by supplying a device.
+00:13:07,221 --> 00:13:09,790
+iOS 9和OS X
+El Capitan一块引入的
 
 
 205
-00:12:14,916 --> 00:12:17,586
-Then, once we have that
-texture loader object,
+00:13:11,225 --> 00:13:12,960
+它的一个关键特点是
 
 
 206
-00:12:17,586 --> 00:12:20,356
-we can create many
-textures with it.
+00:13:13,060 --> 00:13:17,698
+它可以为你上载许多的模型文件格式
 
 
 207
-00:12:21,196 --> 00:12:26,116
-First, we will give a URL
-location of our image file,
+00:13:18,999 --> 00:13:21,768
+如果你需要可以为你专门格式创建
 
 
 208
-00:12:26,786 --> 00:12:29,996
-and we can supply a number of
-options including how we want
+00:13:21,969 --> 00:13:25,005
+你自己的导入器和导出器
 
 
 209
-00:12:29,996 --> 00:12:33,886
-to treat the sRGB information
-in the file or whether
+00:13:27,007 --> 00:13:28,242
+这里非常酷的特点是
 
 
 210
-00:12:33,886 --> 00:12:36,136
-or not we want to allocate
-memory for MIT maps
+00:13:28,642 --> 00:13:33,013
+做offline baking操作
 
 
 211
-00:12:36,546 --> 00:12:37,866
-when we create this texture,
+00:13:33,814 --> 00:13:38,018
+可创建静态环境光遮蔽地图生成光照图
 
 
 212
-00:12:38,496 --> 00:12:42,426
-and finally we will supply
-a completion handler block.
+00:13:39,052 --> 00:13:42,055
+它还包括你的网格的立体像素化
 
 
 213
-00:12:42,936 --> 00:12:45,526
-Now, this block will
-get executed as soon
+00:13:43,457 --> 00:13:48,462
+它提供了一种集中于你的渲染代码
 
 
 214
-00:12:45,526 --> 00:12:48,206
-as the texture loader has
-finished loading the texture
+00:13:48,529 --> 00:13:49,630
+和写入你的着色器的方法
 
 
 215
-00:12:48,276 --> 00:12:49,086
-and created it.
+00:13:49,696 --> 00:13:52,266
+你不需要创建一些parchers
 
 
 216
-00:12:49,166 --> 00:12:51,056
-It will pass the texture
-handler back to you
+00:13:52,332 --> 00:13:53,700
+来将一些东西从磁盘中取出
 
 
 217
-00:12:51,096 --> 00:12:54,086
-which you can stash away
-for later and render
+00:13:53,767 --> 00:13:57,104
+你必须少和串行打交道
 
 
 218
-00:12:54,086 --> 00:12:57,166
-with when you need to.
+00:13:57,771 --> 00:14:00,607
+你只需要上载一个
+带有Model I/O的模型文件
 
 
 219
-00:12:57,356 --> 00:12:59,396
-That's very simple,
-the texture loader.
+00:14:01,642 --> 00:14:03,577
+把它放入你可用它做渲染的一些构成中
 
 
 220
-00:12:59,506 --> 00:13:02,686
-Let's move on to model I/O.
+00:14:04,244 --> 00:14:06,813
+开始写入你的着色器
 
 
 221
-00:13:04,496 --> 00:13:07,236
-So model I/0 is a new
-framework introduced
+00:14:09,650 --> 00:14:12,152
+MetalKit
+在这种情况下提供了什么
 
 
 222
-00:13:07,236 --> 00:13:09,396
-with iOS 9 and OS X El Capitan.
+00:14:12,219 --> 00:14:15,455
+它的程序有效使用
+Metal的Model I/O
 
 
 223
-00:13:11,236 --> 00:13:13,246
-And one of its key features is
+00:14:16,790 --> 00:14:20,561
+它提供了将Model I/O
+网格优化上载到Metal缓冲器中
 
 
 224
-00:13:13,246 --> 00:13:17,696
-that it can load many
-model file formats for you.
+00:14:21,695 --> 00:14:25,933
+MetalKit
+对象内部的网格数据封装
 
 
 225
-00:13:19,006 --> 00:13:22,336
-You can create your own
-importers and exporters
+00:14:27,000 --> 00:14:29,803
+有许多函数用于为网格数据
 
 
 226
-00:13:22,366 --> 00:13:25,056
-for proprietary formats
-if you need to.
+00:14:30,537 --> 00:14:31,672
+的Metal管道做准备
 
 
 227
-00:13:25,056 --> 00:13:28,776
-Some of the cooler
-features here are
+00:14:34,741 --> 00:14:38,145
+让我来指导
 
 
 228
-00:13:28,776 --> 00:13:32,806
-that you can do offline
-baking operations.
+00:14:38,245 --> 00:14:42,482
+如何用Model I/O
+来上载一个模型文件的步骤
 
 
 229
-00:13:32,806 --> 00:13:36,286
-You can create static
-ambient occlusion maps,
+00:14:43,517 --> 00:14:46,019
+并且用Metal来将它渲染到屏幕上
 
 
 230
-00:13:36,826 --> 00:13:40,856
-light map generations, it
-also includes the Voxelization
+00:14:48,388 --> 00:14:49,690
+这里就是我们要采取的步骤
 
 
 231
-00:13:40,956 --> 00:13:41,656
-of your meshes.
+00:14:53,861 --> 00:14:58,932
+首先创建一个Metal渲染状态管道
 
 
 232
-00:13:42,256 --> 00:13:48,536
-It provides you a way to
-focus on your rendering code
+00:14:58,999 --> 00:15:01,869
+我们将用来创建我们的网格
+来渲染我们的网格
 
 
 233
-00:13:48,536 --> 00:13:49,636
-and write your shaders.
+00:15:03,604 --> 00:15:06,240
+然后通过初始化
+Model I/O asset
 
 
 234
-00:13:49,706 --> 00:13:52,346
-You don't have to deal
-with creating some parchers
+00:15:06,340 --> 00:15:08,942
+用asset来上载模型文件
 
 
 235
-00:13:52,346 --> 00:13:53,766
-to get some stuff off disk.
+00:15:10,777 --> 00:15:14,448
+我们就可以创建MetalKit网格
 
 
 236
-00:13:53,766 --> 00:13:57,106
-You have to deal less
-with serialization,
+00:15:14,515 --> 00:15:16,083
+以及子网格对象
 
 
 237
-00:13:57,776 --> 00:14:00,606
-you just load a model
-file with Model I/O,
+00:15:17,484 --> 00:15:19,853
+最后用Metal来渲染那些对象
 
 
 238
-00:14:01,636 --> 00:14:03,566
-put it into some form
-you can render it with,
+00:15:22,623 --> 00:15:26,159
+因此集中于创建
+一个Metal渲染状态管道
 
 
 239
-00:14:04,246 --> 00:14:06,596
-and start writing your shaders.
+00:15:27,327 --> 00:15:29,429
+我们要特别注意
 
 
 240
-00:14:06,596 --> 00:14:12,216
-So what does MetalKit
-provide in this context?
+00:15:29,763 --> 00:15:31,498
+创建一个顶点描述器
 
 
 241
-00:14:12,216 --> 00:14:15,456
-It's utilities to efficiently
-use model I/O with Metal.
+00:15:31,965 --> 00:15:37,971
+该描述器将会对需要的网格
+提供给管道的顶点的布局进行描述
 
 
 242
-00:14:16,796 --> 00:14:19,636
-It offers optimized
-loading of model I/O meshes
+00:15:39,473 --> 00:15:43,210
+这里是顶点着色器的基本内容
 
 
 243
-00:14:19,636 --> 00:14:23,786
-into Metal buffers, the
-encapsulation of mesh data
+00:15:45,379 --> 00:15:48,248
+它使用限制符级基本上
 
 
 244
-00:14:24,206 --> 00:14:28,606
-within MetalKit objects, and
-there are a number of functions
+00:15:48,315 --> 00:15:51,785
+说明了我们每个顶点的输入它们的布局
 
 
 245
-00:14:28,606 --> 00:14:31,676
-to prepare mesh data
-for Metal pipelines.
+00:15:52,319 --> 00:15:55,656
+用我们的objective-C代码
+使用顶点描述符
 
 
 246
-00:14:32,326 --> 00:14:40,356
-Let me walk you through the
-process of loading a model file
+00:15:56,757 --> 00:15:58,158
+对着色器以外进行描述
 
 
 247
-00:14:41,426 --> 00:14:46,026
-with model I/O and getting it
-rendering on screen with Metal.
+00:15:59,626 --> 00:16:02,396
+它使用了这里所定义的
 
 
 248
-00:14:46,596 --> 00:14:53,626
-And here are the
-steps we will take.
+00:16:03,564 --> 00:16:04,865
+顶点输入架构
 
 
 249
-00:14:53,846 --> 00:14:58,986
-So first, we will create a
-Metal render state pipeline
+00:16:06,099 --> 00:16:09,403
+这个顶点输入架构的主要部分是
 
 
 250
-00:14:58,986 --> 00:15:01,866
-that we'll use to create our
-mesh, to render our mesh.
+00:16:09,503 --> 00:16:12,973
+这些功能
+我们要使用这些指数来连接
 
 
 251
-00:15:02,406 --> 00:15:06,256
-Then we will actually
-load the model file
+00:16:13,040 --> 00:16:16,310
+Objective-C
+编码的外部和内部
 
 
 252
-00:15:06,336 --> 00:15:09,426
-by initializing the
-model I/O asset.
+00:16:17,144 --> 00:16:23,684
+注意这些浮点矢量
+类型定义了数据在着色器中的样子
 
 
 253
-00:15:10,456 --> 00:15:14,506
-And with that asset, we
-will create MetalKit mesh
+00:16:24,351 --> 00:16:27,387
+不是实际上数据从我们的
 
 
 254
-00:15:14,506 --> 00:15:16,076
-and sub mesh objects.
+00:16:27,454 --> 00:16:29,356
+Objective-C编码送入
 
 
 255
-00:15:17,496 --> 00:15:20,416
-Finally, we will render
-those objects with Metal.
+00:16:29,423 --> 00:16:30,691
+着色器的样子
 
 
 256
-00:15:22,216 --> 00:15:26,146
-So let's focus on creating a
-Metal Render State Pipeline
+00:16:38,899 --> 00:16:41,235
+对此需要创建一个顶点描述符
 
 
 257
-00:15:27,316 --> 00:15:29,436
-and we will pay particular
-attention
+00:16:43,070 --> 00:16:46,240
+我将把这个顶点输入结构
 
 
 258
-00:15:29,756 --> 00:15:33,356
-to creating a vertex descriptor
-that will describe the layout
+00:16:46,306 --> 00:16:49,743
+放在这作为参考但是我要提醒你
 
 
 259
-00:15:33,356 --> 00:15:36,326
-of vertices that we'll
-need our mesh to be
+00:16:49,810 --> 00:16:53,380
+它定义的不是被送入到着色器时
 
 
 260
-00:15:36,326 --> 00:15:40,086
-in to feed our pipeline.
+00:16:53,447 --> 00:16:54,715
+的数据的布局
 
 
 261
-00:15:40,086 --> 00:15:43,226
-Here is the bare bones
-of a vertex shader.
+00:16:55,115 --> 00:17:01,188
+我们实际上创建的是下面
+的Metal顶点描述符
 
 
 262
-00:15:45,046 --> 00:15:48,306
-It uses the stage in
-qualifier which basically says
+00:17:01,822 --> 00:17:06,260
+我们要做的是针对属性0
 
 
 263
-00:15:48,306 --> 00:15:51,776
-that our per vertex
-inputs, the layout for them,
+00:17:08,729 --> 00:17:15,068
+用三个浮点 三个浮点值
 
 
 264
-00:15:52,306 --> 00:15:54,426
-will be described
-outside of the shader
+00:17:16,002 --> 00:17:17,271
+来定义这个位置
 
 
 265
-00:15:54,426 --> 00:15:58,156
-in our objective-C code
-using a vertex descriptor.
+00:17:17,738 --> 00:17:23,210
+对于属性1 色彩将由
 
 
 266
-00:15:59,626 --> 00:16:02,386
-It uses this vertex
-input structure
+00:17:23,277 --> 00:17:26,747
+四个无符号的字符组成
 
 
 267
-00:16:03,556 --> 00:16:04,706
-which is defined up here.
+00:17:26,980 --> 00:17:29,650
+不是上面的四个浮点 四个无符号字符
 
 
 268
-00:16:06,096 --> 00:16:09,406
-And the key part of this vertex
-input structure are these
+00:17:29,917 --> 00:17:31,385
+它紧接在位置数据之后
 
 
 269
-00:16:09,506 --> 00:16:13,026
-attributes, the indices here
-which we will use to connect
+00:17:32,519 --> 00:17:36,823
+有12个比特的相位差
 
 
 270
-00:16:13,026 --> 00:16:16,306
-up outside inside of
-our Objective-C code.
+00:17:41,094 --> 00:17:44,531
+对于属性2的纹理坐标
 
 
 271
-00:16:17,136 --> 00:16:22,136
-Note that these floating-point
-vector types define how the data
+00:17:45,399 --> 00:17:49,036
+我们将定义它用了两个半浮点
 
 
 272
-00:16:22,136 --> 00:16:27,456
-looks within the shader, not
-actually how the data looks
+00:17:50,637 --> 00:17:55,742
+它紧跟在位置和颜色数据之后
 
 
 273
-00:16:27,456 --> 00:16:29,366
-as it's being fed
-into the shader
+00:17:55,843 --> 00:17:57,544
+有16比特的相位差
 
 
 274
-00:16:29,416 --> 00:16:30,686
-from our Objective-C code.
+00:17:59,913 --> 00:18:04,384
+通过将
+缓存器的stride设置设为20
 
 
 275
-00:16:33,036 --> 00:16:41,226
-For that, we need to
-create a vertex descriptor.
+00:18:04,651 --> 00:18:05,819
+将每个顶点的大小
 
 
 276
-00:16:41,796 --> 00:16:46,296
-Now, I'm going to put this
-vertex input structure
+00:18:05,886 --> 00:18:07,654
+规定为20比特
 
 
 277
-00:16:46,296 --> 00:16:49,826
-up here just for reference,
-but let me just remind you
+00:18:12,059 --> 00:18:15,729
+这样就定义了我们的顶点阵列
 
 
 278
-00:16:49,826 --> 00:16:53,136
-that it does not define
-the layout of the data
+00:18:15,796 --> 00:18:17,698
+内的每个顶点的布局
 
 
 279
-00:16:53,456 --> 00:16:54,796
-as it's being fed
-into the shader.
+00:18:21,368 --> 00:18:23,570
+这样我们就得到了
+我们的Metal顶点描述符
 
 
 280
-00:16:54,796 --> 00:16:57,256
-We are actually creating
-the Metal Vertex Descriptor
+00:18:23,971 --> 00:18:26,106
+我们能够将
+它分配到我们的渲染状态管道
 
 
 281
-00:16:57,756 --> 00:17:01,146
-that is down below.
+00:18:27,641 --> 00:18:31,011
+并且用渲染
+对不起 用渲染管道描述符
 
 
 282
-00:17:01,826 --> 00:17:06,256
-And for that, what we will
-do is for attribute zero,
+00:18:31,311 --> 00:18:34,248
+我们就能够
+创建一个Metal渲染状态管道
 
 
 283
-00:17:07,156 --> 00:17:12,796
-the position will define as
-using three floating points,
+00:18:36,617 --> 00:18:39,586
+现在我们开始上载我们的asset
 
 
 284
-00:17:13,215 --> 00:17:14,876
-three floating point values.
+00:18:41,388 --> 00:18:44,591
+用Model I/O来完成那个任务
 
 
 285
-00:17:15,986 --> 00:17:23,756
-For attribute one, the color
-will specify that it's going
+00:18:46,326 --> 00:18:49,029
+我们实际上使用我们在
 
 
 286
-00:17:23,756 --> 00:17:26,736
-to be composed of four
-unsigned characters,
+00:18:49,096 --> 00:18:50,364
+前一步创建的顶点描述符
 
 
 287
-00:17:26,965 --> 00:17:29,666
-not the four floats above,
-four unsigned characters
+00:18:51,331 --> 00:18:55,068
+一个MetalKit网格缓冲器对象
 
 
 288
-00:17:29,906 --> 00:17:31,396
-and it will have an offset
+00:18:55,502 --> 00:18:58,005
+一个网格缓冲器分配器对象
 
 
 289
-00:17:32,506 --> 00:17:40,906
-of 12 bytes immediately
-following the position data.
+00:18:59,339 --> 00:19:00,874
+在我们继续向下讲时
 
 
 290
-00:17:41,086 --> 00:17:46,636
-Now, for the texture coordinates
-in attribute 2, we will define
+00:19:01,441 --> 00:19:03,877
+我多说几句强调一下它的重要性
 
 
 291
-00:17:46,636 --> 00:17:49,026
-that it uses two half floats.
+00:19:06,547 --> 00:19:11,418
+Model I/O顶点描述器
 
 
 292
-00:17:49,586 --> 00:17:55,756
-And that it immediately follows
-the position and color data
+00:19:11,685 --> 00:19:14,521
+以及Metal顶点描述器非常类似
 
 
 293
-00:17:55,836 --> 00:17:57,556
-with an offset of 16 bytes.
+00:19:15,689 --> 00:19:18,659
+但是尽管
+Model I/O顶点描述器描述了
 
 
 294
-00:17:58,056 --> 00:18:02,576
-And finally, we will
-specify that the size
+00:19:18,725 --> 00:19:20,794
+网格内的顶点属性的布局
 
 
 295
-00:18:02,576 --> 00:18:05,656
-of each vertex is 20 bytes
-by setting the stride
+00:19:22,663 --> 00:19:24,998
+但是Metal顶点描述器描述了
 
 
 296
-00:18:05,896 --> 00:18:07,646
-to 20 for that buffer.
+00:19:25,065 --> 00:19:27,167
+作为渲染状态管道的输入
 
 
 297
-00:18:11,736 --> 00:18:15,676
-Now, this defines the
-layout of each vertex
+00:19:27,668 --> 00:19:29,169
+的顶点属性的布局
 
 
 298
-00:18:15,786 --> 00:18:17,776
-within our array of vertices.
+00:19:30,537 --> 00:19:33,707
+它们专门设计成看起来相似
 
 
 299
-00:18:17,776 --> 00:18:23,386
-So now that we have got our
-Metal Vertex Descriptor,
+00:19:34,441 --> 00:19:38,512
+因为它们包含属性和缓冲器布局对象
 
 
 300
-00:18:23,986 --> 00:18:26,046
-we can assign it to our
-render state pipeline,
+00:19:39,379 --> 00:19:44,952
+原因是这样就简化了
+将一个对象翻译成另一个的过程
 
 
 301
-00:18:27,636 --> 00:18:28,426
-and with that render --
+00:19:47,354 --> 00:19:51,758
+在Model I/O顶点
+描述器中的每个属性
 
 
 302
-00:18:28,526 --> 00:18:31,016
-excuse me, with the
-render pipeline descriptor,
+00:19:52,025 --> 00:19:53,861
+都有一个可识别的字符串库名称
 
 
 303
-00:18:31,306 --> 00:18:34,256
-we can create a Metal
-Render State Pipeline.
+00:19:54,828 --> 00:19:59,433
+Model I/O分配了一个
+缺省的名称 如果模型内不存在
 
 
 304
-00:18:35,776 --> 00:18:40,246
-So let's move on to
-actually loading our asset
+00:19:59,499 --> 00:20:03,237
+或者是那个模型文件不支持这些名称
 
 
 305
-00:18:41,056 --> 00:18:45,646
-and using model I/O
-for that task.
+00:20:03,770 --> 00:20:08,041
+这些名称包括位置、
+法向量、纹理、坐标颜色等
 
 
 306
-00:18:46,326 --> 00:18:49,086
-And we will actually use the
-vertex descriptor we just
+00:20:09,376 --> 00:20:11,512
+Model I/O用
+基于MDLVertex
 
 
 307
-00:18:49,086 --> 00:18:50,366
-created in the previous step,
+00:20:11,578 --> 00:20:14,748
+属性常数的字符串来定义这些
 
 
 308
-00:18:51,336 --> 00:18:55,056
-along with a MetalKit
-mesh buffer object,
+00:20:15,849 --> 00:20:19,887
+有许多文件
+包括你可以自定义那些名称的
 
 
 309
-00:18:55,516 --> 00:18:58,066
-a mesh buffer allocator object.
+00:20:19,953 --> 00:20:23,123
+Alembic文件格式
 
 
 310
-00:18:58,876 --> 00:19:00,636
-I will describe a
-little bit more
+00:20:23,857 --> 00:20:26,960
+注意 如果你要改变名称
 
 
 311
-00:19:00,636 --> 00:19:06,456
-about its importance
-as we continue.
+00:20:27,027 --> 00:20:31,798
+你需要用那些
+自定义名称来访问这些属性
 
 
 312
-00:19:06,556 --> 00:19:11,426
-So the model I/O
-vertex descriptor
+00:20:33,734 --> 00:20:39,072
+所以我们建议你创建一个
+自定义Model I/O顶点描述器
 
 
 313
-00:19:11,686 --> 00:19:14,506
-and Metal Vertex
-Descriptor are very similar,
+00:20:39,139 --> 00:20:42,376
+因为在缺省下
+Model I/O上载的顶点
 
 
 314
-00:19:15,586 --> 00:19:18,726
-but while the model I/O vertex
-descriptor describes the layouts
+00:20:42,576 --> 00:20:43,810
+为高精度
 
 
 315
-00:19:18,726 --> 00:19:20,796
-of vertex attributes
-within a mesh,
+00:20:44,077 --> 00:20:47,181
+而且占用大量内存的浮点类型
 
 
 316
-00:19:22,336 --> 00:19:25,076
-the Metal Vertex Descriptor
-describes the layout
+00:20:48,182 --> 00:20:52,452
+这是使用
+Model I/O的优势之一
 
 
 317
-00:19:25,076 --> 00:19:27,156
-of vertex attributes
-as their input
+00:20:52,920 --> 00:20:58,926
+你实际上可以上载一个模型格式
 
 
 318
-00:19:27,666 --> 00:19:29,166
-to a render state pipeline.
+00:20:58,992 --> 00:21:03,463
+具有你所喜爱的任何形式的顶点数据
 
 
 319
-00:19:30,536 --> 00:19:33,696
-Now, they are intentionally
-designed to look similar
+00:21:03,530 --> 00:21:06,600
+将那个数据变成你能够实际使用的格式
 
 
 320
-00:19:34,456 --> 00:19:38,386
-as they contain attribute
-and buffer layout objects,
+00:21:07,301 --> 00:21:09,770
+在这种情况下我们想用最小的类型
 
 
 321
-00:19:39,376 --> 00:19:43,396
-and the reason for this is
-it simplifies the translation
+00:21:10,137 --> 00:21:11,205
+提供给管道
 
 
 322
-00:19:43,396 --> 00:19:44,906
-of one object to another.
+00:21:11,605 --> 00:21:13,941
+以满足你们的精确性要求
 
 
 323
-00:19:47,366 --> 00:19:52,276
-Now, each attribute in a model
-I/O vertex descriptor has an
+00:21:14,174 --> 00:21:17,678
+这将提高你们的顶点带宽效率
 
 
 324
-00:19:52,276 --> 00:19:53,866
-identifying string base name.
+00:21:18,045 --> 00:21:20,714
+当你们在将每个顶点提供给管道的时候
 
 
 325
-00:19:54,836 --> 00:19:59,456
-Model I/O assigns a default
-name if one does not exist
+00:21:21,081 --> 00:21:23,083
+你实际上不想要一个膨胀的顶点
 
 
 326
-00:19:59,486 --> 00:20:02,626
-in the model file or that
-model file does not support
+00:21:25,886 --> 00:21:28,689
+这里就是我们前面定义的
 
 
 327
-00:20:02,626 --> 00:20:03,366
-these names.
+00:21:28,755 --> 00:21:30,891
+当创建我们的
+Metal顶点描述符时的布局
 
 
 328
-00:20:04,046 --> 00:20:07,046
-These names include position,
-normal, texture, coordinate,
+00:21:33,560 --> 00:21:37,197
+现在我们通过从Metal中调用
+MTKModel I/O顶点格式
 
 
 329
-00:20:07,046 --> 00:20:11,046
-color, et cetera, and
-model I/0 defines these
+00:21:37,598 --> 00:21:42,569
+来创建我们的
+Model I/O顶点描述符
 
 
 330
-00:20:11,046 --> 00:20:14,746
-with the string based
-MDLVertex attribute constants.
+00:21:43,303 --> 00:21:45,439
+我们所提供
+我们的Metal顶点描述符
 
 
 331
-00:20:15,856 --> 00:20:19,796
-There are a number of files
-including the Alembic file
+00:21:45,706 --> 00:21:51,545
+就构建了这个Model I/O
+顶点描述符的大部分
 
 
 332
-00:20:19,796 --> 00:20:23,136
-format where you can
-customize those names.
+00:21:52,379 --> 00:21:55,716
+然而我们还需要
+为每个属性标个名字
 
 
 333
-00:20:23,796 --> 00:20:27,646
-Be aware if you are changing
-the names you will need
+00:21:55,782 --> 00:21:59,152
+这样Model I/O
+就知道我们谈论的是什么
 
 
 334
-00:20:27,646 --> 00:20:31,806
-to access these attributes
-with those customized names.
+00:22:00,053 --> 00:22:03,590
+因此对于属性0我们用顶点
 
 
 335
-00:20:32,406 --> 00:20:39,146
-So we recommend that you create
-a custom model I/O vertex
+00:22:03,657 --> 00:22:06,226
+属性位置名称来标记
 
 
 336
-00:20:39,146 --> 00:20:42,366
-descriptor, because by default
-model I/O loads vertices
+00:22:07,461 --> 00:22:10,764
+类似地如属性1和2 我们用
 
 
 337
-00:20:42,586 --> 00:20:43,816
-as high-precision
+00:22:10,831 --> 00:22:13,700
+颜色和纹理坐标属性来做标记
 
 
 338
-00:20:44,066 --> 00:20:48,526
-yet memory-hungry
-floating-point types.
+00:22:17,371 --> 00:22:20,107
+这里我们要做的另外的事是我们要创建
 
 
 339
-00:20:48,526 --> 00:20:52,446
-This is one of the
-advantages of using model I/0.
+00:22:20,340 --> 00:22:24,478
+一个MetalKit
+并且我们会提供一个Metal设备
 
 
 340
-00:20:52,916 --> 00:20:58,976
-You can actually load a model
-format and have the vertex data
+00:22:25,012 --> 00:22:29,383
+这个对象所做的
+就是允许Model I/O来
 
 
 341
-00:20:58,976 --> 00:21:03,486
-in any form that you would like
-and use model I/0 to massage
+00:22:29,917 --> 00:22:35,122
+直接将顶点
+数据上载到GPU备份内存中
 
 
 342
-00:21:03,536 --> 00:21:06,596
-that data into a format
-you can actually use.
+00:22:35,923 --> 00:22:39,059
+你不一定要使用一个
+MetalKit网格缓冲器分配器
 
 
 343
-00:21:07,306 --> 00:21:09,766
-In this case, we want
-to feed the pipelines
+00:22:39,860 --> 00:22:44,198
+但是它所做的是为网格内的
 
 
 344
-00:21:10,126 --> 00:21:11,206
-with the smallest type
+00:22:44,665 --> 00:22:49,870
+这些顶点和指标缓冲器分配系统内存
 
 
 345
-00:21:11,596 --> 00:21:13,796
-that meets your precision
-requirements.
+00:22:50,137 --> 00:22:53,574
+当你想真的要渲染它
+我们需要从系统内存拷贝到
 
 
 346
-00:21:14,186 --> 00:21:17,686
-This would improve your
-vertex bandwidth efficiency;
+00:22:53,640 --> 00:22:56,743
+GPU备份内存中
 
 
 347
-00:21:18,036 --> 00:21:20,716
-as you are feeding each
-vertex to the pipeline,
+00:22:56,810 --> 00:23:01,615
+因此为了更有效最好使用这些网格
 
 
 348
-00:21:21,066 --> 00:21:23,086
-you don't really want
-a bloated vertex.
+00:23:01,715 --> 00:23:05,018
+缓存分配器中的一个
+这里我们要说下如何使用它
 
 
 349
-00:21:23,626 --> 00:21:28,756
-So here is the layout
-we defined previously
+00:23:06,119 --> 00:23:08,422
+我们要上载我们的asset文件
 
 
 350
-00:21:28,756 --> 00:21:30,906
-when creating our Metal
-Vertex Descriptor.
+00:23:10,090 --> 00:23:13,126
+我们将提供URL地址
 
 
 351
-00:21:31,456 --> 00:21:37,186
-Now, we will create our
-model I/O vertex descriptor
+00:23:15,295 --> 00:23:17,231
+将会告诉Model I/O如何对
 
 
 352
-00:21:37,606 --> 00:21:42,406
-by calling this MTK model
-I/O vertex format from Metal
+00:23:17,297 --> 00:23:20,000
+每个顶点进行布局的
+Model I/O顶点描述符
 
 
 353
-00:21:42,486 --> 00:21:45,426
-and we will supply our
-Metal Vertex Descriptor.
+00:23:21,368 --> 00:23:24,404
+我们还将提供该网格缓存分配器
 
 
 354
-00:21:45,716 --> 00:21:51,546
-This builds the majority of this
-model I/O vertex descriptor,
+00:23:25,005 --> 00:23:27,941
+这样Model I/O
+就能直接上载数据到
 
 
 355
-00:21:52,376 --> 00:21:55,786
-yet we still need to tag
-each attribute with a name,
+00:23:28,008 --> 00:23:29,142
+GPU备份内存中
 
 
 356
-00:21:55,786 --> 00:21:59,136
-so model I/O knows what
-we are talking about.
+00:23:31,712 --> 00:23:33,680
+现在我们获得的我们的asset
 
 
 357
-00:22:00,066 --> 00:22:03,646
-So for attribute
-0, we will tag it
+00:23:35,549 --> 00:23:37,918
+让我们真正地
+来创建一些MetalKit网格
 
 
 358
-00:22:03,646 --> 00:22:06,216
-with the vertex attribute
-position name.
+00:23:37,985 --> 00:23:39,419
+以及一些网格对象
 
 
 359
-00:22:07,446 --> 00:22:10,846
-And similarly for attribute
-1 and 2, we will tag them
+00:23:41,421 --> 00:23:43,557
+这里是通过Model I/O
 
 
 360
-00:22:10,846 --> 00:22:13,696
-with a color and texture
-coordinate attributes.
+00:23:43,624 --> 00:23:46,293
+来创建asset的一个例子
 
 
 361
-00:22:17,036 --> 00:22:20,096
-The other thing we will do here
-is we will create a MetalKit
+00:23:47,861 --> 00:23:51,598
+在asset的内部
+我们可能会有相机对象
 
 
 362
-00:22:20,356 --> 00:22:24,466
-mesh buffer allocator and we
-will supply a Metal device.
+00:23:53,200 --> 00:23:54,368
+光照对象...
 
 
 363
-00:22:24,996 --> 00:22:29,376
-Now, what this object does
-is it allows model I/0
+00:23:55,435 --> 00:24:00,040
+以及对我们
+目前非常重要的网格对象
 
 
 364
-00:22:29,906 --> 00:22:35,116
-to load vertex data directly
-into GPU backed memory.
+00:24:00,307 --> 00:24:04,044
+MetalKit首先与
+这些网格对象相关
 
 
 365
-00:22:35,936 --> 00:22:39,056
-Now, you don't have to use a
-MetalKit mesh buffer allocator,
+00:24:04,111 --> 00:24:08,215
+它并不直接与光线
+和相机对象打交道
 
 
 366
-00:22:39,856 --> 00:22:44,206
-but what that will do is it
-will allocate system memory
+00:24:08,282 --> 00:24:14,021
+因为那种数据取决于
+你的自定义的着色器和你的引擎
 
 
 367
-00:22:44,676 --> 00:22:49,876
-for these vertex and index
-buffers inside of the mesh.
+00:24:14,655 --> 00:24:19,459
+你可以真的探究这个对象
+或者向内查看这个对象
 
 
 368
-00:22:50,136 --> 00:22:53,596
-And when you want to actually
-render it, we will need to copy
+00:24:19,526 --> 00:24:23,797
+取出相机和光亮信息
+插入到你的着色器中
 
 
 369
-00:22:53,626 --> 00:22:56,816
-from that system memory down
-into the GPU backed memory.
+00:24:24,064 --> 00:24:27,100
+但是MetalKit并不
+直接参与到那个过程中
 
 
 370
-00:22:56,816 --> 00:23:01,926
-So for efficiency, it's
-really desirable to use one
+00:24:28,068 --> 00:24:34,708
+因此我们所能做的就是
+直接将这个asset
 
 
 371
-00:23:01,926 --> 00:23:05,026
-of these mesh buffer allocators,
-and here is how you use it.
+00:24:37,611 --> 00:24:42,382
+传到这个网格中
+网格来自asset类函数
 
 
 372
-00:23:06,106 --> 00:23:09,856
-Now, we are going to
-load our asset file.
+00:24:42,716 --> 00:24:46,253
+将会创建MetalKit网格的阵列
 
 
 373
-00:23:10,086 --> 00:23:16,806
-We will supply the URL location,
-the model I/0 vertex descriptor
+00:24:51,024 --> 00:24:53,994
+让我们看看这个网格对象内部都有什么
 
 
 374
-00:23:16,806 --> 00:23:19,996
-which will tell model I/0
-how to lay out each vertex
+00:24:55,229 --> 00:24:57,397
+首先是这些顶点缓存器
 
 
 375
-00:23:21,366 --> 00:23:24,406
-and we will also supply
-this mesh buffer allocator
+00:24:57,464 --> 00:25:00,100
+包括位置属性
 
 
 376
-00:23:24,996 --> 00:23:28,006
-so that model I/0 can
-load this data directly
+00:25:00,367 --> 00:25:04,004
+法向量属性 纹理属性等等
 
 
 377
-00:23:28,006 --> 00:23:29,656
-into GPU backed memory.
+00:25:04,404 --> 00:25:07,508
+在我们的例子中 我们只需要一个阵列
 
 
 378
-00:23:30,916 --> 00:23:35,336
-So now that we have
-got our asset,
+00:25:07,708 --> 00:25:09,376
+因为我们对所有我们的数据进行交错
 
 
 379
-00:23:35,556 --> 00:23:37,986
-let's actually create
-some MetalKit mesh
+00:25:09,943 --> 00:25:13,614
+然而我们用多重阵列来定义布局
 
 
 380
-00:23:37,986 --> 00:23:39,146
-and some mesh objects.
+00:25:13,680 --> 00:25:16,283
+因此你就会有多重顶点缓存器
 
 
 381
-00:23:39,146 --> 00:23:43,636
-So here's an example of an asset
+00:25:16,783 --> 00:25:21,321
+你可以定义那个属性0可以在
 
 
 382
-00:23:43,636 --> 00:23:47,686
-that might be created
-by model I/0.
+00:25:21,421 --> 00:25:23,957
+一个单独阵列的内部
+这样你就会在一个阵列
 
 
 383
-00:23:47,866 --> 00:23:51,606
-Inside of an asset, we
-might have camera objects,
+00:25:24,491 --> 00:25:28,161
+中有一阵列的位置
+在下一个中有一阵列的纹理坐标
 
 
 384
-00:23:53,236 --> 00:23:57,616
-light objects, and
-particularly important
+00:25:28,629 --> 00:25:31,398
+下一个是色彩阵列等等
 
 
 385
-00:23:57,616 --> 00:23:59,966
-to us right now are
-the mesh objects.
+00:25:35,569 --> 00:25:37,638
+该网格还包括一个定义了这个
 
 
 386
-00:24:00,346 --> 00:24:03,266
-Now, MetalKit is
-primarily concerned
+00:25:37,704 --> 00:25:39,339
+布局的顶点描述符
 
 
 387
-00:24:03,266 --> 00:24:04,166
-with these mesh objects.
+00:25:39,439 --> 00:25:41,842
+与我们初始化我们的asset时
 
 
 388
-00:24:04,166 --> 00:24:07,226
-It doesn't really deal
-directly with the light
+00:25:41,909 --> 00:25:44,478
+刚刚创建的和送入的是相同的对象
 
 
 389
-00:24:07,336 --> 00:24:10,876
-and camera objects because that
-sort of data is very specific
+00:25:46,413 --> 00:25:49,716
+网格包含有许多的子网格对象
 
 
 390
-00:24:11,166 --> 00:24:13,886
-to your custom shaders
-and your engines.
+00:25:50,083 --> 00:25:54,021
+每个子网格对象的
+主要部分是这个变址缓存器
 
 
 391
-00:24:14,676 --> 00:24:18,246
-You can actually
-introspect into this object
+00:25:54,621 --> 00:25:58,425
+它引用顶点缓存器内部的顶点
 
 
 392
-00:24:18,246 --> 00:24:20,876
-or go look inside this object
-and grab out that camera
+00:26:00,027 --> 00:26:03,063
+另外你能够使用许多属性
 
 
 393
-00:24:20,876 --> 00:24:23,806
-and light information to
-plug it into your shaders,
+00:26:03,564 --> 00:26:05,599
+来用Metal调用一个绘制
 
 
 394
-00:24:24,086 --> 00:24:27,106
-but MetalKit isn't directly
-involved in that process.
+00:26:08,702 --> 00:26:14,041
+获得了Metal kit网格
+和子网格对象
 
 
 395
-00:24:28,116 --> 00:24:38,066
-So what we can do is pass
-in this asset directly
+00:26:16,844 --> 00:26:18,512
+让我们继续来渲染它们
 
 
 396
-00:24:38,066 --> 00:24:42,386
-to this mesh, meshes
-from asset class function
+00:26:21,582 --> 00:26:26,053
+首先我们要循环访问每个顶点缓冲器
 
 
 397
-00:24:42,756 --> 00:24:46,246
-which will create an
-array of MetalKit meshes.
+00:26:27,421 --> 00:26:29,723
+可能有稀疏阵列 因此需要确定
 
 
 398
-00:24:50,636 --> 00:24:54,006
-Let's take a look at what's
-inside this mesh object.
+00:26:29,790 --> 00:26:32,326
+每个缓存器里真的有东西
 
 
 399
-00:24:55,276 --> 00:24:57,476
-So first are these
-vertex buffers
+00:26:33,460 --> 00:26:35,896
+但是一旦我们确定了
+我们就可以继续
 
 
 400
-00:24:57,476 --> 00:25:00,106
-which includes the
-position attributes,
+00:26:35,963 --> 00:26:39,700
+并且在我们的渲染
+编码器中设置顶点缓存器
 
 
 401
-00:25:00,366 --> 00:25:04,006
-the normal attributes,
-textural attributes, et cetera.
+00:26:40,701 --> 00:26:43,337
+顶点缓存器实际上有两个属性
 
 
 402
-00:25:04,406 --> 00:25:07,496
-In our example, we
-only needed one array
+00:26:43,570 --> 00:26:47,140
+缓存器本身
+以及缓存器内部的相位差
 
 
 403
-00:25:07,696 --> 00:25:09,366
-because we interleaved
-all of our data.
+00:26:47,608 --> 00:26:50,244
+它是你的顶点数据驻留的地方
 
 
 404
-00:25:09,946 --> 00:25:13,696
-However, you can define the
-layout to use multiple arrays,
+00:26:52,079 --> 00:26:57,050
+我们还需要提供一个缓冲索引
+告诉管道
 
 
 405
-00:25:13,696 --> 00:25:17,216
-and therefore you would have
-multiple vertex buffers.
+00:26:57,551 --> 00:26:59,319
+数据的精确位置
 
 
 406
-00:25:17,376 --> 00:25:21,326
-You could define that
-attribute 0 would be inside
+00:27:01,788 --> 00:27:03,824
+就可以真正地渲染我们的网格了
 
 
 407
-00:25:21,426 --> 00:25:23,966
-of a single array, so you would
-have an array of positions
+00:27:04,892 --> 00:27:06,460
+我们将循环访问每个子网格
 
 
 408
-00:25:24,476 --> 00:25:28,156
-in one array, an array of
-texture coordinates in the next,
+00:27:07,895 --> 00:27:10,163
+并且调用我们的绘制指数基元
 
 
 409
-00:25:28,636 --> 00:25:32,056
-another array with
-colors, and so on.
+00:27:11,131 --> 00:27:13,166
+注意这个子网格具有
 
 
 410
-00:25:35,276 --> 00:25:37,696
-The mesh also includes
-a vertex descriptor
+00:27:13,700 --> 00:27:18,505
+这个绘制指数参数的所有参数
 
 
 411
-00:25:37,696 --> 00:25:39,336
-which defines this layout
+00:27:21,041 --> 00:27:25,412
+今天将这个MetalKit基本样本
 
 
 412
-00:25:39,436 --> 00:25:41,896
-and it's the same object
-we just created and passed
+00:27:25,746 --> 00:27:28,682
+发布到WWDC 2015网站上
 
 
 413
-00:25:41,896 --> 00:25:45,266
-in when we initialized
-our asset.
+00:27:29,383 --> 00:27:31,285
+我希望你们将它下载下来
 
 
 414
-00:25:46,026 --> 00:25:49,716
-And finally, the mesh contains
-a number of sub mesh objects.
+00:27:31,351 --> 00:27:34,121
+它描述了许多我介绍的技术
 
 
 415
-00:25:50,086 --> 00:25:53,666
-Now, the key part of each
-sub mesh object is this index
+00:27:34,521 --> 00:27:38,926
+它使用Model I/O来上载
+这个塞入一个OBJ文件中的
 
 
 416
-00:25:53,696 --> 00:25:57,506
-buffer, which references
-vertices inside the
+00:27:38,992 --> 00:27:44,665
+小型飞机对象
+并且创建一了个MetalKit网格
 
 
 417
-00:25:57,506 --> 00:25:59,846
-vertex buffer.
+00:27:45,132 --> 00:27:47,234
+并且将它在屏幕上进行渲染
 
 
 418
-00:26:00,016 --> 00:26:03,076
-Additionally, there are a number
-of properties which you can use
+00:27:47,534 --> 00:27:51,171
+这样你就能明白究竟如何去做
 
 
 419
-00:26:03,566 --> 00:26:08,556
-to make a draw call with Metal.
+00:27:51,672 --> 00:27:53,640
+我鼓励你们多看看
 
 
 420
-00:26:08,696 --> 00:26:12,696
-So now that we have
-got our Metal kit mesh
+00:27:56,210 --> 00:27:58,545
+我的就这么多
+我叫丹·大町市
 
 
 421
-00:26:12,696 --> 00:26:21,086
-and sub mesh objects, let's
-go ahead and render them.
+00:27:58,612 --> 00:28:02,015
+如果对我今天讨论的题目有什么问题
 
 
 422
-00:26:21,586 --> 00:26:26,046
-So first we will iterate
-through each vertex buffer.
+00:28:02,082 --> 00:28:03,684
+我明天就在Metal实验室
 
 
 423
-00:26:27,426 --> 00:26:29,796
-Now, we may have a sparse
-array, so we need to make sure
+00:28:03,951 --> 00:28:07,287
+我想要欢迎我的同事
+安娜·吉洪诺夫
 
 
 424
-00:26:29,796 --> 00:26:32,136
-that there is actually
-something in each buffer,
+00:28:07,354 --> 00:28:13,126
+上台来谈Metal性能着色器架构
+谢谢
 
 
 425
-00:26:32,136 --> 00:26:35,956
-but once we are sure of
-that, we can continue on
+00:28:18,832 --> 00:28:19,666
+早晨好
 
 
 426
-00:26:35,956 --> 00:26:39,716
-and set the vertex buffer
-in our render encoder.
+00:28:20,267 --> 00:28:22,669
+谢谢你 丹
+谢谢你的介绍 我叫 安娜
 
 
 427
-00:26:40,696 --> 00:26:43,346
-Now, the vertex buffer
-actually has two properties,
+00:28:23,203 --> 00:28:26,206
+我将和你们谈谈Metal性能着色器
 
 
 428
-00:26:43,556 --> 00:26:47,126
-the buffer itself, and an
-offset within the buffer
+00:28:26,273 --> 00:28:27,274
+让我们开始
 
 
 429
-00:26:47,616 --> 00:26:50,026
-where your vertex data resides.
+00:28:27,941 --> 00:28:29,910
+首先Metal性能着色器是什么
 
 
 430
-00:26:50,026 --> 00:26:57,046
-We also need to supply a buffer
-index telling the pipeline
+00:28:30,410 --> 00:28:34,214
+它是Metal内 的用于GPU的
 
 
 431
-00:26:57,546 --> 00:26:59,316
-exactly where the data is.
+00:28:34,281 --> 00:28:35,916
+优化性能数据并行算法
 
 
 432
-00:26:59,946 --> 00:27:03,826
-Now, we will actually
-render our mesh.
+00:28:37,050 --> 00:28:38,719
+你什么时候和为什么要使用它？
 
 
 433
-00:27:04,756 --> 00:27:06,466
-We will iterate through
-every sub mesh,
+00:28:39,553 --> 00:28:41,388
+如果你在写C代码并且你要
 
 
 434
-00:27:07,906 --> 00:27:10,156
-and make our draw
-index primitives call.
+00:28:41,455 --> 00:28:42,923
+填加一个C代码排序算法
 
 
 435
-00:27:11,126 --> 00:27:15,506
-Note here that the sub mesh
-has all of the parameters
+00:28:42,990 --> 00:28:44,691
+到你的CPU应用中
 
 
 436
-00:27:15,506 --> 00:27:18,496
-for this draw index parameter.
+00:28:44,958 --> 00:28:49,329
+你肯定不会抓来一个就用
+除非出于你自身的利益
 
 
 437
-00:27:20,416 --> 00:27:25,486
-So today we posted this
-MetalKit essentials sample
+00:28:49,963 --> 00:28:53,066
+你更有可能使用函数库提供给你的实现
 
 
 438
-00:27:25,486 --> 00:27:28,696
-on the WWDC 2015 site.
+00:28:53,400 --> 00:28:58,005
+因为它已经经过了调试和优化
 
 
 439
-00:27:29,396 --> 00:27:31,356
-I encourage you to download it.
+00:28:59,006 --> 00:29:01,975
+同样如果你想要在我们的平台上
 
 
 440
-00:27:31,356 --> 00:27:34,116
-It describes a number of
-the techniques I described.
+00:29:02,042 --> 00:29:05,445
+添加一个图像处理
+操作到你的CPU应用程序中
 
 
 441
-00:27:34,506 --> 00:27:38,936
-It uses model I/0 to load this
-little airplane object that's
+00:29:05,512 --> 00:29:07,080
+你将会使用加速架构
 
 
 442
-00:27:38,996 --> 00:27:44,666
-stuffed in an OBJ file and
-creates a MetalKit mesh
+00:29:07,481 --> 00:29:08,715
+因为它使用了vlmage
 
 
 443
-00:27:45,126 --> 00:27:47,226
-and renders it on screen.
+00:29:09,583 --> 00:29:10,717
+它是一个强大的
 
 
 444
-00:27:47,526 --> 00:27:51,186
-So you can get an idea of
-exactly how this is all done.
+00:29:10,784 --> 00:29:14,988
+高性能的调整图像处理架构
 
 
 445
-00:27:51,686 --> 00:27:55,966
-So I encourage you
-to check that out.
+00:29:16,256 --> 00:29:19,126
+因为它使用了CPU的向量处理
 
 
 446
-00:27:56,226 --> 00:27:58,356
-So that's it for me,
-my name is Dan Omachi,
+00:29:20,194 --> 00:29:21,662
+这只是几个例子
 
 
 447
-00:27:58,616 --> 00:28:02,076
-I will be at the Metal Lab
-tomorrow if you have questions
+00:29:22,529 --> 00:29:25,566
+重要的是可以为你的CPU应用程序
 
 
 448
-00:28:02,076 --> 00:28:03,516
-about topics I have discussed.
+00:29:25,632 --> 00:29:26,834
+提供丰富的环境
 
 
 449
-00:28:03,516 --> 00:28:07,366
-I would like to welcome my
-colleague, Anna Tikhonova
+00:29:27,868 --> 00:29:30,103
+对于GPU情况有些不同
 
 
 450
-00:28:07,366 --> 00:28:12,336
-on stage to talk about the Metal
-performance shaders frameworks.
+00:29:30,871 --> 00:29:32,239
+你的选择变少
 
 
 451
-00:28:12,636 --> 00:28:12,976
-Thank you.
+00:29:32,973 --> 00:29:34,474
+但是我们将会改变这种情况
 
 
 452
-00:28:13,516 --> 00:28:18,546
-[ Applause ]
+00:29:34,908 --> 00:29:38,145
+我们的目标是丰富
+我们的Metal编程环境
 
 
 453
-00:28:19,046 --> 00:28:19,386
->> ANNA TIKHONOVA: Good morning.
+00:29:40,447 --> 00:29:42,683
+我们选择了一系列的通用过滤器
 
 
 454
-00:28:20,276 --> 00:28:22,676
-Thank you, Dan, for the
-introduction, my name is Anna
+00:29:42,749 --> 00:29:45,986
+我们知道这些通用过滤器通常使用
 
 
 455
-00:28:23,206 --> 00:28:26,086
-and I will be talking to you
-about Metal performance shaders.
+00:29:46,053 --> 00:29:47,955
+在你的图像处理应用和游戏中
 
 
 456
-00:28:26,266 --> 00:28:26,996
-Let's get started.
+00:29:49,723 --> 00:29:53,660
+这些算法为iOS进行了优化并且
 
 
 457
-00:28:27,946 --> 00:28:29,926
-So first of all, what is it?
+00:29:53,894 --> 00:29:55,963
+可以使用于A8处理器的IOS 9中
 
 
 458
-00:28:30,406 --> 00:28:34,276
-It's a framework of optimized
-high performance data parallel
+00:29:57,798 --> 00:30:00,434
+Metal性能着色器架构有两个目标
 
 
 459
-00:28:34,276 --> 00:28:35,926
-algorithms for the GPU in Metal.
+00:30:00,801 --> 00:30:03,103
+性能和容易使用
 
 
 460
-00:28:37,066 --> 00:28:38,156
-When and why would you use it?
+00:30:03,337 --> 00:30:05,405
+将它设计成容易融合到
 
 
 461
-00:28:39,136 --> 00:28:41,466
-If you are writing
-C code and you want
+00:30:05,506 --> 00:30:06,907
+你的Metal应用中
 
 
 462
-00:28:41,466 --> 00:28:42,996
-to add a common sorting
-algorithm
+00:30:07,474 --> 00:30:10,143
+让它直接在Metal资源上进行操作
 
 
 463
-00:28:42,996 --> 00:28:46,486
-to your CPU application, you are
-very unlikely to implement one
+00:30:10,611 --> 00:30:12,079
+它们是输入和输出
 
 
 464
-00:28:46,486 --> 00:28:49,346
-from scratch unless it
-was out of self-interest.
+00:30:13,180 --> 00:30:15,148
+我们不只是给你提供一批的这些高性能
 
 
 465
-00:28:49,976 --> 00:28:52,736
-You are a lot more likely to
-use the implementation provided
+00:30:15,215 --> 00:30:19,753
+优化的极好的核心程序
 
 
 466
-00:28:52,736 --> 00:28:56,746
-to you by the library because
-it's already been debugged
+00:30:19,920 --> 00:30:21,688
+我们还十分关注
 
 
 467
-00:28:56,986 --> 00:28:58,096
-and optimized for you.
+00:30:21,755 --> 00:30:25,125
+启动这些核心程序的必要的宿主代码
 
 
 468
-00:28:59,006 --> 00:29:02,036
-Likewise, if you wanted to add
-an image processing operation
+00:30:25,726 --> 00:30:28,028
+我们对如何将并行计算分离
 
 
 469
-00:29:02,036 --> 00:29:05,496
-to your CPU application,
-on our platform,
+00:30:28,362 --> 00:30:30,998
+的决策流程也很重视
 
 
 470
-00:29:05,496 --> 00:29:07,086
-you would use the
-accelerate framework
+00:30:32,032 --> 00:30:34,401
+你所要做的工作就是将这个架构的优势
 
 
 471
-00:29:07,466 --> 00:29:08,716
-because it uses vImage.
+00:30:34,468 --> 00:30:36,670
+应用到你的应用程序中
 
 
 472
-00:29:09,596 --> 00:29:10,796
-It's a powerful,
+00:30:36,870 --> 00:30:38,872
+通常只需要几行的代码
 
 
 473
-00:29:10,796 --> 00:29:14,976
-high-performance tuned image
-processing framework for --
+00:30:40,440 --> 00:30:42,643
+它简单地就像是调用一个库函数
 
 
 474
-00:29:16,256 --> 00:29:19,136
-that utilizes the CPU's
-vector processing.
+00:30:44,211 --> 00:30:46,180
+现在我就像你们介绍这个架构
 
 
 475
-00:29:19,656 --> 00:29:21,536
-These are just a few examples.
+00:30:46,380 --> 00:30:48,448
+让我们看看可用的操作
 
 
 476
-00:29:22,516 --> 00:29:25,636
-The point is that there is
-a rich environment available
+00:30:49,750 --> 00:30:52,386
+这里是个完整的列表 我们从头开始
 
 
 477
-00:29:25,636 --> 00:29:26,836
-for your CPU applications.
+00:30:52,653 --> 00:30:54,421
+实际上我只是挑几个说
 
 
 478
-00:29:27,496 --> 00:29:30,096
-On the GPU the story
-is a bit different,
+00:30:54,488 --> 00:30:55,589
+并且我还要举例说明
 
 
 479
-00:29:30,866 --> 00:29:33,366
-you simply have fewer
-options but we would
+00:30:57,224 --> 00:30:59,726
+首先该架构支持直方图过滤器
 
 
 480
-00:29:33,366 --> 00:29:34,466
-like to change the story.
+00:31:00,027 --> 00:31:02,729
+直方图均衡和规格过滤器
 
 
 481
-00:29:34,546 --> 00:29:38,136
-Our goal is to enrich your
-Metal programming environment.
+00:31:03,830 --> 00:31:06,099
+均衡和规格过滤器
 
 
 482
-00:29:38,776 --> 00:29:42,536
-We have selected a
-collection of common filters
+00:31:06,567 --> 00:31:10,537
+允许你改变你的图像
 
 
 483
-00:29:42,756 --> 00:29:45,746
-that we see often used in
-graphic processing pipelines
+00:31:10,604 --> 00:31:12,206
+中的色彩强度的分布
 
 
 484
-00:29:46,066 --> 00:29:47,956
-in your image processing
-applications and games.
+00:31:12,840 --> 00:31:15,075
+均衡过滤器是个很特殊的例子
 
 
 485
-00:29:49,736 --> 00:29:53,656
-These algorithms are
-optimized for iOS and available
+00:31:15,542 --> 00:31:16,944
+它将当前的分布
 
 
 486
-00:29:53,906 --> 00:29:55,966
-in iOS 9 for the A8 processor.
+00:31:17,411 --> 00:31:20,013
+改变为统一的分布
 
 
 487
-00:29:56,996 --> 00:30:00,306
-The Metal performance shaders
-framework has two goals,
+00:31:20,881 --> 00:31:22,983
+而规格过滤器使你能够设置
 
 
 488
-00:30:00,786 --> 00:30:02,956
-performance and ease of use.
+00:31:23,050 --> 00:31:24,852
+你所选择的任何分布
 
 
 489
-00:30:03,336 --> 00:30:05,416
-It's designed to
-integrate easily
+00:31:25,219 --> 00:31:27,621
+你指定将要在过滤器中使用的直方图
 
 
 490
-00:30:05,496 --> 00:30:06,726
-into your Metal applications.
+00:31:30,591 --> 00:31:34,394
+这是均衡过滤器的一个例子
 
 
 491
-00:30:07,476 --> 00:30:10,136
-It operates on Metal
-resources directly.
+00:31:37,998 --> 00:31:40,200
+它增加了图像的整体对比度
 
 
 492
-00:30:10,596 --> 00:30:13,356
-They are the input
-and the output.
+00:31:40,367 --> 00:31:43,203
+这里它描绘的天空中的彩虹非常美丽
 
 
 493
-00:30:13,356 --> 00:30:14,936
-We are not only giving
-you collection
+00:31:43,971 --> 00:31:45,439
+我想提醒的一件事是
 
 
 494
-00:30:15,206 --> 00:30:18,086
-of these high performance
-optimized awesome kernels --
+00:31:45,839 --> 00:31:48,609
+这些过滤器并不是其本身的结束
 
 
 495
-00:30:18,386 --> 00:30:22,156
-we are giving you that, but
-we are also taking care of all
+00:31:49,576 --> 00:31:51,612
+它们可以在一个更加复杂的算法中
 
 
 496
-00:30:22,156 --> 00:30:24,996
-of the host code necessary
-to launch these kernels.
+00:31:52,012 --> 00:31:53,480
+用作中间步骤
 
 
 497
-00:30:25,716 --> 00:30:28,756
-We take care of the
-decision-making process of how
+00:31:53,881 --> 00:31:57,284
+直方图过滤器可以用来实现
 
 
 498
-00:30:28,756 --> 00:30:30,996
-to split up the work for
-parallel computation.
+00:31:57,351 --> 00:31:58,886
+tune mapping的中间步骤
 
 
 499
-00:30:31,556 --> 00:30:35,556
-The work you have to do to take
-advantage of this framework
+00:31:58,952 --> 00:32:01,655
+这种技术常用于图形开发者来
 
 
 500
-00:30:35,556 --> 00:30:37,656
-in your applications
-usually amounts
+00:32:02,089 --> 00:32:05,092
+接近高动态范围的外观继续
 
 
 501
-00:30:37,656 --> 00:30:40,266
-to only a few lines of code.
+00:32:06,159 --> 00:32:09,763
+我们还支持Lancos重采样
 
 
 502
-00:30:40,436 --> 00:30:42,636
-It's as simple as calling
-a library function.
+00:32:10,230 --> 00:32:12,466
+它是高质量的重采样算法
 
 
 503
-00:30:44,226 --> 00:30:46,186
-So now that I have introduced
-the framework to you,
+00:32:12,599 --> 00:32:16,703
+可以用来缩减 放大
+压缩和拉伸图像
 
 
 504
-00:30:46,366 --> 00:30:48,306
-let's take a look at the
-available operations.
+00:32:18,071 --> 00:32:21,909
+在这个例子中 我垂直地拉伸图片
 
 
 505
-00:30:49,296 --> 00:30:52,396
-Here is a full list and let's
-start from the beginning.
+00:32:22,075 --> 00:32:24,511
+并且水平地挤压图片同时还保存
 
 
 506
-00:30:52,666 --> 00:30:54,296
-I will cover just a
-few of these actually
+00:32:24,578 --> 00:32:25,512
+图像的内容
 
 
 507
-00:30:54,476 --> 00:30:55,586
-and I will show you examples.
+00:32:27,748 --> 00:32:29,616
+你还可以支持阀值过滤器
 
 
 508
-00:30:56,756 --> 00:30:59,806
-So first, the framework
-supports the histogram filter
+00:32:30,150 --> 00:32:31,952
+如果与Sobel过滤器链接在一起
 
 
 509
-00:30:59,806 --> 00:31:02,726
-and the histogram equalization
-and specification filters.
+00:32:32,085 --> 00:32:33,487
+它还可以被用来查找图像的边缘
 
 
 510
-00:31:03,846 --> 00:31:06,116
-The equalization and
-specification filters,
+00:32:35,122 --> 00:32:36,290
+让我们来看个例子
 
 
 511
-00:31:06,566 --> 00:31:10,596
-they allow you to
-change the distribution
+00:32:37,824 --> 00:32:39,693
+这是阀值过滤器的输出
 
 
 512
-00:31:10,596 --> 00:31:12,216
-of color intensities
-in your image.
+00:32:40,294 --> 00:32:44,932
+现在它进入Sobel过滤器
+来给你提供图像的边缘
 
 
 513
-00:31:12,446 --> 00:31:15,076
-The equalization filter
-is a special case.
+00:32:46,633 --> 00:32:50,904
+最后支持整个范围的卷积核
 
 
 514
-00:31:15,536 --> 00:31:16,946
-It changes the distribution
+00:32:50,971 --> 00:32:53,841
+包括通用卷积
+在这里你可以指定你自己的
 
 
 515
-00:31:17,396 --> 00:31:20,016
-from the current
-distribution to the uniform one.
+00:32:53,907 --> 00:32:55,275
+卷积矩阵
 
 
 516
-00:31:20,736 --> 00:31:23,046
-And the specification
-filter enables you
+00:32:55,742 --> 00:32:57,711
+我们还支持高斯模糊
 
 
 517
-00:31:23,046 --> 00:31:24,866
-to set any distribution
-of your choice.
+00:32:57,945 --> 00:32:59,780
+box tent和Sobel过滤器
 
 
 518
-00:31:25,216 --> 00:31:27,606
-You specify the histogram that
-will be used in the filter.
+00:33:00,180 --> 00:33:03,150
+我最后的例子将是高斯模糊
 
 
 519
-00:31:30,576 --> 00:31:34,386
-This is an example of
-the equalization filter.
+00:33:03,750 --> 00:33:05,319
+你们都应该很熟悉
 
 
 520
-00:31:34,936 --> 00:31:40,186
-It increases the global
-contrast in the image.
+00:33:05,719 --> 00:33:07,354
+我们想在我们的UL中使用
 
 
 521
-00:31:40,366 --> 00:31:43,216
-Here it brings out the rainbow
-in the sky quite beautifully.
+00:33:07,821 --> 00:33:09,857
+你想要在你自己的应用程序中
 
 
 522
-00:31:43,956 --> 00:31:45,446
-One thing I'd like to mention
+00:33:09,923 --> 00:33:11,425
+使用高斯模糊会怎么样呢
 
 
 523
-00:31:45,846 --> 00:31:48,606
-about these filters is they
-are not an end in themselves.
+00:33:12,526 --> 00:33:15,395
+性能着色器架构会使它非常简单
 
 
 524
-00:31:49,496 --> 00:31:51,606
-They can be used as
-an intermediate step
+00:33:16,730 --> 00:33:17,798
+你要问有多简单？
 
 
 525
-00:31:52,026 --> 00:31:53,476
-in a more complex algorithm.
+00:33:18,732 --> 00:33:20,601
+我预先告诉你
 
 
 526
-00:31:53,826 --> 00:31:57,336
-The histogram filter can be
-used as an intermediate step
+00:33:20,667 --> 00:33:22,703
+只有两行代码
 
 
 527
-00:31:57,336 --> 00:31:58,636
-in implementing tune mapping,
+00:33:23,537 --> 00:33:28,408
+首先你必须创建一个模糊过滤器对象
 
 
 528
-00:31:58,966 --> 00:32:01,646
-which is a technique commonly
-used by graphics developers
+00:33:28,475 --> 00:33:33,347
+然后你必须将这个
+过滤器编码到指令缓存器中
 
 
 529
-00:32:02,096 --> 00:32:05,076
-to approximate the appearance
-of high dynamic range.
+00:33:37,451 --> 00:33:38,552
+谢谢大家
 
 
 530
-00:32:05,676 --> 00:32:09,756
-So moving on, we also
-support Lancos resampling.
+00:33:41,188 --> 00:33:43,924
+有一件事我想再次指出和提醒的是
 
 
 531
-00:32:10,226 --> 00:32:13,456
-It's a high-quality resampling
-algorithm that can used
+00:33:44,424 --> 00:33:47,594
+API将你的通用
+Metal资源看作是输入
 
 
 532
-00:32:13,576 --> 00:32:16,476
-to downscale, upscale,
-squeeze, and stretch images.
+00:33:48,161 --> 00:33:50,030
+你的设备、你的指令缓存器、你的纹理
 
 
 533
-00:32:16,476 --> 00:32:21,906
-In this example, I
-stretched the image vertically
+00:33:51,098 --> 00:33:53,433
+这些都是你已经在你的应用程序中
 
 
 534
-00:32:22,086 --> 00:32:24,566
-and squeezed it horizontally
-while preserving all
+00:33:53,500 --> 00:33:55,169
+创建的Metal资源
 
 
 535
-00:32:24,566 --> 00:32:25,506
-of the image content.
+00:33:57,271 --> 00:33:59,106
+现在我已经向你展示了这两行代码
 
 
 536
-00:32:27,396 --> 00:32:29,566
-You also support the
-thresholding filter.
+00:33:59,540 --> 00:34:02,075
+让我们看看它们插入到你
 
 
 537
-00:32:30,156 --> 00:32:31,956
-It can be used to
-find image edges
+00:34:02,342 --> 00:34:04,278
+当前的Metal工作流程的哪个位置
 
 
 538
-00:32:32,076 --> 00:32:33,486
-if chained with a Sobel filter.
+00:34:04,745 --> 00:34:07,147
+这是你的指令缓存器的图解表示法
 
 
 539
-00:32:34,746 --> 00:32:36,296
-Let's take a look at an example.
+00:34:08,447 --> 00:34:10,617
+它包括你将要提交到
 
 
 540
-00:32:36,776 --> 00:32:39,776
-This is the output of
-the thresholding filter,
+00:34:10,684 --> 00:34:12,186
+设备中的所有命令
 
 
 541
-00:32:39,776 --> 00:32:44,926
-and now it's fed into the Sobel
-filter to give you image edges.
+00:34:12,719 --> 00:34:14,288
+你就像平时那样操作就行了
 
 
 542
-00:32:46,626 --> 00:32:49,666
-And finally we support
-a whole range
+00:34:15,054 --> 00:34:17,157
+你通过发送绘制调用来渲染你的屏幕
 
 
 543
-00:32:49,666 --> 00:32:52,616
-of convolution kernels
-including general convolution,
+00:34:18,292 --> 00:34:21,328
+你通过发送核心程序来进行效果处理
 
 
 544
-00:32:52,616 --> 00:32:55,296
-where you can specify your
-own convolution matrix.
+00:34:22,129 --> 00:34:26,199
+现在你已经决定
+你的处理效果之一是模糊过滤器
 
 
 545
-00:32:55,356 --> 00:32:57,716
-And we also support
-Gaussian blur,
+00:34:26,934 --> 00:34:29,770
+正好是这个地方
 
 
 546
-00:32:57,936 --> 00:32:59,696
-box tent, and Sobel filters.
+00:34:31,938 --> 00:34:36,310
+不要忘记你还要像平时那样
+提交你的命令到设备中
 
 
 547
-00:33:00,196 --> 00:33:03,136
-My final example will
-be of a Gaussian blur.
+00:34:36,376 --> 00:34:37,411
+这里什么都没有改变
 
 
 548
-00:33:03,766 --> 00:33:05,326
-You should all be
-very familiar with it;
+00:34:39,279 --> 00:34:43,417
+现在如果你想要看我刚才
+完成的例子中的示例代码
 
 
 549
-00:33:05,706 --> 00:33:07,076
-we like to use it in our UI.
-
-
-550
-00:33:07,806 --> 00:33:09,936
-What if you wanted to
-use a Gaussian blur
-
-
-551
-00:33:09,936 --> 00:33:11,426
-in your own application,
-
-
-552
-00:33:12,366 --> 00:33:15,396
-the Metal performance shaders
-framework makes it very easy.
-
-
-553
-00:33:16,736 --> 00:33:17,616
-How easy, you ask?
-
-
-554
-00:33:18,716 --> 00:33:20,186
-I'm building some
-anticipation here.
-
-
-555
-00:33:20,666 --> 00:33:23,206
-It's just two lines of code.
-
-
-556
-00:33:23,536 --> 00:33:28,466
-You first have to create a blur
-filter object, and then you have
-
-
-557
-00:33:28,466 --> 00:33:33,356
-to encode the filter
-to the command buffer.
-
-
-558
-00:33:33,986 --> 00:33:35,796
-And that's it [applause].
-
-
-559
-00:33:37,466 --> 00:33:38,226
-Thank you, guys.
-
-
-560
-00:33:40,906 --> 00:33:43,716
-And one thing I just wanted to
-point out again and just note is
-
-
-561
-00:33:43,716 --> 00:33:47,536
-that this API takes your common
-Metal resources as input.
-
-
-562
-00:33:48,146 --> 00:33:50,036
-Your device, your command
-buffer, your textures.
-
-
-563
-00:33:51,096 --> 00:33:53,496
-These are the Metal resources
-
-
-564
-00:33:53,496 --> 00:33:55,176
-that you already create
-in your application.
-
-
-565
-00:33:55,736 --> 00:33:59,116
-And now that I have shown
-you these two lines of code,
-
-
-566
-00:33:59,536 --> 00:34:01,816
-let's take a look
-at where they plug
-
-
-567
-00:34:01,816 --> 00:34:03,926
-in into your current
-Metal work flow.
-
-
-568
-00:34:04,436 --> 00:34:06,336
-So this is a graphical
-representation
-
-
-569
-00:34:06,336 --> 00:34:07,086
-of your command buffer.
-
-
-570
-00:34:08,436 --> 00:34:10,686
-It contains all of the
-commands you are going
-
-
-571
-00:34:10,686 --> 00:34:11,866
-to be submitting to the device.
-
-
-572
-00:34:12,716 --> 00:34:14,755
-You do your work as
-you usually would.
-
-
-573
-00:34:15,056 --> 00:34:17,025
-You render your scene
-by issuing draw calls
-
-
-574
-00:34:18,326 --> 00:34:21,206
-and you do your post processing
-effect by dispatching kernels.
-
-
-575
-00:34:21,545 --> 00:34:23,536
-Now you have decided that one
-
-
-576
-00:34:23,536 --> 00:34:26,136
-of your post processing effects
-is going to be a blur filter.
-
-
-577
-00:34:26,976 --> 00:34:29,576
-So this is exactly
-where it goes.
-
-
-578
-00:34:30,346 --> 00:34:34,315
-And don't forget that you still
-have to submit your commands
-
-
-579
-00:34:34,315 --> 00:34:36,396
-to the device as
-you normally would.
-
-
-580
-00:34:36,396 --> 00:34:37,356
-Nothing changes here.
-
-
-581
-00:34:38,106 --> 00:34:41,446
-And now, if you would like
-to look at the sample code
-
-
-582
-00:34:41,446 --> 00:34:43,466
-for the example I was
-just going through,
-
-
-583
-00:34:43,466 --> 00:34:44,485
-you could do so right now.
-
-
-584
-00:34:44,485 --> 00:34:46,295
-You can go to
+00:34:43,483 --> 00:34:46,320
+你可以上网
 developer.Apple.com
 
 
+550
+00:34:46,553 --> 00:34:50,056
+下载叫做Metal性能着色器的例子
+世界你好
+
+
+551
+00:34:52,226 --> 00:34:53,293
+我前面已经提到过
+
+
+552
+00:34:53,360 --> 00:34:57,731
+Metal性能着色器架构
+有两个目的性能和易于使用
+
+
+553
+00:34:58,232 --> 00:35:00,300
+我刚才展示了它是多么容易使用
+
+
+554
+00:35:01,168 --> 00:35:03,070
+让我们快速地看看幕后
+
+
+555
+00:35:03,537 --> 00:35:05,472
+将要告诉你的性能的秘密
+
+
+556
+00:35:07,641 --> 00:35:09,476
+对于这些过滤器的每一个
+
+
+557
+00:35:09,543 --> 00:35:13,647
+包括高斯模糊过滤器
+我们要选择恰当的算法
+
+
+558
+00:35:14,081 --> 00:35:18,852
+恰当的这里的意思
+是正确的并且是最快的
+
+
+559
+00:35:19,319 --> 00:35:24,591
+对于输入数据、输入参数
+
+
+560
+00:35:24,825 --> 00:35:27,361
+设备GPU的特别组合是最快的
+
+
+561
+00:35:28,262 --> 00:35:29,496
+我这样说是什么意思
+
+
+562
+00:35:30,364 --> 00:35:32,633
+有许多方法可以实现高斯模糊
+
+
+563
+00:35:33,100 --> 00:35:36,270
+有constant cost
+log 2 linear
+
+
+564
+00:35:36,336 --> 00:35:37,738
+以及强力运算
+
+
+565
+00:35:39,273 --> 00:35:40,841
+所有这些方法的启动费用和
+
+
+566
+00:35:40,908 --> 00:35:42,309
+日常开支都不相同
+
+
+567
+00:35:42,676 --> 00:35:45,646
+一种方法可能对于小的核半径
+
+
+568
+00:35:45,979 --> 00:35:48,815
+非常好但在大的核半径上表现不佳
+
+
+569
+00:35:49,983 --> 00:35:54,321
+重要的是我们要实现每一种方法
+
+
+570
+00:35:54,421 --> 00:35:57,057
+并且通过实验来发现哪个
+
+
+571
+00:35:57,124 --> 00:35:59,459
+对于一个特别的输入问题、输入参数
+
+
+572
+00:35:59,526 --> 00:36:04,097
+和设备GPU的组合是最快的
+
+
+573
+00:36:05,265 --> 00:36:06,500
+在这个过程之后
+
+
+574
+00:36:07,000 --> 00:36:11,538
+所有的核都被调整成为你的核半径
+
+
+575
+00:36:12,439 --> 00:36:13,841
+你的像素格式
+
+
+576
+00:36:14,408 --> 00:36:16,944
+你的基础硬件结构的存储层次的参数
+
+
+577
+00:36:17,311 --> 00:36:19,279
+以及每个线程的像素数目
+
+
+578
+00:36:19,346 --> 00:36:21,148
+以及线程组规模的参数
+
+
+579
+00:36:21,215 --> 00:36:23,584
+这决定了如何将你的工作并行分离
+
+
+580
+00:36:25,018 --> 00:36:26,486
+最后我将会提到
+
+
+581
+00:36:27,187 --> 00:36:30,624
+该架构还为你做CPU优化工作
+
+
+582
+00:36:32,526 --> 00:36:35,028
+它优化了程序上载速度
+
+
+583
+00:36:36,263 --> 00:36:40,634
+它还重复使用中间纹理
+
+
+584
+00:36:41,201 --> 00:36:45,072
+它还为你做计算编码优化
+
+
 585
-00:34:46,585 --> 00:34:49,275
-and download the example called
-Metal performance shaders
+00:36:45,472 --> 00:36:47,241
+特别的是它还能察觉
 
 
 586
-00:34:49,356 --> 00:34:49,926
-hello world.
+00:36:47,641 --> 00:36:51,044
+你是否是在连续使用多重计算编码器
 
 
 587
-00:34:51,315 --> 00:34:54,626
-I've mentioned before that
-the Metal performance shaders
+00:36:51,111 --> 00:36:52,412
+如果是这样它就会将它们合并
 
 
 588
-00:34:54,626 --> 00:34:57,566
-framework has two goals,
-performance and ease of use.
+00:36:55,048 --> 00:36:57,417
+我们为你完成了所有的这些步骤
 
 
 589
-00:34:57,666 --> 00:35:00,206
-I just showed you how
-easy it is to use.
+00:36:58,418 --> 00:37:01,021
+非常酷
+但以代码的角度来看是什么样子
 
 
 590
-00:35:01,116 --> 00:35:03,056
-Let's take a quick
-look behind the scenes
+00:37:01,088 --> 00:37:03,724
+如对于我刚刚向你们展示的
 
 
 591
-00:35:03,556 --> 00:35:05,416
-at what's giving you
-this performance.
+00:37:03,790 --> 00:37:04,725
+优化高斯模糊着色器
 
 
 592
-00:35:07,676 --> 00:35:10,606
-For every one of these filters
-including the Gaussian blur
+00:37:07,427 --> 00:37:08,862
+好了 你准备好了么？
 
 
 593
-00:35:10,606 --> 00:35:13,656
-filter, we had to choose
-the right algorithm.
+00:37:09,696 --> 00:37:11,131
+这就是代码
 
 
 594
-00:35:14,106 --> 00:35:18,676
-The right here means correct
-and it has to be the fastest.
+00:37:12,499 --> 00:37:13,534
+现在你们都知道了
 
 
 595
-00:35:19,346 --> 00:35:24,606
-The fastest for a particular
-combination of input data,
+00:37:13,600 --> 00:37:15,936
+如何实现你们自己的优化高斯模糊
 
 
 596
-00:35:24,836 --> 00:35:27,366
-input parameters,
-and device GPU.
+00:37:16,203 --> 00:37:17,337
+对么我敢打赌 你没想到
 
 
 597
-00:35:28,276 --> 00:35:30,286
-What do I mean by this?
+00:37:17,404 --> 00:37:19,573
+在这个讲座中能学到这个
 
 
 598
-00:35:30,366 --> 00:35:32,686
-There are multiple ways to
-implement Gaussian blur.
+00:37:19,840 --> 00:37:23,010
+言归正传这是49 Metal
+kernels
 
 
 599
-00:35:32,686 --> 00:35:36,346
-There are constant
-cost, log 2, linear,
+00:37:23,076 --> 00:37:25,245
+2,000行的kernel代码
 
 
 600
-00:35:36,346 --> 00:35:37,736
-and brute force algorithms.
+00:37:25,312 --> 00:37:29,750
+以及821个不同的
+Metal高斯模糊实现
 
 
 601
-00:35:39,276 --> 00:35:40,906
-All of these approaches
-have different start
+00:37:30,584 --> 00:37:35,789
+每个实现都是这些49个Metal
+kernels一些组合
 
 
 602
-00:35:40,906 --> 00:35:42,296
-up costs and overheads.
+00:37:35,856 --> 00:37:37,424
+因此看起来我们做了很多的工作
 
 
 603
-00:35:42,666 --> 00:35:45,636
-One approach may work really
-well for a small kernel radius
+00:37:37,691 --> 00:37:38,692
+现在不必由你来做
 
 
 604
-00:35:45,976 --> 00:35:48,806
-but perform very poorly
-on a large kernel radius.
+00:37:39,493 --> 00:37:40,894
+让我们看看
 
 
 605
-00:35:49,976 --> 00:35:54,326
-The point is we had to implement
-each one of these approaches
+00:37:40,961 --> 00:37:44,665
+运行中的Metal性能着色器架构
 
 
 606
-00:35:54,406 --> 00:35:57,126
-and find out experimentally
-which one is going
+00:37:51,238 --> 00:37:53,273
+首先我将演示一个简单的
 
 
 607
-00:35:57,126 --> 00:35:59,536
-to be the fastest for a
-particular combination
+00:37:53,373 --> 00:37:58,545
+可分离高斯模糊实现的教科书
 
 
 608
-00:35:59,536 --> 00:36:03,956
-of input problem, input
-parameters, and device GPU.
+00:37:59,947 --> 00:38:01,715
+只需要1分钟就可写入到Metal
 
 
 609
-00:36:03,956 --> 00:36:09,076
-And after this process, all
-of the kernels had to be tuned
+00:38:01,782 --> 00:38:03,951
+这可能是你刚开始时应该使用的东西
 
 
 610
-00:36:09,076 --> 00:36:11,266
-for such parameters
-as your kernel radius,
+00:38:04,017 --> 00:38:05,586
+如果你要实现你的模糊
 
 
 611
-00:36:12,436 --> 00:36:13,456
-your pixel format,
+00:38:05,652 --> 00:38:08,188
+并且你手头没有Metal性能着色器
 
 
 612
-00:36:14,416 --> 00:36:16,936
-your underlying hardware
-architecture's memory hierarchy,
+00:38:08,922 --> 00:38:11,258
+现在我们非常愉快地
+在每秒60帧在运行着
 
 
 613
-00:36:17,326 --> 00:36:19,776
-and such parameters as
-number of pixels per thread
+00:38:11,325 --> 00:38:13,193
+但是我们实际上还没有做任何工作
 
 
 614
-00:36:19,776 --> 00:36:20,846
-and thread group dimensions.
+00:38:13,994 --> 00:38:15,195
+sigma数值是0
 
 
 615
-00:36:21,206 --> 00:36:23,636
-This is what determines how to
-split up your work in parallel.
+00:38:15,596 --> 00:38:19,399
+让我们改变sigma数值到6
 
 
 616
-00:36:23,636 --> 00:36:26,476
-And finally, I would
-like to mention
+00:38:19,466 --> 00:38:21,134
+我们就降到了每秒8帧
 
 
 617
-00:36:27,196 --> 00:36:30,626
-that the framework also performs
-CPU optimizations for you.
+00:38:21,969 --> 00:38:23,303
+我们还敢继续么
 
 
 618
-00:36:31,176 --> 00:36:35,016
-It optimizes program
-loading speed.
+00:38:23,370 --> 00:38:24,738
+让我们试着sigma 20
 
 
 619
-00:36:36,266 --> 00:36:40,546
-It also reuses intermediate
-textures,
+00:38:27,307 --> 00:38:30,844
+好了 现在我们降到了每秒3帧
 
 
 620
-00:36:41,206 --> 00:36:45,096
-and finally it does some compute
-encoder optimization for you.
+00:38:30,911 --> 00:38:32,179
+那样就无法工作了
 
 
 621
-00:36:45,146 --> 00:36:47,256
-Specifically, it can defect
+00:38:33,013 --> 00:38:34,748
+让我们转换到Metal性能
 
 
 622
-00:36:47,646 --> 00:36:51,106
-if you are using multiple
-computing coders in a row and if
+00:38:34,815 --> 00:38:35,949
+着色器实现
 
 
 623
-00:36:51,106 --> 00:36:52,416
-so it will coalesce them.
+00:38:37,551 --> 00:38:39,887
+现在我们返回到了每秒60帧
 
 
 624
-00:36:53,116 --> 00:36:58,896
-And after we have done all
-of these steps for you,
+00:38:39,953 --> 00:38:42,789
+没有做任何工作sigma为6
 
 
 625
-00:36:58,896 --> 00:37:01,076
-that's cool, but what would
-this actually look like in terms
+00:38:43,423 --> 00:38:44,858
+每秒仍然是60帧
 
 
 626
-00:37:01,076 --> 00:37:03,776
-of code, for example, for an
-optimized Gaussian blur shader
+00:38:45,592 --> 00:38:46,560
+Sigma为20
 
 
 627
-00:37:03,776 --> 00:37:04,736
-that I just showed you?
+00:38:47,127 --> 00:38:48,595
+仍然是每秒60帧
 
 
 628
-00:37:07,436 --> 00:37:08,656
-Well, are you ready for it?
+00:38:49,863 --> 00:38:53,367
+我们还得继续 真的模糊它
 
 
 629
-00:37:09,686 --> 00:37:11,926
-Here is the code.
+00:38:53,700 --> 00:38:55,169
+仍然是每秒60帧
 
 
 630
-00:37:12,436 --> 00:37:13,606
-So now all of you know how
+00:38:55,235 --> 00:38:56,470
+看起来我们赢了
 
 
 631
-00:37:13,606 --> 00:37:15,726
-to implement your own
-optimized Gaussian blur, right?
+00:39:13,053 --> 00:39:15,322
+这样你的屏幕刷新速率是60赫兹
 
 
 632
-00:37:16,196 --> 00:37:17,396
-I bet you didn't
-know you were going
+00:39:17,090 --> 00:39:20,994
+这就意味着我们以每秒60帧在运行
 
 
 633
-00:37:17,396 --> 00:37:19,046
-to learn this in this session.
+00:39:21,061 --> 00:39:24,898
+这样你在演示中
+所看到的优化高斯模糊着色器
 
 
 634
-00:37:19,826 --> 00:37:23,016
-Basically all joking aside,
-this is 49 Metal kernels,
+00:39:24,965 --> 00:39:28,335
+的性能最高是每秒60帧
 
 
 635
-00:37:23,066 --> 00:37:25,066
-2,000 lines of kernel code
+00:39:29,102 --> 00:39:33,941
+这就意味着你有
+16.6毫秒来画你的帧
 
 
 636
-00:37:25,296 --> 00:37:29,756
-and 821 different Metal
-Gaussian blur implementations
+00:39:34,575 --> 00:39:36,543
+这还包括你的系统可能要做的
 
 
 637
-00:37:30,576 --> 00:37:33,706
-where each implementation
-is some combination
+00:39:36,610 --> 00:39:38,779
+合成工作
 
 
 638
-00:37:33,706 --> 00:37:37,426
-of these 49 Metal kernels, so it
-looks like a lot of work we did
+00:39:39,813 --> 00:39:43,584
+这个图表显示你在不同的sigma值
 
 
 639
-00:37:37,686 --> 00:37:39,566
-and now you don't have to.
+00:39:43,650 --> 00:39:47,254
+的优化高斯模糊过滤器的执行时间
 
 
 640
-00:37:39,566 --> 00:37:40,946
-Now, let's take a look
+00:39:47,321 --> 00:39:48,422
+你可以看到执行时间
 
 
 641
-00:37:40,946 --> 00:37:50,216
-at the Metal performance
-shaders framework in action.
+00:39:49,656 --> 00:39:52,759
+要比16.6毫秒少得多
 
 
 642
-00:37:50,316 --> 00:37:53,286
-So first, I will
-demonstrate the performance
+00:39:53,794 --> 00:39:56,363
+这就意味着你仍然有额外的时间
 
 
 643
-00:37:53,366 --> 00:37:58,556
-of a simple textbook separable
-Gaussian blur implementation
+00:39:56,430 --> 00:39:57,965
+来做多余的GPU工作
 
 
 644
-00:37:59,466 --> 00:38:01,486
-that took only minutes
-to write in Metal.
+00:39:59,499 --> 00:40:02,769
+而且仍然能达到希望的每秒60帧
 
 
 645
-00:38:01,656 --> 00:38:04,026
-This is probably something you
-would start with if you had
+00:40:05,472 --> 00:40:07,708
+现在还有一些细节需要说明
 
 
 646
-00:38:04,026 --> 00:38:05,646
-to implement your own blur
+00:40:09,476 --> 00:40:12,212
+有时候你需要在很大的图片上工作
 
 
 647
-00:38:05,646 --> 00:38:07,806
-and you didn't have Metal
-performance shaders available
+00:40:12,279 --> 00:40:13,380
+你需要并列式显示
 
 
 648
-00:38:07,806 --> 00:38:08,086
-to you.
+00:40:14,548 --> 00:40:15,983
+有时候你需要只在你的
 
 
 649
-00:38:08,456 --> 00:38:11,336
-So now we are happily running
-at 60 frames per second
+00:40:16,049 --> 00:40:17,317
+图像的一部分上工作
 
 
 650
-00:38:11,336 --> 00:38:12,996
-but we are not actually
-doing any work yet.
+00:40:17,718 --> 00:40:18,986
+针对那个有个机制
 
 
 651
-00:38:13,996 --> 00:38:15,186
-The sigma value is 0.
+00:40:19,486 --> 00:40:21,889
+它叫做源偏移和
+destination剪裁矩形
 
 
 652
-00:38:15,606 --> 00:38:19,466
-Let's change the sigma value
-to 6 and we are down to
+00:40:23,090 --> 00:40:25,626
+剪裁矩形有起始点和大小
 
 
 653
-00:38:19,466 --> 00:38:21,146
-about 8 frames per second.
+00:40:26,193 --> 00:40:28,795
+它决定了目的纹理的区域
 
 
 654
-00:38:21,956 --> 00:38:23,046
-Dare we go any further?
+00:40:28,862 --> 00:40:30,697
+将由过滤器来进行更新
 
 
 655
-00:38:23,376 --> 00:38:24,736
-Let's try a sigma of 20.
+00:40:31,899 --> 00:40:34,334
+源偏移只有起始点
 
 
 656
-00:38:25,396 --> 00:38:30,896
-Okay. And we are down
-to 3 frames per second
+00:40:35,135 --> 00:40:37,905
+大小是隐含的
+由剪裁矩形来决定的
 
 
 657
-00:38:30,896 --> 00:38:32,176
-so that's not going to work.
+00:40:37,971 --> 00:40:41,542
+它只是你的目的纹理的
+左上角的一个相位差
 
 
 658
-00:38:33,006 --> 00:38:34,806
-Let's switch to the
-Metal performance
+00:40:42,309 --> 00:40:45,379
+它们共同工作给你提供了最后的图像
 
 
 659
-00:38:34,806 --> 00:38:35,956
-shaders implementation.
+00:40:48,448 --> 00:40:50,651
+在Metal性能着色器架构中
 
 
 660
-00:38:36,566 --> 00:38:39,946
-So now we are back to
-60 frames per second,
+00:40:50,717 --> 00:40:53,654
+你的来源和目的是相同纹理中的一个
 
 
 661
-00:38:39,946 --> 00:38:42,626
-not doing any work, sigma of 6.
+00:40:54,621 --> 00:40:56,590
+在这种情况下剪裁矩形
 
 
 662
-00:38:43,416 --> 00:38:44,846
-Still 60 frames per second.
+00:40:56,890 --> 00:40:59,560
+以同样的方式工作
 
 
 663
-00:38:45,576 --> 00:38:46,556
-Sigma of 20.
+00:41:03,463 --> 00:41:06,233
+当来源和目的是相同的
 
 
 664
-00:38:47,136 --> 00:38:48,586
-Still 60 frames per second.
+00:41:06,400 --> 00:41:08,235
+我们管它叫in-place操作
 
 
 665
-00:38:49,876 --> 00:38:53,366
-And, of course, we had to go
-further and really blur it,
+00:41:08,836 --> 00:41:10,037
+用它来节约内存
 
 
 666
-00:38:53,706 --> 00:38:55,226
-still at 60 frames per second.
+00:41:11,271 --> 00:41:14,208
+你怎样做才能对这些in-place
+过滤器进行编码呢
 
 
 667
-00:38:55,226 --> 00:38:56,486
-So this looks like a winner.
+00:41:15,175 --> 00:41:17,878
+你必须要使用编码命令缓冲区方法
 
 
 668
-00:39:02,516 --> 00:39:12,026
-[ Applause ]
+00:41:17,945 --> 00:41:20,614
+和一个分配器
+fall by back copy
 
 
 669
-00:39:12,526 --> 00:39:12,656
-Okay.
+00:41:22,382 --> 00:41:25,285
+有一件事要记住的是
+着色器并不总是可能
 
 
 670
-00:39:13,046 --> 00:39:15,336
-So your screen refresh
-rate is 60 hertz.
+00:41:25,352 --> 00:41:27,020
+运行in place
 
 
 671
-00:39:17,096 --> 00:39:21,056
-This means that we are running
-at 60 frames we are second,
+00:41:27,087 --> 00:41:28,922
+它取决于你的过滤器
 
 
 672
-00:39:21,056 --> 00:39:24,956
-so the performance of this
-optimized Gaussian blur shader
+00:41:28,989 --> 00:41:30,791
+过滤器参数和性能
 
 
 673
-00:39:24,956 --> 00:39:28,326
-you have seen in the demo is
-capped at 60 frames per second.
+00:41:31,425 --> 00:41:32,893
+如果你希望这个操作永远成功
 
 
 674
-00:39:28,966 --> 00:39:33,786
-This means that you have 16.6
-milliseconds to draw your frame,
+00:41:32,960 --> 00:41:35,495
+使用一个复制分配器
 
 
 675
-00:39:33,786 --> 00:39:36,566
-and this also includes
-any compositing work
+00:41:36,063 --> 00:41:37,664
+它就会被自动调用
 
 
 676
-00:39:36,596 --> 00:39:39,306
-that your system
-might need to do.
+00:41:38,432 --> 00:41:41,635
+除非在in place
+操作不可能的情况下
 
 
 677
-00:39:39,806 --> 00:39:43,066
-This chart shows you
-the execution time
+00:41:42,035 --> 00:41:44,872
+我们将为你创建一个新的目的纹理
 
 
 678
-00:39:43,646 --> 00:39:46,616
-of this optimized Gaussian blur
-filter for different values
+00:41:46,206 --> 00:41:47,674
+这样在必要情况下操作
 
 
 679
-00:39:46,616 --> 00:39:51,096
-of sigma and as you can see,
-the execution time is a lot less
+00:41:47,741 --> 00:41:49,276
+可在out of place 进行
 
 
 680
-00:39:51,246 --> 00:39:52,756
-than 16.6 milliseconds.
+00:41:50,811 --> 00:41:54,214
+有简单fall back copy
+分配器的例子
 
 
 681
-00:39:53,436 --> 00:39:56,416
-So this means that you
-still have some extra time
+00:41:55,816 --> 00:41:58,952
+这个例子只是创建了一个
+新的具有相同的像素格式和大小
 
 
 682
-00:39:56,416 --> 00:39:57,976
-to do additional GPU work,
+00:41:59,720 --> 00:42:02,823
+的目的纹理
 
 
 683
-00:39:59,496 --> 00:40:02,766
-and still hit the desired
-60 frames per second.
+00:42:02,890 --> 00:42:04,625
+因为源纹理非常简单
 
 
 684
-00:40:03,416 --> 00:40:07,036
-And now there are just a
-few more details I would
+00:42:05,792 --> 00:42:07,961
+之前我向你们
+展示了一个in place 操作
 
 
 685
-00:40:07,036 --> 00:40:07,596
-like to cover.
+00:42:08,028 --> 00:42:10,731
+在这个操作中 你只对目的纹理的
 
 
 686
-00:40:08,966 --> 00:40:12,266
-Sometimes you will need to
-work on very large images
+00:42:10,797 --> 00:42:12,099
+一部分进行了更改
 
 
 687
-00:40:12,266 --> 00:40:13,376
-and you will need to tile them.
+00:42:12,766 --> 00:42:15,869
+在剪裁矩形之外的任何东西都没有改变
 
 
 688
-00:40:14,546 --> 00:40:16,036
-And sometimes you
-will just need to work
+00:42:16,236 --> 00:42:18,372
+在复制分配器中你还可以这样做
 
 
 689
-00:40:16,036 --> 00:40:17,186
-on a portion of your image.
+00:42:19,339 --> 00:42:21,675
+只需要用你的源纹理的环境
 
 
 690
-00:40:17,186 --> 00:40:18,976
-So there is a mechanism
-for that.
+00:42:21,742 --> 00:42:23,544
+来初始化你的目的纹理
 
 
 691
-00:40:19,486 --> 00:40:22,616
-It's called source offset
-and destination clip Rect.
+00:42:26,346 --> 00:42:28,615
+我还想提到的是所有常见
 
 
 692
-00:40:23,106 --> 00:40:25,616
-Clip rect has an
-origin and size.
+00:42:28,682 --> 00:42:31,118
+的Metal资源如你的设备和
 
 
 693
-00:40:26,206 --> 00:40:28,866
-It determines the region
-of the destination texture,
+00:42:31,185 --> 00:42:32,252
+你的指令缓冲器
 
 
 694
-00:40:28,866 --> 00:40:32,416
-which is going to be
-updated by a filter.
+00:42:32,319 --> 00:42:34,288
+你都可在复制分配器中获得
 
 
 695
-00:40:32,416 --> 00:40:34,346
-The source offset
-only has an origin.
+00:42:35,322 --> 00:42:37,090
+现在我对细节进行了说明
 
 
 696
-00:40:35,136 --> 00:40:37,356
-The size is implicit, it's
-determined by the clip rect,
+00:42:37,157 --> 00:42:38,292
+让我们来总结一下
 
 
 697
-00:40:37,356 --> 00:40:40,066
-and it is just an offset
-from the upper left corner
+00:42:39,660 --> 00:42:43,363
+我想说的是请使用Metal支持架构
 
 
 698
-00:40:40,066 --> 00:40:41,436
-of your source texture.
+00:42:43,430 --> 00:42:45,499
+MetalKit和Metal性能着色器
 
 
 699
-00:40:42,316 --> 00:40:45,366
-They work together to
-give you the final image.
+00:42:45,766 --> 00:42:47,601
+它们非常强健
+它们经过优化
 
 
 700
-00:40:45,916 --> 00:40:50,716
-In the Metal performance
-shaders framework your source
+00:42:47,868 --> 00:42:49,002
+正如我向你们展示的
 
 
 701
-00:40:50,716 --> 00:40:53,646
-and destination can be
-one in the same texture.
+00:42:49,069 --> 00:42:51,605
+它们很容易融入
+你们的Metal的应用程序中
 
 
 702
-00:40:54,096 --> 00:40:56,066
-In this case, the clip rect
+00:42:52,005 --> 00:42:54,641
+它们会给你的应用程序带来更多的时间
 
 
 703
-00:40:56,896 --> 00:40:59,546
-and source offset work
-exactly the same way.
+00:42:54,908 --> 00:42:57,644
+你可以把时间用在
+制作独特的应用程序上
 
 
 704
-00:41:00,126 --> 00:41:06,246
-When the source and destination
-are the same texture,
+00:42:57,911 --> 00:43:00,047
+而不是浪费在一般的工作上
 
 
 705
-00:41:06,406 --> 00:41:08,246
-we call it an in
-place operation.
+00:43:00,547 --> 00:43:02,482
+另外的好处是
 
 
 706
-00:41:08,836 --> 00:41:09,846
-Use it to save memory.
+00:43:02,716 --> 00:43:04,952
+你可以花更少的代码来编写和维护
 
 
 707
-00:41:09,846 --> 00:41:12,386
-How could you do you
-actually encode one
+00:43:05,886 --> 00:43:10,424
+到我们的实验室来向我们提出反馈意见
+让我们知道如何开始或者向我们提问
 
 
 708
-00:41:12,386 --> 00:41:13,466
-of these filters in place?
+00:43:10,791 --> 00:43:15,963
+让我们知道是否想让新的工具或着色器
+添加到支持架构中
 
 
 709
-00:41:14,836 --> 00:41:17,936
-You have to use the encode to
-command buffer method that takes
+00:43:17,564 --> 00:43:19,700
+你随时可以在网上发现更多的信息
 
 
 710
-00:41:17,936 --> 00:41:20,606
-in place texture and a fall
-by back copy allocator.
+00:43:19,766 --> 00:43:21,602
+我们可以提供文档视频
 
 
 711
-00:41:22,376 --> 00:41:25,346
-One thing to keep in mind
-here, it's not always possible
+00:43:21,969 --> 00:43:25,205
+充分利用苹果开发论坛和技术支持
 
 
 712
-00:41:25,346 --> 00:41:26,716
-for the shaders to run in place.
+00:43:25,706 --> 00:43:26,840
+对于一般的疑问
 
 
 713
-00:41:27,076 --> 00:41:28,596
-It depends on your filter,
+00:43:26,907 --> 00:43:29,843
+请联系我们的游戏技术大师
+阿伦·谢弗
 
 
 714
-00:41:28,996 --> 00:41:30,506
-on the filter parameters
-and properties.
+00:43:31,879 --> 00:43:35,015
+你可以在网上观看以前的讲座
 
 
 715
-00:41:31,106 --> 00:41:32,806
-If you want this operation
+00:43:35,249 --> 00:43:38,785
+但如果你想
+学习新Metal性能优化技术
 
 
 716
-00:41:32,806 --> 00:41:35,486
-to always succeed,
-use a copy allocator.
+00:43:39,319 --> 00:43:41,688
+明天上午11:00来听我们的讲座
 
 
 717
-00:41:35,726 --> 00:41:40,086
-It will be called automatically,
-only in the situation where the
-
-
-718
-00:41:40,086 --> 00:41:41,646
-in place operation
-is not possible.
-
-
-719
-00:41:42,046 --> 00:41:44,866
-And we will create a new
-destination texture for you
-
-
-720
-00:41:46,216 --> 00:41:47,736
-so that the operation
-can proceed
-
-
-721
-00:41:47,736 --> 00:41:49,286
-out of place if necessary.
-
-
-722
-00:41:50,206 --> 00:41:54,206
-And here is an example of a
-simple fall back copy allocator.
-
-
-723
-00:41:55,826 --> 00:41:58,946
-This one simply creates
-a new destination texture
-
-
-724
-00:41:59,726 --> 00:42:02,886
-with the same pixel
-format and dimensions
-
-
-725
-00:42:02,886 --> 00:42:04,626
-as the source texture,
-very simple.
-
-
-726
-00:42:05,326 --> 00:42:08,016
-So now I have shown you
-an example before of an
-
-
-727
-00:42:08,016 --> 00:42:10,796
-in place operation where
-you only modified a portion
-
-
-728
-00:42:10,796 --> 00:42:13,976
-of your destination texture
-and everything outside
-
-
-729
-00:42:13,976 --> 00:42:15,866
-of the clip rect
-remained unchanged.
-
-
-730
-00:42:16,226 --> 00:42:18,366
-You can also do this
-in the copy allocator.
-
-
-731
-00:42:19,346 --> 00:42:22,596
-Just initialize your destination
-texture with the contexts
-
-
-732
-00:42:22,596 --> 00:42:23,536
-of your source texture.
-
-
-733
-00:42:24,136 --> 00:42:28,696
-And I would also like
-to mention that all
-
-
-734
-00:42:28,696 --> 00:42:31,176
-of the usual Metal
-resources such as your device
-
-
-735
-00:42:31,176 --> 00:42:33,316
-and your command buffer
-are available to you
-
-
-736
-00:42:33,316 --> 00:42:34,286
-in the copy allocator.
-
-
-737
-00:42:34,796 --> 00:42:36,916
-Now that I have covered
-these details,
-
-
-738
-00:42:37,166 --> 00:42:38,286
-let's jump into the summary.
-
-
-739
-00:42:38,846 --> 00:42:43,296
-I would like to say please use
-the Metal support frameworks,
-
-
-740
-00:42:43,416 --> 00:42:46,416
-MetalKit and Metal performance
-shaders, they are robust,
-
-
-741
-00:42:46,606 --> 00:42:49,716
-they are optimized, and as I
-have shown you, they're easy
-
-
-742
-00:42:49,716 --> 00:42:51,486
-to integrate into your
-Metal applications.
-
-
-743
-00:42:52,026 --> 00:42:54,586
-They will allow for faster bring
-up time of your applications.
-
-
-744
-00:42:54,906 --> 00:42:56,216
-Now, you can spend the time
-
-
-745
-00:42:56,216 --> 00:42:58,316
-on making application
-unique instead
-
-
-746
-00:42:58,316 --> 00:43:00,626
-of implementing common tasks.
-
-
-747
-00:43:00,626 --> 00:43:03,566
-And, of course, as an added
-benefit, there is less code
-
-
-748
-00:43:03,566 --> 00:43:04,956
-for you to write and maintain.
-
-
-749
-00:43:05,736 --> 00:43:07,746
-And come to our labs,
-give us feedback.
-
-
-750
-00:43:07,856 --> 00:43:10,366
-Let us know how to get
-started or give us questions.
-
-
-751
-00:43:10,836 --> 00:43:14,106
-Let us know if there are new
-utilities or shaders you would
-
-
-752
-00:43:14,106 --> 00:43:15,856
-like to see added to
-the support frameworks.
-
-
-753
-00:43:16,466 --> 00:43:19,686
-You can always find
-more information online.
-
-
-754
-00:43:19,786 --> 00:43:22,886
-We have documentation videos
-available, and take advantage
-
-
-755
-00:43:22,886 --> 00:43:25,216
-of the Apple Developer
-Forums and technical support.
-
-
-756
-00:43:25,496 --> 00:43:28,416
-For general inquiries,
-contact our gaming technologies
-
-
-757
-00:43:28,416 --> 00:43:29,706
-evangelist Allan Schaffer.
-
-
-758
-00:43:31,926 --> 00:43:35,726
-You can watch the past sessions
-online, but if you would
-
-
-759
-00:43:35,726 --> 00:43:38,236
-like to learn new Metal
-performance optimization
-
-
-760
-00:43:38,236 --> 00:43:40,576
-techniques, come to
-our talk tomorrow
-
-
-761
-00:43:40,576 --> 00:43:42,956
-at 11:00 a.m. Thank you.
-
-
-762
-00:43:44,516 --> 00:43:58,360
-[ Applause ]
+00:43:41,788 --> 00:43:42,623
+谢谢
 

@@ -1,3937 +1,3041 @@
 1
-00:00:21,516 --> 00:00:27,716
-[ Applause ]
+00:00:19,620 --> 00:00:23,724
+MapKit的最新内容
 
 
 2
-00:00:28,216 --> 00:00:29,166
->> SUMIT LONKAR: Good
-afternoon, everyone.
+00:00:28,195 --> 00:00:29,229
+大家下午好
 
 
 3
-00:00:29,496 --> 00:00:31,166
-Welcome to Session 206.
+00:00:29,463 --> 00:00:30,964
+欢迎来到206号讲座
 
 
 4
-00:00:31,236 --> 00:00:32,866
-This is What's New
-In the MapKit.
+00:00:31,231 --> 00:00:32,732
+本次讲座是关于
+《MapKit的最新内容》
 
 
 5
-00:00:33,326 --> 00:00:34,416
-My name is Sumit Lonkar.
+00:00:33,300 --> 00:00:34,501
+我是苏米特·隆卡尔
 
 
 6
-00:00:34,496 --> 00:00:36,306
-I am a software engineer
-on the Maps team.
+00:00:34,568 --> 00:00:36,303
+我是在地图团队工作的软件工程师
 
 
 7
-00:00:36,766 --> 00:00:39,226
-So, we have got a jam-packed
-session for you this afternoon.
+00:00:36,670 --> 00:00:39,239
+今天下午的讲座内容很多
 
 
 8
-00:00:39,436 --> 00:00:41,246
-So without further
-ado, let's get started.
+00:00:39,439 --> 00:00:41,241
+那我们闲话少说直接开始
 
 
 9
-00:00:42,556 --> 00:00:44,316
-Before we begin,
-first take a look
+00:00:42,509 --> 00:00:45,546
+开始之前
+我们先来看看今天的讲座日程
 
 
 10
-00:00:44,316 --> 00:00:45,496
-at today's session's agenda.
+00:00:46,079 --> 00:00:50,350
+今天第一个话题是
+现有MapKit API的功能改进
 
 
 11
-00:00:46,116 --> 00:00:49,046
-Our first topic of today
-is going to be improvements
+00:00:50,584 --> 00:00:52,886
+这里我主要介绍新功能
 
 
 12
-00:00:49,046 --> 00:00:50,206
-to existing MapKit API.
+00:00:53,120 --> 00:00:54,888
+不好意思 我主要探讨
 
 
 13
-00:00:50,616 --> 00:00:52,826
-Here, I will mainly talk
-about new features --
+00:00:55,789 --> 00:00:59,026
+我们新增的API功能
+以支持现有的功能
 
 
 14
-00:00:53,116 --> 00:00:57,506
-sorry, here, I'll mainly talk
-about our new APIs that we added
+00:00:59,259 --> 00:01:01,261
+之后
+我会谈谈Transit
 
 
 15
-00:00:57,506 --> 00:00:58,906
-to support our existing
-features.
+00:01:01,562 --> 00:01:04,798
+我们主要关注MapKit中
+的Transit问题
 
 
 16
-00:00:59,266 --> 00:01:02,956
-After that, I'll talk about
-Transit and we'll mainly focus
+00:01:05,199 --> 00:01:07,100
+最后是Flyover
 
 
 17
-00:01:02,956 --> 00:01:04,806
-on Transit in MapKit's
-perspective.
+00:01:07,434 --> 00:01:09,937
+Flyover是
+MapKit中的全新Map Type
 
 
 18
-00:01:04,806 --> 00:01:07,106
-And finally we will
-have a Flyover.
+00:01:10,003 --> 00:01:13,307
+iOS 6起
+可以运用在iOS的应用中
 
 
 19
-00:01:07,476 --> 00:01:09,636
-Flyover is a brand
-new MapType to MapKit.
+00:01:13,540 --> 00:01:15,309
+现在我们就展示给大家看
 
 
 20
-00:01:10,006 --> 00:01:13,296
-It's been available to iOS
-applications since iOS 6,
+00:01:15,576 --> 00:01:18,312
+关于这个话题
+我们还准备了许多演示
 
 
 21
-00:01:13,296 --> 00:01:15,246
-and now we are bringing
-it to you guys.
+00:01:18,579 --> 00:01:21,315
+这样大家可以看到所有这些新
+增API是怎样工作的
 
 
 22
-00:01:15,246 --> 00:01:18,316
-And along with this topic we
-will have various demos for you.
+00:01:21,782 --> 00:01:22,716
+大致是这些
 
 
 23
-00:01:18,646 --> 00:01:21,326
-So you can see all these
-newly added API in action.
+00:01:22,783 --> 00:01:24,651
+接下来我们直接
+介绍今天首个话题
 
 
 24
-00:01:21,676 --> 00:01:23,416
-So with that outline,
-let's jump right
+00:01:24,818 --> 00:01:26,587
+现有API的改进
 
 
 25
-00:01:23,416 --> 00:01:26,446
-into our first topic today,
-Improvements to Existing API.
+00:01:30,991 --> 00:01:33,627
+根据诸位开发人员的提议和要求
 
 
 26
-00:01:29,656 --> 00:01:33,636
-Based on comments and requests
-from developers like you,
+00:01:33,827 --> 00:01:35,729
+今年我们下大力气
 
 
 27
-00:01:33,746 --> 00:01:36,376
-this year we have taken some
-serious effort to make sure
+00:01:35,796 --> 00:01:38,932
+确保大家和你们的应用能够充
+分利用MapKit的功能
 
 
 28
-00:01:36,376 --> 00:01:40,036
-that you and your application
-get best out of MapKit.
+00:01:39,900 --> 00:01:45,205
+这些新增的API可以使你在
+应用中自定义MapKit
 
 
 29
-00:01:40,036 --> 00:01:42,076
-These newly added
-API will help you
+00:01:45,472 --> 00:01:47,541
+同样可以改善用户体验
 
 
 30
-00:01:42,076 --> 00:01:45,196
-to customize your MapKit
-experience in your application
+00:01:47,841 --> 00:01:49,376
+对于像诸位这样的开发人员来说
 
 
 31
-00:01:45,506 --> 00:01:48,686
-as well as enable great user
-experience, and for developers
+00:01:49,443 --> 00:01:51,578
+这意味着诸位会减少编码量
 
 
 32
-00:01:48,686 --> 00:01:51,586
-like you, it means way
-less code on your side.
+00:01:51,912 --> 00:01:53,847
+我们现在来逐个看这些API
 
 
 33
-00:01:51,996 --> 00:01:53,856
-So, let's look at
-these API one by one.
+00:01:54,214 --> 00:01:56,884
+先来看看
+Pin Color Customization
 
 
 34
-00:01:54,236 --> 00:01:56,496
-To start with, Pin
-Color Customization.
+00:01:59,119 --> 00:02:02,022
+MapKit图钉也叫
+MKAnnotationView
 
 
 35
-00:01:57,136 --> 00:02:02,036
-So, MapKit pins, are also
-known as MKAnnotationView,
+00:02:02,189 --> 00:02:04,758
+从一开始它们就是
+MapKit的重要组成部分
 
 
 36
-00:02:02,226 --> 00:02:04,756
-has been an integral part of
-MapKit since the very beginning.
+00:02:05,192 --> 00:02:09,429
+它们可以在地图上
+确定任何单个图钉的具体位置
 
 
 37
-00:02:05,446 --> 00:02:07,246
-They provide very
-concrete behavior
+00:02:09,863 --> 00:02:13,467
+但谈及自定义的时候
+我们却没有太多可以修改的
 
 
 38
-00:02:07,536 --> 00:02:09,425
-to denote any singular
-point on a map.
+00:02:13,734 --> 00:02:18,172
+你只能将之设为
+红色或绿色或紫色
 
 
 39
-00:02:09,876 --> 00:02:11,516
-And when it comes
-to customization,
+00:02:18,438 --> 00:02:19,706
+你没有其他选择
 
 
 40
-00:02:11,656 --> 00:02:13,466
-there is not much you
-can do about with them.
+00:02:19,773 --> 00:02:24,144
+从iOS3起 你只有这三种选择
 
 
 41
-00:02:13,756 --> 00:02:16,736
-So, you can make them red
-or you can make them green.
+00:02:24,611 --> 00:02:28,715
+现在我们来看
+可以实现自定义的新款API
 
 
 42
-00:02:17,266 --> 00:02:18,256
-Or purple.
+00:02:29,149 --> 00:02:30,217
+我们把它设定为
 
 
 43
-00:02:18,256 --> 00:02:18,976
-And that's it.
+00:02:30,284 --> 00:02:32,986
+MKPinAnnotationView
+的属性
 
 
 44
-00:02:19,146 --> 00:02:21,536
-That's all you get, all you
-get is only three choices.
+00:02:33,253 --> 00:02:34,655
+叫做pinTintColor
 
 
 45
-00:02:21,536 --> 00:02:24,136
-And it's been like
-that since iOS 3.
+00:02:34,721 --> 00:02:39,259
+在iOS上 叫做UIColor
+在OS X上 是NSColor
 
 
 46
-00:02:24,626 --> 00:02:27,096
-And now we are bringing
-you a new API
+00:02:39,660 --> 00:02:42,429
+之后我們也称其为
+UIColor和NSColor
 
 
 47
-00:02:27,416 --> 00:02:28,706
-that lets you customize this.
+00:02:42,596 --> 00:02:45,732
+这意味着在地图上你有
+数百万不同颜色可以选择
 
 
 48
-00:02:29,156 --> 00:02:31,346
-So we are introducing
-it as a property
+00:02:47,167 --> 00:02:50,370
+我希望借此机会指出旧版API
 
 
 49
-00:02:31,346 --> 00:02:34,426
-on MKPinAnnotationView,
-called pinTintColor.
+00:02:50,437 --> 00:02:52,940
+即图钉颜色设置的不足之处
 
 
 50
-00:02:34,966 --> 00:02:39,246
-On iOS it takes UIColor and
-on OS X it takes NSColor.
+00:02:53,307 --> 00:02:55,576
+因此如果你的应用软件
+还在用这款API
 
 
 51
-00:02:39,666 --> 00:02:42,396
-Now, as underneath, it's
-UIColor and NSColor,
+00:02:55,843 --> 00:02:58,979
+一定要升级到
+我们正在介绍的最新版API
 
 
 52
-00:02:42,396 --> 00:02:44,636
-that means you have
-millions of different colors
+00:02:59,680 --> 00:03:02,583
+这就是关于
+图钉颜色自定义的内容
 
 
 53
-00:02:44,636 --> 00:02:45,716
-that you can put on your Map.
+00:03:02,649 --> 00:03:04,952
+接下来是
+Callout自定义
 
 
 54
-00:02:47,176 --> 00:02:50,106
-I would like to take
-this opportunity to point
+00:03:05,018 --> 00:03:06,920
+在详细介绍
+callouts前
 
 
 55
-00:02:50,106 --> 00:02:52,936
-out that we are deprecating
-our old API called pinColor.
+00:03:06,987 --> 00:03:09,089
+先来说说什么是
+callout
 
 
 56
-00:02:53,306 --> 00:02:55,406
-So, if your application
-is using this API,
+00:03:09,456 --> 00:03:11,458
+对于已经使用这个功能
+很久的朋友来说
 
 
 57
-00:02:55,846 --> 00:02:58,136
-make sure that you
-update it to the new API
+00:03:11,692 --> 00:03:13,627
+就当是温故而知新吧
 
 
 58
-00:02:58,136 --> 00:03:00,126
-that we are providing.
+00:03:14,027 --> 00:03:15,229
+那什么是callout呢
 
 
 59
-00:03:00,126 --> 00:03:02,446
-That's all about Pin
-Color Customization.
+00:03:15,429 --> 00:03:19,099
+callout就是点击注释
+时 跳出来的那个白色气泡
 
 
 60
-00:03:02,446 --> 00:03:04,636
-Let's move on to go to
-Callout Customization.
+00:03:19,499 --> 00:03:21,835
+主要由四部分构成
 
 
 61
-00:03:05,026 --> 00:03:07,596
-And before we dive into
-callouts, I'll first take
+00:03:22,102 --> 00:03:23,036
+其一是标题
 
 
 62
-00:03:07,596 --> 00:03:09,246
-up some time to talk
-about callout.
+00:03:23,370 --> 00:03:26,473
+其二 紧接在标题下面的副标题
 
 
 63
-00:03:09,446 --> 00:03:11,446
-For those who have been
-using it for a long time,
+00:03:26,807 --> 00:03:29,676
+然后是右辅助视图和左辅助视图
 
 
 64
-00:03:11,726 --> 00:03:13,656
-it is just going to
-be a refresher course.
+00:03:30,177 --> 00:03:35,015
+通常情况下这四部分足以
+向我们展示和提供该点
 
 
 65
-00:03:14,036 --> 00:03:16,886
-So, what is this callout, the
-callout is the white bubble
+00:03:35,082 --> 00:03:40,320
+和它们所代表的座标的信息
 
 
 66
-00:03:16,886 --> 00:03:19,106
-that pops up when you
-tap on an annotation.
+00:03:40,787 --> 00:03:43,657
+但是当内容数量增加时就会出现问题
 
 
 67
-00:03:19,446 --> 00:03:21,846
-Primarily it has four
-different components.
+00:03:44,224 --> 00:03:46,994
+例如 在这个callout中
 
 
 68
-00:03:22,096 --> 00:03:23,036
-One, the title.
+00:03:47,461 --> 00:03:50,464
+你可以看到副标题就附在这点上
 
 
 69
-00:03:23,386 --> 00:03:26,466
-Second, you get a subtitle that
-goes right below the title,
+00:03:51,064 --> 00:03:55,035
+那么怎么才能自定义callout
+来满足应用需求呢
 
 
 70
-00:03:26,796 --> 00:03:29,676
-and you have a right accessory
-view and a left accessory view.
+00:03:55,335 --> 00:03:58,338
+事实证明 这也是研发人员一
+直以来试图解决的问题
 
 
 71
-00:03:30,186 --> 00:03:32,876
-Normally, these four
-components are good enough
+00:03:59,339 --> 00:04:00,908
+有时遇到这样的问题
 
 
 72
-00:03:33,006 --> 00:03:35,876
-to provide us enough, good
-enough to give a little bit
+00:04:01,508 --> 00:04:04,778
+在地图软件中点击那个点后
 
 
 73
-00:03:35,876 --> 00:03:37,896
-of information about the point
+00:04:05,012 --> 00:04:07,414
+会跳出类似这样的东西
 
 
 74
-00:03:38,316 --> 00:03:40,316
-or the coordinate
-they are representing,
+00:04:07,714 --> 00:04:10,450
+点击注释时你会得到一个POI
 
 
 75
-00:03:40,776 --> 00:03:43,666
-but the problem arises when
-the content size increases.
+00:04:10,517 --> 00:04:12,419
+和带有Yelp点评
+功能的callout
 
 
 76
-00:03:43,946 --> 00:03:46,986
-For example, in this
-callout, all right,
+00:04:12,653 --> 00:04:16,957
+为了实现类似的行为
 
 
 77
-00:03:47,446 --> 00:03:49,636
-in this callout you can see
-the subtitle is getting clipped
+00:04:17,190 --> 00:04:19,091
+我们见过开发人员做过这样的事情
 
 
 78
-00:03:49,636 --> 00:03:50,476
-at one point.
+00:04:19,493 --> 00:04:21,461
+他们把Emojis放入副标题中
 
 
 79
-00:03:51,056 --> 00:03:53,466
-So what do you have to do
-to customize these callouts
+00:04:21,728 --> 00:04:23,430
+我是说 这种办法
+对这类情况还是可以的
 
 
 80
-00:03:53,466 --> 00:03:54,936
-to fit your application needs?
+00:04:23,797 --> 00:04:27,134
+可是当处理更复杂的情况
+比如像这种情况又会怎样呢？
 
 
 81
-00:03:55,336 --> 00:03:57,276
-Well, it turns out, there
-are a couple of work-arounds
+00:04:27,434 --> 00:04:29,570
+结果发现这不是个好的办法
 
 
 82
-00:03:57,276 --> 00:03:58,346
-that developers have
-been trying.
+00:04:29,937 --> 00:04:32,973
+为了解决这个问题
+我们来介绍一个新的办法
 
 
 83
-00:03:58,766 --> 00:04:02,846
-Sometimes they run into
-issues, like, to start with,
+00:04:33,407 --> 00:04:36,877
+它可以帮你自定义callout
 
 
 84
-00:04:03,096 --> 00:04:04,766
-we have something like
-this in a map view
+00:04:37,110 --> 00:04:40,747
+我们这里介绍的属性叫做
+detailCalloutAccessoryView
 
 
 85
-00:04:05,036 --> 00:04:07,406
-where you tap -- a
-maps application.
+00:04:40,814 --> 00:04:45,452
+在iOS上 会用到UIView
+在OS X上 则是NSView
 
 
 86
-00:04:07,706 --> 00:04:10,306
-So, when you tap on
-annotations you get a POI
+00:04:45,819 --> 00:04:48,155
+那么这是个UIView和NSView
 
 
 87
-00:04:10,446 --> 00:04:12,116
-and a callout with
-a Yelp review.
+00:04:48,322 --> 00:04:50,991
+这意谓着可以更大限度地实现自定义
 
 
 88
-00:04:12,816 --> 00:04:16,276
-And in order to implement
-a similar kind
+00:04:51,191 --> 00:04:53,493
+那么即便想使用也可以这么做
 
 
 89
-00:04:16,276 --> 00:04:18,676
-of behavior we have seen
-developers do something
+00:04:53,894 --> 00:04:58,065
+这会开启无数
+自定义callout的可能
 
 
 90
-00:04:18,676 --> 00:04:21,406
-like this, where they put
-Emojis in their subtitle.
+00:04:58,565 --> 00:05:03,837
+同时这些callout都
+支持从右到左的语言自动排版
 
 
 91
-00:04:21,736 --> 00:04:23,396
-I mean, it's fine for
-something like this.
+00:05:03,904 --> 00:05:07,674
+也就是说所有的功能已准备好
+只需你输入一行代码即可
 
 
 92
-00:04:23,806 --> 00:04:26,776
-But what happens when you go
-implement something complex
+00:05:08,041 --> 00:05:11,612
+我们来快速看看示例代码
+以及怎么在应用中使用
 
 
 93
-00:04:26,776 --> 00:04:27,126
-like this?
+00:05:12,112 --> 00:05:16,650
+这里我有一个回调函数
+当你点击注释时就会执行该函数
 
 
 94
-00:04:27,446 --> 00:04:29,586
-Well, it turns out it
-is not a good solution.
+00:05:17,384 --> 00:05:21,488
+先来设置
+detailCalloutAccessory属性
 
 
 95
-00:04:29,936 --> 00:04:32,776
-And in order to solve this
-problem we are introducing a new
+00:05:21,655 --> 00:05:24,925
+detailCalloutAccessoryView
+属性 作为UIImageView
 
 
 96
-00:04:32,776 --> 00:04:35,806
-way, in terms of a
-property that will help you
+00:05:24,992 --> 00:05:28,328
+大家来看 我放了一个泰姬陵
+的图片在callout中
 
 
 97
-00:04:35,806 --> 00:04:37,416
-to customize the callout.
+00:05:28,662 --> 00:05:31,632
+这些就是自定义
+callout所要做的
 
 
 98
-00:04:37,416 --> 00:04:39,126
-The property we are
-introducing is called
+00:05:31,832 --> 00:05:32,666
+怎么样 很棒吧？
 
 
 99
-00:04:39,126 --> 00:04:40,386
-detailCalloutAccessoryView.
+00:05:38,172 --> 00:05:40,707
+正如我刚才所说的这只是
+UIView和NSView
 
 
 100
-00:04:40,826 --> 00:04:45,466
-On iOS it takes a UIView,
-and on OS X it takes NSView.
+00:05:40,841 --> 00:05:43,043
+我们非常高兴
+能为大家提供这个功能
 
 
 101
-00:04:45,826 --> 00:04:48,146
-Again, it's a UIView and NSView.
+00:05:43,110 --> 00:05:45,479
+来看看你们能用它做些什么
 
 
 102
-00:04:48,306 --> 00:04:50,756
-That means you can customize
-it to a greater length.
+00:05:45,913 --> 00:05:48,415
+希望我们很快就能看到结果
 
 
 103
-00:04:50,756 --> 00:04:52,846
-So, even if you want
-to use, like, a --
+00:05:48,949 --> 00:05:51,051
+这就是关于Callout
+自定义的所有内容
 
 
 104
-00:04:52,986 --> 00:04:56,776
-you can do it and it will open
-up the endless possibilities
+00:05:51,251 --> 00:05:53,453
+我们来继续讲地图自定义
 
 
 105
-00:04:56,776 --> 00:04:58,686
-of customizing these callouts.
+00:05:54,788 --> 00:05:58,559
+在这个特定的话题中
+我们将介绍新版API
 
 
 106
-00:04:58,686 --> 00:05:02,556
-Again, these callouts
-support auto layout,
+00:05:58,725 --> 00:06:01,328
+它可以帮助大家控制
+在Map View上进行的内容
 
 
 107
-00:05:02,646 --> 00:05:03,866
-right to left languages.
+00:06:01,395 --> 00:06:03,530
+比如在你所有的应用程序中
+有个地图程序
 
 
 108
-00:05:03,896 --> 00:05:05,686
-That means everything
-is in there for you,
+00:06:03,864 --> 00:06:05,999
+怎样才能控制
+Map View的内容呢？
 
 
 109
-00:05:05,686 --> 00:05:07,676
-and all you need is one
-single line of code.
+00:06:06,600 --> 00:06:10,871
+如今这些API在地图程序中
+已经使用了好多年
 
 
 110
-00:05:08,076 --> 00:05:09,506
-Let's quickly take a
-look at a sample code
+00:06:11,104 --> 00:06:12,706
+现在我们就给大家看看
 
 
 111
-00:05:09,506 --> 00:05:11,586
-and how one would use
-it in their application.
+00:06:13,207 --> 00:06:15,242
+首先来看交通状况
 
 
 112
-00:05:12,106 --> 00:05:14,966
-So, here, I have a callback
-method that gets fired
+00:06:15,943 --> 00:06:18,946
+现在你可以在Map View中
+显示任何交通高峰
 
 
 113
-00:05:14,966 --> 00:05:16,656
-when you tap on an annotation.
+00:06:19,012 --> 00:06:23,050
+你只需要在
+Map View上插面小旗
 
 
 114
-00:05:17,036 --> 00:05:19,776
-I'll start off with just setting
+00:06:23,116 --> 00:06:24,718
+这个叫做
+shows Traffic
 
 
 115
-00:05:19,776 --> 00:05:21,466
-up detailCalloutAccessory
-property,
+00:06:24,818 --> 00:06:25,853
+与交通状况功能相似的
 
 
 116
-00:05:21,786 --> 00:05:24,696
-detailCalloutAccessoryView
-property to be a UIImageView.
+00:06:26,086 --> 00:06:28,922
+我们还要介绍
+显示或隐藏比例尺的方法
 
 
 117
-00:05:24,986 --> 00:05:27,736
-As you can see I'm just placing
-an image of the Taj Mahal
+00:06:29,356 --> 00:06:34,661
+你可以在Map View
+左上角显示或隐藏比例尺
 
 
 118
-00:05:27,736 --> 00:05:30,386
-in that callout, and that's
-it, that's all you need to do
+00:06:34,728 --> 00:06:37,798
+同样的
+你还可以显示或隐藏指南针
 
 
 119
-00:05:30,386 --> 00:05:31,896
-to customize this callout.
+00:06:38,999 --> 00:06:43,170
+你可能注意到了这些API与
+现有的API很相似
 
 
 120
-00:05:31,896 --> 00:05:32,456
-Isn't that great?
+00:06:43,237 --> 00:06:46,039
+比如showsPointsOfInterest
+或showsBuilding
 
 
 121
-00:05:33,516 --> 00:05:37,266
-[ Applause ]
+00:06:46,106 --> 00:06:48,342
+我们相信通过使用这些API
 
 
 122
-00:05:37,766 --> 00:05:40,706
-As I mentioned earlier, it
-is just a UIView and NSView.
+00:06:48,509 --> 00:06:51,545
+你可以在自己的应用中
+自定义Map View
 
 
 123
-00:05:40,916 --> 00:05:43,096
-We are really excited to
-give it out to you guys
+00:06:51,912 --> 00:06:53,947
+并获得实现棒的用户体验
 
 
 124
-00:05:43,096 --> 00:05:45,466
-and see what you guys can
-achieve with this thing.
+00:06:54,448 --> 00:06:55,816
+这就是地图自定义
 
 
 125
-00:05:45,906 --> 00:05:48,076
-Hopefully we will see
-those results coming soon.
+00:06:57,951 --> 00:07:00,787
+除了地图和这些谈过的API外
 
 
 126
-00:05:48,076 --> 00:05:51,016
-So that's all about
-Callout Customization.
+00:07:01,188 --> 00:07:03,590
+我们对MapKit也有很多改进
 
 
 127
-00:05:51,286 --> 00:05:53,056
-Let's move on to
-Map Customizations.
+00:07:04,324 --> 00:07:05,993
+首先是时区支持
 
 
 128
-00:05:53,596 --> 00:05:58,566
-In this particular topic we will
-be talking about new handy APIs
+00:07:06,293 --> 00:07:09,329
+我们在MK地图项增添了时区属性
 
 
 129
-00:05:58,566 --> 00:06:01,406
-that will let you control
-what goes on your Map View.
+00:07:09,596 --> 00:07:12,933
+使用这个属性可以获得相关的时区
 
 
 130
-00:06:01,406 --> 00:06:03,526
-Like, you have a map unit
-inside your application,
+00:07:13,267 --> 00:07:15,202
+可以和CLGeocoder一起使用
 
 
 131
-00:06:03,856 --> 00:06:05,986
-how can you control the
-content of this Map View?
+00:07:15,602 --> 00:07:18,605
+因此你可以用一个特定的坐标
+找到相关的时区
 
 
 132
-00:06:06,206 --> 00:06:09,826
-These APIs have been
-available to maps applications
+00:07:18,939 --> 00:07:21,074
+你也可以和MK本地搜索一起使用
 
 
 133
-00:06:09,826 --> 00:06:10,886
-for a couple of years now
+00:07:21,408 --> 00:07:26,647
+这样就可以搜索感兴趣的区域
+或任何你想查找的内容
 
 
 134
-00:06:10,976 --> 00:06:12,696
-and now we are bringing
-it to you guys.
+00:07:26,713 --> 00:07:29,082
+还可以找到相关时区
 
 
 135
-00:06:12,696 --> 00:06:15,256
-Let's start off with traffic.
+00:07:29,683 --> 00:07:32,653
+此外
+我们还对MapKit做了诸多改进
 
 
 136
-00:06:15,916 --> 00:06:18,246
-Now you have an ability
-to show any high traffic
+00:07:32,719 --> 00:07:34,421
+以实现更好的Swift兼容性
 
 
 137
-00:06:18,246 --> 00:06:21,836
-on your Map View and all you
-have to do is put a flag, like,
+00:07:34,621 --> 00:07:36,590
+同时我们还增加了
+WatchKit支持
 
 
 138
-00:06:21,836 --> 00:06:24,026
-set a flag on the Map
-View called showsTraffic.
+00:07:37,090 --> 00:07:40,994
+从而可以在手表上
+启动你自己的地图程序
 
 
 139
-00:06:24,756 --> 00:06:27,256
-Similar to the traffic,
-we're also providing a way
+00:07:41,361 --> 00:07:46,567
+这些就是我们对MapKit
+做的所有改进
 
 
 140
-00:06:27,256 --> 00:06:28,916
-to show or hide a scale.
+00:07:47,000 --> 00:07:48,268
+我们来继续讲下一个话题
 
 
 141
-00:06:29,336 --> 00:06:32,396
-So you can either
-show or hide a scale
+00:07:48,435 --> 00:07:50,737
+同时这也是我个人最喜欢的话题
+Transit
 
 
 142
-00:06:32,396 --> 00:06:34,736
-in your left top
-corner of your Map View.
+00:07:54,208 --> 00:07:57,211
+昨天的讲座很令人兴奋
 
 
 143
-00:06:34,736 --> 00:06:37,846
-And similar to a scale, you
-can also show and hide compass.
+00:07:57,277 --> 00:08:00,814
+同时我们也推出了地图程序
+的新功能 Transit
 
 
 144
-00:06:38,246 --> 00:06:41,996
-You might have noticed that
-these APIs are very similar
+00:08:01,081 --> 00:08:04,351
+今天我们主要介绍这对于
+MapKit而言意味什么
 
 
 145
-00:06:41,996 --> 00:06:43,056
-to our existing APIs
+00:08:04,852 --> 00:08:07,221
+在这个功能方面
+我们已经做了许多工作
 
 
 146
-00:06:43,246 --> 00:06:45,696
-like showsPointsOfInterest
-or showsBuildings.
+00:08:07,554 --> 00:08:12,726
+在设计该功能时
+我们将用户放在开发过程的中心位置
 
 
 147
-00:06:46,126 --> 00:06:49,146
-We believe with the use of
-these APIs, you will be able
+00:08:13,260 --> 00:08:17,397
+为了在你的应用程序中提供类似的体验
 
 
 148
-00:06:49,146 --> 00:06:51,596
-to customize Map View
-inside your application
+00:08:17,598 --> 00:08:21,969
+我们希望同过地图软件给你
+提供相似的体验
 
 
 149
-00:06:51,916 --> 00:06:53,956
-and provide a great
-user experience.
+00:08:22,202 --> 00:08:23,470
+和你...
 
 
 150
-00:06:54,476 --> 00:06:55,816
-So that's Map Customization.
+00:08:24,071 --> 00:08:29,076
+我们采用MapsTransit的
+入口来实现这一点
 
 
 151
-00:06:56,346 --> 00:07:00,786
-Other than maps, other than
-these APIs we talked about,
+00:08:29,343 --> 00:08:30,744
+我们来逐个看这个入口
 
 
 152
-00:07:01,216 --> 00:07:04,446
-we have various other
-improvements to MapKit as well.
+00:08:31,078 --> 00:08:33,981
+首先
+可以应用Transit ETA
 
 
 153
-00:07:04,446 --> 00:07:05,996
-First of all, a time
-zone support.
+00:08:34,381 --> 00:08:37,583
+如果你之前使用过
+MKDirections协议
 
 
 154
-00:07:06,326 --> 00:07:09,336
-We have added a time zones
-property on our MK map item.
+00:08:37,650 --> 00:08:40,354
+MKDirection类型
+和相关的API的话
 
 
 155
-00:07:09,646 --> 00:07:12,926
-You can use that property to
-get the associated time zone.
+00:08:40,419 --> 00:08:45,792
+那么你也许知道我们支持汽车和步行
+这两种交通方式
 
 
 156
-00:07:13,376 --> 00:07:15,206
-You can use it with CLGeocoder.
+00:08:46,059 --> 00:08:51,198
+你可以针对这两种交通类型
+提出方向和ETA请求
 
 
 157
-00:07:15,606 --> 00:07:17,586
-So you can find out a
-time zone associated
+00:08:51,365 --> 00:08:53,800
+今年我们添加了新的交通方式
 
 
 158
-00:07:17,586 --> 00:07:18,616
-with a particular coordinate.
+00:08:53,934 --> 00:08:56,170
+MKDirectionsTransportType
+和Transit
 
 
 159
-00:07:18,936 --> 00:07:21,976
-Or you can also use it
-with MKLocalSearch, so,
+00:08:56,236 --> 00:09:00,407
+有这个TransportType
+就可以应用ETA
 
 
 160
-00:07:21,976 --> 00:07:25,826
-you can search an area for a
-point of interest or anything
+00:09:00,807 --> 00:09:05,712
+我要指出的是
+你将只为Transit应用ETAs
 
 
 161
-00:07:25,826 --> 00:07:26,746
-that you would like to search.
+00:09:06,046 --> 00:09:08,081
+你不会获得Transit方向
 
 
 162
-00:07:26,746 --> 00:07:29,096
-And you can find out a time
-zone associated with that.
+00:09:08,415 --> 00:09:10,350
+我们进入示例代码之前
 
 
 163
-00:07:29,676 --> 00:07:32,726
-Besides that, we have also done
-various improvements to MapKit
+00:09:11,084 --> 00:09:15,522
+来看一下可以怎样
+从ETA之外获得什么
 
 
 164
-00:07:32,726 --> 00:07:34,416
-for better Swift compatibility,
+00:09:15,589 --> 00:09:19,660
+比如你可以获得预计到达时间
+和预计离开时间
 
 
 165
-00:07:34,636 --> 00:07:36,576
-and we also added
-a WatchKit support
+00:09:19,993 --> 00:09:25,566
+考虑到交通频率的性质
+大多数都取决于时间和地点
 
 
 166
-00:07:37,106 --> 00:07:39,226
-to launch maps applications
-on your watch
+00:09:25,832 --> 00:09:28,302
+因此提供这一信息就变得非常重要
 
 
 167
-00:07:39,496 --> 00:07:40,986
-from your own application.
+00:09:28,669 --> 00:09:30,370
+我们相信通过这些信息
 
 
 168
-00:07:41,406 --> 00:07:44,736
-So that's it, so that's all the
-improvements that we have done
+00:09:30,537 --> 00:09:35,342
+你会为程序用户群提供很棒的用户体验
 
 
 169
-00:07:44,736 --> 00:07:46,576
-to existing features in MapKit.
+00:09:35,843 --> 00:09:37,277
+我们来看示例代码
 
 
 170
-00:07:47,046 --> 00:07:48,246
-Let's move on to the next topic
+00:09:37,377 --> 00:09:39,546
+怎样才能应用
+这些Transit ETA
 
 
 171
-00:07:48,246 --> 00:07:50,476
-and personal favorite
-of mine, Transit.
+00:09:40,080 --> 00:09:43,150
+这里我有个辅助函数
+getTransitETA
 
 
 172
-00:07:54,226 --> 00:07:57,246
-We were pretty excited
-about yesterday's keynote,
+00:09:43,617 --> 00:09:46,420
+那我先
+生成MKDirectionsRequest
 
 
 173
-00:07:57,246 --> 00:07:58,946
-with the moment we
-announced the new feature
+00:09:46,820 --> 00:09:49,056
+之后我将设置起点和目的地
 
 
 174
-00:07:59,366 --> 00:08:00,776
-for maps application Transit.
+00:09:49,590 --> 00:09:53,026
+一旦完成
+我将交通类型设置为Transit
 
 
 175
-00:08:01,106 --> 00:08:04,336
-And today we will mainly focus
-on what it means to MapKit.
+00:09:53,293 --> 00:09:55,963
+因为我们感兴趣的是
+获得Transit ETA
 
 
 176
-00:08:05,006 --> 00:08:07,236
-We have worked really
-hard on this feature.
+00:09:56,730 --> 00:09:59,499
+使用刚刚生成的函数
 
 
 177
-00:08:07,556 --> 00:08:10,766
-And while designing this feature
-we kept our user at the center
+00:09:59,566 --> 00:10:01,468
+我将要创建
+MKDirections对象
 
 
 178
-00:08:10,766 --> 00:08:12,676
-of the development process.
+00:10:01,802 --> 00:10:03,203
+我叫它ETA计算程序
 
 
 179
-00:08:13,286 --> 00:08:16,346
-And in order to provide a
-similar kind of experience
+00:10:03,270 --> 00:10:05,572
+随着Completion
+Handler确定终点
 
 
 180
-00:08:16,346 --> 00:08:18,286
-in your application,
-we would like you
+00:10:05,639 --> 00:10:07,407
+同时在CompletionHandler上
 
 
 181
-00:08:18,286 --> 00:08:21,986
-to leverage maps application to
-provide a similar experience.
+00:10:07,474 --> 00:10:08,976
+我将处理
+从服务器反馈回来的信息
 
 
 182
-00:08:22,246 --> 00:08:25,636
-And the way we are
-going to do that is
+00:10:09,910 --> 00:10:11,545
+这就是Transit ̨ETA
 
 
 183
-00:08:25,636 --> 00:08:27,436
-by providing you a
-distinct entry point
+00:10:11,612 --> 00:10:13,514
+现在既然我们
+具备了Transit ETA
 
 
 184
-00:08:27,846 --> 00:08:29,066
-to a Maps Transit feature.
+00:10:13,647 --> 00:10:16,483
+那为了提供完整的体验
+我们会介绍一种方法
 
 
 185
-00:08:29,356 --> 00:08:30,756
-Let's look at this
-point one by one.
+00:10:16,550 --> 00:10:19,453
+来启动地图软件
+进入Transit模式
 
 
 186
-00:08:31,146 --> 00:08:35,226
-First one, ability to
-request a Transit ETA.
+00:10:19,920 --> 00:10:23,757
+到目前为止你可以在地图软件上
+通过不同的启动方式
 
 
 187
-00:08:35,226 --> 00:08:39,176
-If you use MKDirections
-protocol, MKDirections class
+00:10:24,057 --> 00:10:25,959
+甚至其他相关的软件来启动运行
 
 
 188
-00:08:39,176 --> 00:08:41,775
-and related APIs before, then
-you know, you might be aware
+00:10:26,193 --> 00:10:28,595
+此外MKLaunchOptions
+DirectionsModeKey
 
 
 189
-00:08:41,775 --> 00:08:44,596
-of these two TransportType
-that we already support,
+00:10:28,662 --> 00:10:33,700
+将给你指出哪些地图软件模式可以使用
 
 
 190
-00:08:44,596 --> 00:08:45,726
-automobile and walking.
+00:10:34,101 --> 00:10:37,738
+现在我们支持Driving方式
+和步行方式
 
 
 191
-00:08:46,066 --> 00:08:49,166
-You can request directions
-and ETAs
+00:10:37,838 --> 00:10:41,742
+在iOS 9中我们
+还引入Transit模式
 
 
 192
-00:08:49,166 --> 00:08:51,216
-for these two transport types.
+00:10:42,142 --> 00:10:48,715
+通过这个模式
+你可以从你的程序中启动地图应用
 
 
 193
-00:08:51,216 --> 00:08:53,806
-And this year we are
-adding a new TransportType,
+00:10:49,082 --> 00:10:50,918
+我们快速来看这里的示例代码
 
 
 194
-00:08:54,156 --> 00:08:55,936
-MKDirectionsTransportType,
-Transit.
+00:10:51,418 --> 00:10:55,189
+那么我这里有个辅助公式
+openInMapsTransit
 
 
 195
-00:08:56,436 --> 00:09:00,396
-With this TransportType, you
-will be able to request ETAs.
+00:10:55,255 --> 00:10:56,690
+这是一个使用坐标的公式
 
 
 196
-00:09:00,806 --> 00:09:02,956
-And I would like to point
-it out, you will only,
+00:10:58,458 --> 00:11:03,130
+我基本上先要用那个解析坐标
+生成MK地图项
 
 
 197
-00:09:03,036 --> 00:09:05,696
-as of now you will only
-request ETAs for Transit.
+00:11:03,530 --> 00:11:08,302
+之后我会用Transit模式设置
+生成字典启动选项
 
 
 198
-00:09:06,046 --> 00:09:08,066
-You won't get a Transit
-direction.
+00:11:08,735 --> 00:11:09,670
+一旦完成
 
 
 199
-00:09:08,456 --> 00:09:10,346
-So, let's see how you can --
-
-
-200
-00:09:10,426 --> 00:09:13,606
-before we move on to a sample
-code, let's see how you can,
-
-
-201
-00:09:14,206 --> 00:09:15,586
-what you get besides ETA.
-
-
-202
-00:09:15,586 --> 00:09:17,986
-Well, you get expected
-arrival timing
-
-
-203
-00:09:18,216 --> 00:09:19,676
-and expected departure timing.
-
-
-204
-00:09:19,986 --> 00:09:22,336
-Given the frequency, given
-the nature of the frequency
-
-
-205
-00:09:22,366 --> 00:09:25,586
-of our transit varies based on
-the time of the day and a place,
-
-
-206
-00:09:25,656 --> 00:09:28,296
-it is really important that
-we provide this information.
-
-
-207
-00:09:28,676 --> 00:09:31,966
-We believe with this
-information, you will be able
-
-
-208
-00:09:32,086 --> 00:09:33,596
-to give out a great
-user experience
-
-
-209
-00:09:33,666 --> 00:09:35,346
-to your application user base.
-
-
-210
-00:09:35,876 --> 00:09:37,206
-Let's take a look
-at a sample code,
-
-
-211
-00:09:37,296 --> 00:09:39,316
-how can we request
-these Transit ETAs.
-
-
-212
-00:09:39,316 --> 00:09:43,146
-Here, I have a helper
-function called getTransitETA.
-
-
-213
-00:09:43,606 --> 00:09:46,436
-So, I'll start off with
-creating an MKDirectionsRequest.
-
-
-214
-00:09:46,826 --> 00:09:49,056
-After that I'll set a source
-and a destination on it,
-
-
-215
-00:09:49,056 --> 00:09:53,036
-and once I have that, I'll set
-our transport type to be Transit
-
-
-216
-00:09:53,306 --> 00:09:56,606
-because we are interested
-in getting our Transit ETA.
-
-
-217
-00:09:56,686 --> 00:10:00,026
-Once, after that I will create
-MKDirections object using the
-
-
-218
-00:10:00,026 --> 00:10:03,256
-request that we just created,
-and I'll call it calculate ETA
-
-
-219
-00:10:03,256 --> 00:10:05,316
-With Completion Handler
-on that direction object,
-
-
-220
-00:10:05,716 --> 00:10:07,736
-and in CompletionHandler
-I will handle the response
-
-
-221
-00:10:07,736 --> 00:10:08,966
-that is coming back
-from the server.
-
-
-222
-00:10:09,926 --> 00:10:11,616
-So, that's a Transit ETA.
-
-
-223
-00:10:11,616 --> 00:10:13,356
-Now, once we have
-the Transit ETA,
-
-
-224
-00:10:13,656 --> 00:10:16,546
-in order to provide a complete
-experience we are giving you a
-
-
-225
-00:10:16,546 --> 00:10:19,456
-way to launch maps applications
-into a Transit mode.
-
-
-226
-00:10:19,926 --> 00:10:23,276
-As of now you can launch maps
-using various different launch
-
-
-227
-00:10:23,276 --> 00:10:25,946
-options on a map,
-along with a map item,
-
-
-228
-00:10:26,526 --> 00:10:28,296
-and the
-MKLaunchOptionsDirectionsModeKey
-
-
-229
-00:10:28,656 --> 00:10:32,986
-helps you to point out which
-maps application mode you would
-
-
-230
-00:10:32,986 --> 00:10:33,706
-like to launch in.
-
-
-231
-00:10:34,106 --> 00:10:36,516
-So as of now, we are
-supporting a Driving mode
-
-
-232
-00:10:36,516 --> 00:10:38,836
-and a Walking mode, and now
-
-
-233
-00:10:38,836 --> 00:10:41,726
-with iOS 9 we are also
-introducing a Transit mode.
-
-
-234
-00:10:42,566 --> 00:10:47,756
-By using this mode, you will be
-able to launch maps application
-
-
-235
-00:10:47,756 --> 00:10:48,696
-from your application.
-
-
-236
-00:10:49,116 --> 00:10:50,916
-Let's quickly take a look
-at a sample code here.
-
-
-237
-00:10:51,416 --> 00:10:53,746
-So, here, I have a
-helper function called
-
-
-238
-00:10:53,946 --> 00:10:56,676
-openInMapsTransit, which
-takes a coordinate.
-
-
-239
-00:10:57,116 --> 00:11:01,566
-And I will just basically start
-off with creating an MK map item
-
-
-240
-00:11:01,566 --> 00:11:03,126
-with that parsing coordinate.
-
-
-241
-00:11:03,566 --> 00:11:05,976
-After that I'll create a
-dictionary launch options
-
-
-242
-00:11:06,586 --> 00:11:08,316
-with the mode set to be Transit.
-
-
-243
-00:11:08,316 --> 00:11:10,636
-And once I have that, all I have
-
-
-244
-00:11:10,636 --> 00:11:13,636
-to do is call
+00:11:10,003 --> 00:11:14,708
+我只需在地图程序上使用
 openInMapsWithLaunchOptions
 
 
+200
+00:11:14,975 --> 00:11:18,245
+基本上这是在Transit
+模式上启动地图程序
+
+
+201
+00:11:18,512 --> 00:11:21,415
+并且是以在地图上
+设置的内容作为目的地
+
+
+202
+00:11:21,982 --> 00:11:23,650
+这部分内容就是这些了
+
+
+203
+00:11:23,884 --> 00:11:25,586
+让我们来看看这些API是怎么运行的
+
+
+204
+00:11:36,830 --> 00:11:42,369
+好的 为了这次演示 我创建了一个
+旧金山城市的旅游应用程序
+
+
+205
+00:11:42,936 --> 00:11:47,307
+基本上只是个加上了
+一些注释的简单地图视图
+
+
+206
+00:11:47,608 --> 00:11:50,344
+我来快速运行一下
+你们可以看到现在我有什么
+
+
+207
+00:11:53,413 --> 00:11:56,049
+正如大家所见
+我们有张旧金山的地图
+
+
+208
+00:11:56,116 --> 00:11:58,118
+我用地标做了几个不同注释
+
+
+209
+00:11:58,652 --> 00:11:59,753
+比如这里是苏特洛讯号塔
+
+
+210
+00:12:00,521 --> 00:12:04,291
+这里是金门大桥还有所有这些
+
+
+211
+00:12:04,658 --> 00:12:07,661
+我还随意设置了这些图钉的颜色
+
+
+212
+00:12:07,761 --> 00:12:09,830
+所以如果我向下滚动到...
+
+
+213
+00:12:11,532 --> 00:12:12,833
+viewForAnnotation
+callback
+
+
+214
+00:12:12,900 --> 00:12:15,536
+你们可以看到我设置了
+图钉颜色属性
+
+
+215
+00:12:15,869 --> 00:12:17,571
+来自定义这些图钉颜色
+
+
+216
+00:12:18,105 --> 00:12:18,939
+好了
+
+
+217
+00:12:19,339 --> 00:12:22,910
+随着演示的进行
+我们要尝试更多的自定义
+
+
+218
+00:12:23,410 --> 00:12:29,183
+接下来 我要在副标题
+加上Transit ETA
+
+
+219
+00:12:29,616 --> 00:12:32,653
+为了实现这个内容
+我创建了个简单的辅助公式
+
+
+220
+00:12:33,754 --> 00:12:36,156
+我把它拖拽到这里
+
+
+221
+00:12:36,690 --> 00:12:40,427
+这样就有了个可以简单处理
+
+
+222
+00:12:40,494 --> 00:12:43,597
+当地地标注释的辅助公式
+
+
+223
+00:12:44,097 --> 00:12:47,100
+然后我要这个位子生成
+MKDirectionsRequest
+
+
+224
+00:12:47,801 --> 00:12:51,371
+大家可以看到我已经生成了
+一个MKDirectionsRequest
+
+
+225
+00:12:51,572 --> 00:12:55,742
+之后我在只需在应用中
+设置个起点和目的地
+
+
+226
+00:12:56,710 --> 00:12:59,313
+最后我把交通类型
+设置为Transit
+
+
+227
+00:12:59,379 --> 00:13:01,548
+因为我们感兴趣的是
+Transit ETA
+
+
+228
+00:13:01,982 --> 00:13:03,317
+一旦具备这些
+我将继续
+
+
+229
+00:13:03,383 --> 00:13:05,052
+生成MKDirection对象
+
+
+230
+00:13:08,455 --> 00:13:11,491
+在这个位置我用该应用创建了
+MKDirection对象
+
+
+231
+00:13:12,593 --> 00:13:14,561
+在CompletionHandler中
+
+
+232
+00:13:14,928 --> 00:13:18,932
+我将副标题的注释设置为我们
+预计的到达时间
+
+
+233
+00:13:20,467 --> 00:13:25,439
+在地图视图上加注释前
+我将快速地调试这个功能
+
+
+234
+00:13:25,873 --> 00:13:30,310
+我们称这个功能为
+LandMarkPin
+
+
+235
+00:13:31,578 --> 00:13:33,780
+好的 我们来运行一下
+
+
+236
+00:13:38,318 --> 00:13:42,489
+好了 从Moscone West
+会议中心到市政厅
+
+
+237
+00:13:42,923 --> 00:13:46,326
+坐公共交通工具大约要22分钟
+我们在看看其他图钉
+
+
+238
+00:13:46,693 --> 00:13:48,028
+到轮渡大厦 是17分钟
+
+
+239
+00:13:48,395 --> 00:13:50,998
+非常好
+这能通过使用Transit
+
+
+240
+00:13:51,231 --> 00:13:55,736
+给用户提供一些类似需要多
+少时间到达目的地的初步信息
+
+
+241
+00:13:56,170 --> 00:13:58,605
+但是为了提供
+完整的Transit体验
+
+
+242
+00:13:58,972 --> 00:14:01,942
+我们还要想办法
+将它们运用在地图程序中
+
+
+243
+00:14:02,075 --> 00:14:03,177
+为了实现这次演示的目的
+
+
+244
+00:14:03,243 --> 00:14:07,114
+我要将rightcallout
+Accessoryview
+
+
 245
-00:11:13,766 --> 00:11:14,686
-on that map item.
+00:14:07,181 --> 00:14:08,382
+放在我的callout中
 
 
 246
-00:11:14,986 --> 00:11:18,236
-It will basically launch our
-maps application in Transit mode
+00:14:08,448 --> 00:14:11,919
+同时当我点击时
+可以用户直接转换到地图程序
 
 
 247
-00:11:18,236 --> 00:11:21,416
-with the mapped item
-to be a destination.
+00:14:13,086 --> 00:14:18,058
+我们快速结束这块内容并回过
+头继续callback模式
 
 
 248
-00:11:21,976 --> 00:11:23,666
-So that is enough
-of our talking.
+00:14:19,560 --> 00:14:22,095
+我将在我的
+AnnotationView
 
 
 249
-00:11:23,876 --> 00:11:25,366
-Let's see all these
-APIs in action.
+00:14:22,162 --> 00:14:24,865
+设置rightCalloutAccessoryView
 
 
 250
-00:11:36,536 --> 00:11:37,076
-All right.
+00:14:28,669 --> 00:14:31,605
+这是我之前添加的
+rightCalloutAccessoryView
 
 
 251
-00:11:37,496 --> 00:11:41,416
-So for this demo purpose I have
-created a city tour application
+00:14:31,672 --> 00:14:32,539
+让我们试一下
 
 
 252
-00:11:41,416 --> 00:11:42,376
-for San Francisco.
+00:14:40,180 --> 00:14:41,014
+好了
 
 
 253
-00:11:42,936 --> 00:11:45,636
-It is basically just
-a simple map view
+00:14:41,081 --> 00:14:43,584
+你可以看到rightCallout
+AccessoryView
 
 
 254
-00:11:45,636 --> 00:11:47,316
-with various different
-annotations in it.
+00:14:43,650 --> 00:14:46,420
+这里已经添加了公交车图标
+但没出现任何数据
 
 
 255
-00:11:47,606 --> 00:11:48,776
-I'm just going to quickly run it
+00:14:46,486 --> 00:14:49,223
+因为我们还没有点击
+callback模式
 
 
 256
-00:11:48,776 --> 00:11:50,696
-so you can see what
-I have so far.
+00:14:49,623 --> 00:14:52,159
+这套公式每次操作都需要
+callout的辅助控制
 
 
 257
-00:11:53,056 --> 00:11:56,106
-So, as you can see, we
-have a map of San Francisco
+00:14:52,593 --> 00:14:55,262
+我们快速把这些内容
+添加在这里
 
 
 258
-00:11:56,106 --> 00:11:59,806
-and I plotted various different
-annotations with the landmarks,
+00:15:00,434 --> 00:15:01,802
+这个就是已经执行了的
 
 
 259
-00:11:59,966 --> 00:12:02,916
-like we have Sutro
-Tower over here,
+00:15:01,869 --> 00:15:04,505
+每次操作都需要
+callout辅助控制的
 
 
 260
-00:12:02,916 --> 00:12:05,106
-we have Golden Gate
-bridge, and all that,
+00:15:04,571 --> 00:15:05,572
+callback模式
 
 
 261
-00:12:05,106 --> 00:12:06,376
-and I have also taken
-the liberty
+00:15:06,340 --> 00:15:09,109
+我一旦这样 就会加入代码
 
 
 262
-00:12:06,376 --> 00:12:07,666
-to set the pin colors on these.
+00:15:09,676 --> 00:15:12,813
+在地图应用中启动
+给定的地图项
 
 
 263
-00:12:07,746 --> 00:12:12,936
-So if I scroll down to the
-viewForAnnotation callback,
+00:15:13,447 --> 00:15:18,218
+这里我先来
+用模式Key生成字典对象
 
 
 264
-00:12:12,936 --> 00:12:15,526
-you can see I have set in
-a pin tint color property
+00:15:18,385 --> 00:15:20,754
+模式键设成Transit
 
 
 265
-00:12:15,876 --> 00:12:17,576
-to customize these pin colors.
+00:15:21,121 --> 00:15:23,991
+然后 从以往的设置
+获取坐标
 
 
 266
-00:12:18,096 --> 00:12:18,916
-This is okay.
+00:15:24,057 --> 00:15:27,261
+我准备生成MKMapItem
 
 
 267
-00:12:19,326 --> 00:12:21,416
-As the demo progresses
-we will try
+00:15:27,561 --> 00:15:30,797
+一旦完成
+我就会在地图项中打开启动选项
 
 
 268
-00:12:21,416 --> 00:12:22,896
-to customize this more and more.
+00:15:30,864 --> 00:15:34,635
+把这个地图项
+变为Transit模式
 
 
 269
-00:12:23,436 --> 00:12:25,736
-To begin with, what I'm
-going to do is I'm going
+00:15:35,235 --> 00:15:37,838
+我们快点继续
+再次运行应用
 
 
 270
-00:12:25,736 --> 00:12:29,156
-to add a Transit
-ETA into a subtitle.
+00:15:41,608 --> 00:15:42,442
+好了
 
 
 271
-00:12:29,606 --> 00:12:31,846
-So in order to do so I
-have created a simple
+00:15:44,645 --> 00:15:47,381
+来看轮渡大厦
 
 
 272
-00:12:31,846 --> 00:12:32,656
-helper function.
+00:15:49,116 --> 00:15:50,617
+点击这里
 
 
 273
-00:12:33,766 --> 00:12:36,146
-I am going to drag
-and drop that in here.
+00:15:50,684 --> 00:15:53,887
+地图应用
+进入了Transit模式
 
 
 274
-00:12:36,656 --> 00:12:38,746
-So I have this helper function
+00:15:53,954 --> 00:15:57,758
+可以看到需要
+乘坐18分钟的40路公交
 
 
 275
-00:12:38,746 --> 00:12:40,426
-that basically takes
-our annotation,
+00:15:57,824 --> 00:16:01,929
+再回到示例app
+试试其他的内容
 
 
 276
-00:12:40,736 --> 00:12:43,586
-which is a landmark
-class for local object.
+00:16:02,629 --> 00:16:05,165
+来看苏特洛讯号塔的结果
+好了
 
 
 277
-00:12:44,096 --> 00:12:47,106
-And then I will create a
-MKDirectionsRequest in there.
+00:16:05,232 --> 00:16:06,366
+这就是获得的结果
 
 
 278
-00:12:47,816 --> 00:12:51,086
-So you can see I have created
-an MKDirectionsRequest.
+00:16:08,202 --> 00:16:10,003
+根据Transti的结果
+需要45分钟
 
 
 279
-00:12:51,566 --> 00:12:53,076
-After that I'm just
-setting a source
+00:16:10,637 --> 00:16:11,705
+相当远
 
 
 280
-00:12:53,076 --> 00:12:55,736
-and a destination
-on that request.
+00:16:11,772 --> 00:16:14,842
+哦 明白了
+出了点问题
 
 
 281
-00:12:56,736 --> 00:12:59,326
-And finally I'm setting a
-transport type to be Transit
+00:16:14,908 --> 00:16:18,245
+公交站移位了
+也许就是需要那么久的原因
 
 
 282
-00:12:59,386 --> 00:13:01,106
-because we are interested
-in a Transit ETA.
+00:16:18,679 --> 00:16:22,282
+无论怎样 这就是在MapKit中的
+Transit体验
 
 
 283
-00:13:01,976 --> 00:13:03,386
-Once I have that,
-I'm going to go
+00:16:23,784 --> 00:16:28,255
+我想谈谈怎样实现刚说过的
+自定义callout
 
 
 284
-00:13:03,386 --> 00:13:05,706
-and create an MKDirections
-object.
+00:16:28,589 --> 00:16:32,359
+我们继续来看
+怎样在示例app中
 
 
 285
-00:13:08,096 --> 00:13:11,966
-So in here I have created an
-MKDirections object using the
+00:16:32,459 --> 00:16:35,028
+应用这些callout
 
 
 286
-00:13:12,586 --> 00:13:15,826
-request and in CompletionHandler
-I'm just setting an
+00:16:36,330 --> 00:16:40,767
+好了 首先 我们来谈谈
+callback模式
 
 
 287
-00:13:15,826 --> 00:13:18,916
-annotation.subtitle to be our
-estimated time of arrival.
+00:16:40,834 --> 00:16:43,470
+每次点击注释就会得到调用
 
 
 288
-00:13:19,356 --> 00:13:23,576
-And I am quickly going to call
-this function before I drop my
+00:16:44,104 --> 00:16:49,376
+在这里 我会在视图上
+设置具体的回调辅助属性
 
 
 289
-00:13:23,576 --> 00:13:25,256
-annotation on a map view.
+00:16:49,676 --> 00:16:55,015
+为路标所准备的数据中
+我有部分图像
 
 
 290
-00:13:25,876 --> 00:13:30,306
-So let's call that
-function here LandMarkPin.
+00:16:55,949 --> 00:16:59,219
+在Callout高级设置中
+设置UIImageView
 
 
 291
-00:13:31,576 --> 00:13:34,426
-So, all right, let's run it.
+00:16:59,286 --> 00:17:01,421
+来看在注释中是什么样子
 
 
 292
-00:13:38,016 --> 00:13:40,686
-There we go, so city
-hall is about 22 minutes
+00:17:02,256 --> 00:17:05,259
+在这里
+读出图像数据
 
 
 293
-00:13:41,416 --> 00:13:44,236
-from Moscone West by
-using a public transport.
+00:17:05,325 --> 00:17:08,428
+从解析的plist文件中
+读出图像名称
 
 
 294
-00:13:44,266 --> 00:13:45,606
-Let's check out some other pins.
+00:17:08,862 --> 00:17:10,430
+接着生成UIImage
 
 
 295
-00:13:46,006 --> 00:13:48,026
-Ferry Building, it's 17 minutes.
+00:17:10,830 --> 00:17:13,200
+然后生成
+UIImageView
 
 
 296
-00:13:48,456 --> 00:13:49,136
-So this is nice.
+00:17:13,267 --> 00:17:15,135
+在detailCallout
+AccessoryView中设置
 
 
 297
-00:13:49,136 --> 00:13:51,776
-I mean, this gives initial
-information to your user
+00:17:15,502 --> 00:17:16,970
+我们就来运行这个
 
 
 298
-00:13:51,776 --> 00:13:53,796
-like how long will it take to go
+00:17:21,241 --> 00:17:23,410
+好了 很好
 
 
 299
-00:13:53,916 --> 00:13:57,056
-to this destination using
-Transit, but in order
+00:17:23,510 --> 00:17:25,244
+我现在有了
+金门大桥的图像
 
 
 300
-00:13:57,056 --> 00:13:59,596
-to provide a complete Transit
-experience we have to find
+00:17:25,311 --> 00:17:26,880
+我们继续来看
 
 
 301
-00:13:59,596 --> 00:14:01,936
-out a way to bring them
-to a maps application.
+00:17:27,314 --> 00:17:28,182
+就这样
 
 
 302
-00:14:02,346 --> 00:14:04,296
-And for this demo purpose,
-what I am going to do is,
+00:17:28,248 --> 00:17:30,851
+这是非常漂亮的
+金门大桥图像
 
 
 303
-00:14:04,296 --> 00:14:08,266
-I'm going to put a right callout
-accessory view on my callout,
+00:17:31,051 --> 00:17:32,085
+来看看还有什么
 
 
 304
-00:14:08,266 --> 00:14:11,906
-and when I tap it, I will take
-the user to a maps application.
+00:17:33,520 --> 00:17:34,721
+还有轮渡大厦的图像
 
 
 305
-00:14:13,086 --> 00:14:18,056
-So we quickly stop it, and let's
-go back to our callback method.
+00:17:36,823 --> 00:17:38,358
+这就是目前的位置
 
 
 306
-00:14:18,586 --> 00:14:23,116
-And in here I am going to set
-a rightCalloutAccessoryView
+00:17:39,393 --> 00:17:40,227
+很好
 
 
 307
-00:14:23,146 --> 00:14:24,156
-on my AnnotationView.
+00:17:40,794 --> 00:17:44,865
+没有泛美金字塔图像
 
 
 308
-00:14:29,346 --> 00:14:31,396
-I added my
-rightCalloutAccessoryView.
+00:17:45,332 --> 00:17:46,400
+从这里可知
 
 
 309
-00:14:31,686 --> 00:14:33,006
-Let's run it.
+00:17:46,934 --> 00:17:51,805
+当我们设置
+具体的回调辅助视图
 
 
 310
-00:14:39,916 --> 00:14:40,426
-All right.
+00:17:52,239 --> 00:17:54,675
+我们总能获得优先级
+或副标题
 
 
 311
-00:14:41,316 --> 00:14:43,266
-So you can see a right
-callout accessory view.
+00:17:55,142 --> 00:17:57,811
+对金门大桥而言
+我们添加了细节
 
 
 312
-00:14:43,546 --> 00:14:45,196
-We have added a bus icon here.
+00:17:57,878 --> 00:17:58,912
+因而我们也有了副标题
 
 
 313
-00:14:45,616 --> 00:14:48,186
-Nothing is happening because we
-haven't implemented the callback
+00:17:59,313 --> 00:18:02,783
+但是一旦设置detailCall
+outAccessoryView
 
 
 314
-00:14:48,186 --> 00:14:51,426
-method that gets called every
-single time a callout accessory
+00:18:02,950 --> 00:18:04,518
+它就会获得优先级或副标题
 
 
 315
-00:14:51,426 --> 00:14:52,306
-control is tapped.
+00:18:05,152 --> 00:18:08,155
+对于部分其他地标
+我现在没有图像
 
 
 316
-00:14:52,596 --> 00:14:55,266
-So let's quickly go and
-add that method down here.
+00:18:08,222 --> 00:18:09,957
+我们可以在这里加上文本
 
 
 317
-00:15:00,096 --> 00:15:01,476
-So this is the callback method
+00:18:11,291 --> 00:18:14,862
+我已经生成了文本视图
 
 
 318
-00:15:01,476 --> 00:15:04,176
-that gets called every time
-a callout control accessory
+00:18:15,596 --> 00:18:17,898
+那么我这里有自定义文本视图
 
 
 319
-00:15:04,176 --> 00:15:05,036
-is pressed.
+00:18:18,332 --> 00:18:21,168
+基本上我刚设置过高和宽
 
 
 320
-00:15:06,176 --> 00:15:08,656
-Once I have this, I am
-going to add my code
+00:18:21,668 --> 00:18:24,905
+这样可以通过具体的回调
 
 
 321
-00:15:08,656 --> 00:15:12,816
-to launch a given map item
-into a maps application.
+00:18:26,406 --> 00:18:28,575
+辅助视图显示内容
 
 
 322
-00:15:13,446 --> 00:15:17,476
-So here I start off with
-creating a dictionary object
+00:18:28,909 --> 00:18:32,346
+与图像类似 我可以从
+归档这些地标建筑的
 
 
 323
-00:15:17,476 --> 00:15:20,746
-with the mode Key, and the
-mode key set to be Transit.
+00:18:32,880 --> 00:18:34,681
+plist文件中读出数据
 
 
 324
-00:15:21,136 --> 00:15:23,986
-After that by getting
-a coordinate
-
-
-325
-00:15:24,046 --> 00:15:27,246
-from the past annotation I'm
-going to create an MKMapItem.
-
-
-326
-00:15:27,246 --> 00:15:30,856
-And once I have that, I am going
-to use open in launch options
-
-
-327
-00:15:30,856 --> 00:15:34,646
-on mapItem to launch this
-map item into a Transit mode.
-
-
-328
-00:15:35,226 --> 00:15:37,836
-Let's quickly go ahead and
-run our application again.
-
-
-329
-00:15:41,376 --> 00:15:41,796
-All right.
-
-
-330
-00:15:42,566 --> 00:15:47,396
-Let's see, Ferry Building.
-
-
-331
-00:15:49,116 --> 00:15:50,696
-Tap on it and there we go.
-
-
-332
-00:15:50,696 --> 00:15:53,946
-We have a maps application
-into a Transit mode
-
-
-333
-00:15:53,946 --> 00:15:57,746
-and you can see it takes 18
-minutes by bus number 40.
-
-
-334
-00:15:57,866 --> 00:16:00,826
-And let's go back to
-our sample app again
-
-
-335
-00:16:00,826 --> 00:16:01,766
-and try something else.
-
-
-336
-00:16:02,656 --> 00:16:04,386
-Let's see if we got
-a response for Sutro.
-
-
-337
-00:16:04,436 --> 00:16:05,056
-Yeah, there we go.
-
-
-338
-00:16:05,266 --> 00:16:07,586
-That's our response.
-
-
-339
-00:16:08,206 --> 00:16:09,966
-Again 45 minutes by Transit.
-
-
-340
-00:16:10,626 --> 00:16:12,046
-That's fairly long.
-
-
-341
-00:16:12,046 --> 00:16:12,396
-Oh, I see.
-
-
-342
-00:16:12,396 --> 00:16:14,896
-It is something wrong.
-
-
-343
-00:16:14,896 --> 00:16:18,236
-Oh, bus stops moved, so probably
-that's the reason, long time.
-
-
-344
-00:16:18,716 --> 00:16:22,226
-Anyway, that's a Transit
-experience in a MapKit.
-
-
-345
-00:16:22,646 --> 00:16:26,836
-Now I would like to talk
-about how we previously talked
-
-
-346
-00:16:26,836 --> 00:16:28,266
-about the callout customization.
-
-
-347
-00:16:28,626 --> 00:16:32,136
-Now let's go and see how
-can we use those callouts
-
-
-348
-00:16:32,476 --> 00:16:34,966
-in this, our sample app.
-
-
-349
-00:16:36,376 --> 00:16:36,806
-All right.
-
-
-350
-00:16:36,806 --> 00:16:39,986
-So, again, we are going to go
-back to our callback method
-
-
-351
-00:16:39,986 --> 00:16:43,486
-that gets called every single
-time the annotation is tapped.
-
-
-352
-00:16:44,136 --> 00:16:45,206
-And down here I'm just going
-
-
-353
-00:16:45,206 --> 00:16:49,376
-to set a detailed callout
-accessory property on this view.
-
-
-354
-00:16:49,696 --> 00:16:51,646
-For the data that I'm getting
-
-
-355
-00:16:51,646 --> 00:16:54,946
-for these landmarks I
-have some of the images.
-
-
-356
-00:16:56,056 --> 00:16:59,336
-So let's set a UIImageView
-in a detailCallout
-
-
-357
-00:16:59,336 --> 00:17:01,296
-and see how they look
-in our annotation.
-
-
-358
-00:17:02,326 --> 00:17:05,246
-So, here I'm just
-reading my image data,
-
-
-359
-00:17:05,366 --> 00:17:08,415
-I'm reading my image name
-from a plist that I'm parsing,
-
-
-360
-00:17:08,856 --> 00:17:10,425
-and then I'm creating a UIImage,
-
-
-361
-00:17:10,816 --> 00:17:13,266
-and after that I'm creating
-a UIImageView and setting it
-
-
-362
-00:17:13,266 --> 00:17:14,746
-on a detailCalloutAccessoryView.
-
-
-363
-00:17:15,656 --> 00:17:16,976
-So let's run this thing.
-
-
-364
-00:17:17,256 --> 00:17:17,646
-Okay. All right.
-
-
-365
-00:17:20,976 --> 00:17:25,306
-So I think I have an image
-for Golden Gate Bridge.
-
-
-366
-00:17:25,306 --> 00:17:26,866
-So let's go and take
-a look at it.
-
-
-367
-00:17:27,316 --> 00:17:28,246
-So there we go.
-
-
-368
-00:17:28,246 --> 00:17:30,866
-That's a nice image of
-the Golden Gate Bridge.
-
-
-369
-00:17:31,066 --> 00:17:32,076
-Let's see what else I have.
-
-
-370
-00:17:32,266 --> 00:17:34,716
-I have the Ferry
-Building as well.
-
-
-371
-00:17:35,336 --> 00:17:38,346
-Okay, that's current location.
-
-
-372
-00:17:39,416 --> 00:17:40,086
-All right.
-
-
-373
-00:17:40,786 --> 00:17:43,066
-Okay. So, Transamerica
-Pyramid doesn't have a,
-
-
-374
-00:17:43,066 --> 00:17:46,106
-Transamerica Pyramid
-doesn't have an image.
-
-
-375
-00:17:46,266 --> 00:17:49,656
-So you can see when we set a
-detail callout accessory view
-
-
-376
-00:17:49,656 --> 00:17:51,966
-on a callout, a detail
-callout accessory,
-
-
-377
-00:17:52,286 --> 00:17:54,686
-we will always get
-precedence or a subtitle.
-
-
-378
-00:17:55,126 --> 00:17:57,856
-For Golden Gate Bridge
-we did add a detail,
-
-
-379
-00:17:57,886 --> 00:17:58,916
-we did have a subtitle,
-
-
-380
-00:17:59,296 --> 00:18:02,966
-but as soon as we set a detail
-callout accessory view on it,
-
-
-381
-00:18:02,966 --> 00:18:04,526
-it got a precedence
-or a subtitle.
-
-
-382
-00:18:05,146 --> 00:18:08,166
-So, for some of these other
-landmarks, I don't have images.
-
-
-383
-00:18:08,206 --> 00:18:09,946
-So, let's add text in there.
-
-
-384
-00:18:09,946 --> 00:18:14,846
-So, I have also created
-a text view that will --
-
-
-385
-00:18:15,606 --> 00:18:17,606
-so here I have a
-custom text view
-
-
-386
-00:18:17,606 --> 00:18:21,156
-that basically I just have set
-some height and weight on it.
-
-
-387
-00:18:21,676 --> 00:18:24,916
-And that will allow
-me to show the content
-
-
-388
-00:18:25,526 --> 00:18:28,586
-in our detail callout
-accessory view.
-
-
-389
-00:18:28,896 --> 00:18:32,466
-Similar to the images, I'm
-reading data from my plist
-
-
-390
-00:18:32,466 --> 00:18:34,696
-that I have been using
-to plot these landmarks.
-
-
-391
-00:18:35,236 --> 00:18:37,706
-I just set it that
+00:18:35,249 --> 00:18:37,651
+我把这些
 detailTextView
 
 
+325
+00:18:37,718 --> 00:18:40,621
+设置成
+detailCalloutAccessoryView
+
+
+326
+00:18:40,687 --> 00:18:42,556
+好
+我再快速地来运行一次
+
+
+327
+00:18:48,428 --> 00:18:50,764
+好了 很好
+我们来看一下
+
+
+328
+00:18:51,565 --> 00:18:56,103
+正如大家所见在苏特洛讯号塔
+下面有不错的文本视图
+
+
+329
+00:18:56,703 --> 00:18:57,804
+我们再来看看其他内容
+
+
+330
+00:18:58,438 --> 00:19:00,407
+市政厅也是一样 文本也不错
+
+
+331
+00:19:03,010 --> 00:19:05,746
+这里我希望回调副标题
+
+
+332
+00:19:05,879 --> 00:19:09,550
+回调UIImageView
+再回调TextView
+
+
+333
+00:19:11,351 --> 00:19:13,987
+这就是这个API的
+所有出彩的地方
+
+
+334
+00:19:14,288 --> 00:19:16,823
+我们非常高兴为大家介绍它
+
+
+335
+00:19:17,524 --> 00:19:20,227
+并且坚信各位
+能实现出色的应用
+
+
+336
+00:19:26,366 --> 00:19:29,536
+那么从这个演示中学到的是
+
+
+337
+00:19:30,037 --> 00:19:31,972
+如何来自定义这些图钉颜色
+
+
+338
+00:19:32,573 --> 00:19:34,441
+我们学到如何自定义回调
+
+
+339
+00:19:35,375 --> 00:19:37,477
+也学到如何应用
+Transit ETA
+
+
+340
+00:19:37,911 --> 00:19:43,150
+以及如何将用户带到地图应用
+以便提供丰富的交通体验
+
+
+341
+00:19:43,884 --> 00:19:44,952
+我这边就是要介绍这些
+
+
+342
+00:19:45,285 --> 00:19:47,721
+再来看Flyover
+有请伊丽莎白
+
+
+343
+00:19:52,926 --> 00:19:53,760
+好的
+
+
+344
+00:19:57,130 --> 00:19:58,966
+我们来谈谈Flyover
+
+
+345
+00:19:59,867 --> 00:20:01,301
+我是伊丽莎白·林奎斯特
+
+
+346
+00:20:01,368 --> 00:20:03,370
+也是在地图团队工作的工程师
+
+
+347
+00:20:03,637 --> 00:20:06,673
+今天我给大家介绍这些内容
+
+
+348
+00:20:08,175 --> 00:20:09,743
+首先
+Flyover是什么？
+
+
+349
+00:20:11,278 --> 00:20:13,013
+怎样在应用中发挥作用？
+
+
+350
+00:20:14,414 --> 00:20:17,351
+在使用Flyover时
+怎么设置正确的区域
+
+
+351
+00:20:17,417 --> 00:20:18,685
+并处理摄像头？
+
+
+352
+00:20:20,020 --> 00:20:24,925
+我还会介绍Flyover与现有部分
+MapKit API怎样配合
+
+
+353
+00:20:26,260 --> 00:20:29,329
+首先Flyover具体
+是指什么？
+
+
+354
+00:20:30,130 --> 00:20:31,932
+例如说这是Flyover
+
+
+355
+00:20:35,335 --> 00:20:40,474
+这里是各种城市和地标的
+高度真实3D模型
+
+
+356
+00:20:41,241 --> 00:20:44,545
+在世界各地哪儿都有
+这样的东西
+
+
+357
+00:20:46,613 --> 00:20:51,151
+自从iOS 6起
+在地图应用中都可以找到
+
+
+358
+00:20:52,119 --> 00:20:54,054
+我们现在为大家提供机会
+
+
+359
+00:20:54,121 --> 00:20:57,824
+为用户展示这些互动3D视图
+
+
+360
+00:21:00,360 --> 00:21:05,666
+大家可能注意到
+在地图应用中并没有卫星图像
+
+
+361
+00:21:05,732 --> 00:21:08,202
+有的是位于代表地面的
+
+
+362
+00:21:09,269 --> 00:21:13,540
+3D立体图上方的平面卫星图
+
+
+363
+00:21:14,174 --> 00:21:16,743
+在你们的app中也是这种情况
+
+
+364
+00:21:18,812 --> 00:21:21,882
+Flyover的另一个重要特点是:
+
+
+365
+00:21:22,149 --> 00:21:27,721
+它是在球体上展示
+而不是像其他2D地图类型那样展示
+
+
+366
+00:21:28,255 --> 00:21:32,192
+这就意味着要如何处理区域设置
+
+
+367
+00:21:32,960 --> 00:21:35,963
+这部分内容我稍后会介绍
+
+
+368
+00:21:37,531 --> 00:21:42,002
+那么在应用中怎样才能获得
+Flyover视图呢？
+
+
+369
+00:21:43,370 --> 00:21:46,807
+如果以前用过MapKit
+那么一定会熟悉MK地图类型
+
+
+370
+00:21:46,874 --> 00:21:50,010
+这是在MK地图视图上设置的属性
+
+
+371
+00:21:50,077 --> 00:21:52,913
+是为了选择将要显示的数据类型
+
+
+372
+00:21:53,780 --> 00:21:56,483
+我们有普通地图的标准
+
+
+373
+00:21:57,651 --> 00:22:00,954
+还有卫星地图
+是从上到下的卫星视图
+
+
+374
+00:22:02,089 --> 00:22:06,193
+还有在卫星视图中加入了道路
+
+
+375
+00:22:06,260 --> 00:22:09,496
+标签和兴趣点的混合地图
+
+
+376
+00:22:10,864 --> 00:22:13,467
+我们现在为大家
+介绍两种新的地图类型
+
+
+377
+00:22:14,034 --> 00:22:17,070
+Satellite Flyover
+和Hybrid Flyover
+
+
+378
+00:22:17,671 --> 00:22:20,574
+为了在app中显示这类内容
+
+
+379
+00:22:21,008 --> 00:22:23,610
+只需将地图视图中的地图类型
+
+
+380
+00:22:23,710 --> 00:22:27,014
+设置为
+Satellite Flyover即可
+
+
+381
+00:22:28,515 --> 00:22:33,987
+如果想添加诸如标签 兴趣点
+道路和国界等内容
+
+
+382
+00:22:34,655 --> 00:22:38,192
+可以使用Hybrid
+Flyover地图类型
+
+
+383
+00:22:39,927 --> 00:22:44,464
+我说过在使用Flyover时
+有些内容需要考虑
+
+
+384
+00:22:44,531 --> 00:22:48,135
+其中重要的一项是
+怎样设置地图的可见区域
+
+
+385
+00:22:49,236 --> 00:22:54,341
+大家可能对使用矩形的几种
+MapKit方法比较熟悉
+
+
+386
+00:22:54,408 --> 00:22:57,644
+如MKCoordinateRegion
+和MKMapRect
+
+
+387
+00:22:57,945 --> 00:23:00,414
+以便设置和获得地图的可见区域
+
+
+388
+00:23:01,148 --> 00:23:06,620
+不过地图视图的可见区域
+并非总是矩形
+
+
+389
+00:23:07,588 --> 00:23:10,424
+在iOS 7中
+我们介绍可以查看
+
+
+390
+00:23:10,490 --> 00:23:12,092
+有斜度的地图视图
+
+
+391
+00:23:12,159 --> 00:23:14,228
+这样可以从一定角度查看地图
+
+
 392
-00:18:37,706 --> 00:18:39,456
-to be a
-detailCalloutAccessoryView.
+00:23:14,728 --> 00:23:15,963
+当你这么做时
 
 
 393
-00:18:40,686 --> 00:18:40,956
-All right.
+00:23:17,030 --> 00:23:20,200
+可见区域就不会是完全的矩形
 
 
 394
-00:18:41,006 --> 00:18:43,176
-So I'm quickly going
-to run it again.
+00:23:21,034 --> 00:23:23,904
+在Flyover中就是这种情况
 
 
 395
-00:18:48,186 --> 00:18:49,866
-Okay. All right.
+00:23:23,971 --> 00:23:26,673
+这样也可以
+看到倾斜的地图视图
 
 
 396
-00:18:50,106 --> 00:18:50,736
-So let's see.
+00:23:28,008 --> 00:23:31,545
+现在将这个区域缩小来看
 
 
 397
-00:18:51,566 --> 00:18:54,466
-As you can see now we have
-a nice text view down here
+00:23:31,612 --> 00:23:34,114
+这样就可以看到
+可见区域的实际形状
 
 
 398
-00:18:54,466 --> 00:18:56,096
-in Sutro Tower callout.
+00:23:34,915 --> 00:23:39,686
+我们在这里需要做的是
+定义地图的可见区域为矩形
 
 
 399
-00:18:56,716 --> 00:18:57,666
-Let's check on something else.
+00:23:39,853 --> 00:23:44,024
+这就包括我们在屏幕上
+实际看到的内容
 
 
 400
-00:18:58,426 --> 00:19:00,416
-Same thing, for City Hall
-we also have a nice text.
+00:23:44,258 --> 00:23:46,927
+就是本例中的蓝色矩形
 
 
 401
-00:19:00,776 --> 00:19:05,746
-So here I have like a one
-callout with a subtitle,
+00:23:48,128 --> 00:23:50,998
+在Flyover中
+就是这么做
 
 
 402
-00:19:05,866 --> 00:19:11,116
-one callout with a UIImageView
-and one callout with a TextView.
+00:23:51,298 --> 00:23:56,370
+可见区域都定义为矩形
+也就是在屏幕上所包括的区域
 
 
 403
-00:19:11,366 --> 00:19:13,616
-That's all the beauty
-of this API.
+00:23:58,972 --> 00:24:04,278
+在Flyover中
+视图不必为了不是矩形而倾斜
 
 
 404
-00:19:13,616 --> 00:19:18,396
-We are really excited to offer
-it to you and I am damn sure
+00:24:04,912 --> 00:24:07,915
+如果有一片区域是这样 而且还相当大
 
 
 405
-00:19:18,396 --> 00:19:20,226
-that you guys will come
-up with something amazing.
+00:24:08,148 --> 00:24:11,652
+在本例中
+可以试着把可见区域设置成蓝色矩形
 
 
 406
-00:19:21,516 --> 00:19:25,996
-[ Applause ]
+00:24:11,718 --> 00:24:13,387
+最后就会是这样
 
 
 407
-00:19:26,496 --> 00:19:29,546
-So what we learn from this demo,
+00:24:15,422 --> 00:24:19,793
+这里的点就是
+矩形显示将一直成为近似值
 
 
 408
-00:19:30,026 --> 00:19:31,976
-we learn how we can
-customize our pin colors,
+00:24:19,860 --> 00:24:22,496
+因为Flyover是出现在球体上
 
 
 409
-00:19:32,576 --> 00:19:35,436
-we learn how we can
-customize our callouts.
+00:24:23,664 --> 00:24:27,034
+同样如果面积很大的区域
 
 
 410
-00:19:35,436 --> 00:19:37,486
-We also learn how to
-request Transit ETAs
+00:24:27,301 --> 00:24:29,469
+有部分区域实际上不会显示
 
 
 411
-00:19:37,926 --> 00:19:41,356
-and we also learn how to bring
-users to a maps application
+00:24:29,536 --> 00:24:33,040
+在这种情况下
+部分可见区域实际是球体后面
 
 
 412
-00:19:41,496 --> 00:19:43,146
-to provide a rich
-transit experience.
+00:24:35,409 --> 00:24:40,113
+即便这是个别情况
+矩形区域设置在
 
 
 413
-00:19:43,876 --> 00:19:44,956
-That's all from my end.
+00:24:40,180 --> 00:24:43,150
+Flyover中依然奏效
+在倾斜地图视图中
 
 
 414
-00:19:45,276 --> 00:19:47,736
-To talk about Flyover, I would
-like to call upon Elisabeth.
+00:24:43,917 --> 00:24:46,620
+如果是从上到下的视图需要放大很多
 
 
 415
-00:19:48,516 --> 00:19:53,896
-[ Applause ]
+00:24:47,054 --> 00:24:48,956
+建议要确保你是通过
 
 
 416
-00:19:54,396 --> 00:19:54,756
->> ELISABETH LINDKVIST: Okay.
+00:24:49,022 --> 00:24:54,261
+MKMapCamera
+在展示这个世界的相应部分
 
 
 417
-00:19:56,056 --> 00:19:58,966
-Right, let's talk about Flyover.
+00:24:55,829 --> 00:25:00,133
+MKMapCamera早在2013年的
+iOS 7中就已推出
 
 
 418
-00:19:59,876 --> 00:20:01,376
-My name is Elisabeth Lindkvist,
+00:25:00,400 --> 00:25:03,136
+想了解MKMapCamera的
+更多详情
 
 
 419
-00:20:01,376 --> 00:20:03,386
-and I'm also an engineer
-on the maps team.
+00:25:03,203 --> 00:25:04,805
+以及普遍的地区设置问题
 
 
 420
-00:20:03,646 --> 00:20:04,686
-And these are the things
+00:25:05,272 --> 00:25:08,342
+我推荐大家看看
+《将MapKit放入透视图》
 
 
 421
-00:20:04,686 --> 00:20:06,676
-that I will be talking
-to you about today.
+00:25:08,408 --> 00:25:10,444
+这是2013年的讲座内容
 
 
 422
-00:20:07,266 --> 00:20:09,756
-So, first of all,
-what is Flyover?
+00:25:11,945 --> 00:25:15,616
+但是我要简要介绍
+MKMapCamera的功能
 
 
 423
-00:20:11,286 --> 00:20:13,026
-How will it work in
-your application?
+00:25:16,850 --> 00:25:18,919
+它有四个基本属性
 
 
 424
-00:20:14,326 --> 00:20:17,416
-How do you set the right
-region and handle the camera
+00:25:20,354 --> 00:25:25,425
+中间坐标代表想在屏幕中间
+显示的世界上的位置
 
 
 425
-00:20:17,416 --> 00:20:18,686
-when you are using Flyover?
+00:25:26,593 --> 00:25:29,930
+朝向是摄像头所朝的方向
 
 
 426
-00:20:18,686 --> 00:20:22,986
-And I will also discuss how
-Flyover will work together
+00:25:31,031 --> 00:25:35,369
+斜度是你看地图视角的倾斜程度
 
 
 427
-00:20:22,986 --> 00:20:24,916
-with some of our
-existing MapKit API.
+00:25:36,003 --> 00:25:39,773
+还有高度是你希望摄像头所处位置
 
 
 428
-00:20:26,256 --> 00:20:29,316
-But to start with, what do
-we actually mean by Flyover?
+00:25:39,840 --> 00:25:41,642
+在地图上方的高度是以米为单位
 
 
 429
-00:20:29,796 --> 00:20:31,936
-For example, this is Flyover.
+00:25:43,343 --> 00:25:46,713
+还有一个便捷的
+MKMapCamera初始化器
 
 
 430
-00:20:32,956 --> 00:20:40,466
-It's photo-realistic 3D models
-of various cities and landmarks.
+00:25:47,247 --> 00:25:49,483
+这会令中心坐标和你希望摄像头
 
 
 431
-00:20:41,246 --> 00:20:43,926
-They are available in
-many different places all
+00:25:50,184 --> 00:25:53,420
+所在位置的视点坐标
 
 
 432
-00:20:43,926 --> 00:20:44,546
-around the world.
+00:25:54,087 --> 00:25:57,791
+你所希望摄像头处的高度
 
 
 433
-00:20:45,256 --> 00:20:47,956
-And they have been available
+00:25:58,091 --> 00:26:02,262
+这样就可以获得从视点坐标
+看到中心坐标的摄像头位置
 
 
 434
-00:20:47,956 --> 00:20:51,146
-in the maps application
-since iOS 6.
+00:26:03,463 --> 00:26:07,835
+不过 在Flyover中
+有地面 建筑
 
 
 435
-00:20:52,106 --> 00:20:54,086
-And we are now giving
-you the opportunity
+00:26:07,901 --> 00:26:09,937
+和各种有趣的内容
 
 
 436
-00:20:54,086 --> 00:20:57,466
-to show these interactive
-3D views to your users.
+00:26:10,370 --> 00:26:14,508
+这就意味着高度
 
 
 437
-00:20:57,466 --> 00:21:03,106
-As you might have noticed
-in the maps application
+00:26:15,075 --> 00:26:16,944
+实际上并不像
+你想象中的那么简单
 
 
 438
-00:21:03,176 --> 00:21:06,746
-where satellite imagery is not
-available you will instead see
+00:26:18,078 --> 00:26:20,614
+例如
+这是在建筑上方的高度么？
 
 
 439
-00:21:06,746 --> 00:21:10,316
-flat satellite imagery
-being displayed on top
+00:26:20,681 --> 00:26:21,982
+这是地面上的高度么？
 
 
 440
-00:21:10,356 --> 00:21:13,596
-of a 3D height map which
-represents the terrain.
+00:26:22,149 --> 00:26:23,217
+还是海平面高度？
 
 
 441
-00:21:14,176 --> 00:21:18,186
-And this will also be
-the case in your apps.
+00:26:23,617 --> 00:26:26,854
+这并非是中心坐标和
+摄像头之间的距离
 
 
 442
-00:21:18,806 --> 00:21:21,886
-Another important aspect
-of Flyover is this:
+00:26:26,920 --> 00:26:30,157
+摄像头实际上在这种情况下
+更容易测量
 
 
 443
-00:21:22,026 --> 00:21:25,386
-it is being displayed on a globe
-rather than being projected
+00:26:30,490 --> 00:26:33,994
+我们就在这里添加了
+MKMapCamera的新初始化器
 
 
 444
-00:21:25,386 --> 00:21:27,716
-into 2D like our
-other map types are.
+00:26:34,528 --> 00:26:37,297
+我们来快速了解一下这是怎么实现的
 
 
 445
-00:21:27,716 --> 00:21:30,096
-This one has some implications
+00:26:38,966 --> 00:26:40,667
+先从中心坐标开始
 
 
 446
-00:21:30,096 --> 00:21:32,186
-for how you handle
-your region setting.
+00:26:40,734 --> 00:26:42,803
+也就是你希望在屏幕中间的位置
 
 
 447
-00:21:32,956 --> 00:21:35,966
-And this is something that I
-will be returning to shortly.
+00:26:43,537 --> 00:26:46,473
+接着确定一个距离以米为单位
 
 
 448
-00:21:37,546 --> 00:21:39,856
-So, what do you need to do
+00:26:46,540 --> 00:26:50,143
+你希望中心坐标和摄像头所在
+位置之间的距离
 
 
 449
-00:21:39,856 --> 00:21:42,016
-to get a Flyover view
-in your application?
+00:26:50,511 --> 00:26:53,113
+注意这与海拔高度不同
 
 
 450
-00:21:42,756 --> 00:21:45,726
-If you used MapKit before,
-I'm sure you are familiar
+00:26:54,848 --> 00:26:58,819
+还要确定斜度
+也就是希望摄像头所处的角度
 
 
 451
-00:21:45,726 --> 00:21:48,756
-with MK map type, which
-is the property you set
+00:26:59,586 --> 00:27:02,155
+还有朝向准备看的方向
 
 
 452
-00:21:48,756 --> 00:21:51,566
-on an MK map view, in
-order to choose which type
+00:27:03,190 --> 00:27:05,926
+通过这个初始化器
 
 
 453
-00:21:51,566 --> 00:21:52,916
-of data you will be displaying.
+00:27:05,993 --> 00:27:08,896
+你可以完全不必担心在摄像头下方的
 
 
 454
-00:21:53,766 --> 00:21:56,646
-We have standard,
-which is a regular map.
+00:27:08,962 --> 00:27:12,799
+地面或建筑会发生什么情况
 
 
 455
-00:21:57,646 --> 00:22:01,346
-We have satellite, which is
-a top-down satellite view.
+00:27:14,401 --> 00:27:17,137
+我先放一段短的演示
 
 
 456
-00:22:01,346 --> 00:22:06,276
-And we have hybrid, which adds
-things like roads and labels
+00:27:17,204 --> 00:27:19,206
+来看可以用Flyover
+完成哪些很酷的事情
 
 
 457
-00:22:06,276 --> 00:22:09,486
-and points of interest
-to the satellite view.
+00:27:23,277 --> 00:27:26,547
+好的
+苏米特刚刚给大家看了旅游应用
 
 
 458
-00:22:10,856 --> 00:22:13,476
-And we are now introducing
-two new map types,
+00:27:27,114 --> 00:27:30,984
+我的Mac上也有类似应用
 
 
 459
-00:22:14,036 --> 00:22:16,726
-Satellite Flyover
-and Hybrid Flyover.
+00:27:31,785 --> 00:27:33,420
+可以看到这里的地标
 
 
 460
-00:22:17,666 --> 00:22:20,586
-So in order to display
-something like this in your app,
+00:27:36,356 --> 00:27:37,758
+例如悬崖小屋
 
 
 461
-00:22:21,016 --> 00:22:23,616
-what you would do is
-just set the map type
+00:27:38,692 --> 00:27:44,131
+大家可能还记得有些位置
+我们还没有真实的图像
 
 
 462
-00:22:23,726 --> 00:22:27,016
-of your map view to
-Satellite Flyover.
+00:27:44,198 --> 00:27:47,034
+那我觉得可以
+用Flyover进行补足
 
 
 463
-00:22:28,266 --> 00:22:32,496
-If you want to add things such
-as labels, points of interest,
+00:27:48,235 --> 00:27:49,703
+我想做的是
 
 
 464
-00:22:32,496 --> 00:22:37,256
-roads, and borders, you would
-instead use the Hybrid Flyover
+00:27:49,770 --> 00:27:52,773
+在我的callouts中添加
 
 
 465
-00:22:38,506 --> 00:22:39,326
-map type.
+00:27:52,840 --> 00:27:54,174
+detailCallout
+AccessoryView
 
 
 466
-00:22:39,936 --> 00:22:42,686
-Now, as I mentioned, there are
-some things you really need
+00:27:54,675 --> 00:27:57,911
+我将使用MKMap
+以便为Flyover
 
 
 467
-00:22:42,686 --> 00:22:44,536
-to consider when using Flyover.
+00:27:57,978 --> 00:28:03,083
+为设置成detailCallout
+AccessoryView的图像
 
 
 468
-00:22:44,536 --> 00:22:47,286
-One of the most important ones
-is how you set the visible
+00:28:04,351 --> 00:28:06,453
+MKMap快照非常有用
 
 
 469
-00:22:47,286 --> 00:22:48,136
-region of your map.
+00:28:06,520 --> 00:28:08,722
+当你只需要地图的静态图像时
 
 
 470
-00:22:49,236 --> 00:22:52,236
-You might be familiar with
-the several methods in MapKit
+00:28:08,922 --> 00:28:10,624
+当你不要与它互动时都是如此
 
 
 471
-00:22:52,236 --> 00:22:57,466
-that use rectangles such as
-MKCoordinateRegion and MKMapRect
+00:28:11,892 --> 00:28:14,828
+我还会为这个快照加上几个选项
 
 
 472
-00:22:57,946 --> 00:23:00,406
-in order to set and get the
-visible region of your map.
+00:28:14,895 --> 00:28:16,663
+最重要的是要把mapType
 
 
 473
-00:23:01,136 --> 00:23:03,376
-However, the visible area
+00:28:16,730 --> 00:28:19,833
+设置成
+Satellite Flyover
 
 
 474
-00:23:03,836 --> 00:23:06,616
-of your map view is
-not always a rectangle.
+00:28:22,636 --> 00:28:26,507
+我会使用新的初始化器
+生成MKMapCamera
 
 
 475
-00:23:07,526 --> 00:23:10,486
-In iOS 7 we introduced
-the possibility
+00:28:27,074 --> 00:28:29,710
+来看注释部分的坐标
 
 
 476
-00:23:10,486 --> 00:23:12,156
-to view a pitched map view
+00:28:30,744 --> 00:28:35,682
+我接着使用这些选项
+生成MKMap快照器
 
 
 477
-00:23:12,156 --> 00:23:14,226
-where you are viewing
-the map at an angle.
+00:28:36,984 --> 00:28:41,488
+启动快照器如果也已完成且没有错误
 
 
 478
-00:23:14,716 --> 00:23:17,606
-And when you do that,
+00:28:41,555 --> 00:28:45,559
+我就在detailCallout
+AccessoryView生成图像
 
 
 479
-00:23:17,606 --> 00:23:20,186
-the visible area will not
-actually be a perfect rectangle,
+00:28:47,528 --> 00:28:49,696
+我们当然要调用这个功能
 
 
 480
-00:23:21,026 --> 00:23:23,526
-and this will also be
-the case in Flyover
+00:28:55,035 --> 00:28:58,205
+好的
+我们来看效果如何
 
 
 481
-00:23:23,526 --> 00:23:26,686
-as you can view pitched
-map views there as well.
+00:29:00,874 --> 00:29:05,479
+如果我没记错悬崖小屋是我们
+还没有图像的那个
 
 
 482
-00:23:27,996 --> 00:23:30,936
-Now, if we take a look
-at this region and zoom
+00:29:06,380 --> 00:29:07,781
+来看 现在有了
 
 
 483
-00:23:30,936 --> 00:23:34,126
-out a bit we can see the actual
-shape of the visible area.
+00:29:17,391 --> 00:29:19,560
+好的
+我们应该还有另外几处
 
 
 484
-00:23:34,926 --> 00:23:37,116
-And what we do in this case is
+00:29:19,626 --> 00:29:21,161
+例如市政厅
 
 
 485
-00:23:37,116 --> 00:23:39,696
-that we define the
-visible region of this map
+00:29:21,562 --> 00:29:23,697
+相当酷
+不过 Flyover视图
 
 
 486
-00:23:39,866 --> 00:23:43,226
-as the rectangle which is
-enclosing what you are actually
+00:29:23,764 --> 00:29:25,265
+当时是可以互动的
 
 
 487
-00:23:43,226 --> 00:23:44,026
-seeing on screen.
+00:29:25,766 --> 00:29:28,669
+我觉得可以在视图中添加一点动画效果
 
 
 488
-00:23:44,266 --> 00:23:46,926
-So it will be the blue
-rectangle in this case.
-
-
-489
-00:23:47,216 --> 00:23:50,996
-And this will work exactly
-in the same way in Flyover.
-
-
-490
-00:23:51,296 --> 00:23:54,186
-The visible region will be
-defined as the rectangle
-
-
-491
-00:23:54,186 --> 00:23:56,366
-that is enclosing
-whatever you see on screen.
-
-
-492
-00:23:58,256 --> 00:24:02,626
-Now, in Flyover, a view does not
-necessarily have to be pitched
-
-
-493
-00:24:02,626 --> 00:24:04,286
-in order to not be rectangular.
-
-
-494
-00:24:04,286 --> 00:24:07,926
-If you have a region such as
-this, which is fairly large,
-
-
-495
-00:24:08,146 --> 00:24:11,136
-and you try to set the visible
-region to the blue rectangle
-
-
-496
-00:24:11,136 --> 00:24:13,386
-in this case you end up
-with something like this.
-
-
-497
-00:24:14,156 --> 00:24:16,266
-And the point here is
-
-
-498
-00:24:16,266 --> 00:24:19,616
-that a rectangular
-representation will always be an
-
-
-499
-00:24:19,616 --> 00:24:22,506
-approximation since Flyover
-is being shown on a globe.
-
-
-500
-00:24:23,666 --> 00:24:27,566
-And, also, if you have a very
-large region there will be some
-
-
-501
-00:24:27,566 --> 00:24:29,546
-areas that are not
-actually displayed.
-
-
-502
-00:24:29,546 --> 00:24:30,676
-So, in this case, parts
-
-
-503
-00:24:30,676 --> 00:24:33,026
-of the visible region are
-actually behind the globe.
-
-
-504
-00:24:34,206 --> 00:24:38,996
-So, the recommended way, even
-though there are some cases
-
-
-505
-00:24:38,996 --> 00:24:41,666
-where rectangular region setting
-works just fine in Flyover
-
-
-506
-00:24:41,666 --> 00:24:43,896
-and with pitched map
-views, for example,
-
-
-507
-00:24:43,956 --> 00:24:46,566
-if you have a top-down view
-where if you're very zoomed in,
-
-
-508
-00:24:47,066 --> 00:24:49,006
-the recommended way to make sure
-
-
-509
-00:24:49,006 --> 00:24:51,206
-that you are really
-displaying exactly the part
-
-
-510
-00:24:51,206 --> 00:24:54,196
-of the world you want to
-is to use MKMapCamera.
-
-
-511
-00:24:55,836 --> 00:25:00,146
-MKMapCamera was also
-introduced in iOS 7 in 2013.
-
-
-512
-00:25:00,416 --> 00:25:03,126
-And for more detailed
-information about MKMapCamera,
-
-
-513
-00:25:03,126 --> 00:25:06,076
-and also about region setting
-in general, I really recommend
-
-
-514
-00:25:06,076 --> 00:25:08,446
-that you check out Putting
-MapKit in Perspective,
-
-
-515
-00:25:08,446 --> 00:25:10,436
-which is a talk from 2013.
-
-
-516
-00:25:11,966 --> 00:25:15,626
-But I will briefly recap
-a bit about MKMapCamera.
-
-
-517
-00:25:16,846 --> 00:25:18,686
-It has four basic properties.
-
-
-518
-00:25:20,366 --> 00:25:23,326
-The center coordinate, which
-is the position in the world
-
-
-519
-00:25:23,326 --> 00:25:25,536
-that you want to be shown in
-the middle of your screen.
-
-
-520
-00:25:26,626 --> 00:25:29,376
-The heading which is the
-direction the camera will be
-
-
-521
-00:25:29,376 --> 00:25:29,936
-looking in.
-
-
-522
-00:25:31,066 --> 00:25:33,456
-The pitch, how tilted
-the view is,
-
-
-523
-00:25:33,676 --> 00:25:37,456
-at what angle you are looking
-at the map, and the altitude,
-
-
-524
-00:25:37,456 --> 00:25:39,776
-which is the height in
-meters above the map
-
-
-525
-00:25:39,776 --> 00:25:42,376
-where you want your
-camera to be positioned.
-
-
-526
-00:25:43,036 --> 00:25:46,706
-There is also a convenience
-initializer for MKMapCamera,
-
-
-527
-00:25:47,236 --> 00:25:49,486
-which takes the center
-coordinates
-
-
-528
-00:25:50,176 --> 00:25:52,546
-and the eye coordinates,
-where you want the camera
-
-
-529
-00:25:52,546 --> 00:25:55,516
-to be positioned,
-and the eye altitude,
-
-
-530
-00:25:55,516 --> 00:25:57,806
-how high up you want
-the camera to be,
-
-
-531
-00:25:58,086 --> 00:26:00,046
-and gives you back the
-camera which is looking
-
-
-532
-00:26:00,046 --> 00:26:02,246
-at that center coordinate
-from the eye coordinate.
-
-
-533
-00:26:03,456 --> 00:26:07,896
-So, however, in Flyover there
-is terrain and buildings
-
-
-534
-00:26:07,896 --> 00:26:09,946
-and all other sorts
-of interesting things.
-
-
-535
-00:26:10,376 --> 00:26:15,176
-And that means that the
-altitude is actually not
-
-
-536
-00:26:15,226 --> 00:26:18,056
-as straightforward
-as you might think.
-
-
-537
-00:26:18,056 --> 00:26:20,686
-For example, is it the
-height above the buildings?
-
-
-538
-00:26:20,686 --> 00:26:21,786
-The height above the terrain?
-
-
-539
-00:26:21,786 --> 00:26:23,116
-Or some sort of sea level?
-
-
-540
-00:26:23,116 --> 00:26:26,866
-So instead the distance
-between the center coordinates
-
-
-541
-00:26:26,926 --> 00:26:29,366
-and the camera is actually
-a much better measure
-
-
-542
-00:26:29,366 --> 00:26:30,156
-for this case.
-
-
-543
-00:26:30,496 --> 00:26:33,996
-And this is where we're adding a
-new initializer to MKMapCamera.
-
-
-544
-00:26:34,516 --> 00:26:37,116
-And let me go through
-quickly what this does.
-
-
-545
-00:26:38,966 --> 00:26:40,726
-You will start with
-the center coordinates,
-
-
-546
-00:26:40,726 --> 00:26:42,606
-the position you want to be
-in the middle of the screen.
-
-
-547
-00:26:42,606 --> 00:26:47,586
-And you will then specify a
-distance in meters, how far away
-
-
-548
-00:26:47,586 --> 00:26:49,286
-from the center coordinate
-you want the camera
-
-
-549
-00:26:49,286 --> 00:26:50,136
-to be positioned.
-
-
-550
-00:26:50,516 --> 00:26:53,126
-And notice how this
-differs from the altitude.
-
-
-551
-00:26:53,846 --> 00:26:58,466
-You will also specify the pitch,
-how angled you want the camera
-
-
-552
-00:26:58,466 --> 00:27:00,476
-to be, and the heading,
-
-
-553
-00:27:00,476 --> 00:27:02,146
-the direction you
-want to be looking in.
-
-
-554
-00:27:03,186 --> 00:27:05,976
-And using this initializer
-you can get a camera
-
-
-555
-00:27:05,976 --> 00:27:08,966
-which is looking precisely
-where you want to without having
-
-
-556
-00:27:08,966 --> 00:27:11,686
-to worry about what sort of
-terrain or buildings happens
-
-
-557
-00:27:11,686 --> 00:27:12,796
-to be beneath your camera.
-
-
-558
-00:27:14,386 --> 00:27:17,216
-And I will now give a
-short demo to show some
-
-
-559
-00:27:17,216 --> 00:27:18,726
-of the cool things you
-can do with Flyover.
-
-
-560
-00:27:23,356 --> 00:27:26,546
-Okay. So Sumit was showing you
-a tour application earlier.
-
-
-561
-00:27:27,106 --> 00:27:30,966
-And I have a similar application
-here running on my Mac.
-
-
-562
-00:27:30,966 --> 00:27:33,556
-You can see the landmarks here.
-
-
-563
-00:27:35,426 --> 00:27:37,746
-For example here, Cliff House.
-
-
-564
-00:27:38,676 --> 00:27:41,766
-And as you might remember there
-were some of these locations
-
-
-565
-00:27:41,766 --> 00:27:44,186
-that we did not actually
-have any images for.
-
-
-566
-00:27:44,186 --> 00:27:45,746
-And I thought we
-could use Flyover
-
-
-567
-00:27:45,746 --> 00:27:46,756
-in order to correct that.
-
-
-568
-00:27:48,236 --> 00:27:50,076
-So what I will be doing is,
-
-
-569
-00:27:50,076 --> 00:27:52,996
-that I will be adding a
-detail callout accessory views
-
-
-570
-00:27:52,996 --> 00:27:54,066
-to my callouts here.
-
-
-571
-00:27:54,686 --> 00:27:57,986
-And I will use the
-MKMap snapshot in order
-
-
-572
-00:27:57,986 --> 00:28:01,426
-to generate images from
-Flyover, to set as the image
-
-
-573
-00:28:01,426 --> 00:28:04,686
-of the detail callout
-accessory view.
-
-
-574
-00:28:04,686 --> 00:28:06,536
-The MKMap snapshot
-is very useful
-
-
-575
-00:28:06,536 --> 00:28:08,716
-when you only really need
-a static image of a map,
-
-
-576
-00:28:08,906 --> 00:28:10,626
-when you don't need
-it to be interactive.
-
-
-577
-00:28:11,876 --> 00:28:14,886
-So I'm going to add a few
-options for the snapshotter,
-
-
-578
-00:28:14,886 --> 00:28:16,746
-and the most important
-one here being
-
-
-579
-00:28:16,746 --> 00:28:19,826
-that I'm setting the
-mapType to Satellite Flyover.
-
-
-580
-00:28:22,366 --> 00:28:25,626
-I will then create an
-MKMapCamera using our new
-
-
-581
-00:28:25,626 --> 00:28:29,846
-initializer to look at the
-coordinates of the annotation.
-
-
-582
-00:28:30,756 --> 00:28:32,996
-And I will then use
-these options
-
-
-583
-00:28:33,226 --> 00:28:35,686
-to create an MKMap snapshotter.
-
-
-584
-00:28:36,986 --> 00:28:40,566
-I'll start the snapshotter
-and if it completes
-
-
-585
-00:28:40,566 --> 00:28:43,836
-without any error, I will use
-the resulting image as the image
-
-
-586
-00:28:43,876 --> 00:28:45,716
-on my detail callout
-accessory view.
-
-
-587
-00:28:46,246 --> 00:28:49,576
-Let's of course,
-call this function.
-
-
-588
-00:28:55,046 --> 00:29:02,206
-Okay. Let's take a look
-at what it looks like now.
-
-
-589
-00:29:02,206 --> 00:29:04,216
-So if I recall correctly,
-Cliff House was one of those
-
-
-590
-00:29:04,216 --> 00:29:05,366
-that we didn't have
-an image for.
-
-
-591
-00:29:05,366 --> 00:29:07,796
-And look at that, now we do.
-
-
-592
-00:29:08,516 --> 00:29:16,816
-[ Applause ]
-
-
-593
-00:29:17,316 --> 00:29:18,056
->> ELISABETH LINDKVIST:
-And yeah,
-
-
-594
-00:29:18,166 --> 00:29:19,586
-I think we have a
-few other ones here.
-
-
-595
-00:29:19,616 --> 00:29:21,166
-Like City Hall, for example.
-
-
-596
-00:29:21,576 --> 00:29:23,736
-Now, that's was pretty
-cool, but Flyover views are
-
-
-597
-00:29:23,776 --> 00:29:25,276
-of course also interactive,
-
-
-598
-00:29:25,776 --> 00:29:28,656
-so I'm thinking we can add a
-little animation to this view.
-
-
-599
-00:29:29,646 --> 00:29:31,436
-And I created a new
+00:29:29,503 --> 00:29:31,438
+我生成一个新的
 ViewController
 
 
-600
-00:29:31,436 --> 00:29:35,536
-which doesn't really do much
-yet but it has an MKMapView.
+489
+00:29:31,505 --> 00:29:35,275
+这个还太常用
+不过其中有MKMapView
 
 
-601
-00:29:37,036 --> 00:29:41,616
-And I will add some constants
-that I think will be useful.
+490
+00:29:37,044 --> 00:29:41,615
+我会在其中添加部分有用的常数
 
 
-602
-00:29:42,456 --> 00:29:44,966
-And then I will set
-up the map view.
+491
+00:29:42,416 --> 00:29:44,952
+然后我来设置地图视图
 
 
-603
-00:29:49,446 --> 00:29:52,606
-And so as we can note here
-I'm also setting my map type
+492
+00:29:49,423 --> 00:29:53,794
+大家还注意到我给Satellite
+Flyover 设置了地图类型
 
 
-604
-00:29:52,606 --> 00:29:53,696
-to Satellite Flyover.
+493
+00:29:54,595 --> 00:29:58,866
+还把OS X中可见的指南针
+和缩放控制进行隐藏
 
 
-605
-00:29:54,596 --> 00:29:57,446
-I'm hiding the compass
-and the zoom controls
+494
+00:30:01,335 --> 00:30:04,738
+我还生成了
+MKMapCamera
 
 
-606
-00:29:57,556 --> 00:29:59,576
-that are visible in OS X.
+495
+00:30:04,805 --> 00:30:06,373
+初始状态是地标的坐标
 
 
-607
-00:30:00,606 --> 00:30:04,816
-I'm also creating an MKMapCamera
-which initially looks
+496
+00:30:07,841 --> 00:30:09,510
+我需要的设置就是这些
 
 
-608
-00:30:04,816 --> 00:30:06,366
-at the coordinates
-of the landmark.
+497
+00:30:10,777 --> 00:30:15,716
+接着我准备再生成几个
+MKMapCamera
 
 
-609
-00:30:07,846 --> 00:30:09,516
-And that's about all
-the setup I need.
+498
+00:30:17,150 --> 00:30:21,622
+首先
+是一个稍稍向下倾斜的斜度摄像头
 
 
-610
-00:30:10,786 --> 00:30:13,776
-Then I'm going to
-create a couple
+499
+00:30:22,389 --> 00:30:24,591
+这里还加上了旋转
 
 
-611
-00:30:13,776 --> 00:30:15,716
-of additionally MKMapCameras.
+500
+00:30:24,658 --> 00:30:26,727
+这样可以稍作旋转
 
 
-612
-00:30:17,136 --> 00:30:20,266
-First of all I have one
-which is a bit tilted down,
+501
+00:30:27,494 --> 00:30:31,932
+因为MKMapCamera
+在MKMapView具有动画属性
 
 
-613
-00:30:20,766 --> 00:30:21,626
-my pitched camera.
+502
+00:30:32,366 --> 00:30:35,135
+我会做些动画处理
+以便在这两个之间进行切换
 
 
-614
-00:30:22,396 --> 00:30:24,666
-And I'm also adding
-a rotation here.
+503
+00:30:38,005 --> 00:30:44,444
+这里我先添加一段短的动画效果
+把摄像头设置成斜度摄像头
 
 
-615
-00:30:24,666 --> 00:30:26,716
-So it will do a little
-spin around.
+504
+00:30:44,811 --> 00:30:49,783
+再把视图向下倾斜一点
+再加稍长的动画内容
 
 
-616
-00:30:27,486 --> 00:30:30,976
-And as MKMapCamera is
-an animatable property
+505
+00:30:49,850 --> 00:30:51,752
+也会做少许旋转动作
 
 
-617
-00:30:30,976 --> 00:30:34,066
-in MKMapView, I will do a
-little animation in order
+506
+00:30:53,120 --> 00:30:54,821
+在主ViewController中
 
 
-618
-00:30:34,066 --> 00:30:35,826
-to switch between these.
+507
+00:30:54,888 --> 00:30:59,860
+我加入了rightCallout
+AccessoryView
 
 
-619
-00:30:37,316 --> 00:30:41,116
-So here I am adding first
-a little short animation
+508
+00:31:00,060 --> 00:31:02,729
+这可以打开
+新的View Controller
 
 
-620
-00:30:41,116 --> 00:30:44,436
-which will set the camera
-to my pitched camera,
+509
+00:31:04,198 --> 00:31:06,466
+我们再加上按钮
 
 
-621
-00:30:44,816 --> 00:30:46,676
-and we will tilt
-the view down a bit,
+510
+00:31:18,979 --> 00:31:21,949
+好的
+我们再来看悬崖小屋 就像这样
 
 
-622
-00:30:47,206 --> 00:30:49,946
-and I am then adding a
-little longer animation
+511
+00:31:22,082 --> 00:31:26,920
+这里有个小按钮可以稍稍倾斜
 
 
-623
-00:30:49,946 --> 00:30:51,766
-which will do a little
-spin around.
+512
+00:31:28,989 --> 00:31:29,957
+再做旋转
 
 
-624
-00:30:52,456 --> 00:30:57,696
-In my main View Controller
-I have added a little right
+513
+00:31:43,403 --> 00:31:45,472
+这个非常有趣
+我们也来看看这个
 
 
-625
-00:30:58,076 --> 00:30:59,856
-callout accessory view here
+514
+00:31:45,539 --> 00:31:46,707
+因为我觉得非常酷
 
 
-626
-00:31:00,086 --> 00:31:02,736
-which will open my
-new View Controller.
+515
+00:31:49,810 --> 00:31:51,812
+就这样
+泛美金字塔也好了
 
 
-627
-00:31:04,186 --> 00:31:06,456
-So let's add that
-button as well.
+516
+00:31:59,920 --> 00:32:03,090
+好的现在我们看到了
+Flyover的部分功能
 
 
-628
-00:31:07,516 --> 00:31:17,806
-[ Silence ]
+517
+00:32:03,357 --> 00:32:05,058
+那我们回到讲座中来
 
 
-629
-00:31:18,306 --> 00:31:21,256
-Okay. Let's take another
-look at Cliff House.
+518
+00:32:05,959 --> 00:32:08,529
+一开始时我就说过
+我想说说
 
 
-630
-00:31:21,466 --> 00:31:21,786
-There we go.
+519
+00:32:08,629 --> 00:32:11,565
+现有MapKit API的
+部分功能
 
 
-631
-00:31:21,786 --> 00:31:26,966
-And I have my little button
-here, and we are tilting down.
+520
+00:32:11,632 --> 00:32:13,433
+看看它们怎么和
+Flyover怎么配合
 
 
-632
-00:31:27,796 --> 00:31:29,786
-And spinning around.
+521
+00:32:14,535 --> 00:32:16,670
+我先从MK注释讲起
 
 
-633
-00:31:32,516 --> 00:31:41,836
-[ Applause ]
+522
+00:32:17,504 --> 00:32:21,441
+MK注释用于注释地图的单一坐标
 
 
-634
-00:31:42,336 --> 00:31:43,716
-This was fun.
+523
+00:32:21,909 --> 00:32:25,445
+最常见的情况
+是我们今天使用的图钉
 
 
-635
-00:31:43,796 --> 00:31:45,536
-We'll just look at
-this one, too,
+524
+00:32:26,446 --> 00:32:29,983
+如果是用标准地图类型显示建筑
 
 
-636
-00:31:45,536 --> 00:31:46,706
-because I think it
-looks really cool.
+525
+00:32:31,251 --> 00:32:33,720
+注释就是位于最上面的部分
 
 
-637
-00:31:49,806 --> 00:31:50,336
-There we go.
+526
+00:32:34,421 --> 00:32:38,292
+在使用Flyover时
+地图类型时就是这种情况
 
 
-638
-00:31:50,456 --> 00:31:51,646
-Transamerica Pyramid, too.
+527
+00:32:38,692 --> 00:32:42,729
+当使用Flyover时
+无论发现什么
 
 
-639
-00:31:52,516 --> 00:31:59,486
-[ Applause ]
+528
+00:32:43,130 --> 00:32:47,034
+注释将出现在任何建筑 树木
+大船 雕塑的上方
 
 
-640
-00:31:59,986 --> 00:32:01,646
-Okay. So now we have
-seen some of the things
+529
+00:32:48,368 --> 00:32:51,071
+接下来是MKOverlay
 
 
-641
-00:32:01,646 --> 00:32:03,096
-that you can do with Flyover.
+530
+00:32:51,905 --> 00:32:56,476
+叠加图层是用于强调地图的区域
+而不是单一的坐标
 
 
-642
-00:32:03,356 --> 00:32:05,056
-So let's get back
-to the presentation.
+531
+00:32:57,311 --> 00:33:02,216
+如果是在标准地图类型的3D地图中
 
 
-643
-00:32:05,946 --> 00:32:08,536
-As I said at the beginning
-there are also some parts
+532
+00:33:03,650 --> 00:33:07,354
+你会注意到建筑阻隔了叠加图层
 
 
-644
-00:32:08,616 --> 00:32:11,646
-of the existing MapKit API that
-I would like to talk about,
+533
+00:33:08,155 --> 00:33:11,191
+Flyover也是同样如此
 
 
-645
-00:32:11,646 --> 00:32:13,446
-how they would work
-together with Flyover.
+534
+00:33:11,558 --> 00:33:16,096
+Flyover的建筑和树木
+会阻隔任何叠加层
 
 
-646
-00:32:14,546 --> 00:32:16,676
-And I'll start with
-MK annotations.
+535
+00:33:16,964 --> 00:33:18,232
+就像是这样
 
 
-647
-00:32:17,076 --> 00:32:21,236
-MK annotations are used to
-annotate a single coordinate
+536
+00:33:21,502 --> 00:33:27,474
+不过叠加层会拉到地面的上方
+这样就会跟着地势走
 
 
-648
-00:32:21,236 --> 00:32:24,086
-of the map and the most
-common use case is the pins
+537
+00:33:28,642 --> 00:33:29,576
+就像是这样
 
 
-649
-00:32:24,086 --> 00:32:25,446
-that we have been
-working with today.
+538
+00:33:30,677 --> 00:33:33,780
+我觉得为了在app中
+用到Flyover
 
 
-650
-00:32:26,486 --> 00:32:29,936
-If you are showing buildings
-on the standard map type,
+539
+00:33:33,847 --> 00:33:37,050
+大家需要掌握的就是这些
 
 
-651
-00:32:30,246 --> 00:32:33,516
-annotations will be
-placed on top of those.
+540
+00:33:37,117 --> 00:33:39,453
+我真是迫不及待
+想看看大家的成果
 
 
-652
-00:32:34,456 --> 00:32:36,326
-And this will also be the case
+541
+00:33:41,255 --> 00:33:43,957
+总结一下今天所讲的内容
 
 
-653
-00:32:36,326 --> 00:32:38,236
-when you are using
-the Flyover map types.
+542
+00:33:44,458 --> 00:33:48,795
+我们对自定义图钉 callouts
+和显示带有交通状况 指南针
 
 
-654
-00:32:38,716 --> 00:32:42,456
-Annotations will be placed on
-top of any buildings, trees,
+543
+00:33:48,862 --> 00:33:52,232
+和比例尺的地图增加了几种新方法
 
 
-655
-00:32:43,176 --> 00:32:45,586
-large boats, statues,
-whatever you may find
+544
+00:33:53,500 --> 00:33:55,969
+还增添了Transit ETA请求
 
 
-656
-00:32:45,586 --> 00:32:46,936
-when you are exploring Flyover.
+545
+00:33:56,036 --> 00:34:00,140
+以及启动地图app中的显示
+Transit方向的功能
 
 
-657
-00:32:48,366 --> 00:32:50,946
-And next, MKOverlays.
+546
+00:34:01,041 --> 00:34:05,312
+我们还增加了Satellite Flyover
+和Hybrid Flyover地图类型
 
 
-658
-00:32:51,566 --> 00:32:54,876
-Overlays are used to highlight
-areas of the map rather
+547
+00:34:05,379 --> 00:34:09,683
+这样可以在app中高度真实地显示
+地面的3D模型和卫星图像
 
 
-659
-00:32:54,876 --> 00:32:56,476
-than just a single coordinate.
+548
+00:34:11,851 --> 00:34:13,554
+若想了解更多详情可以看今天
 
 
-660
-00:32:57,346 --> 00:33:00,766
-And if you are showing
-buildings on a 3D map
+549
+00:34:13,620 --> 00:34:16,723
+MapKit文件资料
+和开发人员论坛
 
 
-661
-00:33:00,916 --> 00:33:04,616
-in the standard map
-type, you will notice
-
-
-662
-00:33:04,616 --> 00:33:07,186
-that overlays are being
-occluded by the buildings.
-
-
-663
-00:33:08,176 --> 00:33:11,196
-This will work precisely
-in the same way in Flyover.
-
-
-664
-00:33:11,606 --> 00:33:13,676
-Any overlays you
-have will be occluded
-
-
-665
-00:33:13,676 --> 00:33:15,856
-by Flyover buildings and trees.
-
-
-666
-00:33:16,956 --> 00:33:18,036
-Something like that.
-
-
-667
-00:33:21,546 --> 00:33:25,336
-However, overlays will be
-drawn on top of the terrain
-
-
-668
-00:33:25,336 --> 00:33:27,456
-so that they will
-follow the ground.
-
-
-669
-00:33:28,696 --> 00:33:30,196
-Something like that.
-
-
-670
-00:33:30,716 --> 00:33:33,866
-So I think that's about
-everything you need to know
-
-
-671
-00:33:33,866 --> 00:33:37,026
-in order to get started with
-using Flyover in your apps
-
-
-672
-00:33:37,136 --> 00:33:41,686
-and I can't wait to see what
-you will be doing with it.
-
-
-673
-00:33:41,686 --> 00:33:43,936
-To summarize a bit what we
-have been talking about today,
-
-
-674
-00:33:43,996 --> 00:33:48,016
-we have added some new ways
-for you to customize your pins,
-
-
-675
-00:33:48,016 --> 00:33:51,156
-your callouts, and the way you
-display your map with traffic,
-
-
-676
-00:33:51,156 --> 00:33:52,286
-and compass, and scale.
-
-
-677
-00:33:53,526 --> 00:33:57,716
-We've added Transit ETA requests
-and ways for you to launch
-
-
-678
-00:33:57,716 --> 00:33:59,946
-into the maps apps to
-show Transit directions.
-
-
-679
-00:34:01,006 --> 00:34:03,396
-And we've also added
-the Satellite Flyover
-
-
-680
-00:34:03,446 --> 00:34:05,176
-and Hybrid Flyover map types
-
-
-681
-00:34:05,206 --> 00:34:07,716
-so that you can show
-photo-realistic 3D models
-
-
-682
-00:34:07,716 --> 00:34:10,306
-and satellite imagery
-on terrain in your apps.
-
-
-683
-00:34:10,956 --> 00:34:13,596
-For more information,
-please take a look
-
-
-684
-00:34:13,596 --> 00:34:16,536
-at the MapKit documentation
-and the Developer Forums.
-
-
-685
-00:34:17,766 --> 00:34:18,766
-Thank you so much for coming.
-
-
-686
-00:34:19,016 --> 00:34:21,000
-[ Applause ]
+550
+00:34:17,757 --> 00:34:18,592
+感谢大家光临
 

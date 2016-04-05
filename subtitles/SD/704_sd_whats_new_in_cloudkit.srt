@@ -1,3089 +1,2609 @@
 1
-00:00:23,516 --> 00:00:29,856
-[Applause]
+00:00:20,387 --> 00:00:23,724
+CloudKit中的新特性
 
 
 2
-00:00:30,356 --> 00:00:31,686
->> OLIVIER BONNET: Good
-afternoon and welcome
+00:00:30,364 --> 00:00:34,768
+下午好 欢迎参加第704环节的讲座
+“CloudKit中的新特性”
 
 
 3
-00:00:31,686 --> 00:00:34,416
-to Session 704 What's
-New in CloudKit.
+00:00:35,169 --> 00:00:36,170
+我叫Olivier
 
 
 4
-00:00:35,156 --> 00:00:36,246
-My name is Olivier.
+00:00:36,236 --> 00:00:39,139
+是iCloud客户端团队的技术经理
 
 
 5
-00:00:36,246 --> 00:00:39,006
-I'm the Engineering Manager
-for the iCloud Client teams.
+00:00:39,973 --> 00:00:44,778
+一年前我们介绍了CloudKits
+它对你们开发者来说
 
 
 6
-00:00:39,976 --> 00:00:44,656
-So a year ago we introduced
-CloudKits a brand new framework
+00:00:44,845 --> 00:00:48,615
+是一种驾驭iCloud的全新架构
 
 
 7
-00:00:44,966 --> 00:00:48,476
-for you as developers to
-harness of the power of iCloud.
+00:00:50,284 --> 00:00:53,987
+我们在iOS 8上构建了很多
 
 
 8
-00:00:49,156 --> 00:00:54,056
-We built a number of
-the iOS 8 new features
+00:00:54,054 --> 00:00:55,389
+CloudKits的新特性
 
 
 9
-00:00:54,056 --> 00:00:55,186
-on top of CloudKits.
+00:00:55,522 --> 00:00:59,526
+最明显是把iCloud Drive
+和iCloud照片库
 
 
 10
-00:00:55,526 --> 00:00:59,266
-Most visibly iCloud Drive and
-iCloud Photo Library were built
+00:00:59,593 --> 00:01:03,730
+全部加入了CloudKit之中而
+Mail Drop HomeKit
 
 
 11
-00:00:59,736 --> 00:01:03,536
-from the ground up on top of
-CloudKit but Mail Drop, HomeKit,
+00:01:04,096 --> 00:01:08,035
+Safari历史同步和电话历史同步
+也都使用了CloudKit
 
 
 12
-00:01:04,096 --> 00:01:07,226
-Safari history syncing, and
-call history syncing were also
+00:01:09,770 --> 00:01:11,872
+一年之后我们看到了什么？
 
 
 13
-00:01:07,226 --> 00:01:08,056
-using CloudKit.
+00:01:13,307 --> 00:01:17,244
+我们上传了2400多亿个记录
 
 
 14
-00:01:08,576 --> 00:01:12,416
-So a year later,
-what have we seen?
+00:01:18,178 --> 00:01:21,748
+我们存储了来自3亿多用户的
 
 
 15
-00:01:13,306 --> 00:01:17,106
-We have uploaded over
-240 billion records.
+00:01:21,815 --> 00:01:25,152
+超过250PB的资源数据
 
 
 16
-00:01:18,176 --> 00:01:22,426
-We saved over 250 petabytes
-of assets and that's coming
+00:01:26,787 --> 00:01:28,255
+我们真是喜不自禁
 
 
 17
-00:01:22,426 --> 00:01:25,156
-from over 300 million users.
+00:01:28,322 --> 00:01:31,425
+对于CloudKit带给我们
 
 
 18
-00:01:26,516 --> 00:01:28,326
-So really, we couldn't
-be happier
+00:01:31,859 --> 00:01:34,695
+可靠性和稳定性
 
 
 19
-00:01:28,326 --> 00:01:32,716
-with how this has turned
-out, with how reliable
+00:01:35,362 --> 00:01:39,867
+所以今年我们会再加入几个新特性
 
 
 20
-00:01:32,716 --> 00:01:34,566
-and stable CloudKit
-has been for us.
+00:01:40,467 --> 00:01:44,204
+IOS和OS X上的备忘录
+正在使用CloudKit
 
 
 21
-00:01:35,356 --> 00:01:39,856
-So this year, we're going to add
-a couple more features to that.
+00:01:44,271 --> 00:01:47,708
+在你的设备之间实现备忘录同步
 
 
 22
-00:01:40,476 --> 00:01:44,006
-Notes is now using
-CloudKit on iOS,
+00:01:48,942 --> 00:01:51,411
+我们昨天介绍的新app-新闻
 
 
 23
-00:01:44,276 --> 00:01:47,716
-and OS X to synchronize your
-notes between your devices.
+00:01:51,645 --> 00:01:55,148
+也是完全构建在
+CloudKit公用数据库基础上的
 
 
 24
-00:01:48,936 --> 00:01:50,806
-The new app we introduces
-yesterday,
+00:01:56,283 --> 00:01:59,520
+今年就连WWDC app
+也在使用CloudKit
 
 
 25
-00:01:50,806 --> 00:01:55,146
-News is entirely built on
-the CloudKit public database.
+00:02:00,020 --> 00:02:02,289
+最后一个要点
+iOS 9上提供对iCloud备份
 
 
 26
-00:01:56,296 --> 00:01:59,506
-Even the WWDC app is now
-using CloudKit this year.
+00:02:03,023 --> 00:02:06,393
+端口支持以便使用CloudKit
 
 
 27
-00:02:00,016 --> 00:02:02,276
-And last but not
-least iCloud Backup,
+00:02:07,227 --> 00:02:09,562
+所以这其实有更大的意义
 
 
 28
-00:02:03,016 --> 00:02:06,406
-was ported in iOS
-9 to use CloudKit.
+00:02:09,630 --> 00:02:12,466
+因为就用户数量 数据量
 
 
 29
-00:02:07,216 --> 00:02:09,636
-So this is actually -- this
-one is actually a bigger deal
+00:02:12,799 --> 00:02:14,501
+和每秒的请求数量而言
 
 
 30
-00:02:09,636 --> 00:02:12,306
-than it seems because iCloud
-Backup is our biggest service
+00:02:14,701 --> 00:02:17,471
+iCloud备份是我们最大的服务
 
 
 31
-00:02:12,786 --> 00:02:16,396
-in terms of number of users,
-amount of data, and the number
+00:02:19,907 --> 00:02:22,776
+我们也从你们开发者那里
+得到了一些好的反馈
 
 
 32
-00:02:16,396 --> 00:02:19,796
-of requests per seconds.
+00:02:23,310 --> 00:02:26,747
+比如 Hipstamatic说
+利用CloudKit我们得以专注于
 
 
 33
-00:02:19,906 --> 00:02:22,776
-We've also heard some good
-feedback from you as developers.
+00:02:26,813 --> 00:02:28,148
+构建自己的app
 
 
 34
-00:02:23,316 --> 00:02:26,616
-For instance, from Hipstamatic,
-"With CloudKit, we were able
+00:02:28,215 --> 00:02:30,050
+甚至还有些游刃有余
 
 
 35
-00:02:26,616 --> 00:02:28,066
-to focus on building our app,
+00:02:30,651 --> 00:02:33,187
+这正是构建CloudKit的原因
 
 
 36
-00:02:28,216 --> 00:02:30,036
-and even squeeze
-in a few extras."
+00:02:33,887 --> 00:02:37,457
+为了使你们这些开发者
+能够专心构建优秀的app
 
 
 37
-00:02:30,656 --> 00:02:33,036
-So that is exactly
-why we built CloudKit.
+00:02:37,524 --> 00:02:39,593
+构建美好的用户体验不用去设置服务器
 
 
 38
-00:02:33,876 --> 00:02:37,386
-To enable you as developers to
-focus on building great apps,
+00:02:39,860 --> 00:02:43,330
+不用去运营服务器
 
 
 39
-00:02:37,536 --> 00:02:40,596
-building awesome user
-experience, without having
+00:02:43,664 --> 00:02:46,733
+不用7乘24小时随时待命
 
 
 40
-00:02:40,596 --> 00:02:43,286
-to set up a server, without
-having to operate it,
+00:02:48,268 --> 00:02:52,239
+AgileBits正在使用
+CloudKit 同步密码数据
 
 
 41
-00:02:43,676 --> 00:02:46,486
-without having to
-be on call 24/7.
+00:02:52,306 --> 00:02:53,340
+他们对此非常满意
 
 
 42
-00:02:47,956 --> 00:02:52,306
-AgileBits is using CloudKit to
-synchronize one password data.
+00:02:53,407 --> 00:02:56,677
+他们这样说
+CloudKit非常快速且高效
 
 
 43
-00:02:52,306 --> 00:02:53,326
-They're happy with it.
+00:02:57,144 --> 00:02:59,780
+它使错误检测和排除变得简单易行
 
 
 44
-00:02:53,406 --> 00:02:56,086
-Here's what they're saying:
-"CloudKit is very fast,
+00:03:00,480 --> 00:03:05,586
+是CloudKit的设计目标之一
 
 
 45
-00:02:56,086 --> 00:02:59,786
-efficient, and makes it easy to
-detect and troubleshoot errors."
+00:03:06,119 --> 00:03:09,223
+如果后台程序 
+网络或服务器端存在错误
 
 
 46
-00:03:00,486 --> 00:03:05,586
-Again, that was one of our
-design goals with CloudKit.
+00:03:09,289 --> 00:03:12,359
+我们会把该错误发回你的app
 
 
 47
-00:03:06,106 --> 00:03:09,286
-If there's an error in the
-daemon, on the network,
+00:03:12,759 --> 00:03:15,729
+让你的app负责处理 重试
 
 
 48
-00:03:09,286 --> 00:03:12,356
-or on the server side, we will
-return that error to your app
+00:03:15,796 --> 00:03:17,464
+如果那么做是有意义的话
 
 
 49
-00:03:12,746 --> 00:03:15,786
-and your app is in
-charge of handling it,
+00:03:19,333 --> 00:03:24,137
+赞誉来自于IconFactory
+“CloudKit最大的优点之一是
 
 
 50
-00:03:15,786 --> 00:03:19,126
-retrying it, if it makes sense.
+00:03:24,204 --> 00:03:27,040
+没有复杂的登陆程序或设置程序”
 
 
 51
-00:03:19,316 --> 00:03:23,076
-Last but not least, IconFactory:
-"One of the best parts
+00:03:27,608 --> 00:03:29,643
+这也是我们的目标之一
 
 
 52
-00:03:23,076 --> 00:03:26,236
-about CloudKit is there's no
-complicated sign-in process
+00:03:30,043 --> 00:03:35,182
+让天衣无缝的用户体验成为可能
 
 
 53
-00:03:26,236 --> 00:03:26,846
-or setup."
+00:03:35,249 --> 00:03:36,650
+无需创建账户
 
 
 54
-00:03:27,606 --> 00:03:29,636
-Again that was one of out goals.
+00:03:36,717 --> 00:03:38,919
+无需录入密码或记住密码
 
 
 55
-00:03:30,056 --> 00:03:34,406
-Make it possible to enable
-completely seamless user
+00:03:40,954 --> 00:03:42,422
+除了这些良好的反馈之外
 
 
 56
-00:03:34,406 --> 00:03:36,726
-experience, no account creation,
+00:03:42,489 --> 00:03:45,092
+我们还听到了你们开发者提出一些问题
 
 
 57
-00:03:36,726 --> 00:03:38,926
-no password to enter
-or remember.
+00:03:45,659 --> 00:03:47,261
+去年我们介绍CloudKit时
 
 
 58
-00:03:40,676 --> 00:03:42,496
-In addition to this
-good feedback,
+00:03:47,327 --> 00:03:49,096
+我们说它没有限制
 
 
 59
-00:03:42,496 --> 00:03:45,096
-we also heard some questions
-from you as developers.
+00:03:49,863 --> 00:03:52,666
+所以我们收到了一些问题
+比如 这是什么意思？
 
 
 60
-00:03:45,666 --> 00:03:47,326
-So last year, we
-introduced CloudKit.
+00:03:52,733 --> 00:03:55,435
+如果我的app达到限额怎么办？
 
 
 61
-00:03:47,326 --> 00:03:49,096
-We said it was free with limits.
+00:03:55,802 --> 00:03:57,504
+我要付给苹果公司多少钱？
 
 
 62
-00:03:49,876 --> 00:03:52,746
-And so we get some questions
-like, okay, what does it mean?
+00:04:00,541 --> 00:04:03,110
+去年我们立刻收到的第二个问题
+大意是这样的:
 
 
 63
-00:03:52,746 --> 00:03:55,276
-What if my app reached
-the limits?
+00:04:03,277 --> 00:04:04,811
+好的 但是网络呢？
 
 
 64
-00:03:55,816 --> 00:04:00,316
-How much will I have
-to pay Apple?
+00:04:05,078 --> 00:04:09,116
+如果我有一个网络app
+我想让它能够访问
 
 
 65
-00:04:00,526 --> 00:04:03,126
-Second question we got
-immediately last year is like,
+00:04:09,183 --> 00:04:13,086
+IOS和OS X CloudKit
+app所访问的相同的数据怎么办
 
 
 66
-00:04:03,286 --> 00:04:04,826
-okay, but what about the web?
+00:04:13,887 --> 00:04:15,355
+关于这两个问题的讨论
 
 
 67
-00:04:05,086 --> 00:04:07,576
-What if I have a web app
-and I wanted to be able
+00:04:15,422 --> 00:04:17,156
+我要把它交给Eric
 
 
 68
-00:04:07,576 --> 00:04:12,966
-to access the same data as
-my iOS and OS X CloudKit app.
+00:04:17,524 --> 00:04:19,660
+Eric是
+iCloud服务器端团队的经理
 
 
 69
-00:04:13,876 --> 00:04:15,436
-To talk about both of those,
+00:04:26,733 --> 00:04:27,935
+谢谢 谢谢 Olivier
 
 
 70
-00:04:15,436 --> 00:04:17,156
-I would like to hand
-it over to Eric.
+00:04:28,001 --> 00:04:30,470
+很高兴能在今天下午来到这里
 
 
 71
-00:04:17,526 --> 00:04:19,646
-Eric is the manager for
-the iCloud Server team.
+00:04:30,537 --> 00:04:32,372
+和你们讨论CloudKit的新特性
 
 
 72
-00:04:20,516 --> 00:04:25,586
-[Applause].
+00:04:32,940 --> 00:04:34,708
+首先我们来回答第一个问题
 
 
 73
-00:04:26,086 --> 00:04:26,636
->> ERIC KRUGLER: Thank you.
+00:04:34,775 --> 00:04:35,876
+要花多少钱？
 
 
 74
-00:04:26,726 --> 00:04:27,826
-Well, thank you, Olivier.
+00:04:36,343 --> 00:04:38,645
+来看CloudKit的使用和价格
 
 
 75
-00:04:28,016 --> 00:04:30,536
-It's terrific to be here
-this afternoon to talk to you
+00:04:38,812 --> 00:04:40,080
+在此之前 我们需要理解
 
 
 76
-00:04:30,536 --> 00:04:32,166
-about what's new in CloudKit.
+00:04:40,147 --> 00:04:42,349
+CloudKit的架构
 
 
 77
-00:04:32,836 --> 00:04:34,786
-Let's start by answering
-that first question.
+00:04:43,417 --> 00:04:46,486
+当你使用CloudKit时
+你所有的数据都存储在
 
 
 78
-00:04:34,786 --> 00:04:35,606
-What does it cost?
+00:04:46,553 --> 00:04:47,921
+你的CloudKit容器中
 
 
 79
-00:04:36,186 --> 00:04:39,226
-We are going to look at CloudKit
-usage and pricing but to get
+00:04:48,255 --> 00:04:50,257
+这个地方存储着你所有的数据
 
 
 80
-00:04:39,226 --> 00:04:40,136
-into that, we first need
+00:04:50,524 --> 00:04:52,593
+你能够以两种不同的方式存储这些数据
 
 
 81
-00:04:40,136 --> 00:04:42,346
-to understand the
-CloudKit architecture.
+00:04:53,126 --> 00:04:58,232
+一种是作为私人数据库
+另一种是作为公用数据库
 
 
 82
-00:04:42,746 --> 00:04:46,556
-So when you use CloudKit,
-all of your data is stored
+00:04:59,032 --> 00:05:02,035
+私人数据库是用户的私人数据
 
 
 83
-00:04:46,556 --> 00:04:47,916
-in your CloudKit container.
+00:05:02,970 --> 00:05:05,239
+比如iCloud照片库
 
 
 84
-00:04:48,266 --> 00:04:50,256
-This is the place where
-all of your data resides
+00:05:05,405 --> 00:05:08,575
+你拍的
+所有照片都存在CloudKit中
 
 
 85
-00:04:50,536 --> 00:04:52,596
-and you can store that
-data, in two different ways.
+00:05:09,009 --> 00:05:11,345
+用户本人可以对其进行访问和管理
 
 
 86
-00:04:53,136 --> 00:04:58,226
-One is as a private database
-and two is as a public database.
+00:05:11,478 --> 00:05:13,480
+由于这是用户的私人数据
 
 
 87
-00:04:59,026 --> 00:05:02,036
-Now a private database is
-the user's private data.
+00:05:13,614 --> 00:05:17,217
+它占用是用户的存储限额 不是开发者
 
 
 88
-00:05:02,976 --> 00:05:05,226
-This example would be
-the iCloud Photo Library.
+00:05:18,151 --> 00:05:19,953
+现在我们来看公用数据库
 
 
 89
-00:05:05,396 --> 00:05:08,586
-All the photos that you
-take are stored in CloudKit
+00:05:20,387 --> 00:05:22,155
+这是应用的公用数据
 
 
 90
-00:05:08,996 --> 00:05:11,336
-and accessible by the user
-and managed by the user,
+00:05:22,689 --> 00:05:25,325
+关于这个的最佳案例是我们昨天刚发布
 
 
 91
-00:05:11,486 --> 00:05:14,046
-and because it's the
-user's private data it comes
+00:05:25,492 --> 00:05:27,160
+新的新闻app
 
 
 92
-00:05:14,046 --> 00:05:17,186
-out of the user's storage
-quota, not the developer's.
+00:05:27,594 --> 00:05:30,464
+其中所有的新闻文章
+是通过CloudKit公用数据库
 
 
 93
-00:05:17,186 --> 00:05:19,946
-Now when we look at
-the public database,
+00:05:30,531 --> 00:05:33,700
+分布在所有的新闻应用之中
 
 
 94
-00:05:20,386 --> 00:05:22,146
-this is application's
-public data.
+00:05:34,301 --> 00:05:36,503
+由于它是应用的公用数据
 
 
 95
-00:05:22,696 --> 00:05:25,316
-A great example of this
-is the new News app
+00:05:36,770 --> 00:05:39,506
+它占用的是开发者的存储限额
 
 
 96
-00:05:25,496 --> 00:05:27,146
-that we just announced
-yesterday,
+00:05:39,840 --> 00:05:42,910
+所以当我们讨论价格和使用时
 
 
 97
-00:05:27,606 --> 00:05:30,516
-where all of those news articles
-are actually distributed
+00:05:42,976 --> 00:05:45,979
+我们其实是在讨论公用数据库的使用
 
 
 98
-00:05:30,516 --> 00:05:33,716
-to all the news applications
-via CloudKit public database
+00:05:46,780 --> 00:05:47,915
+我们来看看这是什么意思
 
 
 99
-00:05:34,306 --> 00:05:37,016
-and because it's the
-application's public data this
+00:05:50,050 --> 00:05:51,718
+对于我们提供的公用数据库
 
 
 100
-00:05:37,016 --> 00:05:39,436
-comes out of the
-developer's storage quota.
+00:05:52,052 --> 00:05:53,220
+我们有一定的免费限额
 
 
 101
-00:05:39,846 --> 00:05:42,936
-So when we talk about pricing
-and we talk about usage,
+00:05:54,121 --> 00:05:57,424
+如果你超出了免费限额
+我们还有一个收费结构
 
 
 102
-00:05:42,986 --> 00:05:45,976
-we are really talking about
-public database usage.
+00:05:58,158 --> 00:05:59,860
+此外 我们还有使用数据
 
 
 103
-00:05:46,766 --> 00:05:47,766
-So let's see what that means.
+00:06:00,761 --> 00:06:02,062
+我们来看看免费限额
 
 
 104
-00:05:47,766 --> 00:05:51,666
-For our public database
-offering,
+00:06:03,964 --> 00:06:08,635
+你把资源存在云盘里 追踪到这些资源
 
 
 105
-00:05:52,066 --> 00:05:53,216
-we have a free offering.
+00:06:09,236 --> 00:06:11,071
+一开始会送你10GB
 
 
 106
-00:05:54,106 --> 00:05:57,436
-We also have a fee structure if
-you exceed those free limits.
+00:06:11,805 --> 00:06:14,007
+所以 如果你没有用户 你刚开始发展
 
 
 107
-00:05:58,166 --> 00:05:59,856
-And we also have usage data.
+00:06:14,341 --> 00:06:15,275
+送你10G
 
 
 108
-00:06:00,756 --> 00:06:03,956
-Let's look at the free offering.
+00:06:15,709 --> 00:06:18,245
+随着你的用户数量增长
 
 
 109
-00:06:03,956 --> 00:06:08,626
-So you have to store assets in
-the cloud, and we track that
+00:06:18,312 --> 00:06:20,514
+随着你的应用越来越受欢迎
 
 
 110
-00:06:09,246 --> 00:06:11,066
-and we give you ten
-gigabytes to start.
+00:06:20,948 --> 00:06:24,184
+我们会给你增加每人额外250MB
 
 
 111
-00:06:11,806 --> 00:06:13,996
-So if you have no users, you
-are just starting development,
+00:06:24,251 --> 00:06:27,321
+我们会为这些用你应用的用户
 
 
 112
-00:06:14,376 --> 00:06:14,966
-10 gigs.
+00:06:28,355 --> 00:06:32,059
+我们可以增加到
+最高可达1PB的存储空间
 
 
 113
-00:06:15,716 --> 00:06:18,296
-Now as your user
-population grows,
+00:06:34,161 --> 00:06:35,229
+同样
 
 
 114
-00:06:18,296 --> 00:06:21,496
-as your application becomes more
-popular, we are going to grow
+00:06:35,295 --> 00:06:37,798
+对于你存储记录数据的数据库
 
 
 115
-00:06:21,496 --> 00:06:24,256
-with you and we are going to
-add an additional 250 megs
+00:06:38,232 --> 00:06:42,002
+我们一开始会送你100MB
+每个用户可增加2.5MB
 
 
 116
-00:06:24,256 --> 00:06:27,176
-for every single user that is
-using your application for free
+00:06:42,069 --> 00:06:44,137
+最高可达10TB的免费限额
 
 
 117
-00:06:27,176 --> 00:06:29,186
-and we will grow that up
+00:06:45,305 --> 00:06:48,942
+除了数据存储以外 还提供数据传输
 
 
 118
-00:06:29,296 --> 00:06:32,046
-to an astonishing 1
-petabyte of storage.
+00:06:49,743 --> 00:06:50,711
+上传和下载资源时
 
 
 119
-00:06:34,156 --> 00:06:36,246
-Likewise, for the database side,
+00:06:50,777 --> 00:06:53,347
+你会消耗带宽
 
 
 120
-00:06:36,246 --> 00:06:38,716
-where you store your record
-data, we will start you
+00:06:54,248 --> 00:06:56,350
+我们一开始会每月送你2GB的
 
 
 121
-00:06:38,716 --> 00:06:42,056
-with 100 megs and we will
-grow that at 2.5 megs per user
+00:06:56,583 --> 00:06:59,253
+数据传输量与其他配给一样
 
 
 122
-00:06:42,056 --> 00:06:44,136
-and we will go up to
-10 terabytes for free.
+00:07:00,087 --> 00:07:02,789
+随着你的用户数量增加 会增加限额
 
 
 123
-00:06:45,316 --> 00:06:48,956
-Now in addition to storage,
-we also have data transfer.
+00:07:02,856 --> 00:07:05,292
+我们每人每月会增加50MB
 
 
 124
-00:06:49,756 --> 00:06:50,786
-So as you're uploading
+00:07:06,026 --> 00:07:08,996
+提供每月最高200TB的数据传输量
 
 
 125
-00:06:50,786 --> 00:06:53,186
-and downloading your assets
-you are consuming bandwidth
+00:07:09,096 --> 00:07:11,932
+全部免费
 
 
 126
-00:06:53,236 --> 00:06:56,336
-and we will start
-you with 2 gigabytes
+00:07:13,333 --> 00:07:15,869
+对于数据库 情况略有不同
 
 
 127
-00:06:56,596 --> 00:06:59,106
-of data transfer per
-month in and out.
+00:07:16,370 --> 00:07:19,173
+我们的衡量依据是每秒的请求
 
 
 128
-00:07:00,076 --> 00:07:02,856
-And like the others we will grow
-that as you have more users.
+00:07:19,873 --> 00:07:23,277
+我们一开始会送你每秒40个请求
+这个量很大
 
 
 129
-00:07:02,856 --> 00:07:05,066
-So we will add an extra 50
-megs per user per month.
+00:07:23,810 --> 00:07:25,879
+与其他配给一样
 
 
 130
-00:07:05,166 --> 00:07:08,996
-And we will allow you to
-grow up to 200 terabytes
+00:07:26,413 --> 00:07:27,781
+它会随着用户数量增长
 
 
 131
-00:07:09,096 --> 00:07:11,936
-of data transfer per
-month all for free.
+00:07:27,848 --> 00:07:29,049
+每增加10万用户
 
 
 132
-00:07:12,686 --> 00:07:15,856
-Now for database, it's
-a little different.
+00:07:29,116 --> 00:07:31,985
+会有每秒10个请求的增量
 
 
 133
-00:07:16,356 --> 00:07:19,106
-We actually measure it on
-a request per second basis.
+00:07:32,352 --> 00:07:35,255
+最高可达每秒400个免费请求
 
 
 134
-00:07:19,106 --> 00:07:20,716
-So we are going to start you
+00:07:35,722 --> 00:07:38,325
+关于每秒的请求数
 
 
 135
-00:07:20,716 --> 00:07:22,976
-at 40 requests per second,
-which is very large.
+00:07:38,392 --> 00:07:39,893
+重要的是它其实是一种节流限制
 
 
 136
-00:07:23,816 --> 00:07:25,486
-And just like the
-others, we will grow
+00:07:40,360 --> 00:07:42,996
+如果因为某种原因
+你的应用达到了这些限额
 
 
 137
-00:07:26,416 --> 00:07:27,486
-with the number of users.
+00:07:43,230 --> 00:07:46,099
+我们会向你发送客户端节流错误
 
 
 138
-00:07:27,856 --> 00:07:29,126
-And we will do that
-in increments
+00:07:46,166 --> 00:07:47,935
+告诉你 你已达到了限额
 
 
 139
-00:07:29,126 --> 00:07:31,976
-of 10 requests per second
-for each 100,000 users
+00:07:49,269 --> 00:07:50,637
+随后我们再来讨论一下
 
 
 140
-00:07:32,356 --> 00:07:36,386
-up to 400 requests per second
-for free, and what's important
+00:07:50,704 --> 00:07:52,206
+如何确保这种情况不会再次发生
 
 
 141
-00:07:36,386 --> 00:07:38,386
-to note about the
-request per second is
+00:07:54,408 --> 00:07:56,810
+好的 如果你真的超过了这些限额
 
 
 142
-00:07:38,386 --> 00:07:39,686
-that it's actually
-a throttle limit.
+00:07:56,877 --> 00:07:58,278
+可以付费获取更多用量
 
 
 143
-00:07:40,346 --> 00:07:42,976
-So if for some reason your
-application hits these limits,
+00:07:58,545 --> 00:08:00,214
+也就是我们的公用数据库费用
 
 
 144
-00:07:42,976 --> 00:07:46,176
-we will actually send you
-back a throttling error back
+00:08:01,281 --> 00:08:03,350
+现在的情况是已超出了
+我们送你的免费限额
 
 
 145
-00:07:46,176 --> 00:07:47,926
-to your client to tell
-you you've hit the limits.
+00:08:03,417 --> 00:08:07,721
+所以这个增量范围是在
+你得到的免费限额和你的用量之间
 
 
 146
-00:07:48,476 --> 00:07:50,696
-And then we will talk
-in a bit about how
+00:08:08,455 --> 00:08:11,758
+资源是每月0.03美元/GB
 
 
 147
-00:07:50,696 --> 00:07:52,666
-to make sure that
-doesn't happen.
+00:08:12,226 --> 00:08:14,127
+数据库是每月3.00美元/GB
 
 
 148
-00:07:53,496 --> 00:07:54,706
-All right.
+00:08:14,862 --> 00:08:16,196
+在数据传输方面
 
 
 149
-00:07:54,796 --> 00:07:56,746
-Now, if you do go
-over those limits,
+00:08:16,263 --> 00:08:18,565
+传输资源是0.10美元/GB
 
 
 150
-00:07:56,866 --> 00:07:58,226
-there is a way to pay for more.
+00:08:19,132 --> 00:08:20,901
+对于数据库的请求价格
 
 
 151
-00:07:58,546 --> 00:08:00,216
-And that's our public
-database fees.
+00:08:21,235 --> 00:08:24,037
+100美元可额外增加10个请求/秒
 
 
 152
-00:08:01,266 --> 00:08:03,406
-Now, this is over and above
-what we give you for free.
+00:08:24,271 --> 00:08:26,673
+如果你达到了免费限额
 
 
 153
-00:08:03,406 --> 00:08:06,476
-So it's the incremental delta
-between what you get for free,
+00:08:26,740 --> 00:08:29,042
+你可以根据需要增加用量
 
 
 154
-00:08:06,836 --> 00:08:07,706
-and what you are using.
+00:08:29,109 --> 00:08:30,410
+直到你的应用能够平稳运行
 
 
 155
-00:08:08,456 --> 00:08:11,536
-So for assets, it's $0.03
-per gigabyte per month,
+00:08:33,881 --> 00:08:35,716
+当然 推送是免费的
 
 
 156
-00:08:12,226 --> 00:08:14,136
-for database, $3.00
-per gig per month.
+00:08:36,049 --> 00:08:38,619
+好的 我们现在来看一个
 
 
 157
-00:08:14,876 --> 00:08:16,066
-On the transfer side,
+00:08:39,186 --> 00:08:42,289
+CloudKit计算器的演示
 
 
 158
-00:08:16,276 --> 00:08:18,416
-for transferring
-assets $0.10 per gig
-
-
-159
-00:08:19,146 --> 00:08:20,886
-and on the database
-request rates,
-
-
-160
-00:08:21,226 --> 00:08:23,946
-we'll add an extra 10
-requests per second for $100,
-
-
-161
-00:08:24,276 --> 00:08:26,726
-and so you can increment that
-number up to get to the level
-
-
-162
-00:08:26,726 --> 00:08:29,106
-that allows your
-application to work smoothly
-
-
-163
-00:08:29,106 --> 00:08:30,266
-if you hit the free limits.
-
-
-164
-00:08:30,796 --> 00:08:35,726
-And, of course, push is free.
-
-
-165
-00:08:36,035 --> 00:08:40,166
-Okay? So now let's
-take a look at a demo
-
-
-166
-00:08:40,405 --> 00:08:42,285
-of the CloudKit calculator.
-
-
-167
-00:08:42,385 --> 00:08:46,196
-This is on
-developer.apple.com/cloudkit.
-
-
-168
-00:08:46,196 --> 00:08:47,916
-You can play around with
-this if you haven't already.
-
-
-169
-00:08:47,946 --> 00:08:50,526
-I'm going to invite
-Ramiro Calvo to help drive,
-
-
-170
-00:08:50,526 --> 00:08:52,696
-because apparently I can drive
-and talk at the same time.
-
-
-171
-00:08:53,176 --> 00:08:57,046
-And he's going to help
-us walk through this.
-
-
-172
-00:08:57,046 --> 00:09:00,916
-If you go to the calculator,
-you notice that right now,
-
-
-173
-00:09:00,996 --> 00:09:04,366
-we have zero active users.
-
-
-174
-00:09:04,666 --> 00:09:10,516
-Okay? And the numbers that you
-see beneath it tell you how much
-
-
-175
-00:09:10,516 --> 00:09:11,876
-storage we are getting
-to you for free.
-
-
-176
-00:09:11,986 --> 00:09:13,996
-For start, this matches
-what we just talked about.
-
-
-177
-00:09:13,996 --> 00:09:15,486
-There's 10 gigs of
-asset storage,
-
-
-178
-00:09:15,486 --> 00:09:19,236
-100 megs of database storage, 2
-gigs of data transfer per month,
-
-
-179
-00:09:19,396 --> 00:09:20,786
-and 40 requests per second.
-
-
-180
-00:09:21,436 --> 00:09:23,666
-Now let's say my
-application starts taking off
-
-
-181
-00:09:23,666 --> 00:09:24,986
-and I have 100,000 users.
-
-
-182
-00:09:25,406 --> 00:09:27,716
-So we're going to
-grow that to 100,000,
-
-
-183
-00:09:28,156 --> 00:09:30,496
-and you will notice we gave
-you a lot more storage,
-
-
-184
-00:09:31,086 --> 00:09:33,386
-and if you look below
-at the bottom there,
-
-
-185
-00:09:33,436 --> 00:09:35,946
-and Ramiro maybe you can scroll
-up a little bit, you're going
-
-
-186
-00:09:35,946 --> 00:09:41,186
-to notice that the
-cost is actually $0.
-
-
-187
-00:09:41,666 --> 00:09:43,316
-Ramiro is it possible to
-scroll it up a little bit.
-
-
-188
-00:09:43,316 --> 00:09:43,636
-Thank you.
-
-
-189
-00:09:44,746 --> 00:09:46,626
-Okay? So we have $0 cost.
-
-
-190
-00:09:47,486 --> 00:09:49,946
-Now let's say we go up
-to half a million users.
-
-
-191
-00:09:53,776 --> 00:09:56,736
-Okay? Now, once again we
-have a lot of storage.
-
-
-192
-00:09:56,736 --> 00:09:58,596
-Now we are up to 125 terabytes.
-
-
-193
-00:09:58,856 --> 00:10:02,566
-We're still growing and the
-cost to you is still zero.
-
-
-194
-00:10:03,606 --> 00:10:04,856
-Let's take it to
-a million users.
-
-
-195
-00:10:06,236 --> 00:10:08,176
-Okay? So now we got a
-lot of users in here.
-
-
-196
-00:10:08,796 --> 00:10:10,226
-We got a lot of storage.
-
-
-197
-00:10:10,226 --> 00:10:12,586
-We are up to 250
-terabytes of data.
-
-
-198
-00:10:12,806 --> 00:10:15,126
-Lots of requests per second.
-
-
-199
-00:10:15,236 --> 00:10:15,916
-It's still free.
-
-
-200
-00:10:16,446 --> 00:10:18,016
-Let's take it to
-4 million users.
-
-
-201
-00:10:18,536 --> 00:10:22,066
-Okay. So now we are at 4
-million users and you are going
-
-
-202
-00:10:22,066 --> 00:10:23,346
-to see some very
-large numbers here.
-
-
-203
-00:10:24,246 --> 00:10:27,496
-We are up to the petabyte
-of storage, 10 terabytes
-
-
-204
-00:10:27,886 --> 00:10:31,376
-of database storage,
-200 terabytes per month
-
-
-205
-00:10:31,376 --> 00:10:33,996
-of data transfer,
-this is a lot of data,
-
-
-206
-00:10:33,996 --> 00:10:36,126
-and all of this still
-costs you nothing.
-
-
-207
-00:10:36,846 --> 00:10:39,126
-Now if you recall from
-the pricing slide,
-
-
-208
-00:10:39,726 --> 00:10:41,086
-at some point, we hit a limit.
-
-
-209
-00:10:41,366 --> 00:10:42,776
-And that limit looks
-about right here.
-
-
-210
-00:10:42,916 --> 00:10:44,426
-You got about a petabyte
-of storage.
-
-
-211
-00:10:44,426 --> 00:10:46,026
-That's what we said was
-the max you can get to.
-
-
-212
-00:10:46,026 --> 00:10:49,716
-So, as we add more users then
-there must be some costs.
-
-
-213
-00:10:49,716 --> 00:10:51,036
-Let's take it to
-5 million users.
-
-
-214
-00:10:51,546 --> 00:10:56,696
-And the cost here is --
-well, it's still free.
-
-
-215
-00:10:57,546 --> 00:10:59,206
-So what's going on here?
-
-
-216
-00:11:00,016 --> 00:11:03,986
-Well, if your application on
-average uses less per user
-
-
-217
-00:11:03,986 --> 00:11:06,106
-that we give you, it
-still costs you nothing.
-
-
-218
-00:11:06,736 --> 00:11:07,826
-And because it's an average,
-
-
-219
-00:11:07,826 --> 00:11:10,316
-that means that some users
-may use more than the average,
-
-
-220
-00:11:10,376 --> 00:11:12,666
-and some may use less and
-that's perfectly fine.
-
-
-221
-00:11:12,976 --> 00:11:14,146
-It still costs you nothing.
-
-
-222
-00:11:14,536 --> 00:11:16,576
-So we could take this all the
-way up to 10 million here,
-
-
-223
-00:11:17,016 --> 00:11:20,186
-and demonstrate that it still
-costs you nothing, all right?
-
-
-224
-00:11:20,296 --> 00:11:23,776
-If you just architect your
-application correctly to stay
-
-
-225
-00:11:23,776 --> 00:11:25,696
-within the free limits
-that we give you.
-
-
-226
-00:11:25,696 --> 00:11:26,516
-All right?
-
-
-227
-00:11:26,516 --> 00:11:29,556
-So that's how we calculate
-things, use the calculator
-
-
-228
-00:11:29,556 --> 00:11:30,606
-if you would like
-more information.
-
-
-229
-00:11:31,206 --> 00:11:31,866
-Thanks Ramiro.
-
-
-230
-00:11:33,516 --> 00:11:39,756
-[Applause]
-
-
-231
-00:11:40,256 --> 00:11:40,906
-All right.
-
-
-232
-00:11:41,016 --> 00:11:43,106
-The next question is how do
-I know how much I'm using?
-
-
-233
-00:11:43,446 --> 00:11:45,646
-The CloudKit Dashboard
-is the place
-
-
-234
-00:11:45,646 --> 00:11:46,856
-where we put this information.
-
-
-235
-00:11:47,076 --> 00:11:49,516
-The Dashboard is a web
-application that you get
-
-
-236
-00:11:49,516 --> 00:11:52,076
-to at developer.apple.com.
-
-
-237
-00:11:52,116 --> 00:11:54,146
-It's a place that you get
-to look at your container
-
-
-238
-00:11:54,446 --> 00:11:58,596
-and you get to do things like
-manage your record types,
-
-
-239
-00:11:58,666 --> 00:12:01,066
-manage whether they are in
-development or production,
-
-
-240
-00:12:01,976 --> 00:12:03,906
-and we have added some
-new functionality.
-
-
-241
-00:12:04,486 --> 00:12:07,556
-So if you take a look
-at what we've added,
-
-
-242
-00:12:07,726 --> 00:12:10,356
-there's a new section
-called Usage.
-
-
-243
-00:12:10,966 --> 00:12:12,586
-And you can go there
-and take a look
-
-
-244
-00:12:12,586 --> 00:12:15,036
-at how your application
-container is performing.
-
-
-245
-00:12:16,776 --> 00:12:19,036
-If we drill in, we have a couple
-
-
-246
-00:12:19,036 --> 00:12:20,176
-of different ways
-to look at the data.
-
-
-247
-00:12:20,176 --> 00:12:23,306
-We can look at it at a daily
-level or a monthly level.
-
-
-248
-00:12:23,766 --> 00:12:28,376
-And if you look at the daily
-information, the very top thing
-
-
-249
-00:12:28,376 --> 00:12:30,636
-on the graphs is
-the number of users
-
-
-250
-00:12:30,636 --> 00:12:31,936
-and this is really important
-
-
-251
-00:12:32,296 --> 00:12:34,906
-because we calculate how
-much free stuff we give you,
-
-
-252
-00:12:34,906 --> 00:12:36,066
-based on the numbers you have.
-
-
-253
-00:12:36,066 --> 00:12:37,396
-So you want to look
-at that first.
-
-
-254
-00:12:38,396 --> 00:12:40,066
-Now, you'll also
-notice on the right,
-
-
-255
-00:12:40,636 --> 00:12:42,076
-you have some dashed
-lines over this
-
-
-256
-00:12:42,076 --> 00:12:44,916
-because what we are giving you
-is two months worth of data,
-
-
-257
-00:12:44,986 --> 00:12:46,956
-the prior month and
-the current month.
-
-
-258
-00:12:47,166 --> 00:12:48,826
-The current month,
-depending on where you are at,
-
-
-259
-00:12:48,826 --> 00:12:50,376
-some of that is going
-to be a forecast.
-
-
-260
-00:12:50,686 --> 00:12:52,786
-And we're going to
-forecast that for you based
-
-
-261
-00:12:52,786 --> 00:12:55,136
-on the prior activity
-of your container.
-
-
-262
-00:12:56,476 --> 00:12:58,616
-Now, below this,
-is another graph,
-
-
-263
-00:12:58,616 --> 00:13:00,866
-which shows our requests
-per second and day by day,
-
-
-264
-00:13:00,866 --> 00:13:03,686
-we show you what the peak
-request per second we're seeing
-
-
-265
-00:13:03,686 --> 00:13:04,656
-on any given day is.
-
-
-266
-00:13:04,656 --> 00:13:09,836
-Now you can also select monthly
-and if you choose monthly,
-
-
-267
-00:13:09,946 --> 00:13:12,686
-you're going to get a
-12-month view month by month
-
-
-268
-00:13:12,966 --> 00:13:14,496
-of the activity of
-your application,
-
-
-269
-00:13:15,086 --> 00:13:17,246
-and the current month
-is typically going to be
-
-
-270
-00:13:17,246 --> 00:13:19,966
-in a forecast where
-it shows a dashed line
-
-
-271
-00:13:20,016 --> 00:13:21,716
-and basically what we
-expect it's going to be
-
-
-272
-00:13:21,716 --> 00:13:22,516
-for the current month.
-
-
-273
-00:13:23,136 --> 00:13:25,846
-Now, let's scroll down to look
-at a couple of other graphs.
-
-
-274
-00:13:27,026 --> 00:13:29,586
-Here's database storage,
-as well as asset storage.
-
-
-275
-00:13:30,286 --> 00:13:31,936
-And you'll notice
-something different here.
-
-
-276
-00:13:31,936 --> 00:13:33,006
-You will see two lines.
-
-
-277
-00:13:33,136 --> 00:13:35,656
-There's a red line on top
-and a yellow line just below.
-
-
-278
-00:13:36,086 --> 00:13:39,876
-The red line represents
-the amount of free storage
-
-
-279
-00:13:39,876 --> 00:13:40,646
-that we are giving you.
-
-
-280
-00:13:40,646 --> 00:13:44,376
-And the yellow line represents
-how much you are actually using.
-
-
-281
-00:13:45,056 --> 00:13:47,256
-So the game all of you
-guys get to play is how
-
-
-282
-00:13:47,256 --> 00:13:50,766
-to keep the yellow line
-beneath the red line, right?
-
-
-283
-00:13:50,856 --> 00:13:53,486
-The way that you can actually
-see this information is
-
-
-284
-00:13:53,486 --> 00:13:56,586
-by clicking over here on
-the section on the right
-
-
-285
-00:13:56,586 --> 00:13:57,806
-where the quota box is.
-
-
-286
-00:13:57,806 --> 00:13:58,856
-It's off by default.
-
-
-287
-00:13:58,856 --> 00:14:00,116
-You can just turn
-it on if you like.
-
-
-288
-00:14:00,596 --> 00:14:02,556
-The reason it is off by
-default is because we give you
-
-
-289
-00:14:02,556 --> 00:14:05,966
-so much free storage, if you
-click that, the scale changes
-
-
-290
-00:14:05,966 --> 00:14:08,766
-and basically your usage looks
-like a flat line relative
-
-
-291
-00:14:08,766 --> 00:14:10,146
-to the amount of free
-storage that we give you.
-
-
-292
-00:14:11,106 --> 00:14:12,346
-So please go ahead
-and try that out.
-
-
-293
-00:14:13,746 --> 00:14:16,066
-So the CloudKit Dashboard
-provides two things.
-
-
-294
-00:14:16,736 --> 00:14:19,986
-It's a new section to
-keep track of usage data
-
-
-295
-00:14:20,126 --> 00:14:21,796
-and also give you
-the free limits.
-
-
-296
-00:14:22,496 --> 00:14:27,516
-And it's available now in beta
-release at developer.apple.com.
-
-
-297
-00:14:27,516 --> 00:14:28,756
-So if you already
-have a container,
-
-
-298
-00:14:28,756 --> 00:14:31,476
-you can go there today and
-you can see the usage data
-
-
-299
-00:14:32,146 --> 00:14:32,856
-on the Dashboard.
-
-
-300
-00:14:38,356 --> 00:14:39,396
-All right.
-
-
-301
-00:14:39,396 --> 00:14:41,916
-The second question that
-was asked is what about web?
-
-
-302
-00:14:42,556 --> 00:14:44,146
-Well, I'm pleased
-to introduce you
-
-
-303
-00:14:44,256 --> 00:14:46,886
-to the new CloudKit
-Web Services.
-
-
-304
-00:14:47,416 --> 00:14:48,076
-This is the way --
-
-
-305
-00:14:49,516 --> 00:14:54,556
-[Applause].
-
-
-306
-00:14:55,056 --> 00:14:55,286
-Yeah, all right!
-
-
-307
-00:14:55,366 --> 00:14:57,866
-This is the way that you
-can take your amazing iOS
-
-
-308
-00:14:57,866 --> 00:15:00,576
-and OS X applications and you
-can extend them to the web.
-
-
-309
-00:15:01,476 --> 00:15:02,546
-So how does this work?
-
-
-310
-00:15:03,266 --> 00:15:04,716
-Well, first lets talk
-about the features.
-
-
-311
-00:15:04,716 --> 00:15:09,016
-You get a full CloudKit
-API via JSON and HTTPS,
-
-
-312
-00:15:09,826 --> 00:15:12,346
-we also provide CloudKit
-JS Library
-
-
-313
-00:15:12,346 --> 00:15:13,806
-which is absolutely the best way
-
-
-314
-00:15:13,856 --> 00:15:15,696
-to quickly create
-web applications,
-
-
-315
-00:15:16,566 --> 00:15:19,126
-and we provide Web Sign in
-with Apple ID is the way
-
-
-316
-00:15:19,126 --> 00:15:20,606
-that your users will
-authenticate
-
-
-317
-00:15:20,606 --> 00:15:22,566
-when they use your web app.
-
-
-318
-00:15:24,496 --> 00:15:25,566
-Now, how does this work?
-
-
-319
-00:15:25,566 --> 00:15:30,116
-If you look today, you'll
-see your application running
-
-
-320
-00:15:30,256 --> 00:15:32,146
-on iOS and OS X.
-
-
-321
-00:15:32,146 --> 00:15:34,076
-It interacts with
-CloudKit the framework,
-
-
-322
-00:15:34,496 --> 00:15:36,946
-which behind the scenes talks
-to our CloudKit servers.
-
-
-323
-00:15:38,276 --> 00:15:42,186
-What we have introduced
-today is the ability for you
-
-
-324
-00:15:42,186 --> 00:15:43,886
-to create your own
-web application,
-
-
-325
-00:15:43,886 --> 00:15:47,896
-running in a web browser and
-talking over JSON and HTTPS,
-
-
-326
-00:15:48,746 --> 00:15:51,666
-to our CloudKit Web Services
-which lets you then talk
-
-
-327
-00:15:51,766 --> 00:15:54,256
-to the same exact
-CloudKit servers
-
-
-328
-00:15:54,626 --> 00:15:57,526
-that your native applications
-are talking to on iOS and OS X.
-
-
-329
-00:15:57,526 --> 00:16:00,726
-Now, it's important to
-understand about the JSON
-
-
-330
-00:16:00,726 --> 00:16:04,026
-and the HTTPS piece of this,
-it's just a specification.
-
-
-331
-00:16:04,706 --> 00:16:05,576
-There's no code.
-
-
-332
-00:16:06,206 --> 00:16:08,006
-Effectively, it's up to
-you as a developer to look
-
-
-333
-00:16:08,006 --> 00:16:09,116
-at that specification.
-
-
-334
-00:16:09,746 --> 00:16:12,526
-You get to construct your own
-end points, hitting endpoints.
-
-
-335
-00:16:12,836 --> 00:16:16,216
-You get to create your URLs and
-construct your JSONs that goes
-
-
-336
-00:16:16,216 --> 00:16:19,426
-in the bodies that go up in
-a request, you get back JSON
-
-
-337
-00:16:19,426 --> 00:16:22,436
-in responses, you parse that,
-you deal with asset uploads
-
-
-338
-00:16:22,436 --> 00:16:24,766
-and downloads, retry
-logic and on and on.
-
-
-339
-00:16:25,216 --> 00:16:28,846
-But a much better way to do
-this is using the CloudKit
-
-
-340
-00:16:29,166 --> 00:16:30,296
-JS framework.
-
-
-341
-00:16:30,996 --> 00:16:34,836
-CloudKit JS gives you a
-JavaScript API that you can use
-
-
-342
-00:16:35,016 --> 00:16:38,126
-that shields you from all
-the complexities of the HTTPS
-
-
-343
-00:16:38,126 --> 00:16:40,676
-and JSON protocol
-that sits behind it.
-
-
-344
-00:16:41,046 --> 00:16:43,856
-And you can use either one,
-but you are probably crazy
-
-
-345
-00:16:43,856 --> 00:16:44,656
-if you go the other route.
-
-
-346
-00:16:44,656 --> 00:16:46,806
-So please use CloudKit JS.
-
-
-347
-00:16:47,896 --> 00:16:49,206
-So what does this give you?
-
-
-348
-00:16:49,466 --> 00:16:51,026
-Well all right, it
-gives you full public
-
-
-349
-00:16:51,026 --> 00:16:52,436
-and private database access.
-
-
-350
-00:16:53,036 --> 00:16:54,846
-It gives you all those
-record applications.
-
-
-351
-00:16:55,316 --> 00:16:57,266
-It lets you upload
-and download assets.
-
-
-352
-00:16:57,736 --> 00:16:59,566
-It lets you execute queries.
-
-
-353
-00:17:00,406 --> 00:17:03,086
-It even lets you do
-subscriptions and notifications,
-
-
-354
-00:17:03,536 --> 00:17:06,976
-which means that I can actually
-get an asynchronous event
-
-
-355
-00:17:07,076 --> 00:17:09,726
-into my web application,
-just like you get pushes
-
-
-356
-00:17:09,935 --> 00:17:12,406
-to tell you something has
-changed or to notify you
-
-
-357
-00:17:12,526 --> 00:17:14,476
-of some other event,
-so you don't have
-
-
-358
-00:17:14,476 --> 00:17:16,796
-to have users hitting the
-refresh button or pulling
-
-
-359
-00:17:16,796 --> 00:17:17,896
-from your web application.
-
-
-360
-00:17:18,925 --> 00:17:20,586
-It also has user
-discoverability,
-
-
-361
-00:17:21,445 --> 00:17:23,876
-and it has the ability to answer
-the question what's changed
-
-
-362
-00:17:23,876 --> 00:17:26,695
-since within custom zones
-which gives you sync semantics.
-
-
-363
-00:17:27,346 --> 00:17:31,336
-In short, what this gives
-you is full compatibility
-
-
-364
-00:17:31,336 --> 00:17:32,806
-and capability as what you get
-
-
-365
-00:17:33,186 --> 00:17:40,316
-on the native CloudKit
-on iOS and OS X.
-
-
-366
-00:17:40,836 --> 00:17:44,896
-Now, CloudKit JS, as I mentioned
-before is the absolute best way
-
-
-367
-00:17:44,896 --> 00:17:46,196
-to develop web applications.
-
-
-368
-00:17:46,196 --> 00:17:47,246
-It's a JavaScript API.
-
-
-369
-00:17:48,296 --> 00:17:50,756
-It matches the native
-CloudKit API as much
-
-
-370
-00:17:50,756 --> 00:17:52,746
-as you can make JavaScript
-match Objective-C,
-
-
-371
-00:17:52,746 --> 00:17:54,456
-but you know we did our
-best, it's pretty close.
-
-
-372
-00:17:55,106 --> 00:17:56,566
-There's no intermediate servers.
-
-
-373
-00:17:56,566 --> 00:17:59,316
-So you can create your
-JavaScript application
-
-
-374
-00:17:59,626 --> 00:18:02,266
-and you can talk directly
-to the CloudKit, you know --
-
-
-375
-00:18:02,266 --> 00:18:06,536
-the CloudKit Web Service behind
-the scenes and you don't have
-
-
-376
-00:18:06,536 --> 00:18:08,606
-to run your own servers
-or anything in the middle
-
-
-377
-00:18:08,936 --> 00:18:12,236
-and it's how we built
-the new Notes web app
-
-
-378
-00:18:13,026 --> 00:18:15,606
-that you saw demonstrated
-the other day.
-
-
-379
-00:18:15,926 --> 00:18:20,966
-And what I would like to do is
-have Ramiro Calvo join me again.
-
-
-380
-00:18:21,116 --> 00:18:22,146
-We're going to give you a demo
-
-
-381
-00:18:22,146 --> 00:18:25,836
-of the new Notes web app
-based on CloudKit JS.
-
-
-382
-00:18:32,476 --> 00:18:33,106
-All right.
-
-
-383
-00:18:33,106 --> 00:18:35,576
-So we are going to
-start at icloud.com.
-
-
-384
-00:18:35,576 --> 00:18:36,536
-This is our spring board.
-
-
-385
-00:18:36,536 --> 00:18:38,326
-There's a bunch of web
-apps sitting here already.
-
-
-386
-00:18:38,326 --> 00:18:42,006
-You'll notice some familiar ones
-we have Photos and iCloud Drive.
-
-
-387
-00:18:42,396 --> 00:18:43,466
-Those are two applications
-
-
-388
-00:18:43,466 --> 00:18:45,626
-that already exist
-on top of CloudKit.
-
-
-389
-00:18:46,306 --> 00:18:50,316
-And with iOS 9, the new Notes
-application is also built
-
-
-390
-00:18:50,566 --> 00:18:51,216
-on CloudKit.
-
-
-391
-00:18:51,726 --> 00:18:54,976
-And so we've created a new web
-application that sits on top
-
-
-392
-00:18:54,976 --> 00:18:57,016
-of CloudKit, and
-gives all of those --
-
-
-393
-00:18:57,016 --> 00:18:59,846
-that rich capability that you
-saw demonstrated at the keynote.
-
-
-394
-00:19:00,346 --> 00:19:01,906
-So Ramiro will click in.
-
-
-395
-00:19:02,146 --> 00:19:02,846
-Here's the web app.
-
-
-396
-00:19:03,546 --> 00:19:05,706
-You're going to see some
-great content in here.
-
-
-397
-00:19:05,896 --> 00:19:07,016
-You see images.
-
-
-398
-00:19:07,016 --> 00:19:08,016
-You can do videos.
-
-
-399
-00:19:08,476 --> 00:19:09,606
-There's check boxes.
-
-
-400
-00:19:10,076 --> 00:19:12,196
-All of these things are
-available in the new Notes app
-
-
-401
-00:19:12,276 --> 00:19:14,986
-and they are just CloudKit
-assets and records.
-
-
-402
-00:19:15,266 --> 00:19:18,846
-Okay? So what we are going to do
-now is create a brand new node.
-
-
-403
-00:19:19,646 --> 00:19:21,986
-And since we are at the
-developers conference,
-
-
-404
-00:19:21,986 --> 00:19:23,476
-we should probably
-have a what to do
-
-
-405
-00:19:23,476 --> 00:19:25,636
-at the developers
-conference while we are here.
-
-
-406
-00:19:26,456 --> 00:19:28,876
-So let's start out
-with maybe one
-
-
-407
-00:19:28,876 --> 00:19:31,436
-of the more important
-things, which is we need
-
-
-408
-00:19:31,436 --> 00:19:33,036
-to make sure we attend
-all the after parties.
-
-
-409
-00:19:33,366 --> 00:19:38,286
-Let's get that one on the list.
-
-
-410
-00:19:38,286 --> 00:19:41,716
-Now after we get done with
-attending the after parties,
-
-
-411
-00:19:41,716 --> 00:19:46,586
-we really need to go to
+00:08:42,389 --> 00:08:46,126
+它的访问网址是
 developer.apple.com/cloudkit
 
 
+159
+00:08:46,193 --> 00:08:47,895
+如果你还没玩过 你可以去玩玩
+
+
+160
+00:08:48,395 --> 00:08:50,464
+我要邀请
+Ramiro Calvo来帮我操作
+
+
+161
+00:08:50,531 --> 00:08:52,699
+因为显然我无法边操作边讲话
+
+
+162
+00:08:53,166 --> 00:08:55,736
+他将帮我们演示这个
+
+
+163
+00:08:56,570 --> 00:08:59,873
+如果你进入这个计算器 会立刻注意到
+
+
+164
+00:09:00,073 --> 00:09:04,378
+我们的活跃用户为零
+
+
+165
+00:09:04,678 --> 00:09:09,583
+对吗？ 你可以看到它下面有一些数字
+
+
+166
+00:09:09,650 --> 00:09:11,885
+它们会告诉你
+我们给你提供了多少免费的存储空间
+
+
+167
+00:09:11,985 --> 00:09:13,921
+起初 它和我们刚才说的一样
+
+
+168
+00:09:13,987 --> 00:09:15,422
+10GB的资源存储空间
+
+
+169
+00:09:15,489 --> 00:09:19,226
+100MB的数据库存储空间
+每月2GB的数据传输量
+
+
+170
+00:09:19,393 --> 00:09:20,794
+以及每秒40个请求
+
+
+171
+00:09:21,428 --> 00:09:23,597
+现在假设我的应用开始腾飞了
+
+
+172
+00:09:23,664 --> 00:09:24,998
+我有10万个用户
+
+
+173
+00:09:25,399 --> 00:09:27,701
+我们把数字增加到10万
+
+
+174
+00:09:28,168 --> 00:09:30,504
+你会发现我们又给了你更多的存储空间
+
+
+175
+00:09:31,071 --> 00:09:33,373
+如果你看下屏幕底部
+
+
+176
+00:09:33,440 --> 00:09:35,876
+Ramiro也许你能滚动一下屏幕
+
+
+177
+00:09:35,943 --> 00:09:41,181
+你会发现花费其实是0美元
+
+
+178
+00:09:41,682 --> 00:09:43,684
+Ramiro请把屏幕向下滚动一点 
+谢谢
+
+
+179
+00:09:44,751 --> 00:09:46,753
+好的 可以看到花费是0美元
+
+
+180
+00:09:47,487 --> 00:09:49,957
+现在假设我们的用户达到了50万人
+
+
+181
+00:09:54,094 --> 00:09:56,663
+好的 我们又一次得到了很多存储空间
+
+
+182
+00:09:56,730 --> 00:09:58,732
+现在我们有多达125TB了
+
+
+183
+00:09:58,866 --> 00:10:02,569
+我们仍在增加限额 你的花费仍然是零
+
+
+184
+00:10:03,604 --> 00:10:04,872
+现在假设有100万用户
+
+
+185
+00:10:06,240 --> 00:10:08,175
+好的 现在我们有很多用户了
+
+
+186
+00:10:08,809 --> 00:10:10,143
+我们有很多存储空间
+
+
+187
+00:10:10,210 --> 00:10:12,579
+我们有多达250TB的数据
+
+
+188
+00:10:13,881 --> 00:10:15,983
+每秒有很多请求 它还是免费的
+
+
+189
+00:10:16,450 --> 00:10:18,018
+现在假设有400万用户
+
+
+190
+00:10:19,953 --> 00:10:21,989
+好的 现在是400万用户了
+
+
+191
+00:10:22,055 --> 00:10:23,490
+你会看到这里将出现很大的数字
+
+
+192
+00:10:24,258 --> 00:10:27,494
+我们有多达1PT的存储空间
+10TB的数据库存储空间
+
+
+193
+00:10:27,895 --> 00:10:31,298
+每月200TB的数据传输量
+
+
+194
+00:10:31,365 --> 00:10:33,934
+这是相当多的数据
+
+
+195
+00:10:34,001 --> 00:10:36,136
+所有这些依然不需要你花费分毫
+
+
+196
+00:10:36,837 --> 00:10:39,139
+现在来回想一下价格阶梯
+
+
+197
+00:10:39,740 --> 00:10:41,074
+在某种情况下 我们达到了限额
+
+
+198
+00:10:41,375 --> 00:10:42,776
+这个限额貌似就在这里
+
+
+199
+00:10:42,910 --> 00:10:44,311
+你得到了约1PB的存储空间
+
+
+200
+00:10:44,378 --> 00:10:46,046
+你能得到的最大限额
+
+
+201
+00:10:46,113 --> 00:10:49,650
+那么随着我们增加更多的用户
+一定会有一些花费
+
+
+202
+00:10:49,716 --> 00:10:51,051
+假设有500万用户
+
+
+203
+00:10:54,154 --> 00:10:57,024
+这里的花费是仍是免费的
+
+
+204
+00:10:57,558 --> 00:10:59,193
+这是怎么回事？
+
+
+205
+00:11:00,027 --> 00:11:03,931
+如果你的应用的平均用量
+
+
+206
+00:11:03,997 --> 00:11:06,466
+少于我们送你的每个用户的用量
+仍然不需要你花费分毫
+
+
+207
+00:11:06,733 --> 00:11:07,768
+因为是平均值
+
+
+208
+00:11:07,835 --> 00:11:10,304
+这意味着有些用户也许超出了平均用量
+
+
+209
+00:11:10,370 --> 00:11:12,673
+有些也许用得少一些 这都没有关系
+
+
+210
+00:11:12,973 --> 00:11:14,141
+它仍然无需你花费分毫
+
+
+211
+00:11:14,541 --> 00:11:16,610
+所以我们可以一直加到一千万人
+
+
+212
+00:11:17,010 --> 00:11:20,180
+结果显示仍然无需你花费分毫 对吧
+
+
+213
+00:11:20,280 --> 00:11:23,717
+如果你能正确构建你的应用
+
+
+214
+00:11:23,784 --> 00:11:25,819
+保持在我们送你的免费限额之内
+
+
+215
+00:11:26,186 --> 00:11:29,489
+这就是我们的计算方式
+如果你想获取更多信息
+
+
+216
+00:11:29,556 --> 00:11:30,591
+请使用该计算器
+
+
+217
+00:11:31,024 --> 00:11:31,925
+感谢 Ramiro 
+
+
+218
+00:11:40,534 --> 00:11:43,237
+好的 下一个问题是
+我如何知道我用了多少？
+
+
+219
+00:11:43,770 --> 00:11:45,572
+CloudKit
+ Dashboard 
+
+
+220
+00:11:45,639 --> 00:11:46,840
+是我们显示该信息的场所
+
+
+221
+00:11:47,074 --> 00:11:49,443
+Dashboard是一个网络应用
+
+
+222
+00:11:49,510 --> 00:11:52,045
+网址是
+developer.apple.com
+
+
+223
+00:11:52,112 --> 00:11:54,348
+你可以在这里查看你的容器
+
+
+224
+00:11:54,448 --> 00:11:58,585
+管理你的记录类型
+
+
+225
+00:11:58,652 --> 00:12:01,255
+不管它们是正在开发中
+还是已经完成了开发
+
+
+226
+00:12:01,989 --> 00:12:04,024
+我们又添加了一些新功能
+
+
+227
+00:12:04,925 --> 00:12:07,661
+如果你去看看我们添加了什么
+
+
+228
+00:12:07,728 --> 00:12:10,364
+你会发现有个称为用法的新部分
+
+
+229
+00:12:10,964 --> 00:12:12,533
+你可以去那里看看
+
+
+230
+00:12:12,599 --> 00:12:15,035
+你的应用容器性能如何
+
+
+231
+00:12:16,770 --> 00:12:18,005
+如果我们点进去
+
+
+232
+00:12:18,238 --> 00:12:20,107
+我们会有几种不同的方法
+来查看这些数据
+
+
+233
+00:12:20,174 --> 00:12:23,310
+我们可以按天浏览或按月浏览
+
+
+234
+00:12:25,846 --> 00:12:28,315
+如果你是按天查看信息
+
+
+235
+00:12:28,382 --> 00:12:30,584
+该图表的最上面是用户数量
+
+
+236
+00:12:30,651 --> 00:12:32,085
+这非常重要
+
+
+237
+00:12:32,286 --> 00:12:36,123
+因为我们正是根据你的用户数量
+来计算送你多少免费资源
+
+
+238
+00:12:36,190 --> 00:12:37,524
+所以你应该先看一下这个
+
+
+239
+00:12:38,392 --> 00:12:40,327
+现在你还会注意到
+
+
+240
+00:12:40,627 --> 00:12:41,995
+右边有一些虚线
+
+
+241
+00:12:42,062 --> 00:12:44,932
+因为我们给你的是两个月的数据
+
+
+242
+00:12:44,998 --> 00:12:47,100
+上个月和当月
+
+
+243
+00:12:47,167 --> 00:12:48,769
+当月取决于你的所在月份
+
+
+244
+00:12:48,836 --> 00:12:50,370
+其中有一些是预测
+
+
+245
+00:12:50,671 --> 00:12:52,706
+我们会根据您的容器之前的活动
+
+
+246
+00:12:52,773 --> 00:12:55,142
+为你作出预测
+
+
+247
+00:12:56,476 --> 00:12:58,545
+下面是另一幅图表
+
+
+248
+00:12:58,612 --> 00:13:00,814
+它显示的是每秒的请求
+
+
+249
+00:13:00,881 --> 00:13:03,617
+每天我们会向你展示我们所看到的
+
+
+250
+00:13:03,684 --> 00:13:05,118
+某一天的每秒请求峰值是什么
+
+
+251
+00:13:06,386 --> 00:13:09,823
+你还可以选择按月 如果你选择按月
+
+
+252
+00:13:09,957 --> 00:13:12,693
+你会看到12个月每个月份的
+
+
+253
+00:13:12,960 --> 00:13:14,494
+应用活动情况
+
+
+254
+00:13:15,095 --> 00:13:17,164
+而当月是典型的
+
+
+255
+00:13:17,231 --> 00:13:19,933
+用虚线表示的预测
+
+
+256
+00:13:20,000 --> 00:13:22,603
+基本上就是我们对当月的预期
+
+
+257
+00:13:23,504 --> 00:13:25,839
+现在我们往下滚屏来看看其他几幅图表
+
+
+258
+00:13:27,040 --> 00:13:29,576
+这是数据库存储和资源存储
+
+
+259
+00:13:30,277 --> 00:13:31,879
+你会发现这里有些不同
+
+
+260
+00:13:31,945 --> 00:13:33,013
+你会看到两条线
+
+
+261
+00:13:33,146 --> 00:13:35,649
+上面是一条红线 下面是一条黄线
+
+
+262
+00:13:36,083 --> 00:13:40,787
+红线代表我们送给你的免费的存储量
+
+
+263
+00:13:41,455 --> 00:13:44,391
+黄线代表你的实际用量是多少
+
+
+264
+00:13:45,058 --> 00:13:47,194
+所以现在你们大家要玩的游戏是
+
+
+265
+00:13:47,261 --> 00:13:49,930
+如何让黄线保持在红线以下 对吗
+
+
+266
+00:13:50,564 --> 00:13:53,166
+你要查看该信息的确切方法是
+
+
+267
+00:13:53,333 --> 00:13:56,503
+点击右侧这里的限额箱
+
+
+268
+00:13:56,570 --> 00:13:58,805
+它默认是关闭的
+
+
+269
+00:13:58,872 --> 00:14:00,107
+如果你愿意可以把它打开
+
+
+270
+00:14:00,607 --> 00:14:04,144
+之所以默认为关闭是因为
+我们送给你那么多免费的存储空间
+
+
+271
+00:14:04,211 --> 00:14:05,913
+如果你点开它比例尺会发生变化
+
+
+272
+00:14:05,979 --> 00:14:08,715
+与我们送给你的免费存储量相比
+
+
+273
+00:14:08,782 --> 00:14:10,350
+你的用量基本上会看似一条直线
+
+
+274
+00:14:11,118 --> 00:14:12,553
+所以请别客气 去试试看吧
+
+
+275
+00:14:13,754 --> 00:14:16,256
+CloudKit 
+Dashboard可提供两样东西
+
+
+276
+00:14:16,723 --> 00:14:19,993
+跟踪使用数据是一个新领域
+
+
+277
+00:14:20,127 --> 00:14:21,795
+也会送你们免费限额
+
+
+278
+00:14:22,696 --> 00:14:27,434
+如今可用的测试版已公布在
+developer.apple.com
+
+
+279
+00:14:27,501 --> 00:14:28,702
+如果你已有容器
+
+
+280
+00:14:28,769 --> 00:14:31,538
+今天你就可用去那里
+
+
+281
+00:14:32,139 --> 00:14:33,974
+看看Dashboard上的使用数据
+
+
+282
+00:14:38,345 --> 00:14:39,313
+好的
+
+
+283
+00:14:39,379 --> 00:14:41,915
+人们提出的第二个问题是
+“那么网络呢？”
+
+
+284
+00:14:42,549 --> 00:14:44,351
+我很高兴向你们介绍
+
+
+285
+00:14:44,518 --> 00:14:46,887
+最新的CloudKit网络服务
+
+
+286
+00:14:47,421 --> 00:14:49,223
+就是这个方法 是的 好
+
+
+287
+00:14:55,329 --> 00:14:57,798
+通过它 可以对接超强的iOS	
+
+
+288
+00:14:57,865 --> 00:15:00,567
+和OS X应用
+可用把它们扩展到网络上
+
+
+289
+00:15:01,735 --> 00:15:02,903
+那么它是如何运作的呢？
+
+
+290
+00:15:03,270 --> 00:15:04,638
+我们先来讨论一下它的特性
+
+
+291
+00:15:04,705 --> 00:15:09,009
+你可以通过JSON和HTTPS
+获取完整的CloudKit API
+
+
+292
+00:15:09,810 --> 00:15:12,279
+我们也提供CloudKit JS库
+
+
+293
+00:15:12,346 --> 00:15:13,780
+它无疑是迅速创建网络应用的
+
+
+294
+00:15:13,847 --> 00:15:15,682
+最佳方式
+
+
+295
+00:15:16,550 --> 00:15:19,052
+我们会提供的网络注册
+要使用Apple ID
+
+
+296
+00:15:19,119 --> 00:15:20,554
+用户使用你的网络app时
+
+
+297
+00:15:20,621 --> 00:15:22,022
+需要以这种方式进行验证
+
+
+298
+00:15:24,791 --> 00:15:30,130
+那么它是如何运作的？
+如果你观察下 会发现你的应用正在
+
+
+299
+00:15:30,264 --> 00:15:31,665
+iOS和OS X上运行
+
+
+300
+00:15:31,732 --> 00:15:34,168
+它与CloudKit框架在幕后互动
+
+
+301
+00:15:34,501 --> 00:15:36,937
+与我们的CloudKit服务器对话
+
+
+302
+00:15:38,272 --> 00:15:39,973
+我们今天为你介绍的是
+
+
+303
+00:15:40,774 --> 00:15:43,810
+创建你自己的网络应用的能力
+
+
+304
+00:15:43,877 --> 00:15:47,881
+在浏览器中运行
+并讨论JSON HTTPS
+
+
+305
+00:15:48,749 --> 00:15:51,652
+和我们的CloudKit网络服务
+它能让你
+
+
+306
+00:15:51,752 --> 00:15:54,254
+相同的CloudKit服务器对话
+
+
+307
+00:15:54,621 --> 00:15:57,658
+在iOS和OS X上
+进行交互的本地应用程序
+
+
+308
+00:15:58,926 --> 00:16:01,862
+关键是要理解JSON和HTTPS
+
+
+309
+00:16:01,929 --> 00:16:04,031
+关于这个它其实就是技术规范
+
+
+310
+00:16:04,698 --> 00:16:05,832
+没有代码
+
+
+311
+00:16:06,200 --> 00:16:07,935
+事实上它完全取决于开发者
+
+
+312
+00:16:08,001 --> 00:16:09,102
+对该技术规范的解读
+
+
+313
+00:16:09,736 --> 00:16:12,539
+你得创建你自己的端点达到端点
+
+
+314
+00:16:12,840 --> 00:16:16,143
+你必须创建URL并构造JSON
+
+
+315
+00:16:16,210 --> 00:16:19,346
+后者进入实体并在请求中向上传递
+您取回 JSON 响应
+
+
+316
+00:16:19,413 --> 00:16:22,382
+对其进行解析
+处理资源的上传与下载
+
+
+317
+00:16:22,449 --> 00:16:24,751
+重试逻辑等等等等
+
+
+318
+00:16:25,219 --> 00:16:30,290
+但这样做更好的方法是使用
+CloudKit JS架构
+
+
+319
+00:16:30,991 --> 00:16:34,828
+CloudKit JS提供了可用的
+JavaScript API
+
+
+320
+00:16:35,028 --> 00:16:40,601
+使你避免了HTTPS和JSOH协议
+背后的一切复杂性
+
+
+321
+00:16:41,034 --> 00:16:43,804
+你可以使用其中任何一个
+但如果你去另谋出路
+
+
+322
+00:16:43,871 --> 00:16:46,173
+你很可能是疯了
+所以请使用CloudKit JS
+
+
+323
+00:16:48,242 --> 00:16:49,409
+那么它能给你什么呢？
+
+
+324
+00:16:49,476 --> 00:16:50,944
+好的 它能给你全面的
+
+
+325
+00:16:51,011 --> 00:16:52,446
+公用与私人数据库的存取
+
+
+326
+00:16:53,046 --> 00:16:54,848
+它能给你所有的记录操作
+
+
+327
+00:16:55,315 --> 00:16:57,251
+它能让你上传和下载资源
+
+
+328
+00:16:58,018 --> 00:16:59,820
+它能让你进行查询
+
+
+329
+00:17:00,420 --> 00:17:03,090
+它甚至能让你收到订阅和通知
+
+
+330
+00:17:03,524 --> 00:17:06,960
+这意味着我的网络应用
+
+
+331
+00:17:07,060 --> 00:17:09,829
+能够收到不同步的事件
+就好像你收到推送
+
+
+332
+00:17:09,896 --> 00:17:12,398
+告诉你事情有变
+
+
+333
+00:17:12,532 --> 00:17:13,901
+或通知你一些其他事情
+
+
+334
+00:17:13,967 --> 00:17:16,737
+所以你无需让用户点击更新按钮
+
+
+335
+00:17:16,803 --> 00:17:17,905
+或是退出你的网络应用
+
+
+336
+00:17:18,939 --> 00:17:20,574
+它还可以发现用户的数据变化
+
+
+337
+00:17:21,441 --> 00:17:23,810
+它有能力解答
+自定义区中的语义发生了哪些变化
+
+
+338
+00:17:23,877 --> 00:17:26,680
+这会为您提供同步的语义
+
+
+339
+00:17:27,347 --> 00:17:31,285
+简而言之 它给你的是全面的兼容性
+
+
+340
+00:17:31,351 --> 00:17:32,819
+以及在iOS和OS X上运行的
+
+
+341
+00:17:33,187 --> 00:17:35,923
+本地CloudKit中的一切能力
+
+
+342
+00:17:41,161 --> 00:17:44,831
+正如我之前所说
+目前CloudKit JS绝对是
+
+
+343
+00:17:44,898 --> 00:17:46,133
+开发网络应用的最佳方式
+
+
+344
+00:17:46,200 --> 00:17:48,001
+它是JavaScript API
+
+
+345
+00:17:48,302 --> 00:17:50,704
+它与
+本地CloudKit API相匹配
+
+
+346
+00:17:50,771 --> 00:17:52,673
+JavaScript与
+Objective-C语言相配
+
+
+347
+00:17:52,739 --> 00:17:54,641
+但你知道我们已经尽力了
+它是相当接近
+
+
+348
+00:17:55,108 --> 00:17:56,510
+因为没有中间服务器
+
+
+349
+00:17:56,577 --> 00:17:59,313
+可创建你的JavaScript应用
+
+
+350
+00:17:59,713 --> 00:18:02,216
+你可以直接和CloudKit对话 
+你知道
+
+
+351
+00:18:02,282 --> 00:18:06,453
+幕后的CloudKit网络服务
+
+
+352
+00:18:06,520 --> 00:18:08,622
+你无需运行你自己的服务器
+或任何中间服务器
+
+
+353
+00:18:09,256 --> 00:18:12,559
+现在要介绍的是
+如何创建新的备忘录网络应用
+
+
+354
+00:18:13,026 --> 00:18:15,696
+这个前几天曾演示过
+
+
+355
+00:18:16,330 --> 00:18:21,034
+让Ramiro Calvo帮忙
+来演示一下
+
+
+356
+00:18:21,101 --> 00:18:25,839
+向你演示基于CloudKit JS
+新的备忘录网络应用
+
+
+357
+00:18:32,679 --> 00:18:34,948
+好的 
+我们先从icloud.com开始
+
+
+358
+00:18:35,249 --> 00:18:36,483
+这是我们的跳板
+
+
+359
+00:18:36,550 --> 00:18:38,519
+这里已经有一些网络应用了
+
+
+360
+00:18:38,852 --> 00:18:42,022
+你会看到一些熟悉的应用
+有照片和iCloud Drive
+
+
+361
+00:18:42,389 --> 00:18:43,390
+这是两个已经存在于
+
+
+362
+00:18:43,457 --> 00:18:45,626
+CloudKit上部的应用程序
+
+
+363
+00:18:46,293 --> 00:18:51,431
+在iOS 9中 新的备忘录应用
+也是建立在CloudKit上
+
+
+364
+00:18:51,732 --> 00:18:55,903
+所以我们已在CloudKit上
+创建了一个新的网络应用
+
+
+365
+00:18:56,270 --> 00:18:59,840
+在接下来的演示中
+你会看到它丰富的能力
+
+
+366
+00:19:00,674 --> 00:19:02,075
+Ramiro将会点进去
+
+
+367
+00:19:02,142 --> 00:19:03,243
+这是它的网络app
+
+
+368
+00:19:03,544 --> 00:19:05,712
+你会在这里看到一些主要内容
+
+
+369
+00:19:05,913 --> 00:19:06,947
+你会看到图片
+
+
+370
+00:19:07,014 --> 00:19:08,182
+你能编辑视频
+
+
+371
+00:19:08,482 --> 00:19:09,716
+这里有个复选框
+
+
+372
+00:19:10,083 --> 00:19:12,186
+所以这些事情在新的备忘录app中
+都能实现
+
+
+373
+00:19:12,286 --> 00:19:14,988
+它们只是
+CloudKit的资源和记录
+
+
+374
+00:19:15,255 --> 00:19:18,825
+好的
+现在我们要创建一个全新的备忘录
+
+
+375
+00:19:19,860 --> 00:19:21,929
+因为我们正在参加开发者大会
+
+
+376
+00:19:21,995 --> 00:19:23,397
+我们也许应该安排一下
+
+
+377
+00:19:23,463 --> 00:19:25,632
+在这里参加开发者大会时该做些什么
+
+
+378
+00:19:26,466 --> 00:19:28,402
+所以也许我们应该先从其中一件
+
+
+379
+00:19:28,468 --> 00:19:30,304
+较为重要的事情开始
+
+
+380
+00:19:30,871 --> 00:19:33,106
+我们要确保我们会参加所有的会后派对
+
+
+381
+00:19:33,373 --> 00:19:34,741
+让我们把这件事列在单子上
+
+
+382
+00:19:38,178 --> 00:19:40,747
+在我们参加完会后派对之后
+
+
+383
+00:19:41,248 --> 00:19:46,587
+我们真得访问一下
+developer.apple.com/cloudkit
+
+
+384
+00:19:47,054 --> 00:19:49,389
+看看所有优秀的文稿
+
+
+385
+00:19:49,489 --> 00:19:51,592
+包括这个超棒的介绍
+
+
+386
+00:19:51,658 --> 00:19:54,094
+在那里你会找到一切
+
+
+387
+00:19:54,161 --> 00:19:56,864
+有关CloudKit的信息和文稿
+
+
+388
+00:19:56,930 --> 00:19:58,932
+以及最新的CloudKit网络服务
+
+
+389
+00:19:59,666 --> 00:20:02,302
+浏览完这些文稿之后我们应该退出
+
+
+390
+00:20:02,603 --> 00:20:06,106
+去创建我们的
+第一个CloudKit网络应用
+
+
+391
+00:20:07,908 --> 00:20:11,478
+创建好之后 我们继续下一项
+
+
+392
+00:20:11,778 --> 00:20:14,214
+尽最大努力达到免费限额
+
+
+393
+00:20:14,314 --> 00:20:15,582
+这可能要花费一段时间
+
+
+394
+00:20:15,649 --> 00:20:17,184
+所以我想我们无需核对这一项
+
+
+395
+00:20:17,417 --> 00:20:19,887
+但我至少参加了一个派对
+
+
+396
+00:20:19,953 --> 00:20:24,458
+所以我们可先核对这一项Ramiro
+
+
+397
+00:20:24,791 --> 00:20:26,360
+完成这个网络体验
+
+
+398
+00:20:26,426 --> 00:20:31,031
+现在我们去iOS操作系统
+
+
+399
+00:20:31,098 --> 00:20:33,534
+这是在iPad上运行新的备忘录应用
+
+
+400
+00:20:33,934 --> 00:20:35,102
+我们打开它
+
+
+401
+00:20:36,970 --> 00:20:40,240
+你们会看到与我们
+之前所见一样的厨房改装计划
+
+
+402
+00:20:40,307 --> 00:20:43,010
+这是我们在全球开发者大会上
+刚键入的我们要做的新事情
+
+
+403
+00:20:43,443 --> 00:20:44,678
+它会自动显示出来
+
+
+404
+00:20:44,745 --> 00:20:46,013
+是同样的数据 对吗
+
+
+405
+00:20:46,079 --> 00:20:47,714
+只是我们有一个对接的网站界面
+
+
+406
+00:20:47,781 --> 00:20:50,551
+让你把你的本地IOS界面对接上去
+
+
+407
+00:20:51,685 --> 00:20:53,720
+现在我们要在这里做一些改动
+
+
+408
+00:20:53,787 --> 00:20:56,256
+访问过
+developer.apple.com
+
+
+409
+00:20:56,323 --> 00:21:01,261
+显然已经用备忘录app开发了一款
+很棒的CloudKit网络app
+
+
+410
+00:21:01,562 --> 00:21:04,064
+现在我们何不返回去
+
+
+411
+00:21:04,131 --> 00:21:06,400
+看看网络
+
+
 412
-00:19:47,066 --> 00:19:49,386
-and take a look at all
-the amazing documentation,
+00:21:06,633 --> 00:21:08,468
+看看那边发生了什么
 
 
 413
-00:19:49,476 --> 00:19:51,336
-including this amazing
-presentation,
+00:21:09,570 --> 00:21:11,438
+如果所有事情都做了
 
 
 414
-00:19:51,336 --> 00:19:54,156
-where you are going to be
-able to find information,
+00:21:11,505 --> 00:21:12,840
+你会发现所有事情都核对过了
 
 
 415
-00:19:54,156 --> 00:19:56,936
-documentation and everything
-about CloudKit itself as well
+00:21:13,073 --> 00:21:16,443
+这又是我之前提到过的通知体验
 
 
 416
-00:19:56,936 --> 00:19:58,916
-as the new CloudKit
-Web Services.
+00:21:17,311 --> 00:21:19,713
+出现了通知 推送通知
 
 
 417
-00:19:59,676 --> 00:20:02,316
-Once we get through that,
-we should really go off
+00:21:20,247 --> 00:21:22,115
+网络应用将其选取
 
 
 418
-00:20:02,606 --> 00:20:05,956
-and create our first
-CloudKit web application.
+00:21:22,249 --> 00:21:24,451
+自动更新 向你显示出变化
 
 
 419
-00:20:06,516 --> 00:20:11,346
-And once we create that, well,
-we should basically move on
+00:21:25,185 --> 00:21:28,155
+这就是在iOS 9
+和icloud.com上
 
 
 420
-00:20:11,776 --> 00:20:14,206
-and do our best to try
-to hit those free limits
+00:21:28,255 --> 00:21:29,923
+可用的最新的备忘录网络app
 
 
 421
-00:20:14,326 --> 00:20:15,656
-and that might actually
-take a while.
+00:21:30,424 --> 00:21:31,358
+谢谢 Ramiro 
 
 
 422
-00:20:15,656 --> 00:20:17,976
-So I don't think we
-will check that one off.
+00:21:42,269 --> 00:21:45,339
+如果你的用户
+想使用该应用他们需要注册
 
 
 423
-00:20:18,316 --> 00:20:19,966
-But I have attended
-at least one party.
+00:21:46,139 --> 00:21:48,275
+所以我们直接跳过去看看
 
 
 424
-00:20:19,966 --> 00:20:24,256
-So I think we can check
-that first one off, Ramiro.
+00:21:48,342 --> 00:21:50,277
+你的网络应用上所显示的界面
 
 
 425
-00:20:24,776 --> 00:20:26,426
-And complete this
-web experience.
+00:21:50,944 --> 00:21:53,380
+首先你需要有一个
 
 
 426
-00:20:26,426 --> 00:20:30,716
-Now, let's go over to
-iOS, which is an iPad,
+00:21:53,447 --> 00:21:55,015
+让用户注册的按钮
 
 
 427
-00:20:31,226 --> 00:20:33,546
-running the new Notes
-application.
+00:21:55,082 --> 00:21:56,149
+这就是你的用户界面
 
 
 428
-00:20:33,546 --> 00:20:35,106
-We will open this up.
+00:21:57,217 --> 00:22:00,754
+当用户点击该按钮之后
+会弹出一个新的浏览窗口
 
 
 429
-00:20:35,506 --> 00:20:39,286
-And you will see that same
-kitchen remodel project
+00:22:00,821 --> 00:22:03,357
+该浏览窗口归Apple所有
 
 
 430
-00:20:39,286 --> 00:20:40,116
-as we saw before.
+00:22:03,524 --> 00:22:04,691
+由Apple管理
 
 
 431
-00:20:40,116 --> 00:20:42,956
-And here's our new things to
-do at WWDC that we just typed.
+00:22:05,225 --> 00:22:07,694
+这是因为ID和密码
 
 
 432
-00:20:43,436 --> 00:20:44,736
-It showed up automatically.
+00:22:07,761 --> 00:22:09,763
+只在Apple和该用户之间交互
 
 
 433
-00:20:44,736 --> 00:20:46,086
-It's the same data, right?
+00:22:09,830 --> 00:22:11,431
+开发者永远看不到这个
 
 
 434
-00:20:46,086 --> 00:20:47,766
-It's just that we have
-a web interface to it,
+00:22:12,232 --> 00:22:14,501
+在后面的登入页面
 
 
 435
-00:20:47,766 --> 00:20:50,536
-where you can have your
-native iOS interface to it.
+00:22:14,568 --> 00:22:16,103
+还会显示其他一些东西
 
 
 436
-00:20:50,536 --> 00:20:53,786
-Now, we will make a few
-more changes in here.
+00:22:21,842 --> 00:22:23,410
+首先是“保持登陆状态”
 
 
 437
-00:20:53,786 --> 00:20:56,576
-I have already gone to
-developer.apple.com.
+00:22:23,677 --> 00:22:25,812
+这样用户可以选择勾选
 
 
 438
-00:20:56,576 --> 00:20:59,976
-Ramiro you have clearly
-developed an amazing CloudKit
+00:22:25,879 --> 00:22:27,080
+在未来两周保持登陆状态
 
 
 439
-00:20:59,976 --> 00:21:04,136
-web app with the Notes app
-and why don't we now go back
+00:22:28,148 --> 00:22:29,816
+“忘记Apple ID或密码？”
 
 
 440
-00:21:04,136 --> 00:21:06,156
-and take a look at the web
+00:22:29,883 --> 00:22:31,752
+如果用户忘记了他们的ID
 
 
 441
-00:21:06,646 --> 00:21:08,976
-and see what happens,
-you know, over there.
+00:22:32,052 --> 00:22:34,454
+我们将全力帮助他们
 
 
 442
-00:21:09,586 --> 00:21:11,516
-Now, if all things happen,
+00:22:34,521 --> 00:22:36,857
+想起密码或重置密码
 
 
 443
-00:21:11,516 --> 00:21:12,836
-you will notice everything
-got checked.
+00:22:37,324 --> 00:22:41,929
+最后 你知道 如果该用户
+对Apple生态系统而言是个新用户
 
 
 444
-00:21:13,066 --> 00:21:14,156
-That was, again,
+00:22:41,995 --> 00:22:43,764
+他们根本没有Apple ID
 
 
 445
-00:21:14,156 --> 00:21:16,256
-that notification
-experience I talked about.
+00:22:44,097 --> 00:22:46,600
+他们可当即创建一个Apple ID
 
 
 446
-00:21:16,686 --> 00:21:19,556
-The notification, push
-notification happened.
+00:22:46,667 --> 00:22:48,302
+他们将得到一个
 
 
 447
-00:21:20,256 --> 00:21:21,916
-The web application
-picked that up,
+00:22:48,468 --> 00:22:50,671
+可以在你的
+应用中立即使用的Apple账户
 
 
 448
-00:21:22,256 --> 00:21:24,466
-and automatically updated itself
-and showed you the changes.
+00:22:54,007 --> 00:22:56,510
+CloudKit网络服务提供包括
 
 
 449
-00:21:25,186 --> 00:21:28,156
-And that's the new Notes
-web app that's available
+00:22:57,110 --> 00:23:01,181
+我刚讲到的
+仅用于iCloud网络的账户
 
 
 450
-00:21:28,266 --> 00:21:29,916
-on iOS 9 and icloud.com.
+00:23:01,315 --> 00:23:03,717
+它会为私人数据库的使用提供
+1GB的免费存储空间
 
 
 451
-00:21:30,486 --> 00:21:30,946
-Thanks Ramiro.
+00:23:04,418 --> 00:23:07,654
+如果
+同一位用户访问了iOS或OS X
 
 
 452
-00:21:31,516 --> 00:21:41,496
-[Applause]
+00:23:07,721 --> 00:23:09,857
+并在那里设置了他们的账户
+它会立刻自动更新为
 
 
 453
-00:21:41,996 --> 00:21:43,416
->> ERIC KRUGLER: Now,
-if your users are going
+00:23:09,923 --> 00:23:12,926
+5GB的iCloud账户
 
 
 454
-00:21:43,506 --> 00:21:45,156
-to use the application,
-they have to sign in.
+00:23:15,529 --> 00:23:20,734
+公用数据库的使用
+在iOS OS X和网络上是一样
 
 
 455
-00:21:46,126 --> 00:21:48,336
-And so we are going to jump
-right in to taking a look
+00:23:20,801 --> 00:23:22,736
+没有区别 所以在网络上提出请求
 
 
 456
-00:21:48,336 --> 00:21:50,276
-at what that might look like
-in your web application.
+00:23:22,803 --> 00:23:24,505
+和你在手机或Mac上提出请求
 
 
 457
-00:21:50,936 --> 00:21:53,396
-So, first, you need
-some sort of a button
+00:23:24,638 --> 00:23:26,540
+是一样的
 
 
 458
-00:21:53,446 --> 00:21:54,956
-to ask the user to sign in.
+00:23:26,974 --> 00:23:27,975
+存储也是一样
 
 
 459
-00:21:55,066 --> 00:21:55,866
-This is your UI.
+00:23:28,041 --> 00:23:34,214
+在Dashboard上查看使用信息
+存储区部分时没有任何差别
 
 
 460
-00:21:57,206 --> 00:22:00,806
-Now when the user clicks this,
-a new browser window is going
+00:23:34,448 --> 00:23:35,415
+它都是放在一起的
 
 
 461
-00:22:00,806 --> 00:22:03,366
-to pop up and this
-browser window is owned
+00:23:37,651 --> 00:23:42,356
+我们确实需要一款
+配得上iOS或OS X的应用
 
 
 462
-00:22:03,526 --> 00:22:04,676
-and managed by Apple.
+00:23:42,723 --> 00:23:44,525
+这些网络服务的目的是
 
 
 463
-00:22:05,236 --> 00:22:08,686
-And this is because the ID
-and password is only exchanged
+00:23:44,591 --> 00:23:48,395
+把超棒的iOS和OS X应用
+扩展到网络上
 
 
 464
-00:22:08,686 --> 00:22:09,836
-between the user and Apple.
+00:23:51,365 --> 00:23:55,869
+它的开发测试版现在可以使用了
+是和iOS 9一起发布的
 
 
 465
-00:22:09,836 --> 00:22:11,416
-The developer never sees this.
+00:23:58,372 --> 00:24:00,307
+这就是
+CloudKit网络服务的内容
 
 
 466
-00:22:12,236 --> 00:22:14,566
-And there's a few other
-things that show up further
+00:24:00,440 --> 00:24:03,110
+现在我要把Olivier请回来
 
 
 467
-00:22:14,566 --> 00:22:16,106
-down on the login page.
+00:24:03,277 --> 00:24:05,412
+结束这次讲座 非常感谢
 
 
 468
-00:22:21,856 --> 00:22:23,396
-So first, there's
-"Keep me signed in."
+00:24:11,952 --> 00:24:13,220
+谢谢 Eric
 
 
 469
-00:22:23,676 --> 00:22:26,046
-So the user can opt in to
-say I want to stay signed
+00:24:13,987 --> 00:24:14,988
+这就是今天的内容
 
 
 470
-00:22:26,046 --> 00:22:27,076
-in for up to two weeks.
+00:24:15,055 --> 00:24:18,692
+我们非常期待看到
+你们在CloudKit上
 
 
 471
-00:22:28,146 --> 00:22:29,876
-There's a "Forgot
-Apple ID or password?"
+00:24:18,759 --> 00:24:21,128
+创建出某种应用
 
 
 472
-00:22:29,876 --> 00:22:31,736
-So if the user has
-forgotten their ID,
+00:24:21,195 --> 00:24:22,396
+迸发出某种惊人的想法
 
 
 473
-00:22:32,036 --> 00:22:34,536
-we'll manage the whole
-flow of helping them
+00:24:23,897 --> 00:24:26,967
+正如Eric所说
+我们有了一个新的网页：
 
 
 474
-00:22:34,536 --> 00:22:36,866
-to remember their
-password or reset it.
+00:24:27,034 --> 00:24:29,403
+developer.Apple.com/cloudkit
 
 
 475
-00:22:37,326 --> 00:22:41,206
-And finally, if the user
-is brand new to, you know,
+00:24:29,469 --> 00:24:33,207
+它汇集了我们拥有的所有数据
+以及在 CloudKit 方面的
 
 
 476
-00:22:41,206 --> 00:22:43,766
-the Apple ecosystem, they
-don't have an Apple ID at all,
+00:24:33,273 --> 00:24:36,710
+包括在新的服务器 网络API
+以及在客户端框架方面的
 
 
 477
-00:22:44,096 --> 00:22:46,666
-they can create an Apple
-ID right here in the flow
+00:24:36,777 --> 00:24:41,014
+所有文稿 参考库以及示例代码
 
 
 478
-00:22:46,666 --> 00:22:48,296
-and they will get
-an Apple account
+00:24:41,582 --> 00:24:44,484
+除了常规的技术支持
 
 
 479
-00:22:48,466 --> 00:22:49,646
-that they can then
-use immediately
+00:24:44,551 --> 00:24:46,954
+论坛和网址以外
 
 
 480
-00:22:49,646 --> 00:22:50,576
-with your application.
+00:24:47,554 --> 00:24:50,724
+如果所有这些都不可用 你可以电邮
 
 
 481
-00:22:51,146 --> 00:22:57,586
-So the CloudKit Web Service
-offering includes iCloud
+00:24:50,791 --> 00:24:53,360
+cloudkit@apple.com
+进行一般咨询
 
 
 482
-00:22:57,586 --> 00:23:01,016
-web-only accounts what I just
-described, which offers 1 gig
+00:24:54,561 --> 00:24:57,831
+本周我们还有两节讲座
 
 
 483
-00:23:01,326 --> 00:23:03,716
-of free storage for
-private database usage.
+00:24:57,898 --> 00:25:01,001
+第一节在明天 我们将深入探讨
 
 
 484
-00:23:04,416 --> 00:23:07,706
-And if that same user then
-goes to iOS or OS X and sets
+00:25:01,068 --> 00:25:04,438
+CloudKit JS
+和网络服务 API
 
 
 485
-00:23:07,706 --> 00:23:09,926
-up their account there,
-it automatically upgrades
+00:25:06,440 --> 00:25:10,844
+另一节讲座在周四下午4:30分
+有关CloudKit技巧与窍门讲座
 
 
 486
-00:23:09,926 --> 00:23:12,916
-to the 5 gig iCloud
-account immediately.
+00:25:11,311 --> 00:25:14,648
+在该讲座中我们将演示最佳实践
 
 
 487
-00:23:15,196 --> 00:23:20,816
-Public database usage is the
-same for iOS, OS X and web.
+00:25:14,715 --> 00:25:18,085
+介绍一些注意事项
 
 
 488
-00:23:20,816 --> 00:23:22,816
-There's no difference,
-so a request made
+00:25:19,486 --> 00:25:22,389
+以及我们在iOS 9
+和OS X El Capitan中
 
 
 489
-00:23:22,816 --> 00:23:24,496
-on the web is the
-same as a request made
+00:25:22,456 --> 00:25:25,459
+对客户端框架做出的一些改善
 
 
 490
-00:23:24,646 --> 00:23:26,386
-on your phone or on your Mac.
+00:25:27,294 --> 00:25:30,998
+本周我们还有一些实验室活动
 
 
 491
-00:23:26,976 --> 00:23:28,036
-Storage is the same way.
+00:25:31,365 --> 00:25:33,700
+在周三 周四 周五上午9:00
 
 
 492
-00:23:28,036 --> 00:23:32,176
-So when you go to the storage
-areas or the usage information
+00:25:33,767 --> 00:25:36,370
+我们会请来客户端工程师
+我们会请来服务器端工程师
 
 
 493
-00:23:32,216 --> 00:23:34,266
-on the Dashboard,
-there's no distinction.
+00:25:36,803 --> 00:25:40,908
+我保证其中有些人
+甚至在早上9:00点还没睡
 
 
 494
-00:23:34,436 --> 00:23:35,296
-It's all put together.
+00:25:40,974 --> 00:25:43,744
+请带着你的问题和想法前来
 
 
 495
-00:23:35,856 --> 00:23:41,966
-We do require a comparable
-application for iOS or OS X.
+00:25:43,810 --> 00:25:46,713
+我们乐于更多地讨论数据
 
 
 496
-00:23:42,726 --> 00:23:45,856
-The purpose of the Web Services
-is to take your amazing iOS
+00:25:46,780 --> 00:25:49,483
+讨论你们头脑中的应用类型
 
 
 497
-00:23:45,856 --> 00:23:48,406
-and OS X applications and
-extend them to the web.
+00:25:49,550 --> 00:25:51,752
+无论用公用数据库还是私人数据库
 
 
 498
-00:23:48,976 --> 00:23:52,926
-And it's available now in beta
+00:25:52,986 --> 00:25:54,021
+非常感谢
 
 
 499
-00:23:52,926 --> 00:23:55,836
-for development,
-releasing with iOS 9.
-
-
-500
-00:23:57,116 --> 00:24:00,296
-And that's it for
-CloudKit Web Services.
-
-
-501
-00:24:00,296 --> 00:24:03,106
-What I would like to do is
-ask Olivier to come back
-
-
-502
-00:24:03,266 --> 00:24:04,486
-and close out the session.
-
-
-503
-00:24:04,486 --> 00:24:04,976
-Thank you very much.
-
-
-504
-00:24:05,516 --> 00:24:11,446
-[Applause].
-
-
-505
-00:24:11,946 --> 00:24:12,946
->> OLIVIER BONNET: Thank
-you very much, Eric.
-
-
-506
-00:24:12,946 --> 00:24:14,636
-So that's it.
-
-
-507
-00:24:15,056 --> 00:24:18,766
-We are very excited to see
-what kind of application,
-
-
-508
-00:24:18,766 --> 00:24:21,196
-what kind of amazing
-ideas you guys will build
-
-
-509
-00:24:21,196 --> 00:24:23,656
-on top of CloudKits.
-
-
-510
-00:24:23,926 --> 00:24:27,586
-As Eric mentioned, we have
-new web page developer
-
-
-511
-00:24:27,586 --> 00:24:29,406
-at apple.com/cloudkit.
-
-
-512
-00:24:29,406 --> 00:24:33,276
-It aggregates all the data we
-have and all the documentation,
-
-
-513
-00:24:33,276 --> 00:24:36,776
-the reference library, the
-simple code we have on CloudKit,
-
-
-514
-00:24:36,776 --> 00:24:41,016
-both the new server, web APIs,
-and the client framework.
-
-
-515
-00:24:41,866 --> 00:24:44,536
-In addition to the
-usual technical support,
-
-
-516
-00:24:44,536 --> 00:24:46,886
-and forums, URLs.
-
-
-517
-00:24:47,566 --> 00:24:52,116
-If all of those fail, you
-can email cloudkit@apple.com
-
-
-518
-00:24:52,116 --> 00:24:53,206
-for general inquiries.
-
-
-519
-00:24:54,566 --> 00:24:57,626
-We have two more
-sessions this week.
-
-
-520
-00:24:57,906 --> 00:25:01,066
-The first one is tomorrow
-and we will do a deep dive
-
-
-521
-00:25:01,066 --> 00:25:03,966
-on the CloudKit JS and
-the Web Services API.
-
-
-522
-00:25:03,966 --> 00:25:09,846
-And then we have on Thursday
-at 4:30, we have CloudKit Tips
-
-
-523
-00:25:09,846 --> 00:25:14,656
-and Tricks session, where
-we'll do a best practices,
-
-
-524
-00:25:14,716 --> 00:25:18,076
-do's and don'ts and
-as well a couple
-
-
-525
-00:25:18,306 --> 00:25:22,466
-of nice improvements we made
-to the client's framework
-
-
-526
-00:25:22,466 --> 00:25:25,446
-in iOS 9, and OS X El Capitan.
-
-
-527
-00:25:26,016 --> 00:25:30,786
-We have a number of labs
-during the rest of the week.
-
-
-528
-00:25:31,366 --> 00:25:33,766
-On Wednesday, Thursday,
-and Friday at 9:00,
-
-
-529
-00:25:33,766 --> 00:25:35,116
-we'll have client engineers.
-
-
-530
-00:25:35,116 --> 00:25:36,356
-We will have server engineers.
-
-
-531
-00:25:36,816 --> 00:25:40,966
-I promise some of them
-will even be awake at 9:00.
-
-
-532
-00:25:40,966 --> 00:25:43,796
-Please come and with your
-questions, with your ideas.
-
-
-533
-00:25:43,796 --> 00:25:46,726
-We're happy to talk about
-data mall, about what type
-
-
-534
-00:25:46,896 --> 00:25:49,546
-of apps you guys have in mind,
-
-
-535
-00:25:49,546 --> 00:25:51,766
-either using public
-or private databases.
-
-
-536
-00:25:52,986 --> 00:25:54,036
-Thank you very much.
-
-
-537
-00:25:54,096 --> 00:25:54,976
-Thank you for your attention.
-
-
-538
-00:25:55,516 --> 00:25:58,500
-[Applause]
+00:25:54,087 --> 00:25:55,689
+感谢你们的关注
 

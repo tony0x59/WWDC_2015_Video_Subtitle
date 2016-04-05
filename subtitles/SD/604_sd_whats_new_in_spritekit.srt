@@ -1,4777 +1,4605 @@
 1
-00:00:23,516 --> 00:00:29,176
-[Applause]
+00:00:20,521 --> 00:00:23,857
+SpriteKit 新功能 
 
 
 2
-00:00:29,676 --> 00:00:32,316
->> TIM ORIOL: Hi and welcome
-to What's New in SpriteKit.
+00:00:29,663 --> 00:00:32,332
+大家好欢迎来到“SpriteKit
+新功能 ”讲座
 
 
 3
-00:00:32,906 --> 00:00:35,606
-We have a lot of great new
-features and enhancements
+00:00:32,900 --> 00:00:35,536
+今天 我们将要告诉大家一系列很棒的
 
 
 4
-00:00:35,606 --> 00:00:36,416
-to tell you about today.
+00:00:35,602 --> 00:00:36,470
+新功能和改进
 
 
 5
-00:00:36,416 --> 00:00:39,776
-I know that there's a few people
-in the audience that are new
+00:00:37,171 --> 00:00:40,908
+我知道在座的各位中有很多人
+是第一次来听SpriteKit讲座
 
 
 6
-00:00:39,776 --> 00:00:43,136
-to SpriteKit and I just wanted
-to take a few minutes first
+00:00:40,974 --> 00:00:43,143
+首先 我想要花几分钟来
 
 
 7
-00:00:43,546 --> 00:00:45,666
-to recap what we're all about.
+00:00:43,544 --> 00:00:45,679
+回顾我们所要讲的是什么
 
 
 8
-00:00:48,846 --> 00:00:52,996
-So SpriteKit is Apple's 2D frame
-work for games and graphics.
+00:00:48,849 --> 00:00:52,986
+SpriteKit是苹果2D游戏
+和图形的框架
 
 
 9
-00:00:53,426 --> 00:00:56,306
-And we provide you tools
-like integrated physics,
+00:00:53,420 --> 00:00:56,290
+我们将给你提供集成的物理运动 
 
 
 10
-00:00:56,936 --> 00:00:58,896
-particle simulations, actions
+00:00:56,924 --> 00:00:58,825
+离子运动模拟 动作
 
 
 11
-00:00:58,896 --> 00:01:00,726
-and animations and,
-of course, Sprite.
+00:00:58,892 --> 00:01:00,727
+以及动画 当然 还有计算机子图
 
 
 12
-00:01:01,706 --> 00:01:06,206
-We set out to design
-SpriteKit to be both powerful
+00:01:01,695 --> 00:01:06,133
+我们启动（这个项目）是想要将
+SpriteKit做得不仅仅是强大
 
 
 13
-00:01:06,206 --> 00:01:08,926
-but also really,
-really easy to use.
+00:01:06,400 --> 00:01:08,769
+而且要非常容易上手使用
 
 
 14
-00:01:09,016 --> 00:01:11,896
-We wanted someone who's maybe
-even has never written a game
+00:01:09,002 --> 00:01:12,472
+我们希望一个之前
+完全没有做过游戏的人
 
 
 15
-00:01:11,896 --> 00:01:15,966
-before to be able to come to
-our platform, pick up SpriteKit
+00:01:13,040 --> 00:01:14,641
+能够来到我们的平台
 
 
 16
-00:01:16,426 --> 00:01:17,766
-and be up and running
-in no time.
+00:01:14,975 --> 00:01:16,343
+开始使用SpriteKit
 
 
 17
-00:01:18,676 --> 00:01:22,176
-We really wanted to deliver
-something that lets you focus
+00:01:16,410 --> 00:01:17,911
+并且能够花很少的时间得到提高
+并熟悉（SpriteKit）
 
 
 18
-00:01:22,176 --> 00:01:25,306
-on what you do best and
-that is making great games.
+00:01:18,679 --> 00:01:20,881
+我们非常期望能够传达出一些东西
 
 
 19
-00:01:25,836 --> 00:01:33,246
-We designed SpriteKit to work
-across iPhone iPad and Mac
+00:01:20,948 --> 00:01:23,217
+能够使你专心致志地做你最擅长的事情
 
 
 20
-00:01:33,246 --> 00:01:35,936
-and in addition to this media
-you can deliver your app
+00:01:23,283 --> 00:01:25,319
+那就是做出最棒的游戏
 
 
 21
-00:01:35,936 --> 00:01:39,726
-to multiple platforms, it also
-means that you can prototype
+00:01:28,021 --> 00:01:29,857
+我们将SpriteKit设计成
 
 
 22
-00:01:39,726 --> 00:01:41,906
-and test all of your
-SpriteKit games directly
+00:01:29,923 --> 00:01:32,559
+可以在iPhone、
+iPad以及Mac上工作
 
 
 23
-00:01:41,906 --> 00:01:47,416
-on the Mac before you
-even put it on a device.
+00:01:33,093 --> 00:01:35,863
+并且
+你也能够通过这个平台将你的app
 
 
 24
-00:01:47,566 --> 00:01:50,626
-and with SpriteKit the framework
-is really only half the story.
+00:01:35,929 --> 00:01:38,599
+应用到多个平台上
+这也就意味着
 
 
 25
-00:01:51,206 --> 00:01:54,626
-Since the beginning we spent
-a lot of effort on our tools
+00:01:38,665 --> 00:01:40,300
+你能够
+直接在Mac上设计原型
 
 
 26
-00:01:54,796 --> 00:01:57,506
-and we have continued to
-invest in that year after year
+00:01:40,367 --> 00:01:42,402
+并测试你的SpriteKit游戏
 
 
 27
-00:01:57,506 --> 00:02:02,036
-to allow you to edit your
-particle affects as well
+00:01:42,669 --> 00:01:44,538
+在你将它（游戏）安装到
+一个设备上之前
 
 
 28
-00:02:02,036 --> 00:02:06,396
-as entire scenes and new this
-year actions and animations
+00:01:47,574 --> 00:01:50,611
+可以说 有了SpriteKit 
+游戏构架的开发能够做到事半功倍
 
 
 29
-00:02:06,396 --> 00:02:08,175
-as well, directly inside
+00:01:51,211 --> 00:01:54,615
+在刚开始的时候我们花费了
+大量的精力在我们的工具上
 
 
 30
-00:02:08,175 --> 00:02:11,606
-of Xcode before you even
-write a line of code.
+00:01:54,781 --> 00:01:57,451
+在后续的几年里我们
+也在持续地进行投资
 
 
 31
-00:02:13,516 --> 00:02:15,896
-So now lets talk about the new
-additions to the framework.
+00:01:57,885 --> 00:01:59,186
+就是为了能够
 
 
 32
-00:02:16,716 --> 00:02:19,576
-The first one was requested
-by developers quite a bit
+00:01:59,286 --> 00:02:01,188
+让你能够像编辑整个画面
+一样编辑粒子效果
 
 
 33
-00:02:20,226 --> 00:02:25,336
-and this has to do with the
-Viewport and the Viewport is
+00:02:01,622 --> 00:02:03,524
+直到今年年初也同样
 
 
 34
-00:02:25,336 --> 00:02:28,046
-when we're talking about which
-portion of your scene is visible
+00:02:03,590 --> 00:02:06,326
+能够对运动和动画进行编辑
 
 
 35
-00:02:28,046 --> 00:02:31,356
-in a SpriteKit view at any time.
+00:02:06,393 --> 00:02:08,095
+只需要在写代码前
 
 
 36
-00:02:31,356 --> 00:02:34,336
-The way this works now is if
-you want to move your camera,
+00:02:08,161 --> 00:02:10,997
+加入一段Xcode即可
 
 
 37
-00:02:34,826 --> 00:02:38,426
-you would have to realign
-every piece of geometry
+00:02:13,867 --> 00:02:15,969
+现在 我们可以开始讲解
+这个构架有哪些新功能了
 
 
 38
-00:02:38,426 --> 00:02:41,056
-within your game, or if you
-wanted to follow along one
+00:02:17,037 --> 00:02:19,573
+第一点 也是开发人员强烈要求的一点
 
 
 39
-00:02:41,056 --> 00:02:42,826
-of your hero characters
-through your game world,
+00:02:20,240 --> 00:02:22,609
+就是视窗
 
 
 40
-00:02:43,196 --> 00:02:44,756
-you need to do those
-calculations.
+00:02:22,676 --> 00:02:25,279
+视窗是指
 
 
 41
-00:02:45,386 --> 00:02:48,376
-Now this works, but it is
-not as intuitive as we'd like
+00:02:25,345 --> 00:02:27,981
+当我们在讨论你的场景的时候
+这部分（场景）是可见的
 
 
 42
-00:02:49,316 --> 00:02:51,596
-and if you're also
-running physics simulations
+00:02:28,048 --> 00:02:29,850
+在任何时候
+通过SpriteKit视角
 
 
 43
-00:02:51,656 --> 00:02:54,806
-on those game entities while
-you're changing their actual
+00:02:31,351 --> 00:02:34,321
+现在的这种工作方式是
+如果你想要移动你的镜头
 
 
 44
-00:02:54,806 --> 00:02:57,526
-position, you can get
-artifacts from that.
+00:02:34,821 --> 00:02:38,358
+你不得不移动
+你游戏中的每一块几何图案
 
 
 45
-00:02:58,716 --> 00:03:00,906
-We thought we could do
-something a little bit better.
+00:02:38,425 --> 00:02:40,994
+或者
+如果你想要跟随你的一个英雄人物
 
 
 46
-00:03:01,986 --> 00:03:04,086
-We would like to
-introduce SKCameraNode.
+00:02:41,061 --> 00:02:42,829
+穿越你的整个游戏界面
 
 
 47
-00:03:04,556 --> 00:03:10,576
-With the CameraNode we allow you
-to simply specify which portion
+00:02:43,197 --> 00:02:44,765
+你就需要做这些计算
 
 
 48
-00:03:10,576 --> 00:03:13,456
-of your view is going to be
-visible and the camera does this
+00:02:45,399 --> 00:02:46,633
+现在这样的工作
 
 
 49
-00:03:13,456 --> 00:03:14,626
-by representing the center
+00:02:46,700 --> 00:02:48,368
+但是它并不像我们想象中的那样直观
 
 
 50
-00:03:14,626 --> 00:03:16,016
-of the visible content
-in your scene.
+00:02:49,303 --> 00:02:51,605
+如果你想要对这些游戏实体进行物理模
+拟 
 
 
 51
-00:03:16,626 --> 00:03:19,816
-So now you can move the
-CameraNode through your scene
+00:02:51,672 --> 00:02:54,741
+当你移动他们的实际位置时
 
 
 52
-00:03:20,246 --> 00:03:22,036
-with the same logic
-that you move all
+00:02:54,808 --> 00:02:57,077
+你可以从中看到一些伪影
 
 
 53
-00:03:22,036 --> 00:03:23,736
-of your other game
-entities through your scene.
+00:02:59,046 --> 00:03:00,914
+我们认为我们能够做的更好
 
 
 54
-00:03:24,716 --> 00:03:26,896
-We have a property on
-SKScene that will allow you
+00:03:01,982 --> 00:03:04,084
+接下来我们介绍
+SKCameraNode.
 
 
 55
-00:03:26,896 --> 00:03:29,746
-to select the camera you'd
-like to use so these scenes,
+00:03:05,485 --> 00:03:07,020
+通过CameraNode
 
 
 56
-00:03:29,746 --> 00:03:31,806
-you can have multiple
-cameras throughout your scene
+00:03:07,087 --> 00:03:10,524
+我们允许你能够简单的指定你看到的部
+分
 
 
 57
-00:03:32,126 --> 00:03:34,576
-and you can select the
-active one via property.
+00:03:10,591 --> 00:03:13,393
+变得可视化 镜头通过
 
 
 58
-00:03:35,976 --> 00:03:38,696
-If you leave the property
-as its default value of nil,
+00:03:13,460 --> 00:03:14,561
+展现你的场景中所包含的
 
 
 59
-00:03:39,156 --> 00:03:41,666
-we get the same experiences
-you have today
+00:03:14,628 --> 00:03:16,029
+可视化中心来达到这样的效果
 
 
 60
-00:03:41,666 --> 00:03:44,146
-and all the SpriteKit
-rendering is as it was.
+00:03:16,630 --> 00:03:18,332
+这样你就可以在你的画面中任意移动
 
 
 61
-00:03:44,656 --> 00:03:47,716
-But the best feature of all
+00:03:18,398 --> 00:03:19,800
+CameraNode
 
 
 62
-00:03:47,716 --> 00:03:50,906
-about SKCameraNode
-is that it's a node.
+00:03:20,234 --> 00:03:22,035
+同样的
+你也可以在你的画面中移动其他的
 
 
 63
-00:03:51,626 --> 00:03:54,366
-And this means that you get
-access to all the great features
+00:03:22,102 --> 00:03:23,804
+所有的游戏实体
 
 
 64
-00:03:54,366 --> 00:03:55,426
-in SpriteKit for nodes.
+00:03:24,705 --> 00:03:26,673
+我们在SKScene中
+设置了一个属性
 
 
 65
-00:03:55,706 --> 00:03:57,846
-You have access to
-our actions library
+00:03:26,740 --> 00:03:29,142
+这个属性将允许你选择
+你想使用的包含这些场景的镜头
 
 
 66
-00:03:57,846 --> 00:03:59,706
-so you can now run
-actions on the camera.
+00:03:29,209 --> 00:03:31,812
+在你的场景中你可以选择多个镜头
 
 
 67
-00:04:00,176 --> 00:04:02,076
-You have access to
-our constraint system
+00:03:32,112 --> 00:03:34,581
+同样你也可以通过属性选择活动的镜头
 
 
 68
-00:04:02,076 --> 00:04:03,886
-so you can apply
-constraints to the camera.
+00:03:35,983 --> 00:03:38,685
+如果你不理会属性 即其缺省值为零
 
 
 69
-00:04:04,246 --> 00:04:06,356
-You can make it align
-with game entities,
+00:03:39,152 --> 00:03:41,388
+我们将会保存所有你今天的使用记录
 
 
 70
-00:04:06,356 --> 00:04:08,766
-you can make it always stay
-within a certain distance
+00:03:41,455 --> 00:03:43,390
+并且所有的
+SpriteKit渲染效果
 
 
 71
-00:04:08,766 --> 00:04:10,026
-of objects within your game.
+00:03:43,457 --> 00:03:44,625
+都和从前一样不会改变
 
 
 72
-00:04:10,616 --> 00:04:13,646
-Beyond just moving the camera
-you now have access to rotation
+00:03:45,792 --> 00:03:48,862
+但是SKCameraNode
+中最棒的功能是
 
 
 73
-00:04:13,646 --> 00:04:16,065
-and scale via those
-properties on the node.
+00:03:49,997 --> 00:03:50,898
+它作为一个节点存在
 
 
 74
-00:04:17,305 --> 00:04:21,726
-So for example, in a game like
-this, I may start the camera off
+00:03:51,632 --> 00:03:54,301
+这就意味着你能够
+使用SpriteKit节点中
 
 
 75
-00:04:21,726 --> 00:04:24,726
-to the side, and I might
-apply a few move animations
+00:03:54,368 --> 00:03:55,435
+所有伟大的功能
 
 
 76
-00:04:24,766 --> 00:04:27,256
-to reveal the bad guys in
-my scene before centering
+00:03:55,702 --> 00:03:57,771
+你可以访问我们的动作数据库
 
 
 77
-00:04:27,256 --> 00:04:28,236
-on the hero character.
+00:03:57,838 --> 00:04:00,073
+这样你就能够在
+镜头上运行这样的动作（数据）
 
 
 78
-00:04:28,926 --> 00:04:31,166
-And then I can apply a
-scale action if I want
+00:04:00,140 --> 00:04:02,009
+你也可以使用我们的约束系统
 
 
 79
-00:04:31,166 --> 00:04:33,446
-to zoom the camera in or out.
+00:04:02,075 --> 00:04:03,877
+这样你就能够对镜头进行约束
 
 
 80
-00:04:33,446 --> 00:04:36,016
-I can even use our follow
-path action if I want
+00:04:04,244 --> 00:04:06,280
+你可以让它与游戏实体相结合
 
 
 81
-00:04:36,016 --> 00:04:37,816
-to have the camera follow
-a Bezier [Unintelligable]
+00:04:06,346 --> 00:04:08,715
+你也可以让它总是保留在
 
 
 82
-00:04:37,816 --> 00:04:41,516
-and if I really want to make my
-user sick I can spin the camera
+00:04:08,782 --> 00:04:10,184
+距离你游戏中物体的一定范围内
 
 
 83
-00:04:41,516 --> 00:04:42,946
-around and throw it
-around the scene.
+00:04:10,617 --> 00:04:13,587
+除了移动镜头之外
+你还能够通过这些节点的属性
 
 
 84
-00:04:43,766 --> 00:04:46,676
-So you really have full
-control over what part
+00:04:13,654 --> 00:04:16,055
+来控制旋转和尺度
 
 
 85
-00:04:46,676 --> 00:04:48,836
-of your game is visible
-now in SpriteKit
+00:04:17,291 --> 00:04:18,392
+例如
 
 
 86
-00:04:49,126 --> 00:04:49,806
-and I think this is going
+00:04:18,458 --> 00:04:20,560
+在这样一个游戏中 
 
 
 87
-00:04:49,806 --> 00:04:51,966
-to be a great addition
-to your toolkit.
+00:04:20,627 --> 00:04:22,729
+我想将镜头放到一
+旁
 
 
 88
-00:04:52,516 --> 00:04:57,216
-[Applause]
+00:04:22,796 --> 00:04:24,698
+我可能应用一些移动动画
 
 
 89
-00:04:57,716 --> 00:04:59,346
->> TIM ORIOL: In
-addition to camera,
+00:04:24,765 --> 00:04:26,500
+来揭示我的视线中有坏人
 
 
 90
-00:04:59,346 --> 00:05:00,856
-we've also done work with audio.
+00:04:26,567 --> 00:04:28,435
+在我将我的游戏角色
+放在视线中央之前
 
 
 91
-00:05:01,486 --> 00:05:05,876
-We're adding an SKAudioNode to
-allow you to add positional,
+00:04:28,936 --> 00:04:31,104
+之后我可以应用一些尺度命令 
 
 
 92
-00:05:06,026 --> 00:05:07,976
-environmental sound right
-in your SpriteKit game.
+00:04:31,171 --> 00:04:32,506
+来实现镜头的变焦操作
 
 
 93
-00:05:08,516 --> 00:05:12,606
-[Applause]
+00:04:33,440 --> 00:04:35,943
+我甚至可以使用我们的跟踪路径运动
 
 
 94
-00:05:13,106 --> 00:05:16,336
->> TIM ORIOL: We're leveraging
-Apple's powerful AV audio engine
+00:04:36,009 --> 00:04:37,744
+如果我想要镜头跟踪一个贝塞尔曲线
 
 
 95
-00:05:16,386 --> 00:05:18,116
-framework that we
-introduced last year.
+00:04:38,645 --> 00:04:40,547
+如果我真的非常想让我的用户感到恶心
 
 
 96
-00:05:18,526 --> 00:05:19,886
-If you're not familiar
-with this,
+00:04:40,614 --> 00:04:41,748
+我可以旋转镜头
 
 
 97
-00:05:19,936 --> 00:05:22,336
-it lets you specify
-your tone soundscape
+00:04:41,815 --> 00:04:43,450
+或者将镜头在场景中到处扔来扔去
 
 
 98
-00:05:22,736 --> 00:05:24,886
-and play sound emitters
-within that environment
+00:04:43,750 --> 00:04:46,620
+所以现在在SpriteKit中
+你完全可以控制你的游戏
 
 
 99
-00:05:25,266 --> 00:05:27,896
-and it will play them
-back in correspondence
+00:04:46,687 --> 00:04:48,822
+哪些部分是可见的
 
 
 100
-00:05:27,896 --> 00:05:29,566
-to a listener position
-that you specify.
+00:04:49,122 --> 00:04:51,425
+我认为这将会是
+你的工具中的一件很棒的新品
 
 
 101
-00:05:30,686 --> 00:05:33,596
-In SpriteKit we're going to
-do all the wiring up for you.
+00:04:57,731 --> 00:04:59,266
+对镜头的改进
 
 
 102
-00:05:34,356 --> 00:05:37,636
-All you have to do is specify
-the sound asset that you want
+00:04:59,333 --> 00:05:01,001
+同样的我们也针对音频做了很多工作
 
 
 103
-00:05:37,636 --> 00:05:40,716
-to play back via
-file name or URL
+00:05:01,502 --> 00:05:03,804
+我们添加了一个
+SKAudioNode
 
 
 104
-00:05:41,146 --> 00:05:44,526
-and we'll use the AudioNodes
-position in your scene,
+00:05:03,871 --> 00:05:05,873
+允许你在你的SpriteKit
+游戏中
 
 
 105
-00:05:44,526 --> 00:05:46,826
-along with the listener
-point that you specify,
+00:05:06,039 --> 00:05:07,975
+添加位置和环境的背景音
 
 
 106
-00:05:46,826 --> 00:05:50,626
-to wire up the whole audiograph
-and give you really easy access
+00:05:13,113 --> 00:05:16,316
+我们借助了我们去年
+发布的Apple强大的
 
 
 107
-00:05:50,896 --> 00:05:53,096
-to immersive, positional
-audio in your game.
+00:05:16,383 --> 00:05:18,118
+AV音频引擎构架
 
 
 108
-00:05:53,966 --> 00:05:56,556
-If you want to dig a little
-deeper and get your hands-on,
+00:05:18,519 --> 00:05:19,853
+如果你对这个并不熟悉
 
 
 109
-00:05:56,976 --> 00:06:00,106
-you can access the
-underlying AVAudioNode as well
+00:05:19,920 --> 00:05:22,322
+它允许你指定你的语气音量
 
 
 110
-00:06:00,426 --> 00:06:02,856
-from a property on the
-node and go to town
+00:05:22,723 --> 00:05:24,892
+并能够作为特定环境中的声音发射器
 
 
 111
-00:06:02,856 --> 00:06:05,766
-and set any settings
-you want on there.
+00:05:25,259 --> 00:05:27,828
+它可以回放你制定位置
 
 
 112
-00:06:05,966 --> 00:06:09,566
-To demonstrate the types of
-affects you'd be able to add
+00:05:27,895 --> 00:05:29,563
+侦听器获得的声音
 
 
 113
-00:06:09,686 --> 00:06:12,646
-to your SpriteKit game
-using this new technology,
+00:05:30,697 --> 00:05:33,600
+在SpriteKit中我们将为
+你做好所有的画线工作
 
 
 114
-00:06:12,836 --> 00:06:14,436
-I'm going to have an
-example scene here
+00:05:34,368 --> 00:05:37,571
+所有你需要做的工作就是
+通过文件名或者URL指定
 
 
 115
-00:06:14,766 --> 00:06:15,926
-where I've got my goblin.
+00:05:37,638 --> 00:05:40,707
+你想要播放的背景音乐
 
 
 116
-00:06:15,926 --> 00:06:17,926
-I'm going to make
-him my listener,
+00:05:41,141 --> 00:05:44,444
+我们将会使用AudioNodes 
 
 
 117
-00:06:18,186 --> 00:06:20,036
-so I set my listener
-position there.
+00:05:44,511 --> 00:05:46,747
+跟随你指定的侦听器的位置
+在你的场景中定位
 
 
 118
-00:06:21,076 --> 00:06:23,056
-I have added a fireball
-to my scene.
+00:05:46,813 --> 00:05:50,617
+并画出音频曲线 让你能够更容易地
 
 
 119
-00:06:23,276 --> 00:06:24,756
-This is going to
-be my sound source,
+00:05:50,884 --> 00:05:53,086
+身临其境地在游戏中定位你的音频
 
 
 120
-00:06:24,756 --> 00:06:26,556
-so I've added it
-as an SKAudioNode.
+00:05:53,954 --> 00:05:56,557
+如果你想深入一点 亲自动手
 
 
 121
-00:06:27,276 --> 00:06:31,416
-When I play this back
-listen how the audio affects
+00:05:56,990 --> 00:06:00,093
+你也可以通过
+底层AVAudioNode的
 
 
 122
-00:06:31,416 --> 00:06:33,416
-as the fireball moves
-around the scene.
+00:06:00,427 --> 00:06:02,796
+一个节点的属性 去掉所有的约束
 
 
 123
-00:06:33,416 --> 00:06:37,476
-You should notice it become
-richer, more centered and louder
+00:06:02,863 --> 00:06:04,264
+在那里设置所有的你想要的东西
 
 
 124
-00:06:37,476 --> 00:06:41,196
-as it gets close to our listener
-and more one-sided and distant
+00:06:05,966 --> 00:06:07,668
+为了掩饰这种效果
 
 
 125
-00:06:41,666 --> 00:06:42,816
-as it gets to the
-side of the scene.
+00:06:07,734 --> 00:06:09,570
+你能够使用
 
 
 126
-00:06:42,816 --> 00:06:43,976
-Let's take a listen.
+00:06:09,670 --> 00:06:12,639
+最新的技术将其添加
+到你的SpriteKit游戏中
 
 
 127
-00:06:44,516 --> 00:06:59,306
-[Sound effect]
+00:06:12,840 --> 00:06:14,441
+现在我又一个例子
 
 
 128
-00:06:59,806 --> 00:07:00,976
->> TIM ORIOL: So that's
-pretty cool, right?
+00:06:14,775 --> 00:06:16,009
+这里是我的制作的一个地精
 
 
 129
-00:07:01,516 --> 00:07:05,236
-[Applause]
+00:06:16,076 --> 00:06:17,911
+我打算让他作为我的听众
 
 
 130
-00:07:05,736 --> 00:07:07,406
->> TIM ORIOL: Beyond the
-additional set up I have
+00:06:18,178 --> 00:06:20,047
+所以我把我的侦听器位置放在这里
 
 
 131
-00:07:07,406 --> 00:07:09,696
-to do nothing to update
-these effects as they move
+00:06:21,081 --> 00:06:23,050
+我已经在我的场景中添加了一个火球
 
 
 132
-00:07:09,696 --> 00:07:11,686
-around the game world,
-they're completely tied
+00:06:23,283 --> 00:06:24,685
+这是我的音频资源
 
 
 133
-00:07:12,066 --> 00:07:14,016
-to the game logic that's
-driving my game already.
+00:06:24,751 --> 00:06:27,020
+在这里我已经将其作为一个
+SKAudioNode添加了进来
 
 
 134
-00:07:16,136 --> 00:07:20,766
-Also this year we focused on
-referencing and instancing.
+00:06:27,287 --> 00:06:29,389
+我重新播放这个音乐的时候
 
 
 135
-00:07:21,196 --> 00:07:25,496
-We know you spend a lot of time
-designing high-quality content
+00:06:29,456 --> 00:06:31,358
+注意听这个音频的效果怎么样
 
 
 136
-00:07:25,756 --> 00:07:30,056
-and animations for your games
-and we want you to let you reuse
+00:06:31,425 --> 00:06:33,360
+当火球在整个场景中来回运动的时候
 
 
 137
-00:07:30,056 --> 00:07:33,376
-that content anywhere
-where you would like to.
+00:06:33,427 --> 00:06:34,795
+你能够注意到
 
 
 138
-00:07:33,376 --> 00:07:36,836
-We're allowing you to
-create serialized data files
+00:06:34,862 --> 00:06:37,397
+它变得更加饱满 更加集中 声音也更
+大了
 
 
 139
-00:07:37,256 --> 00:07:42,296
-for your nodes and your
-actions and then add them
+00:06:37,464 --> 00:06:39,166
+当它靠近我们的侦听器时
 
 
 140
-00:07:42,366 --> 00:07:45,066
-as a reference instead of just
-loading them into your scene.
+00:06:39,233 --> 00:06:41,502
+从远到近
 
 
 141
-00:07:45,066 --> 00:07:48,336
-This way, every time you make
-a change to the source asset
+00:06:41,568 --> 00:06:44,304
+直到来到场景这一边
+现在我们听一下
 
 
 142
-00:07:48,656 --> 00:07:52,536
-that is automatically reflected
-in the content of your game.
+00:06:59,820 --> 00:07:00,988
+很酷 不是吗？
 
 
 143
-00:07:54,196 --> 00:07:55,916
-How do I do this for nodes?
+00:07:05,726 --> 00:07:07,327
+除了这些额外的设置
 
 
 144
-00:07:56,736 --> 00:07:59,756
-For nodes I design
-part of my scene,
+00:07:07,394 --> 00:07:09,630
+我不需要做任何事情来处理这些特效
 
 
 145
-00:07:59,756 --> 00:08:02,816
-maybe a background element,
-or some scenery in our editor
+00:07:09,696 --> 00:07:11,698
+当他们在游戏场景中运动的时候
+他们已经和
 
 
 146
-00:08:02,816 --> 00:08:07,356
-with an Xcode and then I can
-just drag-and-drop those files
+00:07:12,065 --> 00:07:14,001
+驱动游戏运行的逻辑联系在了一起
 
 
 147
-00:08:07,736 --> 00:08:08,936
-into my main scene in Xcode
+00:07:16,403 --> 00:07:20,774
+同样的
+今年我们也重点关注了引用和实例化
 
 
 148
-00:08:08,936 --> 00:08:10,616
-and it will automatically
-create a reference
+00:07:21,208 --> 00:07:25,512
+我们知道你花了很多时间
+为你的游戏设计
 
 
 149
-00:08:10,896 --> 00:08:12,036
-and it is all set up for you.
+00:07:25,746 --> 00:07:29,983
+内容和动画 我们也希望你能够在
 
 
 150
-00:08:13,086 --> 00:08:15,216
-If you want to do this
-in code you can as well,
+00:07:30,050 --> 00:07:33,320
+任何你想用的地方重新使用这些内容
 
 
 151
-00:08:15,676 --> 00:08:18,696
-you can manually construct
-an SKReferenceNode,
+00:07:33,387 --> 00:07:36,823
+我们将允许你能够为你的节点
+和动作创建序列化数据文件
 
 
 152
-00:08:19,066 --> 00:08:23,106
-assign it a file name
-or even a URL and when
+00:07:37,257 --> 00:07:39,259
+创建序列化数据文件
 
 
 153
-00:08:23,106 --> 00:08:26,046
-that content is first presented
-in your game we'll load
+00:07:39,326 --> 00:07:41,862
+并将其作为一个引用参数添加进来
 
 
 154
-00:08:26,046 --> 00:08:28,526
-in that content based
-on the latest version
+00:07:41,929 --> 00:07:44,998
+而不是简单的加载到你的场景中
 
 
 155
-00:08:28,806 --> 00:08:29,986
-of the file that's
-in your bundle.
+00:07:45,065 --> 00:07:45,899
+这样
 
 
 156
-00:08:30,616 --> 00:08:34,025
-We can also do the
-same thing for actions.
+00:07:45,966 --> 00:07:48,335
+你每次对资源文件进行修改之后
 
 
 157
-00:08:34,525 --> 00:08:37,395
-With actions go check out
-our great new action editor
+00:07:48,669 --> 00:07:51,939
+将会自动地对你的游戏内容产生影响
 
 
 158
-00:08:37,976 --> 00:08:40,726
-and beyond creating and
-composing the actions
+00:07:54,474 --> 00:07:55,909
+我怎么做这个节点呢?
 
 
 159
-00:08:40,726 --> 00:08:43,066
-in Xcode you can
-give all them names.
+00:07:56,743 --> 00:07:59,680
+我设计了一部分场景作为节点
 
 
 160
-00:08:43,746 --> 00:08:46,076
-These names are the key to
-using them in your game.
+00:07:59,746 --> 00:08:02,749
+可以是一个背景元素
+或者是Xcode编辑器中的一些画面
 
 
 161
-00:08:46,716 --> 00:08:50,446
-We have added a selector to
-SKAction called actionNamed.
+00:08:02,816 --> 00:08:07,354
+接下来我可以通过
+Xcode将这些文件
 
 
 162
-00:08:51,016 --> 00:08:54,556
-This works just like it does
-for SKTexture and textureNamed.
+00:08:07,721 --> 00:08:08,856
+拖放到主场景中
 
 
 163
-00:08:55,056 --> 00:08:56,766
-You pass in the name
-of the action you want.
+00:08:08,922 --> 00:08:10,624
+接下来它会自动地创建一个参数
 
 
 164
-00:08:57,416 --> 00:09:00,996
-We're going to automatically
-look inside of your app bundle
+00:08:10,891 --> 00:08:12,025
+这些都是为你设置好的
 
 
 165
-00:09:01,706 --> 00:09:04,336
-in all of the serialized
-action files, find the one
+00:08:13,093 --> 00:08:15,229
+如果你想写代码来完成这些事情
+同样可以
 
 
 166
-00:09:04,336 --> 00:09:06,526
-with the appropriate
-name and then surface
+00:08:15,662 --> 00:08:18,699
+你可以手动构建一个
+SKReferenceNode
 
 
 167
-00:09:06,526 --> 00:09:07,546
-that to the application.
+00:08:19,066 --> 00:08:23,036
+为其分配一个文件名或者URL
 
 
 168
-00:09:08,506 --> 00:09:11,276
-Please use this multiple
-times within your game.
+00:08:23,103 --> 00:08:25,973
+当这些内容在
+你的游戏中是第一次发布时
 
 
 169
-00:09:11,276 --> 00:09:14,966
-We have done all the work on
-our side to take care of caching
+00:08:26,039 --> 00:08:28,542
+我们会将你的包中
+这些内容的最新版本的
 
 
 170
-00:09:15,356 --> 00:09:17,776
-and we guarantee that the same
-action will never be loaded
+00:08:28,809 --> 00:08:29,977
+文件进行上传
 
 
 171
-00:09:17,776 --> 00:09:21,436
-from disk more than
-once in your game.
+00:08:31,945 --> 00:08:34,014
+我们同样能够这样处理一些动作
 
 
 172
-00:09:21,666 --> 00:09:24,686
-Sometimes you have an action
-that you would want to use more
+00:08:34,515 --> 00:08:37,384
+通过这些动作作品
 
 
 173
-00:09:24,686 --> 00:09:26,866
-than once but it will play
-back faster or slower.
+00:08:37,985 --> 00:08:40,654
+能够看出我们的
+新动作编辑器是多么的伟大
 
 
 174
-00:09:27,456 --> 00:09:29,616
-We have added an additional
-selector that will allow you
+00:08:40,721 --> 00:08:43,323
+同时那些你在Xcode中创作的动作
+你都 有命名的权利
 
 
 175
-00:09:29,616 --> 00:09:31,326
-to override the duration
-of the action.
+00:08:43,756 --> 00:08:46,059
+这些名字将是你在游戏中
+使用它们时候的关键字
 
 
 176
-00:09:32,106 --> 00:09:34,006
-This is a smart scaling
-of the time,
+00:08:46,727 --> 00:08:48,996
+我们在SKAction中添加了
 
 
 177
-00:09:34,096 --> 00:09:37,336
-so even if you have a nested
-action with nested groups
+00:08:49,329 --> 00:08:50,631
+一个名叫actionNamed
+的筛选器
 
 
 178
-00:09:37,336 --> 00:09:39,806
-and sequences, it will
-dynamically scale it
+00:08:51,031 --> 00:08:51,932
+它的作用就像
 
 
 179
-00:09:39,806 --> 00:09:43,576
-to the new duration so that each
-component is the same fractional
+00:08:51,999 --> 00:08:54,935
+textureNamed
+对于SKTexture一样
 
 
 180
-00:09:43,606 --> 00:09:45,286
-size to the original duration.
+00:08:55,068 --> 00:08:56,770
+你可以输入你想要的动作的名字
 
 
 181
-00:09:46,646 --> 00:09:50,226
-Those are our utilities
-for reusable components
+00:08:57,404 --> 00:09:01,008
+我们将自动在你的App包中的
 
 
 182
-00:09:50,596 --> 00:09:53,626
-that you can use in the
-same scene in the same game
+00:09:01,708 --> 00:09:04,278
+序列化动作文件中 找到
 
 
 183
-00:09:53,626 --> 00:09:54,826
-or across multiple games.
+00:09:04,344 --> 00:09:06,446
+一个最合适的文件
 
 
 184
-00:09:55,296 --> 00:09:59,046
-We have also added a couple
-new actions to the framework.
+00:09:06,513 --> 00:09:07,948
+然后将其在应用程序中呈现出来
 
 
 185
-00:09:59,046 --> 00:10:01,746
-So now that we have these
-positional AudioNodes it would
+00:09:08,515 --> 00:09:11,218
+在你的游戏中请频繁使用这个功能
 
 
 186
-00:10:01,746 --> 00:10:04,286
-be nice to be able to control
-the playback via actions.
+00:09:11,285 --> 00:09:14,955
+我们做了所有的关于内存的工作
 
 
 187
-00:10:04,476 --> 00:10:10,026
-We have added play, pause, play
-back rate as well as actions
+00:09:15,355 --> 00:09:17,724
+我们可以保证
+你的游戏中所有相同的动作绝对不会
 
 
 188
-00:10:10,096 --> 00:10:12,066
-for volume and stereo panning.
+00:09:17,791 --> 00:09:21,428
+从硬盘中重复地加载多次
 
 
 189
-00:10:12,636 --> 00:10:17,786
-We also are doing a little bit
-more with frame animations.
+00:09:21,662 --> 00:09:24,631
+有时候你可能会想要
+让同一个动作重复多次
 
 
 190
-00:10:18,246 --> 00:10:21,486
-We have always had
-frame-based animations
+00:09:24,698 --> 00:09:26,867
+但它会播放得时快时慢
 
 
 191
-00:10:21,486 --> 00:10:24,526
-in SpriteKit via the
-animate with textures action
+00:09:27,467 --> 00:09:29,536
+我们添加了一个额外的选择器
 
 
 192
-00:10:25,546 --> 00:10:28,126
-but last year we introduced
-lighting to SpriteKit.
+00:09:29,603 --> 00:09:31,338
+它将允许你能够覆盖操作的持续时间
 
 
 193
-00:10:28,126 --> 00:10:31,766
-With lighting you're able to
-either automatically generate
+00:09:32,105 --> 00:09:34,007
+这是一个智能时间轴
 
 
 194
-00:10:32,226 --> 00:10:34,966
-or supply your own normal
-textures for sprites
+00:09:34,107 --> 00:09:37,277
+所以即使你使用的是嵌套组和序列中的
+嵌套 动作
 
 
 195
-00:10:34,966 --> 00:10:37,926
-within your scene and then
-we can light them dynamically
+00:09:37,344 --> 00:09:39,746
+它将动态规划新的时间轴
 
 
 196
-00:10:37,926 --> 00:10:40,196
-at run time by moving the
-light nodes around your scene.
+00:09:39,813 --> 00:09:43,550
+这样 每个时间区间内的动作组件
 
 
 197
-00:10:41,596 --> 00:10:43,936
-This works great for
-elements that don't change,
+00:09:43,617 --> 00:09:45,285
+都将会是一样的大小
 
 
 198
-00:10:43,936 --> 00:10:46,906
-but if I have a frame-based
-animation like this guy here,
+00:09:46,653 --> 00:09:50,224
+这些都是为可重复使用组件设计的工具
 
 
 199
-00:10:47,666 --> 00:10:49,876
-we want those highlights
-and shadows to line
+00:09:50,591 --> 00:09:53,560
+这些可重复使用组件你
+可以在同一个游戏的同一个场景
 
 
 200
-00:10:49,876 --> 00:10:50,806
-up with the current position.
+00:09:53,627 --> 00:09:55,095
+或者跨越多个不同的游戏中使用
 
 
 201
-00:10:50,806 --> 00:10:53,366
-We don't want a specular
-highlight where the leg used
+00:09:56,563 --> 00:09:58,966
+我们同样在构架中
+添加了一系列新的动作
 
 
 202
-00:10:53,366 --> 00:10:56,126
-to be, so we're adding
-an animate
+00:09:59,032 --> 00:10:01,468
+所以现在我们有了这些位置
+AudioNodes
 
 
 203
-00:10:56,126 --> 00:10:58,256
-with normal textures
-action as well
+00:10:01,535 --> 00:10:04,271
+就能够通过动作更好的控制回放
 
 
 204
-00:10:58,506 --> 00:11:01,236
-so you can use this
-alongside the normal animation
+00:10:04,471 --> 00:10:10,010
+我们已经添加了播放,暂停,回放速度
 
 
 205
-00:11:01,726 --> 00:11:04,606
-and get both of them in
-sync for every frame.
+00:10:10,110 --> 00:10:12,079
+以及操作体积和立体平移等开关
 
 
 206
-00:11:04,686 --> 00:11:08,836
-If I run that on our character
-and add lighting to the scene,
+00:10:13,881 --> 00:10:17,584
+我们也在帧动画中做了一些改动
 
 
 207
-00:11:09,126 --> 00:11:11,966
-you can see that all the
-highlights, shadows are kept
+00:10:18,252 --> 00:10:21,421
+在SpriteKit中我们一直
+都有通过纹理动作运动
 
 
 208
-00:11:11,966 --> 00:11:15,586
-in sync with every frame, no
-matter how my character runs.
+00:10:21,488 --> 00:10:24,525
+做出来的基于帧的动画
 
 
 209
-00:11:16,516 --> 00:11:24,406
-[Applause]
+00:10:25,559 --> 00:10:28,395
+但是去年我们在SpriteKit中
+引入了lighting
 
 
 210
-00:11:24,906 --> 00:11:27,456
->> TIM ORIOL: So those are
-additional features we added
+00:10:28,462 --> 00:10:29,530
+通过lighting
 
 
 211
-00:11:27,456 --> 00:11:29,476
-to the framework, we've
-also done a lot of work
+00:10:29,596 --> 00:10:31,899
+你不仅能够在你的场景中为
+Sprites自动生成
 
 
 212
-00:11:29,816 --> 00:11:33,046
-to integrate well with the rest
-of the system and take advantage
+00:10:32,232 --> 00:10:34,401
+也能够自主添加常规的纹理动作
 
 
 213
-00:11:33,046 --> 00:11:35,256
-of new hardware and frameworks
+00:10:34,468 --> 00:10:37,871
+然后我们可以在运行时动态的点亮他们
 
 
 214
-00:11:35,306 --> 00:11:36,806
-that have been added
-to our platform.
+00:10:37,938 --> 00:10:40,207
+通过在你的场景中移动光节点
 
 
 215
-00:11:37,906 --> 00:11:40,126
-First I want to talk
-about Metal.
+00:10:41,608 --> 00:10:43,877
+这种做法对于稳定的元素来讲很方便
 
 
 216
-00:11:40,756 --> 00:11:43,516
-We're making SpriteKit and
-we're moving it directly on top
+00:10:43,944 --> 00:10:46,914
+但是如果我有一个基于帧的动画
+例如这个东西
 
 
 217
-00:11:43,516 --> 00:11:48,026
-of Metal on iOS and Mac
-and it will be Metal backed
+00:10:47,681 --> 00:10:49,816
+我们想要这些高亮和阴影部分
 
 
 218
-00:11:48,836 --> 00:11:51,366
-on any device that
-supports it and any device
+00:10:49,883 --> 00:10:50,751
+在当前位置分开
 
 
 219
-00:11:51,366 --> 00:11:53,636
-that doesn't will automatically
-fall back to OpenGL.
+00:10:50,817 --> 00:10:53,654
+我们不想要腿前面所在的区域高亮
 
 
 220
-00:11:54,816 --> 00:11:58,286
-This means that you get
-lower CPU utilization,
+00:10:54,655 --> 00:10:56,056
+所以 我们添加了一个
 
 
 221
-00:11:58,576 --> 00:12:00,526
-it means you get better
-draw call performance
+00:10:56,123 --> 00:10:58,258
+正常纹理运动的动画
 
 
 222
-00:12:00,526 --> 00:12:03,416
-and better battery life
-with zero action required
+00:10:58,492 --> 00:11:01,228
+所以你可以使用这个 在正常的动画
 
 
 223
-00:12:03,416 --> 00:12:04,646
-to you as a developer.
+00:11:01,728 --> 00:11:04,598
+与每一帧之间 进行同步
 
 
 224
-00:12:05,516 --> 00:12:10,016
-[Applause]
+00:11:04,698 --> 00:11:08,836
+如果我在我的人物上运行了这种动画
+并给场景添加了lighting
 
 
 225
-00:12:10,516 --> 00:12:11,036
->> TIM ORIOL: We're going
+00:11:09,136 --> 00:11:11,905
+你就会看到所有的高亮区域 阴影都能
+与每一帧保 持同步
 
 
 226
-00:12:11,036 --> 00:12:13,796
-to upgrade all SpriteKit apps
-automatically, you don't have
+00:11:11,972 --> 00:11:15,209
+无论我的人物如何跑动
 
 
 227
-00:12:13,796 --> 00:12:15,256
-to recompile or resubmit.
+00:11:24,918 --> 00:11:27,387
+这些就是我们添加到构架中的新功能
 
 
 228
-00:12:15,686 --> 00:12:18,746
-If it supports Metal
-we're going to run it.
+00:11:27,454 --> 00:11:29,489
+我们也做了很多其他的工作
+使这些功能能够与
 
 
 229
-00:12:18,746 --> 00:12:19,756
-For those of you
-that are wondering
+00:11:29,823 --> 00:11:32,993
+系统的其他部分更好的结合在一起
 
 
 230
-00:12:19,756 --> 00:12:22,456
-about your custom shaders, we've
-taken care of that as well.
+00:11:33,060 --> 00:11:35,229
+更好的发挥已经添加到我们平台上的
 
 
 231
-00:12:23,006 --> 00:12:25,636
-If you have a custom shader
-in your game, we're supporting
+00:11:35,295 --> 00:11:36,797
+新硬件和构架的优势
 
 
 232
-00:12:25,636 --> 00:12:28,316
-to upgrade almost all of
-those to a Metal variant
+00:11:37,898 --> 00:11:40,133
+首先我想讲的是Metal
 
 
 233
-00:12:28,516 --> 00:12:30,976
-and that will run just fine
-on Metal devices as well.
+00:11:40,767 --> 00:11:43,437
+我们正在开发SpriteKit
 
 
 234
-00:12:31,516 --> 00:12:35,966
-[Applause]
+00:11:43,504 --> 00:11:48,041
+并且我们正准备将它直接链接到IOS
+和 Mac的Metal平台上
 
 
 235
-00:12:36,466 --> 00:12:37,396
->> TIM ORIOL: Next up is Swift.
+00:11:48,842 --> 00:11:51,311
+将能够在任何
+支持Metal的设备上使用
 
 
 236
-00:12:38,176 --> 00:12:39,976
-We have gone through
-the entire API
+00:11:51,378 --> 00:11:53,647
+以及那些不会自动降级
+到OpenGL的设备上
 
 
 237
-00:12:40,136 --> 00:12:42,366
-and we've applied
-nullability qualifiers
+00:11:54,815 --> 00:11:58,285
+这意味着你的CPU使用率会降低
 
 
 238
-00:12:42,666 --> 00:12:45,866
-and we've adopted Objective-C
-generics on any array types
+00:11:58,585 --> 00:12:01,188
+这意味着作为一个开发人员
+你将会得到更好的绘制调用性能
 
 
 239
-00:12:45,936 --> 00:12:47,716
-that are used for
-paramaters or return types
+00:12:01,255 --> 00:12:02,823
+以及更好的电池使用寿命
 
 
 240
-00:12:48,366 --> 00:12:50,576
-and this will allow you
-to access the full power
+00:12:02,890 --> 00:12:04,658
+因为将能够做到零运动请求
 
 
 241
-00:12:50,576 --> 00:12:53,376
-of SpriteKit from Swift
-without any hassle.
+00:12:10,531 --> 00:12:12,633
+我们将自动升级所有的
+SpriteKit程序
 
 
 242
-00:12:54,396 --> 00:12:56,226
-This will also give you
-enhanced type safety
+00:12:12,699 --> 00:12:13,734
+你不需要重新编译
 
 
 243
-00:12:56,226 --> 00:12:58,326
-within your application
-whether you're using Swift
+00:12:13,800 --> 00:12:15,269
+或重新提交
 
 
 244
-00:12:59,166 --> 00:12:59,926
-or Objective C.
+00:12:15,702 --> 00:12:17,538
+只要它支持Metal 你就能够运行
 
 
 245
-00:13:00,506 --> 00:13:04,086
-Now I would like to talk
-a bit about SceneKit.
+00:12:18,505 --> 00:12:21,041
+如果你对自定义着色器感兴趣的话
 
 
 246
-00:13:04,086 --> 00:13:06,906
-With SceneKit in case you
-don't know, we allow you
+00:12:21,108 --> 00:12:22,442
+我们也同样顾及到了
 
 
 247
-00:13:06,906 --> 00:13:09,106
-to render SpriteKit
-content in SceneKit
+00:12:23,010 --> 00:12:25,579
+如果你的游戏中有自定义着色器
 
 
 248
-00:13:09,106 --> 00:13:10,666
-and SceneKit content
-in SpriteKit.
+00:12:25,646 --> 00:12:28,315
+我们几乎支持
+所有的Metal变体的升级
 
 
 249
-00:13:11,326 --> 00:13:13,966
-This year we're allowing you
-to go a little bit further
+00:12:28,515 --> 00:12:30,984
+同样能够在
+支持Metal的设备上很好地运行
 
 
 250
-00:13:13,966 --> 00:13:16,536
-and use all the SpriteKit
-transitions that you know
+00:12:36,456 --> 00:12:37,391
+接下来是Swift
 
 
 251
-00:13:16,536 --> 00:13:19,936
-and love directly in
-your SceneKits games
+00:12:38,192 --> 00:12:39,960
+我们看了整个API的文件
 
 
 252
-00:13:19,936 --> 00:13:22,756
-and you don't even have to
-be using SpriteKit to do it.
+00:12:40,127 --> 00:12:42,362
+并且我们向其中添加了可空性限定符
 
 
 253
-00:13:22,756 --> 00:13:26,726
-You can use transitions like
-the doorway one here, clip,
+00:12:42,663 --> 00:12:45,866
+我们采用了
+Objective-C泛型数组类型
 
 
 254
-00:13:27,026 --> 00:13:29,706
-or even the core image
-based transition effects
+00:12:45,933 --> 00:12:47,701
+用作参数或者返回类型
 
 
 255
-00:13:30,166 --> 00:13:33,166
-for your SceneKit game
-and that all works fine.
+00:12:48,368 --> 00:12:50,504
+这将是你能够很方便的
 
 
 256
-00:13:34,296 --> 00:13:35,816
-SceneKit has also done work
+00:12:50,571 --> 00:12:53,373
+从Swift中访问
+SpriteKit的所有功能
 
 
 257
-00:13:35,876 --> 00:13:38,196
-to support Metal backed
-context for this release.
+00:12:54,408 --> 00:12:56,243
+这也能够给你的软件
+提供增强版的安全性
 
 
 258
-00:13:38,886 --> 00:13:41,456
-We take care of automatically
-matching that.
+00:12:56,310 --> 00:12:58,545
+增强版的安全性
+无论你是使用Swift
 
 
 259
-00:13:41,456 --> 00:13:43,616
-If you have a SceneKit game
-that's running Metal backed
+00:12:59,146 --> 00:13:00,347
+还是Objective C
 
 
 260
-00:13:44,246 --> 00:13:45,496
-and you have SpriteKit content
+00:13:02,049 --> 00:13:03,750
+现在我想讲一下SceneKit
 
 
 261
-00:13:45,496 --> 00:13:46,956
-in there we'll render
-using Metal.
+00:13:03,951 --> 00:13:06,486
+或许你并不知道Scenekit
 
 
 262
-00:13:47,176 --> 00:13:49,096
-If you have a SceneKit
-game that's GL backed
+00:13:06,553 --> 00:13:09,056
+我们允许你用SceneKit体现
+SpriteKit
 
 
 263
-00:13:49,526 --> 00:13:51,806
-and you have SpriteKit in there,
-we'll render using OpenGL.
+00:13:09,122 --> 00:13:10,891
+也可以用SpriteKit
+体现SceneKit
 
 
 264
-00:13:52,256 --> 00:13:54,756
-You never have additional
-overhead for us
+00:13:11,325 --> 00:13:13,894
+今年我们允许你能做到的更多一点
 
 
 265
-00:13:54,786 --> 00:14:00,356
-to translate between
-the two APIs.
+00:13:13,961 --> 00:13:16,463
+可以直接在
+SceneKits游戏中使用
 
 
 266
-00:14:00,356 --> 00:14:03,396
-This year we've also
-announced a brand-new framework
+00:13:16,530 --> 00:13:18,932
+所有你知道和
+你喜欢的SpriteKit过渡效果
 
 
 267
-00:14:03,606 --> 00:14:04,646
-called GameplayKit.
+00:13:19,933 --> 00:13:21,935
+你甚至都不需要
+用SpriteKit去做
 
 
 268
-00:14:05,116 --> 00:14:09,736
-This is really cool, it provides
-you the building blocks you need
+00:13:22,769 --> 00:13:26,740
+你可以像使用门一样使用这个转换器
+剪辑
 
 
 269
-00:14:09,976 --> 00:14:14,326
-to build your game Logic like
-Entity/Component systems as well
+00:13:27,040 --> 00:13:29,710
+甚至你的SceneKit游戏中
+基于转换效果的核心图片
 
 
 270
-00:14:14,536 --> 00:14:18,266
-as state machines and also
-provides great utilities
+00:13:30,177 --> 00:13:33,180
+同样能够有很好的效果
 
 
 271
-00:14:18,396 --> 00:14:21,516
-like AI opponents and
-deterministic random sources.
+00:13:34,281 --> 00:13:36,016
+这个版本的SceneKit同样支持
 
 
 272
-00:14:22,456 --> 00:14:24,566
-One of my favorite ones
-here, is its ability
+00:13:36,083 --> 00:13:38,185
+Metal背景下的内容
 
 
 273
-00:14:24,566 --> 00:14:26,806
-to provide a pathfinding
-solution for your game.
+00:13:38,886 --> 00:13:41,054
+我们可以自动匹配好
 
 
 274
-00:14:26,976 --> 00:14:28,506
-I think a lot of SpriteKit
-developers are going
+00:13:41,121 --> 00:13:43,924
+如果你有一个支持在Metal上运行
+的SceneKit游戏 
 
 
 275
-00:14:28,506 --> 00:14:29,186
-to be interested in this.
+00:13:44,258 --> 00:13:45,425
+我们通过使用Metal
 
 
 276
-00:14:30,466 --> 00:14:31,916
-The way Pathfinding works
+00:13:45,492 --> 00:13:47,227
+可以使你得到SpriteKit内容
 
 
 277
-00:14:31,916 --> 00:14:34,726
-in GameplayKit is you would
-specify a navigation graph
+00:13:47,294 --> 00:13:49,696
+去过你有一个支持GL上运行的
+SceneKit游戏
 
 
 278
-00:14:35,416 --> 00:14:37,646
-of the traversable areas
-within your game world.
+00:13:49,763 --> 00:13:52,466
+我们可以通过使用OpenGL使你得
+到SpriteKit
 
 
 279
-00:14:38,196 --> 00:14:41,436
-Then you would make
-connections between those nodes
+00:13:52,533 --> 00:13:54,735
+你永远不会产生额外的开销
 
 
 280
-00:14:41,786 --> 00:14:43,356
-and give them an
-associated cost.
+00:13:54,801 --> 00:13:57,337
+在两个API之间进行转换时
 
 
 281
-00:14:44,626 --> 00:14:46,016
-Once you have this graph,
+00:14:00,207 --> 00:14:03,410
+今年我们也发布了一个全新的构架
 
 
 282
-00:14:46,576 --> 00:14:48,696
-GameplayKit will then
-calculate the optimal path
+00:14:03,610 --> 00:14:04,912
+叫做 GameplayKit
 
 
 283
-00:14:48,816 --> 00:14:50,086
-between any two points
-in the graph.
+00:14:05,112 --> 00:14:06,780
+这个构架很棒
 
 
 284
-00:14:50,986 --> 00:14:52,756
-How would I set one of
-these up for a game?
+00:14:06,847 --> 00:14:09,750
+它将提供给你创建一个游戏逻辑结构所
+需的所有基础
 
 
 285
-00:14:53,986 --> 00:14:56,336
-If I have this SpriteKit game
-here, and I've got my hero
+00:14:09,983 --> 00:14:12,920
+就像Entity/
+Component系统一样
 
 
 286
-00:14:56,336 --> 00:14:58,156
-in the lower corner, I have --
+00:14:13,587 --> 00:14:15,088
+作为状态机
 
 
 287
-00:14:58,616 --> 00:15:01,676
-maybe I want him to move
-to a certain destination.
+00:14:15,155 --> 00:14:18,258
+而且还提供了非常棒的工具
 
 
 288
-00:15:02,216 --> 00:15:05,856
-I'll then specify a couple
-of obstacles in my scene
+00:14:18,392 --> 00:14:21,528
+例如AI对手和确定性随机源
 
 
 289
-00:15:05,856 --> 00:15:07,426
-that are non-traversable
-regions.
+00:14:22,462 --> 00:14:24,498
+有一点我非常喜欢
 
 
 290
-00:15:07,856 --> 00:15:12,076
-Giving just this to
-GameplayKit and a buffer radius
+00:14:24,565 --> 00:14:26,967
+那就是它能够为你的游戏
+提供一个路径寻找的解决方案
 
 
 291
-00:15:12,106 --> 00:15:14,716
-around my character that
-I want it to pass through,
+00:14:27,034 --> 00:14:29,636
+我相信很多SpriteKit工程师
+会对这个功能感兴趣
 
 
 292
-00:15:15,056 --> 00:15:17,746
-GameplayKit will take that
-buffer radius into account,
+00:14:30,470 --> 00:14:32,506
+GameplayKit中寻路
+的工作方式是
 
 
 293
-00:15:17,746 --> 00:15:20,496
-automatically expand all of
-the obstacles so we never get
+00:14:32,573 --> 00:14:34,741
+你指定一个可穿越的导航图
 
 
 294
-00:15:20,496 --> 00:15:22,556
-within that radius of
-any of the obstacles
+00:14:35,409 --> 00:14:37,644
+在你的游戏世界中
 
 
 295
-00:15:23,246 --> 00:15:25,436
-and then create the
-valid connections
+00:14:38,212 --> 00:14:41,448
+之后你将会在这些节点之间连线
 
 
 296
-00:15:25,436 --> 00:15:27,686
-and only the valid
-connections within that graph,
+00:14:41,782 --> 00:14:43,350
+并给出一个相关成本
 
 
 297
-00:15:27,856 --> 00:15:29,876
-so you're never traversing
-through the obstacles.
+00:14:44,618 --> 00:14:46,019
+只要你给出了这个地图
 
 
 298
-00:15:30,436 --> 00:15:33,566
-You can then use this to perform
-any pathfinding operations
+00:14:46,587 --> 00:14:48,689
+GameplayKit 
+将计算出地图上
 
 
 299
-00:15:33,956 --> 00:15:35,046
-within your game.
+00:14:48,822 --> 00:14:50,090
+这两个点之间的最优路径
 
 
 300
-00:15:35,596 --> 00:15:37,286
-It is not specific to SpriteKit,
+00:14:50,991 --> 00:14:52,759
+我怎样在游戏中设置呢？
 
 
 301
-00:15:37,356 --> 00:15:40,636
-so you can use GameplayKits
-features with SceneKit,
+00:14:53,994 --> 00:14:56,263
+加入我这里
+有一个SpriteKit游戏
 
 
 302
-00:15:40,636 --> 00:15:45,506
-SpriteKit, OpenGL, Metal, any
-kind of game scenario you want.
+00:14:56,330 --> 00:14:58,165
+我的英雄在下面的这个角 
+我...嗯…
 
 
 303
-00:15:45,506 --> 00:15:47,426
-If you are doing it with
-SpriteKit we made it easier.
+00:14:58,632 --> 00:15:01,668
+假如我想让他移动到某一个目的地
 
 
 304
-00:15:47,426 --> 00:15:49,316
-You don't even need to
-create the obstacles.
+00:15:02,202 --> 00:15:05,806
+然后在我的地图上指定几个障碍物
 
 
 305
-00:15:50,036 --> 00:15:53,696
-You can create the obstacles
-directly from a sprite's bounds,
+00:15:05,873 --> 00:15:07,441
+障碍物是不可穿越的地区
 
 
 306
-00:15:54,296 --> 00:15:57,746
-you can create the
-obstacles from a physics body
+00:15:07,841 --> 00:15:12,045
+将这些数据
+给GameplayKit之后
 
 
 307
-00:15:57,746 --> 00:16:01,316
-that you may have set
-on the sprite or even
+00:15:12,112 --> 00:15:14,715
+给我的想要穿越地图的角色
+周围设置一个缓冲半径
 
 
 308
-00:16:01,316 --> 00:16:03,376
-from the alpha transparency
-information
+00:15:15,048 --> 00:15:17,684
+GameplayKit 会将
+缓冲半径计算进去
 
 
 309
-00:16:03,596 --> 00:16:05,986
-in the texture that's associated
-with that sprite in your game.
+00:15:17,751 --> 00:15:20,420
+自动扩展所有的障碍物
 
 
 310
-00:16:06,286 --> 00:16:09,206
-This gives you really easy
-access to harness the power
+00:15:20,487 --> 00:15:22,556
+这样我们不会
+进入任何障碍物的缓冲半径中
 
 
 311
-00:16:09,456 --> 00:16:11,976
-of GameplayKits pathfinding
-from your SpriteKit app.
+00:15:23,257 --> 00:15:25,359
+然后在地图中创建有效的连接图
 
 
 312
-00:16:12,516 --> 00:16:17,856
-[Applause]
+00:15:25,425 --> 00:15:27,694
+并且只创建有效的连接
 
 
 313
-00:16:18,356 --> 00:16:19,826
->> TIM ORIOL: As I said before,
+00:15:27,861 --> 00:15:29,863
+所以我们永远不会穿越这些障碍物
 
 
 314
-00:16:20,136 --> 00:16:22,186
-the framework really
-is only half the story.
+00:15:30,430 --> 00:15:33,567
+然后你就可以在你的游戏中
+使用这些来进行
 
 
 315
-00:16:22,646 --> 00:16:25,126
-We have a number of
-really cool enhancements
+00:15:33,967 --> 00:15:35,035
+寻路操作
 
 
 316
-00:16:25,196 --> 00:16:27,916
-to our tools this year and I'd
-like to turn it over to Norman
+00:15:35,602 --> 00:15:37,704
+这个功能并不专属于
+ SpriteKit
 
 
 317
-00:16:27,916 --> 00:16:28,976
-to tell you all about it.
+00:15:37,771 --> 00:15:40,707
+所以你可以在SceneKit
+中使用GameplayKits
 
 
 318
-00:16:29,516 --> 00:16:34,276
-[Applause]
+00:15:40,774 --> 00:15:43,110
+SpriteKit, 
+OpenGL, Metal
 
 
 319
-00:16:34,776 --> 00:16:35,956
->> NORMAN WANG: Thanks, Tim.
+00:15:43,177 --> 00:15:44,378
+等等任何类型的游戏都可以
 
 
 320
-00:16:37,376 --> 00:16:40,456
-Building games is a complex
-and iteration process.
+00:15:45,212 --> 00:15:47,948
+如果你使用的是SpriteKit
+我们可以使它变得更容易
 
 
 321
-00:16:40,946 --> 00:16:44,286
-Various parts of the game needs
-to be iterated like game play,
+00:15:48,015 --> 00:15:49,249
+你甚至都不需要创建障碍物
 
 
 322
-00:16:44,886 --> 00:16:47,476
-making sure a game
-is fun, animation,
+00:15:50,050 --> 00:15:53,687
+你可以使用Sprite界限
+直接创建障碍物
 
 
 323
-00:16:48,066 --> 00:16:50,236
-making sure the character
-movement is fluid,
+00:15:55,422 --> 00:15:57,691
+你可以根据你在Sprite上
+设置的物理主体
 
 
 324
-00:16:50,826 --> 00:16:53,286
-or art assets, making
-sure that the pixels
+00:15:57,758 --> 00:16:01,261
+创建障碍物
 
 
 325
-00:16:53,286 --> 00:16:56,046
-on the screen really pop.
+00:16:01,328 --> 00:16:03,363
+甚至从与你游戏中
+Sprite相关纹理的
 
 
 326
-00:16:56,246 --> 00:16:58,756
-In addition to the
-iteration problem you also,
+00:16:03,597 --> 00:16:05,999
+Alpha透明度信息中创建障碍物
 
 
 327
-00:16:58,756 --> 00:17:01,536
-as a game developer, face
-the scalability problem.
+00:16:06,300 --> 00:16:09,203
+这给了你一种非常简单的
+在SpriteKit软件中利用
 
 
 328
-00:17:01,906 --> 00:17:05,386
-How do I replicate a current
-design across multiple levels.
+00:16:09,469 --> 00:16:11,972
+GameplayKits寻路的方法
 
 
 329
-00:17:05,386 --> 00:17:07,776
-At Apple when we first set
+00:16:18,345 --> 00:16:19,813
+就像我之前说的
 
 
 330
-00:17:07,776 --> 00:17:11,496
-out to design SpriteKit we
-wanted not only to provide you
+00:16:20,147 --> 00:16:22,182
+构架只是我们工作的一部分
 
 
 331
-00:17:11,496 --> 00:17:16,886
-with a high performance and easy
-to use API but also the tools
+00:16:22,649 --> 00:16:25,118
+今年我们对我们的工具进行了
+大量非常棒的改进
 
 
 332
-00:17:17,066 --> 00:17:20,425
-to help you with scalability and
-iteration so that we can focus
+00:16:25,185 --> 00:16:27,855
+接下来我想将这些交给Norman
 
 
 333
-00:17:20,425 --> 00:17:21,586
-on just building the game.
+00:16:27,921 --> 00:16:28,989
+来讲解
 
 
 334
-00:17:22,556 --> 00:17:24,006
-Ever since day one release
+00:16:34,761 --> 00:16:35,963
+谢谢你 提姆
 
 
 335
-00:17:24,006 --> 00:17:26,636
-of the SpriteKit
-framework we have created
+00:16:37,364 --> 00:16:40,467
+开发游戏是一个复杂
+并且不断迭代的过程
 
 
 336
-00:17:26,836 --> 00:17:30,596
-and continuously added
-multiple tools as part of Xcode.
+00:16:40,934 --> 00:16:44,271
+游戏的各个部分需要
+像玩游戏一样不断迭代
 
 
 337
-00:17:31,066 --> 00:17:34,536
-Let me give you a quick tour
-of what are the tools available
+00:16:44,872 --> 00:16:47,474
+以保证一个游戏的趣味性
 
 
 338
-00:17:34,676 --> 00:17:36,396
-for you as a SpriteKit user.
+00:16:48,075 --> 00:16:50,244
+动画 用来确保一个角色移动的流畅性
 
 
 339
-00:17:37,306 --> 00:17:40,156
-The first thing I want to
-talk about is texture atlas.
+00:16:50,811 --> 00:16:53,213
+艺术性 用来保证屏幕上的像素点
 
 
 340
-00:17:41,166 --> 00:17:42,236
-One of the main benefits
+00:16:53,280 --> 00:16:56,049
+能够流行起来
 
 
 341
-00:17:42,236 --> 00:17:45,806
-of using texture atlas is
-performance improvement.
+00:16:56,250 --> 00:16:58,685
+作为一个游戏工程师
+你不仅会遇到迭代问题
 
 
 342
-00:17:46,776 --> 00:17:49,806
-SpriteKit uses texture
-atlas to minimize the amount
+00:16:58,752 --> 00:17:01,522
+你还会遇到可伸缩性问题
 
 
 343
-00:17:49,806 --> 00:17:53,096
-of draw calls sent out to the
-GPU to optimize the efficiency.
+00:17:01,922 --> 00:17:05,325
+我要怎样才能跨越多个等级
+复制我的设计呢？
 
 
 344
-00:17:53,756 --> 00:17:57,816
-We don't want to force our
-users to adopt a manual process
+00:17:06,292 --> 00:17:09,695
+在苹果公司我们当初启动设计
+SpriteKit 的工程时
 
 
 345
-00:17:58,136 --> 00:18:01,826
-by manually building these
-texture atlas, [unintelligible]
+00:17:09,762 --> 00:17:13,200
+我们不仅想要为你提供
+一个高性能
 
 
 346
-00:18:02,546 --> 00:18:05,006
-and every time when the
-source acts as a change,
+00:17:13,267 --> 00:17:15,435
+且易用的API
 
 
 347
-00:18:05,106 --> 00:18:07,476
-this manual process will
-have to be kickedoff again.
+00:17:15,502 --> 00:17:18,405
+而且要为你提供
+一个可伸缩和迭代的工具
 
 
 348
-00:18:08,196 --> 00:18:11,346
-Therefore it builds an automatic
-texture atlas generator right
+00:17:18,872 --> 00:17:21,575
+这样我们就能专注于
+开发游戏
 
 
 349
-00:18:11,346 --> 00:18:12,166
-inside the Xcode.
+00:17:22,542 --> 00:17:25,244
+从SpriteKit 构架的
+第一个版本发布
 
 
 350
-00:18:12,796 --> 00:18:15,276
-To build one of these
-atlas is as simple
+00:17:25,311 --> 00:17:26,780
+我们已经开发并
 
 
 351
-00:18:15,276 --> 00:18:17,796
-as dragging a folder
-into your workspace.
+00:17:26,847 --> 00:17:28,582
+持续向Xcode中
 
 
 352
-00:18:18,686 --> 00:18:22,526
-And we'll do something like this
-automatically at build time.
+00:17:28,649 --> 00:17:30,584
+添加了多个工具
 
 
 353
-00:18:22,526 --> 00:18:25,216
-Each of the source images
-is automatically going
+00:17:31,051 --> 00:17:34,521
+让我来给你们展示一下
+作为一个SpriteKit用户
 
 
 354
-00:18:25,216 --> 00:18:27,336
-through a complex
-post processing stage.
+00:17:34,688 --> 00:17:36,390
+你能够使用哪些工具
 
 
 355
-00:18:27,736 --> 00:18:31,916
-For example, we trim the alpha
-transparent pixels for the image
+00:17:37,691 --> 00:17:40,160
+第一个要介绍的是纹理地图集
 
 
 356
-00:18:32,466 --> 00:18:34,366
-that doesn't really contribute
-anything to the screen.
+00:17:41,161 --> 00:17:43,730
+使用texture atlas的
+第一个主要好处就是
 
 
 357
-00:18:34,906 --> 00:18:38,836
-We rotate the image up to 90°
-if they result a tighter fit
+00:17:44,131 --> 00:17:45,866
+能够提升性能
 
 
 358
-00:18:39,366 --> 00:18:41,206
-or result a smaller
-texture atlas.
+00:17:46,767 --> 00:17:49,736
+SpriteKit通过纹理地图集将
+大量的图片调用命令最小化
 
 
 359
-00:18:41,986 --> 00:18:46,046
-For each of the source
-images, we also introspect each
+00:17:49,803 --> 00:17:53,106
+并发送给GPU以达到优化效率的目的
 
 
 360
-00:18:46,046 --> 00:18:47,466
-of the edges on the image
+00:17:53,740 --> 00:17:57,811
+我们不想强迫我们的用户适应手动
 
 
 361
-00:18:47,886 --> 00:18:50,856
-and if they're fully opaque
-we'll perform extrusion
+00:17:58,145 --> 00:18:01,815
+创建这些纹理地图集的过程
 
 
 362
-00:18:50,856 --> 00:18:51,436
-on the edge.
+00:18:02,549 --> 00:18:05,018
+每次对资源进行修改的时候
 
 
 363
-00:18:51,476 --> 00:18:54,276
-So when you tile these
-images on your scene,
+00:18:05,118 --> 00:18:07,487
+这些手动的过程都必须从头再来一遍
 
 
 364
-00:18:54,376 --> 00:18:57,066
-you will not see any seams,
+00:18:08,188 --> 00:18:10,591
+所以我们开发了一个
+自动的纹理地图集生成器
 
 
 365
-00:18:57,246 --> 00:18:59,456
-that's automatic
-texture atlas generation.
+00:18:10,657 --> 00:18:12,159
+在Xcode中
 
 
 366
-00:19:00,446 --> 00:19:02,536
-This year we have
-made that even better.
+00:18:12,793 --> 00:18:15,195
+创建一个这种地图集
 
 
 367
-00:19:03,286 --> 00:19:07,146
-Now you can generate texture
-atlas instead of asset catalog.
+00:18:15,262 --> 00:18:17,798
+就像拖拽一个文件夹
+到你的工作区中一样简单
 
 
 368
-00:19:07,686 --> 00:19:09,186
-There are two major benefits
+00:18:18,699 --> 00:18:22,469
+同样的我们在开发的时候
+也会自动做一些事情
 
 
 369
-00:19:09,186 --> 00:19:11,906
-of generating texture
-atlas using asset catalog.
+00:18:22,536 --> 00:18:25,138
+每一张资源图片
 
 
 370
-00:19:12,276 --> 00:19:16,006
-Number one, you have
-precise control
+00:18:25,205 --> 00:18:27,341
+都会自动经历一个复杂的后期处理过程
 
 
 371
-00:19:16,006 --> 00:19:18,826
-of the targeted device
-resolutions matching
+00:18:27,741 --> 00:18:31,912
+例如我们会为图片
+修剪Alpha透明像素
 
 
 372
-00:19:18,826 --> 00:19:19,856
-with your image names.
+00:18:32,479 --> 00:18:34,381
+但是这并不会在屏幕上有任何体现
 
 
 373
-00:19:20,426 --> 00:19:25,256
-You have freedom to not follow
-the post-fix in your image names
+00:18:34,915 --> 00:18:38,852
+如果旋转90度能够让这些图片更紧凑
 
 
 374
-00:19:25,256 --> 00:19:28,506
-like add 2X or add
-2X to the iPhone,
+00:18:39,353 --> 00:18:41,421
+或者能得到一个更小的地图集的话 
+我们会进行这样的旋转
 
 
 375
-00:19:29,196 --> 00:19:31,196
-all of that can be
-designed right in the UI.
+00:18:41,989 --> 00:18:43,690
+对于每一个资源图片 
 
 
 376
-00:19:32,356 --> 00:19:36,876
-The second benefit is we support
-[unintelligible] now inside the
+00:18:43,757 --> 00:18:47,461
+我们都会对其进行其边缘的审查
 
 
 377
-00:19:36,876 --> 00:19:37,606
-asset catalog.
+00:18:47,895 --> 00:18:49,596
+如果其实完全不透明的
 
 
 378
-00:19:38,236 --> 00:19:41,236
-Each group of the target
-resolution are going
+00:18:49,663 --> 00:18:51,398
+我们将会对其边缘进行压缩
 
 
 379
-00:19:41,236 --> 00:19:43,836
-to be generated by their
-device independent textures.
+00:18:51,465 --> 00:18:53,400
+当你在场景中堆叠这些图片时
 
 
 380
-00:19:44,346 --> 00:19:45,836
-When the user goes
-to the App Store
+00:18:53,467 --> 00:18:55,736
+你不会看到任何接缝
 
 
 381
-00:19:45,836 --> 00:19:48,086
-and downloads your
-SpriteKit enabled games,
+00:18:57,237 --> 00:18:59,439
+这就是纹理地图集自动生成器
 
 
 382
-00:19:48,846 --> 00:19:51,776
-only the texture atlas
-that's relevant to his
+00:19:00,440 --> 00:19:02,543
+今年我们将它做得更好了
 
 
 383
-00:19:51,776 --> 00:19:53,396
-or her device will
-get downloaded,
+00:19:03,277 --> 00:19:05,479
+现在你可以生成纹理地图集
 
 
 384
-00:19:54,056 --> 00:19:57,686
-not only does this minimize
-the amount of bandwidth as well
+00:19:05,546 --> 00:19:07,147
+来代替资源目录了
 
 
 385
-00:19:57,746 --> 00:20:01,056
-as install time for the app
-to get on the users phone
+00:19:07,681 --> 00:19:09,116
+使用资源目录生成地图集
 
 
 386
-00:20:01,416 --> 00:20:06,986
-but also minimizes the amount
-of storage overhead on the app.
+00:19:09,183 --> 00:19:11,919
+有两个主要好处
 
 
 387
-00:20:07,256 --> 00:20:10,436
-In addition, texture atlas
-supports on-demand resources.
+00:19:12,286 --> 00:19:13,153
+第一
 
 
 388
-00:20:10,916 --> 00:20:14,776
-On-demand resources is a
-brand-new API that enables you
+00:19:14,087 --> 00:19:15,923
+你可以精确地
 
 
 389
-00:20:14,776 --> 00:20:18,246
-to stream in art assets over
-the network in the background
+00:19:15,989 --> 00:19:18,192
+为你的目标设备
 
 
 390
-00:20:18,316 --> 00:20:19,206
-when the game is running.
+00:19:18,258 --> 00:19:19,860
+适配到合适分辨率的图片
 
 
 391
-00:20:20,046 --> 00:20:22,096
-SpriteKit builds that
-support right in.
+00:19:20,427 --> 00:19:23,730
+你不需要严格
+按照你的图片名字的后缀来查找
 
 
 392
-00:20:22,486 --> 00:20:24,886
-These assets are
-identified by tags.
+00:19:24,231 --> 00:19:28,502
+例如添加2X或者
+添加2X到iphone
 
 
 393
-00:20:25,266 --> 00:20:28,356
-Here, for example, my
-background elements in Xcode
+00:19:29,203 --> 00:19:31,538
+所有的这些都能在在UI中设计好
 
 
 394
-00:20:28,356 --> 00:20:32,446
-in Inspector I can specify what
-are the tags associated with it.
+00:19:32,372 --> 00:19:33,640
+第二个
 
 
 395
-00:20:33,016 --> 00:20:35,536
-I'm calling it level
-1 and background.
+00:19:33,707 --> 00:19:36,343
+有点就是我们现在支持 ...
 
 
 396
-00:20:35,656 --> 00:20:38,516
-These are the tags, you can
-use either of these tags
+00:19:36,410 --> 00:19:37,611
+在资源目录中
 
 
 397
-00:20:38,576 --> 00:20:42,226
-to retrieve this asset and
-start background streaming
+00:19:38,245 --> 00:19:41,181
+每一组的目标分辨率
 
 
 398
-00:20:42,486 --> 00:20:44,566
-when your application
-requests it.
+00:19:41,248 --> 00:19:43,851
+将会根据他们设备的独立纹理来生成
 
 
 399
-00:20:46,536 --> 00:20:51,426
-Particle effects really help
-you set up the game right.
+00:19:44,351 --> 00:19:45,786
+当用户打开App Store
 
 
 400
-00:20:52,176 --> 00:20:56,846
-We provide SKEmitterNode as a
-very powerful and flexible APIs
+00:19:45,853 --> 00:19:48,088
+并下载下来
+你的SpriteKit授权游戏时
 
 
 401
-00:20:57,066 --> 00:20:58,696
-in the framework for you to use.
+00:19:48,856 --> 00:19:51,124
+只有与他或她的设备
 
 
 402
-00:20:59,596 --> 00:21:02,856
-The downside of being
-powerful and flexible is
+00:19:51,191 --> 00:19:53,393
+相适配的地图集才会被下载下来
 
 
 403
-00:21:02,856 --> 00:21:05,836
-that it also comes with 49
-properties for you to set.
+00:19:54,061 --> 00:19:56,864
+这不仅能够使下载时的带宽最小
 
 
 404
-00:21:07,136 --> 00:21:09,136
-To set a combination
-of permutations
+00:19:57,297 --> 00:20:01,068
+同样能够使其安装到
+用户手机的时间最短
 
 
 405
-00:21:09,136 --> 00:21:12,806
-of these 49 properties to
-match with the look and feel
+00:20:01,401 --> 00:20:04,872
+同样能够最小化应用程序的存储开销
 
 
 406
-00:21:12,806 --> 00:21:15,456
-that you're going after
-is time consuming.
+00:20:07,241 --> 00:20:10,444
+另外 纹理地图集支持基于命令资源
 
 
 407
-00:21:16,106 --> 00:21:20,316
-Therefore we build a particle
-editor right inside of Xcode
+00:20:10,911 --> 00:20:13,680
+基于命令的资源是一个全新的API
 
 
 408
-00:21:20,746 --> 00:21:23,076
-that uses the same
-SpriteKit rendering engine
+00:20:13,981 --> 00:20:17,317
+它使你能够在游戏运行的情况下
 
 
 409
-00:21:23,406 --> 00:21:27,186
-that gives you the visual look
-right inside of your work space
+00:20:17,384 --> 00:20:19,219
+从网上下载艺术资源流
 
 
 410
-00:21:27,186 --> 00:21:31,126
-so that you can tweak and change
-any of these 49 properties
+00:20:20,053 --> 00:20:22,089
+SpriteKit也集成了这种功能
 
 
 411
-00:21:31,496 --> 00:21:33,296
-without ever having
-to write any lines
+00:20:22,489 --> 00:20:24,892
+这种资源是通过标签来识别的
 
 
 412
-00:21:33,296 --> 00:21:35,076
-of code or rebuild your game.
+00:20:25,259 --> 00:20:26,126
+例如
 
 
 413
-00:21:35,076 --> 00:21:37,946
-These particles are
-going to be exported
+00:20:26,193 --> 00:20:28,295
+这是我的Inspector中的Xc
+ode写的背景元素
 
 
 414
-00:21:37,946 --> 00:21:41,936
-as a really small data file that
-can be serialized and deployed
+00:20:28,362 --> 00:20:32,432
+我可以指定一个与其相关联的标签
 
 
 415
-00:21:41,936 --> 00:21:44,676
-across multiple levels or
-across multiple projects.
+00:20:33,133 --> 00:20:35,536
+我把它叫做一级背景
 
 
 416
-00:21:47,556 --> 00:21:50,576
-SpriteKit also supports
-Quick Look.
+00:20:35,602 --> 00:20:38,505
+这些就是标签 你可以通过这些标签
 
 
 417
-00:21:50,576 --> 00:21:53,176
-Here for example I'm trying
-to learn the new Swift.
+00:20:38,572 --> 00:20:40,440
+检索这个资源
 
 
 418
-00:21:53,696 --> 00:21:57,576
-I create a brand-new
-playground and try to play
+00:20:40,507 --> 00:20:42,242
+并且开启背景流媒体
 
 
 419
-00:21:57,576 --> 00:22:00,746
-around with the SpriteKit
-API using the new Swift
+00:20:42,476 --> 00:20:44,044
+当你的程序调用它的时候
 
 
 420
-00:22:00,746 --> 00:22:01,686
-2.0 language.
+00:20:46,813 --> 00:20:48,348
+粒子效果
 
 
 421
-00:22:02,266 --> 00:22:06,596
-What I'm doing here is I'm
-creating a bad guy character,
+00:20:48,415 --> 00:20:50,150
+可以有效地帮助你准确的建立起游戏
 
 
 422
-00:22:07,266 --> 00:22:09,156
-called bad guy, which
-is a sprite node,
+00:20:52,186 --> 00:20:54,555
+我们将这个构架中的
+SKEmitterNode
 
 
 423
-00:22:09,316 --> 00:22:12,226
-it copied a single texture
-called the car hood,
+00:20:54,621 --> 00:20:56,924
+作为一个强大且灵活的APIs
 
 
 424
-00:22:13,186 --> 00:22:16,956
-and in addition I create two
-children node that appear
+00:20:56,990 --> 00:20:58,692
+提供给你来使用
 
 
 425
-00:22:16,956 --> 00:22:21,166
-under this bad guy, one has
-the texture of the roof,
+00:20:59,593 --> 00:21:02,196
+强大并灵活也有缺点
 
 
 426
-00:22:21,686 --> 00:22:23,626
-the other one has the
-texture of the trunk.
+00:21:02,763 --> 00:21:05,832
+那就是你需要设置49个属性
 
 
 427
-00:22:24,726 --> 00:22:29,326
-What's happening here, SpriteKit
-will do a partial off-screen
+00:21:07,134 --> 00:21:09,069
+你需要对这49个属性
 
 
 428
-00:22:29,326 --> 00:22:31,216
-rendering of this
-subterrain when you try
+00:21:09,136 --> 00:21:11,038
+进行排列组合
 
 
 429
-00:22:31,216 --> 00:22:32,646
-to introspect the sprite node
+00:21:11,104 --> 00:21:12,739
+来达到你想要的视觉和感觉效果
 
 
 430
-00:22:32,886 --> 00:22:36,336
-and it will provide the result
-right inside of the playground
+00:21:12,806 --> 00:21:15,442
+你需要做的就是花费更多的时间
 
 
 431
-00:22:36,336 --> 00:22:39,546
-for you so that every step
-along the way when you try
+00:21:16,109 --> 00:21:18,045
+因为我们在Xcode中
 
 
 432
-00:22:39,546 --> 00:22:42,406
-to learn a new language or
-make changes to the object,
+00:21:18,111 --> 00:21:20,314
+开发了一个粒子编辑器
 
 
 433
-00:22:42,786 --> 00:22:45,586
-you will see the live changes
-right inside of the playground.
+00:21:20,747 --> 00:21:23,083
+它是使用同一个
+SpriteKit呈现驱动
 
 
 434
-00:22:47,176 --> 00:22:50,796
-In addition the Quicklook
-in SpriteKit also supported
+00:21:23,417 --> 00:21:25,252
+可以让你能够
 
 
 435
-00:22:50,796 --> 00:22:54,086
-when you debug your applications
-whether they're in Swift,
+00:21:25,319 --> 00:21:27,120
+在你的工作区中直观的看到它
 
 
 436
-00:22:54,846 --> 00:22:57,966
-Objective-C, whether they
-are running on iOS devices
+00:21:27,754 --> 00:21:31,124
+所以你无需编写任何代码
 
 
 437
-00:22:58,266 --> 00:22:59,586
-or running on Mac OS X.
+00:21:31,491 --> 00:21:33,227
+就能够对这49个属性进行调整和改变
 
 
 438
-00:23:00,456 --> 00:23:03,946
-So here I'm trying to debug an
-application that I have written,
+00:21:33,293 --> 00:21:34,995
+也无需重建你的游戏
 
 
 439
-00:23:05,036 --> 00:23:06,356
-I trigger a break point,
+00:21:35,863 --> 00:21:37,865
+这些粒子将作为一个
+很小的数据文件导出
 
 
 440
-00:23:06,416 --> 00:23:10,126
-the target process is actually
-paused, but we're still able
+00:21:37,931 --> 00:21:39,800
+并能够被序列化
 
 
 441
-00:23:10,126 --> 00:23:14,086
-to wrap the partial screen
-rendering of the current texture
+00:21:40,133 --> 00:21:44,671
+也能够部署在多个等级或者多个项目中
 
 
 442
-00:23:14,706 --> 00:23:15,926
-and show that in the debugger.
+00:21:47,841 --> 00:21:50,177
+SpriteKit同样支持
+Quick Look.
 
 
 443
-00:23:16,366 --> 00:23:20,826
-So you know exactly what that
-texture is before I go ahead
+00:21:50,377 --> 00:21:53,180
+例如 我正在努力学习新的Swift
 
 
 444
-00:23:20,826 --> 00:23:23,416
-and grab it to assign
-to an SKSpriteNode.
+00:21:53,680 --> 00:21:56,617
+我创建了一个全新的场景
 
 
 445
-00:23:23,926 --> 00:23:29,826
-Last year in iOS 8 we
-announced a visual scene editor
+00:21:56,850 --> 00:21:59,987
+并努力地在
+SpriteKit API中使用
 
 
 446
-00:23:29,826 --> 00:23:32,896
-which will allow you to set up a
-full scene layout without having
+00:22:00,053 --> 00:22:01,688
+全新的Swift 2.0语言
 
 
 447
-00:23:32,896 --> 00:23:36,306
-to write any lines of code.
+00:22:03,724 --> 00:22:06,593
+我正在做的事情就是创建一个坏蛋角色
 
 
 448
-00:23:36,516 --> 00:23:41,666
-Not only you can set up the
-position, rotation and scale
+00:22:07,261 --> 00:22:09,162
+就叫坏人 这是一个Sprite节点
 
 
 449
-00:23:41,666 --> 00:23:44,006
-on each of the available
-nodes that are in the scene,
+00:22:09,329 --> 00:22:12,232
+它是一个叫做车罩的
+单独纹理复制出来的
 
 
 450
-00:23:44,396 --> 00:23:47,816
-but you can also define its
-physics properties like setting
+00:22:13,200 --> 00:22:15,702
+另外 我创建两个子节点 
 
 
 451
-00:23:47,816 --> 00:23:51,506
-up a graphic, gravities,
-mass, frictions,
+00:22:15,769 --> 00:22:18,839
+在这个坏人节点之下
 
 
 452
-00:23:52,036 --> 00:23:55,756
-you can also perform
-live simulations
+00:22:18,906 --> 00:22:21,175
+一个有屋顶的纹理
 
 
 453
-00:23:56,196 --> 00:23:59,126
-of these physics
-simulations without having
+00:22:21,675 --> 00:22:23,610
+另一个有树干的纹理
 
 
 454
-00:23:59,126 --> 00:24:01,626
-to launch your game or
-rebuild the application.
+00:22:24,711 --> 00:22:25,712
+这里会发生什么呢？
 
 
 455
-00:24:03,116 --> 00:24:06,946
-SpriteKit will support some
-advanced rendering techniques
+00:22:26,180 --> 00:22:29,249
+SpriteKit的部分屏幕中将
+会呈现这些看不见的东西
 
 
 456
-00:24:06,946 --> 00:24:08,066
-like custom shaders.
+00:22:29,316 --> 00:22:31,151
+当你努力去
 
 
 457
-00:24:08,766 --> 00:24:12,906
-Here in my level the waterfall
-in the background and the fog
+00:22:31,218 --> 00:22:32,753
+内观一个Sprite节点的时候
 
 
 458
-00:24:12,906 --> 00:24:15,316
-on the bottom I actually
-implement using two
+00:22:33,086 --> 00:22:36,256
+它会将结果为你呈现在窗口中
 
 
 459
-00:24:15,396 --> 00:24:16,256
-custom shaders.
+00:22:36,323 --> 00:22:39,493
+这样 你试着学习一个新的语言或者
 
 
 460
-00:24:16,726 --> 00:24:20,056
-To add the shaders,
-it is a matter of --
+00:22:39,560 --> 00:22:42,396
+更改一个对象的每一步都会呈现出来
 
 
 461
-00:24:20,556 --> 00:24:22,846
-it is as simple as opening
-up the assist editor,
+00:22:42,796 --> 00:22:45,599
+你将会在窗口中看到实时的变化
 
 
 462
-00:24:22,956 --> 00:24:25,076
-it automatically shows
-you the current scene
+00:22:47,534 --> 00:22:49,002
+另外SpriteKit中
+的Quicklook
 
 
 463
-00:24:25,636 --> 00:24:27,656
-with the shader that's
-being rendering
+00:22:49,369 --> 00:22:50,737
+同样支持
 
 
 464
-00:24:27,656 --> 00:24:30,136
-and it will show you
-the assistant editor
+00:22:50,804 --> 00:22:52,539
+在你调试程序的时候
 
 
 465
-00:24:30,136 --> 00:24:31,146
-with the shader source code.
+00:22:52,606 --> 00:22:54,274
+无论你是使用Swift
 
 
 466
-00:24:31,536 --> 00:24:33,356
-Any live changes you make
+00:22:54,842 --> 00:22:56,143
+还是Objective-C
 
 
 467
-00:24:33,356 --> 00:24:35,976
-in the assistant editor will
-automatically recompile the
+00:22:56,210 --> 00:22:57,978
+无论他们是在IOS设备上运行
 
 
 468
-00:24:35,976 --> 00:24:39,406
-shader, open up to OpenGL
-or Metal and provide you
+00:22:58,278 --> 00:22:59,580
+还是在Mac OS X上运行
 
 
 469
-00:24:39,406 --> 00:24:42,846
-with a real realtime
-preview rather than having
+00:23:00,447 --> 00:23:03,951
+这里我想试着去调试一个我写的程序
 
 
 470
-00:24:42,846 --> 00:24:46,086
-to build a game, go
-through the level,
+00:23:05,052 --> 00:23:06,353
+我触发了一个断点
 
 
 471
-00:24:46,596 --> 00:24:48,586
-go through the certain
-spots and trigger the event
+00:23:06,420 --> 00:23:08,856
+目标过程其实停止了 
 
 
 472
-00:24:48,896 --> 00:24:52,626
-to see whether I'm sending
-this stream to OpenGL or Metal,
+00:23:09,223 --> 00:23:10,591
+但是我们仍然能够
 
 
 473
-00:24:52,626 --> 00:24:54,296
-whether it compiles
-successfully or not.
+00:23:10,958 --> 00:23:14,094
+隐藏这部分显示
+并呈现出目前的纹理
 
 
 474
-00:24:54,656 --> 00:24:56,386
-It saves a lot of
-iteration time.
+00:23:14,695 --> 00:23:15,929
+并在调试器中显示出来
 
 
 475
-00:24:58,116 --> 00:25:00,956
-This year we have made
-a lot of enhancements
+00:23:16,363 --> 00:23:18,432
+所以你能够清楚地知道
 
 
 476
-00:25:00,956 --> 00:25:02,066
-to the visual scene editor.
+00:23:18,498 --> 00:23:20,767
+这个纹理是我之前调试的
 
 
 477
-00:25:02,066 --> 00:25:05,246
-The number one requested
-feature is custom classes.
+00:23:20,834 --> 00:23:23,403
+并将它抓取出来分配给了
+一个SKSpriteNode
 
 
 478
-00:25:06,266 --> 00:25:11,556
-Now in the level my hero
-character I can specify its
+00:23:26,440 --> 00:23:29,743
+去年 IOS
+8中我们发布了一个虚拟场景编辑器
 
 
 479
-00:25:11,596 --> 00:25:16,156
-class is called main
-character class.
+00:23:29,810 --> 00:23:32,813
+他允许你建立一个完整的场景布局
 
 
 480
-00:25:16,156 --> 00:25:18,666
-When the scene is
-de-serialized at runtime,
+00:23:32,880 --> 00:23:34,114
+并不需要编写任何代码
 
 
 481
-00:25:19,006 --> 00:25:21,526
-whether your application
-is written in Objective-C
+00:23:38,018 --> 00:23:41,588
+你不仅可以设置场景中每一个
 
 
 482
-00:25:21,526 --> 00:25:28,306
-or Swift the correct class will
-be instantiated and created
+00:23:41,655 --> 00:23:43,991
+可选节点的位置 旋转和尺度
 
 
 483
-00:25:28,306 --> 00:25:33,336
-when the scene is running
-and loaded on the scene.
+00:23:44,391 --> 00:23:47,761
+你同样可以定义其物理属性例如
 
 
 484
-00:25:33,336 --> 00:25:38,576
-In addition we have been
-very busy adding the support
+00:23:47,828 --> 00:23:51,498
+图片 重力 质量和摩擦
 
 
 485
-00:25:38,576 --> 00:25:41,156
-from day one of the
-brand-new SKNodes.
+00:23:53,166 --> 00:23:55,769
+你也可以进行这些物理仿真的
 
 
 486
-00:25:41,566 --> 00:25:44,766
-Now you can design your
-scene with the Camera nodes,
+00:23:56,203 --> 00:23:59,072
+实时模拟
 
 
 487
-00:25:45,356 --> 00:25:47,486
-position AudioNode and as well
+00:23:59,139 --> 00:24:01,642
+而这些并不需要你登陆游戏
+或者重新编译你的程序
 
 
 488
-00:25:47,486 --> 00:25:50,146
-as the ReferenceNode right
-inside of the editor.
+00:24:03,110 --> 00:24:06,880
+SpriteKit也将支持
+一些先进的渲染技术
 
 
 489
-00:25:50,486 --> 00:25:53,646
-It is really cool to be able
-to see the camera sending
+00:24:06,947 --> 00:24:08,081
+例如自定义着色器等
 
 
 490
-00:25:53,646 --> 00:25:56,546
-up the correct scale,
-the zoom factor as well
+00:24:08,782 --> 00:24:12,853
+在这一层上 这个瀑布的背景和
 
 
 491
-00:25:56,546 --> 00:25:58,976
-as run actions right inside
-of the scene editor rather
+00:24:12,920 --> 00:24:15,322
+雾的底部实际上我使用了
 
 
 492
-00:25:58,976 --> 00:26:01,516
-than having to rebuild
-your game.
+00:24:15,389 --> 00:24:16,256
+两个自定义着色器
 
 
 493
-00:26:02,106 --> 00:26:06,206
-You can also set up the
-position of the SKAudioNode,
+00:24:16,723 --> 00:24:20,060
+要添加着色器 
 
 
 494
-00:26:06,686 --> 00:26:11,866
-move them around and hear the
-actual sound change to make sure
+00:24:20,561 --> 00:24:22,829
+他就像打开帮助编辑器一样简单
 
 
 495
-00:26:11,866 --> 00:26:14,186
-that your effect is set up
-correctly on your scene.
+00:24:22,963 --> 00:24:25,065
+它会自动在你的当前场景中显示出来
 
 
 496
-00:26:14,786 --> 00:26:18,706
-Now this year, one of the
-most exciting features
+00:24:25,632 --> 00:24:27,601
+当然这是渲染过后的
 
 
 497
-00:26:18,706 --> 00:26:21,406
-on the tools front is
-to have the ability
+00:24:27,668 --> 00:24:30,070
+并向你展示附有源代码的
 
 
 498
-00:26:21,406 --> 00:26:23,086
-to design complex actions.
+00:24:30,137 --> 00:24:31,138
+助理编辑器
 
 
 499
-00:26:23,956 --> 00:26:26,646
-You can design a
-really complex action
+00:24:31,538 --> 00:24:32,606
+你在助理编辑器中
 
 
 500
-00:26:27,046 --> 00:26:28,846
-by using the fundamental
-building blocks
+00:24:32,673 --> 00:24:34,208
+所做的任何实时的修改
 
 
 501
-00:26:28,846 --> 00:26:32,186
-that we've provided as part
-of SpriteKit action runtime.
+00:24:34,274 --> 00:24:35,909
+都会自动进行编译
 
 
 502
-00:26:32,756 --> 00:26:38,766
-It is timeline based, also just
-like any other editors we have
+00:24:35,976 --> 00:24:38,011
+打开OpenGL或者Metal
 
 
 503
-00:26:38,766 --> 00:26:42,366
-in Xcode it provides
-live visualization.
+00:24:38,412 --> 00:24:41,648
+会为你提供一个真正实时的视窗
 
 
 504
-00:26:43,356 --> 00:26:47,096
-You can use not only
-to create 2D actions,
+00:24:42,015 --> 00:24:44,418
+而不是都建整个游戏
 
 
 505
-00:26:47,816 --> 00:26:50,126
-you can also create
-3D animations
+00:24:44,952 --> 00:24:46,086
+跨越整个层
 
 
 506
-00:26:50,276 --> 00:26:52,706
-for SceneKit, it's
-the same editor.
+00:24:46,587 --> 00:24:48,589
+以及特定的节点
 
 
 507
-00:26:53,826 --> 00:26:56,206
-You can also create
-cinematic animations
+00:24:48,889 --> 00:24:52,359
+触发这个事件来确定我是否真的发送了
+一个流给OpenGL或者Metal
 
 
 508
-00:26:56,746 --> 00:26:59,606
-which will be the animations
-saved out as part of scene
+00:24:52,426 --> 00:24:54,294
+无论是否编译成功
 
 
 509
-00:26:59,606 --> 00:27:02,676
-when the scene is loaded
-that automatically gets run
+00:24:54,661 --> 00:24:56,396
+这将节省很多迭代的时间
 
 
 510
-00:27:02,676 --> 00:27:05,326
-for any node that has
-action in a scene.
+00:24:58,398 --> 00:25:00,901
+今年我们花了大量的时间来
 
 
 511
-00:27:06,636 --> 00:27:11,356
-You can also create interactive
-animations like running cycle
+00:25:00,968 --> 00:25:02,569
+对虚拟场景编辑器进行改进升级
 
 
 512
-00:27:11,706 --> 00:27:14,266
-or jump animations,
-falling off from a ledge
+00:25:02,636 --> 00:25:05,239
+第一个请求的类型是自定义的
 
 
 513
-00:27:14,266 --> 00:27:19,006
-and trigger these animations
-with one or two lines of code
+00:25:06,273 --> 00:25:09,710
+现在 在我的英雄角色所处的这一层
 
 
 514
-00:27:19,946 --> 00:27:21,366
-at different game
-play scenarios.
+00:25:10,344 --> 00:25:12,379
+我可以将它指定为一个类
 
 
 515
-00:27:25,216 --> 00:27:28,976
-Here I have a scene, I designed
-to move the camera around,
+00:25:12,446 --> 00:25:14,615
+这个类的名字叫做角色类
 
 
 516
-00:27:28,976 --> 00:27:30,436
-I focus on the main character,
+00:25:16,149 --> 00:25:18,652
+当场景被反序列化运行时
 
 
 517
-00:27:30,436 --> 00:27:32,126
-the main character
-starts animating,
+00:25:19,019 --> 00:25:22,489
+无论你的程序是用Objective
+-C还是用Swift写的
 
 
 518
-00:27:32,126 --> 00:27:34,086
-running the walk cycle, and walk
+00:25:23,957 --> 00:25:26,860
+正确的类将会被创建并实例化
 
 
 519
-00:27:34,086 --> 00:27:35,676
-across the scene,
-that's my opening.
+00:25:27,494 --> 00:25:30,998
+并加载到场景中 在场景运行的时候
 
 
 520
-00:27:35,736 --> 00:27:42,326
-You can do that in less
-than 5 minutes of your time.
+00:25:32,900 --> 00:25:34,434
+另外
 
 
 521
-00:27:42,516 --> 00:27:45,486
-Now another major focus
-this year on the tools front
+00:25:35,869 --> 00:25:38,505
+从SKNodes项目开始的第一天起
 
 
 522
-00:27:45,486 --> 00:27:48,106
-for both 2D and 3D is
-to have the ability
+00:25:38,572 --> 00:25:41,141
+我们就一直忙于它的支撑工作
 
 
 523
-00:27:48,106 --> 00:27:50,546
-of doing referencing
-and instancing.
+00:25:41,575 --> 00:25:44,077
+现在你能够使用编辑其中的
 
 
 524
-00:27:50,956 --> 00:27:56,666
-On SpriteKit side with support
-references on the actions
+00:25:44,144 --> 00:25:45,012
+镜头节点
 
 
 525
-00:27:56,716 --> 00:28:00,336
-as well as references on the
-node which is your art assets
+00:25:45,379 --> 00:25:46,647
+音频节点定位 
 
 
 526
-00:28:00,336 --> 00:28:03,056
-in your scene, these
-are reusable components
+00:25:47,014 --> 00:25:48,549
+以及Referenc
+eNode
 
 
 527
-00:28:03,146 --> 00:28:05,386
-and they are data files
-that can be shared
+00:25:48,615 --> 00:25:50,150
+来设计你的场景
 
 
 528
-00:28:05,666 --> 00:28:07,626
-across multiple projects,
+00:25:50,617 --> 00:25:53,453
+能够在编辑器中看到镜头发送
 
 
 529
-00:28:07,886 --> 00:28:10,066
-multiple persons
-or multiple levels.
+00:25:53,520 --> 00:25:55,989
+准确的时间轴、缩放因子
 
 
 530
-00:28:10,936 --> 00:28:12,436
-To use these reference files,
+00:25:56,056 --> 00:25:57,391
+以及动作
 
 
 531
-00:28:12,436 --> 00:28:14,136
-you don't have to
-write any code.
+00:25:57,457 --> 00:25:59,092
+而并不需要
 
 
 532
-00:28:14,746 --> 00:28:19,386
-To create the reference
-animation is really easy,
+00:25:59,927 --> 00:26:01,528
+编译整个游戏是多么酷炫的一件事
 
 
 533
-00:28:19,736 --> 00:28:24,236
-we provide a brand new SK
-action file template in Xcode 7
+00:26:02,095 --> 00:26:03,363
+你也可以
 
 
 534
-00:28:24,236 --> 00:28:27,066
-and you can a pure
-animation file,
+00:26:03,430 --> 00:26:06,200
+设置SKAudioNode的位置
 
 
 535
-00:28:27,466 --> 00:28:31,156
-in there design all your complex
-animation, give it out a name,
+00:26:06,700 --> 00:26:08,302
+并将之移动
 
 
 536
-00:28:31,486 --> 00:28:34,846
-each of these actions can be
-retrieved with the SKAction,
+00:26:08,368 --> 00:26:10,304
+来亲自听实时的音效变化
 
 
 537
-00:28:34,846 --> 00:28:38,246
-actionNamed selector to
-create the right instance
+00:26:11,104 --> 00:26:14,174
+以确定你在场景中
+想要的效果是否设置正确
 
 
 538
-00:28:38,246 --> 00:28:39,256
-and to add it to your scene.
+00:26:16,710 --> 00:26:20,013
+今年 前端工具中最激动人心的功能是
 
 
 539
-00:28:40,006 --> 00:28:44,306
-Any of the referenced actions,
-automatically will be picked out
+00:26:20,080 --> 00:26:21,348
+能够设计
 
 
 540
-00:28:44,306 --> 00:28:46,216
-and reside in object library.
+00:26:21,415 --> 00:26:23,083
+复杂的动作
 
 
 541
-00:28:46,346 --> 00:28:48,686
-If you want to have
-the actions reused
+00:26:23,951 --> 00:26:26,653
+你可以通过基础构建模块
 
 
 542
-00:28:48,686 --> 00:28:50,986
-across multiple intro scenes
+00:26:27,054 --> 00:26:28,789
+设计出一个非常复杂的动作
 
 
 543
-00:28:50,986 --> 00:28:54,086
-in different levels it is just
-a matter of drag-n-drop these
+00:26:28,856 --> 00:26:32,192
+我们已经将其作为SpriteKit
+的动作部分提供给了大家
 
 
 544
-00:28:54,086 --> 00:28:55,176
-from the object library.
+00:26:33,961 --> 00:26:35,629
+它是基于时间线的
 
 
 545
-00:28:56,756 --> 00:28:59,396
-Creating reference
-nodes is also easier.
+00:26:36,129 --> 00:26:39,633
+和Xcode中的其他编辑器一样
 
 
 546
-00:29:00,806 --> 00:29:04,266
-It is just as simple as
-dragging another SKS file
+00:26:40,133 --> 00:26:42,369
+他也支持实时可视化
 
 
 547
-00:29:04,266 --> 00:29:06,696
-from your work space
-to your scene.
+00:26:43,370 --> 00:26:44,905
+你不仅可以
 
 
 548
-00:29:07,546 --> 00:29:09,866
-These references,
-we automatically
+00:26:44,972 --> 00:26:47,107
+用它来开发2D动作
 
 
 549
-00:29:09,866 --> 00:29:12,486
-in the editor create
-SKReferenceNode instances
+00:26:47,808 --> 00:26:50,110
+也可以用来为
+SceneKit设计3D动画
 
 
 550
-00:29:12,776 --> 00:29:14,606
-and set up correct URL for you.
+00:26:50,277 --> 00:26:52,713
+都是同样的编辑器
 
 
 551
-00:29:15,096 --> 00:29:19,896
-You can also use it, the API
-to build a custom collection
+00:26:53,814 --> 00:26:56,216
+你也可以创建电影动画
 
 
 552
-00:29:20,406 --> 00:29:23,616
-of the nodes, for example, if I
-have a bird house that I'm going
+00:26:56,750 --> 00:26:59,553
+电影动画可以作为场景动画的一部分
 
 
 553
-00:29:23,616 --> 00:29:25,396
-to be using as a level prop
+00:26:59,620 --> 00:27:02,623
+当场景加载的时候
+任何包含这种动作的节点
 
 
 554
-00:29:25,396 --> 00:29:29,056
-across multiple levels I
-can just build that and have
+00:27:02,689 --> 00:27:05,325
+都会自动运行起来
 
 
 555
-00:29:29,056 --> 00:29:32,696
-that instance in multiple
-levels and any changes
+00:27:06,627 --> 00:27:09,596
+你也可以创建交互式动画
 
 
 556
-00:29:32,696 --> 00:29:33,936
-to the original design
+00:27:10,063 --> 00:27:11,365
+例如循环动画
 
 
 557
-00:29:33,996 --> 00:29:36,506
-of the bird house will
-automatically get reflected
+00:27:11,698 --> 00:27:14,535
+或者跳转动画
+从窗台掉落
 
 
 558
-00:29:36,506 --> 00:29:39,146
-in each of the instances
-that use the reference.
+00:27:15,636 --> 00:27:19,006
+通过一行或两行代码出发折叠动画
 
 
 559
-00:29:41,816 --> 00:29:45,686
-Here you can also
-manually change
+00:27:19,940 --> 00:27:21,375
+在不同的游戏场景中
 
 
 560
-00:29:45,686 --> 00:29:48,596
-and update the reference
-file in the editor as well.
+00:27:25,546 --> 00:27:27,181
+这里有一个场景
 
 
 561
-00:29:48,596 --> 00:29:54,916
-Next, I like to invite Tyler on
-stage to give you a quick demo
+00:27:27,247 --> 00:27:28,916
+我将镜头设计为移动的
 
 
 562
-00:29:55,056 --> 00:29:56,976
-of these great new
-features in Xcode.
+00:27:28,982 --> 00:27:30,384
+现在锁定游戏角色
 
 
 563
-00:29:57,516 --> 00:30:02,496
-[Applause]
+00:27:30,450 --> 00:27:32,052
+角色开始运动
 
 
 564
-00:30:02,996 --> 00:30:03,816
->> TYLER CASELLA:
-Thank you Norman.
+00:27:32,119 --> 00:27:33,654
+运行行走动作循环
 
 
 565
-00:30:03,996 --> 00:30:06,996
-As you see, we have a lot of
-great new additions to SpriteKit
+00:27:33,720 --> 00:27:35,656
+穿越整个场景 这就是开场
 
 
 566
-00:30:06,996 --> 00:30:09,596
-and Xcode 7, and I'd like to
-show you how they'll integrate
+00:27:35,722 --> 00:27:38,625
+你也可以在五分钟之完成这些
 
 
 567
-00:30:09,596 --> 00:30:12,166
-in your development workflow
-by showing you a quick demo
+00:27:42,529 --> 00:27:45,432
+今年2D和3D的前端工具中
 
 
 568
-00:30:12,166 --> 00:30:15,246
-of creating a simple level,
-adding a cut scene to it,
+00:27:45,499 --> 00:27:48,035
+另一个主要关注点就是
 
 
 569
-00:30:15,576 --> 00:30:17,336
-and then creating some
-interactive game play.
+00:27:48,101 --> 00:27:50,537
+能够做引用和实例化
 
 
 570
-00:30:22,176 --> 00:30:25,526
-Well see here, I just
-started a game project
+00:27:51,438 --> 00:27:53,307
+在SpriteKit上
 
 
 571
-00:30:25,526 --> 00:30:28,596
-and I've started a level
-within this project.
+00:27:53,373 --> 00:27:56,643
+一直是支持对动作或节点的引用
 
 
 572
-00:30:28,596 --> 00:30:31,576
-I've got a player sprite
-as well as some platforms.
+00:27:56,944 --> 00:28:00,280
+这些都是你场景中的艺术资源
 
 
 573
-00:30:32,056 --> 00:30:35,656
-The first thing I want to do is
-to create the environment in it
+00:28:01,381 --> 00:28:03,050
+这些都是可重复使用的组件
 
 
 574
-00:30:35,916 --> 00:30:39,076
-by adding a background and
-some foreground elements.
+00:28:03,150 --> 00:28:05,385
+这些都是数据文件
 
 
 575
-00:30:39,636 --> 00:30:42,466
-Previously I would do this
-directly into the scene
+00:28:05,652 --> 00:28:07,621
+能够在不同的工程中
 
 
 576
-00:30:42,466 --> 00:30:45,496
-and then create copies for
-each instance that I needed.
+00:28:07,888 --> 00:28:10,057
+不同的人之间 不同的层次上共享
 
 
 577
-00:30:45,896 --> 00:30:48,686
-This quickly becomes cumbersome
-if I need to make changes
+00:28:10,924 --> 00:28:12,359
+在使用这些引用文件时
 
 
 578
-00:30:48,686 --> 00:30:51,016
-because I need to make the
-change in many different spots.
+00:28:12,426 --> 00:28:14,127
+你不需要写任何代码
 
 
 579
-00:30:51,306 --> 00:30:53,076
-It is not easy to reuse.
+00:28:16,930 --> 00:28:19,399
+创建引用动画非常简单
 
 
 580
-00:30:53,076 --> 00:30:55,516
-We have addressed that
-with the ReferenceNode.
+00:28:19,733 --> 00:28:24,171
+我们在Xcode中提供一种
+全新的SK动作文件模板
 
 
 581
-00:30:56,196 --> 00:30:58,726
-So see here in a separate
-file I've created all
+00:28:24,238 --> 00:28:27,074
+你可以打包一个纯粹的动画文件
 
 
 582
-00:30:58,726 --> 00:31:00,856
-of my elements for
-our environment.
+00:28:27,474 --> 00:28:30,143
+设计好所有的复杂的动画
 
 
 583
-00:31:01,096 --> 00:31:03,646
-I've got a nice background
-with the waterfall as well
+00:28:30,210 --> 00:28:31,144
+将之命名
 
 
 584
-00:31:03,646 --> 00:31:05,646
-as a nice foreground fog effect.
+00:28:31,478 --> 00:28:34,781
+使这些动作可以
+被SKAction检索
 
 
 585
-00:31:06,396 --> 00:31:08,146
-What I can do to
-reference the contents
+00:28:34,848 --> 00:28:36,550
+使用actionNamed选择器
 
 
 586
-00:31:08,176 --> 00:31:10,826
-of this file is simply
-drag it into our level.
+00:28:37,017 --> 00:28:39,253
+创建正确的实例
+并将之添加到你的场景中
 
 
 587
-00:31:11,246 --> 00:31:13,376
-Now we've automatically
-created a ReferenceNode
+00:28:40,020 --> 00:28:44,224
+任何引用的动作
+都将会被自动筛选出来
 
 
 588
-00:31:13,576 --> 00:31:14,776
-with all those elements.
+00:28:44,291 --> 00:28:46,226
+放到一个对象库中
 
 
 589
-00:31:14,856 --> 00:31:18,816
-You will notice even the
-foreground Z value is preserved
+00:28:46,360 --> 00:28:48,629
+如果你想在不同的场景中
 
 
 590
-00:31:18,816 --> 00:31:20,356
-as we add it into our scene.
+00:28:48,695 --> 00:28:50,931
+或者不同的层中
 
 
 591
-00:31:21,226 --> 00:31:23,746
-So go ahead and create a
-few copies of these to fill
+00:28:50,998 --> 00:28:54,034
+再次使用这些动作 这只是一个
 
 
 592
-00:31:23,746 --> 00:31:26,716
-out our level and you'll
-notice that I'm creating copies
+00:28:54,101 --> 00:28:55,169
+从对象库中拖放的问题
 
 
 593
-00:31:26,716 --> 00:31:28,326
-of the ReferenceNode itself
+00:28:56,770 --> 00:28:59,406
+创建一个引用节点也很简单
 
 
 594
-00:31:28,586 --> 00:31:31,206
-and not the actual
-individual elements
+00:29:00,807 --> 00:29:04,211
+就像在你的工作区中拖一个SKS文件
 
 
 595
-00:31:31,326 --> 00:31:33,276
-within our reference scene.
+00:29:04,278 --> 00:29:06,680
+放到你的场景中一样简单
 
 
 596
-00:31:33,896 --> 00:31:37,296
-What's great about that is,
-later on in my project when I,
+00:29:07,681 --> 00:29:08,882
+对于这些引用
 
 
 597
-00:31:37,606 --> 00:31:39,966
-for example, want to change
-the background texture
+00:29:08,949 --> 00:29:10,551
+我们会自动在编辑器中
 
 
 598
-00:31:39,966 --> 00:31:41,246
-because it doesn't quite match
+00:29:10,617 --> 00:29:12,553
+生成SKReferenceNode
+实例
 
 
 599
-00:31:41,246 --> 00:31:43,736
-with the platforms I've got
-here, I don't have to make
+00:29:12,786 --> 00:29:14,621
+并为你分配合适的URL
 
 
 600
-00:31:43,736 --> 00:31:45,786
-that change on the
-three instances I have.
+00:29:16,223 --> 00:29:19,893
+你同样可以使用API创建
+一个自定义节点收藏夹
 
 
 601
-00:31:46,146 --> 00:31:48,136
-Instead I can go to
-our single source
+00:29:20,394 --> 00:29:22,629
+例如 我有一个鸟笼
 
 
 602
-00:31:48,486 --> 00:31:53,486
-and make this change only once
-and that change is echoed to all
+00:29:22,696 --> 00:29:24,231
+我打算用它作为一个
 
 
 603
-00:31:53,486 --> 00:31:55,906
-of our instances
-within our level.
+00:29:24,298 --> 00:29:26,633
+不同的层之间的层道具
 
 
 604
-00:31:56,516 --> 00:32:00,646
-[Applause]
+00:29:26,700 --> 00:29:28,802
+我可以在多个层之间建立起来
 
 
 605
-00:32:01,146 --> 00:32:01,726
->> TYLER CASELLA: Next I'd
+00:29:28,869 --> 00:29:31,305
+并将其实例化
 
 
 606
-00:32:01,726 --> 00:32:03,846
-like to create a cut
-scene within our level.
+00:29:31,371 --> 00:29:33,941
+任何对鸟笼原设计的修改
 
 
 607
-00:32:03,846 --> 00:32:07,066
-I'll do that by using
-our new action editor
+00:29:34,007 --> 00:29:36,443
+都会被自动地反映到
 
 
 608
-00:32:07,266 --> 00:32:08,096
-that we've introduced.
+00:29:36,510 --> 00:29:39,146
+每一个引用了这个设计的实例中
 
 
 609
-00:32:08,556 --> 00:32:10,836
-Previously you could only
-create actions in code
+00:29:42,115 --> 00:29:45,619
+这样你就能够在编辑器中手动地
 
 
 610
-00:32:10,836 --> 00:32:13,536
-which is very difficult
-to visualize so we wanted
+00:29:45,686 --> 00:29:48,522
+修改和更新引用文件了
 
 
 611
-00:32:13,536 --> 00:32:16,696
-to create an editor that was
-easy to create complex actions
+00:29:50,757 --> 00:29:54,928
+接下来
+我想邀请泰勒上台来给大家
 
 
 612
-00:32:16,696 --> 00:32:19,146
-from and give you
-realtime previews
+00:29:55,062 --> 00:29:56,964
+演示一下Xcode中的这些新功能
 
 
 613
-00:32:19,146 --> 00:32:19,996
-of what you're creating.
+00:30:03,136 --> 00:30:04,004
+谢谢你诺曼
 
 
 614
-00:32:20,786 --> 00:32:22,376
-To access the action editor,
+00:30:04,071 --> 00:30:04,905
+就像你看到的那样
 
 
 615
-00:32:22,376 --> 00:32:23,996
-you just click the
-disclosure button here
+00:30:04,972 --> 00:30:07,941
+我们为SpriteKit和
+Xcode 7增加了很多优秀的功能
 
 
 616
-00:32:23,996 --> 00:32:26,326
-in the bottom-left corner and
-you'll see you're presented
+00:30:08,008 --> 00:30:09,543
+我想通过展示一个简单地例子向
 
 
 617
-00:32:26,326 --> 00:32:29,136
-with all of the nodes in your
-scene as well as the timeline
+00:30:09,610 --> 00:30:12,112
+你们展示它们是如何
+在你的开发流中集成工作的
 
 
 618
-00:32:29,136 --> 00:32:30,876
-of all of the actions
-they contain.
+00:30:12,179 --> 00:30:15,249
+这个例子展示了创建一个简单的层
+添加场景
 
 
 619
-00:32:31,266 --> 00:32:33,416
-We'll see here our player
-has one action on it,
+00:30:15,582 --> 00:30:17,351
+创建一些互动的游戏等内容
 
 
 620
-00:32:33,416 --> 00:32:35,136
-which is an animate
-with textures action,
+00:30:22,189 --> 00:30:25,459
+好的
+看这里 我刚刚创建了一个游戏工程
 
 
 621
-00:32:35,536 --> 00:32:37,366
-and we've got our
-idle frames within it.
+00:30:25,526 --> 00:30:28,529
+我在这个工程中添加了一个层
 
 
 622
-00:32:37,486 --> 00:32:38,756
-So now when I click animate,
+00:30:28,595 --> 00:30:31,565
+我们创建了一些平台和一个角色
 
 
 623
-00:32:39,036 --> 00:32:41,856
-we'll see that our player is
-running this animate action
+00:30:32,065 --> 00:30:35,669
+我想做的第一件事就是在其中创建环境
 
 
 624
-00:32:42,146 --> 00:32:42,826
-within our scene.
+00:30:35,903 --> 00:30:39,072
+添加一些背景和前景元素
 
 
 625
-00:32:43,216 --> 00:32:46,376
-Let's go ahead and make a
-cut scene within our level,
+00:30:39,640 --> 00:30:42,409
+放在从前
+我会直接在场景中做这些事情
 
 
 626
-00:32:46,376 --> 00:32:49,266
-we're going to make the
-player run across the level.
+00:30:42,476 --> 00:30:45,512
+然后一个个复制我所需要的实例
 
 
 627
-00:32:50,106 --> 00:32:52,016
-To do that, I'll
-start by filtering
+00:30:45,913 --> 00:30:48,615
+如果我需要修改一些东西的话
+这很快就会变得非常麻烦
 
 
 628
-00:32:52,016 --> 00:32:54,186
-down to just our player
-interaction editor
+00:30:48,682 --> 00:30:51,018
+因为我需要对非常多不同的点进行修改
 
 
 629
-00:32:54,986 --> 00:32:57,506
-and to just the actions
-within our object library.
+00:30:51,318 --> 00:30:52,519
+并且很难重复使用
 
 
 630
-00:32:57,696 --> 00:33:01,276
-We provide you a set of
-building block actions to use
+00:30:52,586 --> 00:30:54,388
+现在我们用
+ReferenceNode
 
 
 631
-00:33:01,276 --> 00:33:03,056
-to create your more
-complex actions
+00:30:54,454 --> 00:30:55,522
+解决了这个问题
 
 
 632
-00:33:03,056 --> 00:33:04,656
-which is exactly
-what I'm going to do.
+00:30:56,190 --> 00:30:58,659
+所以在这里我创建了我的环境中
 
 
 633
-00:33:05,056 --> 00:33:08,216
-We'll start by adding a move
-action into our cut scene.
+00:30:58,725 --> 00:31:00,861
+所需要的所有的元素并
+将其放在单独的文件中
 
 
 634
-00:33:08,216 --> 00:33:09,206
-All I have to do is drag it
+00:31:01,094 --> 00:31:03,564
+这样我就得到了一个有瀑布的背景
 
 
 635
-00:33:09,206 --> 00:33:10,966
-from the object library
-into our timeline.
+00:31:03,630 --> 00:31:05,632
+和一个有雾气效果的前景
 
 
 636
-00:33:11,186 --> 00:33:16,256
-Now for this movement I'll go
-850 units in the X direction
+00:31:06,400 --> 00:31:08,101
+引用这些内容文件所需要进行的操作
 
 
 637
-00:33:16,256 --> 00:33:18,246
-and we're going to ease in
-for more natural motion.
+00:31:08,168 --> 00:31:10,838
+就是将其拖放到我的层中
 
 
 638
-00:33:18,246 --> 00:33:20,086
-Now when I click
-animate we'll see
+00:31:11,238 --> 00:31:13,373
+现在 我们自动创建一个
 
 
 639
-00:33:20,086 --> 00:33:22,226
-that the player is
-running that action.
+00:31:13,574 --> 00:31:16,276
+包含所有元素的Reference
+Node你会注意到
 
 
 640
-00:33:22,566 --> 00:33:24,656
-That was a bit quick, so
-let's change the duration
+00:31:16,343 --> 00:31:18,745
+前景的Z值被保留了下来
 
 
 641
-00:33:24,656 --> 00:33:27,436
-by just dragging out the
-action to about 2 seconds.
+00:31:18,812 --> 00:31:20,447
+当我们将它添加到我的场景中的时候
 
 
 642
-00:33:27,756 --> 00:33:30,626
-I'm going to adjust the
-scale so now when we run,
+00:31:21,215 --> 00:31:23,684
+接下来创建一些复制来填充起来这一层
 
 
 643
-00:33:30,836 --> 00:33:32,576
-the movement has a
-much better velocity.
+00:31:23,750 --> 00:31:26,653
+你会注意到
+我复制了ReferenceNode
 
 
 644
-00:33:32,576 --> 00:33:36,216
-Now I'm going to also make
-the player run as he moves
+00:31:26,720 --> 00:31:28,322
+其本身
 
 
 645
-00:33:36,216 --> 00:33:39,596
-across the screen so I'll add in
-an animate with textures action.
+00:31:28,589 --> 00:31:31,191
+而不是我所引用的场景中的
 
 
 646
-00:33:40,336 --> 00:33:42,836
-To define what animation
-we're going to be playing,
+00:31:31,325 --> 00:31:33,260
+单独的元素
 
 
 647
-00:33:43,006 --> 00:33:45,426
-I can just go into the
-media library and filter
+00:31:33,894 --> 00:31:37,297
+这在我之后的工程中会显得很棒
 
 
 648
-00:33:45,426 --> 00:33:46,746
-down to our run frames.
+00:31:37,598 --> 00:31:39,900
+例如 当我想要跟换背景纹理时
 
 
 649
-00:33:47,336 --> 00:33:49,896
-I can select them and simply
-drag them into our action.
+00:31:39,967 --> 00:31:41,168
+因为它并不是特别合适
 
 
 650
-00:33:50,386 --> 00:33:55,006
-Now when we run we'll see that
-the player plays that animation.
+00:31:41,235 --> 00:31:43,003
+我做的这个平台 
 
 
 651
-00:33:55,406 --> 00:33:58,056
-But of course we're only
-playing it once so we're going
+00:31:43,070 --> 00:31:45,772
+我不需要改变我现有的三个实例
 
 
 652
-00:33:58,056 --> 00:34:00,476
-to add a loop so that we
-can span the whole time
+00:31:46,139 --> 00:31:48,141
+我可以打开我单独的资源
 
 
 653
-00:34:00,476 --> 00:34:01,546
-of our movement.
+00:31:48,475 --> 00:31:50,677
+只需要做一次修改
 
 
 654
-00:34:01,546 --> 00:34:03,916
-I can create a loop by
-clicking this loop button here
+00:31:51,512 --> 00:31:53,213
+改动的地方就会自动送给所有的实例
 
 
 655
-00:34:03,916 --> 00:34:05,276
-in the corner and I'm presented
+00:31:53,280 --> 00:31:55,249
+在这个层中
 
 
 656
-00:34:05,276 --> 00:34:06,636
-with all the controls
-for looping.
+00:32:01,154 --> 00:32:01,989
+接下来
 
 
 657
-00:34:06,956 --> 00:34:10,426
-I can increase the number of
-iterations, I can decrease
+00:32:02,055 --> 00:32:03,790
+我想在我的层中创建一个跳转场景
 
 
 658
-00:34:10,426 --> 00:34:11,636
-or I can loop indefinitely.
+00:32:03,857 --> 00:32:07,060
+我会使用我们刚才介绍的
 
 
 659
-00:34:12,196 --> 00:34:14,516
-In our case I'm going to
-only want to loop twice
+00:32:07,261 --> 00:32:08,195
+新的动作编辑器来做
 
 
 660
-00:34:14,516 --> 00:34:16,676
-and then I'll adjust the
-duration to match our movement.
+00:32:08,562 --> 00:32:10,764
+放在从前 你只能在代码中创建动作
 
 
 661
-00:34:17,025 --> 00:34:19,106
-Now we have the player
-running across the scene.
+00:32:10,831 --> 00:32:13,467
+这非常不容易看到
 
 
 662
-00:34:20,346 --> 00:34:22,926
-Next we've got two
-gaps within the level
+00:32:13,534 --> 00:32:16,637
+所以我们想要开发一中编辑器
+能够很容易的创建复杂的动作
 
 
 663
-00:34:22,926 --> 00:34:24,616
-so let's make the
-player jump over them.
+00:32:16,703 --> 00:32:19,072
+并给你实时的
 
 
 664
-00:34:24,616 --> 00:34:30,085
-In the action editor we're
-able to scrub to specific times
+00:32:19,139 --> 00:32:20,140
+你正在创建的图像信息
 
 
 665
-00:34:30,085 --> 00:34:33,815
-within our action so I can scrub
-to just before we reach the gap
+00:32:20,774 --> 00:32:22,309
+访问动作编辑器
 
 
 666
-00:34:33,936 --> 00:34:35,886
-and we'll add another
-movement action.
+00:32:22,376 --> 00:32:23,944
+你可以点击左下角的按钮
 
 
 667
-00:34:36,335 --> 00:34:38,045
-We'll snap right to
-where we're scrubbed.
+00:32:24,011 --> 00:32:26,246
+你会看到显示出来
 
 
 668
-00:34:39,616 --> 00:34:43,985
-For this movement we'll move
-in the Y direction 100 units
+00:32:26,313 --> 00:32:29,082
+你的场景中的所有节点以及时间轴
 
 
 669
-00:34:44,176 --> 00:34:46,496
-and I'll ease out so that
-we slow down as we get
+00:32:29,149 --> 00:32:30,884
+其中包含所有的动作
 
 
 670
-00:34:46,496 --> 00:34:47,496
-to the top of our jump.
+00:32:31,251 --> 00:32:33,353
+我们能够看到我们的角色
+已经有了一个动作
 
 
 671
-00:34:48,416 --> 00:34:51,306
-Then I'll scrub once again
-towards the middle of our gap
+00:32:33,420 --> 00:32:35,122
+这是一个由纹理动作组成的动画
 
 
 672
-00:34:51,306 --> 00:34:53,436
-and I'll adjust the duration
-so that we reach the top
+00:32:35,656 --> 00:32:37,357
+我们将它放在一个空闲的帧内
 
 
 673
-00:34:53,436 --> 00:34:56,076
-of our jump right there
-in the center of the gap.
+00:32:37,491 --> 00:32:38,759
+现在点击播放
 
 
 674
-00:34:56,786 --> 00:35:00,736
-Then I'll copy the first part of
-our action and simply reverse it
+00:32:39,026 --> 00:32:41,862
+我们可以看到我们的角色
+在我们的场景中
 
 
 675
-00:35:00,886 --> 00:35:02,896
-to get our full motion
-of the jump.
+00:32:42,162 --> 00:32:42,996
+动了起来
 
 
 676
-00:35:03,886 --> 00:35:05,486
-That last step for
-our jump is I'm going
+00:32:43,964 --> 00:32:46,300
+接下来
+在我们的层中创建一个跳转场景
 
 
 677
-00:35:05,486 --> 00:35:07,806
-to create one more
-animation which is going
+00:32:46,366 --> 00:32:49,269
+我们准备让角色穿过这一层
 
 
 678
-00:35:07,806 --> 00:35:11,086
-to have our jump frames so I'll
-follow the same process going
+00:32:50,103 --> 00:32:51,939
+要做到这些
 
 
 679
-00:35:11,086 --> 00:35:14,066
-to our media library, filter
-down to our jump frames
+00:32:52,005 --> 00:32:54,174
+我们需要过滤出来
+我们的玩家互动编辑器和
 
 
 680
-00:35:14,146 --> 00:35:15,266
-and add them to our action
+00:32:54,975 --> 00:32:57,511
+我们的对象库中的动作
 
 
 681
-00:35:16,306 --> 00:35:18,906
-and now we've got the player
-jumping over that first gap.
+00:32:57,711 --> 00:33:01,215
+我们为你提供了一组动作构件
 
 
 682
-00:35:19,466 --> 00:35:23,336
-Of course we have one more
-gap so one option I have is
+00:33:01,281 --> 00:33:02,983
+可以用来创建更加复杂的动作
 
 
 683
-00:35:23,336 --> 00:35:25,876
-to simply copy these
-actions I have just added
+00:33:03,050 --> 00:33:04,651
+这正是我接下来要做到的事情
 
 
 684
-00:35:25,876 --> 00:35:28,696
-and displace them, but then we
-run into the same issue we had
+00:33:05,052 --> 00:33:07,054
+我们首先添加一个移动的动作
 
 
 685
-00:35:28,696 --> 00:35:31,096
-with the background where if
-I want it make changes to it,
+00:33:07,120 --> 00:33:08,155
+到我们的跳转场景中
 
 
 686
-00:35:31,096 --> 00:35:33,756
-I'm going to have to do it to
-every instance I have copied.
+00:33:08,222 --> 00:33:10,958
+我需要做的所有事情就是拖放
+从对象库拖放到时间轴中
 
 
 687
-00:35:34,096 --> 00:35:37,116
-It very likely I'm going to
-want to reuse these actions
+00:33:11,992 --> 00:33:13,260
+现在对于这个运动
 
 
 688
-00:35:37,116 --> 00:35:37,976
-in different levels
+00:33:13,327 --> 00:33:16,196
+我们可以看到在X方向上有850个单
+位组成
 
 
 689
-00:35:37,976 --> 00:35:39,756
-or potentially even
-a different project.
+00:33:16,263 --> 00:33:18,165
+我们想要将这个动作做得更缓慢更自然
 
 
 690
-00:35:40,366 --> 00:35:41,546
-We've addressed this
-the same way
+00:33:18,565 --> 00:33:20,033
+现在点击这个播放
 
 
 691
-00:35:41,546 --> 00:35:44,076
-with the background allowing
-you to reference actions.
+00:33:20,100 --> 00:33:22,236
+我们可以看到我们的角色是这样跑的
 
 
 692
-00:35:44,416 --> 00:35:46,636
-To do that we've introduced
-a new file in Xcode
+00:33:22,569 --> 00:33:24,605
+这有点快
+所以我们需要修改持续的时间
 
 
 693
-00:35:46,826 --> 00:35:48,526
-which is the SpriteKit
-action file.
+00:33:24,671 --> 00:33:27,441
+将这个动作拖长大概2秒
 
 
 694
-00:35:49,276 --> 00:35:51,966
-This is a file where you can
-place these actions with a name
+00:33:27,741 --> 00:33:29,276
+我想要调整一下时间轴
 
 
 695
-00:35:51,966 --> 00:35:54,096
-that you can then
-reference across scenes,
+00:33:29,843 --> 00:33:30,777
+所以现在运行一下
 
 
 696
-00:35:54,296 --> 00:35:55,826
-projects, and in code.
+00:33:30,844 --> 00:33:32,513
+这时的运动就有了一个更合理的速率
 
 
 697
-00:35:56,296 --> 00:35:57,816
-Let's go ahead, make
-one of those files
+00:33:33,780 --> 00:33:37,251
+现在我想让角色
+在穿越屏幕的时候跑起来
 
 
 698
-00:35:58,226 --> 00:36:00,676
-by right clicking our selected
-actions and we're going
+00:33:37,317 --> 00:33:39,520
+所以我要添加一个带有纹理动作的动画
 
 
 699
-00:36:00,676 --> 00:36:01,756
-to convert it to a reference.
+00:33:40,320 --> 00:33:42,823
+要定义我们准备使用的动画
 
 
 700
-00:36:02,176 --> 00:36:04,806
-I'm prompted to give it a
-name, so I'll name it jump
+00:33:42,990 --> 00:33:45,359
+我可以打开媒体库
 
 
 701
-00:36:05,216 --> 00:36:07,426
-and we can select an
-action file to put this in,
+00:33:45,425 --> 00:33:46,760
+过滤下来我们的奔跑的框架
 
 
 702
-00:36:07,426 --> 00:36:09,346
-and in our case we'll
-create the new file.
+00:33:47,327 --> 00:33:49,897
+我可以选择之后将其简单地
+拖动到我们的运动中
 
 
 703
-00:36:10,866 --> 00:36:13,736
-So I'll name this file player
-actions because I'm going
+00:33:50,397 --> 00:33:51,298
+现在我们运行一下
 
 
 704
-00:36:13,736 --> 00:36:16,366
-to put all the actions related
-to the player into this file.
+00:33:52,332 --> 00:33:55,002
+可以看到角色将会做这个动作
 
 
 705
-00:36:17,896 --> 00:36:19,466
-The file is added to our project
+00:33:55,402 --> 00:33:58,005
+当然 如果我们只使用一次的话
 
 
 706
-00:36:19,556 --> 00:36:22,056
-and you will see now those
-actions that we created
+00:33:58,071 --> 00:34:00,407
+我们可以添加一个循环
 
 
 707
-00:36:22,056 --> 00:36:24,426
-for the jump are within our
-file under the name jump
+00:34:00,474 --> 00:34:01,475
+这样就能在其移动的整个
+时间段中持续下来
 
 
 708
-00:36:24,806 --> 00:36:27,836
-and within our scene
-we're simply referencing
+00:34:01,542 --> 00:34:03,844
+我可以点击角落里的
+这个循环按钮创建一个循环
 
 
 709
-00:36:27,906 --> 00:36:28,616
-those actions.
+00:34:03,911 --> 00:34:05,212
+我能够看到
 
 
 710
-00:36:29,696 --> 00:36:31,036
-So now all the actions
-that you put
+00:34:05,279 --> 00:34:06,647
+循环的所有控制参数
 
 
 711
-00:36:31,036 --> 00:36:33,426
-into this file are completely
-independent of any scene
+00:34:06,947 --> 00:34:10,350
+我可以增加迭代的次数 
 
 
 712
-00:36:33,426 --> 00:36:35,256
-or project but you're going
-to often want to edit them
+00:34:10,417 --> 00:34:11,784
+也可以减少 也可以自定义循环
 
 
 713
-00:36:35,256 --> 00:36:36,906
-in the context of some scene.
+00:34:12,186 --> 00:34:14,454
+在这个例子中我想要让它循环两次
 
 
 714
-00:36:37,416 --> 00:36:40,116
-We allow you to set a preview
-screen that you can assign any
+00:34:14,521 --> 00:34:16,822
+接下来我将调整一下持续时间
+来适应我们的运动过程
 
 
 715
-00:36:40,116 --> 00:36:42,546
-of the actions in your file on
-any of the nodes in your scene.
+00:34:17,024 --> 00:34:19,426
+现在我们就得到了我们的角色
+跑着穿越整个场景的动画
 
 
 716
-00:36:42,546 --> 00:36:45,376
-So for example, I can preview my
-jump on any node in this scene
+00:34:20,360 --> 00:34:22,862
+接下来 我们在层中添加两个沟
 
 
 717
-00:36:45,576 --> 00:36:46,866
-or I can set up my own scene
+00:34:22,929 --> 00:34:24,565
+让这个角色跳过它们
 
 
 718
-00:36:46,946 --> 00:36:48,696
-with different orientations
-of the player.
+00:34:24,630 --> 00:34:30,003
+在动作编辑器中我们可以
+定向清除我们动作中的时间点
 
 
 719
-00:36:48,966 --> 00:36:52,046
-For example, I can preview
-what this jump action will look
+00:34:30,070 --> 00:34:33,806
+在刚刚到达沟的旁边的时候
+我可以清除掉
 
 
 720
-00:36:52,046 --> 00:36:55,106
-like on the left and right
-orientations of my player.
+00:34:33,940 --> 00:34:35,876
+然后添加一个其他的动作
 
 
 721
-00:36:55,656 --> 00:36:59,186
-So now on our level I'll
-go ahead and scrub back
+00:34:36,342 --> 00:34:38,045
+我们可以正好对齐我们刚才擦除的地方
 
 
 722
-00:36:59,186 --> 00:37:02,686
-to our next gap and in our
-object library we automatically
+00:34:39,913 --> 00:34:43,350
+对于这个移动
+我们会在Y轴方向移动100个单位
 
 
 723
-00:37:02,686 --> 00:37:04,446
-populate it with
-all of the actions
+00:34:43,417 --> 00:34:44,885
+我将其设置成缓慢输出
 
 
 724
-00:37:04,446 --> 00:37:05,776
-that are available to reference.
+00:34:45,351 --> 00:34:47,688
+这样在到达我们跳跃的顶部的时候
+角色的动作会变慢
 
 
 725
-00:37:05,886 --> 00:37:08,956
-So that jump action that I
-just created is automatically
+00:34:48,422 --> 00:34:51,225
+在到达沟的中间的时候
+我会再做一次擦除
 
 
 726
-00:37:09,006 --> 00:37:12,036
-in our object library and
-I can just drag it in.
+00:34:51,291 --> 00:34:53,360
+调整一下持续时间 使角色能够在
 
 
 727
-00:37:12,036 --> 00:37:13,366
-So now we've got our
-finished cut scene.
+00:34:53,427 --> 00:34:56,063
+达到最高点的时候刚好到达沟的中间
 
 
 728
-00:37:13,406 --> 00:37:14,526
-Let's take a look.
+00:34:56,797 --> 00:35:00,734
+然后复制我们动作的第一部分
+然后翻转
 
 
 729
-00:37:16,656 --> 00:37:17,556
-That looks great.
+00:35:00,901 --> 00:35:02,903
+得到一个完整的跳跃运动
 
 
 730
-00:37:18,356 --> 00:37:20,666
-Now I want to show you how
-you can use these actions
+00:35:03,871 --> 00:35:05,405
+跳跃的最后一步
 
 
 731
-00:37:20,666 --> 00:37:23,156
-within code itself instead
-of just a cut scene.
+00:35:05,472 --> 00:35:07,741
+我准备再创建一个动画
 
 
 732
-00:37:23,846 --> 00:37:26,516
-What I want to do is create a
-named action for every state
+00:35:07,808 --> 00:35:11,011
+包含跳跃的构架
 
 
 733
-00:37:26,516 --> 00:37:29,996
-that the player can be in and
-then reference those in code.
+00:35:11,078 --> 00:35:14,081
+同样的方法
+打开媒体库 过滤下来我们的跳跃构架
 
 
 734
-00:37:30,256 --> 00:37:35,366
-I will create a reference, a
-referencable action called run
+00:35:14,147 --> 00:35:15,282
+添加到动作中
 
 
 735
-00:37:35,486 --> 00:37:38,976
-that has our animation and
-I'll do the same for our idle.
+00:35:16,316 --> 00:35:18,919
+现在我们的角色就能够
+从第一个沟上面跳过去
 
 
 736
-00:37:39,596 --> 00:37:42,186
-I'll go ahead and delete these
+00:35:20,354 --> 00:35:23,257
+当然 我们还有一个沟
 
 
 737
-00:37:42,186 --> 00:37:44,356
-because we'll do this
-interactively now
+00:35:23,323 --> 00:35:25,826
+我需要做的就是复制我刚刚添加的动作
 
 
 738
-00:37:44,706 --> 00:37:48,166
-and you can see in our action
-file we now have the three
+00:35:25,893 --> 00:35:28,629
+然后替换
+但是接下来我们会碰到同样的问题
 
 
 739
-00:37:48,166 --> 00:37:50,256
-states present within this file.
+00:35:28,695 --> 00:35:31,031
+那就是在地图上的哪里进行修改
 
 
 740
-00:37:50,666 --> 00:37:52,626
-Now to use these
-within code all you have
+00:35:31,098 --> 00:35:33,767
+我将要对每一个复制的实例进行修改
 
 
 741
-00:37:52,626 --> 00:37:54,626
-to do is use the new
-selectors we have introduced,
+00:35:34,101 --> 00:35:37,037
+很可能我会在不同的层中
 
 
 742
-00:37:54,986 --> 00:37:57,066
-the action name selectors
-providing them
+00:35:37,104 --> 00:35:38,005
+重复使用这些动作
 
 
 743
-00:37:57,066 --> 00:37:58,956
-with the names we have just
-created the actions with,
+00:35:38,071 --> 00:35:39,740
+甚至可能在不同的工程中
 
 
 744
-00:37:59,276 --> 00:38:00,966
-idle, run, and jump.
+00:35:40,374 --> 00:35:41,875
+我们用同样的方式解决了这个问题
 
 
 745
-00:38:01,666 --> 00:38:04,516
-Now when I run our game
-you can see the actions
+00:35:41,942 --> 00:35:44,077
+就是允许你引用运动
 
 
 746
-00:38:04,516 --> 00:38:07,356
-that I have just created are
-being used in the game itself.
+00:35:44,411 --> 00:35:46,647
+我们在Xcode中引入一个新文件
 
 
 747
-00:38:08,176 --> 00:38:08,876
-Interactively.
+00:35:46,813 --> 00:35:48,615
+这是一个
+SpriteKit动作文件夹
 
 
 748
-00:38:09,866 --> 00:38:11,856
-The real power of this
-comes when you want
+00:35:49,416 --> 00:35:51,251
+这个文件夹中放了一些动作文件
 
 
 749
-00:38:11,856 --> 00:38:12,986
-to make a change
-to your actions.
+00:35:51,318 --> 00:35:53,086
+这些动作文件的名字
 
 
 750
-00:38:13,016 --> 00:38:15,006
-I can go in my action
-file and let's
+00:35:53,153 --> 00:35:55,822
+你可以在场景、工程或者代码中
+全局引用
 
 
 751
-00:38:15,006 --> 00:38:18,116
-for example make the player
-do a flip when we jump.
+00:35:56,290 --> 00:35:57,824
+接下来 选定动作文件  
 
 
 752
-00:38:18,116 --> 00:38:22,636
-I can go in here and I can add
-a rotate action to the jump,
+00:35:58,225 --> 00:36:00,594
+创建一个这样的文件夹
 
 
 753
-00:38:23,336 --> 00:38:27,786
-give it a value of negative
-360, ease in and out
+00:36:00,661 --> 00:36:01,762
+并将其转换成引用的形式
 
 
 754
-00:38:27,786 --> 00:38:30,156
-and now I run the game without
-even recompiling our game,
+00:36:02,162 --> 00:36:04,798
+我准备给它命名 将其命名为跳跃
 
 
 755
-00:38:30,556 --> 00:38:31,436
-we can see the changes
+00:36:05,232 --> 00:36:07,367
+我们可以选择一个动作文件夹放进去
 
 
 756
-00:38:31,436 --> 00:38:33,976
-that I have made are now
-applied to our player.
+00:36:07,434 --> 00:36:09,336
+在这个例子中
+我会新建一个新的文件夹
 
 
 757
-00:38:34,516 --> 00:38:39,686
-[Applause]
+00:36:10,871 --> 00:36:13,674
+我给这个文件夹命名为角色动作
 
 
 758
-00:38:40,186 --> 00:38:42,316
->> TYLER CASELLA: So now
-the level looks pretty good
+00:36:13,740 --> 00:36:16,376
+因为我打算将所有的跟角色有关的动作
+都放进这个文件夹
 
 
 759
-00:38:42,316 --> 00:38:43,106
-so the last thing I want
+00:36:17,911 --> 00:36:19,479
+将这个文件添加到我们的工程
 
 
 760
-00:38:43,106 --> 00:38:45,186
-to do is create a
-nice cinematic opening
+00:36:19,546 --> 00:36:21,982
+现在你会看到我们创建的这些动作
 
 
 761
-00:38:45,186 --> 00:38:47,046
-to really introduce the
-player to the level.
+00:36:22,049 --> 00:36:24,418
+例如跳跃已经在跳跃文件夹的下面了
 
 
 762
-00:38:47,496 --> 00:38:51,686
-I can do that by creating an
-SKCameraNode and into our scene.
+00:36:24,818 --> 00:36:25,919
+并且在我们的场景中
 
 
 763
-00:38:52,196 --> 00:38:54,956
-The camera node let's us
-define a Viewport within it
+00:36:26,620 --> 00:36:28,622
+我们可以引用
+这些动作
 
 
 764
-00:38:55,126 --> 00:38:57,116
-and we can go ahead
-and assign our scene
+00:36:29,690 --> 00:36:31,225
+现在你放到这个文件夹中的动作
 
 
 765
-00:38:57,316 --> 00:38:59,316
-to use the camera
-I've just added.
+00:36:31,291 --> 00:36:33,360
+已经完全从所有的场景
+或者工程中独立了出来
 
 
 766
-00:39:00,186 --> 00:39:02,696
-For our cinematic opening
-I'm going to start us off
+00:36:33,427 --> 00:36:35,195
+但是在一些场景中某些背景下
 
 
 767
-00:39:02,696 --> 00:39:05,526
-in the corner here and I'll
-have the camera zoomed in.
+00:36:35,262 --> 00:36:36,897
+你经常会想要修改他们
 
 
 768
-00:39:09,776 --> 00:39:12,246
-I'm going to zoom in
-on the fog over here.
+00:36:37,431 --> 00:36:39,533
+我们允许你设置一个预览窗口
 
 
 769
-00:39:12,726 --> 00:39:15,446
-What's great is, because it
-is just an SKNode I can apply
+00:36:39,600 --> 00:36:42,469
+你可以分配你文件夹中的任何动作
+在你的场景中的任何节点
 
 
 770
-00:39:15,446 --> 00:39:16,526
-actions to the camera.
+00:36:42,536 --> 00:36:45,372
+例如我可以在这个场景中的任何节点预
+览我 的跳跃动作
 
 
 771
-00:39:17,206 --> 00:39:19,166
-I'll filter down
-to just our camera
+00:36:45,572 --> 00:36:46,874
+或者打开一个自己的场景
 
 
 772
-00:39:19,866 --> 00:39:21,936
-and then I'll add
-a move 2 action.
+00:36:46,940 --> 00:36:48,709
+在角色的不同角度
 
 
 773
-00:39:22,246 --> 00:39:24,776
-What I'm going to do for our
-cinematic opening is pan the
+00:36:48,976 --> 00:36:51,979
+例如 我可以预览角色左边或者
 
 
 774
-00:39:24,776 --> 00:39:26,426
-camera over to the
-center of our level
+00:36:52,045 --> 00:36:55,115
+右边跳跃动作是怎样的
 
 
 775
-00:39:26,606 --> 00:39:27,986
-and zoom out at the same time.
+00:36:56,984 --> 00:36:59,119
+所以现在 在这里 我们继续 
 
 
 776
-00:39:28,296 --> 00:39:32,746
-For our move 2 I'll use this
-platforms X value as our center,
+00:36:59,186 --> 00:37:02,623
+回到擦除第二个沟的地方 在对象库中
 
 
 777
-00:39:32,806 --> 00:39:36,826
-507, and I'll also want
-to center it in the Y
+00:37:02,689 --> 00:37:04,391
+我们可以用可以引用的动作
 
 
 778
-00:39:37,036 --> 00:39:39,596
-which is 384 units
-and we're going
+00:37:04,458 --> 00:37:05,792
+自动填充进去
 
 
 779
-00:39:39,596 --> 00:39:40,866
-to want this to ease in and out.
+00:37:05,893 --> 00:37:08,929
+因为我刚才创建的跳跃动作
 
 
 780
-00:39:41,796 --> 00:39:44,256
-I'm going to move our action
-to start about half a second
+00:37:08,996 --> 00:37:11,565
+已经自动放在了对象库中
+我就能够将它拖放进去
 
 
 781
-00:39:44,256 --> 00:39:46,086
-after we begin our
-scene and I'm going
+00:37:11,899 --> 00:37:14,101
+现在我们就完成了我们的跳转场景
+让我们欣赏一下
 
 
 782
-00:39:46,086 --> 00:39:48,456
-to have it take three
-seconds to pan over.
+00:37:16,937 --> 00:37:17,838
+看起来很棒
 
 
 783
-00:39:48,916 --> 00:39:52,906
-I'll also add a scale 2 action
-and give it a half second offset
+00:37:18,372 --> 00:37:20,607
+现在我想向你展示一下
+怎样在代码中使用
 
 
 784
-00:39:52,946 --> 00:39:57,636
-from our move and have it end at
-the same time as our movement.
+00:37:20,674 --> 00:37:23,143
+而不仅仅是一个跳转场景
 
 
 785
-00:39:58,036 --> 00:39:59,386
-Now within that short amount
+00:37:23,844 --> 00:37:26,446
+我想要做的就是在每一个角色
+可能存在的地图中
 
 
 786
-00:39:59,386 --> 00:40:00,986
-of time we have created
-the cinematic opening,
+00:37:26,513 --> 00:37:29,983
+都创建一个动作 然后通过代码引用它
 
 
 787
-00:40:01,146 --> 00:40:02,176
-and we have finished our level,
+00:37:31,051 --> 00:37:33,654
+我要创建一个引用
 
 
 788
-00:40:02,396 --> 00:40:04,326
-so let's take a look
-at how it looks.
+00:37:33,720 --> 00:37:35,355
+这个可引用的动作叫跑
 
 
 789
-00:40:11,876 --> 00:40:14,486
-So that's just a taste
-of what you're able to do
+00:37:35,489 --> 00:37:36,523
+其中包含我们动画
 
 
 790
-00:40:14,596 --> 00:40:16,916
-with SpriteKit and Xcode 7 now.
+00:37:37,090 --> 00:37:38,992
+我也同样对对空文件这么处理
 
 
 791
-00:40:17,516 --> 00:40:23,156
-[Applause]
+00:37:41,061 --> 00:37:42,129
+现在开始 删除这些
 
 
 792
-00:40:23,656 --> 00:40:25,276
->> TYLER CASELLA: And with that,
-I would like to hand it off back
+00:37:42,196 --> 00:37:44,364
+因为现在我们要把这些做成交互式的
 
 
 793
-00:40:25,406 --> 00:40:27,946
-to Tim to summarize for you.
+00:37:44,698 --> 00:37:45,933
+现在你可以看到
 
 
 794
-00:40:29,406 --> 00:40:30,566
->> TIM ORIOL: Thanks, Tyler.
+00:37:45,999 --> 00:37:48,101
+我们的动作文件夹中
 
 
 795
-00:40:30,676 --> 00:40:32,346
-That is really, really
-cool stuff.
+00:37:48,168 --> 00:37:50,270
+包含了三个地图
 
 
 796
-00:40:32,346 --> 00:40:35,396
-I think as you all can see,
+00:37:50,671 --> 00:37:52,573
+现在通过代码使用这些动作
 
 
 797
-00:40:35,396 --> 00:40:37,306
-it is going to be an
-extremely exciting year
+00:37:52,639 --> 00:37:54,641
+你所要做的就是使用
+我们刚才介绍的新选择器
 
 
 798
-00:40:37,306 --> 00:40:38,466
-for SpriteKit developers.
+00:37:54,975 --> 00:37:57,010
+动作名称选择器 
 
 
 799
-00:40:38,706 --> 00:40:41,106
-We've added the AudioNode,
-we've added the CameraNode,
+00:37:57,077 --> 00:37:58,946
+给它们提供我们刚刚创建的动作的名称
 
 
 800
-00:40:41,106 --> 00:40:43,046
-we have reference
-actions and nodes,
+00:37:59,279 --> 00:38:00,981
+空 跑 和跳跃
 
 
 801
-00:40:43,506 --> 00:40:46,446
-we have a brand-new timeline
-based action editor built right
+00:38:01,682 --> 00:38:04,451
+现在当我运行我们的游戏时
 
 
 802
-00:40:46,446 --> 00:40:47,106
-into Xcode.
+00:38:04,518 --> 00:38:07,354
+你能够看到我刚才创建的动作
+现在正在游戏中使用着
 
 
 803
-00:40:47,436 --> 00:40:50,926
-We have integrated our texture
-atlases with the Asset Catalog
+00:38:08,188 --> 00:38:09,022
+交互式的
 
 
 804
-00:40:50,926 --> 00:40:52,626
-to give you access
-to new features
+00:38:09,857 --> 00:38:11,792
+这一点最强大的地方在于
 
 
 805
-00:40:52,866 --> 00:40:55,086
-like On-Demand Resources
-and app thinning
+00:38:11,859 --> 00:38:12,960
+当你想要修改你的动作时
 
 
 806
-00:40:55,646 --> 00:40:59,096
-and we have also made SpriteKit
-Metal backed on every device
+00:38:13,026 --> 00:38:14,928
+我可以直接打开动作文件夹
 
 
 807
-00:40:59,126 --> 00:41:01,976
-that supports it and
-provides you easy access
+00:38:14,995 --> 00:38:18,065
+例如 让角色在跳跃的时候翻个筋斗
 
 
 808
-00:41:02,086 --> 00:41:03,836
-to the new GamePlayKit
-framework.
+00:38:18,131 --> 00:38:22,636
+我可以打开这里
+然后添加一个旋转的动作到跳跃上
 
 
 809
-00:41:04,286 --> 00:41:08,166
-If you need any more
-information, please check
+00:38:23,337 --> 00:38:26,406
+给它赋值负360 缓进缓出
 
 
 810
-00:41:08,166 --> 00:41:11,146
-out our great developer site
-or for general inquiries,
+00:38:27,007 --> 00:38:30,143
+现在我们不编译就运行我们的游戏
 
 
 811
-00:41:11,276 --> 00:41:15,856
-contact our graphics evangelist
-Allan Schaffer, there's a couple
+00:38:30,544 --> 00:38:32,212
+我们可以看到发生了改变
 
 
 812
-00:41:15,856 --> 00:41:17,896
-of related sessions if
-you want to find out more
+00:38:32,279 --> 00:38:33,981
+我刚做的修改已经提交给了角色
 
 
 813
-00:41:17,896 --> 00:41:19,596
-about GamePlayKit or SceneKit.
+00:38:41,154 --> 00:38:42,723
+现在这一层看起来已经很棒了
 
 
 814
-00:41:21,016 --> 00:41:22,766
-We also have a few labs,
+00:38:42,789 --> 00:38:45,225
+所以最后要做的事情就是
+创建一个漂亮的电影动画开场
 
 
 815
-00:41:22,836 --> 00:41:24,506
-the first of which
-is the SpriteKit lab
+00:38:45,325 --> 00:38:47,060
+将角色引入到这一层
 
 
 816
-00:41:24,506 --> 00:41:25,646
-which is starting right now.
+00:38:47,494 --> 00:38:51,698
+我可以通过创建一个SKCamera
+Node到场景中的方式实现
 
 
 817
-00:41:26,056 --> 00:41:28,756
-So, feel free to follow us
-downstairs and we'd be happy
+00:38:52,199 --> 00:38:54,968
+让我们在镜头节点中
+定义一个Viewport
 
 
 818
-00:41:28,756 --> 00:41:30,396
-to answer any questions
-you may have.
+00:38:55,135 --> 00:38:57,104
+我们可以开始使用我刚添加的镜头
 
 
 819
-00:41:31,076 --> 00:41:31,906
-Thank you very much.
+00:38:57,304 --> 00:38:59,306
+来分配我们的场景
 
 
 820
-00:41:31,906 --> 00:41:32,976
-Please enjoy your conference.
+00:39:00,174 --> 00:39:02,643
+作为电影动画开场
+我想用从这个角落开始
 
 
 821
-00:41:33,516 --> 00:41:37,500
-[Applause]
+00:39:02,709 --> 00:39:05,512
+使用镜头放大
+
+
+822
+00:39:10,450 --> 00:39:12,252
+我准备放大这里的雾气
+
+
+823
+00:39:12,719 --> 00:39:15,389
+最棒的是
+因为这只是一个SKNode 
+
+
+824
+00:39:15,455 --> 00:39:16,590
+我可以向镜头中添加动作
+
+
+825
+00:39:17,191 --> 00:39:19,159
+过滤下来适应我们的镜头
+
+
+826
+00:39:20,260 --> 00:39:21,929
+之后添加一个有两个动作的移动
+
+
+827
+00:39:22,262 --> 00:39:24,698
+我准备要做的电影动画开场
+
+
+828
+00:39:24,765 --> 00:39:26,433
+就是讲镜头平移到这一层的中心
+
+
+829
+00:39:26,600 --> 00:39:28,001
+同时缩放
+
+
+830
+00:39:28,535 --> 00:39:30,571
+第二步我将要把X轴的值
+
+
+831
+00:39:30,637 --> 00:39:33,841
+设置为507
+作为中 心
+
+
+832
+00:39:35,042 --> 00:39:37,177
+同时将Y轴的值设置为
+384个单位并作为中心
+
+
+833
+00:39:37,244 --> 00:39:39,513
+并将这些设置为
+
+
+834
+00:39:39,580 --> 00:39:40,881
+缓进缓出
+
+
+835
+00:39:41,782 --> 00:39:44,184
+我打算在我们打开我们的场景半秒钟后
+
+
+836
+00:39:44,251 --> 00:39:46,019
+开始移动我们的动画
+
+
+837
+00:39:46,086 --> 00:39:48,455
+并耗时3秒将其平移过去
+
+
+838
+00:39:48,922 --> 00:39:52,893
+同样我添加了第二个动作
+并给其半秒钟从我们的动画中抵消
+
+
+839
+00:39:52,960 --> 00:39:57,631
+在动画结束后同时结束
+
+
+840
+00:39:58,031 --> 00:39:59,333
+现在 在短短时间内
+
+
+841
+00:39:59,399 --> 00:40:01,001
+我们创建了一个电影动画式的开场
+
+
+842
+00:40:01,134 --> 00:40:02,236
+我们也已经结束了这一层
+
+
+843
+00:40:02,402 --> 00:40:04,004
+接下来让我们看一下它现在什么样子
+
+
+844
+00:40:11,879 --> 00:40:14,481
+这就是你现在可以使用
+SpriteKit和Xcode 7
+
+
+845
+00:40:14,581 --> 00:40:16,917
+做的事情了
+
+
+846
+00:40:23,657 --> 00:40:25,292
+与此同时 我想将话题重新交给提姆
+
+
+847
+00:40:25,392 --> 00:40:27,961
+让它来为你们总结一下
+
+
+848
+00:40:29,396 --> 00:40:30,564
+谢谢泰勒
+
+
+849
+00:40:30,664 --> 00:40:32,266
+这真的是一个非常棒的工作
+
+
+850
+00:40:32,666 --> 00:40:35,335
+我相信大家有目共睹
+
+
+851
+00:40:35,402 --> 00:40:37,237
+这对于SpriteKit工程师来讲
+
+
+852
+00:40:37,304 --> 00:40:38,472
+将会是超级棒的一年
+
+
+853
+00:40:38,772 --> 00:40:41,675
+我们新增了AudioNode,
+也新增了CameraNode
+
+
+854
+00:40:41,742 --> 00:40:43,243
+我们也有了可以引用的动作和节点
+
+
+855
+00:40:43,510 --> 00:40:45,345
+也有了一个全新的
+
+
+856
+00:40:45,412 --> 00:40:47,548
+基于运动编辑器的
+集成在Xcode中的时间轴
+
+
+857
+00:40:47,781 --> 00:40:50,851
+我们整合了纹理地图集和资源目录
+
+
+858
+00:40:50,918 --> 00:40:52,619
+并给你提供了新的功能
+
+
+859
+00:40:52,853 --> 00:40:55,088
+例如基于命令的资源库
+和更加简洁的App
+
+
+860
+00:40:55,656 --> 00:40:59,059
+同时也使SpriteKit适配
+所有的支持Metal的设备
+
+
+861
+00:40:59,126 --> 00:41:01,962
+让你能够更容易地访问
+
+
+862
+00:41:02,095 --> 00:41:03,830
+全新的GamePlayKit构架
+
+
+863
+00:41:06,300 --> 00:41:08,101
+如果你需要更多的信息
+
+
+864
+00:41:08,168 --> 00:41:09,837
+请访问我们的开发者网站
+
+
+865
+00:41:09,903 --> 00:41:11,138
+或者拨打咨询电话
+
+
+866
+00:41:11,271 --> 00:41:13,774
+联系我们的图形专家Allan
+Schaffer 
+
+
+867
+00:41:15,342 --> 00:41:16,543
+还有几个与之相关的会议
+
+
+868
+00:41:16,610 --> 00:41:18,212
+如果你想对GamePlayKit
+
+
+869
+00:41:18,278 --> 00:41:19,880
+或者SceneKit了解更多的话
+
+
+870
+00:41:21,014 --> 00:41:22,749
+我们也有一些实验室
+
+
+871
+00:41:22,850 --> 00:41:24,585
+第一个就是SpriteKit实验室
+
+
+872
+00:41:24,651 --> 00:41:25,786
+现在马上就会启动
+
+
+873
+00:41:26,053 --> 00:41:28,689
+大家放松 跟我们一起下楼
+
+
+874
+00:41:28,755 --> 00:41:30,390
+我们将很乐意回答你们的所有问题
+
+
+875
+00:41:31,091 --> 00:41:32,960
+非常感谢
+请享受您的会议
 

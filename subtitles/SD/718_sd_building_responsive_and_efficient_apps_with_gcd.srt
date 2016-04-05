@@ -1,5142 +1,4294 @@
 1
-00:00:24,516 --> 00:00:27,036
-[Applause]
+00:00:20,120 --> 00:00:24,825
+用GCD构建具有响应性的高效app
 
 
 2
-00:00:27,536 --> 00:00:31,316
->> ANTHONY CHIVETTA:
-Good morning and welcome
+00:00:27,528 --> 00:00:28,362
+早上好
 
 
 3
-00:00:31,316 --> 00:00:34,046
-to building responsive and
-efficient apps with GCD.
+00:00:30,898 --> 00:00:33,834
+欢迎来到本次讲座 题目为
+用GCD构建具有响应性的高效app
 
 
 4
-00:00:34,306 --> 00:00:37,276
-We're so excited to see so
-many of you here interested
+00:00:34,301 --> 00:00:37,504
+我们非常高兴看到这么多的人有兴趣
 
 
 5
-00:00:37,276 --> 00:00:40,416
-in learning about how Grand
-Central Dispatch can help you
+00:00:37,571 --> 00:00:40,541
+学习如何利用
+多线程优化技术来帮助你们的
 
 
 6
-00:00:40,886 --> 00:00:43,256
-adapt your application
-to all of our platforms.
+00:00:40,874 --> 00:00:43,443
+应用程序适应我们所有的平台
 
 
 7
-00:00:43,646 --> 00:00:46,826
-I'm Anthony and my teammate
-Daniel will be presenting this
+00:00:43,577 --> 00:00:47,548
+我是Anthony我将和我的队友
+Daniel一起呈现这段演讲
 
 
 8
-00:00:46,826 --> 00:00:47,336
-talk with me.
+00:00:48,315 --> 00:00:50,851
+多线程优化技术或者叫GCD是
+与OS X Snow
 
 
 9
-00:00:48,526 --> 00:00:52,176
-Grand Central Dispatch or GCD is
-a technology that was introduced
+00:00:50,918 --> 00:00:53,587
+Leopard
+操作系统一起引入的一种技术
 
 
 10
-00:00:52,176 --> 00:00:53,336
-with OS X Snow Leopard.
+00:00:54,021 --> 00:00:56,523
+当时我们的最新版的Mac
 
 
 11
-00:00:53,696 --> 00:00:57,626
-At that time our brand new
-Mac was the MacBook Pro
+00:00:56,590 --> 00:00:59,459
+还是使用Core II
+Duo的MacBook Pro
 
 
 12
-00:00:57,896 --> 00:00:59,286
-with the Core II Duo.
+00:00:59,593 --> 00:01:02,596
+当时GCD的卖点之一是
 
 
 13
-00:00:59,656 --> 00:01:02,646
-One of the selling points
-of GCD at the time was
+00:01:02,663 --> 00:01:05,065
+它让你可以使用双核
 
 
 14
-00:01:02,646 --> 00:01:05,126
-that it would allow you to
-take advantage of both cores,
+00:01:05,132 --> 00:01:07,534
+同时运行应用程序的不同部分
 
 
 15
-00:01:05,126 --> 00:01:07,236
-running different parts of
-your application concurrently,
+00:01:07,601 --> 00:01:10,070
+并使线程变得非常非常容易
 
 
 16
-00:01:07,536 --> 00:01:09,866
-and make threading
-really, really easy.
+00:01:10,370 --> 00:01:13,841
+我们认为GCD的使用真的
+经受住了时间的考验
 
 
 17
-00:01:10,356 --> 00:01:13,746
-We think that use of GCD has
-really stood the test of time.
+00:01:14,708 --> 00:01:19,046
+今天我们最先进
+的Mac Pro有多得多的内核
 
 
 18
-00:01:14,656 --> 00:01:19,036
-Today our top-of-the-line Mac
-Pro has many, many more Cores
+00:01:19,613 --> 00:01:22,382
+而GCD仍然是利用这些所有计算资源
 
 
 19
-00:01:19,606 --> 00:01:22,446
-and GCD is still a great
-way to take advantage of all
+00:01:22,449 --> 00:01:23,617
+的好方法
 
 
 20
-00:01:22,446 --> 00:01:23,626
-of those computing resources.
+00:01:24,585 --> 00:01:27,988
+但正如GCD有助于利用所有高端
 
 
 21
-00:01:24,346 --> 00:01:28,056
-But just as GCD is a great
-way to use all the resources
+00:01:28,055 --> 00:01:30,891
+资源一样 它还可以帮助你的应用程序
 
 
 22
-00:01:28,056 --> 00:01:30,886
-on the high end it can
-help your application adapt
+00:01:30,991 --> 00:01:32,593
+适应较小的环境
 
 
 23
-00:01:30,976 --> 00:01:32,596
-to smaller environments.
+00:01:34,494 --> 00:01:37,598
+比如最近发布的新MacBook是
 
 
 24
-00:01:34,176 --> 00:01:36,136
-For example, the new MacBook
+00:01:37,664 --> 00:01:39,099
+第一个无窗格的设计
 
 
 25
-00:01:36,136 --> 00:01:38,686
-that we recently released is
-the first paneless design.
+00:01:39,333 --> 00:01:42,769
+虽然就机型体积而言
 
 
 26
-00:01:39,316 --> 00:01:44,846
-While this is an advantage in
-terms of size of the machine,
+00:01:44,304 --> 00:01:47,274
+这是一个优势 但如何管理热性能而言
 
 
 27
-00:01:44,846 --> 00:01:47,336
-it also presents unique
-challenges in terms
+00:01:47,341 --> 00:01:49,476
+它也带来一些独特的挑战
 
 
 28
-00:01:47,336 --> 00:01:49,366
-of how we manage the
-thermal properties.
+00:01:49,943 --> 00:01:53,113
+稍后我会谈到
+你们的app如何利用GCD
 
 
 29
-00:01:49,446 --> 00:01:52,986
-I'll talk a little bit later
-about how your app can use GCD
+00:01:53,180 --> 00:01:55,148
+从而在这种环境下更有效地运行
 
 
 30
-00:01:53,176 --> 00:01:54,946
-to run more efficiently
-in this environment.
+00:01:56,817 --> 00:01:59,520
+我们iOS 9也有了 新多任务功能
 
 
 31
-00:01:55,696 --> 00:01:59,536
-We also have iOS 9 with
-new multitasking features.
+00:01:59,953 --> 00:02:02,923
+这是第一次你们的
+应用程序必须肩并肩地
 
 
 32
-00:01:59,946 --> 00:02:02,836
-This is the first time your
-app had to run side-by-side,
+00:02:02,990 --> 00:02:06,827
+这种说法毫不夸张与其他
+应用程序一起在系统中运行
 
 
 33
-00:02:02,976 --> 00:02:06,896
-quite literally, with other
-applications on the system.
+00:02:06,894 --> 00:02:09,930
+GCD可以告诉系统你正在做什么
 
 
 34
-00:02:06,896 --> 00:02:09,836
-GCD can inform the system
-what kind of work you're doing
+00:02:09,997 --> 00:02:12,599
+并能够更好地在你的应用程序和其他
 
 
 35
-00:02:09,985 --> 00:02:13,406
-and better share
-resources between your app
+00:02:12,666 --> 00:02:15,035
+出现在屏幕上应用程序之间分配资源
 
 
 36
-00:02:13,476 --> 00:02:15,046
-and the other apps
-present on the screen.
+00:02:16,837 --> 00:02:21,642
+有了Watch OS系统
+即便我们最小的平台都能识别你的代码
 
 
 37
-00:02:15,536 --> 00:02:21,656
-Of course, Watch OS brings your
-code to our smallest platform.
+00:02:22,643 --> 00:02:26,280
+GCD可以帮助
+系统知道你应该运行哪些部分
 
 
 38
-00:02:22,516 --> 00:02:26,346
-GCD is a way that you can help
-the system know which parts
+00:02:26,346 --> 00:02:28,849
+的代码才能让你在这么大的设备上
 
 
 39
-00:02:26,346 --> 00:02:28,916
-of your code you should
-run in order to be able
+00:02:28,916 --> 00:02:34,154
+构建起具有响应性能的应用程序
 
 
 40
-00:02:28,916 --> 00:02:34,056
-to have a responsive application
-on a device this size.
+00:02:39,359 --> 00:02:41,361
+所以我要先简要概述
+我们今天将要讨论的内容
 
 
 41
-00:02:38,976 --> 00:02:41,176
-So a brief outline of what we
-are going to go through today.
+00:02:42,029 --> 00:02:45,199
+我首先会介绍所谓的服务质量类别
 
 
 42
-00:02:41,686 --> 00:02:42,556
-I'm going to start
+00:02:45,632 --> 00:02:49,503
+我们与iOS 8和OS X 
+Yosemite发布的一款API
 
 
 43
-00:02:42,556 --> 00:02:45,066
-by introducing something called
-Quality of Service classes.
+00:02:50,838 --> 00:02:53,207
+Daniel来讲解它针对GCD使用
 
 
 44
-00:02:45,646 --> 00:02:49,496
-This is an API that we released
-with iOS 8 and OS X Yosemite.
+00:02:53,273 --> 00:02:54,641
+一些设计模式以及
 
 
 45
-00:02:50,826 --> 00:02:53,276
-Daniel's going to come up and
-go through some design patterns
+00:02:54,708 --> 00:02:56,577
+如何整合QLS与这些模式
 
 
 46
-00:02:53,276 --> 00:02:54,706
-for using GCD, and how
+00:02:57,678 --> 00:03:00,280
+然后我会详细讲解线程 队列
 
 
 47
-00:02:54,706 --> 00:02:56,576
-to integrate QLS
-with these patterns.
+00:03:00,347 --> 00:03:03,217
+并运行可以使GCD更便于使用的循环
 
 
 48
-00:02:57,676 --> 00:03:00,296
-I'll then go through some
-details about threads, queues,
+00:03:03,717 --> 00:03:06,620
+最后我们会就如何理解使用GCD时
 
 
 49
-00:03:00,336 --> 00:03:03,126
-and run loops that can
-make using GCD easier.
+00:03:06,687 --> 00:03:09,089
+的崩溃报告得出一个简短的结论
 
 
 50
-00:03:03,706 --> 00:03:06,686
-And finally, we'll conclude
-with a brief section on how
+00:03:12,192 --> 00:03:13,827
+但首先需要一点背景
 
 
 51
-00:03:06,686 --> 00:03:08,816
-to understand crash reports
-when you're using GCD.
+00:03:14,661 --> 00:03:16,964
+你们构建起非常棒的app
 
 
 52
-00:03:09,596 --> 00:03:13,486
-But first a little
-bit of background.
+00:03:17,030 --> 00:03:20,200
+然后开始执行这款app
+用户触碰它的图标
 
 
 53
-00:03:14,336 --> 00:03:17,386
-So we have your awesome app.
+00:03:20,267 --> 00:03:21,835
+从finder中进行下载
 
 
 54
-00:03:17,386 --> 00:03:20,266
-And you start executing the
-app, the user taps the icon,
+00:03:22,102 --> 00:03:24,304
+我们将开始执行主函数中的代码
 
 
 55
-00:03:20,266 --> 00:03:21,206
-loads it from a finder.
+00:03:24,571 --> 00:03:26,306
+那么你们将得到每个app用以开始的
 
 
 56
-00:03:21,976 --> 00:03:24,156
-We will begin executing
-your code in main
+00:03:26,373 --> 00:03:27,708
+最初的主线程
 
 
 57
-00:03:24,576 --> 00:03:26,366
-and you'll have your
-initial main thread
+00:03:28,342 --> 00:03:32,212
+你们调用应用程序UI函数 
+或者NS应用程序函数
 
 
 58
-00:03:26,366 --> 00:03:27,336
-that every app starts with.
+00:03:32,279 --> 00:03:34,281
+接着会弹出一个线程上的运行循环
 
 
 59
-00:03:28,326 --> 00:03:31,666
-You call UI application
-main, or NSApplication main,
+00:03:34,348 --> 00:03:35,816
+和框架代码
 
 
 60
-00:03:31,666 --> 00:03:34,026
-and that's going to bring
-up a run loop on the thread
+00:03:37,284 --> 00:03:39,887
+然后线程会停在那里等待事件
 
 
 61
-00:03:34,146 --> 00:03:35,216
-and the Framework code.
+00:03:40,320 --> 00:03:41,889
+在某一时刻会有事件发生
 
 
 62
-00:03:35,776 --> 00:03:39,686
-And then that thread is going
-to sit there waiting for events.
+00:03:42,389 --> 00:03:44,124
+也许你会得到一个调出的委派模式
 
 
 63
-00:03:40,306 --> 00:03:42,776
-At some point something
-is going to happen.
+00:03:44,191 --> 00:03:45,993
+到你的应用程序委托UI
 
 
 64
-00:03:42,776 --> 00:03:44,206
-Maybe you'll get a
-delegate method call
+00:03:46,660 --> 00:03:48,362
+这时你的代码开始运行
 
 
 65
-00:03:44,206 --> 00:03:45,846
-out to your UI application
-delegate.
+00:03:48,428 --> 00:03:51,198
+需要完成某项任务
+比方说从数据库读取信息
 
 
 66
-00:03:45,846 --> 00:03:48,556
-At this point, your code
-begins to run and needs
+00:03:52,132 --> 00:03:54,535
+你发出指令访问磁盘上的该文件
 
 
 67
-00:03:48,556 --> 00:03:51,206
-to do something; let's say it
-wants to read from a database.
+00:03:55,669 --> 00:03:57,070
+就会返回相应数据
 
 
 68
-00:03:52,146 --> 00:03:54,296
-You go out and, you'll
-access that file on disk.
+00:03:58,372 --> 00:03:59,973
+你会更新用户界面
 
 
 69
-00:03:55,256 --> 00:03:56,656
-That data will come back.
+00:04:02,776 --> 00:04:05,612
+最后返回控制到框架
 
 
 70
-00:03:58,366 --> 00:03:59,976
-You'll update the
-user interface.
+00:04:05,679 --> 00:04:07,514
+并继续等待线程上的事件
 
 
 71
-00:04:02,436 --> 00:04:05,666
-And then finally return
-control back to the Frameworks
+00:04:08,348 --> 00:04:10,117
+这些进展都很顺利 只是
 
 
 72
-00:04:05,666 --> 00:04:07,246
-and continue waiting for
-events on the thread.
+00:04:10,184 --> 00:04:12,186
+从数据库读取信息需要一点儿时间
 
 
 73
-00:04:08,356 --> 00:04:10,196
-This works great until that read
+00:04:13,754 --> 00:04:18,791
+在OS X系统
+此时你可能会看到一个旋转的等待光标
 
 
 74
-00:04:10,196 --> 00:04:13,626
-from the database takes
-a little bit of time.
+00:04:18,858 --> 00:04:21,661
+iOS系统里
+app会暂停甚至被终止运行
 
 
 75
-00:04:13,766 --> 00:04:18,446
-At that point on OS X you might
-see a spinning wait cursor.
+00:04:22,429 --> 00:04:25,799
+这种用户体验不仅糟糕而且未得到响应
 
 
 76
-00:04:18,846 --> 00:04:21,676
-On iOS the app would hang and
-might even get terminated.
+00:04:28,068 --> 00:04:30,037
+出现这种情况GCD就可以参与进来
 
 
 77
-00:04:22,416 --> 00:04:25,806
-This is a poor and
-unresponsive user experience.
+00:04:30,103 --> 00:04:31,972
+帮助提高运行效率
 
 
 78
-00:04:26,266 --> 00:04:30,106
-And this is where
-GCD can come in
+00:04:32,039 --> 00:04:33,774
+你会得到调出的委派模式
 
 
 79
-00:04:30,106 --> 00:04:32,296
-and help make things
-a little bit easier.
+00:04:33,841 --> 00:04:38,478
+但是不要立即开始进行操作
+而要创建一个GCD队列
 
 
 80
-00:04:32,296 --> 00:04:33,836
-You'll get your delegate
-method of call out.
+00:04:39,947 --> 00:04:42,583
+使用异步分派把任务移动到尾接
 
 
 81
-00:04:33,836 --> 00:04:38,946
-But instead of doing the work
-immediately you can create a GCD
+00:04:43,650 --> 00:04:47,387
+你的代码与主线程异步执行
 
 
 82
-00:04:39,616 --> 00:04:42,576
-queue, use dispatch async to
-move the work on to the cue.
+00:04:48,989 --> 00:04:50,190
+等你们得到了数据
 
 
 83
-00:04:43,636 --> 00:04:45,756
-Your code executes
-asynchronously
+00:04:50,257 --> 00:04:53,861
+就可以异步分派回主线程更新用户界面
 
 
 84
-00:04:45,756 --> 00:04:47,016
-with respect to the main thread.
+00:04:54,795 --> 00:04:58,498
+这样做的优势在于
+当你的任务在GCD队列运行时
 
 
 85
-00:04:48,166 --> 00:04:50,246
-When you have the
-data available,
+00:04:59,233 --> 00:05:01,368
+主线程可以继续等待事件
 
 
 86
-00:04:50,246 --> 00:04:53,346
-you can dispatch async back to
-the main thread, update the UI.
+00:05:01,435 --> 00:05:02,503
+它始终保持响应状态
 
 
 87
-00:04:53,346 --> 00:04:57,356
-Now, the advantage here is that
-while your work is happening
+00:05:02,569 --> 00:05:04,605
+用户可以获得持续的良好体验
 
 
 88
-00:04:57,356 --> 00:05:00,596
-on that GCD queue, the main
-thread can continue waiting
+00:05:05,339 --> 00:05:06,573
+大家都感到满意
 
 
 89
-00:05:00,596 --> 00:05:01,256
-for events.
+00:05:08,308 --> 00:05:09,376
+我希望这是一个
 
 
 90
-00:05:01,436 --> 00:05:02,536
-It stays responsive.
+00:05:09,443 --> 00:05:10,711
+大家都熟悉的模式
 
 
 91
-00:05:02,576 --> 00:05:04,546
-The user continues to
-get a great experience,
+00:05:10,777 --> 00:05:12,212
+我们不会详细谈论
 
 
 92
-00:05:05,346 --> 00:05:08,056
-and everyone is happy.
+00:05:12,279 --> 00:05:13,514
+如何做到这一点
 
 
 93
-00:05:08,296 --> 00:05:09,436
-Now, I'm hoping this
-is a pattern
+00:05:14,014 --> 00:05:16,517
+如果你们不熟悉 
+我强烈建议各位在今天的
 
 
 94
-00:05:09,436 --> 00:05:10,486
-that is familiar to all of you.
+00:05:16,583 --> 00:05:19,853
+演讲之后去一趟去普西迪
+听一听那里的讲话
 
 
 95
-00:05:10,486 --> 00:05:12,266
-We are not going to
-go through the details
+00:05:19,920 --> 00:05:21,922
+里面将详细讲述这种模式
 
 
 96
-00:05:12,266 --> 00:05:13,526
-of how to accomplish this.
+00:05:23,757 --> 00:05:25,792
+有一点你们之前可能没有想过
 
 
 97
-00:05:14,016 --> 00:05:16,576
-If this is not familiar, I
-highly encourage you to head
+00:05:25,859 --> 00:05:29,263
+我们现在有两个线程两个都要执行代码
 
 
 98
-00:05:16,576 --> 00:05:19,906
-up to Presidio after this
-and check out the talk there
+00:05:29,329 --> 00:05:31,265
+主线程要处理新事件
 
 
 99
-00:05:19,906 --> 00:05:23,056
-which will go through
-the pattern in detail.
+00:05:31,331 --> 00:05:32,466
+GCD队列要
 
 
 100
-00:05:23,766 --> 00:05:25,846
-One thing you might have
-not thought about before,
+00:05:32,533 --> 00:05:34,568
+执行你派遣的任务
 
 
 101
-00:05:25,846 --> 00:05:28,936
-is we now have two threads
-that both want to execute code.
+00:05:35,235 --> 00:05:37,371
+也许这两个任务都在一个核心设备上
 
 
 102
-00:05:29,346 --> 00:05:31,016
-Your main thread wants
-to handle new events
+00:05:38,038 --> 00:05:40,374
+在这种情况下我们要执行哪个线程呢
 
 
 103
-00:05:31,146 --> 00:05:32,536
-and the GCD queue wants
+00:05:45,145 --> 00:05:47,881
+这里服务质量类别
+就要发挥作用了
 
 
 104
-00:05:32,536 --> 00:05:34,286
-to execute the block
-you dispatched to it.
+00:05:49,049 --> 00:05:53,086
+这是一个在iOS 8和10
+Yosemite系统中的新的API
 
 
 105
-00:05:34,286 --> 00:05:37,376
-And maybe we're only on
-a single core device.
+00:05:53,153 --> 00:05:54,555
+于去年发布
 
 
 106
-00:05:38,046 --> 00:05:40,366
-In this case, which
-thread do we execute?
+00:05:55,455 --> 00:05:58,959
+我们有四个服务质量类别：
+用户交互模式
 
 
 107
-00:05:45,286 --> 00:05:47,676
-This is where Quality of
-Service classes come into play.
+00:05:59,026 --> 00:06:01,628
+用户发起模式效用和背景
 
 
 108
-00:05:48,436 --> 00:05:53,156
-As I mentioned this is a new
-API in iOS 8 and 10 Yosemite
+00:06:02,796 --> 00:06:05,766
+通过这些方法你可以
+告诉系统你们正在进行哪种任务
 
 
 109
-00:05:53,156 --> 00:05:54,546
-that we released last year.
+00:06:06,433 --> 00:06:10,404
+它也使系统能够提供各种资源控制
 
 
 110
-00:05:55,306 --> 00:05:58,806
-We have four Quality of Service
-classes: user interactive,
+00:06:10,704 --> 00:06:12,706
+以最有效地执行你的代码
 
 
 111
-00:05:59,036 --> 00:06:01,616
-user initiated, utility
-and background.
+00:06:14,341 --> 00:06:16,376
+说到资源控制什么是资源控制
 
 
 112
-00:06:02,806 --> 00:06:04,776
-These are ways you tell
-the system what kind
+00:06:16,944 --> 00:06:20,214
+我们的系统支持CPU调度优先级
 
 
 113
-00:06:04,776 --> 00:06:07,896
-of work you're doing, and in
-turn, it allows the system
+00:06:20,414 --> 00:06:22,382
+我们要运行哪些线程以什么顺序运行
 
 
 114
-00:06:07,896 --> 00:06:10,246
-to provide a variety
-of resource controls
+00:06:23,217 --> 00:06:26,086
+说到I / O优先级
+当系统中有多个I / O时
 
 
 115
-00:06:10,716 --> 00:06:12,526
-to most effectively
-execute your code.
+00:06:26,153 --> 00:06:27,321
+应该以什么顺序执行呢
 
 
 116
-00:06:12,526 --> 00:06:16,376
-When I say resource controls,
-what am I talking about?
+00:06:28,088 --> 00:06:30,657
+计时器聚合技术是一个省电的功能
 
 
 117
-00:06:16,946 --> 00:06:19,946
-Our system has support for
-CPU scheduling priority,
+00:06:31,325 --> 00:06:33,760
+无论我们按照吞吐量还是以效率
 
 
 118
-00:06:20,426 --> 00:06:22,286
-which threads do we
-run, in what order?
+00:06:33,827 --> 00:06:35,429
+导向模式运行CPU
 
 
 119
-00:06:22,286 --> 00:06:26,146
-I/O priority, how do we
-execute I/O with deference
+00:06:35,495 --> 00:06:37,364
+我们想要获得最佳的性能还是想要
 
 
 120
-00:06:26,146 --> 00:06:27,326
-to other I/O in the system.
+00:06:37,431 --> 00:06:39,867
+以最节能的方式执行的代码
 
 
 121
-00:06:28,216 --> 00:06:30,666
-Timer coalescing, which
-is a power-saving feature.
+00:06:41,268 --> 00:06:45,305
+在理想情况下为每个平台或设备优化
 
 
 122
-00:06:31,316 --> 00:06:33,836
-And whether we run
-the CPU in through-put
+00:06:45,372 --> 00:06:48,308
+这些配置值或设备运行的代码
 
 
 123
-00:06:33,836 --> 00:06:35,356
-or in efficiency-oriented mode.
+00:06:49,243 --> 00:06:51,178
+但显然这种做法很快会难以为继
 
 
 124
-00:06:35,566 --> 00:06:37,426
-Do we want to get the most
-performance, or do we want
+00:06:51,445 --> 00:06:54,448
+许多配置值很难调整 而代码
 
 
 125
-00:06:37,426 --> 00:06:41,656
-to execute the code in the
-most energy-efficient manner?
+00:06:54,515 --> 00:06:56,283
+运行的平台数量众多
 
 
 126
-00:06:41,806 --> 00:06:45,086
-In an ideal world we tune each
-of these configuration values
+00:06:58,185 --> 00:07:00,254
+服务质量类别被设计成
 
 
 127
-00:06:45,386 --> 00:06:48,306
-for each platform or device and
-piece of code that's running,
+00:07:00,320 --> 00:07:03,156
+一个抽象参数你们可以使用
 
 
 128
-00:06:49,006 --> 00:06:51,166
-but obviously this would
-get out of hand quickly.
+00:07:03,223 --> 00:07:06,727
+这个参数描述任务的目的和类别
 
 
 129
-00:06:51,456 --> 00:06:54,526
-There's a lot of values hard
-to tune correctly and a lot
+00:07:07,194 --> 00:07:08,495
+不要试图调整所有
 
 
 130
-00:06:54,526 --> 00:06:58,176
-of platforms where
-your code can run.
+00:07:08,562 --> 00:07:11,665
+具体的配置值
+你们要明白自己所做的都
 
 
 131
-00:06:58,176 --> 00:07:00,306
-Quality of Service
-Classes are designed
+00:07:11,732 --> 00:07:13,433
+“由将要执行工作的用户启动”
 
 
 132
-00:07:00,306 --> 00:07:03,206
-to be a single abstract
-parameter that you can use
+00:07:13,667 --> 00:07:15,602
+而系统将自动为平台和设备
 
 
 133
-00:07:03,236 --> 00:07:06,336
-to communicate the intent and
-classification of your work.
+00:07:15,669 --> 00:07:17,571
+选择正确的配置值
 
 
 134
-00:07:06,336 --> 00:07:08,566
-Rather than trying to tune all
+00:07:20,641 --> 00:07:22,776
+我前面提到过我们有四个服务质量类别
 
 
 135
-00:07:08,566 --> 00:07:11,566
-of these specific configuration
-values you simply say
+00:07:23,043 --> 00:07:25,479
+接下来我要对它们进行简要介绍
+它们分别有什么用途
 
 
 136
-00:07:11,716 --> 00:07:13,096
-"I'm doing user initiated work"
+00:07:26,079 --> 00:07:27,548
+第一个是用户交互模式
 
 
 137
-00:07:13,526 --> 00:07:15,676
-and the system will
-automatically pick the right
+00:07:28,081 --> 00:07:29,583
+这是主线程
 
 
 138
-00:07:15,676 --> 00:07:17,556
-values for that platform
-and device.
+00:07:30,250 --> 00:07:33,353
+假设有一个iOS应用程序用户的手指
 
 
 139
-00:07:18,096 --> 00:07:22,776
-So I mentioned we have four
-Quality of Service classes.
+00:07:33,420 --> 00:07:34,688
+正在屏幕上拖动
 
 
 140
-00:07:22,856 --> 00:07:25,276
-Let me talk through them briefly
-and what they are used for.
+00:07:35,088 --> 00:07:37,891
+主线程需要响应以便在
 
 
 141
-00:07:26,126 --> 00:07:27,466
-The first is user interactive.
+00:07:37,958 --> 00:07:39,693
+用户手指拖动时交付
 
 
 142
-00:07:28,086 --> 00:07:29,576
-This is the main thread.
+00:07:39,760 --> 00:07:40,727
+下一帧动画
 
 
 143
-00:07:30,146 --> 00:07:33,426
-Imagine you have an iOS app,
-the user has their finger
+00:07:41,695 --> 00:07:45,799
+主要用户交互代码是保持动画
 
 
 144
-00:07:33,426 --> 00:07:34,506
-on the screen and is dragging.
+00:07:45,866 --> 00:07:49,236
+以每秒60帧的
+速度平稳运行的专门代码
 
 
 145
-00:07:35,086 --> 00:07:37,946
-The main thread needs to
-be responsive in order
+00:07:52,206 --> 00:07:55,342
+所以你们需要问自己
+这项工作是否积极参与
 
 
 146
-00:07:37,946 --> 00:07:39,776
-to deliver the next
-frame of animation
+00:07:55,409 --> 00:07:56,376
+到更新UI之中
 
 
 147
-00:07:39,776 --> 00:07:40,736
-as the user is dragging.
+00:07:56,443 --> 00:07:59,179
+在决定是否需要进行用户交互式设计时
+这一点一定要加以考虑
 
 
 148
-00:07:41,166 --> 00:07:45,506
-The main user interactive code
-is specifically the code needed
+00:08:00,113 --> 00:08:04,384
+这不是在加载可能成为滚动视图的内容
 
 
 149
-00:07:45,856 --> 00:07:48,366
-in order to keep that 60
-frames per second animation
+00:08:04,985 --> 00:08:07,921
+这就是在画新的动画
 
 
 150
-00:07:48,366 --> 00:07:49,156
-running smoothly.
+00:08:08,589 --> 00:08:11,792
+我们所说的用户发起模式
+是指加载由用户
 
 
 151
-00:07:51,326 --> 00:07:55,096
-So you want to ask yourself:
-Is this work actively involved
+00:08:11,859 --> 00:08:13,861
+完成的动作结果
 
 
 152
-00:07:55,096 --> 00:07:55,886
-in updating the UI
+00:08:14,328 --> 00:08:15,662
+比如当我翻动滚动视图
 
 
 153
-00:07:56,436 --> 00:07:57,846
-when considering
-whether something should
+00:08:15,729 --> 00:08:18,532
+为下一个单元加载数据时
 
 
 154
-00:07:57,846 --> 00:07:58,926
-be user-interactive.
+00:08:19,166 --> 00:08:23,270
+或我在使用照片或邮件
+应用程序并点击电子邮件或照片
 
 
 155
-00:07:59,826 --> 00:08:04,386
-This isn't loading the content
-potentially of that scroll view.
+00:08:23,604 --> 00:08:26,173
+加载全尺寸照片或电子邮件时
 
 
 156
-00:08:04,976 --> 00:08:07,926
-It is just drawing
-the new animation.
+00:08:26,673 --> 00:08:29,243
+这些行为就是我们
+所说的用户发起的动作
 
 
 157
-00:08:08,576 --> 00:08:11,866
-We talk about user initiated
-as being loading the results
+00:08:30,744 --> 00:08:33,145
+问题是要继续进行用户交互
 
 
 158
-00:08:11,866 --> 00:08:13,856
-of an action done by the user.
+00:08:33,212 --> 00:08:34,715
+是否需要这项工作
 
 
 159
-00:08:14,316 --> 00:08:15,726
-So this might be
-as I'm scrolling
+00:08:35,414 --> 00:08:36,717
+对其中任何一个都没有帮助
 
 
 160
-00:08:15,726 --> 00:08:18,546
-through scroll view loading
-the data for the next cells
+00:08:36,783 --> 00:08:38,852
+作为用户发起而不是用户拦截
 
 
 161
-00:08:19,156 --> 00:08:22,596
-or if I'm in a photo or mail
-application and tap an email
+00:08:39,385 --> 00:08:41,755
+如果用户不能通过你们的应用程序继续
 
 
 162
-00:08:22,596 --> 00:08:26,176
-or photo, loading the
-full size photo or e-mail,
+00:08:41,822 --> 00:08:44,591
+取得有意义的进展
+就应该选择用户发起模式
 
 
 163
-00:08:26,666 --> 00:08:29,226
-those kinds of actions are what
-we talk about as user initiated.
+00:08:46,226 --> 00:08:49,329
+效用是指用户本来可能已经开始进行
 
 
 164
-00:08:30,236 --> 00:08:33,206
-The question is, is
-this work required
+00:08:49,596 --> 00:08:51,098
+或已经自动启动任务
 
 
 165
-00:08:33,206 --> 00:08:34,716
-to continue user interaction?
+00:08:51,164 --> 00:08:54,101
+这些任务长时间运行但是并不阻碍用户
 
 
 166
-00:08:35,096 --> 00:08:36,775
-It's helpful not to any about it
+00:08:54,168 --> 00:08:55,702
+继续使用你们的应用程序
 
 
 167
-00:08:36,775 --> 00:08:38,726
-as user initiated
-but user blocking.
+00:08:57,171 --> 00:08:59,072
+你们要问问自己用户是否了解
 
 
 168
-00:08:38,726 --> 00:08:41,816
-If the user can't continue
-to make meaningful progress
+00:08:59,139 --> 00:09:00,407
+这项工作的进展
 
 
 169
-00:08:41,816 --> 00:08:44,596
-with your application, user
-initiated is the correct class.
+00:09:00,841 --> 00:09:03,911
+如果一个杂志app正在下载新刊物
 
 
 170
-00:08:46,236 --> 00:08:48,866
-Utility is for those things
-that the user may have started,
+00:09:04,344 --> 00:09:07,881
+那么用户可以继续使这个app
+下载任务可以同时进行彼此互不干扰
 
 
 171
-00:08:49,596 --> 00:08:50,896
-or may have started
-automatically,
+00:09:07,948 --> 00:09:10,517
+他们可以阅读往期刊物或随意浏览
 
 
 172
-00:08:51,156 --> 00:08:54,176
-but are longer running tasks
-that don't prevent the user
+00:09:10,584 --> 00:09:12,152
+你们可以设计一个进度条
 
 
 173
-00:08:54,176 --> 00:08:55,536
-from continuing to use your app.
+00:09:12,419 --> 00:09:13,987
+帮助用户了解进展情况
 
 
 174
-00:08:57,176 --> 00:08:59,126
-You want to ask yourself,
-is the user aware
+00:09:14,521 --> 00:09:16,757
+效用是一个很好的类别
 
 
 175
-00:08:59,126 --> 00:09:01,356
-of the progress of this work?
+00:09:18,892 --> 00:09:21,395
+最后其余的一切都可以归为背景
 
 
 176
-00:09:01,356 --> 00:09:03,896
-If you were a magazine app
-downloading a new issue,
+00:09:21,528 --> 00:09:23,163
+用户不会主动关注的一切
 
 
 177
-00:09:04,336 --> 00:09:06,586
-is something that
-the user can continue
+00:09:23,230 --> 00:09:25,432
+任何类型的维护任务 清理工作
 
 
 178
-00:09:06,586 --> 00:09:07,616
-to use the app while
-it's happening.
+00:09:26,767 --> 00:09:29,770
+数据库清空都属于背景
 
 
 179
-00:09:07,616 --> 00:09:09,976
-They can read old
-issues or browse around.
+00:09:31,638 --> 00:09:32,739
+根本问题是
 
 
 180
-00:09:10,496 --> 00:09:12,136
-You may have a progress bar
+00:09:32,806 --> 00:09:34,408
+用户有没有意识到这项工作
 
 
 181
-00:09:12,416 --> 00:09:13,986
-and the user is aware
-of the progress.
+00:09:35,309 --> 00:09:37,177
+背景工作很有趣 因为你要
 
 
 182
-00:09:14,506 --> 00:09:16,746
-This is a great thing
-to classify as utility.
+00:09:37,244 --> 00:09:38,645
+考虑何时处理背景
 
 
 183
-00:09:18,836 --> 00:09:21,256
-Finally, background is
-for everything else.
+00:09:39,379 --> 00:09:41,281
+我强烈建议你们去看一看
 
 
 184
-00:09:21,466 --> 00:09:23,216
-The user is not actively
-watching.
+00:09:42,282 --> 00:09:44,651
+去年关于编写节能代码的那部分演讲
 
 
 185
-00:09:23,216 --> 00:09:25,216
-Any kind of maintenance
-task, cleanup work,
+00:09:44,718 --> 00:09:47,421
+该演讲讨论了如何有效地做好背景工作
 
 
 186
-00:09:26,776 --> 00:09:29,486
-database vacuuming
-would all be background.
+00:09:47,521 --> 00:09:49,556
+如何判断你们
+的应用程序背景是否表现出色
 
 
 187
-00:09:30,316 --> 00:09:32,776
-And the question is basically,
+00:09:56,663 --> 00:09:58,165
+所以我提到了我们的新MacBook
 
 
 188
-00:09:32,816 --> 00:09:34,286
-is the user unaware
-of this work?
+00:09:59,299 --> 00:10:01,768
+就像我说的这是第一款无风扇的Mac
 
 
 189
-00:09:34,956 --> 00:09:37,256
-Now background work is
-interesting because you want
+00:10:02,336 --> 00:10:05,205
+在之前有风扇的Macbook里
 
 
 190
-00:09:37,256 --> 00:09:39,436
-to think about when
-you're doing it.
+00:10:05,672 --> 00:10:08,842
+机器处理的工作越来越多 产生的热量
 
 
 191
-00:09:39,436 --> 00:09:41,746
-I encourage you to take a look
+00:10:08,909 --> 00:10:11,712
+也越来越多 那么我们可以加快
 
 
 192
-00:09:41,746 --> 00:09:44,666
-at the writing energy efficient
-code sessions from last year
+00:10:11,778 --> 00:10:14,781
+风扇转速来帮助热量更快消散
 
 
 193
-00:09:44,776 --> 00:09:47,406
-that talk about how to do
-background work effectively
+00:10:15,682 --> 00:10:18,185
+新版MacBook非常节能令人惊讶
 
 
 194
-00:09:47,516 --> 00:09:55,276
-if your app has significant
-work in this class.
+00:10:18,252 --> 00:10:22,456
+我们不需要风扇散热在大多数情况下
 
 
 195
-00:09:56,666 --> 00:09:57,816
-So I mentioned our new MacBook.
+00:10:23,423 --> 00:10:26,827
+但全速运转该机器仍然会
 
 
 196
-00:09:58,836 --> 00:10:02,546
-As I said, this is
-the first fanless Mac.
+00:10:26,894 --> 00:10:29,329
+产生一些热量我们需要驱散
 
 
 197
-00:10:02,546 --> 00:10:05,676
-In previous MacBooks
-that had a fan,
+00:10:30,264 --> 00:10:32,432
+但是我们驱散热量的能力是有限的
 
 
 198
-00:10:05,676 --> 00:10:08,896
-as the machine is doing more and
-more work and generating more
+00:10:33,367 --> 00:10:37,738
+我们有其他技术确保我们能让
 
 
 199
-00:10:08,896 --> 00:10:11,766
-and more energy and
-therefore heat we can bring
+00:10:37,804 --> 00:10:40,007
+机器保持适当的温度适合使用者使用
 
 
 200
-00:10:11,766 --> 00:10:14,436
-up the fan speed to help
-dissipate the heat faster.
+00:10:40,841 --> 00:10:44,144
+假设你有一款正在使用的app
+然后你已经完成工作
 
 
 201
-00:10:15,256 --> 00:10:17,836
-The new MacBook is
-incredibly energy efficient.
+00:10:44,211 --> 00:10:46,013
+按服务类的四项质量指标而言
 
 
 202
-00:10:18,246 --> 00:10:22,446
-We don't need a fan to dissipate
-heat in most circumstances,
+00:10:46,847 --> 00:10:50,117
+你正很努力的开动机器用了很多的能量
 
 
 203
-00:10:23,426 --> 00:10:26,896
-but running this machine at
-full speed is still going
+00:10:50,184 --> 00:10:52,853
+而我们需要帮忙控制控制热量的多少
 
 
 204
-00:10:26,896 --> 00:10:29,346
-to generate some energy
-we need to dissipate.
+00:10:52,920 --> 00:10:55,189
+这样能让机器在合理的温度中工作
 
 
 205
-00:10:30,266 --> 00:10:32,426
-But our ability to dissipate
-heat is at a constant rate.
+00:10:56,423 --> 00:10:58,926
+好了我们能做的是我们能
+开始挤出我们的工作量
 
 
 206
-00:10:33,356 --> 00:10:37,806
-We have other techniques to make
-sure we can keep the enclosure
+00:10:58,992 --> 00:11:00,394
+我们将要做的是
 
 
 207
-00:10:37,806 --> 00:10:40,006
-of the machine at an appropriate
-temperature for the user.
+00:11:00,460 --> 00:11:02,663
+比较不重要的服务质量标准
 
 
 208
-00:10:40,846 --> 00:10:44,226
-Imagine you have an app using
-and you have work happening
+00:11:03,397 --> 00:11:06,600
+这就允许我们管理
+这个系统能量的使用
 
 
 209
-00:10:44,226 --> 00:10:46,026
-at all four Quality
-of Service classes.
+00:11:07,901 --> 00:11:10,337
+保持机器
+响应及时确保了
 
 
 210
-00:10:46,856 --> 00:10:49,886
-You are driving the machine
-hard, using a lot of energy
+00:11:10,404 --> 00:11:13,841
+没有无反应情况 让使用者看到
 
 
 211
-00:10:50,176 --> 00:10:52,906
-and we need to help control
-that amount of energy in order
+00:11:14,675 --> 00:11:16,043
+这个方式很重要
 
 
 212
-00:10:52,906 --> 00:10:54,976
-to keep the machine at a
-reasonable temperature.
+00:11:16,109 --> 00:11:17,811
+因为你让你的工作正确分类了
 
 
 213
-00:10:55,616 --> 00:10:58,986
-Well, what we can do is we can
-start to squeeze the amount
+00:11:17,878 --> 00:11:19,646
+在运行一个像这样的机器时
 
 
 214
-00:10:58,986 --> 00:11:00,126
-of work we are going to do
+00:11:22,015 --> 00:11:24,852
+我还提到iOS
+以及新的多元任务的特点
 
 
 215
-00:11:00,476 --> 00:11:02,646
-at the less important
-Quality of Service classes.
+00:11:25,552 --> 00:11:28,355
+你可以想象在古老的
+世界里我们可能会有你的app
 
 
 216
-00:11:03,136 --> 00:11:06,586
-This allows us to manage
-the system's use of energy,
+00:11:28,422 --> 00:11:31,758
+的主要思路而且可能
+它还有另外的分派线程
 
 
 217
-00:11:07,896 --> 00:11:10,406
-keep the machine
-responsive, and make sure
+00:11:31,825 --> 00:11:35,162
+在使用但是现在
+我提出了另外一款app
 
 
 218
-00:11:10,406 --> 00:11:13,726
-that there's no responsiveness
-issues visible to the user.
+00:11:38,198 --> 00:11:40,067
+那款app也将会有一个主要思路
 
 
 219
-00:11:14,666 --> 00:11:16,096
-This way it's very important
+00:11:41,235 --> 00:11:43,570
+然后我也有Picture in
+Picture
 
 
 220
-00:11:16,096 --> 00:11:17,806
-that you have your work
-correctly classified
+00:11:43,637 --> 00:11:45,205
+那款也有一个思路解码视频
 
 
 221
-00:11:17,866 --> 00:11:21,516
-when running on a
-machine like this.
+00:11:46,039 --> 00:11:48,976
+好了但是我也只是拥有两个CPUs
 
 
 222
-00:11:21,926 --> 00:11:24,846
-I also mentioned iOS and the
-new multitasking features.
+00:11:49,910 --> 00:11:52,346
+所以如果我不得不使用其中之一
+来解码视频
 
 
 223
-00:11:25,556 --> 00:11:28,436
-You can imagine in the old
-world we might have your app
+00:11:52,412 --> 00:11:54,181
+对于下一个我该做些什么呢
 
 
 224
-00:11:28,436 --> 00:11:31,776
-with its main thread and maybe
-it has additional dispatch
+00:11:54,281 --> 00:11:55,616
+这是另外一个领域对于质量
 
 
 225
-00:11:31,816 --> 00:11:35,346
-thread running but now
-I bring up another app.
+00:11:55,682 --> 00:11:57,351
+服务标准来说能真正帮你解决问题
 
 
 226
-00:11:35,836 --> 00:11:40,066
-And that app also is going
-to have a main thread.
+00:11:57,851 --> 00:12:01,655
+表明了操作系统的服务质量标准的
 
 
 227
-00:11:41,246 --> 00:11:42,916
-And then I also have
-a Picture in Picture.
+00:12:01,722 --> 00:12:03,957
+每一个线程我们都可以准确决定
 
 
 228
-00:11:43,646 --> 00:11:45,206
-That has a thread
-decoding the video.
+00:12:04,024 --> 00:12:06,226
+在哪里安排那些可用的资源
 
 
 229
-00:11:46,026 --> 00:11:48,966
-Okay, but I've only
-got two CPUs.
+00:12:07,928 --> 00:12:10,130
+通过那些我会转交东西给Daniel
 
 
 230
-00:11:49,896 --> 00:11:52,256
-So if I have to use one
-to decode the video,
+00:12:10,197 --> 00:12:14,301
+他会检查特定的设计模式
+以及对那些类型如何应用服务质量标准
 
 
 231
-00:11:52,536 --> 00:11:53,576
-what do I do with the next one?
+00:12:21,275 --> 00:12:22,943
+早上好 谢谢 Anthony
 
 
 232
-00:11:54,286 --> 00:11:55,676
-This is another place
-for Quality
+00:12:23,010 --> 00:12:24,945
+本章我们会看几个
 
 
 233
-00:11:55,676 --> 00:11:57,356
-of Service classes can
-really help you out.
+00:12:25,012 --> 00:12:29,616
+关于GCD设计和QOS是如何应用的
+具体的例子
 
 
 234
-00:11:57,856 --> 00:12:01,716
-Indicating to the operating
-system the Quality of Service
+00:12:30,617 --> 00:12:34,154
+首先我们从最基本的开始 先看GCD
 
 
 235
-00:12:01,716 --> 00:12:04,026
-of each thread we
-can correctly decide
+00:12:34,221 --> 00:12:38,325
+和QoS 在每个独立模块的层次上
 
 
 236
-00:12:04,026 --> 00:12:05,966
-where to marshall those
-available resources.
+00:12:38,392 --> 00:12:41,862
+是怎样被细分的
+例如QoS 从提交线程到
 
 
 237
-00:12:07,426 --> 00:12:10,196
-So with that I'll hand things
-off to Daniel who will go
+00:12:42,462 --> 00:12:44,364
+异步运行模块
 
 
 238
-00:12:10,196 --> 00:12:13,096
-through specific design patterns
-and how to apply Quality
+00:12:44,431 --> 00:12:47,668
+有一个整体功能模块
 
 
 239
-00:12:13,096 --> 00:12:13,976
-of Service to those patterns.
+00:12:47,734 --> 00:12:49,036
+和一个异步分派模块
 
 
 240
-00:12:14,516 --> 00:12:20,806
-[Applause]
+00:12:49,102 --> 00:12:50,838
+以及相关的自动传播QoS模块
 
 
 241
-00:12:21,306 --> 00:12:21,796
->> DANIEL STEFFEN: Good morning.
+00:12:51,505 --> 00:12:54,575
+那么这个系统是怎样为你
 
 
 242
-00:12:21,796 --> 00:12:22,396
-Thanks, Anthony.
+00:12:54,641 --> 00:12:56,143
+自动切换一些优先级别的呢？
 
 
 243
-00:12:23,136 --> 00:12:25,016
-So in this section
-we are going to look
+00:12:56,210 --> 00:13:00,247
+没有时间深入地讨论具体的API命令
 
 
 244
-00:12:25,016 --> 00:12:29,606
-at a couple specific examples
-GCD design and how QoS applies.
+00:13:00,781 --> 00:13:05,452
+如果你想了解更多的细节 我建议你
 
 
 245
-00:12:30,606 --> 00:12:34,236
-The fundamentals we are
-going to look at for GCD
+00:13:05,519 --> 00:13:07,454
+看看去年的演讲内容
+"功率 性能
 
 
 246
-00:12:34,236 --> 00:12:38,326
-and QoS are how QoS
-can be specified
+00:13:07,521 --> 00:13:09,389
+和诊断: GCD和XPC的新内容"
 
 
 247
-00:12:38,396 --> 00:12:41,866
-at the individual block level
-as well as on QoS has a whole
+00:13:09,456 --> 00:13:13,293
+那么你就能在开发者的网站看到
 
 
 248
-00:12:42,446 --> 00:12:44,446
-and how dispatch async
+00:13:13,360 --> 00:13:17,231
+我们在如何使用API的
+问题上已经讲了很多具体内容
 
 
 249
-00:12:44,446 --> 00:12:47,746
-and related APIs
-propagate QoS automatically
+00:13:17,297 --> 00:13:18,665
+这是去年的新课程
 
 
 250
-00:12:47,746 --> 00:12:49,056
-from the submitting thread
+00:13:20,334 --> 00:13:23,136
+第一个例子是
+ Anthony很早就有了的
 
 
 251
-00:12:49,096 --> 00:12:50,836
-to the asynchronously
-running block,
+00:13:23,203 --> 00:13:26,139
+在主线程的提示下执行了一些异步工作
 
 
 252
-00:12:51,516 --> 00:12:54,656
-and then how the system can
-resolve some priority inversions
+00:13:26,206 --> 00:13:31,211
+在GCD上做了些I/O
 
 
 253
-00:12:54,656 --> 00:12:55,766
-for you automatically.
+00:13:32,546 --> 00:13:37,251
+这个例子怎样适应于QoS？
 
 
 254
-00:12:56,196 --> 00:13:00,236
-We won't have time to go into
-depth on the specific API calls.
+00:13:37,317 --> 00:13:38,986
+什么是可以被应用在这里的
 
 
 255
-00:13:00,796 --> 00:13:05,526
-If you want more details
-I encourage you to look
+00:13:39,052 --> 00:13:40,587
+适当质量的服务等级呢？
 
 
 256
-00:13:05,526 --> 00:13:07,536
-at the session from last
-year, "Power, performance
+00:13:41,088 --> 00:13:44,525
+当然在左手边我们有主线程
 
 
 257
-00:13:07,536 --> 00:13:09,456
-and diagnostics: What's
-New in GCD and XPC",
+00:13:44,591 --> 00:13:47,461
+Anthony说过是UI呈现的地方
 
 
 258
-00:13:09,456 --> 00:13:13,356
-that you can see this on the
-developer website where we went
+00:13:47,528 --> 00:13:48,862
+这里是事件处理的地方
 
 
 259
-00:13:13,356 --> 00:13:17,286
-into much more specific
-detail on how to use the APIs
+00:13:49,396 --> 00:13:51,865
+合适的调用服务命令是用户互动命令
 
 
 260
-00:13:17,286 --> 00:13:18,676
-that were new last year.
+00:13:52,566 --> 00:13:54,101
+这些都是无条件获得的
 
 
 261
-00:13:19,876 --> 00:13:22,956
-So first example is the
-example that Anthony had earlier
+00:13:54,201 --> 00:13:57,571
+应用程序的主线程就在这种质量
+的服务等级下服务等级下出现
 
 
 262
-00:13:23,206 --> 00:13:25,376
-where we performed
-some asynchronous work
+00:13:58,872 --> 00:14:00,474
+在屏幕右手边
 
 
 263
-00:13:26,156 --> 00:13:30,866
-and do some I/O on the GCD
-cue off of the main thread.
+00:14:00,541 --> 00:14:03,243
+是没有出现在主线程的异步工作
 
 
 264
-00:13:32,266 --> 00:13:37,316
-How does this example
-fit in with QoS,
+00:14:03,777 --> 00:14:07,014
+很明显我们不应该启动用户互动
 
 
 265
-00:13:37,316 --> 00:13:39,046
-what are the appropriate Quality
+00:14:07,147 --> 00:14:09,049
+这里我们不是在做UI呈现
 
 
 266
-00:13:39,046 --> 00:13:40,476
-of Service classes
-to apply here?
+00:14:09,183 --> 00:14:12,419
+而是在说正盯住文件图标
 
 
 267
-00:13:40,476 --> 00:13:44,606
-On the left-hand side we have
-the main thread, of course.
+00:14:12,486 --> 00:14:16,723
+正在等待他的文件打开的用户
 
 
 268
-00:13:44,606 --> 00:13:47,466
-As Anthony mentioned, this is
-where the UI rendering happens,
+00:14:16,924 --> 00:14:18,792
+用户已经在使用此app前就被绊住了
 
 
 269
-00:13:47,516 --> 00:13:48,846
-this is where the
-event handling happens,
+00:14:18,892 --> 00:14:21,795
+他仍然能和用户界面互相影响
+但是并不能做所有他想做的事情
 
 
 270
-00:13:49,386 --> 00:13:51,876
-the appropriate caller service
-call here is user interactive.
+00:14:21,862 --> 00:14:24,631
+比如编辑文件或者查看文件
 
 
 271
-00:13:52,566 --> 00:13:54,106
-Nothing you have
-to do to get this.
+00:14:24,798 --> 00:14:27,901
+用户初始化是服务的最佳质量
 
 
 272
-00:13:54,216 --> 00:13:55,986
-The main thread of
-the application comes
+00:14:30,270 --> 00:14:33,173
+如何通过GCDAPI达到这个目标
 
 
 273
-00:13:55,986 --> 00:13:57,266
-up at this Quality
-of Service class.
+00:14:34,141 --> 00:14:37,644
+其实你不需要做任何事情
 
 
 274
-00:13:57,266 --> 00:14:00,786
-On the right-hand
-side of the screen,
+00:14:37,978 --> 00:14:39,546
+它就会自动实现
 
 
 275
-00:14:00,786 --> 00:14:03,236
-that's the asynchronous work not
-happening on the main thread.
+00:14:39,613 --> 00:14:41,582
+但重要的是理解为什么会这样
 
 
 276
-00:14:03,766 --> 00:14:06,866
-Obviously, we shouldn't be
-running user interactive.
+00:14:41,648 --> 00:14:43,050
+让我们详细来看一下
 
 
 277
-00:14:07,136 --> 00:14:08,766
-We're not doing the
-UI rendering here.
+00:14:44,785 --> 00:14:47,387
+所有程序都起源于初步调动async
 
 
 278
-00:14:09,186 --> 00:14:12,216
-But, say the user tapped on the
-document icon and is waiting
+00:14:47,454 --> 00:14:50,357
+它能从主线程消除异步工作
 
 
 279
-00:14:12,486 --> 00:14:16,196
-for his document to open.
+00:14:50,757 --> 00:14:53,594
+正如我在前一个幻灯片里讲的那样
 
 
 280
-00:14:16,196 --> 00:14:18,776
-The user is blocked in
-his progress with the app.
+00:14:53,660 --> 00:14:55,963
+async异步分派会从你提交块执行
 
 
 281
-00:14:18,906 --> 00:14:21,866
-He can still interact with the
-UI but can't do what he wants,
+00:14:56,029 --> 00:14:59,566
+服务线程队列
 
 
 282
-00:14:21,866 --> 00:14:24,856
-which is edit the document
-or view the document.
+00:14:59,633 --> 00:15:02,736
+自动传播服务质量
 
 
 283
-00:14:24,856 --> 00:14:26,756
-User initiated is the
-appropriate Quality
+00:15:04,838 --> 00:15:07,174
+在这个例子中有一个特殊的规则适用于
 
 
 284
-00:14:26,756 --> 00:14:27,556
-of Service Class here.
+00:15:07,241 --> 00:15:12,713
+我们自动转译的
+用户交互用户发起的服务质量
 
 
 285
-00:14:30,286 --> 00:14:32,916
-So how do we achieve
-that with the GCD API.
+00:15:13,280 --> 00:15:15,883
+这样做我们就避免了过度传播
 
 
 286
-00:14:33,596 --> 00:14:37,696
-It turns out you don't
-have to do anything,
+00:15:15,949 --> 00:15:18,151
+应该受到限制的服务质量
 
 
 287
-00:14:37,696 --> 00:14:39,226
-it will work automatically.
+00:15:18,218 --> 00:15:20,153
+到主要的线程和呈现的用户界面
 
 
 288
-00:14:39,616 --> 00:14:41,646
-But it's important to
-understand why that is.
+00:15:20,654 --> 00:15:22,356
+我们可以好好利用此法
 
 
 289
-00:14:41,646 --> 00:14:44,916
-Let's look at that in detail.
+00:15:22,422 --> 00:15:24,258
+因为这正是我们想要的
 
 
 290
-00:14:44,916 --> 00:14:47,386
-Everything starts with
-this initial dispatch async
+00:15:24,358 --> 00:15:26,360
+通常情况下
 
 
 291
-00:14:47,456 --> 00:14:50,036
-that works off the asynchronous
-work from the main thread.
+00:15:26,527 --> 00:15:30,030
+在用户发起的服务质量队列上
 
 
 292
-00:14:50,756 --> 00:14:53,596
-As I mentioned in
-the previous slide,
+00:15:30,464 --> 00:15:33,967
+都是通过自动传播来运行
 
 
 293
-00:14:53,676 --> 00:14:56,036
-dispatch async does automatic
-propagation of Quality
+00:15:34,735 --> 00:15:38,472
+当你用自动传播也试着进行的结果
 
 
 294
-00:14:56,036 --> 00:14:59,206
-of Service from the
-submitting thread to the queue
+00:15:38,539 --> 00:15:40,607
+回到主线程去更新
 
 
 295
-00:14:59,646 --> 00:15:02,696
-where you submit the
-block to execute.
+00:15:40,674 --> 00:15:42,009
+用户界面
 
 
 296
-00:15:02,696 --> 00:15:07,226
-Now, in this case there's
-a special rule that applies
+00:15:42,075 --> 00:15:47,281
+因为用户主线程是服务用户交互的质量
 
 
 297
-00:15:07,226 --> 00:15:09,426
-which is that we
-automatically translate Quality
+00:15:47,581 --> 00:15:48,649
+所优先考虑的
 
 
 298
-00:15:09,426 --> 00:15:12,756
-of Service Class user
-interactive to user initiated.
+00:15:48,715 --> 00:15:51,451
+如果你去一个线程 它不会降低
 
 
 299
-00:15:13,286 --> 00:15:16,086
-We do this so we don't
-accidentaly over-propagate the
+00:15:51,518 --> 00:15:52,786
+那些主线程上指定的
 
 
 300
-00:15:16,086 --> 00:15:18,216
-Quality of Service Class
-that should be restricted
+00:15:52,853 --> 00:15:54,254
+服务质量
 
 
 301
-00:15:18,216 --> 00:15:19,976
-to the main thread
-and UI rendering.
+00:15:54,855 --> 00:15:56,890
+这里我们将忽略传播的价值
 
 
 302
-00:15:19,976 --> 00:15:22,286
-We can take advantage
-of that here,
+00:15:57,324 --> 00:16:01,328
+来在用户交互
+服务质量底部运行用户界面修改块
 
 
 303
-00:15:22,436 --> 00:15:23,796
-because that is exactly
-what we want.
+00:16:01,395 --> 00:16:02,863
+运行用户界面修改块
 
 
 304
-00:15:24,346 --> 00:15:25,966
-That is typically the case
+00:16:05,566 --> 00:16:09,369
+我们调用QoS传播属性推断QoS
 
 
 305
-00:15:26,536 --> 00:15:30,036
-by having the automatic
-propagation run the block
+00:16:09,503 --> 00:16:14,208
+这是块被提交
+至一个队列时被捕获的QoS
 
 
 306
-00:15:30,456 --> 00:15:33,956
-on the queue at Quality of
-Service Class user initiated.
+00:16:14,274 --> 00:16:15,576
+和特殊规则
 
 
 307
-00:15:34,726 --> 00:15:36,996
-Of course when you go back to
-the main thread to update the UI
+00:16:15,642 --> 00:16:17,211
+我们转译用户交互至用户初始化
 
 
 308
-00:15:36,996 --> 00:15:40,276
-with the results this automatic
-propagation will also try
+00:16:17,311 --> 00:16:19,079
+正如上文提到的
 
 
 309
-00:15:40,686 --> 00:15:41,446
-to take place.
+00:16:20,414 --> 00:16:22,716
+如果目的地提交之处
 
 
 310
-00:15:42,086 --> 00:15:45,666
-Because the user main
-thread is Quality
+00:16:22,783 --> 00:16:24,751
+没有自己的指定的服务质量
 
 
 311
-00:15:45,666 --> 00:15:47,066
-of Service Class
-user interactive,
+00:16:24,818 --> 00:16:27,154
+在分配自己的
+高质量的服务主线程的情况下
 
 
 312
-00:15:47,576 --> 00:15:48,576
-that will take priority.
+00:16:28,288 --> 00:16:34,127
+也不降低QoS
+就将用到这种传播的服务质量
 
 
 313
-00:15:48,716 --> 00:15:51,286
-It will not lower if
-you go to a thread
+00:16:37,097 --> 00:16:42,569
+下一个例子是不能自动开启任务的情况
 
 
 314
-00:15:51,506 --> 00:15:52,866
-that has some assigned Quality
+00:16:42,636 --> 00:16:45,038
+长期运行的任务
+比如说在一个异步调用的长期
 
 
 315
-00:15:52,866 --> 00:15:54,246
-of Service Class
-like the main thread.
+00:16:45,105 --> 00:16:48,408
+的运算中 关闭主线程
 
 
 316
-00:15:54,866 --> 00:15:56,896
-Here we will ignore
-this propagated value
+00:16:48,475 --> 00:16:53,080
+用户界面就不能更新
+它正在处理主线程的当前队列
 
 
 317
-00:15:57,336 --> 00:16:01,386
-and run the UI update block
-at the bottom at Quality
+00:16:53,146 --> 00:16:58,919
+可能会更新UI 通过一个异步
 
 
 318
-00:16:01,386 --> 00:16:02,636
-of Service Class
-user interactive.
+00:16:58,986 --> 00:17:00,454
+返回块的进程
 
 
 319
-00:16:03,286 --> 00:16:08,756
-So we call this QoS propagation
-property inferred QoS.
+00:17:00,554 --> 00:17:02,589
+这个块包含了更新一些用户界面元素
 
 
 320
-00:16:09,516 --> 00:16:13,216
-And this is QoS captured at the
-time the block gets submitted
+00:17:05,826 --> 00:17:08,662
+那么什么才是合适的服务质量类呢？
 
 
 321
-00:16:13,216 --> 00:16:15,626
-to a queue and with
-the special rule
+00:17:08,729 --> 00:17:11,865
+在你左手边是用户互动
 
 
 322
-00:16:15,626 --> 00:16:17,206
-that we translate
-user interactive
+00:17:11,932 --> 00:17:14,902
+右手边是之前描述过的Anthony
 
 
 323
-00:16:17,296 --> 00:16:19,076
-to user initiated as mentioned.
+00:17:14,968 --> 00:17:16,970
+这就是适合质量服务
 
 
 324
-00:16:20,406 --> 00:16:22,706
-This propagated Quality
-of Service is used
+00:17:17,037 --> 00:17:18,939
+程序运行的情景
 
 
 325
-00:16:22,786 --> 00:16:24,826
-if the destination where
-the block is submitted
+00:17:19,339 --> 00:17:20,741
+它是长期运行的
 
 
 326
-00:16:24,826 --> 00:16:27,156
-to does not have its own
-quality of service specified
+00:17:20,807 --> 00:17:22,442
+用户可以继续使用用户界面
 
 
 327
-00:16:28,286 --> 00:16:31,566
-and does not lower QoS if
-you go to the main thread
+00:17:22,509 --> 00:17:24,310
+不用等待就会得到想要的画面
 
 
 328
-00:16:31,566 --> 00:16:34,626
-that has its own high
-Quality of Service assigned.
+00:17:24,377 --> 00:17:27,981
+他也可以看一些进程 以某种方式发起
 
 
 329
-00:16:36,756 --> 00:16:42,636
-So next example is something
-that doesn't open automatically,
+00:17:28,048 --> 00:17:31,685
+的进程 
+但是这并不会影响到之前的界面
 
 
 330
-00:16:42,636 --> 00:16:44,666
-long running job, say a
-long running calculation
+00:17:34,421 --> 00:17:38,192
+我们怎么用GCD API实现它呢？
 
 
 331
-00:16:45,096 --> 00:16:48,486
-that dispatch asyncs it off
-the main thread so as not
+00:17:38,258 --> 00:17:40,394
+最简单的解决方法是关注
 
 
 332
-00:16:48,486 --> 00:16:53,136
-to interfere with the UI and it
-operates on a queue concurrently
+00:17:40,460 --> 00:17:42,529
+任务的产生和发起
 
 
 333
-00:16:53,136 --> 00:16:58,906
-with the main thread and maybe
-updates the UI with the progress
+00:17:43,063 --> 00:17:44,998
+这是异步调用的开始
 
 
 334
-00:16:58,996 --> 00:17:00,446
-by asyncing back a block
+00:17:45,599 --> 00:17:48,202
+我们以标记我们提交
 
 
 335
-00:17:00,546 --> 00:17:02,596
-that updates some
-progress UI element.
+00:17:48,669 --> 00:17:50,537
+的带有合适的质量服务类的块
 
 
 336
-00:17:05,816 --> 00:17:08,356
-What are the appropriate
-Quality of Service classes here?
+00:17:50,604 --> 00:17:54,041
+通过调用块生成质量服务类的接口
 
 
 337
-00:17:08,715 --> 00:17:11,425
-On the left-hand side you
-have user interactive,
+00:17:54,441 --> 00:17:57,377
+我们传入想执行的块或者
 
 
 338
-00:17:11,915 --> 00:17:14,965
-and the right-hand side as
-Anthony has described earlier,
+00:17:57,477 --> 00:17:58,579
+我们想要的质量服务类
 
 
 339
-00:17:14,965 --> 00:17:17,026
-this is something where Quality
+00:17:58,679 --> 00:18:00,714
+应用程序就有了
 
 
 340
-00:17:17,026 --> 00:17:18,925
-of Service utility
-is appropriate.
+00:18:00,781 --> 00:18:02,616
+这就是生成的异步调用的
 
 
 341
-00:17:19,336 --> 00:17:20,506
-It's something long running.
+00:18:02,683 --> 00:18:06,753
+块对象 当它被执行的时候
 
 
 342
-00:17:20,816 --> 00:17:22,205
-The user can continue
-to use the UI.
+00:18:06,820 --> 00:18:08,589
+会在质量服务类的应用程序里运行
 
 
 343
-00:17:22,496 --> 00:17:24,376
-He's not waiting for
-the results immediately
+00:18:09,223 --> 00:18:12,693
+通过查找最初
 
 
 344
-00:17:24,376 --> 00:17:28,036
-and he can see the progress,
-and he probably initiated it
+00:18:12,759 --> 00:18:14,995
+质量服务类变化的点
 
 
 345
-00:17:28,036 --> 00:17:32,106
-in some fashion but it is not
-blocking his immediate progress.
+00:18:15,062 --> 00:18:17,998
+就会自动传递给下一步执行
 
 
 346
-00:17:33,696 --> 00:17:37,746
-So how do we make this
-happen with the GCD API?
+00:18:18,065 --> 00:18:21,268
+如果那个块发生变化 就会利用
 
 
 347
-00:17:38,256 --> 00:17:40,476
-The simplest solution
-is to focus on the point
+00:18:21,335 --> 00:18:22,870
+自动执行这个特性
 
 
 348
-00:17:40,476 --> 00:17:42,526
-where the work is
-generated, initiated.
+00:18:22,936 --> 00:18:25,339
+因此产生的
 
 
 349
-00:17:43,266 --> 00:17:44,876
-This is initial dispatch async.
+00:18:25,405 --> 00:18:27,474
+任何异步线程将会自动运行
 
 
 350
-00:17:45,586 --> 00:17:47,986
-We can tag the block
-that we submit
+00:18:27,541 --> 00:18:29,676
+相对应的质量服务类
 
 
 351
-00:17:48,676 --> 00:17:50,606
-with the appropriate
-Quality of Service Class
+00:18:29,743 --> 00:18:32,613
+并继续作为应用程序
+这期间你不需要做任何事
 
 
 352
-00:17:50,606 --> 00:17:53,656
-by using the dispatch block
-create with QoS class API,
+00:18:34,848 --> 00:18:39,419
+在前面的幻灯片上我们可以看到这个
 
 
 353
-00:17:54,456 --> 00:17:57,376
-we pass in the block that
-we want to execute as well
+00:18:39,486 --> 00:18:42,356
+质量服务块被创建
+通过显示的给块对象添加质量
 
 
 354
-00:17:57,486 --> 00:17:58,586
-as the Quality of Service Class
+00:18:42,422 --> 00:18:45,726
+服务属性的方式来实现
+你只需要提供合适的调用时间
 
 
 355
-00:17:58,666 --> 00:18:00,346
-that we would like,
-utility here.
+00:18:45,792 --> 00:18:50,531
+当任务产生不同的类的时候
 
 
 356
-00:18:00,766 --> 00:18:02,616
-The resulting block
-object is what we pass
+00:18:51,398 --> 00:18:54,334
+另一个质量服务应用在块对象中的案例
 
 
 357
-00:18:02,686 --> 00:18:06,656
-through dispatch async and when
-that gets executed that will run
+00:18:54,668 --> 00:18:58,639
+当你需要捕获你提供块的
 
 
 358
-00:18:06,836 --> 00:18:08,366
-at Quality of Service
-Class utility
+00:18:58,705 --> 00:19:00,774
+质量服务类时
 
 
 359
-00:18:09,226 --> 00:18:12,756
-and by finding this
-initial generation point
+00:19:00,841 --> 00:19:05,112
+就是说在一个回调块的方案中
+你正在写一个接口
 
 
 360
-00:18:12,756 --> 00:18:14,526
-where the Quality of
-Service Class changes,
+00:19:05,312 --> 00:19:07,981
+别人提供给你一个回调块 你想
 
 
 361
-00:18:15,076 --> 00:18:17,716
-the automatic propagation
-further downstream,
+00:19:08,048 --> 00:19:11,318
+在另一个队列或者线程中保存并提交它
 
 
 362
-00:18:17,946 --> 00:18:21,326
-if any from that block, will
-then be able to take advantage
+00:19:11,385 --> 00:19:13,287
+但是你很想让它
 
 
 363
-00:18:21,326 --> 00:18:22,566
-of the automatic propagation.
+00:19:13,353 --> 00:19:16,023
+像异步调用
 
 
 364
-00:18:22,926 --> 00:18:25,396
-So that anything that gets
-generated asynchronously
+00:19:16,089 --> 00:19:18,058
+质量服务程序那样被执行
 
 
 365
-00:18:25,396 --> 00:18:27,526
-from that work will
-happen automatically
+00:19:18,125 --> 00:19:21,895
+你可以去分派现有指定模块
 
 
 366
-00:18:27,526 --> 00:18:30,346
-at the correct Quality
-of Service class,
+00:19:21,962 --> 00:19:24,064
+由创立分配模块标识并通过
 
 
 367
-00:18:30,346 --> 00:18:32,616
-continue to be a utility without
-you having to do anything.
+00:19:24,131 --> 00:19:27,434
+它会捕捉到现有的QOS和执行状态
 
 
 368
-00:18:33,246 --> 00:18:39,476
-So this block QoS is
-created like we saw
+00:19:27,501 --> 00:19:30,504
+在提交模块后把它保存到快速模块中
 
 
 369
-00:18:39,476 --> 00:18:42,426
-in the previous slide by adding
-an explicit QoS attribute
+00:19:30,571 --> 00:19:33,507
+它会按分配值在一个队列上运行
 
 
 370
-00:18:42,426 --> 00:18:45,306
-to the wrapped up block object
-to the block you provide
+00:19:37,144 --> 00:19:40,280
+看看另外一个我们的应用程序案例
 
 
 371
-00:18:45,806 --> 00:18:49,176
-at the appropriate time to use
-this is at the point when work
+00:19:40,347 --> 00:19:41,982
+它执行了一个UI操作
 
 
 372
-00:18:49,176 --> 00:18:50,536
-of a different class
-is generated.
+00:19:42,049 --> 00:19:42,983
+在操作测试性能时
 
 
 373
-00:18:51,396 --> 00:18:54,146
-Another use case for
-QoS in a block object is
+00:19:43,050 --> 00:19:45,285
+它通告显示处于维护状态中
 
 
 374
-00:18:54,656 --> 00:18:58,716
-if you have needs to capture
-the Quality of Service class
+00:19:45,352 --> 00:19:47,254
+并即将执行清除状态
 
 
 375
-00:18:58,716 --> 00:19:00,406
-in a block that you
-are provided,
+00:19:47,321 --> 00:19:49,489
+还说里面有一个数据库
+有太多的松散区
 
 
 376
-00:19:00,856 --> 00:19:05,106
-say in a callback block scenario
-where you are writing an API
+00:19:49,556 --> 00:19:53,560
+不得不进行一些压缩程序和清除任务
 
 
 377
-00:19:05,296 --> 00:19:08,036
-where somebody provides you with
-a callback block and you want
+00:19:53,927 --> 00:19:59,099
+还有一个GCD应用的典型例子
 
 
 378
-00:19:08,036 --> 00:19:11,016
-to store that block and submit
-it later from a different thread
+00:20:01,235 --> 00:20:04,037
+在执行异步分配运行的地方
 
 
 379
-00:19:11,396 --> 00:19:13,366
-or queue, but you really want
+00:20:04,104 --> 00:20:07,641
+后台列队上的维护任务
 
 
 380
-00:19:13,366 --> 00:19:16,106
-to get this propagation right
-the same way dispatch async
+00:20:07,708 --> 00:20:09,676
+当然是在左手边的
 
 
 381
-00:19:16,106 --> 00:19:17,786
-propagates the Quality
-of Service.
+00:20:10,077 --> 00:20:13,714
+作为用户会重新启动用户界面
 
 
 382
-00:19:18,276 --> 00:19:21,476
-You can do this by using the
-dispatch block assign current
+00:20:14,081 --> 00:20:16,850
+在这里相应的服务质量等级
 
 
 383
-00:19:22,106 --> 00:19:24,136
-flag, pass that through
-dispatch block create,
+00:20:17,150 --> 00:20:19,086
+将用于服务背景质量上
 
 
 384
-00:19:24,136 --> 00:19:27,126
-and that will capture the
-current QoS and execution state,
+00:20:19,820 --> 00:20:22,189
+目前鉴于幻灯片的标题
 
 
 385
-00:19:27,516 --> 00:19:30,576
-store it in a rapid block and
-when you submit that block later
+00:20:22,322 --> 00:20:23,724
+这只是一个维护操作
 
 
 386
-00:19:30,576 --> 00:19:33,496
-on to a queue it will run
-with that assigned value.
+00:20:23,790 --> 00:20:25,392
+与用户做了些什么不相关系
 
 
 387
-00:19:34,756 --> 00:19:39,896
-To look at another example,
-we have an application
+00:20:25,459 --> 00:20:27,995
+你通告出此时你正在进行的状态
 
 
 388
-00:19:40,346 --> 00:19:42,036
-that performs a UI action.
+00:20:28,595 --> 00:20:31,298
+用户此时并未察觉发生了什么
 
 
 389
-00:19:42,036 --> 00:19:43,056
-And during the performance
+00:20:31,431 --> 00:20:33,967
+你要做的工作是关于APP的工作
 
 
 390
-00:19:43,056 --> 00:19:45,336
-of that action it notices
-some maintenance condition,
+00:20:34,034 --> 00:20:35,435
+基于此处自已利益上的工作
 
 
 391
-00:19:45,336 --> 00:19:46,876
-some cleanup condition
-that should happen.
+00:20:36,637 --> 00:20:39,540
+我们怎样才能取得服务后台的运行质量
 
 
 392
-00:19:47,316 --> 00:19:49,566
-Say you have a database, it
-has too many loose objects,
+00:20:39,940 --> 00:20:43,343
+我们能做的一件事
+就是早点看到API模块的应用
 
 
 393
-00:19:49,566 --> 00:19:53,036
-has to do some compaction,
-some clean up task,
+00:20:43,410 --> 00:20:47,748
+让初始异步此队列成为
 
 
 394
-00:19:53,936 --> 00:20:00,996
-typical example again
-of the use of GCD
+00:20:47,848 --> 00:20:49,316
+后台服务的质量
 
 
 395
-00:20:01,246 --> 00:20:04,106
-where you would execute
-dispatch async to run
+00:20:49,616 --> 00:20:52,186
+也许这件事在APP中是比较多样性的
 
 
 396
-00:20:04,106 --> 00:20:07,306
-that maintenance task
-on a background queue
+00:20:52,252 --> 00:20:53,820
+以此而成清除工作的类型
 
 
 397
-00:20:07,306 --> 00:20:09,676
-and the left-hand
-side, of course,
+00:20:53,887 --> 00:20:55,255
+同时你也有多样的方法
 
 
 398
-00:20:10,086 --> 00:20:13,606
-being the user initiated
--- user interactive again.
+00:20:55,656 --> 00:20:58,992
+可以在这个模式下的数据库上进行操作
 
 
 399
-00:20:13,606 --> 00:20:16,836
-The appropriate Quality of
-Service class here would be
+00:20:59,059 --> 00:21:02,329
+这要用一个适当并特别的队列
 
 
 400
-00:20:17,166 --> 00:20:19,076
-to use Quality of
-Service background.
+00:21:02,396 --> 00:21:05,165
+精确地完成此任务 你才可能创立起
 
 
 401
-00:20:19,806 --> 00:20:22,056
-Currently given by the
-title of the slide,
+00:21:05,232 --> 00:21:07,734
+有指定服务质量的队列
 
 
 402
-00:20:22,256 --> 00:20:24,326
-this is a maintenance
-operation that is unrelated
+00:21:07,801 --> 00:21:10,771
+你可以用QOS等级分派队列属性
 
 
 403
-00:20:24,326 --> 00:20:25,466
-to what the user is doing.
+00:21:11,171 --> 00:21:13,674
+通过如范例中后台
 
 
 404
-00:20:25,466 --> 00:20:27,986
-You notice this condition
-while you were going along
+00:21:13,740 --> 00:21:16,376
+所生成属性通过并分配到创立队列上
 
 
 405
-00:20:28,586 --> 00:20:31,296
-and the user is unaware
-that this is occurring.
+00:21:16,810 --> 00:21:19,546
+创立一个如范例中清除队列
 
 
 406
-00:20:31,446 --> 00:20:34,036
-You are kind of doing
-work, the app does work
+00:21:20,547 --> 00:21:23,217
+通过服务等级质量被指定到队列上
 
 
 407
-00:20:34,036 --> 00:20:35,166
-on its own behalf here.
+00:21:23,617 --> 00:21:26,787
+得到了异步分派的自动传播
 
 
 408
-00:20:35,486 --> 00:20:39,556
-How do we achieve running
-Quality of Service background?
+00:21:27,254 --> 00:21:31,859
+用户再次从主流程启动
 
 
 409
-00:20:39,956 --> 00:20:43,426
-One thing we can do is to use
-the block API we saw earlier
+00:21:31,992 --> 00:21:34,161
+我们实际上忽略了传播的价值
 
 
 410
-00:20:43,426 --> 00:20:47,666
-and have the initial async
-to this queue be the Quality
+00:21:34,228 --> 00:21:36,763
+因为你正在提交
+一个自身拥用指定服务等级质量的队列
 
 
 411
-00:20:47,846 --> 00:20:49,176
-of Service background.
+00:21:36,830 --> 00:21:39,499
+并说可以用此队列来替代
 
 
 412
-00:20:49,616 --> 00:20:52,206
-Maybe this is a case where there
-is multiple places in the app
+00:21:40,000 --> 00:21:43,170
+所以你提交的模块将在后台运行
 
 
 413
-00:20:52,266 --> 00:20:53,876
-that generate this
-type of clean up work
+00:21:43,370 --> 00:21:44,638
+代替已经如果有的
 
 
 414
-00:20:53,876 --> 00:20:57,196
-and there's multiple ways
-that you need to operate
+00:21:44,705 --> 00:21:46,673
+自动系统
 
 
 415
-00:20:57,196 --> 00:20:58,526
-on the database in this mode.
+00:21:47,641 --> 00:21:50,210
+对于这样的情况
 
 
 416
-00:20:58,526 --> 00:21:02,366
-It might be appropriate to have
-a queue specifically dedicated
+00:21:50,277 --> 00:21:55,015
+某处有一个与执行流程无关的维护任务
 
 
 417
-00:21:02,406 --> 00:21:05,046
-to this task so you
-can also create queues
+00:21:55,315 --> 00:21:59,953
+考虑调度程序块分离
+的标记是否有用是合适的
 
 
 418
-00:21:05,226 --> 00:21:07,786
-with assigned Quality
-of Service.
+00:22:00,420 --> 00:22:04,424
+这是一种告诉操纵系统
 
 
 419
-00:21:07,786 --> 00:21:11,386
-You use dispatch queue
-attr make with QoS class,
+00:22:04,491 --> 00:22:06,193
+你正对这个程序块所做的事情
 
 
 420
-00:21:11,386 --> 00:21:13,296
-passing in background
-in this example.
+00:22:06,260 --> 00:22:08,028
+与执行流程无关的方式
 
 
 421
-00:21:13,756 --> 00:21:16,286
-The resulting attribute can be
-passed to dispatch queue create
+00:22:08,095 --> 00:22:11,598
+而且它尤其不参与QoS的传播
 
 
 422
-00:21:16,796 --> 00:21:19,136
-to create a clean up queue
-in this example here.
+00:22:11,665 --> 00:22:16,069
+也不捕捉事物 如活动ID
 
 
 423
-00:21:20,556 --> 00:21:23,046
-By having Quality of Service
-class assigned to the queue,
+00:22:16,136 --> 00:22:20,741
+如果你正在去年我们会上介绍过的
+活动追踪特性中使用它
 
 
 424
-00:21:23,616 --> 00:21:26,496
-you get the automatic
-propagation for dispatch async,
+00:22:22,142 --> 00:22:25,179
+和其它一些执行上下文的性质
 
 
 425
-00:21:27,706 --> 00:21:31,576
-again user initiated
-from the main thread we
+00:22:27,714 --> 00:22:30,384
+当然即使你有工作
 
 
 426
-00:21:31,976 --> 00:21:34,876
-in fact ignore this propagated
-value because you are submitting
+00:22:30,450 --> 00:22:32,619
+它总是应该在QoS背景里
 
 
 427
-00:21:34,876 --> 00:21:36,826
-to a queue that has its
-own assigned Quality
+00:22:32,686 --> 00:22:34,621
+那是些清理性的工作 是可例外的
 
 
 428
-00:21:36,826 --> 00:21:39,516
-of Service Class and use
-what the queue says instead.
+00:22:34,688 --> 00:22:38,825
+如一些退出特性 用户退出他的账户
 
 
 429
-00:21:40,006 --> 00:21:43,026
-So the block that you submitted
-will run at background instead
+00:22:38,892 --> 00:22:41,995
+你应该删除数据库
 
 
 430
-00:21:43,366 --> 00:21:44,466
-of what it would have otherwise
+00:22:42,062 --> 00:22:44,431
+及用户的私人数据
 
 
 431
-00:21:44,696 --> 00:21:46,466
-if it had the automatic
-propagation.
+00:22:44,498 --> 00:22:47,134
+那是一些用户希望能看到它完成的事情
 
 
 432
-00:21:47,636 --> 00:21:50,936
-For a case like this where there
-is a maintenance task unrelated
+00:22:47,201 --> 00:22:48,902
+这不该是后台任务
 
 
 433
-00:21:50,936 --> 00:21:54,736
-to the execution flow,
-it may be appropriate
+00:22:49,069 --> 00:22:54,541
+你有必要在后台属性中重写
 
 
 434
-00:21:55,316 --> 00:21:59,936
-to consider whether the dispatch
-block detached flag is of use.
+00:22:54,608 --> 00:22:56,944
+或退出你这里已经设置过的
 
 
 435
-00:22:00,626 --> 00:22:04,476
-This is a way to tell the
-operating system that the work
+00:22:57,010 --> 00:22:58,545
+这个队列或这个运行
 
 
 436
-00:22:04,476 --> 00:22:06,266
-that you are doing in this
-block has nothing to do
+00:22:58,979 --> 00:23:01,582
+如果这里你仅用自动传播特性
 
 
 437
-00:22:06,266 --> 00:22:07,706
-with the flow of execution.
+00:23:01,648 --> 00:23:04,718
+像以前一样除了这里 我们应该忽略
 
 
 438
-00:22:08,106 --> 00:22:11,526
-And it will in particular
-opt out of propagation of QoS
+00:23:04,785 --> 00:23:06,587
+用户初始的QoS
 
 
 439
-00:22:11,666 --> 00:22:15,196
-but also opt out of capturing
-things like the activity ID
+00:23:06,820 --> 00:23:09,590
+当然这是可用的合适的QoS
 
 
 440
-00:22:15,196 --> 00:22:18,346
-if you are using that for
-the activity tracing feature
+00:23:09,656 --> 00:23:10,824
+这是我们真正期望的
 
 
 441
-00:22:18,346 --> 00:22:20,606
-that we introduced at
-the conference last year.
+00:23:10,891 --> 00:23:12,926
+用户正在等待这个退出结束
 
 
 442
-00:22:22,146 --> 00:22:25,566
-And other properties of
-the execution context.
+00:23:13,327 --> 00:23:14,461
+如何达成呢？
 
 
 443
-00:22:26,436 --> 00:22:30,436
-Now, of course, even if you have
-work that should always kind
+00:23:14,528 --> 00:23:19,333
+利用调度程序块执行QoS分类标志
 
 
 444
-00:22:30,436 --> 00:22:32,676
-of be at Quality of Service
-background that is clean
+00:23:19,399 --> 00:23:22,102
+程序块创建和你想执行的程序块
 
 
 445
-00:22:32,676 --> 00:22:34,206
-up work, there may
-be exceptions.
+00:23:22,169 --> 00:23:23,737
+那是在告诉系统
 
 
 446
-00:22:34,676 --> 00:22:38,896
-Maybe there is some kind of log
-out feature where the user logs
+00:23:23,804 --> 00:23:26,773
+你真的希望程序块中的数值
 
 
 447
-00:22:38,896 --> 00:22:41,506
-out of his account and you
-have to delete the database
+00:23:26,840 --> 00:23:27,908
+与队列中的相反
 
 
 448
-00:22:42,066 --> 00:22:44,056
-and delete the user's
-private data.
+00:23:27,975 --> 00:23:30,911
+这样你可以重写队列的数值显示
 
 
 449
-00:22:44,486 --> 00:22:46,816
-That's something that the
-user want to see complete.
+00:23:32,212 --> 00:23:36,917
+如果你这样做程序块将在本例中
 
 
 450
-00:22:46,866 --> 00:22:48,496
-This is not a background task.
+00:23:36,984 --> 00:23:39,386
+用户初始的QoS分类中执行
 
 
 451
-00:22:49,066 --> 00:22:54,616
-You may have a need to override
-or opt out of this queue
+00:23:41,088 --> 00:23:42,022
+但是 当然 在图中
 
 
 452
-00:22:54,616 --> 00:22:56,996
-or this runs at background
-property
+00:23:42,089 --> 00:23:44,057
+你可以看到现在的情况：
 
 
 453
-00:22:56,996 --> 00:22:58,196
-that you have set up here.
+00:23:44,124 --> 00:23:47,027
+你有个别潜在含两个程序块的队列
 
 
 454
-00:22:58,976 --> 00:23:01,646
-If you just use the automatic
-propagation feature here,
+00:23:47,094 --> 00:23:49,830
+两程序块是同时的且有不同的优先级别
 
 
 455
-00:23:01,646 --> 00:23:05,416
-as before we would ignore
-the user initiated Quality
+00:23:50,264 --> 00:23:53,467
+这就是异步优先级反转翻转
 
 
 456
-00:23:05,506 --> 00:23:07,336
-of Service except
-here, of course,
+00:23:53,534 --> 00:23:56,136
+一个高级QoS程序块
+可能被提交给一个串行队列
 
 
 457
-00:23:07,336 --> 00:23:09,376
-that's the right Quality
-of Service to use.
+00:23:56,203 --> 00:23:58,539
+但是队列中已有工作
 
 
 458
-00:23:09,666 --> 00:23:10,896
-That's what we really
-want to happen.
+00:23:58,605 --> 00:24:00,207
+或在更低级的QoS中运行
 
 
 459
-00:23:10,896 --> 00:23:12,626
-The user is waiting for
-this log out to complete.
+00:24:00,274 --> 00:24:01,975
+你有优先权翻转
 
 
 460
-00:23:13,316 --> 00:23:14,526
-How to achieve that?
+00:24:03,177 --> 00:24:05,646
+GCD会帮助你如果你通过提升
 
 
 461
-00:23:14,526 --> 00:23:19,276
-Use the dispatch block
-enforce QoS class flag,
+00:24:05,712 --> 00:24:08,882
+串行队列中的工作来使用串行队列
 
 
 462
-00:23:19,396 --> 00:23:21,776
-block create along with the
-block you want to execute.
+00:24:08,949 --> 00:24:12,252
+运行或是入队
+直到你达到高级别的QoS程序块
 
 
 463
-00:23:22,156 --> 00:23:23,506
-That indicates to the system
+00:24:12,986 --> 00:24:17,224
+这是后台QoS覆盖出现问题
 
 
 464
-00:23:23,816 --> 00:23:26,856
-that you really want the value
-that's in the block as opposed
+00:24:17,624 --> 00:24:23,163
+并非重写块调用自身的问题
+或者如果将任务非同步传输下去
 
 
 465
-00:23:26,856 --> 00:23:27,986
-to the one that's in the queue.
+00:24:23,230 --> 00:24:28,268
+程序块将以原始QoS状态传输
 
 
 466
-00:23:27,986 --> 00:23:30,896
-So you can override the
-queue's value display.
+00:24:28,468 --> 00:24:32,539
+但程序块将以更高优先级
+执行从而消除块的反转执行
 
 
 467
-00:23:32,196 --> 00:23:36,986
-If you do that, the block
-will get executed at Quality
+00:24:34,408 --> 00:24:38,612
+概括说QoS队列排序大多适合那些
 
 
 468
-00:23:36,986 --> 00:23:39,236
-of Service class user
-initiated in this example.
+00:24:38,679 --> 00:24:41,615
+在应用程序中排序是唯一用途的场景
 
 
 469
-00:23:40,616 --> 00:23:42,086
-But of course, here
+00:24:41,682 --> 00:24:44,818
+或者输入的指令
+不需要考虑登录优先级的重要性
 
 
 470
-00:23:42,086 --> 00:23:44,116
-in the picture you can
-see now we have a case
+00:24:44,885 --> 00:24:48,555
+而需要考虑的是指令用途的优先级
 
 
 471
-00:23:44,116 --> 00:23:47,106
-where you have several queue
-with potentially two blocks
+00:24:48,622 --> 00:24:50,824
+QoS队列排序还可用于
 
 
 472
-00:23:47,106 --> 00:23:49,486
-in queue at the same time at
-different priority levels.
+00:24:50,891 --> 00:24:54,895
+为这种类型的工作
+负载所开发的独立的程序块API
 
 
 473
-00:23:50,256 --> 00:23:53,156
-That's the case of
-asynchronous priority inversion.
+00:24:54,962 --> 00:24:56,964
+当这种负载处于维护或后台模式时
 
 
 474
-00:23:53,546 --> 00:23:56,196
-A High QoS block may be
-submitted to a serial queue,
+00:24:59,333 --> 00:25:03,504
+在队列中使用QoS会使我们忽略
 
 
 475
-00:23:56,196 --> 00:23:58,236
-but there is already
-work in queue or running
+00:25:03,570 --> 00:25:06,773
+异步block(块)中的QoS除非
 
 
 476
-00:23:58,606 --> 00:24:00,026
-at a lower Quality of Service
+00:25:06,840 --> 00:25:08,742
+我们在程序中使用强制执行标记
 
 
 477
-00:24:00,276 --> 00:24:01,966
-and you have a priority
-inversion.
+00:25:12,412 --> 00:25:16,483
+最后是利用串行队列
+实现lock(锁)的功能
 
 
 478
-00:24:03,166 --> 00:24:05,436
-GCD helps you with that
-if you use a serial queue
+00:25:16,550 --> 00:25:18,886
+这在GCD当中是很常见的用法
 
 
 479
-00:24:05,726 --> 00:24:08,936
-by raising the work that
-is already there, running
+00:25:18,952 --> 00:25:22,055
+在程序当中你有一些共享的数据结构
 
 
 480
-00:24:08,936 --> 00:24:11,776
-or enqueued until you reach the
-high Quality of Service block.
+00:25:22,122 --> 00:25:25,125
+而你想要锁定对这些数据结构的访问
 
 
 481
-00:24:12,986 --> 00:24:15,226
-This is something that
-happens behind the scenes
+00:25:25,192 --> 00:25:29,930
+你可以通过
+在数据结构中创建一个带有调用队列
 
 
 482
-00:24:15,356 --> 00:24:17,036
-with QoS override.
+00:25:30,030 --> 00:25:34,601
+标记的串行队列的方法来使用GCD
 
 
 483
-00:24:17,036 --> 00:24:20,306
-It is not something that the
-over-written blocks can see
+00:25:35,068 --> 00:25:39,339
+然后用同步调用来执行关键的区段块
 
 
 484
-00:24:20,306 --> 00:24:22,896
-themselves or if they
-propagate work further along
+00:25:39,406 --> 00:25:43,410
+在队列中只有这个block（块）
+有访问数据结构的权限
 
 
 485
-00:24:23,286 --> 00:24:26,406
-asynchronously they will
-propagate at the original QoS
+00:25:46,079 --> 00:25:50,083
+QoS在这个过程中是如何运行的呢
+注明”同步调用”函数很重要
 
 
 486
-00:24:26,406 --> 00:24:29,766
-that they were as, but they
-will actually be running
+00:25:50,150 --> 00:25:54,388
+当调用”同步调用”函数的线程
 
 
 487
-00:24:29,766 --> 00:24:32,496
-at a higher priority to
-resolve the inversion.
+00:25:54,454 --> 00:25:57,624
+被锁定时执行块
 
 
 488
-00:24:34,316 --> 00:24:38,616
-So to recap, queue QoS is
-mostly appropriate for queues
+00:25:57,691 --> 00:26:00,727
+返回block（块）的同时释放线程
 
 
 489
-00:24:38,666 --> 00:24:42,746
-that are single purpose in the
-app or take inputs from all
+00:26:01,228 --> 00:26:03,764
+这种情况下我们不需要任何额外的线程
 
 
 490
-00:24:42,746 --> 00:24:44,876
-over the place where you
-don't want the priority
+00:26:03,830 --> 00:26:07,835
+我们只需要执行调用同步调用的线程
 
 
 491
-00:24:44,876 --> 00:24:46,926
-of the submitted to be
-important, but the priority
+00:26:07,901 --> 00:26:10,971
+然后在所调用线程的QoS中执行块
 
 
 492
-00:24:47,316 --> 00:24:50,516
-of that purpose and it
-may also be appropriate
+00:26:11,038 --> 00:26:12,773
+此处指用户交互进程
 
 
 493
-00:24:50,896 --> 00:24:54,966
-to use the detached block API
-for such types of workload,
+00:26:13,440 --> 00:26:15,075
+当你可以使用同步
 
 
 494
-00:24:54,966 --> 00:24:56,966
-especially if they are
-maintenance or background.
+00:26:15,142 --> 00:26:16,243
+因为有其他的线程或队列
 
 
 495
-00:24:58,946 --> 00:25:03,586
-And using QoS on the queue
-causes us to ignore the QoS
+00:26:16,310 --> 00:26:18,378
+也在访问此数据结构
 
 
 496
-00:25:03,586 --> 00:25:06,856
-in the asynchronous
-blocks exempt in the case
+00:26:18,445 --> 00:26:22,382
+或许当执行一个QoS线程时
+在队列内调用”同步调用”函数
 
 
 497
-00:25:06,856 --> 00:25:08,756
-where you also use
-that enforce flag.
+00:26:22,449 --> 00:26:25,285
+从而可以独占访问
 
 
 498
-00:25:09,616 --> 00:25:15,976
-Last example is use of
-serial queues as locks.
+00:26:25,352 --> 00:26:26,553
+数据结构
 
 
 499
-00:25:16,536 --> 00:25:18,236
-This is a very common use of GCD
+00:26:26,620 --> 00:26:28,856
+如果随后返回线程 同样的事情将出现
 
 
 500
-00:25:18,296 --> 00:25:21,716
-where you have some shared
-data structure in the app
+00:26:28,922 --> 00:26:32,960
+他将停止等待线程以获取独占访问权限
 
 
 501
-00:25:22,106 --> 00:25:24,656
-where you want locked access
-to that data structure
+00:26:33,026 --> 00:26:36,163
+然后在调用QoS的线程中
 
 
 502
-00:25:25,176 --> 00:25:29,936
-and you can use GCD by
-creating a serial queue
+00:26:36,230 --> 00:26:37,397
+执行自身
 
 
 503
-00:25:30,046 --> 00:25:33,926
-with a dispatch queue serial
-flag at the data structure
+00:26:37,464 --> 00:26:40,300
+QoS线程中的块
 
 
 504
-00:25:33,986 --> 00:25:38,956
-and then use dispatch sync to
-execute a critical section block
+00:26:41,435 --> 00:26:47,374
+我们就又会碰到
+如果这个独占访问以别的顺序获得
 
 
 505
-00:25:39,406 --> 00:25:42,266
-on that queue where that
-block has exclusive access
+00:26:47,441 --> 00:26:50,377
+优先权翻转的问题
 
 
 506
-00:25:42,266 --> 00:25:43,006
-to the data structure.
+00:26:50,444 --> 00:26:52,880
+如果实用程序效用先进入锁死
 
 
 507
-00:25:43,826 --> 00:25:47,576
-How does QoS fit into this?
+00:26:52,946 --> 00:26:55,616
+主线程就必须等待效用线程
 
 
 508
-00:25:47,576 --> 00:25:49,896
-It is important to note
-that dispatch sync,
+00:26:56,450 --> 00:26:58,719
+这当然是我们不期望的
 
 
 509
-00:25:50,136 --> 00:25:56,136
-it executes the block when that
-lock is obtained on the thread
+00:26:59,086 --> 00:27:00,654
+所以QoS继承
 
 
 510
-00:25:56,136 --> 00:25:59,396
-that calls dispatch sync
-and releases the thread
+00:27:01,188 --> 00:27:04,691
+异步优先级翻转会帮助你去解决
 
 
 511
-00:25:59,396 --> 00:26:01,606
-with the block returns.
+00:27:04,758 --> 00:27:08,328
+一个高级的优先级服务线程正在等待
+较低级别的进程工作
 
 
 512
-00:26:01,776 --> 00:26:03,846
-In this case we don't need any
-additional [inaudible] threads,
+00:27:08,395 --> 00:27:12,533
+我们可以通过为等待期间
 
 
 513
-00:26:03,846 --> 00:26:07,906
-we have a thread called dispatch
-sync and we will execute
+00:27:13,166 --> 00:27:15,135
+提高等待工作的QoS来解决 
 
 
 514
-00:26:07,906 --> 00:26:10,656
-that block at the Quality of
-Service of the calling thread,
+00:27:15,202 --> 00:27:18,639
+如果你用串行队列和同步调用
 
 
 515
-00:26:11,026 --> 00:26:12,166
-user interactive here.
+00:27:18,705 --> 00:27:20,274
+或调用程序块等待API
 
 
 516
-00:26:13,426 --> 00:26:15,156
-Of course you have
-synchronization
+00:27:20,908 --> 00:27:22,910
+如果你用多线程互斥锁
 
 
 517
-00:26:15,156 --> 00:26:16,246
-because you have other queues
+00:27:23,110 --> 00:27:26,413
+或任何建立在其上的API
+如NSLock也可实现
 
 
 518
-00:26:16,316 --> 00:26:18,026
-or threads accessing
-this data structure.
+00:27:28,015 --> 00:27:31,818
+值得注意的是
+有些API在这里是不可用的
 
 
 519
-00:26:18,446 --> 00:26:19,726
-Maybe you have a Quality
+00:27:31,885 --> 00:27:35,255
+调度信号量不承认认同所有权概念
 
 
 520
-00:26:19,726 --> 00:26:22,446
-of Service utility thread
-also calling dispatch sync
+00:27:35,322 --> 00:27:37,157
+所以系统无法决定
 
 
 521
-00:26:22,446 --> 00:26:25,316
-on this queue to get
-the exclusive access
+00:27:37,224 --> 00:27:38,759
+谁最终将向信号量发信号
 
 
 522
-00:26:25,346 --> 00:26:26,116
-to the data structure.
+00:27:38,825 --> 00:27:42,829
+那种情况下
+没有任何优先权翻转的解决方案
 
 
 523
-00:26:26,626 --> 00:26:28,906
-Again, the same thing
-will happen if he comes
+00:27:42,896 --> 00:27:44,631
+如果你有优先级翻转
 
 
 524
-00:26:28,906 --> 00:26:32,496
-in later he will block waiting
-to get the exclusive access.
+00:27:44,698 --> 00:27:50,003
+你在某调度信号
+等待中发现高级优先级等待者
 
 
 525
-00:26:33,016 --> 00:26:36,236
-Then execute that block on
-his own thread at Quality
+00:27:50,070 --> 00:27:53,774
+低级别优先级工作者正在执行某些工作
 
 
 526
-00:26:36,236 --> 00:26:37,206
-of Service utility
+00:27:53,841 --> 00:27:57,377
+你可能必须转变成调度程序块等待 
 
 
 527
-00:26:37,456 --> 00:26:40,306
-at the calling threads
-Quality of Service.
+00:27:57,444 --> 00:28:00,814
+在我们能够进行提升的外显实体处等待
 
 
 528
-00:26:41,426 --> 00:26:44,776
-Now, of course in this,
-if this acquisition
+00:28:01,915 --> 00:28:06,286
+下面请Anthony
+讲一下队列线程和运行循环
 
 
 529
-00:26:44,776 --> 00:26:46,386
-of this exclusive
-access happened
+00:28:12,826 --> 00:28:13,861
+谢谢 Daniel
 
 
 530
-00:26:46,386 --> 00:26:48,646
-in the other order we
-would again have a case
+00:28:14,695 --> 00:28:17,564
+希望这激起了你们对服务质量的兴趣
 
 
 531
-00:26:48,646 --> 00:26:50,106
-of priority inversion.
+00:28:17,664 --> 00:28:19,967
+并愿回头看看这些应用
 
 
 532
-00:26:50,106 --> 00:26:52,956
-If the utility guy comes in
-first and takes the lock,
+00:28:20,033 --> 00:28:22,035
+及思考一下如何应用服务质量
 
 
 533
-00:26:52,956 --> 00:26:55,606
-you have the main thread
-waiting on a utility thread.
+00:28:22,569 --> 00:28:26,974
+现在我们讲一下队列、线程及运行循环
 
 
 534
-00:26:56,456 --> 00:26:58,516
-And that's obviously
-undesirable.
+00:28:27,975 --> 00:28:32,179
+希望能使GCD的
+更广泛被应用变得更简单
 
 
 535
-00:26:59,086 --> 00:27:02,126
-So Quality of Service
-inheritance,
+00:28:32,246 --> 00:28:34,915
+并为你调试应用程序提供一些背景
 
 
 536
-00:27:02,316 --> 00:27:04,346
-synchronous priority inversion
-will help you with that.
+00:28:36,917 --> 00:28:40,220
+提醒我们自己我们的应用程序与
 
 
 537
-00:27:04,766 --> 00:27:06,356
-A high priority service
-thread waiting
+00:28:40,287 --> 00:28:41,788
+我们的主线程相关
 
 
 538
-00:27:06,356 --> 00:27:09,246
-for the lower course
-work, we'll resolve
+00:28:41,855 --> 00:28:44,057
+GCD线程池
 
 
 539
-00:27:09,316 --> 00:27:12,536
-that by raising the Quality
-of Service of waited on work
+00:28:44,124 --> 00:28:47,427
+服务于GCD队列中的所有程序块
 
 
 540
-00:27:13,166 --> 00:27:16,046
-for the duration of the
-waiter and this happens
+00:28:47,694 --> 00:28:49,663
+在应用程序中也有某些队列
 
 
 541
-00:27:16,046 --> 00:27:18,716
-if you use a serial queue
-with the dispatch sync
+00:28:50,931 --> 00:28:54,034
+想象一下你在主线程上执行代码
 
 
 542
-00:27:18,716 --> 00:27:20,266
-or the dispatch block wait APIs.
+00:28:54,101 --> 00:28:56,537
+你异步调度到某队列
 
 
 543
-00:27:20,916 --> 00:27:22,906
-It also happens if you
-use pthread mutex lock
+00:28:58,872 --> 00:29:02,209
+一程序块
+且我们会为此程序块启动一个线程
 
 
 544
-00:27:23,106 --> 00:27:26,426
-or any APIs built on top
-of it such as NSLock.
+00:29:02,910 --> 00:29:04,411
+开始执行你的代码
 
 
 545
-00:27:26,916 --> 00:27:32,346
-It is important to note, there
-are APIs that do not do this.
+00:29:04,478 --> 00:29:07,681
+在Delay之后我们将同时
+执行Object和Selector
 
 
 546
-00:27:32,346 --> 00:27:35,306
-Dispatch semaphores do not
-admit a concept of ownership
+00:29:08,382 --> 00:29:10,250
+且这将在当前线程的运行循环上
 
 
 547
-00:27:35,306 --> 00:27:36,826
-so the system cannot determine
+00:29:10,317 --> 00:29:11,752
+加入定时源
 
 
 548
-00:27:36,826 --> 00:27:38,986
-who will eventually
-signal the semaphore.
+00:29:12,586 --> 00:29:14,855
+现在让我们想一下一秒后会发生什么？
 
 
 549
-00:27:39,086 --> 00:27:40,646
-There cannot be any resolution
+00:29:16,657 --> 00:29:18,825
+结果是：当程序块完成时
 
 
 550
-00:27:40,646 --> 00:27:42,616
-of priority inversion
-in that case.
+00:29:18,892 --> 00:29:20,894
+线程可能会消失
 
 
 551
-00:27:42,616 --> 00:27:44,596
-If you have priority inversions
+00:29:20,961 --> 00:29:23,830
+这些是我们临时线程池里的线程
 
 
 552
-00:27:45,026 --> 00:27:47,436
-where you find high
-priority waiter
+00:29:23,897 --> 00:29:25,999
+他们没有任何可确保的有效期
 
 
 553
-00:27:47,436 --> 00:27:49,526
-in a dispatch semaphore wait,
+00:29:26,066 --> 00:29:27,668
+我们可能会破坏这个线程
 
 
 554
-00:27:50,086 --> 00:27:54,636
-where a low priority worker
-is performing some work,
+00:29:28,335 --> 00:29:30,571
+当然即使线程保留了下来 
 
 
 555
-00:27:54,636 --> 00:27:57,436
-you may have to switch
-to dispatch block wait,
+00:29:31,038 --> 00:29:32,973
+也没人在实际地运行那个运行循环
 
 
 556
-00:27:57,436 --> 00:27:58,006
-where you can wait
+00:29:33,307 --> 00:29:35,242
+那个计时器将永远不会被触发
 
 
 557
-00:27:58,006 --> 00:28:00,246
-on an explicit entity
-that we can raise.
+00:29:36,043 --> 00:29:38,745
+这是一个有趣的互动
 
 
 558
-00:28:00,246 --> 00:28:05,416
-With that I hand it back to
-Anthony to talk about queues,
+00:29:38,812 --> 00:29:43,550
+当你混合基于运行
+循环与调度队列的API时发生的
 
 
 559
-00:28:05,416 --> 00:28:06,076
-threads and run loops.
+00:29:45,819 --> 00:29:48,522
+简单的总结一下运行循环与
 
 
 560
-00:28:07,516 --> 00:28:12,326
-[Applause]
+00:29:48,589 --> 00:29:52,559
+串行队列的区别：运行循环束缚于
 
 
 561
-00:28:12,826 --> 00:28:13,306
->> ANTHONY CHIVETTA:
-Thanks, Daniel.
+00:29:52,626 --> 00:29:53,927
+某一特定线程
 
 
 562
-00:28:14,686 --> 00:28:17,506
-Hopefully that whet your
-appetite for Quality of Service
+00:29:54,761 --> 00:29:58,031
+一般看到API通过委托方式被回调
 
 
 563
-00:28:17,656 --> 00:28:20,036
-and you'll go back and take
-a look at the applications
+00:29:59,199 --> 00:30:01,835
+他们拥有在整个运行循环源中的
 
 
 564
-00:28:20,036 --> 00:28:22,026
-and how you can adopt
-Quality of Service.
+00:30:01,902 --> 00:30:03,737
+每次迭代后出现的自动释放池
 
 
 565
-00:28:22,306 --> 00:28:25,976
-I want to go through now other
-topics around queues, threads
+00:30:04,471 --> 00:30:06,640
+且运行循环可以被重新进入使用
 
 
 566
-00:28:25,976 --> 00:28:30,896
-and run loops in the hopes that
-it might make a greater adoption
+00:30:06,707 --> 00:30:09,943
+通过调出运行循环
+以使运行循环自旋也是可能的
 
 
 567
-00:28:30,896 --> 00:28:33,466
-of GCD easier for you and
-help provide a little context
+00:30:10,944 --> 00:30:13,380
+另一方面串行队列
 
 
 568
-00:28:33,466 --> 00:28:34,796
-as you debug your application.
+00:30:13,447 --> 00:30:16,149
+或调度队列可利用
 
 
 569
-00:28:35,376 --> 00:28:39,956
-To remind ourselves we
-have our application
+00:30:16,950 --> 00:30:19,987
+来自Grand Central
+Dispatch线程池的临时线程
 
 
 570
-00:28:40,276 --> 00:28:41,376
-with our main thread.
+00:30:20,053 --> 00:30:22,556
+它们一般将程序块作为它们的回调
 
 
 571
-00:28:41,846 --> 00:28:43,746
-There's a GCD thread pool
+00:30:22,990 --> 00:30:25,459
+或应用它们的API
+一般将程序块作为它们的回调
 
 
 572
-00:28:44,126 --> 00:28:47,426
-that services all blocks
-you might put on GCD queues
+00:30:26,660 --> 00:30:29,129
+仅在一线程完全空闲时
 
 
 573
-00:28:47,696 --> 00:28:49,666
-and you have some set of
-queues in your application.
+00:30:29,196 --> 00:30:30,964
+串行队列的自动释放池才会出现
 
 
 574
-00:28:50,946 --> 00:28:53,806
-Imagine on the main thread
-you execute this code.
+00:30:31,732 --> 00:30:34,835
+如果你的应用在持续忙碌中
+自动释放池将绝不会出现
 
 
 575
-00:28:54,106 --> 00:28:56,256
-You dispatch async
-on to some queue.
+00:30:35,602 --> 00:30:38,939
+所以当你用调度时 不依赖于
 
 
 576
-00:28:57,396 --> 00:29:01,876
-A block, and we will bring
-up a thread for that block.
+00:30:39,006 --> 00:30:40,807
+免费的自动释放池是很重要的
 
 
 577
-00:29:02,786 --> 00:29:04,206
-Start executing your code.
+00:30:41,208 --> 00:30:43,243
+如果你要自动释放大量的项目
 
 
 578
-00:29:04,466 --> 00:29:07,316
-We'll execute performSelector
-withObject afterDelay,
+00:30:43,310 --> 00:30:45,412
+你需确保你的自动释放池是合适的
 
 
 579
-00:29:07,366 --> 00:29:10,006
-and that will put a timer source
+00:30:46,180 --> 00:30:50,117
+最后串行队列不是一个重入锁
 
 
 580
-00:29:10,326 --> 00:29:11,546
-on the current thread's
-run loop.
+00:30:50,684 --> 00:30:52,119
+或递归锁结构
 
 
 581
-00:29:11,546 --> 00:29:16,156
-Now what do we think
-happens a second later?
+00:30:53,053 --> 00:30:55,756
+你需要确保当你设计你应用的队列时
 
 
 582
-00:29:16,666 --> 00:29:17,736
-Well, it turns out when
+00:30:55,956 --> 00:30:57,157
+不要使自己陷入需重入地
 
 
 583
-00:29:17,736 --> 00:29:20,786
-that block completes the
-thread might just go away.
+00:30:57,224 --> 00:30:58,325
+使用它们的情况
 
 
 584
-00:29:20,966 --> 00:29:23,576
-These are threads from
-our ephemeral thread pool.
+00:30:59,326 --> 00:31:01,895
+这些规则被捆绑在一起 其意义在于
 
 
 585
-00:29:23,886 --> 00:29:26,056
-They don't have any
-guaranteed lifetime.
+00:31:01,962 --> 00:31:05,165
+主线程的运行循环也作为主队列被公开
 
 
 586
-00:29:26,056 --> 00:29:27,656
-We may destroy the thread.
+00:31:05,632 --> 00:31:09,203
+相对于主线程
+在这些领域间来回跳转
 
 
 587
-00:29:28,326 --> 00:29:30,116
-Of course even if
-the thread stays
+00:31:09,269 --> 00:31:10,604
+是非常容易的
 
 
 588
-00:29:30,116 --> 00:29:32,976
-around no one is actually
-running that run loop.
+00:31:12,439 --> 00:31:14,274
+所以如果你回到计时器那个例子
 
 
 589
-00:29:33,296 --> 00:29:35,256
-That timer is never
-going to be able to fire.
+00:31:14,341 --> 00:31:16,210
+我们是有点在比较不同的API
 
 
 590
-00:29:36,036 --> 00:29:38,806
-This is sort of an interesting
-interaction that can happen
+00:31:16,310 --> 00:31:17,945
+说到运行循环 我们有
 
 
 591
-00:29:38,806 --> 00:29:43,556
-as you mix run loop based and
-dispatch queue based APIs.
+00:31:18,011 --> 00:31:21,215
+NSObjects—在Delay后
+运行Selector和Object
 
 
 592
-00:29:43,846 --> 00:29:48,576
-So kind of -- to kind of briefly
-summarize the differences
+00:31:21,281 --> 00:31:23,917
+或NSTimer—安排TimerW
+ithTimeInterval
 
 
 593
-00:29:48,576 --> 00:29:52,626
-between run loops and serial
-queues, run loops are bound
+00:31:23,984 --> 00:31:26,420
+可在当前运行循环上安装计时器
 
 
 594
-00:29:52,626 --> 00:29:53,516
-to a particular thread.
+00:31:26,753 --> 00:31:29,556
+在调度领域我们有
+dispatchafter和
 
 
 595
-00:29:54,306 --> 00:29:58,036
-As an API you generally see them
-get delegate method callbacks.
+00:31:29,623 --> 00:31:32,860
+dispatch sources
+用其设置计时器
 
 
 596
-00:29:59,186 --> 00:30:02,506
-They have an auto release pool
-that pops after each iteration
+00:31:32,926 --> 00:31:35,929
+这样就创建一个通过队列上加入程序块
 
 
 597
-00:30:02,506 --> 00:30:03,746
-through all the run loop sources
+00:31:35,996 --> 00:31:37,965
+就可激活的计时器
 
 
 598
-00:30:04,256 --> 00:30:07,036
-and run loop can be used
-reentrantly, it's possible
+00:31:40,501 --> 00:31:44,972
+我提到过GDC利用临时线程
 
 
 599
-00:30:07,036 --> 00:30:10,026
-to respin the run loop from
-the call out on that run loop.
+00:31:45,739 --> 00:31:48,041
+现在让我说明一下它是如何运作的
 
 
 600
-00:30:10,026 --> 00:30:13,126
-On the other hand, serial queues
+00:31:48,442 --> 00:31:51,879
+想象一下我正在做大量的异步调度
 
 
 601
-00:30:13,446 --> 00:30:17,426
-or dispatch queues use
-ephemeral threads that come
+00:31:53,347 --> 00:31:55,749
+我将那些放入全局队列
 
 
 602
-00:30:17,426 --> 00:30:19,376
-from our Grand Central
-Dispatch thread pool.
+00:31:57,918 --> 00:32:00,587
+系统正从线程池中取出一个线程
 
 
 603
-00:30:20,056 --> 00:30:22,316
-They generally take
-blocks as their callbacks,
+00:32:00,654 --> 00:32:02,022
+并将它分配给第一个程序块
 
 
 604
-00:30:22,976 --> 00:30:25,466
-or APIs that use them generally
-take blocks as callbacks.
+00:32:02,322 --> 00:32:03,624
+使其按自己的方式运行
 
 
 605
-00:30:26,646 --> 00:30:29,146
-The autorelease pool on a
-serial queue will only pop
+00:32:04,091 --> 00:32:05,826
+取出另一个线程给第二个程序块
 
 
 606
-00:30:29,186 --> 00:30:30,976
-when a thread goes
-completely idle.
+00:32:05,893 --> 00:32:07,361
+并使其按自己的方式运行
 
 
 607
-00:30:31,716 --> 00:30:34,846
-This could never happen if your
-application is constantly busy.
+00:32:07,895 --> 00:32:09,563
+这样我们就有一个两核设备
 
 
 608
-00:30:35,606 --> 00:30:38,996
-So it's important to not rely on
-the autorelease pool that comes
+00:32:09,997 --> 00:32:12,266
+这些线程在同时运行
 
 
 609
-00:30:38,996 --> 00:30:40,816
-for free when you use dispatch.
+00:32:12,366 --> 00:32:13,534
+我们先停在这里
 
 
 610
-00:30:41,206 --> 00:30:43,296
-If you are going to be auto
-releasing a lot of objects,
+00:32:13,600 --> 00:32:17,137
+理想情况下每核有一个线程
 
 
 611
-00:30:43,296 --> 00:30:45,406
-make sure you have your
-auto release pools in place.
+00:32:17,771 --> 00:32:20,274
+当第一个程序块结束执行时
 
 
 612
-00:30:45,856 --> 00:30:49,636
-Finally, serial queues
-are not a reentrant
+00:32:20,340 --> 00:32:23,443
+我们将取出线程
+分配给下一个以此类推
 
 
 613
-00:30:50,086 --> 00:30:51,946
-or recursive locking structure.
+00:32:24,478 --> 00:32:25,879
+这样运作非常好
 
 
 614
-00:30:52,326 --> 00:30:55,236
-You want to make sure as you're
-designing your application's use
+00:32:25,946 --> 00:32:29,716
+直到我们程序中的某个需要访问
 
 
 615
-00:30:55,236 --> 00:30:57,226
-of queues, you don't run
-into a case where you need
+00:32:29,783 --> 00:32:30,984
+现在还不可获得的资源
 
 
 616
-00:30:57,226 --> 00:30:58,316
-to use them reentrantly.
+00:32:32,352 --> 00:32:33,687
+我们把这叫做等待
 
 
 617
-00:30:59,256 --> 00:31:01,966
-These rules are bound
-together in the sense
+00:32:33,754 --> 00:32:37,024
+线程将等待并暂缓执行
 
 
 618
-00:31:01,966 --> 00:31:05,166
-that main thread's run loop is
-also exposed as the main queue.
+00:32:37,090 --> 00:32:40,427
+当它需要像是I/O或锁定资源时
 
 
 619
-00:31:05,626 --> 00:31:09,276
-It is easy with respect to
-the main thread to jump back
+00:32:41,195 --> 00:32:43,664
+你或许听说过这个被称作阻塞
 
 
 620
-00:31:09,276 --> 00:31:10,596
-and forth between these worlds.
+00:32:43,764 --> 00:32:45,098
+但今天我们叫它等待
 
 
 621
-00:31:11,166 --> 00:31:13,986
-So if you go back to
-the timer example,
+00:32:45,165 --> 00:32:49,403
+所以在接下来的五分钟
+如果谈论程序块阻塞你会觉得非常困惑
 
 
 622
-00:31:13,986 --> 00:31:16,216
-we kind of compare the APIs.
+00:32:49,469 --> 00:32:52,472
+但在许多其它的情况下 你会听到它被
+称作阻塞
 
 
 623
-00:31:16,326 --> 00:31:17,416
-For run loops we have things
+00:32:54,007 --> 00:32:56,643
+从GCD的角度看这里非常有趣的是
 
 
 624
-00:31:17,416 --> 00:31:20,556
-like NSObjects performSelector
-withObject afterDelay.
+00:32:56,710 --> 00:33:02,583
+我们想要设备上
+每核的程序块或是线程都在主动地执行
 
 
 625
-00:31:21,266 --> 00:31:23,586
-Or NSTimer
-scheduledTimerWithTimeInterval
+00:33:03,083 --> 00:33:06,420
+所以当一线程等待时
+我们将提出线程池中的另一个线程
 
 
 626
-00:31:23,586 --> 00:31:25,966
-that installs a timer
-on the current run loop.
+00:33:06,486 --> 00:33:08,822
+直到受到限制
 
 
 627
-00:31:26,756 --> 00:31:29,116
-In the dispatch world, we have
-things like dispatch after
+00:33:09,623 --> 00:33:11,758
+这样就有每核都有一个线程在运行
 
 
 628
-00:31:29,626 --> 00:31:32,536
-and dispatch sources with
-dispatch source set timer,
+00:33:13,727 --> 00:33:15,829
+来想象一下我们有四个这样的程序块
 
 
 629
-00:31:32,536 --> 00:31:36,006
-which can create a
-timer that will fire
+00:33:15,896 --> 00:33:18,365
+正在两个不同的线程上执行前两个
 
 
 630
-00:31:36,006 --> 00:31:40,006
-by putting a block on a queue.
+00:33:19,233 --> 00:33:22,402
+前一个说：嘿 我需要执行I/O
 
 
 631
-00:31:40,516 --> 00:31:44,426
-Now, I mentioned that Grand
-Central Dispatch uses ephemeral
+00:33:22,970 --> 00:33:24,872
+我们说：好我们将发布I/O到磁盘上
 
 
 632
-00:31:44,496 --> 00:31:47,606
-threads, now let me talk
-you through how that works.
+00:33:25,272 --> 00:33:29,910
+但之后我们必须等待I/O回归返回 
 
 
 633
-00:31:48,436 --> 00:31:51,886
-Imagine I'm executing and I do a
-whole bunch of dispatch asyncs.
+00:33:30,177 --> 00:33:31,778
+然后才可提出另一个线程
 
 
 634
-00:31:53,336 --> 00:31:55,746
-I put those on the
-global queues.
+00:33:31,845 --> 00:33:35,816
+执行下一个程序块等等 当线程等待时
 
 
 635
-00:31:57,056 --> 00:32:00,446
-The system is going to take
-a thread from the thread pool
+00:33:35,883 --> 00:33:39,119
+当仍有工作需要被做时
+找另一线程来执行队列上的下一程序块
 
 
 636
-00:32:00,446 --> 00:32:01,726
-and give it to the first block.
+00:33:40,487 --> 00:33:44,191
+这里的问题是：
+如果仅有四个程序块时运行没有问题
 
 
 637
-00:32:02,316 --> 00:32:03,356
-Send it running on its way.
+00:33:44,258 --> 00:33:48,161
+如果我有许多程序块且它们都想等待
 
 
 638
-00:32:04,106 --> 00:32:05,876
-Take another thread, give
-it to the second block
+00:33:48,562 --> 00:33:50,330
+我们就会遇到线程激增
 
 
 639
-00:32:05,876 --> 00:32:07,356
-and send it running on its way.
+00:33:51,965 --> 00:33:54,001
+当然这就会有点低效
 
 
 640
-00:32:07,896 --> 00:32:09,576
-Say we're a two core device,
+00:33:54,067 --> 00:33:56,637
+有大量的线程都在占用资源
 
 
 641
-00:32:10,006 --> 00:32:11,916
-these threads are both
-running, actively executing.
+00:33:57,337 --> 00:33:59,106
+如果它们同时停止等待
 
 
 642
-00:32:12,356 --> 00:32:13,296
-We stop here.
+00:33:59,173 --> 00:34:00,507
+就会有大量的资源冲突
 
 
 643
-00:32:13,616 --> 00:32:16,726
-We have one thread per
-core which is ideal.
+00:34:01,708 --> 00:34:03,977
+所以这对性能来说是非常不好的
 
 
 644
-00:32:17,786 --> 00:32:20,316
-Now, when that first block
-finishes executing we'll take
+00:34:04,745 --> 00:34:05,979
+同时它也有一点危险性
 
 
 645
-00:32:20,346 --> 00:32:23,456
-the thread, give it to
-the next one, and so on.
+00:34:06,046 --> 00:34:08,514
+因为这对可提出的程序数量有所限制
 
 
 646
-00:32:24,096 --> 00:32:25,566
-And this works really well.
+00:34:08,581 --> 00:34:11,851
+当我们耗尽极限时对于新的工作
 
 
 647
-00:32:25,956 --> 00:32:29,796
-Until one of our blocks
-needs access to a resource
+00:34:11,918 --> 00:34:13,219
+我们该怎么办？
 
 
 648
-00:32:29,796 --> 00:32:30,786
-that isn't yet available.
+00:34:13,754 --> 00:34:15,222
+这就导致了死锁
 
 
 649
-00:32:32,346 --> 00:32:33,406
-We call this waiting.
+00:34:16,623 --> 00:34:22,262
+我想举一个死锁的例子 是在
+我们的一个内部应用程序里碰到的
 
 
 650
-00:32:33,746 --> 00:32:37,026
-A thread will wait
-and suspend execution
+00:34:22,862 --> 00:34:25,799
+这个例子有点复杂但
+我希望我能一步步给你解释 因为
 
 
 651
-00:32:37,096 --> 00:32:40,426
-when it needs a resource
-such as I/O or a lock.
+00:34:26,400 --> 00:34:28,034
+此例很好的说明 应用程序不同部分间
 
 
 652
-00:32:41,186 --> 00:32:43,336
-Now, you might also hear
-this referred to as blocking.
+00:34:28,101 --> 00:34:30,670
+是如何以一种意料外的方式互动的
 
 
 653
-00:32:43,756 --> 00:32:45,176
-I will call it waiting today.
+00:34:33,172 --> 00:34:37,244
+我们有主线程
+并且主线程有大量的工作需要去做
 
 
 654
-00:32:45,176 --> 00:32:46,786
-So if I talk about
-blocks blocking
+00:34:37,811 --> 00:34:41,014
+它会异步调度大批程序块
 
 
 655
-00:32:46,786 --> 00:32:49,066
-for the next five minutes
-you'll get confused
+00:34:41,081 --> 00:34:42,416
+到某一并发队列
 
 
 656
-00:32:49,476 --> 00:32:52,436
-but you'll hear it called
-blocking in many other contexts.
+00:34:42,815 --> 00:34:45,518
+我们为这些程序块提出线程
 
 
 657
-00:32:54,006 --> 00:32:56,836
-What is interesting from this
-from the GCD perspective,
+00:34:45,719 --> 00:34:47,353
+这些程序块立即转向
 
 
 658
-00:32:56,836 --> 00:33:01,606
-we want one block or one thread
-executing actively per core
+00:34:47,420 --> 00:34:49,422
+同步调度回主线程
 
 
 659
-00:33:01,606 --> 00:33:02,206
-on the device.
+00:34:50,357 --> 00:34:52,059
+这时我们已经提出了
 
 
 660
-00:33:03,076 --> 00:33:06,486
-So when a thread waits, we are
-going to bring up another thread
+00:34:52,125 --> 00:34:53,393
+我们需要的所有线程
 
 
 661
-00:33:06,486 --> 00:33:08,806
-in our thread pool
-up until some limit
+00:34:53,493 --> 00:34:55,429
+在这里的这个简单例子中 是四个
 
 
 662
-00:33:09,616 --> 00:33:11,766
-so that we can have one
-thread executing per core.
+00:34:55,963 --> 00:34:57,264
+我们达到了线程限制
 
 
 663
-00:33:13,306 --> 00:33:15,646
-So let's imagine we
-have these four blocks,
+00:34:57,865 --> 00:35:00,734
+我们将不能
+再为线程池提出任何更多的线程
 
 
 664
-00:33:15,906 --> 00:33:18,356
-we're executing the first
-two on two different threads
+00:35:03,403 --> 00:35:07,074
+那么 好的
+我们需要主线程再次变成可使用的
 
 
 665
-00:33:19,156 --> 00:33:22,326
-and the first guy goes
-hey, I need to do some I/O.
+00:35:07,140 --> 00:35:09,076
+以使那些程序块可以获取它
 
 
 666
-00:33:22,966 --> 00:33:24,876
-We go great, we'll issue
-the I/O to the disk.
+00:35:09,243 --> 00:35:11,345
+继续运行 至完成
 
 
 667
-00:33:25,276 --> 00:33:29,916
-But we are going to have you
-wait for that I/O to come back.
+00:35:11,745 --> 00:35:13,247
+现在它使我们重新回到限制下
 
 
 668
-00:33:30,166 --> 00:33:31,856
-Then we are going to
-bring up another thread,
+00:35:14,648 --> 00:35:17,117
+仅在某些情况下
+这可能发生但是让我们试想一下
 
 
 669
-00:33:31,856 --> 00:33:35,876
-execute the next block and so
-on as threads wait we'll bring
+00:35:17,818 --> 00:35:21,688
+主线程进入异步调度成为某一串行信号
 
 
 670
-00:33:35,876 --> 00:33:37,256
-up another thread to
-execute the next block
+00:35:22,589 --> 00:35:24,024
+到目前为止一切顺利
 
 
 671
-00:33:37,256 --> 00:33:38,956
-on that queue while there's
-still work to be done.
+00:35:24,091 --> 00:35:25,792
+那个程序块仍不会开始执行
 
 
 672
-00:33:39,256 --> 00:33:43,936
-The problem here, if I only have
-four blocks, that works great.
+00:35:26,126 --> 00:35:28,195
+因为没有可利用的额外的主线程
 
 
 673
-00:33:44,266 --> 00:33:47,906
-If I have lots of blocks
-and they all want to wait,
+00:35:28,262 --> 00:35:29,663
+来执行那个程序块
 
 
 674
-00:33:47,906 --> 00:33:50,126
-we can get what we
-call thread explosion.
+00:35:29,730 --> 00:35:32,933
+它会呆在那里 等待着某一线程返回
 
 
 675
-00:33:51,596 --> 00:33:53,586
-This is, of course,
-a little inefficient.
+00:35:32,999 --> 00:35:34,334
+然后我们可将其再度利用
 
 
 676
-00:33:53,706 --> 00:33:56,646
-There are lots of threads
-all using resources.
+00:35:35,903 --> 00:35:38,405
+但是之后我们的主线程决定同步调度
 
 
 677
-00:33:57,346 --> 00:33:59,176
-If they all stop
-waiting at the same time,
+00:35:38,472 --> 00:35:39,940
+成相同的串行队列
 
 
 678
-00:33:59,176 --> 00:34:00,496
-we have lots of contention.
+00:35:41,208 --> 00:35:43,410
+问题是对于串行队列
 
 
 679
-00:34:01,306 --> 00:34:03,576
-So this isn't great
-for performance.
+00:35:43,477 --> 00:35:44,511
+没有可用的线程
 
 
 680
-00:34:03,816 --> 00:34:06,046
-But it is also a
-little dangerous
+00:35:44,745 --> 00:35:48,615
+主调用将永远阻塞
 
 
 681
-00:34:06,046 --> 00:34:07,166
-in that there is a
-limit to the number
+00:35:48,682 --> 00:35:50,584
+这就是经典的死锁情况
 
 
 682
-00:34:07,166 --> 00:34:08,126
-of threads we can bring up.
+00:35:51,251 --> 00:35:53,020
+我们的主线程正在等待资源
 
 
 683
-00:34:08,596 --> 00:34:11,926
-When you exhaust the limit we
-have a problem of what do we do
+00:35:53,687 --> 00:35:55,923
+在此案例中是我们线程池中的一个线程
 
 
 684
-00:34:11,926 --> 00:34:13,016
-with new work that comes in?
+00:35:55,989 --> 00:35:58,392
+所有来自线程池中的线程都在等待资源
 
 
 685
-00:34:13,746 --> 00:34:14,876
-This brings in deadlock.
+00:35:58,458 --> 00:36:01,328
+主线程都在互相等待 但没有一个会
 
 
 686
-00:34:14,876 --> 00:34:19,846
-I want to talk about an example
-of deadlock we saw in one
+00:36:01,395 --> 00:36:04,164
+放弃那个资源 所以导致了死锁
 
 
 687
-00:34:19,846 --> 00:34:21,186
-of our applications internally.
+00:36:05,132 --> 00:36:07,601
+这似乎非常匪夷所思不自然
 
 
 688
-00:34:21,466 --> 00:34:25,466
-I hope I can talk
-you through this.
+00:36:07,801 --> 00:36:12,906
+但是当你的应用程序有许多不同的部分
+不同的模块同时运行的框架时
 
 
 689
-00:34:25,466 --> 00:34:28,085
-This is a great example
-of how different parts
+00:36:13,307 --> 00:36:15,108
+死锁会比你想象中更容易碰到
 
 
 690
-00:34:28,085 --> 00:34:30,656
-of your application
-interact in unexpected ways.
+00:36:15,909 --> 00:36:18,078
+并且实际情况中会更复杂
 
 
 691
-00:34:31,206 --> 00:34:36,216
-We have the main thread and
-the main thread has a bunch
+00:36:19,313 --> 00:36:21,014
+所以当你在用GCD时
 
 
 692
-00:34:36,216 --> 00:34:38,065
-of work it wants to do.
+00:36:21,081 --> 00:36:22,416
+这是你需要时刻铭记的
 
 
 693
-00:34:38,065 --> 00:34:41,065
-It will dispatch async
-a whole butch of blocks
+00:36:22,482 --> 00:36:24,818
+以保证你可以避免这种情况
 
 
 694
-00:34:41,065 --> 00:34:42,045
-onto a concurrent queue.
+00:36:25,085 --> 00:36:26,019
+这很容易做到
 
 
 695
-00:34:42,716 --> 00:34:45,246
-We start bringing up
-threads for those blocks,
+00:36:26,086 --> 00:36:29,122
+下面我会讲一些可适当避免这个问题的
 
 
 696
-00:34:45,596 --> 00:34:47,416
-and those blocks
-immediately turn around
+00:36:29,189 --> 00:36:30,657
+设计应用程序的方法
 
 
 697
-00:34:47,416 --> 00:34:49,436
-and dispatch sync back
-on to the main thread.
+00:36:32,626 --> 00:36:34,294
+首先是一些基础的东西
 
 
 698
-00:34:50,356 --> 00:34:52,136
-At this point we've brought
+00:36:34,361 --> 00:36:35,262
+在任何可能的情况下
 
 
 699
-00:34:52,136 --> 00:34:53,396
-up all the threads
-we are willing to.
+00:36:35,329 --> 00:36:37,231
+尽可能利用异步API
 
 
 700
-00:34:53,485 --> 00:34:55,226
-In the simple example
-here, it's four.
+00:36:37,297 --> 00:36:38,665
+尤其是对于I/O
 
 
 701
-00:34:55,295 --> 00:34:57,005
-We hit the thread limit.
+00:36:39,299 --> 00:36:42,503
+如果你这样做你可以避免程序块等待
 
 
 702
-00:34:57,005 --> 00:34:58,646
-We are not going to bring
+00:36:43,136 --> 00:36:45,272
+这样你就不用提出更多的线程
 
 
 703
-00:34:58,646 --> 00:35:00,576
-up any additional threads
-for the thread pool.
+00:36:45,339 --> 00:36:46,540
+更高效
 
 
 704
-00:35:03,436 --> 00:35:03,996
-Okay, fine.
+00:36:48,008 --> 00:36:50,577
+对这类的情况 你也可以用串行队列
 
 
 705
-00:35:03,996 --> 00:35:07,156
-We need the main thread
-to become available again
+00:36:50,644 --> 00:36:53,647
+如果调度所有此类工作到串行队列上
 
 
 706
-00:35:07,156 --> 00:35:08,706
-so that those blocks
-can acquire it,
+00:36:53,714 --> 00:36:56,283
+我们就不会遇到线程激增
 
 
 707
-00:35:09,256 --> 00:35:11,146
-do their work and then complete.
+00:36:56,350 --> 00:36:58,285
+我们每次将仅执行一个程序块
 
 
 708
-00:35:11,736 --> 00:35:13,206
-Now it put us back
-under our limit.
+00:36:59,086 --> 00:37:01,955
+我并不是在告诉你们
+串行化你们全部的应用程序
 
 
 709
-00:35:14,646 --> 00:35:17,126
-That might happen some some
-situations, but let's imagine
+00:37:02,623 --> 00:37:05,459
+但是当你建立你的应用程序
 
 
 710
-00:35:17,716 --> 00:35:19,676
-that our main thread then goes
+00:37:05,526 --> 00:37:09,329
+并创建不同的队列
+在你的应用程序中处理不同的模块时
 
 
 711
-00:35:19,676 --> 00:35:21,516
-into the dispatch
-async to a serial cue.
+00:37:09,763 --> 00:37:11,932
+除非你知道对特别的模块你需要
 
 
 712
-00:35:22,216 --> 00:35:23,656
-So far so good.
+00:37:11,999 --> 00:37:13,967
+平行运行某些东西
 
 
 713
-00:35:24,086 --> 00:35:25,526
-That block will not execute
+00:37:14,034 --> 00:37:16,303
+取而代之地为达到你的性能目标
 
 
 714
-00:35:25,526 --> 00:35:28,266
-yet because there's no
-additional threads available
+00:37:16,370 --> 00:37:18,539
+请考虑从串行队列开始
 
 
 715
-00:35:28,266 --> 00:35:29,436
-to execute that block.
+00:37:19,239 --> 00:37:25,012
+在串行队列上同时运行你应用程序中
+的各部分从中你可获得很多性能
 
 
 716
-00:35:29,746 --> 00:35:33,016
-It will sit there waiting for
-one of the threads to return
+00:37:25,078 --> 00:37:29,283
+之后你可以给出你应用程序的轮廓
 
 
 717
-00:35:33,016 --> 00:35:33,926
-so we can use it again.
+00:37:29,349 --> 00:37:32,286
+看什么地方需要额外的平行运行的性能
 
 
 718
-00:35:35,116 --> 00:35:38,336
-But then our main thread
-decides to dispatch sync
+00:37:32,352 --> 00:37:34,821
+并对这些地方进行特别设计
 
 
 719
-00:35:38,486 --> 00:35:39,726
-to that same serial queue.
+00:37:34,888 --> 00:37:37,658
+以避免线程激增
 
 
 720
-00:35:41,216 --> 00:35:43,486
-The problem is that there
-are no threads available
+00:37:38,859 --> 00:37:41,461
+当然你也可以用有并发限制的
 
 
 721
-00:35:43,486 --> 00:35:44,256
-for that serial queue.
+00:37:41,528 --> 00:37:42,963
+NSOperation队列
 
 
 722
-00:35:44,746 --> 00:35:48,016
-The main call is going
-to block forever.
+00:37:45,332 --> 00:37:47,634
+最后不要产生无限的工作
 
 
 723
-00:35:48,546 --> 00:35:50,586
-This is the classic
-deadlock situation.
+00:37:47,701 --> 00:37:51,705
+如果你可以按照
+你需要的程序块数量来约束你的工作
 
 
 724
-00:35:51,166 --> 00:35:53,036
-Our main thread is
-waiting on a resource.
+00:37:51,772 --> 00:37:52,906
+就会避免线程激增
 
 
 725
-00:35:53,686 --> 00:35:55,326
-In this case a thread
-from our thread pool.
+00:37:54,441 --> 00:37:57,077
+让我们来看看更具体的
 
 
 726
-00:35:55,326 --> 00:35:57,796
-Where all the threads from
-the thread pool are waiting
+00:37:57,477 --> 00:37:58,779
+在这是出现问题的实例代码
 
 
 727
-00:35:57,796 --> 00:35:59,086
-on a resource, the main thread.
+00:38:00,047 --> 00:38:03,317
+第一个是我们混合异步和同步
 
 
 728
-00:35:59,516 --> 00:36:01,386
-They're both waiting on each
-other and neither is going
+00:38:04,651 --> 00:38:09,423
+如果我只是对某队列进行同步调度
+会非常的快
 
 
 729
-00:36:01,386 --> 00:36:03,866
-to give up that resource
-so we have a deadlock.
+00:38:09,489 --> 00:38:11,291
+大体上是得到锁
 
 
 730
-00:36:05,146 --> 00:36:07,346
-This may seem bizarre
-and contrived.
+00:38:11,892 --> 00:38:14,761
+如果我进行异步调度也会非常的快
 
 
 731
-00:36:07,346 --> 00:36:09,016
-But when you have lots
-of different parts
+00:38:14,828 --> 00:38:16,230
+大体上是原子入队
 
 
 732
-00:36:09,016 --> 00:36:10,626
-of your appliation,
-different modules,
+00:38:17,030 --> 00:38:19,700
+如果我有一个队列且仅用两个中的某个
 
 
 733
-00:36:10,666 --> 00:36:12,716
-frameworks all doing
-things at the same time,
+00:38:19,766 --> 00:38:23,504
+其性能与这些基本体是非常相近的
 
 
 734
-00:36:13,236 --> 00:36:15,086
-it's easier to hit
-than you might imagine
+00:38:24,771 --> 00:38:29,243
+如果我将这些混合异步到某队列
+并做同步调度
 
 
 735
-00:36:15,816 --> 00:36:18,226
-and may be more complicated
-in practice.
+00:38:29,610 --> 00:38:32,379
+同步调度就必须等待一线程被建立
 
 
 736
-00:36:18,846 --> 00:36:21,096
-So it's something you
-want to keep in mind
+00:38:32,446 --> 00:38:35,315
+并执行那个程序块
+然后程序块才会被完成
 
 
 737
-00:36:21,096 --> 00:36:22,436
-as you are working with GCD.
+00:38:36,049 --> 00:38:38,385
+现在我们多了创建线程的时间
 
 
 738
-00:36:22,476 --> 00:36:24,696
-To make sure you can
-avoid the situation.
+00:38:38,452 --> 00:38:40,420
+但其实本来仅一个锁就足够了
 
 
 739
-00:36:25,086 --> 00:36:25,956
-It is easy.
+00:38:41,121 --> 00:38:43,357
+混合这些基本体当然是安全的
 
 
 740
-00:36:26,076 --> 00:36:29,176
-I'll talk through some ways that
-we can architect our application
+00:38:43,824 --> 00:38:46,960
+但是当你设计应用程序的时候
+想一下是否你真的需要这么做
 
 
 741
-00:36:29,176 --> 00:36:30,666
-to be resilient against
-this problem.
+00:38:47,561 --> 00:38:50,264
+在主线程中混合它们的时候
+需要特别的小心
 
 
 742
-00:36:31,156 --> 00:36:33,836
-First some basic things.
+00:38:53,967 --> 00:38:58,972
+现在下一个问题是我们尝试一次调度许
+多程序块到某一并发队列
 
 
 743
-00:36:34,376 --> 00:36:35,336
-Always good advice
+00:39:00,007 --> 00:39:05,112
+如果你这么做
+在我们的这个情况中你只需
 
 
 744
-00:36:35,336 --> 00:36:37,216
-to use asynchronous
-APIs whenever possible,
+00:39:05,179 --> 00:39:06,880
+避开主线程尝试继续执行
 
 
 745
-00:36:37,376 --> 00:36:38,516
-especially for I/Os.
+00:39:07,347 --> 00:39:09,616
+但是试想一下
+在你异步的地方做一些相似的事情
 
 
 746
-00:36:39,286 --> 00:36:42,496
-If you do that, you can
-avoid having blocks wait
+00:39:09,683 --> 00:39:10,784
+之后做一个同步屏障
 
 
 747
-00:36:42,496 --> 00:36:45,346
-and as a result you won't
-have to bring up more threads.
+00:39:11,485 --> 00:39:16,456
+任何一个都是危险的
+因为它将引起线程激增和死锁
 
 
 748
-00:36:45,346 --> 00:36:46,356
-Gain some efficiency.
+00:39:17,324 --> 00:39:19,893
+但是我们有一个基本体叫做调度使用
 
 
 749
-00:36:47,426 --> 00:36:50,326
-You can also use serial queues
-for something like this.
+00:39:19,960 --> 00:39:23,864
+这两段代码对你来说基本上是一模一样
 
 
 750
-00:36:50,526 --> 00:36:52,236
-If we dispatched all that work
+00:39:23,931 --> 00:39:25,732
+从语义上来看
 
 
 751
-00:36:52,236 --> 00:36:56,366
-on a serial queue we wouldn't
-have had thread explosion.
+00:39:26,300 --> 00:39:28,502
+通过转换为调度应用 你通过GCD
 
 
 752
-00:36:56,366 --> 00:36:59,106
-We would have only executed
-one block at a time.
+00:39:28,569 --> 00:39:32,039
+来管理并行性和避免线程激增
 
 
 753
-00:36:59,106 --> 00:37:01,956
-I'm not telling you to serialize
-your entire application,
+00:39:36,143 --> 00:39:38,011
+当然你也可以用调度信号量
 
 
 754
-00:37:02,616 --> 00:37:05,526
-but as you are building
-your application
+00:39:38,312 --> 00:39:41,348
+你们中的许多对用信号量作锁非常熟悉
 
 
 755
-00:37:05,526 --> 00:37:08,486
-and creating different queues,
-service different modules
+00:39:42,115 --> 00:39:44,918
+取而代之的是这里
+我们将信号量用做计数信号量
 
 
 756
-00:37:08,486 --> 00:37:11,706
-in your application, unless you
-know that you need to run things
+00:39:45,452 --> 00:39:47,788
+我们从对它进行初始化着手
 
 
 757
-00:37:11,706 --> 00:37:13,796
-in parallel for that
-particular module,
+00:39:47,855 --> 00:39:50,224
+通过使用我们想执行的并发任务数
 
 
 758
-00:37:14,046 --> 00:37:16,026
-in order to meet your
-performance goals,
+00:39:50,290 --> 00:39:51,992
+比如说我们想要运行四个
 
 
 759
-00:37:16,396 --> 00:37:18,526
-consider starting out with
-a serial queue instead.
+00:39:53,360 --> 00:39:57,464
+每次我们的程序块完成
+它会向信号量发出信号
 
 
 760
-00:37:19,246 --> 00:37:21,536
-There's a lot of performance
-to be gained from running parts
+00:39:58,165 --> 00:40:01,268
+每次我们提交 我们需要等待信号量
 
 
 761
-00:37:21,536 --> 00:37:24,746
-of your application
-concurrently on serial queues.
+00:40:02,269 --> 00:40:05,906
+结果是：提交线程将进行四次提交
 
 
 762
-00:37:25,116 --> 00:37:29,136
-Then you can profile
-your application,
+00:40:05,973 --> 00:40:08,542
+之后阻塞那个信号量 直到
 
 
 763
-00:37:29,366 --> 00:37:31,366
-see what needs the additional
-performance of running work
+00:40:08,609 --> 00:40:10,978
+它们中的一个
+可以完成并发信号给信号量
 
 
 764
-00:37:31,366 --> 00:37:34,576
-in parallel and specifically
-design those pieces of work
+00:40:11,445 --> 00:40:13,313
+这个模式非常好 如果你的应用程序中
 
 
 765
-00:37:34,896 --> 00:37:37,526
-in ways that are well managed
-to avoid thread explosion.
+00:40:13,380 --> 00:40:15,115
+你可能在多个地点提交
 
 
 766
-00:37:38,446 --> 00:37:41,526
-Now, of course, you can
-also use NSOperation queues
+00:40:15,182 --> 00:40:17,951
+某些东西像是调度应用是不合适的
 
 
 767
-00:37:41,526 --> 00:37:42,856
-which have a concurrency limit.
+00:40:23,090 --> 00:40:26,393
+希望这些帮助你们对线程激增有了解
 
 
 768
-00:37:44,056 --> 00:37:47,406
-And finally don't
-generate unlimited work.
+00:40:26,460 --> 00:40:28,128
+并知道如何去避免它
 
 
 769
-00:37:47,706 --> 00:37:50,176
-If you can design your work
-to be well bounded in terms
+00:40:28,195 --> 00:40:30,430
+我还想简短地谈一下崩溃报告
 
 
 770
-00:37:50,176 --> 00:37:51,426
-of the number of
-blocks you need,
+00:40:31,965 --> 00:40:33,800
+不幸的是
+某些时候你们中的大多数都必须
 
 
 771
-00:37:51,756 --> 00:37:52,886
-that can avoid thread explosion.
+00:40:33,867 --> 00:40:35,402
+处理一份崩溃报告
 
 
 772
-00:37:53,906 --> 00:37:56,866
-Let's look through more
-specific code examples
+00:40:35,469 --> 00:40:37,004
+这里有许多信息
 
 
 773
-00:37:57,476 --> 00:37:58,526
-of things that went wrong here.
+00:40:37,437 --> 00:40:40,607
+如果你在用GCD就更是这样
 
 
 774
-00:38:00,056 --> 00:38:03,326
-The first is that we
-mixed sync and async
+00:40:44,144 --> 00:40:46,513
+随着你有更多的线程
+就会有更多的东西需要被剖析
 
 
 775
-00:38:04,546 --> 00:38:08,566
-so if I just do a dispatch sync
-to a queue, it's really fast.
+00:40:46,580 --> 00:40:47,881
+及理解到底是怎么回事
 
 
 776
-00:38:08,786 --> 00:38:10,816
-It is basically taking a lock.
+00:40:49,783 --> 00:40:51,585
+所以我想介绍给你们一对堆栈
 
 
 777
-00:38:11,886 --> 00:38:14,766
-If I do a dispatch
-async, it's really fast,
+00:40:51,652 --> 00:40:53,720
+它们可以帮助你了解应用程序中
 
 
 778
-00:38:14,826 --> 00:38:16,216
-it's an atomic enqueue.
+00:40:54,855 --> 00:40:57,090
+不同线程的作用
 
 
 779
-00:38:17,046 --> 00:38:19,756
-If I have a queue and
-I only do one of these,
+00:40:57,591 --> 00:40:59,092
+第一个是管理线程
 
 
 780
-00:38:19,756 --> 00:38:23,506
-the performance will be
-similar to those primitives.
+00:41:00,360 --> 00:41:02,095
+你几乎在所有使用GCD的应用程序中
 
 
 781
-00:38:24,786 --> 00:38:29,006
-If I mix these and async to to
-a queue and do a dispatch sync,
+00:41:02,162 --> 00:41:04,798
+都可以看到管理线程
 
 
 782
-00:38:29,626 --> 00:38:32,356
-that dispatch sync has wait
-for a thread to be created
+00:41:04,865 --> 00:41:06,767
+它负责帮助进程调度来源
 
 
 783
-00:38:32,456 --> 00:38:35,166
-and then execute that block, and
-then for the block to complete.
+00:41:07,167 --> 00:41:10,070
+你会注意到调度管理线程是根框架
 
 
 784
-00:38:36,036 --> 00:38:38,446
-Now we have the thread
-creation time coming
+00:41:10,737 --> 00:41:12,105
+一般来说你可以忽略它
 
 
 785
-00:38:38,446 --> 00:38:40,156
-in to what really would
-have been just a lock.
+00:41:13,674 --> 00:41:15,375
+我们有空闲的GCD线程
 
 
 786
-00:38:40,156 --> 00:38:44,056
-Now, it's absolutely safe to
-mix these primitives, but,
+00:41:16,009 --> 00:41:17,811
+这些是线程池里空闲的线程
 
 
 787
-00:38:44,246 --> 00:38:46,956
-as you design the application,
-think about whether you need to.
+00:41:17,878 --> 00:41:20,614
+在堆栈的底部
+你可以看到开始工作队列线程
 
 
 788
-00:38:47,556 --> 00:38:48,606
-Be especially careful
+00:41:20,681 --> 00:41:22,583
+有迹象指出它是一个GCD线程
 
 
 789
-00:38:48,606 --> 00:38:52,666
-when mixing them
-from the main thread.
+00:41:22,683 --> 00:41:25,252
+工作队列当前返回指出它正在处在空闲
 
 
 790
-00:38:53,406 --> 00:38:56,696
-Now, of course, the next problem
-is that we try to dispatch a lot
+00:41:27,955 --> 00:41:30,057
+另一方面一个活跃的GCD线程仍将从
 
 
 791
-00:38:56,696 --> 00:38:58,936
-of blocks on to a
-concurrent queue all at once.
+00:41:30,123 --> 00:41:32,960
+开始工作队列线程开始 
+但你会看到一些
 
 
 792
-00:39:00,016 --> 00:39:05,186
-If you do this, and in our
-case we are just going to try
+00:41:33,026 --> 00:41:36,396
+调度客服端调用和
+调度调用程序块及释放类的东西
 
 
 793
-00:39:05,186 --> 00:39:06,866
-to continue executing
-off the main thread,
+00:41:36,763 --> 00:41:37,931
+跟随着你的代码
 
 
 794
-00:39:07,336 --> 00:39:09,686
-but imagine you do something
-similar where you async
+00:41:38,198 --> 00:41:41,735
+你也会看到当你创建队列时
+曾输入的调度队列名称
 
 
 795
-00:39:09,686 --> 00:39:10,796
-and then do a barrier sync.
+00:41:41,802 --> 00:41:43,971
+给出描述性队列名称是非常重要的
 
 
 796
-00:39:11,486 --> 00:39:15,606
-Either one is dangerous because
-it could cause thread explosion
+00:41:46,740 --> 00:41:49,309
+当主线程空闲时 你会看到其列席在
 
 
 797
-00:39:15,646 --> 00:39:16,386
-and deadlocks.
+00:41:49,376 --> 00:41:53,814
+虚拟信息陷阱 
+CF运行循环端口及CF运行循环运行
 
 
 798
-00:39:17,266 --> 00:39:19,506
-But we have a primitive
-called dispatch apply,
+00:41:54,548 --> 00:41:57,751
+你也会看到com.apple主线程
 
 
 799
-00:39:19,976 --> 00:39:23,346
-and these two pieces of code
-here are basically exactly the
+00:41:59,486 --> 00:42:02,055
+另一方面如果你的主线程是活跃的
 
 
 800
-00:39:23,346 --> 00:39:25,726
-same from the perspective
-of the semantics for you.
+00:42:02,122 --> 00:42:05,259
+由于主队列GCD队列
+你可能会看到CF运行循环
 
 
 801
-00:39:26,306 --> 00:39:28,576
-By switching to dispatch
-apply, you allow GCD
+00:42:05,325 --> 00:42:09,730
+正在服务主调度队列—如果它是活跃的
 
 
 802
-00:39:28,576 --> 00:39:32,026
-to manage the parallelism and
-avoid the thread explosion.
+00:42:10,664 --> 00:42:13,467
+并且在这种情况下有我们
+正调出的NSBlock操作
 
 
 803
-00:39:33,536 --> 00:39:38,376
-Of course, you can also
-use dispatch semaphores.
+00:42:14,701 --> 00:42:17,171
+当你不能依赖于事物不会改变
 
 
 804
-00:39:38,376 --> 00:39:41,336
-Many of you are familiar with
-the use of semaphores as locks.
+00:42:17,237 --> 00:42:19,907
+今天有些内部的细节我也会谈及
 
 
 805
-00:39:42,126 --> 00:39:43,326
-We are going to use
-the semaphore
+00:42:19,973 --> 00:42:23,110
+为了能给你一个崩溃报告的指南
 
 
 806
-00:39:43,406 --> 00:39:44,846
-as a counting semaphore instead.
+00:42:23,710 --> 00:42:25,612
+希望能提供给你一些有用的信息
 
 
 807
-00:39:45,436 --> 00:39:47,866
-We start out by initializing
-it with the number
+00:42:27,548 --> 00:42:31,318
+至此总结一下 记住一个有效的
 
 
 808
-00:39:47,866 --> 00:39:50,296
-of concurrent tasks
-we want to execute.
+00:42:31,385 --> 00:42:34,588
+有响应的应用程序必须接受不同的环境
 
 
 809
-00:39:50,296 --> 00:39:51,986
-Say we want four running.
+00:42:34,655 --> 00:42:36,823
+不管是Watch还是Mac Pro
 
 
 810
-00:39:53,376 --> 00:39:57,476
-Every time our block completes,
-it signals the semaphore.
+00:42:36,890 --> 00:42:40,527
+这些不同的平台有各种各样的可用资源
 
 
 811
-00:39:58,166 --> 00:40:01,016
-Every time we submit, we
-wait on the semaphore.
+00:42:40,594 --> 00:42:43,163
+GCD是可以帮助你
+合理管理它们的一种非常好的方式
 
 
 812
-00:40:01,926 --> 00:40:05,686
-As a result our submitter
-thread will do four submissions
+00:42:44,331 --> 00:42:47,334
+QoS分类允许操作系统
 
 
 813
-00:40:05,766 --> 00:40:08,596
-and then block on that
-semaphore wait until one
+00:42:47,401 --> 00:42:49,870
+以最有效的方式安排你的资源
 
 
 814
-00:40:08,596 --> 00:40:10,516
-of them can complete and
-signal the semaphore.
+00:42:51,505 --> 00:42:54,007
+所以你应该回家想想如何将QoS分类
 
 
 815
-00:40:11,436 --> 00:40:13,376
-This pattern is nice if
-you might be submitting
+00:42:54,074 --> 00:42:55,876
+整合进你的应用程序
 
 
 816
-00:40:13,376 --> 00:40:15,026
-from multiple places
-in your application.
+00:42:55,943 --> 00:42:57,544
+及既存的GCD使用中
 
 
 817
-00:40:15,176 --> 00:40:17,956
-Something like dispatch
-apply isn't appropriate.
+00:42:59,479 --> 00:43:02,149
+最后想一下应用程序是如何使用GCD
 
 
 818
-00:40:22,696 --> 00:40:25,276
-So hopefully that's helped
-you understand a little bit
+00:43:02,216 --> 00:43:03,317
+并尝试避免线程激增
 
 
 819
-00:40:25,276 --> 00:40:28,206
-about thread explosion
-and how to avoid it.
+00:43:04,818 --> 00:43:05,886
+更多的信息 请查看
 
 
 820
-00:40:28,206 --> 00:40:30,416
-I also want to talk
-briefly about crash reports.
+00:43:05,953 --> 00:43:10,691
+Mac和iOS应用程序并发程序指导
+或能源效率指导
 
 
 821
-00:40:31,966 --> 00:40:33,876
-Unfortunately most of
-you probably had to deal
+00:43:10,757 --> 00:43:13,360
+iOS应用程序的那个是这周刚出的
 
 
 822
-00:40:33,876 --> 00:40:35,086
-with a crash report
-at some point.
+00:43:13,560 --> 00:43:19,266
+看看吧 它很棒
+有开发者论坛和我们的宣传员Paul
 
 
 823
-00:40:35,456 --> 00:40:36,876
-There's a lot of
-information here.
+00:43:20,200 --> 00:43:21,668
+几个相关的场次：
 
 
 824
-00:40:37,436 --> 00:40:39,496
-This is especially true
-if you are using GCD.
+00:43:21,768 --> 00:43:26,473
+《获得整日电池寿命》给出了更多关于
 
 
 825
-00:40:39,496 --> 00:40:46,226
-As you have more threads,
-there's more things to parse
+00:43:26,540 --> 00:43:27,741
+我提到的能源话题的信息
 
 
 826
-00:40:46,596 --> 00:40:47,876
-and to understand
-what's going on.
+00:43:28,642 --> 00:43:31,778
+《为多任务iOS9优化你的app》
 
 
 827
-00:40:49,386 --> 00:40:51,316
-So I want to talk you
-through a couple stacks
+00:43:32,913 --> 00:43:36,850
+《高级的NSOperations》
+和在这之后的
 
 
 828
-00:40:51,636 --> 00:40:55,846
-that can help you understand
-what the different threads
+00:43:37,184 --> 00:43:39,052
+《iOS及Watch OS性能》
 
 
 829
-00:40:55,846 --> 00:40:56,806
-in your application are doing.
-
-
-830
-00:40:57,216 --> 00:40:58,926
-So the first one is
-the manager thread.
-
-
-831
-00:40:59,836 --> 00:41:02,146
-So the manager thread is
-something that you are going
-
-
-832
-00:41:02,146 --> 00:41:04,486
-to see in almost all
-GCD using applications.
-
-
-833
-00:41:04,856 --> 00:41:06,776
-It's there to help
-process dispatch sources.
-
-
-834
-00:41:07,176 --> 00:41:10,076
-You notice dispatch manager
-thread is the root frame.
-
-
-835
-00:41:10,736 --> 00:41:12,506
-You can generally ignore it.
-
-
-836
-00:41:13,056 --> 00:41:15,366
-We have idle GCD threads.
-
-
-837
-00:41:16,006 --> 00:41:17,556
-These are idle threads
-in the thread pool.
-
-
-838
-00:41:17,866 --> 00:41:19,356
-You can see start
-work queue thread
-
-
-839
-00:41:19,356 --> 00:41:20,266
-at the bottom of the stack.
-
-
-840
-00:41:20,666 --> 00:41:22,216
-There's an indication
-it's a GCD thread.
-
-
-841
-00:41:22,676 --> 00:41:24,776
-Work queue current return
-indicates it's sitting
-
-
-842
-00:41:24,776 --> 00:41:25,196
-there idle.
-
-
-843
-00:41:25,676 --> 00:41:30,586
-An active GCD thread, on the
-other hand, will still begin
-
-
-844
-00:41:30,586 --> 00:41:33,016
-with start work queue thread
-but you'll see something
-
-
-845
-00:41:33,016 --> 00:41:35,746
-like dispatch client call
-out and dispatch call block
-
-
-846
-00:41:35,746 --> 00:41:37,696
-and release, followed
-by your code.
-
-
-847
-00:41:38,206 --> 00:41:40,536
-You'll also see the dispatch
-queue name that you passed
-
-
-848
-00:41:40,536 --> 00:41:41,426
-when you created the queue.
-
-
-849
-00:41:41,796 --> 00:41:43,956
-It's important to give
-descriptive queue names.
-
-
-850
-00:41:44,536 --> 00:41:49,366
-The main thread when
-idle you'll see sitting
-
-
-851
-00:41:49,366 --> 00:41:53,806
-in mock message trap, CF run
-loop port and CF run loop run
-
-
-852
-00:41:54,536 --> 00:41:57,346
-and you'll see com.apple.main
-thread.
-
-
-853
-00:41:57,346 --> 00:42:01,586
-On the other hand, if
-your main queue is active,
-
-
-854
-00:42:02,126 --> 00:42:05,246
-you might see CF run loop is
-servicing the main dispatch
-
-
-855
-00:42:05,326 --> 00:42:09,186
-queue if it was active because
-of the main queue GCD queue.
-
-
-856
-00:42:09,186 --> 00:42:12,506
-And in this case which
-have NSBlock operation
-
-
-857
-00:42:12,506 --> 00:42:13,256
-that we're calling out.
-
-
-858
-00:42:13,256 --> 00:42:17,226
-Now, of course, you shouldn't
-rely on things not changing.
-
-
-859
-00:42:17,226 --> 00:42:19,756
-There are internal details and
-I'm walking through this today
-
-
-860
-00:42:19,756 --> 00:42:23,076
-to give you a guide
-through your crash reports.
-
-
-861
-00:42:23,506 --> 00:42:25,596
-Hopefully it will provide
-some useful context.
-
-
-862
-00:42:27,006 --> 00:42:31,376
-So with that to wrap things
-up, remember that an efficient
-
-
-863
-00:42:31,376 --> 00:42:33,626
-and responsive application
-must be able to adopt
-
-
-864
-00:42:33,626 --> 00:42:36,436
-to diverse environments, whether
-it's the Watch or Mac Pro.
-
-
-865
-00:42:36,886 --> 00:42:40,146
-These different platforms have a
-variety of resources available.
-
-
-866
-00:42:40,606 --> 00:42:43,156
-GCD is a great way to help
-you manage them appropriately.
-
-
-867
-00:42:43,716 --> 00:42:47,016
-QoS classes allow
-the operating system
-
-
-868
-00:42:47,016 --> 00:42:49,886
-to marshall your resources
-in the most efficient way.
-
-
-869
-00:42:51,516 --> 00:42:54,086
-So you should go home and think
-about how you integrate Quality
-
-
-870
-00:42:54,086 --> 00:42:55,936
-of Service classes
-into your application
-
-
-871
-00:42:55,936 --> 00:42:58,956
-and the existing uses of GCD.
-
-
-872
-00:42:59,486 --> 00:43:02,216
-Finally, consider how
-your apps use GCD and try
-
-
-873
-00:43:02,216 --> 00:43:03,316
-to avoid thread explosion.
-
-
-874
-00:43:04,826 --> 00:43:05,966
-For more information, check
-
-
-875
-00:43:05,966 --> 00:43:07,466
-out the concurrency
-programming guide
-
-
-876
-00:43:07,896 --> 00:43:10,716
-or the energy efficiency
-guides for Mac and iOS apps.
-
-
-877
-00:43:10,756 --> 00:43:13,036
-The iOS app one is
-new this week.
-
-
-878
-00:43:13,576 --> 00:43:14,006
-Check it out.
-
-
-879
-00:43:14,006 --> 00:43:14,366
-It's great.
-
-
-880
-00:43:14,366 --> 00:43:19,146
-We have the developer forums
-and Paul, our evangelist.
-
-
-881
-00:43:19,416 --> 00:43:21,396
-A couple related sessions:
-
-
-882
-00:43:21,766 --> 00:43:26,546
-Achieving all day battery life
-provides more context behind the
-
-
-883
-00:43:26,546 --> 00:43:27,736
-energy topics I mentioned.
-
-
-884
-00:43:28,426 --> 00:43:31,506
-Optimizing your app
-for multitasking iOS 9,
-
-
-885
-00:43:32,916 --> 00:43:36,846
-advanced NSOperations, and
-performans on iOS and Watch OS,
-
-
-886
-00:43:37,196 --> 00:43:38,926
-just after this in Presidio.
-
-
-887
-00:43:38,926 --> 00:43:42,186
-If those are new to
-you, I highly recommend
-
-
-888
-00:43:42,186 --> 00:43:44,406
-that you check those out.
+00:43:39,119 --> 00:43:44,725
+如果那些你没有看过 
+我强烈的建议你去看一下 谢谢
 
